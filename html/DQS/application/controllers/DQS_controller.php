@@ -24,11 +24,17 @@ class DQS_controller extends CI_Controller {
 	 */
 	public function index()
 	{
-        echo dirname(__FILE__);
-		$this->load->view('test');
+  
 	}
     public function test_2()
 	{
 		$this->load->view('test_2');
+	}
+	public function output($view , $data=null)
+	{
+		$this->load->view('template/header');
+		$this->load->view('template/javascript');
+		$this->load->view($view , $data);
+		$this->load->view('template/footer');
 	}
 }

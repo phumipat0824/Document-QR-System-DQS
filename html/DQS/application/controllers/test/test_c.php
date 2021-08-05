@@ -11,4 +11,8 @@ class test_c extends DQS_controller {
 	{
 		$this->load->view('test');
 	}
+	public function show2()
+	{
+		$this->output('test');
+	}
 }
