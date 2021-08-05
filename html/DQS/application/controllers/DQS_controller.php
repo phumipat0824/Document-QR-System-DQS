@@ -1,11 +1,12 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class DQS_controller extends CI_Controller {
-    public function __construct()
-        {
-                parent::__construct();
-        }
+class DQS_controller extends CI_Controller
+{
+	public function __construct()
+	{
+		parent::__construct();
+	}
 
 	/**
 	 * Index Page for this controller.
@@ -24,17 +25,21 @@ class DQS_controller extends CI_Controller {
 	 */
 	public function index()
 	{
-  
 	}
-    public function test_2()
+	public function test_2()
 	{
 		$this->load->view('test_2');
 	}
-	public function output($view , $data=null)
+	public function output($view, $data = null)
 	{
 		$this->load->view('template/header');
 		$this->load->view('template/javascript');
-		$this->load->view($view , $data);
+		$this->load->view($view, $data);
 		$this->load->view('template/footer');
+	}
+
+	public function show_register()
+	{
+		$this->output('v_register');
 	}
 }
