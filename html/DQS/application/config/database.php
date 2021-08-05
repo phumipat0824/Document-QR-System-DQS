@@ -74,8 +74,8 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> 'db',
-	'hostname' => 'localhost',
+	'dsn'	=> '',
+	'hostname' => 'db',
 	'username' => 'devteam1',
 	'password' => '1212312121!',
 	'database' => 'devteam1_db',
