@@ -5,7 +5,7 @@
   <link rel="icon" type="image/png" href="<?php echo base_url().'assets/template/material-dashboard-master'?>/assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>
-    Material Dashboard by Creative Tim
+    DQS
   </title>
   <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport">
   <!-- Extra details for Live View on GitHub Pages -->
