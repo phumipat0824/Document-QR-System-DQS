@@ -11,5 +11,3 @@
 <script src="<?php echo base_url().'assets/template/material-dashboard-master'?>/assets/js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="<?php echo base_url().'assets/template/material-dashboard-master'?>/assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
-
-<?php echo base_url().'assets/template/material-dashboard-master'?>/assets/js/core/jquery.min.js"></script>

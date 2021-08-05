@@ -28,7 +28,6 @@ services:
     restart: unless-stopped
     volumes:
       - ./mariadb/initdb/:/docker-entrypoint-initdb.d
-      - ./mariadb/data/:/var/lib/mysql/
     env_file:
       - ./mariadb/db.env
   
