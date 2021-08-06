@@ -42,4 +42,10 @@ class DQS_controller extends CI_Controller
 	{
 		$this->output('v_register');
 	}
+
+	public function show_register_confirm()
+	{
+
+		$this->output('v_register_confirm');
+	}
 }

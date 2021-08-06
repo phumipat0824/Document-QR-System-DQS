@@ -13,7 +13,8 @@
 
                 </div>
             </div>
-            <form action='<?php echo site_url() . 'DQS_controller/show_register_confirm' ?>' method="post">
+
+            <form action="" method="post">
                 <div class="row gx-5">
                     <div class="col">
                         <div class="p-3 ">จังหวัด</div>
@@ -112,18 +113,33 @@
 
                 <div class="row gx-5">
                     <div class="col">
-                        <div class="p-3 ">รหัสพนักงาน</div>
+                        <div class="p-3 ">ชื่อผู้ใช้</div>
 
-                        <input type="text" class="form-control" id="mem_emp_id" name="mem_emp_id" required><br>
+                        <input type="text" class="form-control" id="mem_emp_id" name="mem_emp_id" required disabled><br>
                     </div>
 
                     <div class="col">
+                        <div class="p-3 ">รหัสพนักงาน</div>
 
-                        <div class="p-3 ">อีเมล</div>
-                        <input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="อีเมล" required>
+                        <input type="text" class="form-control" id="mem_emp_id" name="mem_emp_id" required><br>
+
                     </div>
                 </div>
 
+
+
+                <div class="row gx-5">
+                    <div class="col">
+                        <div class="p-3 ">อีเมล</div>
+                        <input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="อีเมล" required>
+                    </div>
+                    <div class="col">
+                        <div class="p-3 ">รหัสผ่าน</div>
+
+                        <input type="password" class="form-control" id="mem_password" name="mem_password" required><br>
+                    </div>
+
+                </div>
 
 
                 <div class="row gx-5">
@@ -135,20 +151,6 @@
                     <div class="col">
                         <div class="p-3 ">นามสกุล</div>
                         <input type="text" class="form-control" id="mem_lastname" name="mem_lastname"><br>
-                    </div>
-
-                </div>
-
-
-                <div class="row gx-5">
-                    <div class="col">
-                        <div class="p-3 ">รหัสผ่าน</div>
-
-                        <input type="password" class="form-control" id="mem_password" name="mem_password" required><br>
-                    </div>
-                    <div class="col">
-                        <div class="p-3 ">ยืนยันรหัสผ่าน</div>
-                        <input type="password" class="form-control" id="mem_password" name="mem_password" required><br>
                     </div>
                 </div>
 
