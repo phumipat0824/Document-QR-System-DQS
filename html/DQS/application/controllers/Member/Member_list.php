@@ -8,7 +8,7 @@ class Member_list extends DQS_controller {
 
 	public function show_home()
 	{
-		$this->output("Member/v_member_home");
+		$this->output_naevar("Member/v_member_home");
 	}
 
 }

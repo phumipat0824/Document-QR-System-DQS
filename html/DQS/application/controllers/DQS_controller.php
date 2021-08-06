@@ -49,7 +49,7 @@ class DQS_controller extends CI_Controller
 		$this->load->view('template/navbar');
 		$this->load->view($view, $data);
 		$this->load->view('template/footer');
-
+	}
 	public function show_register_confirm()
 	{
 
