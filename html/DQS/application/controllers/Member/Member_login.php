@@ -13,7 +13,7 @@ class Member_login extends DQS_controller {
 
 	public function show_member_home()
 	{
-		$this->output("Member/v_member_home");
+		$this->output_naevar("Member/v_member_home");
 	}
 
 
