@@ -37,6 +37,23 @@ class DQS_controller extends CI_Controller
 		$this->load->view($view, $data);
 		$this->load->view('template/footer');
 	}
+	
+	public function output_sidebar_admin($view, $data = null)
+	{
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar_admin');
+		$this->load->view('template/javascript');
+		$this->load->view($view, $data);
+		$this->load->view('template/footer');
+	}
+	public function output_sidebar_member($view, $data = null)
+	{
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar_member');
+		$this->load->view('template/javascript');
+		$this->load->view($view, $data);
+		$this->load->view('template/footer');
+	}
 
 	public function show_register()
 	{
@@ -48,4 +65,5 @@ class DQS_controller extends CI_Controller
 
 		$this->output('v_register_confirm');
 	}
+
 }

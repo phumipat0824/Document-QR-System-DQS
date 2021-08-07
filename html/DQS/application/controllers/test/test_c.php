@@ -13,6 +13,12 @@ class test_c extends DQS_controller {
 	}
 	public function show2()
 	{
-		$this->output('test');
+		$this->output_sidebar_admin('test');
+	}
+	public function show_py()
+	{
+    	$command = escapeshellcmd('py.py');
+   		$output = shell_exec($command);
+   		echo $output;
 	}
 }
