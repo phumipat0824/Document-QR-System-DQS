@@ -101,11 +101,42 @@
                     <div class="col">
                         <div class="p-3 ">หน่วยงาน</div>
                         <select name="agency" class="form-select" aria-label="Default select example" required>
-                            <option value="" selected>--------- เลือกจังหวัด ---------</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="fiat">Fiat</option>
-                            <option value="audi">Audi</option>
+                            <option value="" selected>--------- เลือกหน่วยงาน ---------</option>
+                            <option value="ที่ทำการปกครองจังหวัด">ที่ทำการปกครองจังหวัด</option>
+                            <option value="สำนักงานจังหวัด ">สำนักงานจังหวัด </option>
+                            <option value="สำนักงานสาธารณสุขจังหวัด">สำนักงานสาธารณสุขจังหวัด</option>
+                            <option value="สำนักงานที่ดินจังหวัด">สำนักงานที่ดินจังหวัด</option>
+                            <option value="สำนักงานพัฒนาชุมชนจังหวัด">สำนักงานพัฒนาชุมชนจังหวัด </option>
+                            <option value="สำนักงานโยธาธิการและผังเมืองจังหวัด">สำนักงานโยธาธิการและผังเมืองจังหวัด </option>
+                            <option value="เรือนจำจังหวัด">เรือนจำจังหวัด </option>
+                            <option value="สำนักงานคลังจังหวัด">สำนักงานคลังจังหวัด</option>
+                            <option value="สำนักงานอุตสาหกรรมจังหวัด">สำนักงานอุตสาหกรรมจังหวัด</option>
+                            <option value="สำนักงานพาณิชย์จังหวัด">สำนักงานพาณิชย์จังหวัด </option>
+                            <option value="สำนักงานพัฒนาสังคมและความมั่นคงของมนุษย์จังหวัด">สำนักงานพัฒนาสังคมและความมั่นคงของมนุษย์จังหวัด</option>
+                            <option value="สำนักงานแรงงานจังหวัด">สำนักงานแรงงานจังหวัด </option>
+                            <option value="สำนักงานสวัสดิการและคุ้มครองแรงงานจังหวัด">สำนักงานสวัสดิการและคุ้มครองแรงงานจังหวัด</option>
+                            <option value="สำนักงานจัดหางานจังหวัด">สำนักงานจัดหางานจังหวัด</option>
+                            <option value="สำนักงานประกันสังคมจังหวัด">สำนักงานประกันสังคมจังหวัด </option>
+                            <option value="สำนักงานเกษตรและสหกรณ์จังหวัด">สำนักงานเกษตรและสหกรณ์จังหวัด </option>
+                            <option value="สำนักงานเกษตรจังหวัด">สำนักงานเกษตรจังหวัด</option>
+                            <option value="สำนักงานปศุสัตว์จังหวัด">สำนักงานปศุสัตว์จังหวัด </option>
+                            <option value="สำนักงานสหกรณ์จังหวัด">สำนักงานสหกรณ์จังหวัด</option>
+                            <option value="สำนักงานปฏิรูปที่ดินจังหวัด">สำนักงานปฏิรูปที่ดินจังหวัด</option>
+                            <option value="สำนักงานประมงจังหวัด">สำนักงานประมงจังหวัด </option>
+                            <option value="สำนักงานขนส่งจังหวัด">สำนักงานขนส่งจังหวัด </option>
+                            <option value="สำนักงานประชาสัมพันธ์จังหวัด">สำนักงานประชาสัมพันธ์จังหวัด</option>
+                            <option value="สำนักงานสถิติจังหวัด">สำนักงานสถิติจังหวัด </option>
+                            <option value="สำนักงานทรัพยากรธรรมชาติและสิ่งแวดล้อมจังหวัด">สำนักงานทรัพยากรธรรมชาติและสิ่งแวดล้อมจังหวัด</option>
+                            <option value="สำนักงานวัฒนธรรมจังหวัด">สำนักงานวัฒนธรรมจังหวัด</option>
+                            <option value="สำนักงานป้องกันและบรรเทาสาธารณภัยจังหวัด">สำนักงานป้องกันและบรรเทาสาธารณภัยจังหวัด</option>
+                            <option value="สำนักงานบังคับคดีจังหวัด">สำนักงานบังคับคดีจังหวัด </option>
+                            <option value="สำนักงานคุมประพฤติจังหวัด">สำนักงานคุมประพฤติจังหวัด</option>
+                            <option value="สำนักงานพระพุทธศาสนาจังหวัด">สำนักงานพระพุทธศาสนาจังหวัด </option>
+                            <option value="สำนักงานการท่องเที่ยวและกีฬาจังหวัด">สำนักงานการท่องเที่ยวและกีฬาจังหวัด </option>
+                            <option value="สำนักงานส่งเสริมการปกครองส่วนท้องถิ่นจังหวัด">สำนักงานส่งเสริมการปกครองส่วนท้องถิ่นจังหวัด</option>
+                            <option value="สำนักงานพลังงานจังหวัด">สำนักงานพลังงานจังหวัด </option>
+                            <option value="สำนักงานสัสดีจังหวัด">สำนักงานสัสดีจังหวัด </option>
+                            <option value="สำนักงานยุติธรรมจังหวัด">สำนักงานยุติธรรมจังหวัด </option>
                         </select><br>
                     </div>
                 </div>
@@ -120,7 +151,7 @@
                     <div class="col">
 
                         <div class="p-3 ">อีเมล</div>
-                        <input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="อีเมล" required>
+                        <input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="อีเมล" required oninvalid="this.setCustomValidity('กรุณากรอกอีเมลที่ถูกต้อง')" oninput="setCustomValidity('')"></input>
                     </div>
                 </div>
 
@@ -139,24 +170,28 @@
 
                 </div>
 
+              
 
                 <div class="row gx-5">
                     <div class="col">
                         <div class="p-3 ">รหัสผ่าน</div>
 
-                        <input type="password" class="form-control" id="mem_password" name="mem_password" required><br>
+                        <input type="password" class="form-control" id="mem_password" name="mem_password" required onkeyup='check();'><br>
                     </div>
                     <div class="col">
                         <div class="p-3 ">ยืนยันรหัสผ่าน</div>
-                        <input type="password" class="form-control" id="mem_password" name="mem_password" required><br>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required onkeyup='check();'><br>
                     </div>
                 </div>
 
+
                 <div class="row gx-5 ">
                     <div class="col-2"></div>
-                    <div class="d-grid gap-2 col-6 mx-auto">
-                        <br><button class="btn btn-primary" type="submit">สมัครสมาชิก</button>
+                    <div class="d-grid gap-2 col-6 mx-auto" >
+                    <span id='message'> </span>
+                        <br><button class="btn btn-primary" type="submit" >สมัครสมาชิก</button>
                     </div>
+
                     <div class="col-2"></div>
                 </div>
             </form>
@@ -164,3 +199,16 @@
         <div class="col"></div>
     </div>
 </div>
+
+<script>
+var check = function() {
+  if (document.getElementById('mem_password').value ==
+    document.getElementById('confirm_password').value) {
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').innerHTML = 'matching';
+  } else {
+    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').innerHTML = 'not matching';
+  }
+}
+ </script>

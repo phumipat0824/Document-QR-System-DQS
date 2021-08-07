@@ -40,6 +40,8 @@
   <!-- CSS Files -->
   <link href="<?php echo base_url().'assets/template/material-dashboard-master'?>/assets/css/material-dashboard.min.css?v=2.1.2" rel="stylesheet">
   <!-- CSS Just for demo purpose, don't include it in your project -->
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
   <link href="<?php echo base_url().'assets/template/material-dashboard-master'?>/assets/demo/demo.css" rel="stylesheet">
   <!-- Google Tag Manager -->
   <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="https://www.google-analytics.com/gtm/js?id=GTM-K9BGS8K&amp;t=gtm47&amp;cid=73618579.1618926084&amp;aip=true"></script><script type="text/javascript" async="" src="https://static.hotjar.com/c/hotjar-99526.js?sv=7"></script><script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script src="https://connect.facebook.net/signals/config/111649226022273?v=2.9.44&amp;r=stable" async=""></script><script async="" src="//connect.facebook.net/en_US/fbevents.js"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-NKDMSK6"></script>
@@ -48,5 +50,3 @@
 
   </head>
   <body>
-
-  

@@ -4,11 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require dirname(__FILE__).'/../DQS_controller.php';
 
-class Member_list extends DQS_controller {
+class QRcode_generator extends DQS_controller {
 
-	public function show_home()
+	public function show_qrcode()
 	{
-		$this->output("Member/v_member_home");
+
+		$this->output_naevar("v_qrcode");
 	}
 
 }
