@@ -46,7 +46,10 @@
             <div class="card bg-secondary border-0 mb-0">
                 <div class="card-body px-lg-5 py-lg-5">
                     <div class="text-center mb-4">
+                        <div class="card">
+                        <div class="card-body">
                         <h3>เข้าสู่ระบบ</h3>
+                    </div>
                     </div>
                     <div class="form-group mb-3">
                         <div class="input-group input-group-merge input-group-alternative">
@@ -54,7 +57,7 @@
                                 <span class="input-group-text"></span>
                             </div>
                             <!-- Insert username -->
-                            <input class="form-control" id="mem_username" placeholder="ชื่อผู้ใช้" type="text" required>
+                            <input class="form-control" id="mem_username" placeholder="อีเมล" type="text" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -68,6 +71,10 @@
                     </div>
                     <div class="text-center">
                         <!-- Button login -->
+                        <button type="submit" onclick='  '>ลืมรหัสผ่าน?</button>
+                    </div>                   
+                    <div class="text-center">
+                        <!-- Button login -->
                         <button type="submit" class="btn btn-primary my-4" onclick='login()'>เข้าสู่ระบบ</button>
                     </div>
                 </div>
@@ -78,3 +85,4 @@
 </body>
 
 </html>
+<body>
