@@ -13,7 +13,7 @@ class test_c extends DQS_controller {
 	}
 	public function show2()
 	{
-		$this->output_sidebar_admin('test');
+		$this->output_sidebar_member('test');
 	}
 	public function show_py()
 	{
