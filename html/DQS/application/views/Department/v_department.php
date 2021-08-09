@@ -4,9 +4,6 @@
 
         Tip 2: you can also add an image using data-image tag
     -->
-      <div class="logo"><img src="<?php echo base_url(). '/assets/image/logo_dqs.PNG' ?>" height="50" width="50">
-      Document QR
-        </a></div>
       <div class="sidebar-wrapper ps-container ps-theme-default">
             </ul><ul class="nav">
           <li class="nav-item active  ">
@@ -23,4 +20,12 @@
           </li>
           
         </ul>
-  </div>
+      </div>
+</div>
+<div class="container">
+  <?php
+    for ($i=0; $i < 100; $i++) { 
+      echo "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa<br>"; 
+    }
+  ?>
+</div>
