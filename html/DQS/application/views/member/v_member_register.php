@@ -13,11 +13,11 @@
 
                 </div>
             </div>
-            <form action='<?php echo site_url() . 'DQS_controller/show_register_confirm' ?>' method="post">
+            <form action='<?php echo site_url() . 'Member/Member_register/insert_session' ?>' method="post">
                 <div class="row gx-5">
                     <div class="col">
                         <div class="p-3 ">จังหวัด</div>
-                        <select name="province" class="form-select" aria-label="Default select example" required>
+                        <select name="province" class="form-select" aria-label="Default select example" required >
                             <option value="" selected>--------- เลือกจังหวัด ---------</option>
                             <option value="กรุงเทพมหานคร">กรุงเทพมหานคร</option>
                             <option value="กระบี่">กระบี่ </option>
@@ -145,7 +145,7 @@
                     <div class="col">
                         <div class="p-3 ">รหัสพนักงาน</div>
 
-                        <input type="text" class="form-control" id="mem_emp_id" name="mem_emp_id" required><br>
+                        <input type="text" class="form-control" id="mem_emp_id" name="mem_emp_id" placeholder="รหัสพนักงาน" required><br>
                     </div>
 
                     <div class="col">
@@ -161,11 +161,11 @@
                     <div class="col">
                         <div class="p-3 ">ชื่อ</div>
 
-                        <input type="text" class="form-control" id="mem_firstname" name="mem_firstname"><br>
+                        <input type="text" class="form-control" id="mem_firstname" name="mem_firstname" placeholder="ชื่อ"><br>
                     </div>
                     <div class="col">
                         <div class="p-3 ">นามสกุล</div>
-                        <input type="text" class="form-control" id="mem_lastname" name="mem_lastname"><br>
+                        <input type="text" class="form-control" id="mem_lastname" name="mem_lastname" placeholder="นามสกุล"><br>
                     </div>
 
                 </div>
@@ -176,11 +176,11 @@
                     <div class="col">
                         <div class="p-3 ">รหัสผ่าน</div>
 
-                        <input type="password" class="form-control" id="mem_password" name="mem_password" required onkeyup='check();'><br>
+                        <input type="password" class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" required onkeyup='check();' oninvalid="this.setCustomValidity('กรุณากรอกรหัสผ่าน')" oninput="setCustomValidity('')"><br>
                     </div>
                     <div class="col">
                         <div class="p-3 ">ยืนยันรหัสผ่าน</div>
-                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required onkeyup='check();'><br>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="ยืนยันรหัสผ่าน" required onkeyup='check();'  oninvalid="this.setCustomValidity('กรุณากรอกรหัสผ่าน')" oninput="setCustomValidity('')"><br>
                     </div>
                 </div>
 
@@ -205,10 +205,10 @@ var check = function() {
   if (document.getElementById('mem_password').value ==
     document.getElementById('confirm_password').value) {
     document.getElementById('message').style.color = 'green';
-    document.getElementById('message').innerHTML = 'matching';
+    document.getElementById('message').innerHTML = 'รหัสผ่านตรงกัน';
   } else {
     document.getElementById('message').style.color = 'red';
-    document.getElementById('message').innerHTML = 'not matching';
+    document.getElementById('message').innerHTML = 'รหัสผ่านไม่ตรงกัน';
   }
 }
  </script>

@@ -14,11 +14,11 @@
                 </div>
             </div>
 
-            <form action="" method="post">
+            <form action="<?php echo site_url() . 'Member/Member_login/show_member_login' ?>" method="post">
                 <div class="row gx-5">
                     <div class="col">
                         <div class="p-3 ">จังหวัด</div>
-                        <select name="province" class="form-select" aria-label="Default select example" required>
+                        <select name="province" class="form-select" aria-label="Default select example" value = "<?php echo $this->session->userdata('mem_province')?>" required disabled>
                             <option value="" selected>--------- เลือกจังหวัด ---------</option>
                             <option value="กรุงเทพมหานคร">กรุงเทพมหานคร</option>
                             <option value="กระบี่">กระบี่ </option>
@@ -101,7 +101,7 @@
                     </div>
                     <div class="col">
                         <div class="p-3 ">หน่วยงาน</div>
-                        <select name="agency" class="form-select" aria-label="Default select example" required>
+                        <select name="agency" class="form-select" aria-label="Default select example" value = "<?php echo $this->session->userdata('mem_dep_id')?>" required disabled>
                             <option value="" selected>--------- เลือกจังหวัด ---------</option>
                             <option value="volvo">Volvo</option>
                             <option value="saab">Saab</option>
@@ -115,13 +115,13 @@
                     <div class="col">
                         <div class="p-3 ">ชื่อผู้ใช้</div>
 
-                        <input type="text" class="form-control" id="mem_emp_id" name="mem_emp_id" required disabled><br>
+                        <input type="text" class="form-control" id="mem_id" name="mem_id"  required disabled><br>
                     </div>
 
                     <div class="col">
                         <div class="p-3 ">รหัสพนักงาน</div>
 
-                        <input type="text" class="form-control" id="mem_emp_id" name="mem_emp_id" required><br>
+                        <input type="text" class="form-control" id="mem_emp_id" name="mem_emp_id" value = "<?php echo $this->session->userdata('mem_emp_id')?>" required disabled><br>
 
                     </div>
                 </div>
@@ -131,12 +131,12 @@
                 <div class="row gx-5">
                     <div class="col">
                         <div class="p-3 ">อีเมล</div>
-                        <input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="อีเมล" required>
+                        <input type="email" class="form-control" id="mem_email" name="mem_email"  value = "<?php echo $this->session->userdata('mem_email')?>" required disabled>
                     </div>
                     <div class="col">
                         <div class="p-3 ">รหัสผ่าน</div>
 
-                        <input type="password" class="form-control" id="mem_password" name="mem_password" required><br>
+                        <input type="password" class="form-control" id="mem_password" name="mem_password" value = "<?php echo $this->session->userdata('mem_password')?>" required disabled><br>
                     </div>
 
                 </div>
@@ -146,19 +146,25 @@
                     <div class="col">
                         <div class="p-3 ">ชื่อ</div>
 
-                        <input type="text" class="form-control" id="mem_firstname" name="mem_firstname"><br>
+                        <input type="text" class="form-control" id="mem_firstname" name="mem_firstname" value = "<?php echo $this->session->userdata('mem_firstname')?>" required disabled><br>
                     </div>
                     <div class="col">
                         <div class="p-3 ">นามสกุล</div>
-                        <input type="text" class="form-control" id="mem_lastname" name="mem_lastname"><br>
+                        <input type="text" class="form-control" id="mem_lastname" name="mem_lastname" value = "<?php echo $this->session->userdata('mem_lastname')?>" required disabled><br>
                     </div>
                 </div>
 
                 <div class="row gx-5 ">
                     <div class="col-2"></div>
-                    <div class="d-grid gap-2 col-6 mx-auto">
-                        <br><button class="btn btn-primary" type="submit">สมัครสมาชิก</button>
+                    <div class="d-grid gap-2 d-md-block" >
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="button" class="btn btn-light">ยกเลิก</button>
+                            <button type="button" class="btn btn-primary">ยืนยัน</button>
+                        </div>
                     </div>
+                    <!DOCTYPE html>
+
+
                     <div class="col-2"></div>
                 </div>
             </form>
