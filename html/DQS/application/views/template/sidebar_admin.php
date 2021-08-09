@@ -1,32 +1,32 @@
-<div class="sidebar" data-color="purple" data-background-color="white" data-image="<?php echo base_url().'/assets/img/sidebar-1.jpg'?>">
-      <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-normal">
-      Document QR
-        </a>
+
+<div class="sidebar" data-color="yellow" data-background-color="white" data-image="<?php echo base_url().'/assets/img/sidebar-1.jpg'?>">
+    <div class="logo">
+      Document QR   
     </div>
       <div class="sidebar-wrapper ps-container ps-theme-default ps-active-y" data-ps-id="a5787ac4-4df1-fec6-f8e0-33c5f4784969">
         <ul class="nav">
-          <li class="nav-item active  ">
+          <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/" ?  'active'  : '' ?> ">
             <a class="nav-link" href="./dashboard.html">
-              <i class="fas fa-folder"></i>
-              <p>คิวอาร์โค้ดของฉัน</p>
+              <i class="fas fa-folder" style="color: rgb(125, 123, 122);"></i>
+              <p style="color: rgb(0,0,0);">คิวอาร์โค้ดของฉัน</p>
             </a>
           </li>
-          <li class="nav-item ">
+          <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/department/department_list" ?  'active'  : '' ?> ">
+            <a class="nav-link" href="<?php echo site_url().'/department/department_list' ?>">
+            <i class="fas fa-users-cog" style="color: rgb(125, 123, 122);"></i>
+              <p style="color: rgb(0,0,0);">จัดการแผนก</p>
+            </a>
+          </li>
+          <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/" ?  'active'  : '' ?> ">
             <a class="nav-link" href="./tables.html">
-            <i class="fas fa-users-cog"></i>
-              <p>จัดการแผนก</p>
+            <i class="fas fa-cog" style="color: rgb(125, 123, 122);"></i>
+              <p style="color: rgb(0,0,0);">จัดการบัญชีผู้ใช้งาน</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./tables.html">
-            <i class="fas fa-cog"></i>
-              <p>จัดการบัญชีผู้ใช้งาน</p>
-            </a>
-          </li>
-          <li class="nav-item ">
+          <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/" ?  'active'  : '' ?> ">
             <a class="nav-link" href="./user.html">
-            <i class="fas fa-chart-bar"></i>
-              <p>รายงานสรุปผล</p>
+            <i class="fas fa-chart-bar" style="color: rgb(125, 123, 122);"></i>
+              <p style="color: rgb(0,0,0);">รายงานสรุปผล</p>
             </a>
           </li>
         </ul>

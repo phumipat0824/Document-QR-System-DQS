@@ -8,7 +8,7 @@ class Department_list extends DQS_controller {
 
 	public function index()
 	{
-		$this->output_naevar("department/v_department");
+		$this->output_sidebar_admin("department/v_department");
 	}
 
 }

@@ -7,7 +7,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
     <img src="<?php echo base_url(). '/assets/image/logo_dqs.PNG' ?>" height="50" width="50">
-      <a class="navbar-brand" href="#">Document QR</a>
+      <a class="navbar-brand" href="#"><b>Document QR</b></a>
       <form class="form-inline ml-auto">
      
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -18,7 +18,7 @@
           <a class="nav-link" href="#">สมัครสมาชิก</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">เข้าสู่ระบบ</a>
+          <a class="nav-link" href="#">เข้าสู่ระบบ</a>
         </li>
       </ul>
          
