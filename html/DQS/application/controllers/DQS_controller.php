@@ -61,7 +61,7 @@ class DQS_controller extends CI_Controller
 	{
 		$this->output('v_register');
 	}
-	public function output_naevar($view, $data = null)
+	public function output_navbar($view, $data = null)
 	{
 		$this->load->view('template/header');
 		$this->load->view('template/javascript');

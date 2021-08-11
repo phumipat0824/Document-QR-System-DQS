@@ -1,5 +1,7 @@
-<div class="container">
+<div class="content">
+<div class="container-fluid">
     <div class="row gx-5">
+        <div class = "col-md-2"> </div>
         <div class="col"></div>
         <div class="col-10">
             <div class="row justify-content-md-center">
@@ -198,6 +200,7 @@
         </div>
         <div class="col"></div>
     </div>
+</div>
 </div>
 
 <script>

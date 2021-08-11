@@ -16,13 +16,13 @@ class Member_register extends DQS_controller {
     
     public function show_member_register()
     {
-        $this->output('member/v_member_register');
+        $this->output_navbar('member/v_member_register');
     }
 
 
     public function show_member_confirm()
     {
-        $this->output('member/v_member_confirm');
+        $this->output_navbar('member/v_member_confirm');
     }
 
 
