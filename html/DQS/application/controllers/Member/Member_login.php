@@ -6,11 +6,10 @@ require dirname(__FILE__).'/../DQS_controller.php';
 
 class Member_login extends DQS_controller {
 
-	public function show_member_login()
+		public function show_member_login()
 	{
-		$this->output_naevar("Member/v_member_login");
+		$this->output_sidebar_member("Member/v_member_login");
 	}
-
 	public function member_home()
 	{
 		redirect('/Member/Member_login/show_member_home');

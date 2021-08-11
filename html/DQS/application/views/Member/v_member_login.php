@@ -43,8 +43,8 @@
     <!-- Login -->
     <div style="margin-left:25%">
         <div class="col-lg-8 col-md-7">
-            <div class="card bg-secondary border-0 mb-0">
-                <div class="card-body px-lg-5 py-lg-5">
+            <<div class="card card-nav-tabs">
+  <div class="card-header card-header-warning">
                     <div class="text-center mb-4">
                         <div class="card">
                         <div class="card-body">
