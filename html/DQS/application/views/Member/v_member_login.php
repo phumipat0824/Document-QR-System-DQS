@@ -1,63 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-    function login() { //login admin
-        $.ajax({
-            type: 'POST',
-            url: '<?php echo site_url() . 'Member/Member_login/login' ?>',
-            data: {
-                mem_username: $('#mem_username').val(),
-                mem_password: $('#mem_password').val()
-            },
-            success: function(res) {
-                console.log('success')
-                console.log(res)
-                if (res == true) {
-                    setTimeout(function() {
-                        window.location.href =
-                            '<?php echo site_url() . 'Member/Member_login/member_home' ?>'
-                    }, 500)
-                } //if
-                else {
-                    console.log('fail')
-                    alert('รหัสผ่านผิด กรุณากรอกใหม่อีกครั้ง')
-                    console.log(res)
-
-                } //else
-            },
-            error: function(res) {
-                console.log('fail')
-                console.log(res)
-            }
-        });
-    } //end login admin
-    </script>
-</head>
-
-<body>
-    <!-- Login -->
-    <div style="margin-left:25%">
-        <div class="col-lg-8 col-md-7">
-            <<div class="card card-nav-tabs">
-  <div class="card-header card-header-warning">
+<!-- Login -->
+    <div class= "row" style="padding-top: 150px ;margin: auto;";>
+    <div class="col-lg-4 col-md-4">
+    </div>
+        <div class="col-lg-4 col-md-4" style= "padding-left: 100px ">
+        <div class="card">                      
                     <div class="text-center mb-4">
-                        <div class="card">
-                        <div class="card-body">
-                        <h3>เข้าสู่ระบบ</h3>
+                <div class="card-header card-header-warning">
+                    <h3 style = "color:#000">เข้าสู่ระบบ</h3>
                     </div>
-                    </div>
+                <div class="card-body "style="padding-top:70px">                    
                     <div class="form-group mb-3">
                         <div class="input-group input-group-merge input-group-alternative">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"></span>
                             </div>
                             <!-- Insert username -->
-                            <input class="form-control" id="mem_username" placeholder="อีเมล" type="text" required>
+                            <input class="form-control" id="mem_username" name="mem_username" placeholder="ชื่อผู้ใช้/อีเมล" type="text" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -66,23 +24,62 @@
                                 <span class="input-group-text"></span>
                             </div>
                             <!-- Insert password -->
-                            <input class="form-control" id="mem_password" placeholder="รหัสผ่าน" type="password" required>
+                            <input class="form-control" id="mem_password"name="mem_password" placeholder="รหัสผ่าน" type="password" required>
                         </div>
                     </div>
-                    <div class="text-center">
+                    <br>
+                    <div class="text-center" style="padding-top: 20px">
                         <!-- Button login -->
-                        <button type="submit" onclick='  '>ลืมรหัสผ่าน?</button>
-                    </div>                   
-                    <div class="text-center">
+                        <a href ="#" >ลืมรหัสผ่าน?</a>
+                    </div>
+                        <div class="text-center"style="margin-top: -20px">       
                         <!-- Button login -->
-                        <button type="submit" class="btn btn-primary my-4" onclick='login()'>เข้าสู่ระบบ</button>
+                        <button type="submit" class="btn btn-primary my-4" id="btn_login" style ="background-color: #100575 ; width:200px "> เข้าสู่ระบบ</button>         
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
     <!------------------------------------------------------------------------------------------------------------------>
-</body>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js%22%3E">
+</script>
+<script type="text/javascript">
+        $(document).ready(function(){
+            $('#btn_login').click(function(e){
+                var mem_username = $('#mem_username').val();
+                var mem_password = $('#mem_password').val();
+                ;
 
-</html>
-<body>
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url().'Member/Member_login/login'?>",
+                    data: {
+                        'mem_username' : mem_username,
+                        'mem_password' :mem_password
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        console.log("response " + response);
+                        if (response == 1) {
+                            swal(
+                                'เข้าสู่ระบบสำเร็จ',
+                                '',
+                                'success'
+                            ).then((result) => {
+                                // console.log(result);
+                                window.location.href = "<?php echo site_url().'/Member/Member_login/member_home'?>";
+                            })
+                        } //if
+                        else {
+                            swal(
+                                'เข้าสู่ระบบไม่สำเร็จ',
+                                'ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง',
+                                'error'
+                            )
+                        } //else
+                    },
+                }); //ajax
+            });
+        }); //check_login
+    </script>

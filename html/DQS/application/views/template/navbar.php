@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg bg-dark_blue" style="z-index: 6; position: fixed; width: 100%; top:0;">
-  <div class="container">
+  
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-bar navbar-kebab"></span>
     <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -24,5 +24,5 @@
          
       </form>
     </div>
-  </div>
+  
 </nav>
