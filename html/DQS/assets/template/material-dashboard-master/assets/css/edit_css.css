@@ -11,6 +11,16 @@
     background-color: #fcd200;
     box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(162, 176, 39, 0.4);
   }
+
+  .col-4_5 {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  
+
   .col-4_5 {
     flex: 0 0 37.4999995%;
     max-width: 37.4999995%;
