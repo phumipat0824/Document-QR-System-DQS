@@ -1,18 +1,9 @@
-<div class="container">
-    <div class="row gx-5">
+<div class="content">
+    <div class="row">
+                    <h2>สมัครสมาชิก</h2>      
         <div class="col"></div>
         <div class="col-10">
-            <div class="row justify-content-md-center">
-                <div class="col col-lg-2">
-
-                </div>
-                <div class="col-md-auto">
-                    <h2>สมัครสมาชิก</h2>
-                </div>
-                <div class="col col-lg-2">
-
-                </div>
-            </div>
+           
             <form action='<?php echo site_url() . 'Member/Member_register/insert_session' ?>' method="post">
                 <div class="row gx-5">
                     <div class="col">

@@ -9,7 +9,7 @@ class QRcode_generator extends DQS_controller {
 	public function show_qrcode()
 	{
 
-		$this->output_naevar("v_qrcode");
+		$this->output("v_qrcode");
 	}
 
 }

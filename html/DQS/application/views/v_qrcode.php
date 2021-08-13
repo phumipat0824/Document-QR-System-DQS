@@ -1,81 +1,51 @@
 
-<h1>สร้างคิวอาร์โค้ด</h1>
-<h2>เริ่มสร้าง QR Code กันเลย </h2>
-
 <div class="content">
-<div class="content-fluid">
-<div class="row ">
-    <div class="col-md-2"> </div>
-        <div class="col-md-4 ">
-        <div class="card card-nav-tabs card-plain">
-    <div class="card-header card-header-primary">
-        <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
-        <div class="nav-tabs-navigation">
-            <div class="nav-tabs-wrapper">
-                <ul class="nav nav-tabs" data-tabs="tabs">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#home" data-toggle="tab">เว็บไซต์</a>
+    <div class="content-fluid">
+        <div class="row" style="padding: 100px 10px 10px 20%;">       
+            <h1>สร้างคิวอาร์โค้ด</h1>
+            <h2>เริ่มสร้าง QR Code กันเลย </h2>
+            <div class="col-md-5 ">   
+                <div class="card card-nav-tabs card-plain">
+                    <ul class="nav nav-tabs">
+                     <li class="nav-item">
+                        <a class="nav-link active" href="#">เว็บไซต์</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#updates" data-toggle="tab">PDF</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#history" data-toggle="tab">รูปภาพ</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    
-       
-            <div class="tab-pane active" id="home">
+                     <li class="nav-item">
+                        <a class="nav-link" href="#">PDF</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#">รูปภาพ</a>
+                     </li>
+                    </ul>
+ 
+            <div class="tab-pane active" style="padding: 100px 10px 10px 20%;">
             
-                            <form>
+                        <form>
                             <div class="form-row">
-                                <div class="form-group col-md-12">
-                                <label for="inputEmail4">เว็บไซต์</label>
-                                <input type="email" class="form-control" id="inputEmail4" placeholder="เว็บไซต์">
+                                <div class="form-group col-md-5">
+                                <label >เว็บไซต์</label>
+                                <input placeholder="เว็บไซต์">
                                 </div>
                                 <br><br>
                                 </div>
-                                <label for="inputEmail4">โลโก้:</label><br>
+                                <label >โลโก้:</label><br>
                                 <input type="file" name="logoqrcode" required><br><br>
-                                <button type="submit" class="btn btn-primary"  style="margin-right: 60px;">สร้างคิวอาร์โค้ด</button> 
-
+                                <button type="submit" class="btn btn-dark_blue" style="margin-bottom: 20px;background-color: #100575;color: #fff;">สร้างคิวอาร์โค้ด</button> 
                             </form>
                             </div>
                             </div>
-           
-            <div class="tab-pane" id="updates">
-               
-            </div>
-            <div class="tab-pane" id="history">
-           
-
-                          
-           
-    
-  </div>
-
-
-                
-
-
-        </div>
-        <div class="col-md-4">
-                <div class="card">
-
-                    <div class="card-body">
-                   
-                    <div class="form-row">
-           
-                        <button type="submit" class="btn btn-primary">ดาวน์โหลด</button> 
-
-                   
+                            </div>
+              <div class="col-md-5">
+                <div class="card"style="padding-top: 10%">                   
+                <img src="<?php echo base_url(). '/assets/image/QR_home.PNG' ?>"height="50%" width="50%"style="margin: auto;">
+                    <div class="card-body" style="margin: auto;">                   
+                            
+                            <br>
+                            <button type="submit" class="btn btn-warning">ดาวน์โหลด</button> 
                     </div>
                 </div>
+             </div>
         </div>
     </div>
-</div>
 </div>
 
