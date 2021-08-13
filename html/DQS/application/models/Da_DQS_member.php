@@ -2,11 +2,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require 'CRS_Model.php';
+require 'DQS_Model.php';
 
 class Da_DQS_member extends DQS_model {
 
-    public $mem_emp_id
+    public $mem_emp_id;
     public $mem_firstname;
     public $mem_lastname;
     public $mem_email;
