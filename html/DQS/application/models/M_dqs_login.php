@@ -10,15 +10,16 @@ class M_dqs_login extends Da_dqs_login {
 		parent::__construct();
 	}
 
-	public function check_login($mem_username,$mem_password)
+	public function check_login()
 	{
-		$sql="SELECT*FROM DQS_Member 
-			WHERE mem_username='$mem_username' 
-			AND mem_password = '$mem_password'
-            ";
-
-		$query = $this->db->query($sql);
+		$sql = "SELECT mem_id,mem_firstname,mem_lastname,mem_usernmeme,mem_password
+                FROM {$this->db_name}.DQS_Member 
+        WHERE mem_usernmeme=? AND mem_password =? ";
+        $query = $this->db->query($sql, array($this->mem_usernmeme, $this->mem_password));
         return $query;
+
+		
 	}
 
 }
+

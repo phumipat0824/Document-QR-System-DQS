@@ -158,8 +158,10 @@
                     <div class="col-2"></div>
                     <div class="d-grid gap-2 d-md-block" >
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button type="button" class="btn btn-light">ยกเลิก</button>
-                            <button type="button" class="btn btn-primary">ยืนยัน</button>
+                            <a href =" <?php echo site_url() . 'Member/Member_register/show_member_register' ?> " > 
+                                <button type="button" class="btn btn-light">ยกเลิก</button></a>
+                            <a href =" <?php echo site_url() . 'Member/Member_login/show_member_login' ?> " > 
+                                <button type="button" class="btn btn-primary">ยืนยัน</button> </a>
                         </div>
                     </div>
                     <!DOCTYPE html>
