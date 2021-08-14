@@ -1,8 +1,9 @@
 <html lang="en">
-  <head>
+
+<head>
   <meta charset="utf-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url().'assets/template/material-dashboard-master'?>/assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="<?php echo base_url().'assets/template/material-dashboard-master'?>/assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>
     DQS
@@ -35,50 +36,51 @@
   <meta property="og:site_name" content="Creative Tim">
   <!--     Fonts and icons     -->
   <script src="bower_components/bootstrap-material-design/scripts/material.js"></script>
-<script src="bower_components/bootstrap-material-design/scripts/ripples.js"></script>
+  <script src="bower_components/bootstrap-material-design/scripts/ripples.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
-  <link href="<?php echo base_url().'assets/template/material-dashboard-master'?>/assets/css/material-dashboard.min.css?v=2.1.2" rel="stylesheet">
-  <link href="<?php echo base_url().'assets/template/material-dashboard-master'?>/assets/css/edit_css.css" rel="stylesheet">
+  <link href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/css/material-dashboard.min.css?v=2.1.2" rel="stylesheet">
+  <link href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/css/edit_css.css" rel="stylesheet">
 
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <!-- CSS only -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-  <link href="<?php echo base_url().'assets/template/material-dashboard-master'?>/assets/demo/demo.css" rel="stylesheet">
+  <link href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/demo/demo.css" rel="stylesheet">
   <!-- Google Tag Manager -->
   <!-- CSS only -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
 
   <nav class="navbar navbar-expand-lg bg-dark_blue" style="z-index: 6; position: fixed; width: 100%; top:0;">
- 
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-bar navbar-kebab"></span>
-    <span class="navbar-toggler-bar navbar-kebab"></span>
-    <span class="navbar-toggler-bar navbar-kebab"></span>
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+      <span class="navbar-toggler-bar navbar-kebab"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <img src="<?php echo base_url(). '/assets/image/logo_dqs.PNG' ?>" height="50" width="50">
-      <a class="navbar-brand" href="#"><b>Document QR</b></a>
+      <img src="<?php echo base_url() . '/assets/image/logo_dqs.PNG' ?>" height="50" width="50">
+      <a class="navbar-brand" href="<?php echo base_url() . 'DQS_qrcode/Qrcode_generator/show_qrcode' ?>"><b>Document QR</b></a>
       <form class="form-inline ml-auto">
-     
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">สร้างคิวอาร์โค้ด <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">สมัครสมาชิก</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">เข้าสู่ระบบ</a>
-        </li>
-      </ul>
-         
+
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url() . 'DQS_qrcode/Qrcode_generator/show_qrcode' ?>" style="font-size:18px">สร้างคิวอาร์โค้ด </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url() . 'Member/Member_register/show_member_register' ?>" style="font-size:18px">สมัครสมาชิก</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url() . 'Member/Member_login/show_member_login' ?>" style="font-size:18px">เข้าสู่ระบบ</a>
+          </li>
+        </ul>
+
       </form>
     </div>
-  
-</nav>
-  </head>
-  <body>
+
+  </nav>
+</head>
+
+<body>
