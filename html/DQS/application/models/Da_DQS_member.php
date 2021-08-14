@@ -13,8 +13,8 @@ class Da_DQS_member extends DQS_model {
     public $mem_username;
     public $mem_password;
     public $mem_role;
-    public $mem_dep_id;
-    public $dep_province;
+    public $dep_name;
+    public $pro_name;
 
 
  public function __construct()

@@ -1,11 +1,10 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 require dirname(__FILE__).'/../DQS_controller.php';
-// require 'DQS_controller.php'เรียกใช้ controller หลัก
+
 class Member_register extends DQS_controller {
-
-
  public function index()
  {
         echo '<b>Hello World</b>';
@@ -60,8 +59,8 @@ class Member_register extends DQS_controller {
         $this->session->set_userdata('mem_lastname', $this->input->post('mem_lastname'));
         $this->session->set_userdata('mem_email', $this->input->post('mem_email'));
         $this->session->set_userdata('mem_password', $this->input->post('mem_password'));
-        $this->session->set_userdata('mem_dep_id', $this->input->post('mem_dep_id'));
-        $this->session->set_userdata('mem_province', $this->input->post('mem_province'));
+        $this->session->set_userdata('dep_name', $this->input->post('dep_name'));       
+        $this->session->set_userdata('pro_name', $this->input->post('pro_name'));
 
         redirect('Member/Member_register/show_member_confirm');
         //ที่อยู่

@@ -26,7 +26,7 @@
                     <div class="row gx-5">
                         <div class="col">
                             <div class="p-3 ">จังหวัด</div>
-                            <select name="province" class="form-select" aria-label="Default select example" required>
+                            <select name="pro_name" id = "pro_name" class="form-select" aria-label="Default select example" required>
                                 <option value="" selected>--------- เลือกจังหวัด ---------</option>
                                 <option value="กรุงเทพมหานคร">กรุงเทพมหานคร</option>
                                 <option value="กระบี่">กระบี่ </option>
@@ -109,7 +109,7 @@
                         </div>
                         <div class="col">
                             <div class="p-3 ">หน่วยงาน</div>
-                            <select name="agency" class="form-select" aria-label="Default select example" required>
+                            <select name="dep_name" id = "dep_name" class="form-select" aria-label="Default select example" required>
                                 <option value="" selected>--------- เลือกหน่วยงาน ---------</option>
                                 <option value="ที่ทำการปกครองจังหวัด">ที่ทำการปกครองจังหวัด</option>
                                 <option value="สำนักงานจังหวัด ">สำนักงานจังหวัด </option>
