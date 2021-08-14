@@ -1,17 +1,24 @@
 <div class="content">
-    <div class="container-fluid">
+    <div class="container-fluid" style="padding-top: 100px ;margin: auto;";>
+    <div class="row gx-5">
+    <div class="col-lg-2 col-md-2" style= "padding-left: 100px ">
+    </div>
+    <div class="col-lg-8 col-md-8" style= "padding-left: 100px ">
+    <div class="card">
         <div class="row gx-5">
-            <div class="col-md-2"> </div>
+           
             <div class="col"></div>
             <div class="col-10">
                 <div class="row justify-content-md-center">
-                    <div class="col col-lg-2">
+                    <div class="col col-lg-1">
 
                     </div>
-                    <div class="col-md-auto">
-                        <h2>สมัครสมาชิก</h2>
+                    <div class="col-md-10 justify-content-md-center">
+                    <div class="card-header card-header-primary">
+                        <h2 class="text-center">สมัครสมาชิก</h2>
                     </div>
-                    <div class="col col-lg-2">
+                    </div>
+                    <div class="col col-lg-1">
 
                     </div>
                 </div>
@@ -202,6 +209,8 @@
             <div class="col"></div>
         </div>
     </div>
+    </div>
+</div>
 </div>
 
 <script>

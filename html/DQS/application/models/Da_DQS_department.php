@@ -9,6 +9,7 @@ class Da_DQS_department extends DQS_model {
     public $dep_name;
     public $dep_province;
     public $dep_active;
+    public $dep_pref_province;
 
  public function __construct()
  {
