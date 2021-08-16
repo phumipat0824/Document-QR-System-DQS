@@ -54,7 +54,7 @@ class Member_login extends DQS_controller
 
                 //setcookie("auth",base64_encode($value->mem_username), time() + (86400 * 30), "/"); 
                 //if(isset($_COOKIE["auth"])) {
-                return redirect('Member/v_member_login');
+                return redirect('/Member/Member_login/show_member_home');
                 // $isLogin = [
                 //     "isAuth" => "success",
 
