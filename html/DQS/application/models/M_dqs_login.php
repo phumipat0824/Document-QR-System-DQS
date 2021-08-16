@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require 'Da_DQS_login.php';
+include_once 'Da_DQS_login.php';
 
 class M_dqs_login extends Da_dqs_login {
 

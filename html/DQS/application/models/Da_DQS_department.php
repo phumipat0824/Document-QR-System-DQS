@@ -1,20 +1,17 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-require 'CRS_Model.php';
+include_once 'DQS_model.php';
 
-class Da_DQS_department extends DQS_model {
+class Da_DQS_department extends DQS_model
+{
 
     public $dep_id;
     public $dep_name;
-    public $dep_province;
     public $dep_active;
-    public $dep_pref_province;
 
- public function __construct()
- {
+    public function __construct()
+    {
         parent::__construct();
     }
-
-
 }
