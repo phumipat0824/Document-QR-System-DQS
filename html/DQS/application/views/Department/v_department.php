@@ -6,17 +6,31 @@
       <div class="row" style="margin-top: 10%;">
         <div class="col md-12"></div>
         <div class="card">
-          <div class="card-header card-header-primary">
-            <h4 class="card-title ">Simple Table</h4>
-            <p class="card-category"> Here is a subtitle for this table</p>
+          <div class="card-header ">
+            <div class="row">
+              <div class="col-md-8">
+                <h4 class="card-title ">ข้อมูลแผนก </h4>
+              </div>
+              <div class="col-md-4">
+                <button class="btn btn-yellow">เพิ่มแผนก</button>
+              </div>
+            </div>
+            <hr>
           </div><!-- div header end  -->
-          <div class="card-body">
+          <div class="card-body" style="margin-top: -20px;">
             <div class="table-responsive">
               <table class="table">
-                <thead class=" text-primary">
-                  </tbody>
-                  </tbody>
+                <thead class=" text">
+                  <tr>
+                    <th>#</th>
+                    <th>ชื่อแผนก</th>
+                    <th>สถานะ</th>
+                    <th>แก้ไขล่าสุด</th>
+                    <th>แก้ไขชื่อ</th>
+                  </tr>
                 </thead>
+                <tbody>
+                </tbody>
               </table>
             </div>
           </div>
