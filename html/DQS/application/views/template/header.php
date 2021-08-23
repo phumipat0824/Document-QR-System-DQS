@@ -42,7 +42,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/css/material-dashboard.min.css?v=2.1.2" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/css/edit_css.css" />
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/css/edit_css.css?"<?php echo date('l jS \of F Y h:i:s A'); ?> />
 
 
   <!-- CSS Just for demo purpose, don't include it in your project -->

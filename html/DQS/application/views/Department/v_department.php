@@ -8,11 +8,11 @@
         <div class="card">
           <div class="card-header ">
             <div class="row">
-              <div class="col-md-8">
+              <div class="col-md-10_5">
                 <h4 class="card-title ">ข้อมูลแผนก </h4>
               </div>
-              <div class="col-md-4">
-                <button class="btn btn-yellow">เพิ่มแผนก</button>
+              <div class="col-md-1_5">
+                <button class="btn btn-yellow" >เพิ่มแผนก</button>
               </div>
             </div>
             <hr>
@@ -30,6 +30,16 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <?php $i=0; ?>
+                  <?php foreach ($arr_dept as $dept) { $i++?>
+                    <tr>
+                      <td><?php echo $i ?></td>
+                      <td><?php echo $dept->dep_name ?></td>
+                      <td><?php echo $dept->dep_active ?></td>
+                      <td><?php echo $dept->dep_timestamp ?></td>
+                      <td><button class="btn btn-info">แก้ไข</button></td>
+                    </tr>
+                  <?php } ?>
                 </tbody>
               </table>
             </div>

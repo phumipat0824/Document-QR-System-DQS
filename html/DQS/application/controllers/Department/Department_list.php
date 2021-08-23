@@ -8,8 +8,13 @@ class Department_list extends DQS_controller {
 
 	public function index()
 	{
-		$this->output_sidebar_admin("department/v_department");
+		$this->load->model('M_DQS_department', 'dept');
+		$pudata['arr_dept'] = $this->dept->get_all()->result();
+		$this->output_sidebar_admin('department/v_department',$pudata);
+
+
 	}
+
 
 }
 ?>
