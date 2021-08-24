@@ -21,5 +21,13 @@ class M_dqs_login extends Da_dqs_login {
 		
 	}
 
-}
+	public function get_by_username_password($mem_username, $mem_password)
+    {
+        $sql = "SELECT * 
+            FROM {$this->db_name}.DQS_Member
+            WHERE mem_username = '$mem_username' AND mem_password = '$mem_password'";
+        $query = $this->db->query($sql);
+        return $query;
+    }
 
+}

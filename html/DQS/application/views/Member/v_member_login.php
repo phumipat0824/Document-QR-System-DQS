@@ -1,4 +1,10 @@
 <!-- Login -->
+<?php
+    $mem_username = $mem_username ?? '';
+    $mem_password = $mem_password ?? '';
+    $error = $error ?? '';
+    
+    ?>
 <div class="row" style="padding-top: 150px ;margin: auto;" ;>
     <div class="col-lg-4 col-md-4">
     </div>
@@ -29,6 +35,10 @@
                                 <input class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" type="password" required>
                             </div>
                         </div>
+                        <center>
+                            <!-- แสดง Username หรือ Password ไม่ถูกต้อง -->
+                            <p id="error" class="py-2 text-danger"> <?php echo $error; ?> </p>
+                        </center>
                         <br>
                         <div class="text-center" style="padding-top: 20px margin-bottom: 1rem">
                             <!-- Button login -->
