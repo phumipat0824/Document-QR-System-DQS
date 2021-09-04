@@ -86,7 +86,7 @@
                                     </div>
                                     <div class=" col">
                                         <div class="p-3 ">ยืนยันรหัสผ่าน</div>
-                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="ยืนยันรหัสผ่าน" required oninvalid="กรุณากรอกรหัสผ่าน"><br>
+                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="ยืนยันรหัสผ่าน" required oninvalid="กรุณากรอกรหัสผ่าน" onchange='check_password()'><br>
                                     </div>
                                 </div>
 
@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="d-grid gap-2 col-6 mx-auto">
                                         <span id='message'> </span>
-                                        <br><button class="btn btn-primary" type="submit">สมัครสมาชิก</button>
+                                        <br><button class="btn btn-primary" id='submit' type="submit" disabled>สมัครสมาชิก</button>
                                     </div>
 
                                     <div class="col-2"></div>
@@ -119,20 +119,12 @@ Password: <input type='text' name="password"/>
     </div>
 
     <script>
-        function onChange() {
-            const password = document.querySelector('input[name=mem_password]');
-            const confirm = document.querySelector('input[name=confirm_password]');
-            var pwdPolicy = /^\w*(?=\w*\d)(?=\w*[a-z])(?=\w*[A-Z])\w*$/;
-            if (pass.match(policy)) {
-                else if (confirm.match(policy)) {
-                    if (confirm.value === '') {
-                        confirm.setCustomValidity('กรุณากรอกรหัสผ่าน');
-                    } else if (confirm.value === password.value) {
-                        confirm.setCustomValidity('');
-                    } else if (confirm.value !== password.value) {
-                        confirm.setCustomValidity('รหัสผ่านไม่ตรงกัน');
-                    }
-                }
+        function check_password() {
+            if (document.getElementById('mem_password').value ==
+                document.getElementById('confirm_password').value) {
+                document.getElementById('submit').disabled = false;
+            } else {
+                document.getElementById('submit').disabled = true;
             }
         }
     </script>
