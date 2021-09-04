@@ -69,8 +69,10 @@ class Member_register extends DQS_controller
         $this->session->set_userdata('mem_email', $this->input->post('mem_email'));
         $this->session->set_userdata('mem_password', $this->input->post('mem_password'));
         $this->session->set_userdata('mem_dep_id', $this->input->post('mem_dep_id'));
+        $this->session->set_userdata('mem_pref_id', $this->input->post('mem_pref_id'));
         $this->session->set_userdata('mem_province_id', $this->input->post('mem_province_id'));
         $this->session->set_userdata('mem_role', $this->input->post('mem_role'));
+        $this->session->set_userdata('mem_password', $this->input->post('mem_password'));
         $pro_id = $this->input->post('mem_province_id');
         $data['obj_province'] = $this->MDP->get_by_id($pro_id)->row();
 

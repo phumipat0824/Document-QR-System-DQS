@@ -43,16 +43,16 @@
                                         </select><br>
                                     </div>
                                 </div>
-                                    
+
 
                                 <div class="row gx-5">
                                     <div class="col">
                                         <div class="p-3 ">คำนำหน้าชื่อ</div>
                                         <select name="mem_pref_id" id="mem_pref_id" class="form-select" aria-label="Default select example" required>
-                                            <option value="" selected>------- คำนำหน้า ---------</option>
-                                            <option>นาย</option>
-                                            <option>นางสาว</option>
-                                            <option>นาง</option>
+                                            <option value="0" selected>------- คำนำหน้า ---------</option>
+                                            <option value="1">นาย</option>
+                                            <option value="2">นางสาว</option>
+                                            <option value="3">นาง</option>
                                         </select><br>
                                     </div>
                                     <div class="col">
@@ -66,27 +66,27 @@
                                     </div>
 
                                 </div>
-                                
 
-                                <div class="row gx-5">                                
-                                <div class="col">
+
+                                <div class="row gx-5">
+                                    <div class="col">
 
                                         <div class="p-3 ">อีเมล</div>
                                         <input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="อีเมล" required oninvalid="this.setCustomValidity('กรุณากรอกอีเมลที่ถูกต้อง')" oninput="setCustomValidity('')"></input>
                                     </div>
-                                <input type="hidden" name="mem_role" id="mem_role" value="2">
+                                    <input type="hidden" name="mem_role" id="mem_role" value="2">
 
 
 
-                              
+
                                     <div class="col">
                                         <div class="p-3 ">รหัสผ่าน</div>
 
-                                        <input type="password" name="password" class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required oninvalid="this.setCustomValidity('กรุณากรอกรหัสผ่าน')" ><br>
+                                        <input type="password" name="password" class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required oninvalid="กรุณากรอกรหัสผ่าน"><br>
                                     </div>
                                     <div class=" col">
                                         <div class="p-3 ">ยืนยันรหัสผ่าน</div>
-                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="ยืนยันรหัสผ่าน" required oninvalid="this.setCustomValidity('กรุณากรอกรหัสผ่าน')"  ><br>
+                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="ยืนยันรหัสผ่าน" required oninvalid="กรุณากรอกรหัสผ่าน"><br>
                                     </div>
                                 </div>
 
@@ -122,9 +122,9 @@ Password: <input type='text' name="password"/>
         function onChange() {
             const password = document.querySelector('input[name=mem_password]');
             const confirm = document.querySelector('input[name=confirm_password]');
-            var pwdPolicy =/^\w*(?=\w*\d)(?=\w*[a-z])(?=\w*[A-Z])\w*$/;
-            if (pass.match(policy)){
-                else if (confirm.match(policy)){
+            var pwdPolicy = /^\w*(?=\w*\d)(?=\w*[a-z])(?=\w*[A-Z])\w*$/;
+            if (pass.match(policy)) {
+                else if (confirm.match(policy)) {
                     if (confirm.value === '') {
                         confirm.setCustomValidity('กรุณากรอกรหัสผ่าน');
                     } else if (confirm.value === password.value) {
@@ -137,7 +137,7 @@ Password: <input type='text' name="password"/>
         }
     </script>
 
-   /
+    /
 
     <!-- <div id="message">
   <h3>Password must contain the following:</h3>
