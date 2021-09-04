@@ -41,22 +41,25 @@
 
                                 <div class="row gx-5">
                                     <div class="col">
-                                        <div class="p-3 ">ชื่อผู้ใช้</div>
+                                        <div class="p-3 ">ชื่อ</div>
 
-                                        <input type="text" class="form-control" id="mem_username" name="mem_username" value="<?php echo $this->session->userdata('mem_username') ?>" required disabled><br>
+                                        <input type="text" class="form-control" id="mem_firstname" name="mem_firstname" value="<?php echo $this->session->userdata('mem_firstname') ?>" required disabled><br>
                                     </div>
-
                                     <div class="col">
-                                        <div class="p-3 ">รหัสพนักงาน</div>
-
-                                        <input type="text" class="form-control" id="mem_emp_id" name="mem_emp_id" value="<?php echo $this->session->userdata('mem_emp_id') ?>" required disabled><br>
-
+                                        <div class="p-3 ">นามสกุล</div>
+                                        <input type="text" class="form-control" id="mem_lastname" name="mem_lastname" value="<?php echo $this->session->userdata('mem_lastname') ?>" required disabled><br>
                                     </div>
+
                                 </div>
 
 
 
                                 <div class="row gx-5">
+                                <div class="col">
+                                        <div class="p-3 ">ชื่อผู้ใช้</div>
+
+                                        <input type="text" class="form-control" id="mem_username" name="mem_username" value="<?php echo $this->session->userdata('mem_username') ?>" required disabled><br>
+                                    </div>
                                     <div class="col">
                                         <div class="p-3 ">อีเมล</div>
                                         <input type="email" class="form-control" id="mem_email" name="mem_email" value="<?php echo $this->session->userdata('mem_email') ?>" required disabled>
@@ -70,16 +73,7 @@
                                 </div>
                                 <input type="hidden" name="mem_role" id="mem_role" value="<?php echo $this->session->userdata('mem_role') ?>">
 
-                                <div class="row gx-5">
-                                    <div class="col">
-                                        <div class="p-3 ">ชื่อ</div>
-
-                                        <input type="text" class="form-control" id="mem_firstname" name="mem_firstname" value="<?php echo $this->session->userdata('mem_firstname') ?>" required disabled><br>
-                                    </div>
-                                    <div class="col">
-                                        <div class="p-3 ">นามสกุล</div>
-                                        <input type="text" class="form-control" id="mem_lastname" name="mem_lastname" value="<?php echo $this->session->userdata('mem_lastname') ?>" required disabled><br>
-                                    </div>
+                              
                                 </div>
 
                                 <div class="row gx-5 ">
