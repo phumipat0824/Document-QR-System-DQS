@@ -4,7 +4,7 @@
       <div class=" container-fluid">
       <!-- defual tab -->
 
-<!--       
+      
       <div class="row" style="margin-top: 10%;">
         <div class="col md-12"></div>
         <div class="card">
@@ -40,7 +40,7 @@
                       <td><?php echo $dept->dep_name ?></td>
                       <td><?php echo $dept->dep_active ?></td>
                       <td><?php echo $dept->dep_timestamp ?></td>
-                      <td><button class="btn btn-info "><i class="material-icons">edit</i>&nbsp;</button></td>
+                      <td><button class="btn btn-info " style="height: 40px;" ><i class="material-icons" style="padding-top: 10px;" >edit</i></button></td>
                     </tr>
                   <?php } ?>
                 </tbody>
@@ -49,7 +49,7 @@
           </div>
         </div>
       </div>
-       -->
+      
       <div class="card" style="margin-top: 10%;">
           <div class="card-header">
           </div>
