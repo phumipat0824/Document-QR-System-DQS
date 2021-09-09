@@ -1,5 +1,13 @@
 <!-- Login -->
 <?php
+/*
+    * v_login
+    * Display login
+    * @input error, username, password
+    * @output login
+    * @author Ashirawat, Krisada
+    * @Create Date 2564-08-05
+*/
     $mem_username = $mem_username ?? '';
     $mem_password = $mem_password ?? '';
     $error = $error ?? '';

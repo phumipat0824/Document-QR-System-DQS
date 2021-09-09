@@ -1,5 +1,11 @@
-<?php
 
+<?php
+/*
+* Login
+* Login Management
+* @author Ashirawat , Krisada
+* @Create Date 2564-08-05
+*/
 defined('BASEPATH') or exit('No direct script access allowed');
 
 require dirname(__FILE__) . '/../DQS_controller.php';
@@ -21,6 +27,14 @@ class Member_login extends DQS_controller
         $this->output_sidebar_member("Member/v_member_home");
     }
 
+     /*
+    * member_login
+    * Show screen member login
+    * @input mem_username,mem_password, mem_user, 
+    * @output view
+    * @author Ashirawat, Krsiada
+    * @Create Date 2564-08-05
+    */
     public function login()
     {
         // get username and password from v_login.php
@@ -50,6 +64,14 @@ class Member_login extends DQS_controller
 
     }
 
+    /*
+    * logout
+    * Go back to login
+    * @input -
+    * @output view
+    * @author Ashirawat, Krsiada
+    * @Create Date 2564-08-05
+    */
     public function logout()
     {
         //session_unset();

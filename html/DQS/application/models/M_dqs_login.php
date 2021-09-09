@@ -9,7 +9,14 @@ class M_dqs_login extends Da_dqs_login {
 	{
 		parent::__construct();
 	}
-
+ /*
+	* check_login
+	* check_login username passwordin database 
+	* @input username, password
+	* @output mem_id, mem_username, mem_password
+	* @author Ashirawat, Krsiada
+	* @Create Date 2564-08-05
+	*/
 	public function check_login()
 	{
 		$sql = "SELECT mem_id,mem_firstname,mem_lastname,mem_usernmeme,mem_password
@@ -20,7 +27,14 @@ class M_dqs_login extends Da_dqs_login {
 
 		
 	}
-
+ /*
+	* get_by_username_password
+	* Get user by username password in database
+	* @input username, password
+	* @output usr_id, usr_username, usr_password, usr_name, usr_active_status, usr_role
+	* @author Ashirawat, Krsiada
+	* @Create Date 2564-08-05
+	*/
 	public function get_by_username_password($mem_username, $mem_password)
     {
         $sql = "SELECT * 
