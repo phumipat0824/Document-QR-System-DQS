@@ -1,8 +1,13 @@
+<!-- load plugin data table -->
+<link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'assets/plugin' ?>/DataTables/datatables.css"/>
+<script type="text/javascript" src="<?php echo base_url() . 'assets/plugin' ?>/DataTables/datatables.js"></script>
+<link href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/css/CSS_table_list.css" rel="stylesheet" />
+
 <div class="main-panel">
   <div class="container">
     <div class="content">
       <div class=" container-fluid">
-      <!-- defual tab -->
+      <!-- defual tab --> 
 
       
       <div class="row" style="margin-top: 10%;">
@@ -19,44 +24,20 @@
             </div>
             <hr>
           </div>
-           div header end  
-          <div class="card-body" style="margin-top: -20px;">
-            <div class="table-responsive">
-              <table class="table">
-                <thead class=" text">
-                  <tr>
-                    <th>#</th>
-                    <th>ชื่อแผนก</th>
-                    <th>สถานะ</th>
-                    <th>แก้ไขล่าสุด</th>
-                    <th>แก้ไขชื่อ</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php $i=0; ?>
-                  <?php foreach ($arr_dept as $dept) { $i++?>
-                    <tr>
-                      <td><?php echo $i ?></td>
-                      <td><?php echo $dept->dep_name ?></td>
-                      <td><?php echo $dept->dep_active ?></td>
-                      <td><?php echo $dept->dep_timestamp ?></td>
-                      <td><button class="btn btn-info " style="height: 40px;" ><i class="material-icons" style="padding-top: 10px;" >edit</i></button></td>
-                    </tr>
-                  <?php } ?>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
+           <!-- div header end   -->
+          
       
-      <div class="card" style="margin-top: 10%;">
-          <div class="card-header">
-          </div>
-        <div class="card-body">
-          <div id="create_table"></div>
-        </div>
-      </div>
+          
+            
+            
+            
+              <div class="card-body" style="margin-top: -20px;">
+                
+                  <div id="create_table"></div>
+                
+              </div>
+            
+          
 
 
       <!-- end defual tab -->
@@ -66,6 +47,7 @@
 </div>
 
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
   $(document).ready(function(){
@@ -77,42 +59,58 @@
       url: "<?php echo site_url() ?>/Department/Department_list/get_dept_list_ajax",
       type: 'POST',
       data:{},
-      dataType: 'json',
-      success:function(json_data){
-      console.log(json_data);
-      create_Table(data['json_dept']);
+      dataType: 'JSON',
+      success:function(data){
+          console.log(data);
+          create_Table(data['json_dept']);
       }
 
-    });
+  });
+    
 }
 
 function create_Table(arr_dept){
-	
-	let html_code = '';
-	var Day = '';
+  let html_code = '';
+
+	html_code += '<div class="table-responsive">';
 	html_code += '<table class="table" id = "datatable_dept_list">';
-	html_code += '<thead>';
+	html_code += '<thead class=" text">';
 	html_code += '<tr>';
-	html_code += '<th>#</th>';
+	html_code += '<th style="text-align: center;">#</th>';
   html_code += '<th>ชื่อแผนก</th>';
-	html_code += '<th>สถานะ</th>';
-	html_code += '<th>แก้ไขล่าสุด</th>';
-	html_code += '<th>แก้ไขชื่อ</th>';
+	html_code += '<th style="text-align: center;">สถานะ</th>';
+	html_code += '<th style="text-align: center;">แก้ไขล่าสุด</th>';
+	html_code += '<th style="text-align: center;">แก้ไขชื่อ</th>';
 	html_code += '</tr>';
 	html_code += '</thead>';
 	html_code += '<tbody>';
   arr_dept.forEach((row_dept, index_dept)=>{
     html_code += '<tr>';
     html_code += '<td style="text-align: center;">' + (index_dept+1) + '</td>';
-    html_code += '<td style="text-align: left;">' +  row_dept['dep_name'] + '</td>';
-    html_code += '<td style="text-align: left;">' +  row_dept['dep_active'] + '</td>';
-    html_code += '<td style="text-align: left;">' +  row_dept['dep_timestamp'] + '</td>';
-    html_code += '<td style="text-align: left;">' +  '<button class="btn btn-info ">'+'<i class="material-icons">edit</i>'+'&nbsp;</button>' + '</td>';
+    html_code += '<td>' +  row_dept['dep_name'] + '</td>';
+
+    if (row_dept['dep_active'] == 1) {
+        var check_status ='checked';
+    } else {
+        var check_status ='';
+    }
+
+
+    html_code += '<td style="text-align: center;">' ;
+    html_code += '<label class="switch">';
+    html_code += '<input type="checkbox"  '+check_status+' >';
+    html_code += '<span class="slider round"></span>';
+    html_code += '</label>';
+    html_code += '</td>';
+
+    html_code += '<td style="text-align: center;">' +  row_dept['dep_timestamp'] + '</td>';
+    html_code += '<td style="text-align: center;">' +  '<button class="btn btn-info ">'+'<i class="material-icons">edit</i>'+'&nbsp;</button>' + '</td>';
     html_code += '</td>';
 		html_code += '</tr>';
   });
   html_code += '</tbody>';
 	html_code += '</table>';
+  html_code += '</div>';
 
 	$('#create_table').html(html_code);
 	make_dataTable_byId('datatable_dept_list');
@@ -129,7 +127,7 @@ function make_dataTable_byId(id_name) {
 		language: {
 		lengthMenu: "แสดง _MENU_ รายการ",
 		emptyTable: "ไม่พบข้อมูลในตาราง",
-		search: "ค้นหา :_INdeptT_",
+		search: "ค้นหา :_INPUT_",
 		searchPlaceholder: "ค้นหาข้อมูลในตาราง...",
 		info: "แสดงหน้าที่ _START_ จาก _PAGES_ หน้า ทั้งหมด _TOTAL_ รายการ",
 		infoEmpty: "แสดงหน้าที่ 0 จาก 0 หน้า รายการทั้งหมด 0 รายการ",
@@ -158,6 +156,70 @@ function make_dataTable_byId(id_name) {
 	});
 
 	return datatable;
-}
+} //make_dataTable_byId
     
 </script>
+
+
+<style>
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 52px;
+    height: 27px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #C0C0C0;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #33f321;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+</style>
