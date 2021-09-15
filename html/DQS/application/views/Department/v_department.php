@@ -9,7 +9,7 @@
       <div class=" container-fluid">
       <!-- defual tab --> 
 
-      
+<!--       
       <div class="row" style="margin-top: 10%;">
         <div class="col md-12"></div>
         <div class="card">
@@ -24,6 +24,7 @@
             </div>
             <hr>
           </div>
+<<<<<<< HEAD
            <!-- div header end   -->
           
       
@@ -38,6 +39,46 @@
               </div>
             
           
+=======
+           div header end  
+          <div class="card-body" style="margin-top: -20px;">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text">
+                  <tr>
+                    <th>#</th>
+                    <th>ชื่อแผนก</th>
+                    <th>สถานะ</th>
+                    <th>แก้ไขล่าสุด</th>
+                    <th>แก้ไขชื่อ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php $i=0; ?>
+                  <?php foreach ($arr_dept as $dept) { $i++?>
+                    <tr>
+                      <td><?php echo $i ?></td>
+                      <td><?php echo $dept->dep_name ?></td>
+                      <td><?php echo $dept->dep_active ?></td>
+                      <td><?php echo $dept->dep_timestamp ?></td>
+                      <td><button class="btn btn-info "><i class="material-icons">edit</i>&nbsp;</button></td>
+                    </tr>
+                  <?php } ?>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+       -->
+      <div class="card" style="margin-top: 10%;">
+          <div class="card-header">
+          </div>
+        <div class="card-body">
+          <div id="create_table"></div>
+        </div>
+      </div>
+>>>>>>> parent of 17b462b (Merge branch 'main' of https://github.com/phumipat0824/Document-QR-System-DQS into main)
 
 
       <!-- end defual tab -->
