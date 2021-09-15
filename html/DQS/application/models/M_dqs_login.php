@@ -39,7 +39,7 @@ class M_dqs_login extends Da_dqs_login {
     {
         $sql = "SELECT * 
             FROM {$this->db_name}.DQS_Member
-            WHERE mem_username = '$mem_username' AND mem_password = '$mem_password'";
+            WHERE mem_username = '$mem_username'AND mem_password = '$mem_password' OR mem_email = '$mem_username' AND mem_password = '$mem_password'";
         $query = $this->db->query($sql);
         return $query;
     }
