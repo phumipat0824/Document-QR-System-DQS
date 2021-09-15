@@ -72,10 +72,8 @@
                                         <div class="p-3 ">นามสกุล</div>
                                         <input type="text" class="form-control" id="mem_lastname" name="mem_lastname" value="<?php echo $this->session->userdata('mem_lastname') ?>" required disabled><br>
                                     </div>
-
+                                    <input type="hidden" name="mem_password" id="mem_password" value="<?php echo $this->session->userdata('mem_password') ?>">
                                 </div>
-
-
 
                                 <div class="row gx-5">
                                     <div class="col">

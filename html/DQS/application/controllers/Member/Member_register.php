@@ -44,6 +44,7 @@ class Member_register extends DQS_controller
 
         $this->load->model('Da_DQS_member', 'dmem');
         $this->dmem->mem_emp_id = $this->session->userdata('mem_emp_id');
+        $this->dmem->mem_pref_id = $this->session->userdata('mem_pref_id');
         $this->dmem->mem_firstname = $this->session->userdata('mem_firstname');
         $this->dmem->mem_lastname = $this->session->userdata('mem_lastname');
         $this->dmem->mem_email = $this->session->userdata('mem_email');
@@ -63,7 +64,6 @@ class Member_register extends DQS_controller
         $this->load->model('M_DQS_province', 'MDP');
         $this->load->model('M_DQS_department', 'MDD');
         //session
-        $this->session->set_userdata('mem_emp_id', $this->input->post('mem_emp_id'));
         $this->session->set_userdata('mem_firstname', $this->input->post('mem_firstname'));
         $this->session->set_userdata('mem_lastname', $this->input->post('mem_lastname'));
         $this->session->set_userdata('mem_email', $this->input->post('mem_email'));
@@ -72,7 +72,6 @@ class Member_register extends DQS_controller
         $this->session->set_userdata('mem_pref_id', $this->input->post('mem_pref_id'));
         $this->session->set_userdata('mem_province_id', $this->input->post('mem_province_id'));
         $this->session->set_userdata('mem_role', $this->input->post('mem_role'));
-        $this->session->set_userdata('mem_password', $this->input->post('mem_password'));
         $pro_id = $this->input->post('mem_province_id');
         $data['obj_province'] = $this->MDP->get_by_id($pro_id)->row();
 

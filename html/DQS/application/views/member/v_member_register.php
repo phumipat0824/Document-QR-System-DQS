@@ -22,7 +22,7 @@
 
                                 </div>
                             </div>
-                            <form action='<?php echo site_url() . 'Member/Member_register/insert_session' ?>' method="post" name='form' onsubmit="checkpassword()">
+                            <form action='<?php echo site_url() . 'Member/Member_register/insert_session' ?>' method="post" name='form'>
                                 <div class="row gx-5">
                                     <div class="col">
                                         <div class="p-3 ">จังหวัด</div>
@@ -82,7 +82,7 @@
                                     <div class="col">
                                         <div class="p-3 ">รหัสผ่าน</div>
 
-                                        <input type="password" name="password" class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" required onchange="checkpassword()" oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"><br>
+                                        <input type="password" name="mem_password" class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" required onchange="checkpassword()" oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"><br>
 
                                     </div>
                                     <div class=" col">
