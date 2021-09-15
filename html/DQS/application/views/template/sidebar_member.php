@@ -1,4 +1,4 @@
-<div class="sidebar" data-color="purple" data-background-color="white" data-image="<?php echo base_url().'/assets/img/sidebar-1.jpg'?>">
+<div class="sidebar" data-color="yellow" data-background-color="white" data-image="<?php echo base_url().'/assets/img/sidebar-1.jpg'?>">
     <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-normal">
             Document QR
         </a>
@@ -7,20 +7,20 @@
         <ul class="nav">
             <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Member/Member_login/member_home" ?  ''  : 'active' ?> ">
                 <a class="nav-link" href="<?php echo site_url().'/Member/Member_login/member_home'?>">
-                    <i class="fas fa-folder"></i>
-                    <p>คิวอาร์โค้ดของฉัน</p>
+                    <i class="fas fa-folder" style="color: rgb(125, 123, 122);"></i>
+                    <p style="color: rgb(0,0,0); ">คิวอาร์โค้ดของฉัน</p>
                 </a>
             </li>
             <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/" ?  'active'  : '' ?> ">
                 <a class="nav-link" href="./user.html">
-                    <i class="fas fa-chart-bar"></i>
-                    <p>รายงานสรุปผล</p>
+                    <i class="fas fa-chart-bar" style="color: rgb(125, 123, 122);"></i>
+                    <p style="color: rgb(0,0,0); ">รายงานสรุปผล</p>
                 </a>
             </li>
             <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/" ?  'active'  : '' ?> ">
                 <a class="nav-link" href="./tables.html">
-                    <i class="fas fa-cog"></i>
-                    <p>จัดการบัญชีผู้ใช้งาน</p>
+                    <i class="fas fa-cog" style="color: rgb(125, 123, 122);"></i>
+                    <p style="color: rgb(0,0,0); ">จัดการบัญชีผู้ใช้งาน</p>
                 </a>
             </li>
         </ul>
