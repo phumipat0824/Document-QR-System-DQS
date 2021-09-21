@@ -11,12 +11,28 @@ require dirname(__FILE__) . '/../DQS_controller.php';
 
 class Member_login extends DQS_controller
 {
+    /*
+    * show_member_login
+    * Go to login
+    * @input -
+    * @output view
+    * @author Ashirawat, Krsiada
+    * @Create Date 2564-08-05
+    */
 
     public function show_member_login()
     {
         $this->output_navbar("Member/v_member_login");
     }
 
+    /*
+    * show_member_home
+    * Go to member home
+    * @input -
+    * @output view
+    * @author Ashirawat, Krsiada
+    * @Create Date 2564-08-05
+    */
 
     public function show_member_home()
     {
@@ -26,7 +42,7 @@ class Member_login extends DQS_controller
      /*
     * member_login
     * Show screen member login
-    * @input mem_username,mem_password, mem_user, 
+    * @input mem_username,mem_password 
     * @output view
     * @author Ashirawat, Krsiada
     * @Create Date 2564-08-05
@@ -51,9 +67,16 @@ class Member_login extends DQS_controller
         
         else {
             // log in complete
-
+            
             // set id and name for user
             //$_SESSION['mem_username'] = $obj_mem->mem_username;
+            //if ($obj_mem->mem_role == 0) {
+            //    $_SESSION['mem_role'] = 'member';
+            //    redirect('');
+            //} else if ($obj_mem->mem_role == 1) {
+            //    $_SESSION['mem_role'] = 'admin';
+            //    redirect('');
+            //}
             redirect('/Member/Member_login/show_member_home');
 
         }
@@ -74,6 +97,15 @@ class Member_login extends DQS_controller
         //session_destroy();
         redirect('Member/v_member_login');
     }
+
+    /*
+    * check_user
+    * check username matches password 
+    * @input mem_username,mem_password 
+    * @output -
+    * @author Ashirawat, Krsiada
+    * @Create Date 2564-08-05
+    */
 
     public function check_user($mem_username, $mem_password)
     {
