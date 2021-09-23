@@ -72,7 +72,10 @@
                                         <div class="p-3 ">นามสกุล</div>
                                         <input type="text" class="form-control" id="mem_lastname" name="mem_lastname" value="<?php echo $this->session->userdata('mem_lastname') ?>" required disabled><br>
                                     </div>
-                                    <input type="hidden" name="mem_password" id="mem_password" value="<?php echo $this->session->userdata('mem_password') ?>">
+                                    <?php
+                                    $mem_password = $this->session->userdata('mem_password');
+                                    ?>
+                                    <input type="hidden" name="mem_password" id="mem_password" value="<?php echo $mem_password ?>">
                                 </div>
 
                                 <div class="row gx-5">
@@ -90,29 +93,56 @@
                                 <input type="hidden" name="mem_role" id="mem_role" value="<?php echo $this->session->userdata('mem_role') ?>">
 
 
+
+
+                                <div class="col"></div>
+
+                                <div class="row gx-5 ">
+                                    <div class="col-2"></div>
+                                    <div class="d-grid gap-2 d-md-block">
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+
+                                            <button type="button" class="btn btn-light" onclick="goBack()">ยกเลิก</button>
+                                            <input type="button" id="btn-ok" value="ยืนยัน" name="register" class="btn btn-primary accept">
+                                        </div>
+                                    </div>
+                                    <div class="col-2"></div>
+                                </div>
+                            </form>
                         </div>
                         <div class="col"></div>
-
-                        <div class="row gx-5 ">
-                            <div class="col-2"></div>
-                            <div class="d-grid gap-2 d-md-block">
-                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                    <a href=" <?php echo site_url() . 'Member/Member_register/show_member_register' ?> ">
-                                        <button type="button" class="btn btn-light">ยกเลิก</button></a>
-                                    <a href=" <?php echo site_url() . 'Member/Member_register/insert_member' ?> ">
-                                        <button type="button" class="btn btn-primary">ยืนยัน</button> </a>
-                                </div>
-                            </div>
-                            <!DOCTYPE html>
-
-
-                            <div class="col-2"></div>
-                        </div>
-                        </form>
                     </div>
-                    <div class="col"></div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        $(document).ready(function() {
+            $('form #btn-ok').click(function(e) {
+                let $form = $(this).closest('form');
+                var mem_username = $('#mem_username').val();
+                var mem_password = $("#mem_password").val();
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false,
+                })
+
+                swalWithBootstrapButtons.fire({  
+                    icon: 'success',
+                    title: 'สมัครสมาชิกเสร็จสิ้น...',
+                    text: 'ชื่อผู้ใช้ : '+mem_username +'    รหัสผ่าน : '+mem_password
+                }).then((result) => {
+                    document.getElementById('btn-ok').type = 'submit';
+                    $form.submit();
+                });
+            });
+        });
+    </script>
