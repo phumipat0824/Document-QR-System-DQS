@@ -1,10 +1,10 @@
 <div class="content">
-    <div class="container-fluid" style="padding-top: 100px ;margin: auto;" ;>
+    <div class="container-fluid" style="padding-top: 100px ;margin: auto;">
         <div class="row gx-5">
             <div class="col-lg-2 col-md-2" style="padding-left: 100px ">
             </div>
             <div class="col-lg-8 col-md-8" style="padding-left: 100px ">
-                <div class="card">
+                <div class="card" style = "border-radius: 30px;">
                     <div class="row gx-5">
                         <div class='col'></div>
                         <div class="col-10">
@@ -13,8 +13,8 @@
 
                                 </div>
                                 <div class="col-md-10 justify-content-md-center">
-                                    <div class="card-header card-header-primary">
-                                        <h2 class="text-center">สมัครสมาชิก</h2>
+                                    <div class="card-header card-header-warning">
+                                        <h2 class="text-center" style = "padding: 10px; border-radius: 20px;">ยืนยันข้อมูลการสมัคร</h2>
                                     </div>
                                 </div>
                                 <div class="col col-lg-1">
@@ -103,7 +103,7 @@
                                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 
                                             <button type="button" class="btn btn-light" onclick="goBack()">ยกเลิก</button>
-                                            <input type="button" id="btn-ok" value="ยืนยัน" name="register" class="btn btn-primary accept">
+                                            <input type="button" id="btn-ok" style="background-color: #100575" value="ยืนยัน" name="register" class="btn btn-primary accept">
                                         </div>
                                     </div>
                                     <div class="col-2"></div>
@@ -112,6 +112,7 @@
                         </div>
                         <div class="col"></div>
                     </div>
+                    
                 </div>
             </div>
         </div>

@@ -1,10 +1,12 @@
+<!-- Register -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 <div class="content">
-    <div class="container-fluid" style="padding-top: 100px ;margin: auto;" ;>
+    <div class="container-fluid" style="padding-top: 100px ;margin: auto;">
         <div class="row gx-5">
             <div class="col-lg-2 col-md-2" style="padding-left: 100px ">
             </div>
             <div class="col-lg-8 col-md-8" style="padding-left: 100px ">
-                <div class="card">
+                <div class="card"  style = "border-radius: 30px;">
                     <div class="row gx-5">
 
                         <div class="col"></div>
@@ -14,8 +16,9 @@
 
                                 </div>
                                 <div class="col-md-10 justify-content-md-center">
-                                    <div class="card-header card-header-primary">
-                                        <h2 class="text-center">สมัครสมาชิก</h2>
+                                    <div class="card-header card-header-warning" style = "padding: 10px; border-radius: 10px;">
+                                    
+                                        <h2 class= "text-center" >สมัครสมาชิก</h2>
                                     </div>
                                 </div>
                                 <div class="col col-lg-1">
@@ -69,7 +72,7 @@
 
 
                                 <div class="row gx-5">
-                                    <div class="col">
+                                    <div class="col-4">
 
                                         <div class="p-3 ">อีเมล</div>
                                         <input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="อีเมล" required oninvalid="this.setCustomValidity('กรุณากรอกอีเมลที่ถูกต้อง')" oninput="setCustomValidity('')"></input>
@@ -77,19 +80,18 @@
                                     <input type="hidden" name="mem_role" id="mem_role" value="2">
 
 
-
-
                                     <div class="col">
                                         <div class="p-3 ">รหัสผ่าน</div>
                                         <p>
-                                        <input type="password" name="mem_password" class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" required onchange="checkpassword()" oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-                                        <i class="bi bi-eye-slash" id="togglePassword"></i><br> </p>
+                                        <input type="password" name="mem_password" class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" required onchange="checkpassword()" oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"></p>
                                     </div>
                                     <div class=" col">
                                         <div class="p-3 ">ยืนยันรหัสผ่าน</div>
                                         <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="ยืนยันรหัสผ่าน" onchange="checkpassword()" required oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"><br>
                                         
+                                    
                                     </div>
+                                        
                                 </div>
 
                                 <div class=" row gx-5 ">
@@ -107,7 +109,7 @@
                                     </div>
                                     <div class="d-grid gap-2 col-6 mx-auto">
                                         <span id='message'> </span>
-                                        <br><button class="btn btn-primary" id='submit' type="submit">สมัครสมาชิก</button>
+                                        <br><button class="btn btn-primary my-4" id='submit' type="submit" style="background-color: #100575">สมัครสมาชิก</button>
                                     </div>
 
                                     <div class=" col-2">
@@ -119,6 +121,7 @@
                         <div class="col"></div>
                     </div>
                 </div>
+                <div class="row gx-5">
             </div>
         </div>
     </div>
@@ -134,21 +137,44 @@
         }
     }
 
-const togglePassword = document.querySelector('#togglePassword');
-const password = document.querySelector('#mem_password');
 
-togglePassword.addEventListener('click', function (e) {
-    // toggle the type attribute
-    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-    password.setAttribute('type', type);
-    // toggle the eye / eye slash icon
-    this.classList.toggle('bi-eye');
+// const togglePassword = document.querySelector('#togglePassword');
+// const password = document.querySelector('#mem_password');
+
+// togglePassword.addEventListener('click', function (e) {
+//     // toggle the type attribute
+//     const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+//     password.setAttribute('type', type);
+//     // toggle the eye / eye slash icon
+//     this.classList.toggle('bi-eye');
+// });
+// const togglePassword2 = document.querySelector('#togglePassword2');
+// const confirm_password = document.querySelector('#confirm_password');
+
+// togglePassword2.addEventListener('click', function (e) {
+//     // toggle the type attribute
+//     const type = confirm_password.getAttribute('type') === 'password' ? 'text' : 'password';
+//     confirm_password.setAttribute('type', type);
+//     // toggle the eye / eye slash icon
+//     this.classList.toggle('bi-eye');
+    
 });
 </script>
 <style>
-    i {
-    margin-left: -30px;
-    cursor: pointer;
-    
-}
+    @import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');
+    *{
+        font-family: 'Sarabun', sans-serif;
+    }
+    /* .i {
+
+        margin-left: 300px;
+        cursor: pointer   
+    } */
+
+    /* .card-header{
+        border: 2px solid red;
+        padding: 10px;
+        border-bottom-left-radius: 50px;
+    } */
+
 </style>
