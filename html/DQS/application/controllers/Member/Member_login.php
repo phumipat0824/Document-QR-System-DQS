@@ -113,7 +113,7 @@ class Member_login extends DQS_controller
 
     public function show_forget_password()
     {
-        $this->output_navbar(น"Member/v_member_forget_password");
+        $this->output_navbar("Member/v_member_forget_password");
     }
 
     public function reset_password()
