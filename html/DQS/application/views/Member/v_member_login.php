@@ -50,15 +50,15 @@
                             <p id="error" class="py-2 text-danger"> <?php echo $error; ?> </p>
                         </center>
                         <br>
-                        <div class="text-center" style="padding-top: 20px margin-bottom: 1rem">
-                            <!-- Button login -->
-                            <a href="<?php echo base_url() . 'Member/Member_login/show_forget_password' ?>" style="font-family:TH Sarabun New;">ลืมรหัสผ่าน?</a>
-                        </div><br>
+                        
                         <div class="text-center" style="margin-top: -20px">
                             <!-- Button login -->
                             <button type="submit" class="btn btn-primary my-4" id="btn_login" style="background-color: #100575 ; width:200px; font-family:TH Sarabun New; "> เข้าสู่ระบบ</button>
+                        </div><br>
+                        <div class="text-center" style="padding-top: 20px margin-bottom: 1rem">
+                            <!-- Button login -->
+                            <a href="<?php echo base_url() . 'Member/Member_login/show_forget_password' ?>" style="font-family:TH Sarabun New;">ลืมรหัสผ่าน?</a>
                         </div>
-
                     </div>
                 </form>
             </div>

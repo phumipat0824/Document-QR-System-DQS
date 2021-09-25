@@ -140,6 +140,7 @@
                     icon: 'success',
                     title: 'สมัครสมาชิกเสร็จสิ้น...',
                     text: 'ชื่อผู้ใช้ : '+mem_username +'    รหัสผ่าน : '+mem_password
+                    text: 'กรุณาจำชื่อผู้ใช้และรหัสผ่านเพื่อใช้เข้าสู่ระบบ'
                 }).then((result) => {
                     document.getElementById('btn-ok').type = 'submit';
                     $form.submit();
