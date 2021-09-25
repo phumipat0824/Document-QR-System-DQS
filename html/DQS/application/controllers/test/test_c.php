@@ -21,4 +21,8 @@ class test_c extends DQS_controller {
    		$output = shell_exec($command);
    		echo $output;
 	}
+	public function show_qr()
+	{
+		$this->load->view('test_qr');
+	}
 }
