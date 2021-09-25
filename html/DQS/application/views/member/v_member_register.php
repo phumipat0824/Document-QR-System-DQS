@@ -1,5 +1,5 @@
 <!-- Register -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"> -->
 <div class="content">
     <div class="container-fluid" style="padding-top: 100px ;margin: auto;">
         <div class="row gx-5">
