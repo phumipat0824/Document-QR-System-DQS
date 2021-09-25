@@ -71,10 +71,8 @@ class Member_login extends DQS_controller
             // set id and name for user
             //$_SESSION['mem_username'] = $obj_mem->mem_username;
             //if ($obj_mem->mem_role == 0) {
-            //    $_SESSION['mem_role'] = 'member';
-            //    redirect('');
+            //    redirect('/Member/Member_login/show_member_home');
             //} else if ($obj_mem->mem_role == 1) {
-            //    $_SESSION['mem_role'] = 'admin';
             //    redirect('');
             //}
             redirect('/Member/Member_login/show_member_home');
