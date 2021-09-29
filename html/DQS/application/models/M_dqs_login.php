@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 include_once 'Da_DQS_login.php';
 
-class M_dqs_login extends Da_dqs_login {
+class M_DQS_login extends Da_DQS_login {
 
 	public function __construct()
 	{

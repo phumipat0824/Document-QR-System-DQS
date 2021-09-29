@@ -70,12 +70,14 @@ class Member_login extends DQS_controller
             
             // set id and name for user
             //$_SESSION['mem_username'] = $obj_mem->mem_username;
-            //if ($obj_mem->mem_role == 0) {
-            //    redirect('/Member/Member_login/show_member_home');
-            //} else if ($obj_mem->mem_role == 1) {
-            //    redirect('');
-            //}
-            redirect('/Member/Member_login/show_member_home');
+            if ($obj_mem->mem_role == 0) {
+                redirect('/Member/Member_login/show_member_home');
+            } 
+            
+            else if ($obj_mem->mem_role == 1) {
+                redirect('/Admin/Admin_home/show_admin_home');
+            }
+            //redirect('/Member/Member_login/show_member_home');
 
         }
 
@@ -107,7 +109,7 @@ class Member_login extends DQS_controller
 
     public function check_user($mem_username, $mem_password)
     {
-        $this->load->model('M_dqs_login', 'mlog');
+        $this->load->model('M_DQS_login', 'mlog');
         return $this->mlog->get_by_username_password($mem_username, $mem_password)->row();
     }
 
