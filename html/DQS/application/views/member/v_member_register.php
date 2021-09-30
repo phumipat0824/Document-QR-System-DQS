@@ -27,8 +27,9 @@
                             </div>
                             <form action='<?php echo site_url() . 'Member/Member_register/insert_session' ?>' method="post" name='form'>
                                 <div class="row gx-5">
-                                    <div class="col">
-                                        <label>จังหวัด</label>
+                                    <div class="col"><br><br>
+                                        <label style = "color: #000000;">จังหวัด</label>
+                                        <label style = "color: #FF0000;">*</label>
                                         <select name="mem_province_id" id="mem_province_id" class="form-select" aria-label="Default select example" required>
                                             <option value="" selected>--------- เลือกจังหวัด ---- -----</option>
                                             <?php foreach ($arr_province as $value) { ?>
@@ -36,8 +37,9 @@
                                             <?php } ?>
                                         </select><br>
                                     </div>
-                                    <div class="col">
-                                        <label>หน่วยงาน</label>
+                                    <div class="col"><br><br>
+                                        <label style = "color: #000000;">หน่วยงาน</label>
+                                        <label style = "color: #FF0000;">*</label>
                                         <select name="mem_dep_id" id="mem_dep_id" class="form-select" aria-label="Default select example" required>
                                             <option value="" selected>--------- เลือกหน่วยงาน ---------</option>
                                             <?php foreach ($arr_department as $value) { ?>
@@ -50,7 +52,8 @@
 
                                 <div class="row gx-5">
                                     <div class="col">
-                                        <label>คำนำหน้าชื่อ</label>
+                                        <label style = "color: #000000;">คำนำหน้าชื่อ</label>
+                                        <label style = "color: #FF0000;">*</label>
                                         <select name="mem_pref_id" id="mem_pref_id" class="form-select" aria-label="Default select example" required>
                                             <option value="0" selected>------- คำนำหน้า ---------</option>
                                             <option value="1">นาย</option>
@@ -59,12 +62,13 @@
                                         </select><br>
                                     </div>
                                     <div class="col">
-                                        <label>ชื่อ</label>
-
+                                        <label style = "color: #000000;">ชื่อ</label>
+                                        <label style = "color: #FF0000;">*</label>
                                         <input type="text" class="form-control" id="mem_firstname" name="mem_firstname" placeholder="ชื่อ"><br>
                                     </div>
                                     <div class="col">
-                                        <label>นามสกุล</label>
+                                        <label style = "color: #000000;">นามสกุล</label>
+                                        <label style = "color: #FF0000;">*</label>
                                         <input type="text" class="form-control" id="mem_lastname" name="mem_lastname" placeholder="นามสกุล"><br>
                                     </div>
 
@@ -74,37 +78,36 @@
                                 <div class="row gx-5">
                                     <div class="col-4">
 
-                                        <label>อีเมล</label>
+                                        <label style = "color: #000000;">อีเมล</label>
+                                        <label style = "color: #FF0000;">*</label>
                                         <input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="อีเมล" required oninvalid="this.setCustomValidity('กรุณากรอกอีเมลที่ถูกต้อง')" oninput="setCustomValidity('')"></input>
                                     </div>
                                     <input type="hidden" name="mem_role" id="mem_role" value="2">
 
 
-                                    <div class="col">
-                                        <label>รหัสผ่าน</label>
-                                        
-                                        <input type="password" name="mem_password" class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" required onchange="checkpassword()" oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+
+
+                                    <div class="form-group col-md-4">
+                                        <label for="inputPassword4" style = "color: #000000;">รหัสผ่าน</label>
+                                        <label style = "color: #FF0000;">*</label>
+                                        <input type="password" class="form-control" id="mem_password4" placeholder="รหัสผ่าน" onchange="checkpassword()" required oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
                                     </div>
-                                    <div class=" col">
-                                        <label>ยืนยันรหัสผ่าน</label>
-                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="ยืนยันรหัสผ่าน" onchange="checkpassword()" required oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"><br>
-                                        
-                                    
+                                    <div class="form-group col-md-4">
+                                        <label for="inputPassword4" style = "color: #000000;">ยืนยันรหัสผ่าน</label>
+                                        <label style = "color: #FF0000;">*</label>
+                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="ยืนยันรหัสผ่าน" onchange="checkpassword()" required oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"><br> 
                                     </div>
 
-                                    <div class="form-group col-md-6">
-                                        <label for="inputPassword4">Password</label>
-                                        <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-                                    </div>
+                                    
                                         
                                 </div>
 
                                 <div class=" row gx-5 ">
                                     <div class=" col-4">
                                     </div>
-                                    <div class="col-7">
+                                    <!-- <div class="col-7">
                                         <label id="subtitle_password" class="form-text text-muted">ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ประกอบด้วยตัวอักษรภาษาอังกฤษตัวพิมพ์เล็กและพิมพ์ใหญ่ ตัวเลข เครื่องหมายพิเศษผสมกัน</label>
-                                    </div>
+                                    </div> -->
 
                                     <div class="col-1"></div>
                                 </div>
@@ -116,6 +119,7 @@
                                         <span id='message'> </span>
                                         <br><button class="btn btn-primary my-4" id='submit' type="submit" style="background-color: #100575">สมัครสมาชิก</button>
                                     </div>
+                                    
 
                                     <div class=" col-2">
                                     </div>
@@ -124,7 +128,7 @@
 
                         </div>
                         <div class="col"></div>
-                    </div>
+                    </div><br>
                 </div>
                 <div class="row gx-5">
             </div>
@@ -163,7 +167,7 @@
 //     // toggle the eye / eye slash icon
 //     this.classList.toggle('bi-eye');
     
-});
+//});
 </script>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');
@@ -180,6 +184,13 @@
         border: 2px solid red;
         padding: 10px;
         border-bottom-left-radius: 50px;
+
     } */
+
+    /* .select{
+    /* margin:40px; */
+    /* color:#DCDCDC;
+
+    } */ 
 
 </style>

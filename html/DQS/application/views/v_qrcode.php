@@ -1,5 +1,5 @@
-<script type="text/javascript" src="<?php echo base_url() . 'assets/plugin' ?>/qrcode/qrcode.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url() . 'assets/plugin' ?>/qrcode/qrcode.js"></script>
+
+<script src="<?php echo base_url() . 'node_modules/easyqrcodejs/src' ?>/easy.qrcode.js"></script>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,10 +52,11 @@
               <div class="col-md-5">
                 <div class="card"style="padding: 10%" >  
 
-                    <div id="qrcode" style="margin: auto;">
-                    <img src="<?php echo base_url(). '/assets/image/QR_home.PNG' ?>"height="256" width="256" style="padding-left: 40px;">
-                    </div>
+                    
+                    <!-- <img src="<?php echo base_url(). '/assets/image/QR_home.PNG' ?>"height="256" width="256"style="margin: auto;"> -->
+                    
                     <div class="card-body" style="margin: auto;">                   
+                          <div id="qrcode">  </div>
                             <br>
                             <button type="submit" class="btn btn-warning" style="font-family:TH sarabun new; font-size: 30px; width: 243; height:48 ;">ดาวน์โหลด</button> 
                     </div>
@@ -67,35 +68,27 @@
 </body>
 </html>
 
-<script type="text/javascript">
-var qrcode = new QRCode(document.getElementById("qrcode"), {
-	width : 50,
-	height : 50
-});
-function makeCode () {		
-	// var elText = document.getElementById("text");
-	
-	// qrcode.makeCode(elText.value);
+<script>
+function make() {		
     var text = document.getElementById('text');
     var qrcode = document.getElementById('qrcode');
+    var logo = document.getElementById('logo');
 
         if(text.value.trim() !== ''){
             qrcode.innerHTML = '';
-            new QRCode(qrcode, text.value);
+            new QRCode(qrcode, text.value ,logo.value);
             
         }
 }
 
-// makeCode();
+var qrcode = new QRCode(document.getElementById("qrcode"), {
+    text: "https://cssscript.com",
+    logo: "<?php echo base_url(). '/assets/image/logo_dqs.png' ?>",
+    logoWidth: undefined,
+    logoHeight: undefined,
+    logoBackgroundColor: '#ffffff',
+    logoBackgroundTransparent: false
+});
 
-// $("#text").
-// 	on("blur", function () {
-// 		makeCode();
-// 	}).
-// 	on("", function (e) {
-// 		if (e.keyCode == 13) {
-// 			makeCode();
-// 		}
-// 	});
 </script>
 
