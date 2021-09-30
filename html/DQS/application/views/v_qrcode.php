@@ -33,18 +33,22 @@
  
             <div class="tab-pane active" style="padding: 10%; margin: auto; ">
             
-                            <div class="form-row" >
+                        
+                            <div class="form-row">
+                            <div class="form-group col-md-6">
+      <label for="inputPassword4">Password</label>
+      <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+    </div>
                                <div class="form-group col-md-5">
-                                    <div class="form-group">
-                                        <p style="font-family:TH sarabun new; color:black; font-size: 31px;" >เว็บไซต์ :</p>
-                                        <input type="text" id="text"   style="font-family:TH sarabun new; font-size: 22px; width: 300px; height: 35px;" placeholder="เว็บไซต์">
-                                        
-                                    </div>
-                                </div>    
-                            </div>
-                               <p style="font-family:TH sarabun new; color:black; font-size: 31px;">โลโก้:</p> 
-                                <input type="file" name="logoqrcode" ><br><br>
-                               <button onclick="makeCode()"class="btn btn-dark_blue" style="font-family:TH sarabun new; font-size: 30px; background-color: #100575;color: #fff; width: 243; height:48" >สร้างคิวอาร์โค้ด</button> 
+                                <label >เว็บไซต์</label>
+                                <input id="text" type="text"  style="width: 230px;" value=""><br />
+                                
+                                </div>
+                                <br><br>
+                                </div>
+                                <label >โลโก้:</label><br>
+                                <input id="logo" type="file" name="logo" ><br><br>
+                                <button onclick="make()"class="btn btn-dark_blue" style="margin-bottom: 20px;background-color: #100575;color: #fff;">สร้างคิวอาร์โค้ด</button> 
                            
                             </div>
                             </div>
