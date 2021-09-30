@@ -54,7 +54,7 @@ class Member_login extends DQS_controller
         $mem_password = $this->input->post('mem_password');
 
         // check user from database
-        $obj_mem = $this->check_user($mem_username, $mem_password);
+        $obj_mem = $this->check_user($mem_username, md5($mem_password));
 
         if ($obj_mem == NULL) {
             // log in failed
