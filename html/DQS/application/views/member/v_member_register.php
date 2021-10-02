@@ -82,7 +82,7 @@
                                         <label style = "color: #FF0000;">*</label>
                                         <input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="อีเมล" required oninvalid="this.setCustomValidity('กรุณากรอกอีเมลที่ถูกต้อง')" oninput="setCustomValidity('')"></input>
                                     </div>
-                                    <input type="hidden" name="mem_role" id="mem_role" value="2">
+                                    <input type="hidden" name="mem_role" id="mem_role" value="1">
 
 
 

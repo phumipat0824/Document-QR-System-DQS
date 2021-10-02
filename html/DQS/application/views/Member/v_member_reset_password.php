@@ -59,7 +59,6 @@
                     mem_confirm: $('#mem_confirm').val()
                 },
                 success: function(res) {
-                    console.log(res)
                     if (res == "true") {
                         Swal.fire({
                             icon: 'success',

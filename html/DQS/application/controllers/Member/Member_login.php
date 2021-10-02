@@ -68,12 +68,12 @@ class Member_login extends DQS_controller
 
             // set id and name for user
             //$_SESSION['mem_username'] = $obj_mem->mem_username;
-            if ($obj_mem->mem_role == 0) {
-                redirect('/Member/Member_login/show_member_home');
-            } else if ($obj_mem->mem_role == 1) {
-                redirect('/Admin/Admin_home/show_admin_home');
-            }
-            //redirect('/Member/Member_login/show_member_home');
+            // if ($obj_mem->mem_role == 0) {
+            //     redirect('/Member/Member_login/show_member_home');
+            // } else if ($obj_mem->mem_role == 1) {
+            //     redirect('/Admin/Admin_home/show_admin_home');
+            // }
+            redirect('/Member/Member_login/show_member_home');
 
         }
     }
@@ -152,7 +152,7 @@ class Member_login extends DQS_controller
         $mem_email_cut = substr($mem_email, 0, strpos($mem_email, '@'));
         $data['arr_mem_email'] = $this->MDM->get_by_email($mem_email_cut)->result();
         $count_mem_email = count($data['arr_mem_email']);
-        if ($count_mem_email == 1) {
+        if ($count_mem_email == 1 || $count_mem_email >= 1) {
             echo true;
         } else {
             echo false;

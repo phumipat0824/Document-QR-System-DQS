@@ -23,7 +23,7 @@
                             <br>
                             <form action="<?php echo site_url() . "Member/Member_login/show_reset_password/" ?>" method="post">
                                 <input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="อีเมล"><br>
-                                <input type="button" id="btn-ok" name="reset_password" class="btn btn-primary" onclick='check_mail()' value="ส่งอีเมลกู้คืนรหัสผ่าน">
+                                <input type="button" id="btn-ok" name="reset_password" class="btn btn-primary" value="ส่งอีเมลกู้คืนรหัสผ่าน">
                             </form>
 
                         </div>
