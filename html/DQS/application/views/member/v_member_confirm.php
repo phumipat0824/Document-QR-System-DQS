@@ -102,7 +102,7 @@
                                     <div class="d-grid gap-2 d-md-block">
                                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 
-                                            <button type="button" class="btn btn-light" onclick="goBack()">ยกเลิก</button>
+                                            <input type="button" class="btn btn-light" onclick="goBack()" value="ยกเลิก">
                                             <input type="button" id="btn-ok" style="background-color: #100575" value="ยืนยัน" name="register" class="btn btn-primary accept">
                                         </div>
                                     </div>
@@ -140,7 +140,6 @@
                     icon: 'success',
                     title: 'สมัครสมาชิกเสร็จสิ้น...',
                     text: 'ชื่อผู้ใช้ : '+mem_username +'    รหัสผ่าน : '+mem_password
-                    text: 'กรุณาจำชื่อผู้ใช้และรหัสผ่านเพื่อใช้เข้าสู่ระบบ'
                 }).then((result) => {
                     document.getElementById('btn-ok').type = 'submit';
                     $form.submit();

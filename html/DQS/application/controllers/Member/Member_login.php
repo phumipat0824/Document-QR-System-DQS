@@ -150,7 +150,7 @@ class Member_login extends DQS_controller
         $this->load->model('M_DQS_member', 'MDM');
         $mem_email = $this->input->post('mem_email');
         $mem_email_cut = substr($mem_email, 0, strpos($mem_email, '@'));
-        $data['arr_mem_email'] = $this->MDM->get_by_email($mem_email_cut)->result();
+        $data['arr_mem_email'] = $this->MDM->get_by_email($mem_email)->result();
         $count_mem_email = count($data['arr_mem_email']);
         if ($count_mem_email == 1 || $count_mem_email >= 1) {
             echo true;
@@ -162,12 +162,13 @@ class Member_login extends DQS_controller
     public function check_name()
     {
         $this->load->model('M_DQS_member', 'MDM');
+        $mem_email = $this->input->post('mem_email');
         $mem_firstname = $this->input->post('mem_firstname');
         $mem_lastname = $this->input->post('mem_lastname');
-        $data['arr_mem_fullname'] = $this->MDM->get_by_name($mem_firstname, $mem_lastname)->result();
+        $data['arr_mem_fullname'] = $this->MDM->get_by_name($mem_email,$mem_firstname, $mem_lastname)->result();
         $count_mem_name = count($data['arr_mem_fullname']);
-        if ($count_mem_name == 1) {
-            echo true;
+        if ($count_mem_name == 1 ) {
+            echo true;  
         } else {
             echo false;
         }
