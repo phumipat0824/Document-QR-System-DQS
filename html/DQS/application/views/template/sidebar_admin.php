@@ -14,7 +14,7 @@
           <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/department/department_list/show_department" ?  'active'  : '' ?> ">
             <a class="nav-link" href="<?php echo site_url().'/department/department_list/show_department' ?>">
             <i class="fas fa-users-cog" style="color: rgb(125, 123, 122);"></i>
-              <p style="color: rgb(0,0,0);">จัดการแผนก</p>
+              <p style="color: rgb(0,0,0);">จัดการหน่วยงาน</p>
             </a>
           </li>
           <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/" ?  'active'  : '' ?> ">
