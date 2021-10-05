@@ -43,13 +43,12 @@ class Member_register extends DQS_controller
     {
 
         $this->load->model('Da_DQS_member', 'dmem');
-        $this->dmem->mem_emp_id = $this->session->userdata('mem_emp_id');
         $this->dmem->mem_pref_id = $this->session->userdata('mem_pref_id');
         $this->dmem->mem_firstname = $this->session->userdata('mem_firstname');
         $this->dmem->mem_lastname = $this->session->userdata('mem_lastname');
         $this->dmem->mem_email = $this->session->userdata('mem_email');
         $this->dmem->mem_username = $this->session->userdata('mem_username');
-        $this->dmem->mem_password = $this->session->userdata('mem_password');
+        $this->dmem->mem_password = md5($this->session->userdata('mem_password'));
         $this->dmem->mem_role = $this->session->userdata('mem_role');
         $this->dmem->mem_dep_id = $this->session->userdata('mem_dep_id');
         $this->dmem->mem_province_id = $this->session->userdata('mem_province_id');

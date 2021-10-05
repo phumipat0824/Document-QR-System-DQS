@@ -33,7 +33,7 @@
                                 </div>
                                 <!-- Insert username -->
 
-                                <input style="font-family:TH Sarabun New;" class="form-control" id="mem_username" name="mem_username" placeholder="ชื่อผู้ใช้/อีเมล" type="text" required>
+                                <input style="font-family:TH Sarabun New;" class="form-control" id="mem_username" name="mem_username" placeholder="ชื่อผู้ใช้งาน/อีเมล" type="text" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -50,15 +50,15 @@
                             <p id="error" class="py-2 text-danger"> <?php echo $error; ?> </p>
                         </center>
                         <br>
-                        <div class="text-center" style="padding-top: 20px margin-bottom: 1rem">
-                            <!-- Button login -->
-                            <a href="<?php echo base_url() . 'Member/Member_login/show_forget_password' ?>" style="font-family:TH Sarabun New;">ลืมรหัสผ่าน?</a>
-                        </div><br>
+                        
                         <div class="text-center" style="margin-top: -20px">
                             <!-- Button login -->
                             <button type="submit" class="btn btn-primary my-4" id="btn_login" style="background-color: #100575 ; width:200px; font-family:TH Sarabun New; "> เข้าสู่ระบบ</button>
+                        </div><br>
+                        <div class="text-center" style="padding-top: 20px margin-bottom: 1rem">
+                            <!-- Button login -->
+                            <a href="<?php echo base_url() . 'Member/Member_login/show_forget_password' ?>" style="font-family:TH Sarabun New;">ลืมรหัสผ่าน?</a>
                         </div>
-
                     </div>
                 </form>
             </div>
@@ -99,3 +99,29 @@
     });
 });
 </script> -->
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');
+    *{
+        font-family: 'Sarabun', sans-serif;
+    }
+    /* .i {
+
+        margin-left: 300px;
+        cursor: pointer   
+    } */
+
+    /* .card-header{
+        border: 2px solid red;
+        padding: 10px;
+        border-bottom-left-radius: 50px;
+
+    } */
+
+    /* .select{
+    /* margin:40px; */
+    /* color:#DCDCDC;
+
+    } */ 
+
+</style>

@@ -39,7 +39,7 @@ class Member_login extends DQS_controller
         $this->output_sidebar_member("Member/v_member_home");
     }
 
-     /*
+    /*
     * member_login
     * Show screen member login
     * @input mem_username,mem_password 
@@ -54,7 +54,7 @@ class Member_login extends DQS_controller
         $mem_password = $this->input->post('mem_password');
 
         // check user from database
-        $obj_mem = $this->check_user($mem_username,$mem_password);
+        $obj_mem = $this->check_user($mem_username, md5($mem_password));
 
         if ($obj_mem == NULL) {
             // log in failed
@@ -63,24 +63,19 @@ class Member_login extends DQS_controller
             $data['mem_username'] = $mem_username;
             $data['mem_password'] = $mem_password;
             $this->output_navbar('Member/v_member_login', $data);
-        }
-        
-        else {
+        } else {
             // log in complete
-            
+
             // set id and name for user
             //$_SESSION['mem_username'] = $obj_mem->mem_username;
-            if ($obj_mem->mem_role == 0) {
-                redirect('/Member/Member_login/show_member_home');
-            } 
-            
-            else if ($obj_mem->mem_role == 1) {
-                redirect('/Admin/Admin_home/show_admin_home');
-            }
-            //redirect('/Member/Member_login/show_member_home');
+            // if ($obj_mem->mem_role == 0) {
+            //     redirect('/Member/Member_login/show_member_home');
+            // } else if ($obj_mem->mem_role == 1) {
+            //     redirect('/Admin/Admin_home/show_admin_home');
+            // }
+            redirect('/Member/Member_login/show_member_home');
 
         }
-
     }
 
     /*
@@ -120,9 +115,62 @@ class Member_login extends DQS_controller
 
     public function reset_password()
     {
-        if (isset($_POST['reset_password']) && $_POST['mem_email']) {
-            $emailId = $_POST['email'];
-            
+        $mem_email = $this->input->post('mem_email');
+        $mem_password = $this->input->post('mem_password');
+        $mem_confirm = $this->input->post('mem_confirm');
+
+        if($mem_password == NULL || $mem_confirm == NULL){
+            echo $mem_email;
+            echo $mem_password;
+            echo $mem_confirm;
+            echo json_encode(false);
+        }else if($mem_password != $mem_confirm){
+            echo json_encode(false);
+        }else if($mem_password == $mem_confirm ){
+            $this->load->model('M_DQS_member', 'MDM');
+            $this->MDM->mem_email = $mem_email;
+            $this->MDM->mem_password = md5($mem_password);
+            $this->MDM->update_password();
+            echo json_encode(true);
+        }
+    }
+
+
+    public function show_reset_password()
+    {
+        $mem_email = $this->input->post('mem_email');
+        $data['mem_email'] = $mem_email;
+        $this->output_navbar("Member/v_member_reset_password", $data);
+    }
+
+
+
+    public function check_email()
+    {
+        $this->load->model('M_DQS_member', 'MDM');
+        $mem_email = $this->input->post('mem_email');
+        $mem_email_cut = substr($mem_email, 0, strpos($mem_email, '@'));
+        $data['arr_mem_email'] = $this->MDM->get_by_email($mem_email)->result();
+        $count_mem_email = count($data['arr_mem_email']);
+        if ($count_mem_email == 1 || $count_mem_email >= 1) {
+            echo true;
+        } else {
+            echo false;
+        }
+    }
+
+    public function check_name()
+    {
+        $this->load->model('M_DQS_member', 'MDM');
+        $mem_email = $this->input->post('mem_email');
+        $mem_firstname = $this->input->post('mem_firstname');
+        $mem_lastname = $this->input->post('mem_lastname');
+        $data['arr_mem_fullname'] = $this->MDM->get_by_name($mem_email,$mem_firstname, $mem_lastname)->result();
+        $count_mem_name = count($data['arr_mem_fullname']);
+        if ($count_mem_name == 1 ) {
+            echo true;  
+        } else {
+            echo false;
         }
     }
 }

@@ -2,24 +2,26 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'assets/plugin' ?>/DataTables/datatables.css"/>
 <script type="text/javascript" src="<?php echo base_url() . 'assets/plugin' ?>/DataTables/datatables.js"></script>
 <link href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/css/CSS_table_list.css" rel="stylesheet" />
-
+<!-- ===================================== -->
 <div class="main-panel">
   <div class="container">
     <div class="content">
       <div class=" container-fluid">
       <!-- defual tab --> 
 
-      
+     
       <div class="row" style="margin-top: 10%;">
         <div class="col md-12"></div>
         <div class="card">
+          <!-- div header start   -->
           <div class="card-header ">
             <div class="row">
-              <div class="col-10_5">
-                <h4 class="card-title " style="padding-top: 10px;" >ข้อมูลแผนก </h4>
+              <div class="col-10">
+                <h4 class="card-title " style="padding-top: 10px;" >ข้อมูลหน่วยงาน </h4>
               </div>
-              <div class="col-1_5">
-                <button class="btn btn-yellow"  >เพิ่มแผนก</button>
+              <div class="col-2">
+                <button class="btn btn-success" data-toggle="modal" data-target="#addModal" >+ เพิ่มหน่วยงาน</button> <!-- ปุ่มเพิ่มหน่วยงาน -->
+                <!-- data-toggle="modal" data-target="#addModal"  onclick="addmodal()" -->
               </div>
             </div>
             <hr>
@@ -33,7 +35,7 @@
             
               <div class="card-body" style="margin-top: -20px;">
                 
-                  <div id="create_table"></div>
+                  <div id="create_table"></div> <!-- ตำแหน่งที่สร้าง data table -->
                 
               </div>
             
@@ -50,11 +52,11 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
-  $(document).ready(function(){
-	    get_dept();
-    });
+$(document).ready(function(){
+	get_dept();
+});
 
-  function get_dept(){
+function get_dept(){
     $.ajax({
       url: "<?php echo site_url() ?>/Department/Department_list/get_dept_list_ajax",
       type: 'POST',
@@ -65,25 +67,23 @@
           create_Table(data['json_dept']);
       }
 
-  });
-    
+    });
 }
 
 function create_Table(arr_dept){
-  let html_code = '';
-
+  let html_code = ''; // ตัวแปร generate code html
 	html_code += '<div class="table-responsive">';
-	html_code += '<table class="table" id = "datatable_dept_list">';
+	html_code += '<table class="table" id = "datatable_dept_list">';  // ส่ง datatable_dept_list  ไปสร้าง data table
 	html_code += '<thead class=" text">';
 	html_code += '<tr>';
 	html_code += '<th style="text-align: center;">#</th>';
-  html_code += '<th>ชื่อแผนก</th>';
+  html_code += '<th>ชื่อหน่วยงาน</th>';
 	html_code += '<th style="text-align: center;">สถานะ</th>';
-	html_code += '<th style="text-align: center;">แก้ไขล่าสุด</th>';
 	html_code += '<th style="text-align: center;">แก้ไขชื่อ</th>';
 	html_code += '</tr>';
 	html_code += '</thead>';
 	html_code += '<tbody>';
+  // strat loop of department
   arr_dept.forEach((row_dept, index_dept)=>{
     html_code += '<tr>';
     html_code += '<td style="text-align: center;">' + (index_dept+1) + '</td>';
@@ -94,20 +94,19 @@ function create_Table(arr_dept){
     } else {
         var check_status ='';
     }
-
+// ตรวจสอบสถานะการแสดงผลของหน่วยงาน 
 
     html_code += '<td style="text-align: center;">' ;
     html_code += '<label class="switch">';
-    html_code += '<input type="checkbox"  '+check_status+' >';
+    html_code += '<input type="checkbox"  '+check_status+' onchange="update_status('+ row_dept['dep_id'] +',' +  row_dept['dep_active'] + ')" >';
     html_code += '<span class="slider round"></span>';
     html_code += '</label>';
     html_code += '</td>';
 
-    html_code += '<td style="text-align: center;">' +  row_dept['dep_timestamp'] + '</td>';
     html_code += '<td style="text-align: center;">' +  '<button class="btn btn-orange ">'+'<i class="material-icons">edit</i>'+'&nbsp;</button>' + '</td>';
     html_code += '</td>';
 		html_code += '</tr>';
-  });
+  }); // end loop of department
   html_code += '</tbody>';
 	html_code += '</table>';
   html_code += '</div>';
@@ -134,8 +133,8 @@ function make_dataTable_byId(id_name) {
 		zeroRecords: "ไม่พบข้อมูลที่ค้นหาในตาราง",
 		infoFiltered: "",
 		paginate: {
-				"first": "",
-				"last": "",
+				"first": "หน้าแรก",
+				"last": "หน้าสุดท้าย",
 				"next": "หน้าถัดไป",
 				"previous": "ก่อนหน้า"
 		},
@@ -160,3 +159,62 @@ function make_dataTable_byId(id_name) {
     
 </script>
 
+
+
+<!-- add Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">เพิ่มหน่วยงาน</h5>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <form id="add-form" method="POST" action="<?php echo site_url() ?>/Department/Department_list/add_department">
+        <div class="modal-body">
+            <center><input type="text" class="col-md-10" placeholder="กรอกชื่อหน่วยงาน" name="dep_name" require></center>
+            <input type="hidden" name="dep_active" value="1">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <input type="submit" class="btn btn-success">
+        </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<!-- ajax add data -->
+<!-- <script type="text/javascript">
+  $('#add-form').submit(function(){
+      $.ajax({
+        url : "<?php echo site_url() ?>/Department/Department_list/add_department",
+        type : "POST",
+        data:$('#add-form').serialize(),
+        dataType: "html",
+        success:function(response){
+          console.log(response);  
+        }
+      });
+  });
+
+</script> -->
+
+<!-- ajax update status -->
+<script>
+function update_status(dep_id,dep_active){
+  $.ajax({
+  url: "<?php echo site_url().'/Department/Department_list/update_status'?>",
+    type: 'POST',
+    data:{
+      dep_id : dep_id,
+      dep_active : dep_active
+    },
+    success:function(data){
+        console.log(data);
+    }
+  });
+}
+
+</script>

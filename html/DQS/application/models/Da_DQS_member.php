@@ -8,7 +8,6 @@ include_once 'DQS_Model.php';
 class Da_DQS_member extends DQS_model
 {
 
-    public $mem_emp_id;
     public $mem_pref_id;
     public $mem_firstname;
     public $mem_lastname;
@@ -27,8 +26,17 @@ class Da_DQS_member extends DQS_model
 
     public function insert()
     { //เวลามีหลายDBต้องบอกชื่อDB.ตาราง ต้องใช้ " ห้ามใช้ '
-        $sql = "INSERT INTO {$this->db_name}.DQS_Member(mem_emp_id, mem_pref_id, mem_firstname, mem_lastname,mem_email,mem_username, mem_password,mem_role,mem_dep_id, mem_province_id) 
-                VALUES (?,?,?,?,?,?,?,?,?,?)";
-        $this->db->query($sql, array($this->mem_emp_id, $this->mem_pref_id, $this->mem_firstname, $this->mem_lastname, $this->mem_email, $this->mem_username, $this->mem_password, $this->mem_role, $this->mem_dep_id, $this->mem_province_id));
+        $sql = "INSERT INTO {$this->db_name}.DQS_Member(mem_pref_id, mem_firstname, mem_lastname,mem_email,mem_username, mem_password,mem_role,mem_dep_id, mem_province_id) 
+                VALUES (?,?,?,?,?,?,?,?,?)";
+        $this->db->query($sql, array($this->mem_pref_id, $this->mem_firstname, $this->mem_lastname, $this->mem_email, $this->mem_username, $this->mem_password, $this->mem_role, $this->mem_dep_id, $this->mem_province_id));
+    }
+
+    public function update_password()
+    {
+        $sql = "UPDATE {$this->db_name}.DQS_Member
+                SET mem_password = ?
+                WHERE mem_email = ? "; // ? = ค่าที่เราจะใส่ไปอยู่แล้ว , อย่าใช้ " ' " เพราะอาจจะเออเร่อได้
+        $this->db->query($sql, array($this->mem_password, $this->mem_email)); //ถ้า SQL ที่เราใส่มี ? ต้องใส่ array ด้วย
+
     }
 }
