@@ -88,7 +88,7 @@
 
 
                                     <div class="form-group col-md-4">
-                                        <label for="inputPassword4">รหัสผ่าน</label>
+                                        <label for="inputPassword4" style = "color: #000000;">รหัสผ่าน</label>
                                         <input type="password" class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" onchange="checkpassword()" required oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
                                     </div>
                                     <div class="form-group col-md-4">

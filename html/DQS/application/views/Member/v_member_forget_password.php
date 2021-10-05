@@ -9,7 +9,7 @@
 
                         </div>
                         <div class="col-md-8 justify-content-md-center">
-                            <div class="card-header card-header-primary ">
+                            <div class="card-header card-header-warning ">
                                 <h2 class="text-center">กู้คืนรหัสผ่าน</h2>
                             </div>
                         </div>
@@ -23,7 +23,7 @@
                             <br>
                             <form action="<?php echo site_url() . "Member/Member_login/show_reset_password/" ?>" method="post">
                                 <input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="อีเมล"><br>
-                                <input type="button" id="btn-ok" name="reset_password" class="btn btn-primary" value="ส่งอีเมลกู้คืนรหัสผ่าน">
+                                <input type="button" id="btn-ok" style="background-color: #100575" name="reset_password" class="btn btn-primary" value="ส่งอีเมลกู้คืนรหัสผ่าน">
                             </form>
 
                         </div>
