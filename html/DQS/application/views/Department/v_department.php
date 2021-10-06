@@ -173,7 +173,7 @@ function make_dataTable_byId(id_name) {
       </div>
       <form id="add-form" method="POST" action="<?php echo site_url() ?>/Department/Department_list/add_department">
         <div class="modal-body">
-            <center><input type="text" class="col-md-10" placeholder="กรอกชื่อหน่วยงาน" name="dep_name" require></center>
+            <center><input type="text" class="col-md-10" placeholder="กรอกชื่อหน่วยงาน" name="dep_name" required ></center>
             <input type="hidden" name="dep_active" value="1">
         </div>
         <div class="modal-footer">
