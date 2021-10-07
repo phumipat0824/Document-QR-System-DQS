@@ -20,7 +20,7 @@
                         <a class="nav-link" href="#">รูปภาพ</a>
                      </li>
                     </ul>
-                    <div class="card-body" style="margin: auto;margin-top: 80px;">
+                    <div class="card-body" style="margin: auto;margin-top: 50px;">
                             <div class="form-row">
                               <div class="form-group col-md-5">
                                 <label >เว็บไซต์</label>
@@ -29,7 +29,7 @@
                                 </div>
                                 <br><br>
                                 </div>
-                               <!-- <label >โลโก้:</label><br>
+                                <label  style="margin-top: 10px;">โลโก้:</label><br>
                                 <input id="logo" type="file" name="logo" onchange="uploadFile()"><br><br>
                                 <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name')?>" hidden >
                                 <button onclick="make()" class="btn btn-dark_blue" style="margin-left: 10px;margin-bottom: 50px;margin-top:100px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button>  -->
@@ -46,7 +46,8 @@
                           <img id="img"src="<?php echo base_url(). '/assets/image/QR_home.PNG' ?>"height="256" width="256"style="margin: auto;">
                           </div>
                             <br>
-                            <button type="submit" class="btn btn-warning" style="font-family:TH sarabun new; font-size: 20px; width: 240; ">ดาวน์โหลด</button> 
+                          
+                            <a href="#" download ><button class="btn btn-warning" style="font-family:TH sarabun new; font-size: 20px; width: 240; ">ดาวน์โหลด</button> </a>
                     </div>
                 </div>
              </div>
@@ -55,22 +56,30 @@
 <!-- </form> -->
 
 <script type="text/javascript">
+
+
 function make() {		
     var text = document.getElementById('text');
     var qrcode = document.getElementById('qrcode');
     var logo = "<?php echo base_url(). '/assets/logo' ?>"+ document.getElementById('logoinqr');
-   
-    
+
         if(text.value.trim() !== ''){
             qrcode.innerHTML = '';
-            new QRCode(qrcode, text.value);
-            
+            new QRCode(document.getElementById("qrcode"), {
+            text: text.value,
+            logo: "<?php echo base_url(). '/assets/logo/' ?><?php echo $this->session->userdata('logo_name')?>",
+            logoWidth: undefined,
+            logoHeight: undefined,
+            logoBackgroundColor: '#ffffff',
+            logoBackgroundTransparent: false
+        });
+             
         }
 }
 
 // var qrcode = new QRCode(document.getElementById("qrcode"), {
 //     text: "https://cssscript.com",
-//     //logo: "<?php echo base_url(). '/assets/image/logo_dqs.png' ?>",
+//     logo: "<?php echo base_url(). '/assets/image/logo_dqs.png' ?>",
 //     logoWidth: undefined,
 //     logoHeight: undefined,
 //     logoBackgroundColor: '#ffffff',
