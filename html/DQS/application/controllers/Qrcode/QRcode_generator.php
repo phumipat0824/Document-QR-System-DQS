@@ -43,6 +43,17 @@ class QRcode_generator extends DQS_controller {
 			}
 
 		}
+		public function dowload(){
+		if (isset($_GET['file'])) {
+			$file = $_GET['file'];
+			if (file_exists($file) && is_readable($file) && preg_match('/\.png$/',$file)) {
+				header('Content-Type: application/png');
+				header("Content-Disposition: attachment; filename=\"$file\"");
+				readfile($file);
+				}
+			}
+
+		}
 
 
 }
