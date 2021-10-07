@@ -56,22 +56,30 @@
 <!-- </form> -->
 
 <script type="text/javascript">
+
+
 function make() {		
     var text = document.getElementById('text');
     var qrcode = document.getElementById('qrcode');
     var logo = "<?php echo base_url(). '/assets/logo' ?>"+ document.getElementById('logoinqr');
-   
-    
+
         if(text.value.trim() !== ''){
             qrcode.innerHTML = '';
-            new QRCode(qrcode, text.value);
-            drawer.svg;  
+            new QRCode(document.getElementById("qrcode"), {
+            text: text.value,
+            logo: "<?php echo base_url(). '/assets/logo/' ?><?php echo $this->session->userdata('logo_name')?>",
+            logoWidth: undefined,
+            logoHeight: undefined,
+            logoBackgroundColor: '#ffffff',
+            logoBackgroundTransparent: false
+        });
+             
         }
 }
 
 // var qrcode = new QRCode(document.getElementById("qrcode"), {
 //     text: "https://cssscript.com",
-//     //logo: "<?php echo base_url(). '/assets/image/logo_dqs.png' ?>",
+//     logo: "<?php echo base_url(). '/assets/image/logo_dqs.png' ?>",
 //     logoWidth: undefined,
 //     logoHeight: undefined,
 //     logoBackgroundColor: '#ffffff',
