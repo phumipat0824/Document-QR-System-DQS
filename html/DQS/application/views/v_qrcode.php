@@ -31,8 +31,8 @@
                                 </div>
                                <!-- <label >โลโก้:</label><br>
                                 <input id="logo" type="file" name="logo" onchange="uploadFile()"><br><br>
-                                <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name')?>" hidden > -->
-                                <button onclick="make()" class="btn btn-dark_blue" style="margin-left: 10px;margin-bottom: 50px;margin-top:100px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button> 
+                                <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name')?>" hidden >
+                                <button onclick="make()" class="btn btn-dark_blue" style="margin-left: 10px;margin-bottom: 50px;margin-top:100px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button>  -->
                                 
                             
                                 </div>
