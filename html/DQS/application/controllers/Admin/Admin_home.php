@@ -20,11 +20,22 @@ class Admin_home extends DQS_controller
     * @Create Date 2564-09-23
     */
 
-    public function show_admin_home()
+    // public function show_admin_home()
+    // {
+    //     $this->output_sidebar_admin('Admin/v_admin_delete');
+        
 
-    {
+    // }
+    
 
-        $this->output_sidebar_admin("Admin/v_admin_home");
-
+    public function show_admin_home(){
+        $this->load->model('M_DQS_department', 'MDD');
+        $data['arr_member'] = $this->MDD->get_department()->result();
+        print_r($data['arr_member']);
+        $this->output_sidebar_admin('Admin/v_admin_home', $data);
     }
+<<<<<<< Updated upstream
+=======
+    
+>>>>>>> Stashed changes
 }

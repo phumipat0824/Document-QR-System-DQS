@@ -37,6 +37,14 @@ class M_DQS_department extends Da_DQS_department
             return false;
         }
     }
+    public function get_department(){
+        $sql = "SELECT *
+        FROM {$this->db_name}.DQS_Department AS depart
+        INNER JOIN {$this->db_name}.DQS_Member AS mem
+        ON depart.dep_id = mem.mem_dep_id";
+        $query = $this->db->query($sql);
+        return $query;
+    }
     
 
 }
