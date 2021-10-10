@@ -61,7 +61,7 @@
                                     <?php for($i = 0; $i < count($arr_member); $i++){?>
                                     <tr>
                                         <td>
-                                            <?php echo $this->$arr_member[$i]->dep_name; ?>
+                                            <?php echo $arr_member[$i]->dep_name; ?>
                                         </td>
                                     </tr>
 
