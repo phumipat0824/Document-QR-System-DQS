@@ -6,35 +6,62 @@
     <div class="sidebar-wrapper ps-container ps-theme-default ps-active-y"
         data-ps-id="a5787ac4-4df1-fec6-f8e0-33c5f4784969">
         <ul class="nav">
-            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/" ?  'active'  : '' ?> ">
+            <<<<<<< HEAD <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/" ?  'active'  : '' ?> ">
                 <a class="nav-link" href="./dashboard.html">
                     <i class="fas fa-folder" style="color: rgb(125, 123, 122);"></i>
                     <p style="color: rgb(0,0,0);">คิวอาร์โค้ดของฉัน</p>
                 </a>
-            </li>
-            <li
-                class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/department/department_list/show_department" ?  'active'  : '' ?> ">
-                <a class="nav-link" href="<?php echo site_url().'/department/department_list/show_department' ?>">
-                    <i class="fas fa-users-cog" style="color: rgb(125, 123, 122);"></i>
-                    <p style="color: rgb(0,0,0);">จัดการหน่วยงาน</p>
-                </a>
-            </li>
-            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/" ?  'active'  : '' ?> ">
-<<<<<<< Updated upstream
-                <a class="nav-link" href="./tables.html">
-=======
-                <a class="nav-link" href="<?php echo site_url().'/Admin/Admin_home/show_admin_home' ?>">
->>>>>>> Stashed changes
-                    <i class="fas fa-cog" style="color: rgb(125, 123, 122);"></i>
-                    <p style="color: rgb(0,0,0);">จัดการบัญชีผู้ใช้งาน</p>
-                </a>
-            </li>
-            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/" ?  'active'  : '' ?> ">
-                <a class="nav-link" href="./user.html">
-                    <i class="fas fa-chart-bar" style="color: rgb(125, 123, 122);"></i>
-                    <p style="color: rgb(0,0,0);">รายงานสรุปผล</p>
-                </a>
-            </li>
+                </li>
+                <li
+                    class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/department/department_list/show_department" ?  'active'  : '' ?> ">
+                    <a class="nav-link" href="<?php echo site_url().'/department/department_list/show_department' ?>">
+                        <i class="fas fa-users-cog" style="color: rgb(125, 123, 122);"></i>
+                        <p style="color: rgb(0,0,0);">จัดการหน่วยงาน</p>
+                    </a>
+                </li>
+                <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/" ?  'active'  : '' ?> ">
+
+                    <a class="nav-link" href="./tables.html">
+
+                        <a class="nav-link" href="<?php echo site_url().'/Admin/Admin_home/show_admin_home' ?>">
+
+                            <i class="fas fa-cog" style="color: rgb(125, 123, 122);"></i>
+                            <p style="color: rgb(0,0,0);">จัดการบัญชีผู้ใช้งาน</p>
+                        </a>
+                </li>
+                <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/" ?  'active'  : '' ?> ">
+                    <a class="nav-link" href="./user.html">
+                        <i class="fas fa-chart-bar" style="color: rgb(125, 123, 122);"></i>
+                        <p style="color: rgb(0,0,0);">รายงานสรุปผล</p>
+                    </a>
+                </li>
+                =======
+                <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/" ?  'active'  : '' ?> ">
+                    <a class="nav-link" href="./dashboard.html">
+                        <i class="fas fa-folder" style="color: rgb(125, 123, 122);"></i>
+                        <p style="color: rgb(0,0,0);">คิวอาร์โค้ดของฉัน</p>
+                    </a>
+                </li>
+                <li
+                    class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Department/Department_list/show_department" ?  'active'  : '' ?> ">
+                    <a class="nav-link" href="<?php echo site_url().'/Department/Department_list/show_department' ?>">
+                        <i class="fas fa-users-cog" style="color: rgb(125, 123, 122);"></i>
+                        <p style="color: rgb(0,0,0);">จัดการหน่วยงาน</p>
+                    </a>
+                </li>
+                <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/" ?  'active'  : '' ?> ">
+                    <a class="nav-link" href="./tables.html">
+                        <i class="fas fa-cog" style="color: rgb(125, 123, 122);"></i>
+                        <p style="color: rgb(0,0,0);">จัดการบัญชีผู้ใช้งาน</p>
+                    </a>
+                </li>
+                <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/" ?  'active'  : '' ?> ">
+                    <a class="nav-link" href="./user.html">
+                        <i class="fas fa-chart-bar" style="color: rgb(125, 123, 122);"></i>
+                        <p style="color: rgb(0,0,0);">รายงานสรุปผล</p>
+                    </a>
+                </li>
+                >>>>>>> b751f7cdafb64e088ea1d0a832d3aa37910b1565
         </ul>
         <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
             <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;">
