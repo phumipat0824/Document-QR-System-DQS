@@ -25,6 +25,7 @@
                             <option for="province" class="card-title " style="padding-top: 10px;" font-size="150px;">
                                 <h4>ค้นหาข้อมูล</h4>
                                 <label for=""></label>
+                                <?php print_r($arr_member); ?>
 
                         </div>
                     </div>
