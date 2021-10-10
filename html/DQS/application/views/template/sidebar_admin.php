@@ -11,8 +11,8 @@
               <p style="color: rgb(0,0,0);">คิวอาร์โค้ดของฉัน</p>
             </a>
           </li>
-          <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/department/department_list/show_department" ?  'active'  : '' ?> ">
-            <a class="nav-link" href="<?php echo site_url().'/department/department_list/show_department' ?>">
+          <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Department/Department_list/show_department" ?  'active'  : '' ?> ">
+            <a class="nav-link" href="<?php echo site_url().'/Department/Department_list/show_department' ?>">
             <i class="fas fa-users-cog" style="color: rgb(125, 123, 122);"></i>
               <p style="color: rgb(0,0,0);">จัดการหน่วยงาน</p>
             </a>

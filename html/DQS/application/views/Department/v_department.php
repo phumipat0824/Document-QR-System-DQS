@@ -27,11 +27,6 @@
             <hr>
           </div>
            <!-- div header end   -->
-          
-      
-          
-            
-            
             
               <div class="card-body" style="margin-top: -20px;">
                 
@@ -39,9 +34,6 @@
                 
               </div>
             
-          
-
-
       <!-- end defual tab -->
       </div>
     </div>
@@ -63,7 +55,7 @@ function get_dept(){
       data:{},
       dataType: 'JSON',
       success:function(data){
-          console.log(data);
+          // console.log(data);
           create_Table(data['json_dept']);
       }
 
@@ -171,14 +163,15 @@ function make_dataTable_byId(id_name) {
           <span aria-hidden="true">&times;</span>
         </button> -->
       </div>
+      <!-- action="<?php echo site_url() ?>/Department/Department_list/add_department" -->
       <form id="add-form" method="POST" action="<?php echo site_url() ?>/Department/Department_list/add_department">
         <div class="modal-body">
             <center><input type="text" class="col-md-10" placeholder="กรอกชื่อหน่วยงาน" name="dep_name" required ></center>
             <input type="hidden" name="dep_active" value="1">
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-          <input type="submit" class="btn btn-success">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+          <input type="submit" class="btn btn-success" value="บันทึก">
         </div>
         </form>
     </div>
@@ -188,21 +181,23 @@ function make_dataTable_byId(id_name) {
 <!-- ajax add data -->
 <!-- <script type="text/javascript">
   $('#add-form').submit(function(){
-      $.ajax({
-        url : "<?php echo site_url() ?>/Department/Department_list/add_department",
-        type : "POST",
-        data:$('#add-form').serialize(),
-        dataType: "html",
-        success:function(response){
-          console.log(response);  
-        }
-      });
+    $.ajax({
+        url: "<?php echo site_url().'/Department/Department_list/add_department'?>",
+        type: 'POST',
+        data: $( "#add-form" ).serialize(),
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            
+        },
+        
+    });
   });
 
 </script> -->
 
 <!-- ajax update status -->
-<script>
+<script type="text/javascript">
 function update_status(dep_id,dep_active){
   $.ajax({
   url: "<?php echo site_url().'/Department/Department_list/update_status'?>",
@@ -211,8 +206,9 @@ function update_status(dep_id,dep_active){
       dep_id : dep_id,
       dep_active : dep_active
     },
+    dataType: "JSON",
     success:function(data){
-        console.log(data);
+        get_dept();
     }
   });
 }
