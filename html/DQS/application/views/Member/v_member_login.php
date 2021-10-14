@@ -33,7 +33,7 @@
                                 </div>
                                 <!-- Insert username -->
 
-                                <input style="font-family:TH Sarabun New;" class="form-control" id="mem_username" name="mem_username" placeholder="ชื่อผู้ใช้งาน/อีเมล" type="text" required>
+                                <input style="font-family:TH Sarabun New;" class="form-control" id="mem_username" name="mem_username" placeholder="ชื่อผู้ใช้/อีเมล" type="text" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -99,29 +99,3 @@
     });
 });
 </script> -->
-
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');
-    *{
-        font-family: 'Sarabun', sans-serif;
-    }
-    /* .i {
-
-        margin-left: 300px;
-        cursor: pointer   
-    } */
-
-    /* .card-header{
-        border: 2px solid red;
-        padding: 10px;
-        border-bottom-left-radius: 50px;
-
-    } */
-
-    /* .select{
-    /* margin:40px; */
-    /* color:#DCDCDC;
-
-    } */ 
-
-</style>

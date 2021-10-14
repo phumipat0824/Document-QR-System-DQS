@@ -1,5 +1,5 @@
 <!-- Register -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/all.min.css">
 <div class="content">
     <div class="container-fluid" style="padding-top: 100px ;margin: auto;">
         <div class="row gx-5">
@@ -90,6 +90,8 @@
                                     <div class="form-group col-md-4">
                                         <label for="inputPassword4" style = "color: #000000;">รหัสผ่าน</label>
                                         <input type="password" class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" onchange="checkpassword()" required oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                                            <i class="show fa fa-eye"></i>
+                                            <i class="hide fa fa-eye-slash"></i>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="inputPassword4" style = "color: #000000;">ยืนยันรหัสผ่าน</label>
@@ -134,7 +136,11 @@
         </div>
     </div>
 </div>
-<script>
+<script type="text/javascript">
+var passwordField = document.querySelector('.password');
+var show = document.querySelector('.show');
+var hide = document.querySelector('.hide');
+
     function checkpassword() {
         const password = document.querySelector('input[name=mem_password]');
         const confirm = document.querySelector('input[name=confirm_password]');
@@ -145,6 +151,17 @@
         }
     }
 
+show.onclick = function(){
+    passwordField.setAttribute("type","text");
+    show.style.display = "none";
+    hide.style.display = "block";
+}
+
+hide.onclick = function(){
+    passwordField.setAttribute("type","password");
+    hide.style.display = "none";
+    show.style.display = "block";
+}
 
 // const togglePassword = document.querySelector('#togglePassword');
 // const password = document.querySelector('#mem_password');
@@ -191,5 +208,17 @@
     /* color:#DCDCDC;
 
     } */ 
+    .show,
+    .hide{
+        position: absolute;
+        right: 15px;
+        top: 10px;
+        font-size: 28px;
+        color: #333;
+
+    }
+    .hide{
+        display: none;
+    }
 
 </style>
