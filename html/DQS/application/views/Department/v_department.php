@@ -60,7 +60,7 @@ function get_dept(){
       }
 
     });
-}
+}// recieve json then send to create data table
 
 function create_Table(arr_dept){
   let html_code = ''; // ตัวแปร generate code html
@@ -95,7 +95,7 @@ function create_Table(arr_dept){
     html_code += '</label>';
     html_code += '</td>';
 
-    html_code += '<td style="text-align: center;">' +  '<button class="btn btn-orange ">'+'<i class="material-icons">edit</i>'+'&nbsp;</button>' + '</td>';
+    html_code += '<td style="text-align: center;">' +  '<button type="button" class="btn btn-orange editModal" data-toggle="modal" data-target="#editModal" data-id= '+row_dept['dep_id']+' >'+'<i class="material-icons">edit</i>'+'&nbsp;</button>' + '</td>';
     html_code += '</td>';
 		html_code += '</tr>';
   }); // end loop of department
@@ -103,7 +103,7 @@ function create_Table(arr_dept){
 	html_code += '</table>';
   html_code += '</div>';
 
-	$('#create_table').html(html_code);
+	$('#create_table').html(html_code); // call function create table to make data table
 	make_dataTable_byId('datatable_dept_list');
 
 }
@@ -164,7 +164,7 @@ function make_dataTable_byId(id_name) {
         </button> -->
       </div>
       <!-- action="<?php echo site_url() ?>/Department/Department_list/add_department" -->
-      <form id="add-form" method="POST" action="<?php echo site_url() ?>/Department/Department_list/add_department">
+      <form id="add-form" method="POST" onsubmit="return false">
         <div class="modal-body">
             <center><input type="text" class="col-md-10" placeholder="กรอกชื่อหน่วยงาน" name="dep_name" required ></center>
             <input type="hidden" name="dep_active" value="1">
@@ -179,22 +179,80 @@ function make_dataTable_byId(id_name) {
 </div>
 
 <!-- ajax add data -->
-<!-- <script type="text/javascript">
+<!-- send value from add modal to add department -->
+<script type="text/javascript">
   $('#add-form').submit(function(){
     $.ajax({
+        type: 'post',
         url: "<?php echo site_url().'/Department/Department_list/add_department'?>",
-        type: 'POST',
         data: $( "#add-form" ).serialize(),
         dataType: 'json',
-        success: function (data) {
-            console.log(data);
-            
+        success: function(data) {
+              // console.log("succ");
+              alert('มีข้อมูลนี้ในระบบอยู่แล้วหรือไม่ได้กรอกข้อมูล กรุณากรอกใหม่');
         },
-        
+        error: function (error) {
+          // console.log("error");
+          location.reload();
+        }
     });
   });
 
-</script> -->
+</script>
+
+<!-- edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">แก้ไขชื่อหน่วยงาน</h5>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <!-- action="<?php echo site_url() ?>/Department/Department_list/add_department" -->
+      <form id="edit-form" method="POST" onsubmit="return false">
+        <div class="modal-body">
+            <center><input type="text" class="col-md-10" placeholder="กรอกชื่อหน่วยงาน" name="dep_name" required ></center>
+            <input type="hidden" name="dep_id" id="dep_id" value="">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+          <input type="submit" class="btn btn-success" value="บันทึก">
+        </div>
+        </form>
+    </div>
+  </div>
+</div>
+<!--  -->
+<script type="text/javascript">
+  $(document).on("click", ".editModal", function () {
+    var id = $(this).attr('data-id');
+    $("#dep_id").val(id);
+  });
+</script>
+
+<!--  -->
+<script type="text/javascript">
+  $('#edit-form').submit(function(){
+    $.ajax({
+        type: 'post',
+        url: "<?php echo site_url().'/Department/Department_list/edit_department'?>",
+        data: $( "#edit-form" ).serialize(),
+        dataType: 'json',
+        success: function(data) {
+              // console.log("succ");
+              alert('มีข้อมูลนี้ในระบบอยู่แล้วหรือไม่ได้กรอกข้อมูล กรุณากรอกใหม่');
+        },
+        error: function (error) {
+          // console.log("error");
+          location.reload();
+        }
+    });
+  });
+
+</script>
+
 
 <!-- ajax update status -->
 <script type="text/javascript">

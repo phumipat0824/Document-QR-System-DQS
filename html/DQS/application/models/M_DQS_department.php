@@ -29,13 +29,7 @@ class M_DQS_department extends Da_DQS_department
     {   
         $this->db->where('dep_name', $dep_name);
         $query = $this->db->get('DQS_Department');
-        if($query->num_rows() >= 1 || trim($dep_name) == "" )
-        {
-            return true;
-        }
-        else{
-            return false;
-        }
+        return $query->num_rows();
     }
     public function get_department(){
         $sql = "SELECT *

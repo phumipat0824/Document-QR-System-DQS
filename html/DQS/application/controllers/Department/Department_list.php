@@ -31,19 +31,39 @@ class Department_list extends DQS_controller {
         $this->load->model('M_DQS_department', 'MDD');
 		$this->MDD->dep_name = $this->input->post('dep_name');
 		$this->MDD->dep_active = $this->input->post('dep_active');
-		if (!$this->MDD->check_exist_name($this->MDD->dep_name)) {
+		if ($this->MDD->check_exist_name($this->MDD->dep_name) == 0 && trim($this->MDD->dep_name) != "") {
 			$this->MDD->insert();
 			redirect('/department/department_list/show_department');
-		}else{
-			echo "
-			<script>
-				alert('ข้อมูลซ้ำในระบบหรือไม่กรอกข้อมูล กรุณากรอกใหม่');
-				window.location.href='show_department';
-			</script>";
-			
 		}
+		// else{
+		// 	echo "
+		// 	<script>
+		// 		alert('ข้อมูลซ้ำในระบบหรือไม่กรอกข้อมูล กรุณากรอกใหม่');
+		// 		window.location.href='show_department';
+		// 	</script>";
+			
+		// }
     }
 
+	public function edit_department()
+    {
+        $this->load->model('M_DQS_department', 'MDD');
+		$this->MDD->dep_name = $this->input->post('dep_name');
+		$this->MDD->dep_active = $this->input->post('dep_active');
+		$this->MDD->dep_id = $this->input->post('dep_id');
+		if ($this->MDD->check_exist_name($this->MDD->dep_name) == 0 && trim($this->MDD->dep_name) != "") {
+			$this->MDD->name_update();
+			redirect('/department/department_list/show_department');
+		}
+		// else{
+		// 	echo "
+		// 	<script>
+		// 		alert('ข้อมูลซ้ำในระบบหรือไม่กรอกข้อมูล กรุณากรอกใหม่');
+		// 		window.location.href='show_department';
+		// 	</script>";
+			
+		// }
+    }
 	
 	// public function check_dept_name(){
 	// 	$this->load->model('M_DQS_department', 'MDD');
