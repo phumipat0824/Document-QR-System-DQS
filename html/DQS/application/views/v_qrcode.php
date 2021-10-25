@@ -80,7 +80,7 @@ function make() {
             qrcode.innerHTML = '';
             new QRCode(document.getElementById("qrcode"), {
             text: text.value,
-            logo: logo.value,
+            logo: "<?php echo base_url(). '/assets/logo/' ?><?php echo $this->session->userdata('logo_name')?>",
             logoWidth: undefined,
             logoHeight: undefined,
             logoBackgroundColor: '#ffffff',
