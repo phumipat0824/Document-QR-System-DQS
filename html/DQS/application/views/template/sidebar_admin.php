@@ -1,10 +1,16 @@
-<div class="sidebar" data-color="yellow" data-background-color="white"
-    data-image="<?php echo base_url().'/assets/img/sidebar-1.jpg'?>">
+<?php 
+        if(!$this->session->has_userdata('mem_username')){
+            $path = site_url()."/Member/Member_login/show_member_login";
+            header("Location: ".$path);
+            exit();
+        }
+
+?>
+<div class="sidebar" data-color="yellow" data-background-color="white" data-image="<?php echo base_url().'/assets/img/sidebar-1.jpg'?>">
     <div class="logo">
         Document QR
     </div>
-    <div class="sidebar-wrapper ps-container ps-theme-default ps-active-y"
-        data-ps-id="a5787ac4-4df1-fec6-f8e0-33c5f4784969">
+    <div class="sidebar-wrapper ps-container ps-theme-default ps-active-y" data-ps-id="a5787ac4-4df1-fec6-f8e0-33c5f4784969">
         <ul class="nav">
             <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/" ?  'active'  : '' ?> ">
                 <a class="nav-link" href="./dashboard.html">
@@ -12,8 +18,7 @@
                     <p style="color: rgb(0,0,0);">คิวอาร์โค้ดของฉัน</p>
                 </a>
             </li>
-            <li
-                class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Department/Department_list/show_department" ?  'active'  : '' ?> ">
+            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Department/Department_list/show_department" ?  'active'  : '' ?> ">
                 <a class="nav-link" href="<?php echo site_url().'/Department/Department_list/show_department' ?>">
                     <i class="fas fa-users-cog" style="color: rgb(125, 123, 122);"></i>
                     <p style="color: rgb(0,0,0);">จัดการหน่วยงาน</p>
@@ -40,8 +45,7 @@
             <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 214px;">
             </div>
         </div>
-        <hr
-            style="height:2px;width:70%;border-width:0;color:gray;background-color:gray;margin-left: auto;margin-right: auto;">
+        <hr style="height:2px;width:70%;border-width:0;color:gray;background-color:gray;margin-left: auto;margin-right: auto;">
     </div>
     <div class="sidebar-background" style="background-image: url(../assets/img/sidebar-1.jpg) ">
     </div>

@@ -67,15 +67,29 @@ class Member_login extends DQS_controller
             // log in complete
 
             // set id and name for user
-            //$_SESSION['mem_username'] = $obj_mem->mem_username;
-            // if ($obj_mem->mem_role == 0) {
-            //     redirect('/Member/Member_login/show_member_home');
-            // } else if ($obj_mem->mem_role == 1) {
-            //     redirect('/Admin/Admin_home/show_admin_home');
-            // }
-            redirect('/Member/Member_login/show_member_home');
+            $this->session->set_userdata('mem_username', $mem_username);
+            if ($obj_mem->mem_role == 0) {
+                //session_unset();
+                //session_destroy();
+                redirect('/Member/Member_login/show_member_home');
+            } else if ($obj_mem->mem_role == 1) {
+                //session_unset();
+                //session_destroy();
+                redirect('/Admin/Admin_home/show_admin_home');
+            }
+            //redirect('/Member/Member_login/show_member_home');
 
         }
+    }
+
+    public function show_session(){
+
+        $arr_session = $this->session->all_userdata();
+        echo '<pre>';
+        print_r($arr_session);
+        echo '</pre>';
+    
+
     }
 
     /*
