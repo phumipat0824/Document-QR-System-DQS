@@ -82,6 +82,15 @@ class Member_login extends DQS_controller
         }
     }
 
+    /*
+    * show_session
+    * Show session member 
+    * @input -
+    * @output view
+    * @author Ashirawat
+    * @Create Date 2564-11-10
+    */
+
     public function show_session(){
 
         $arr_session = $this->session->all_userdata();
