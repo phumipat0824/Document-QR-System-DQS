@@ -80,7 +80,7 @@ function create_Table(arr_dept){
     html_code += '<tr>';
     html_code += '<td style="text-align: center;">' + (index_dept+1) + '</td>';
     html_code += '<td>' +  row_dept['dep_name'] + '</td>';
-
+// ชื่อหน่วยงาน
     if (row_dept['dep_active'] == 1) {
         var check_status ='checked';
     } else {
@@ -94,8 +94,9 @@ function create_Table(arr_dept){
     html_code += '<span class="slider round"></span>';
     html_code += '</label>';
     html_code += '</td>';
-
+// สถานะของหน่วยงาน
     html_code += '<td style="text-align: center;">' +  '<button type="button" class="btn btn-orange editModal" data-toggle="modal" data-target="#editModal" data-id= '+row_dept['dep_id']+' >'+'<i class="material-icons">edit</i>'+'&nbsp;</button>' + '</td>';
+    // button edit data
     html_code += '</td>';
 		html_code += '</tr>';
   }); // end loop of department
@@ -224,7 +225,7 @@ function make_dataTable_byId(id_name) {
     </div>
   </div>
 </div>
-<!--  -->
+<!-- send dep_id to edit modal -->
 <script type="text/javascript">
   $(document).on("click", ".editModal", function () {
     var id = $(this).attr('data-id');
@@ -232,7 +233,7 @@ function make_dataTable_byId(id_name) {
   });
 </script>
 
-<!--  -->
+<!-- edit modal -->
 <script type="text/javascript">
   $('#edit-form').submit(function(){
     $.ajax({
