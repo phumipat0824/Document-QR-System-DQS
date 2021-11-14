@@ -20,24 +20,34 @@
                         <a class="nav-link" href="#">รูปภาพ</a>
                      </li>
                     </ul>
-					<form action="<?php echo site_url() . 'Member/Member_upload_file/upload_file' ?>" method="post">
-						<label style= "color: #000000">ไฟล์ PDF</label><br>
-						<div class="card">
-							<input id="file" type="file" placeholder="อัปโหลดไฟล์" style="width: 230px;"><br>
-						</div>
+                    <div class="card-body" style="margin: auto;margin-top: 10px;">
+                            <div class="form-row">
+                              <div class="form-group col-md-5">
+							  <form action='<?php echo site_url() . 'Member/Member_upload_file/upload_file' ?>' method="post" name='form'>
+							    <label style= "color: #000000">ไฟล์ PDF</label><br>
+                                <label ></label>
+                                <input id="logo" type="file" name="logo" onchange="uploadFile()"accept="image/png, image/gif, image/jpeg"><br><br>
+                                <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name')?>" hidden >
+                                </div>
+                                <br><br>
+                                </div>
+								<div class="form-row">
+                              <div class="form-group col-md-5">
+							    <label style= "color: #000000">ชื่อ:</label><br>
+                                <label ></label>
+                                <input id="text" type="text"  style="width: 230px;" value=""placeholder="ชื่อไฟล์"><br />
+                                
+                                </div>
+                                <br><br>
+                                </div>
+                                <label  style="margin-top: 10px; color: #000000">โลโก้:</label><br>
+                                <input id="logo" type="file" name="logo" onchange="uploadFile()"accept="image/png, image/gif, image/jpeg"><br><br>
+                                <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name')?>" hidden >
+                                <button onclick="make()" class="btn btn-dark_blue" style="margin-left: 10px;margin-bottom: 50px;margin-top:50px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button> 
+                            
+                                </div>
 
-						<label style= "color: #000000">ชื่อ:</label><br>
-                        <label ></label>
-                        <input id="text" type="text"  style="width: 230px;" value=""placeholder="ชื่อไฟล์"><br />
-
-						
-						<label  style="margin-top: 10px; color: #000000">โลโก้:</label><br>
-						<div class="card">
-                        <input id="logo" type="file" name="logo" onchange="uploadFile()"accept="image/png, image/gif, image/jpeg"><br><br></div>
-                        <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name')?>" hidden >
-                        <button onclick="make()" class="btn btn-dark_blue" style="margin-left: 10px;margin-bottom: 50px;margin-top:50px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button> 
-
-					</form>
+								</form>
                             </div>
                     </div>
 
