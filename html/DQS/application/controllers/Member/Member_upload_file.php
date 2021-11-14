@@ -38,6 +38,38 @@ class Member_upload_file extends DQS_controller {
 				readfile($file);
 				}
 			}
+		}
+
+		/*
+		* upload file
+		* upload file pdf into database 
+		* @input file pdf
+		* @output show QRcode
+		* @author Ashirawat
+		* @Create Date 2564-11-14
+		*/
+		public function upload_file (){//Update department into database
+
+			$this->load->model('Da_DQS_qrcode','dqrc');
+			$upload=$_FILES[''];
+			if($upload != '') {   //not select file
+			//โฟลเดอร์ที่จะ upload file เข้าไป 
+				$path= dirname(__FILE__).'/../../../assets/pdf/fileupload_Member/';  
+	
+			//เอาชื่อไฟล์เก่าออกให้เหลือแต่นามสกุล
+				$type = strrchr($_FILES['']['name'],".");
+				
+			//ตั้งชื่อไฟล์ใหม่โดยเอาเวลาไว้หน้าชื่อไฟล์เดิม
+				$newname = $this->input->post('').$type;
+				$path_copy=$path.$newname;
+				
+				$newpath = '/assets/pdf/fileupload_Member/'.$newname;
+			//คัดลอกไฟล์ไปเก็บที่เว็บเซริ์ฟเวอร์
+				move_uploaded_file($_FILES[''][''],$path_copy);  	
+			}//if
+			$this->dqrc-> = $newpath;
+			$this->dqrc->insert();
+			redirect('');
 
 		}
 
