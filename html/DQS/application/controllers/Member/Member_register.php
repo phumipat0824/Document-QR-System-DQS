@@ -1,3 +1,5 @@
+ <!-- ผู้จัดทำ: นางสาวรัชนีกร ป้อชุมภู 
+     Date:   5/8/2021-->
 <?php
 
 defined('BASEPATH') or exit('No direct script access allowed');
@@ -56,13 +58,13 @@ class Member_register extends DQS_controller
         $this->dmem->insert();
 
         redirect('Member/Member_login/show_member_login'); //เรียกกลับมาหน้านี้อีกครั้งอยู่หน้าเดียวกันใส่ชื่อได้เลย
-    }
+    } //เพิ่มข้อมูลสมาชิกลงในตาราง DQS_member
 
-    public function insert_session()
+    public function insert_userdata_regis()
     {
         $this->load->model('M_DQS_province', 'MDP');
         $this->load->model('M_DQS_department', 'MDD');
-        //session
+        
         $this->session->set_userdata('mem_firstname', $this->input->post('mem_firstname'));
         $this->session->set_userdata('mem_lastname', $this->input->post('mem_lastname'));
         $this->session->set_userdata('mem_email', $this->input->post('mem_email'));
@@ -71,6 +73,7 @@ class Member_register extends DQS_controller
         $this->session->set_userdata('mem_pref_id', $this->input->post('mem_pref_id'));
         $this->session->set_userdata('mem_province_id', $this->input->post('mem_province_id'));
         $this->session->set_userdata('mem_role', $this->input->post('mem_role'));
+        //กำหนดค่าตัวแปรโดยใช้session
         $pro_id = $this->input->post('mem_province_id');
         $data['obj_province'] = $this->MDP->get_by_id($pro_id)->row();
 
@@ -94,7 +97,7 @@ class Member_register extends DQS_controller
 
         redirect('Member/Member_register/show_member_confirm');
         //ที่อยู่
-    }
+    } //เก็บข้อมูลการสมัตรสมาชิก
 
     // public function insert_appellant()
     // {

@@ -1,12 +1,12 @@
-<?php //ส่วนใหญ่มี insert/update/delete 
-?>
+<!-- ผู้จัดทำ: นางสาวรัชนีกร ป้อชุมภู 
+     Date:   5/8/2021-->
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
 include_once 'DQS_Model.php';
 
 class Da_DQS_member extends DQS_model
-{
+{ //เพิ่ม ลบ แก้ไขข้อมูลสมาชิกจากดาต้าเบส
 
     public $mem_pref_id;
     public $mem_firstname;
@@ -29,7 +29,7 @@ class Da_DQS_member extends DQS_model
         $sql = "INSERT INTO {$this->db_name}.DQS_Member(mem_pref_id, mem_firstname, mem_lastname,mem_email,mem_username, mem_password,mem_role,mem_dep_id, mem_province_id) 
                 VALUES (?,?,?,?,?,?,?,?,?)";
         $this->db->query($sql, array($this->mem_pref_id, $this->mem_firstname, $this->mem_lastname, $this->mem_email, $this->mem_username, $this->mem_password, $this->mem_role, $this->mem_dep_id, $this->mem_province_id));
-    }
+    }//เพิ่มข้อมูลสมาชิกในดาต้าเบส มีการกำหนดจำนวนcolumn = จำนวนvalues
 
     public function update_password()
     {
@@ -42,7 +42,7 @@ class Da_DQS_member extends DQS_model
     public function delete_member(){
         $sql = "DELETE {$this->db_mane}.DQS_Member
                 SET mem_id = ?
-                WHERE mem_id = ? ";
-        $this-> db->query($sql, array($this->mem_dep_id, $this->mem_pref_id));
-    }
+                WHERE mem_id = ? "; // ? = ค่าที่เราจะใส่ไปอยู่แล้ว , อย่าใช้ " ' " เพราะอาจจะเออเร่อได้
+        $this-> db->query($sql, array($this->mem_dep_id, $this->mem_pref_id)); //ถ้า SQL ที่เราใส่มี ? ต้องใส่ array ด้วย
+    }//ลบข้อมูลสมาชิก
 }
