@@ -11,7 +11,7 @@ class Department_list extends DQS_controller {
 		
 	}
 
-	public function department_show()
+	public function show_department()
 	{
 		$this->output_sidebar_admin('department/v_department');
 	}
@@ -31,7 +31,7 @@ class Department_list extends DQS_controller {
 		$this->MDD->dep_active = $this->input->post('dep_active');
 		if ($this->MDD->check_exist_name($this->MDD->dep_name) == 0 && trim($this->MDD->dep_name) != "") {
 			$this->MDD->insert();
-			redirect('/department/department_list/department_show');
+			redirect('/department/department_list/show_department');
 		}
 		
     }
@@ -44,7 +44,7 @@ class Department_list extends DQS_controller {
 		$this->MDD->dep_id = $this->input->post('dep_id');
 		if ($this->MDD->check_exist_name($this->MDD->dep_name) == 0 && trim($this->MDD->dep_name) != "") {
 			$this->MDD->name_update();
-			redirect('/department/department_list/department_show');
+			redirect('/department/department_list/show_department');
 		}
 		
     }
