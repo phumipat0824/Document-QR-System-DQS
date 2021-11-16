@@ -51,15 +51,13 @@ class Member_upload_file extends DQS_controller {
 		public function upload_file (){//Update department into database
 
 			$this->load->model('Da_DQS_qrcode','dqrc');
-			$this->dqrc->doc_name = $this->input->post('doc_name');
-
-			$upload=$_FILES['doc_path'];
+			$upload=$_FILES['doc_type'];
 			if($upload != '') {   //not select file
 			//โฟลเดอร์ที่จะ upload file เข้าไป 
 				$path= dirname(__FILE__).'/../../../assets/pdf/fileupload_Member/';  
 	
 			//เอาชื่อไฟล์เก่าออกให้เหลือแต่นามสกุล
-				$type = strrchr($_FILES['doc_path']['name'],".");
+				$type = strrchr($_FILES['doc_type']['name'],".");
 				
 			//ตั้งชื่อไฟล์ใหม่โดยเอาเวลาไว้หน้าชื่อไฟล์เดิม
 				$newname = $this->input->post('doc_name').$type;
@@ -67,9 +65,9 @@ class Member_upload_file extends DQS_controller {
 				
 				$newpath = '/assets/pdf/fileupload_Member/'.$newname;
 			//คัดลอกไฟล์ไปเก็บที่เว็บเซริ์ฟเวอร์
-				move_uploaded_file($_FILES['doc_path']['tmp_name'],$path_copy);  	
+				move_uploaded_file($_FILES['doc_type']['doc_name'],$path_copy);  	
 			}//if
-			$this->dqrc->doc_path = $newpath;
+			$this->dqrc->doc_type = $newpath;
 			$this->dqrc->insert();
 			redirect('');
 

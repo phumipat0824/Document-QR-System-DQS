@@ -1,9 +1,9 @@
 <?php 
-        if(!$this->session->has_userdata('mem_username')){
-            $path = site_url()."/Member/Member_login/show_member_login";
-            header("Location: ".$path);
-            exit();
-        }
+        //if(!$this->session->has_userdata('mem_username')){
+        //    $path = site_url()."/Member/Member_login/show_member_login";
+        //    header("Location: ".$path);
+        //    exit();
+        //}
 
 ?>
 <div class="sidebar" data-color="yellow" data-background-color="white" data-image="<?php echo base_url().'/assets/img/sidebar-1.jpg'?>">

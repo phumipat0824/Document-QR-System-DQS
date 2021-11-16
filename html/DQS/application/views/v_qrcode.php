@@ -23,7 +23,7 @@
                     <div class="card-body" style="margin: auto;margin-top: 50px;">
                             <div class="form-row">
                               <div class="form-group col-md-5">
-                                <label >เว็บไซต์</label>
+                                <label ></label>
                                 <input id="text" type="text"  style="width: 230px;" value=""><br />
                                 
                                 </div>
