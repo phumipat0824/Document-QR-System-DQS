@@ -73,7 +73,7 @@ async function uploadFile() {
 function make() {		
     var text = document.getElementById('text');
     var qrcode = document.getElementById('qrcode');
-    var logo = "<?php echo base_url(). '/assets/logo/' ?><?php echo $this->session->userdata('logo_name')?>";
+    var logo = "<?php echo base_url(). '/assets/logo/' ?>+<?php echo $this->session->userdata('logo_name')?>";
     // var logoin = "<?php echo base_url(). '/assets/logo/' ?><?php echo $this->session->userdata('logo_name')?>"
 
         if(text.value.trim() !== ''){
