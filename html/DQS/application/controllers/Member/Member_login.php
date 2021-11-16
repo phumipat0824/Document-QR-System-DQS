@@ -67,14 +67,14 @@ class Member_login extends DQS_controller
             // log in complete
 
             // set id and name for user
-            $this->session->set_userdata('mem_username', $mem_username);
+            //$this->session->set_userdata('mem_username', $mem_username);
             if ($obj_mem->mem_role == 0) {
-                //session_unset();
-                //session_destroy();
+                session_unset();
+                session_destroy();
                 redirect('/Member/Member_login/show_member_home');
             } else if ($obj_mem->mem_role == 1) {
-                //session_unset();
-                //session_destroy();
+                session_unset();
+                session_destroy();
                 redirect('/Admin/Admin_home/show_admin_home');
             }
             //redirect('/Member/Member_login/show_member_home');
