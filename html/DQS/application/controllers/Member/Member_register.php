@@ -60,7 +60,7 @@ class Member_register extends DQS_controller
         redirect('Member/Member_login/show_member_login'); //เรียกกลับมาหน้านี้อีกครั้งอยู่หน้าเดียวกันใส่ชื่อได้เลย
     } //เพิ่มข้อมูลสมาชิกลงในตาราง DQS_member
 
-    public function insert_userdata_regis()
+    public function insert_session()
     {
         $this->load->model('M_DQS_province', 'MDP');
         $this->load->model('M_DQS_department', 'MDD');

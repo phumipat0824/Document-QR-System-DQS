@@ -27,7 +27,7 @@
 
                                 </div>
                             </div>
-                            <form action='<?php echo site_url() . 'Member/Member_register/insert_userdata_regis' ?>' method="post" name='form'>
+                            <form action='<?php echo site_url() . 'Member/Member_register/insert_session' ?>' method="post" name='form'>
                             <!-- เลือกจังหวัดแบบ dropdown list -->
                                 <div class="row gx-5">
                                     <div class="col"><br><br>
