@@ -3,11 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class DQS_controller extends CI_Controller
 {
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
 	/**
 	 * Index Page for this controller.
 	 *
@@ -23,6 +18,12 @@ class DQS_controller extends CI_Controller
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	public function __construct()
+	{
+		parent::__construct();
+		
+	}
 	public function index()
 	{
 	}
@@ -59,7 +60,8 @@ class DQS_controller extends CI_Controller
 
 	public function show_register()
 	{
-		$this->output('v_register');
+		$this->output('Member/v_member_register');
+		session_start();
 	}
 	public function output_navbar($view, $data = null)
 	{

@@ -17,7 +17,9 @@
                         <a class="nav-link" href="#">เว็บไซต์</a>
                      </li>
                      <li class="nav-item">
+                     <div class="card">
                         <a class="nav-link" href="#">รูปภาพ</a>
+                        <div>
                      </li>
                     </ul>
 					<form action="<?php echo site_url() . 'Member/Member_upload_file/upload_file' ?>" method="post">

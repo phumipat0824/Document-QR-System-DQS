@@ -4,12 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require dirname(__FILE__).'/../DQS_controller.php';
 
-class Member_upload_file extends DQS_controller {
+class Member_upload_photo extends DQS_controller {
 
-	public function show_member_upload_file()
+	public function show_member_upload_photo()
 	{
 
-		$this->output("member/v_member_upload_file");
+		$this->output("Member/v_member_upload_photo");
 	}
 
 	public function upload(){

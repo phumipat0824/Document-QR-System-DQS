@@ -66,7 +66,7 @@ async function uploadFile() {
     method: "POST", 
     body: formData
   }); 
-  alert('The file has been uploaded successfully.');
+  // alert('The file has been uploaded successfully.');
   }
 
 
