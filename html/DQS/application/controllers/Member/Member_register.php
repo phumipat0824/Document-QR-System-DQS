@@ -51,11 +51,11 @@ class Member_register extends DQS_controller
         $this->dmem->mem_password = md5($this->session->userdata('mem_password'));
         $this->dmem->mem_role = $this->session->userdata('mem_role');
         $this->dmem->mem_dep_id = $this->session->userdata('mem_dep_id');
-        $this->dmem->mem_province_id = $this->session->userdata('mem_province_id');
+        $this->dmem->mem_pro_id = $this->session->userdata('mem_province_id');
 
         $this->dmem->insert();
 
-        redirect('Member/Member_login/show_member_login'); //เรียกกลับมาหน้านี้อีกครั้งอยู่หน้าเดียวกันใส่ชื่อได้เลย
+        $this->output_navbar("Member/v_member_login"); //เรียกกลับมาหน้านี้อีกครั้งอยู่หน้าเดียวกันใส่ชื่อได้เลย
     }
 
     public function insert_session()

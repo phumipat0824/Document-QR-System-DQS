@@ -23,16 +23,16 @@
                     <div class="card-body" style="margin: auto;margin-top: 50px;">
                             <div class="form-row">
                               <div class="form-group col-md-5">
-                                <label >เว็บไซต์</label>
+                                <label ></label>
                                 <input id="text" type="text"  style="width: 230px;" value=""><br />
                                 
                                 </div>
                                 <br><br>
                                 </div>
                                 <label  style="margin-top: 10px;">โลโก้:</label><br>
-                                <input id="logo" type="file" name="logo" onchange="uploadFile()"><br><br>
+                                <input id="logo" type="file" name="logo" onchange="uploadFile()"accept="image/png, image/gif, image/jpeg"><br><br>
                                 <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name')?>" hidden >
-                                <button onclick="make()" class="btn btn-dark_blue" style="margin-left: 10px;margin-bottom: 50px;margin-top:100px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button>  -->
+                                <button onclick="make()" class="btn btn-dark_blue" style="margin-left: 10px;margin-bottom: 50px;margin-top:50px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button> 
                                 
                             
                                 </div>
@@ -51,17 +51,30 @@
                     </div>
                 </div>
              </div>
+
+             <div class="block"></div>
         </div>
 </div>
 <!-- </form> -->
 
 <script type="text/javascript">
 
+async function uploadFile() {
+  let formData = new FormData(); 
+  formData.append("logo", logo.files[0]);
+  await fetch( "<?php echo site_url() . "/Qrcode/QRcode_generator/upload/" ?>", {
+    method: "POST", 
+    body: formData
+  }); 
+  // alert('The file has been uploaded successfully.');
+  }
+
 
 function make() {		
     var text = document.getElementById('text');
     var qrcode = document.getElementById('qrcode');
-    var logo = "<?php echo base_url(). '/assets/logo' ?>"+ document.getElementById('logoinqr');
+    var logo = "<?php echo base_url(). '/assets/logo/' ?>+<?php echo $this->session->userdata('logo_name')?>";
+    // var logoin = "<?php echo base_url(). '/assets/logo/' ?><?php echo $this->session->userdata('logo_name')?>"
 
         if(text.value.trim() !== ''){
             qrcode.innerHTML = '';
@@ -87,33 +100,7 @@ function make() {
 // });
 
 
-function upload_logo(logo) {
-$.ajax({
-    type: "POST",
-    url: "<?php echo site_url() . "/Qrcode/QRcode_generator/upload_logo/" ?>",
-    data: {
-        'logo': logo,
-    },
-    dataType: 'JSON',
-    async: false,
-    cache : false,
-    processData: false,
-    success: function(jsondata) {
-         alert(logo)
-    }
-})
 
-}
-
-async function uploadFile() {
-  let formData = new FormData(); 
-  formData.append("logo", logo.files[0]);
-  await fetch( "<?php echo site_url() . "/Qrcode/QRcode_generator/upload/" ?>", {
-    method: "POST", 
-    body: formData
-  }); 
-  alert('The file has been uploaded successfully.');
-  }
 
 
 
@@ -138,5 +125,15 @@ input[type=text], select {
   -webkit-filter: blur(2px); /* Safari 6.0 - 9.0 */
   filter: blur(2px);
 }
+
+.block {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-flex: 0 0 48px;
+    -webkit-flex: 0 0 48px;
+    flex: 0 0 48px;
+}
 </style>
+
 

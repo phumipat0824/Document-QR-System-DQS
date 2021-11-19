@@ -1,3 +1,5 @@
+<!-- ผู้จัดทำ: นางสาวรัชนีกร ป้อชุมภู 
+     Date:   5/8/2021-->
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
@@ -6,7 +8,7 @@ include_once 'Da_DQS_member.php';
 class M_DQS_member extends Da_DQS_member
 {
 
-
+ 
     public function __construct()
     {
         parent::__construct();

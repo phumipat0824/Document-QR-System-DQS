@@ -23,10 +23,10 @@ class Da_DQS_department extends DQS_model
     public function name_update()
     {
         $sql = "UPDATE {$this->db_name}.DQS_Department
-                set dep_name = ? , dep_active = ? 
+                set dep_name = ?  
                 where dep_id = ?";
 
-        $this->db->query($sql , array( $this->dep_name , $this->dep_active , $this->dep_id ) );
+        $this->db->query($sql , array( $this->dep_name , $this->dep_id ) );
     }
 
     public function status_update($dep_id,$dep_active)

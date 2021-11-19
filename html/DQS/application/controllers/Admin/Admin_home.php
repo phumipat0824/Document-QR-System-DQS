@@ -29,9 +29,9 @@ class Admin_home extends DQS_controller
     // }
 
     public function show_admin_home(){
-        $this->load->model('M_DQS_member', 'MDM');
-        $data['arr_member'] = $this->MDM->get_member_all()->result();
-        $this->output_sidebar_admin('Admin/v_admin_home',$data);
+        $this->load->model('M_DQS_folder', 'fol');
+		$data['arr_fol'] = $this->fol->get_all()->result();
+        $this->output_sidebar_admin('Admin/v_admin_home', $data);
     }
 
     public function delete_admin($mem_id){

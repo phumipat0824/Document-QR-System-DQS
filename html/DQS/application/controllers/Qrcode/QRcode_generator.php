@@ -8,7 +8,7 @@ class QRcode_generator extends DQS_controller {
 
 	public function show_qrcode()
 	{
-
+		$this->session->unset_userdata('logo_name');
 		$this->output("v_qrcode");
 	}
 
@@ -40,7 +40,6 @@ class QRcode_generator extends DQS_controller {
 			}
 
 		}
-
 
 }
 ?>
