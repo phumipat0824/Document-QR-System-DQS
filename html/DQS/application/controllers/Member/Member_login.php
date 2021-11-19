@@ -79,10 +79,7 @@ class Member_login extends DQS_controller
     * @Create Date 2564-08-05
     */
 
-    public function show_member_home()
-    {
-        
-    }
+    
 
     /*
     * show_session
