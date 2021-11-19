@@ -8,10 +8,12 @@
             <h1 style="color:#100575; font-family:TH sarabun new; font-size: 80px;" >สร้างคิวอาร์โค้ด</h1>
             <h2 style="font-family:TH sarabun new; ">เริ่มสร้าง QR Code กันเลย </h2>
             <div class="col-md-5"  >   
-                <div class="card card-nav-tabs card-plain"style="color: #E0FFFF">
+               
                     <ul class="nav nav-tabs">
                      <li class="nav-item">
+                     <div class="card" style="background-color: #100575">
                         <a class="nav-link active" href="#">PDF</a>
+                      </div>
                     </li>
                      <li class="nav-item">
                         <a class="nav-link" href="#">เว็บไซต์</a>
@@ -20,15 +22,16 @@
                         <a class="nav-link" href="#">รูปภาพ</a>
                      </li>
                     </ul>
+                    <div class="card card-nav-tabs card-plain"style="color: #E0FFFF">
 					<form action="<?php echo site_url() . 'Member/Member_upload_file/upload_file' ?>" method="post">
-						<label style= "color: #000000">ไฟล์ PDF</label><br>
-						<div class="card">
-							<input id="file" type="file" placeholder="อัปโหลดไฟล์" style="width: 230px;"><br>
+						<label style= "padding-left: 35px; padding-top: 20px; color: #000000">ไฟล์ PDF</label><br>
+						<div class="row" style="border: 2px; margin-left:5ex; margin-right: 50ex; margin-bottom: 50px;" >
+							<input id="file" type="file" placeholder="อัปโหลดไฟล์" style="pading: 10px; width: 230px;"><br>
 						</div>
 
-						<label style= "color: #000000">ชื่อ:</label><br>
+						<label style= "color: #000000" style="margin-left:5ex; margin-right: 50ex; margin-bottom: 50px;">ชื่อ:</label><br>
                         <label ></label>
-                        <input id="text" type="text"  style="width: 230px;" value=""placeholder="ชื่อไฟล์"><br />
+                        <input id="text" type="text"  style="margin: 0px;  width: 230px;" value=""placeholder="ชื่อไฟล์"><br />
 
 						
 						<label  style="margin-top: 10px; color: #000000">โลโก้:</label><br>

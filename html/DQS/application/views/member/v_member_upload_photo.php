@@ -17,7 +17,7 @@
                         <a class="nav-link" href="#">เว็บไซต์</a>
                      </li>
                      <li class="nav-item">
-                     <div class="card">
+                     <div class="card" style="margin: 0px; color: #E0FFFF">
                         <a class="nav-link" href="#">รูปภาพ</a>
                         <div>
                      </li>
