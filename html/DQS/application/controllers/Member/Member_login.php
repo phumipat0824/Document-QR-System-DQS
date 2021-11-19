@@ -59,12 +59,13 @@ class Member_login extends DQS_controller
             if ($obj_mem->mem_role == 0) {
                 // session_unset();
                 // session_destroy();
-                $this->output_sidebar_member("Member/v_member_home");
-                // redirect('/Member/Member_login/show_member_home');
+                //$this->output_sidebar_member("Member/v_member_home");
+                redirect('/Member/Member_home/show_member_home');
             } else if ($obj_mem->mem_role == 1) {
                 // session_unset();
                 // session_destroy();
-                $this->output_sidebar_admin('Admin/v_admin_home');
+                redirect('/Admin/Admin_home/show_Admin_home');
+                //$this->output_sidebar_admin('Admin/v_admin_home');
             }
             //redirect('/Member/Member_login/show_member_home');
 
@@ -126,7 +127,7 @@ class Member_login extends DQS_controller
 
     public function check_user($mem_username, $mem_password)
     {
-        $this->load->model('M_DQS_member', 'mlog');
+        $this->load->model('M_DQS_login', 'mlog');
         return $this->mlog->get_by_username_password($mem_username, $mem_password)->row();
     }
 

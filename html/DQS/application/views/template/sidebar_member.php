@@ -14,8 +14,8 @@
     </div>
     <div class="sidebar-wrapper ps-container ps-theme-default ps-active-y" data-ps-id="a5787ac4-4df1-fec6-f8e0-33c5f4784969">
         <ul class="nav">
-            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Member/Member_login/member_home" ?  'active'  : '' ?> ">
-                <a class="nav-link" href="<?php echo site_url().'/Member/Member_login/member_home'?>">
+            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Member/Member_home/member_home" ?  'active'  : '' ?> ">
+                <a class="nav-link" href="<?php echo site_url().'/Member/Member_home/member_home'?>">
                     <i class="fas fa-folder" style="color: rgb(125, 123, 122);"></i>
                     <p style="color: rgb(0,0,0); ">คิวอาร์โค้ดของฉัน</p>
                 </a>

@@ -27,7 +27,7 @@ class M_DQS_login extends Da_DQS_login {
 
 		//ตรวจสอบการเข้าสู่ระบบโดยใช้ username และ password
 	}
- /*
+    /*
 	* get_by_username_password
 	* Get user by username password in database
 	* @input username, password
@@ -35,13 +35,12 @@ class M_DQS_login extends Da_DQS_login {
 	* @author Ashirawat, Krsiada
 	* @Create Date 2564-08-05
 	*/
-	// public function get_by_username_password($mem_username, $mem_password)
-    // {
-    //     $sql = "SELECT * 
-    //         FROM {$this->db_name}.DQS_Member
-    //         WHERE mem_username = '$mem_username'AND mem_password = '$mem_password' OR mem_email = '$mem_username' AND mem_password = '$mem_password'";
-    //     $query = $this->db->query($sql);
-    //     return $query;
-    // }//รับค่าผ่านตัวแปร mem_username และ mem_password
-
+	public function get_by_username_password($mem_username, $mem_password)
+    {
+        $sql = "SELECT * 
+            FROM {$this->db_name}.DQS_Member
+            WHERE mem_username = '$mem_username'AND mem_password = '$mem_password' OR mem_email = '$mem_username' AND mem_password = '$mem_password'";
+        $query = $this->db->query($sql);
+        return $query;
+    }//รับค่าผ่านตัวแปร mem_username และ mem_password
 }
