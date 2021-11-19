@@ -40,20 +40,5 @@ class M_DQS_member extends Da_DQS_member
         $query = $this->db->query($sql);
         return $query;
     }
-    /*
-	* get_by_username_password
-	* Get user by username password in database
-	* @input username, password
-	* @output usr_id, usr_username, usr_password, usr_name, usr_active_status, usr_role
-	* @author Ashirawat, Krsiada
-	* @Create Date 2564-08-05
-	*/
-	public function get_by_username_password($mem_username, $mem_password)
-    {
-        $sql = "SELECT * 
-            FROM {$this->db_name}.DQS_Member
-            WHERE mem_username = '$mem_username'AND mem_password = '$mem_password' OR mem_email = '$mem_username' AND mem_password = '$mem_password'";
-        $query = $this->db->query($sql);
-        return $query;
-    }//รับค่าผ่านตัวแปร mem_username และ mem_password
+
 }

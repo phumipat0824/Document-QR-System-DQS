@@ -17,6 +17,16 @@ class Member_upload_file extends DQS_controller {
 
 		$this->output("member/test_upload");
 	}
+	/*
+		* create folder
+		* create folder  into database 
+		* @input name folder
+		* @output show folder
+		* @author pongthorn
+		* @Create Date 2564-11-19
+		*/
+	
+	 
 
 	public function upload(){
 			$this->session->unset_userdata('logo_name');

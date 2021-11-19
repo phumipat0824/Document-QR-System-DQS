@@ -1,0 +1,44 @@
+<?php
+/*
+	* Da_DQS_folder.php
+    * Da_DQS_folder upload folder
+    * @author pongthorn
+    * @Create Date 2564-11-19
+*/
+?>
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+require 'DQS_model.php';
+
+class Da_DQS_folder extends DQS_model {
+	
+    public $fol_id ;
+    public $fol_name;
+    public $fol_datetime;
+    public $fol_location;
+    public $fol_mem_id;
+    
+    
+    
+    public function __construct()
+	{
+        parent::__construct();
+	}
+
+/*
+* insert
+* Insert folder into database 
+* @input folder data
+* @output -
+* @author pongthorn
+* @Create Date 2564-11-19
+*/
+    public function insert(){//insert folder into database    
+        $sql = "INSERT INTO {$this->db_name}.DQS_Folder(fol_name,fol_location) 
+                VALUES (?,?)";
+                
+        $this->db->query($sql,array($this->fol_name,$this->fol_location));        
+    }//end insert folder into database
+
+}
