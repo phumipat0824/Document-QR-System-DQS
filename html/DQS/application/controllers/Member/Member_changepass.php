@@ -19,15 +19,6 @@ class Member_changepass extends DQS_controller {
 		$this->output_sidebar_member("Member/v_member_changepass");
 	}
     
-    
-	/*
-		* change password
-		* change password member on member management 
-		* @input old passwoed and new password
-		* @output password has changed
-		* @author Natruja
-		* @Create Date 2564-11-14
-		*/
 
 
 }
