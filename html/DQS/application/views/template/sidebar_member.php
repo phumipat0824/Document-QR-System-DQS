@@ -14,13 +14,13 @@
     </div>
     <div class="sidebar-wrapper ps-container ps-theme-default ps-active-y" data-ps-id="a5787ac4-4df1-fec6-f8e0-33c5f4784969">
         <ul class="nav">
-            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Member/Member_login/member_home" ?  ''  : 'active' ?> ">
+            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Member/Member_login/member_home" ?  'active'  : '' ?> ">
                 <a class="nav-link" href="<?php echo site_url().'/Member/Member_login/member_home'?>">
                     <i class="fas fa-folder" style="color: rgb(125, 123, 122);"></i>
                     <p style="color: rgb(0,0,0); ">คิวอาร์โค้ดของฉัน</p>
                 </a>
             </li>
-            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Member/Member_upload_file/show_member_upload_file" ?  ''  : 'active' ?> ">
+            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Member/Member_upload_file/show_member_upload_file" ?  'active'  : '' ?> ">
                 <a class="nav-link" href="<?php echo site_url().'/Member/Member_upload_file/show_member_upload_file'?>">
                     <i class="fas fa-folder" style="color: rgb(125, 123, 122);"></i>
                     <p style="color: rgb(0,0,0); ">สร้างคิวอาร์โค้ด</p>
