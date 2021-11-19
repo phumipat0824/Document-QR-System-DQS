@@ -23,7 +23,7 @@
                                 <div class="col-md-10 justify-content-md-center">
                                     <div class="card-header card-header-warning" style = "padding: 10px; border-radius: 10px;">
                                     
-                                        <h2 class= "text-center"  style="color:#100575; font-family:TH sarabun new; font-size: 50px;">สมัครสมาชิก</h2>
+                                        <h2 class= "text-center"  style="color:#000000; font-family:TH sarabun new; font-size: 60px;">สมัครสมาชิก</h2>
                                         
                                     </div>
                                 </div>

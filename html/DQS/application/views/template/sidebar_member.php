@@ -20,14 +20,20 @@
                     <p style="color: rgb(0,0,0); ">คิวอาร์โค้ดของฉัน</p>
                 </a>
             </li>
+            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Member/Member_upload_file/show_member_upload_file" ?  ''  : 'active' ?> ">
+                <a class="nav-link" href="<?php echo site_url().'/Member/Member_upload_file/show_member_upload_file'?>">
+                    <i class="fas fa-folder" style="color: rgb(125, 123, 122);"></i>
+                    <p style="color: rgb(0,0,0); ">สร้างคิวอาร์โค้ด</p>
+                </a>
+            </li>
             <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/" ?  'active'  : '' ?> ">
                 <a class="nav-link" href="./user.html">
                     <i class="fas fa-chart-bar" style="color: rgb(125, 123, 122);"></i>
                     <p style="color: rgb(0,0,0); ">รายงานสรุปผล</p>
                 </a>
             </li>
-            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/" ?  'active'  : '' ?> ">
-                <a class="nav-link" href="./tables.html">
+            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Member/Member_changepass/show_changepass" ?  'active'  : '' ?> ">
+                <a class="nav-link" href="<?php echo site_url().'/Member/Member_changepass/show_changepass'?>">
                     <i class="fas fa-cog" style="color: rgb(125, 123, 122);"></i>
                     <p style="color: rgb(0,0,0); ">จัดการบัญชีผู้ใช้งาน</p>
                 </a>

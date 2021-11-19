@@ -22,18 +22,18 @@
           </li>
         </ul>
         <form action="<?php echo site_url() . 'Member/Member_upload_file/upload_file' ?>" method="post">
-          <label style="color: #000000">ไฟล์ PDF</label><br>
-          <div class="card">
+          <label style=" margin-left: 10%; color: #000000">ไฟล์ PDF</label><br>
+          <div class="card" style=" margin-left: 10%; width:80%">
             <input id="file" type="file" placeholder="อัปโหลดไฟล์" style="width: 230px;"><br>
           </div>
 
-          <label style="color: #000000">ชื่อ:</label><br>
+          <label style=" margin-left: 10%; color: #000000">ชื่อ:</label><br>
           <label></label>
-          <input id="text" type="text" style="width: 230px;" value="" placeholder="ชื่อไฟล์"><br />
+          <input id="text" type="text" style="margin-left: 10%; width: 385px;" value="" placeholder="ชื่อไฟล์"><br />
 
 
-          <label style="margin-top: 10px; color: #000000">โลโก้:</label><br>
-          <div class="card">
+          <label style="margin-left: 10%; color: #000000">โลโก้:</label><br>
+          <div class="card" style=" margin-left: 10%; width:80%">
             <input id="logo" type="file" name="logo" onchange="uploadFile()" accept="image/png, image/gif, image/jpeg"><br><br>
           </div>
           <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name') ?>" hidden>

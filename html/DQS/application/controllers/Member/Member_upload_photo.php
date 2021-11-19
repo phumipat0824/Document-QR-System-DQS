@@ -9,7 +9,7 @@ class Member_upload_photo extends DQS_controller {
 	public function show_member_upload_photo()
 	{
 
-		$this->output("Member/v_member_upload_photo");
+		$this->output_sidebar_member("Member/v_member_upload_photo");
 	}
 
 	public function upload(){
