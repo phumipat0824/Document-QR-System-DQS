@@ -9,7 +9,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 require dirname(__FILE__) . '/../DQS_controller.php';
 
-class Admin_home extends DQS_controller
+class Admin_config extends DQS_controller
 {
     /*
     * show_admin_home
@@ -28,10 +28,10 @@ class Admin_home extends DQS_controller
     // }
     
 
-    public function show_admin_home(){
-        $this->load->model('M_DQS_folder', 'fol');
-		$data['arr_fol'] = $this->fol->get_all()->result();
-        $this->output_sidebar_admin('Admin/v_admin_home', $data);
+    public function show_admin_config(){
+        $this->load->model('M_DQS_department', 'MDD');
+        $data['arr_member'] = $this->MDD->get_department()->result();
+        $this->output_sidebar_admin('Admin/v_admin_config', $data);
     }
     
 }

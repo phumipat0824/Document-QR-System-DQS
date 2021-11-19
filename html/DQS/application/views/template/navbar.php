@@ -7,18 +7,18 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
     <img src="<?php echo base_url(). '/assets/image/logo_dqs.PNG' ?>" height="50" width="50">
-      <a class="navbar-brand" href="#"><b>Document QR</b></a>
+      <a class="navbar-brand" href="<?php echo base_url() . 'Qrcode/Qrcode_generator/show_qrcode' ?>"><b>Document QR</b></a>
       <form class="form-inline ml-auto">
      
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active">
-          <a class="nav-link" href="#">สร้างคิวอาร์โค้ด <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="<?php echo base_url() . 'Qrcode/Qrcode_generator/show_qrcode' ?>">สร้างคิวอาร์โค้ด <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">สมัครสมาชิก</a>
+          <a class="nav-link" href="<?php echo base_url() . 'Member/Member_register/show_member_register' ?>">สมัครสมาชิก</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"  href="#">เข้าสู่ระบบ</a>
+          <a class="nav-link" href="<?php echo base_url() . 'Member/Member_login/show_member_login' ?>">เข้าสู่ระบบ</a>
         </li>
       </ul>
          

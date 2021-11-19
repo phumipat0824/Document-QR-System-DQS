@@ -24,8 +24,8 @@
                     <p style="color: rgb(0,0,0);">จัดการหน่วยงาน</p>
                 </a>
             </li>
-            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Admin/Admin_home/show_admin_home" ?  'active'  : '' ?> ">
-                <a class="nav-link" href="<?php echo site_url().'/Admin/Admin_home/show_admin_home' ?>">
+            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Admin/Admin_config/show_admin_config" ?  'active'  : '' ?> ">
+                <a class="nav-link" href="<?php echo site_url().'/Admin/Admin_config/show_admin_config' ?>">
                     <i class="fas fa-cog" style="color: rgb(125, 123, 122);"></i>
                     <p style="color: rgb(0,0,0);">จัดการบัญชีผู้ใช้งาน</p>
                 </a>
