@@ -1,3 +1,4 @@
+ 
 <script src="<?php echo base_url() . 'node_modules/easyqrcodejs/src' ?>/easy.qrcode.js"></script>
 
 
@@ -7,12 +8,12 @@
     <h1 style="color:#100575; font-family:TH sarabun new; font-size: 80px;">สร้างคิวอาร์โค้ด</h1>
     <h2 style="font-family:TH sarabun new; ">เริ่มสร้าง QR Code กันเลย </h2>
     <div class="col-md-5">
-
+    <div class="card card-nav-tabs card-plain" style="color: #E0FFFF; width: 100%;">
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <div class="card" style="background-color: #100575">
+        <div class="card" style="margin: 0px; color: #E0FFFF">
             <a class="nav-link active" href="#">PDF</a>
-          </div>
+            </div>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">เว็บไซต์</a>
@@ -21,35 +22,41 @@
           <a class="nav-link" href="#">รูปภาพ</a>
         </li>
       </ul>
-      <div class="card card-nav-tabs card-plain" style="color: #E0FFFF">
+      
         <form action="<?php echo site_url() . 'Member/Member_upload_file/upload_file' ?>" method="post">
           <label style="padding-left: 45px; padding-top: 20px; color: #000000">ไฟล์ PDF</label><br>
         <div class="row">
             <div class="col-md-2 offset-md-1">
-              <input id="file" type="file" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px;"><br>
+            <div class="card" style=" margin-left: 10%; width:640%">
+              <input id="file" type="file" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;"><br>
+              </div>
             </div>
           </div>
 
           <label style="padding-left: 40px; padding-top: 20px; color: #000000">ชื่อ:</label><br>
           <div class="row">
             <div class="col-md-2 offset-md-1">
-              <input id="text" type="text" style="margin: 0px;  width: 230px;" value="" placeholder="ชื่อไฟล์"><br />
+              <input id="text" type="text" style="margin: 0px;  width: 400px;" value="" placeholder="ชื่อไฟล์"><br />
             </div>
           </div>
 
+          
           <label style="padding-left: 40px; padding-top: 20px; color: #000000">โลโก้:</label><br>
+          
           <div class="row">
             <div class="col-md-2 offset-md-1">
+              <div class="card" style=" margin-left: 10%; width:640%">
               <input id="logo" type="file" name="logo" onchange="uploadFile()" accept="image/png, image/gif, image/jpeg"><br><br>
+              </div>
             </div>
           </div>
           <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name') ?>" hidden>
-          <button onclick="make()" class="btn btn-dark_blue" style="margin-left: 10px;margin-bottom: 50px;margin-top:50px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button>
+          <button onclick="make()" class="btn btn-dark_blue" style="margin-left: 25%; margin-bottom: 50px;margin-top:50px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button>
 
         </form>
       </div>
     </div>
-
+    <!-- <div class="col-md-1"></div> -->
     <div class="col-md-5">
       <div class="card" style="padding: 10%" height="500">
         <div class="card-body" style="margin: auto;">
@@ -143,4 +150,18 @@
     -webkit-flex: 0 0 48px;
     flex: 0 0 48px;
   }
+  .blockInput{
+    width: 100%;
+    height: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 0px 20px 0px 0px;
+  }
+  body {
+  background-color: #EFF3F7;
+  }
+  
 </style>
