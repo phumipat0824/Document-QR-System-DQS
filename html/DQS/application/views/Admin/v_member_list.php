@@ -69,7 +69,7 @@
                                         <?php echo $arr_member[$i]->mem_firstname." ".$arr_member[$i]->mem_lastname; ?>
                                     </td>
                                     <td>
-                                        <a href="<?php echo site_url() ?>/Member/member_changepass/show_changepass">
+                                        <a href="<?php echo site_url() ?>/Member/Member_edit/show_member_edit">
                                             <i class="far fa-edit"></i></a>
                                     </td>
                                     <td>
