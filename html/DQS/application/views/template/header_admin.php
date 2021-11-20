@@ -74,11 +74,11 @@
             <a class="navbar-brand" href="<?php echo base_url() . 'Qrcode/Qrcode_generator/show_qrcode' ?>"><b>Document QR</b></a>
             <form class="form-inline ml-auto">
 
-                <!-- <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url() . 'Qrcode/Qrcode_generator/show_qrcode' ?>" style="font-size:18px">สร้างคิวอาร์โค้ด </a>
-          </li>
-          <li class="nav-item">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url() . 'Member/Member_login/logout' ?>" style="font-size:18px">logout</a>
+                    </li>
+                    <!-- <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url() . 'Member/Member_register/show_member_register' ?>" style="font-size:18px">สมัครสมาชิก</a>
           </li>
           <li class="nav-item">

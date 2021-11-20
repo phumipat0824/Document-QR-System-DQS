@@ -1,9 +1,9 @@
 <?php 
-        //if(!$this->session->has_userdata('mem_username')){
-        //    $path = site_url()."/Member/Member_login/show_member_login";
-        //    header("Location: ".$path);
-        //    exit();
-        //}
+        if(!$this->session->has_userdata('mem_username')){
+            $path = site_url()."/Member/Member_login/show_member_login";
+            header("Location: ".$path);
+            exit();
+        }
 
 ?>
 
@@ -20,7 +20,7 @@
                     <p style="color: rgb(0,0,0); ">คิวอาร์โค้ดของฉัน</p>
                 </a>
             </li>
-        
+
             <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Member/Member_changepass/show_changepass" ?  'active'  : '' ?> ">
                 <a class="nav-link" href="<?php echo site_url().'/Member/Member_changepass/show_changepass'?>">
                     <i class="fas fa-cog" style="color: rgb(125, 123, 122);"></i>
@@ -33,7 +33,7 @@
                     <p style="color: rgb(0,0,0); ">รายงานสรุปผล</p>
                 </a>
             </li>
-           
+
         </ul>
         <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
             <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;">
