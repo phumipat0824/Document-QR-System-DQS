@@ -25,19 +25,7 @@ class Member_login extends DQS_controller
         $this->output_navbar("Member/v_member_login");
     }
 
-    /*
-    * show_member_home
-    * Go to member home
-    * @input -
-    * @output view
-    * @author Ashirawat, Krsiada
-    * @Create Date 2564-08-05
-    */
-
-    public function show_member_home()
-    {
-        $this->output_sidebar_member("Member/v_member_home");
-    }
+   
 
     /*
     * member_login
@@ -67,20 +55,32 @@ class Member_login extends DQS_controller
             // log in complete
 
             // set id and name for user
-            //$this->session->set_userdata('mem_username', $mem_username);
+            $this->session->set_userdata('mem_username', $mem_username);
             if ($obj_mem->mem_role == 0) {
-                session_unset();
-                session_destroy();
-                redirect('/Member/Member_login/show_member_home');
+                // session_unset();
+                // session_destroy();
+                //$this->output_sidebar_member("Member/v_member_home");
+                redirect('/Member/Member_home/show_member_home');
             } else if ($obj_mem->mem_role == 1) {
-                session_unset();
-                session_destroy();
-                redirect('/Admin/Admin_home/show_admin_home');
+                // session_unset();
+                // session_destroy();
+                redirect('/Admin/Admin_home/show_Admin_home');
+                //$this->output_sidebar_admin('Admin/v_admin_home');
             }
             //redirect('/Member/Member_login/show_member_home');
 
         }
     }
+     /*
+    * show_member_home
+    * Go to member home
+    * @input -
+    * @output view
+    * @author Ashirawat, Krsiada
+    * @Create Date 2564-08-05
+    */
+
+    
 
     /*
     * show_session
@@ -111,9 +111,9 @@ class Member_login extends DQS_controller
     */
     public function logout()
     {
-        //session_unset();
-        //session_destroy();
-        redirect('Member/v_member_login');
+        session_unset();
+        session_destroy();
+        redirect('/Member/Member_login/show_member_login');
     }
 
     /*

@@ -47,5 +47,5 @@ class Da_DQS_department extends DQS_model
         
     }
 
-
+    
 }

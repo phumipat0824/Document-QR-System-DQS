@@ -16,22 +16,34 @@ class Admin_home extends DQS_controller
     * Go to admin home
     * @input -
     * @output view
-    * @author Ashirawat
-    * @Create Date 2564-09-23
+    * @author Apinya
+    * @Create Date 2564-10-11
     */
 
-    // public function show_admin_home()
-    // {
-    //     $this->output_sidebar_admin('Admin/v_admin_delete');
-        
-
-    // }
-    
-
     public function show_admin_home(){
-        $this->load->model('M_DQS_department', 'MDD');
-        $data['arr_member'] = $this->MDD->get_department()->result();
-        $this->output_sidebar_admin('Admin/v_admin_home', $data);
+
+    $this->output_sidebar_admin('Admin/v_admin_home');
+
     }
-    
+
+    // public function show_admin_home(){
+    //     $this->load->model('M_DQS_member', 'MDM');
+    //     $data['arr_member'] = $this->MDM->get_member_all()->result();
+    //     $this->output_sidebar_admin('Admin/v_admin_home',$data);
+    // }
+
+    public function show_member_list(){
+        $this->load->model('M_DQS_member', 'MDM');
+        $data['arr_member'] = $this->MDM->get_member_all()->result();
+        $this->output_sidebar_admin('Admin/v_member_list',$data);
+    }
+
+    public function delete_admin(){
+        $this->load->model('M_DQS_member', 'MDM');
+        $this->MDM->mem_id = $this->input->post('mem_id');
+		$this->MDM->delete_member();
+        redirect('/Admin/Admin_home/show_member_list');
+        
+    }
+
 }

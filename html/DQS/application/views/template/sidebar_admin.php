@@ -1,9 +1,9 @@
 <?php 
-        //if(!$this->session->has_userdata('mem_username')){
-        //    $path = site_url()."/Member/Member_login/show_member_login";
-        //    header("Location: ".$path);
-        //    exit();
-        //}
+        if(!$this->session->has_userdata('mem_username')){
+            $path = site_url()."/Member/Member_login/show_member_login";
+            header("Location: ".$path);
+            exit();
+        }
 
 ?>
 <div class="sidebar" data-color="yellow" data-background-color="white" data-image="<?php echo base_url().'/assets/img/sidebar-1.jpg'?>">
@@ -12,8 +12,8 @@
     </div>
     <div class="sidebar-wrapper ps-container ps-theme-default ps-active-y" data-ps-id="a5787ac4-4df1-fec6-f8e0-33c5f4784969">
         <ul class="nav">
-            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/" ?  'active'  : '' ?> ">
-                <a class="nav-link" href="./dashboard.html">
+            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Admin/Admin_home/show_Admin_home" ?  'active'  : '' ?> ">
+                <a class="nav-link" href="<?php echo site_url().'/Admin/Admin_home/show_admin_home'?>">
                     <i class="fas fa-folder" style="color: rgb(125, 123, 122);"></i>
                     <p style="color: rgb(0,0,0);">คิวอาร์โค้ดของฉัน</p>
                 </a>
@@ -24,8 +24,8 @@
                     <p style="color: rgb(0,0,0);">จัดการหน่วยงาน</p>
                 </a>
             </li>
-            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Admin/Admin_home/show_admin_home" ?  'active'  : '' ?> ">
-                <a class="nav-link" href="<?php echo site_url().'/Admin/Admin_home/show_admin_home' ?>">
+            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Admin/Admin_home/show_member_list" ?  'active'  : '' ?> ">
+                <a class="nav-link" href="<?php echo site_url().'/Admin/Admin_home/show_member_list' ?>">
                     <i class="fas fa-cog" style="color: rgb(125, 123, 122);"></i>
                     <p style="color: rgb(0,0,0);">จัดการบัญชีผู้ใช้งาน</p>
                 </a>

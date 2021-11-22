@@ -9,8 +9,24 @@ class Member_upload_file extends DQS_controller {
 	public function show_member_upload_file()
 	{
 
-		$this->output("member/v_member_upload_file");
+		$this->output_sidebar_member("Member/v_member_upload_file");
 	}
+
+	public function show_test()
+	{
+
+		$this->output("member/test_upload");
+	}
+	/*
+		* create folder
+		* create folder  into database 
+		* @input name folder
+		* @output show folder
+		* @author pongthorn
+		* @Create Date 2564-11-19
+		*/
+	
+	 
 
 	public function upload(){
 			$this->session->unset_userdata('logo_name');
@@ -52,6 +68,7 @@ class Member_upload_file extends DQS_controller {
 
 			$this->load->model('Da_DQS_qrcode','dqrc');
 			$this->dqrc->doc_name = $this->input->post('doc_name');
+			$this->dqrc->doc_type = $this->input->post('doc_type');
 
 			$upload=$_FILES['doc_path'];
 			if($upload != '') {   //not select file
@@ -71,8 +88,7 @@ class Member_upload_file extends DQS_controller {
 			}//if
 			$this->dqrc->doc_path = $newpath;
 			$this->dqrc->insert();
-			redirect('');
-
+			
 		}
 
 

@@ -25,9 +25,9 @@ class M_DQS_login extends Da_DQS_login {
         $query = $this->db->query($sql, array($this->mem_usernmeme, $this->mem_password));
         return $query;
 
-		
+		//ตรวจสอบการเข้าสู่ระบบโดยใช้ username และ password
 	}
- /*
+    /*
 	* get_by_username_password
 	* Get user by username password in database
 	* @input username, password
@@ -42,6 +42,5 @@ class M_DQS_login extends Da_DQS_login {
             WHERE mem_username = '$mem_username'AND mem_password = '$mem_password' OR mem_email = '$mem_username' AND mem_password = '$mem_password'";
         $query = $this->db->query($sql);
         return $query;
-    }
-
+    }//รับค่าผ่านตัวแปร mem_username และ mem_password.
 }

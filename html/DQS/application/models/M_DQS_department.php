@@ -25,20 +25,30 @@ class M_DQS_department extends Da_DQS_department
         return $query;
     }
 
+    // public function check_exist_name($dep_name)
+    // {
+    //     $sql = "SELECT * 
+    //         FROM {$this->db_name}.DQS_Department
+    //         WHERE dep_name = $dep_name";
+    //     $query = $this->db->query($sql);
+    //     return $query;
+    // }
+
     public function check_exist_name($dep_name)
-    {   
+    {
+        // $sql = "SELECT * 
+        // FROM {$this->db_name}.DQS_Department
+        // WHERE dep_name = $dep_name";
+        // $query = $this->db->query($sql);
+        
         $this->db->where('dep_name', $dep_name);
         $query = $this->db->get('DQS_Department');
         return $query->num_rows();
     }
     public function get_department(){
         $sql = "SELECT *
-        FROM {$this->db_name}.DQS_Department AS depart
-        INNER JOIN {$this->db_name}.DQS_Member AS mem
-        ON depart.dep_id = mem.mem_dep_id";
+        FROM {$this->db_name}.DQS_Member";
         $query = $this->db->query($sql);
         return $query;
     }
-    
-
 }
