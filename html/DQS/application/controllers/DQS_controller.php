@@ -25,6 +25,7 @@ class DQS_controller extends CI_Controller
 	 */
 	public function index()
 	{
+		redirect('Qrcode/QRcode_generator/show_qrcode');
 	}
 	public function test_2()
 	{
