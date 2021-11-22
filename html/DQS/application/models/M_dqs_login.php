@@ -42,5 +42,5 @@ class M_DQS_login extends Da_DQS_login {
             WHERE mem_username = '$mem_username'AND mem_password = '$mem_password' OR mem_email = '$mem_username' AND mem_password = '$mem_password'";
         $query = $this->db->query($sql);
         return $query;
-    }//รับค่าผ่านตัวแปร mem_username และ mem_password
+    }//รับค่าผ่านตัวแปร mem_username และ mem_password.
 }
