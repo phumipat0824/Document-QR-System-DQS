@@ -16,7 +16,7 @@ class Member_edit extends DQS_controller {
 		*/
 	public function show_member_edit()
 	{
-		$this->output_sidebar_member("Member/v_member_edit");
+		$this->output_sidebar_admin("Member/v_member_edit");
 	}
     
 

@@ -8,12 +8,12 @@ class QRcode_generator extends DQS_controller {
 
 	public function show_qrcode()
 	{
-		$this->session->unset_userdata('logo_name');
+		//$this->session->unset_userdata('logo_name');
 		$this->output("v_qrcode");
 	}
 
 	public function upload(){
-			$this->session->unset_userdata('logo_name');
+			//$this->session->unset_userdata('logo_name');
 				/* Get the name of the uploaded file */
 			$filename = $_FILES['logo']['name'];
 			$n_img = date("Ymd").time().'_'.$filename;

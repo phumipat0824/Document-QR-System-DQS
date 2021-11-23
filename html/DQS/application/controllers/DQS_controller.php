@@ -26,6 +26,7 @@ class DQS_controller extends CI_Controller
 	}
 	public function index()
 	{
+		redirect('Qrcode/QRcode_generator/show_qrcode');
 	}
 	public function test_2()
 	{
@@ -41,8 +42,8 @@ class DQS_controller extends CI_Controller
 	
 	public function output_sidebar_admin($view, $data = null)
 	{
-		$this->load->view('template/header');
-		$this->load->view('template/navbar');
+		$this->load->view('template/header_admin');
+		//$this->load->view('template/navbar');
 		$this->load->view('template/sidebar_admin');
 		$this->load->view('template/javascript');
 		$this->load->view($view, $data);

@@ -78,7 +78,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url() . 'Member/Member_login/logout' ?>" style="font-size:18px">logout</a>
                     </li>
-                    <!--<li class="nav-item">
+                    <!-- <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url() . 'Member/Member_register/show_member_register' ?>" style="font-size:18px">สมัครสมาชิก</a>
           </li>
           <li class="nav-item">
