@@ -65,7 +65,7 @@
               <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
               <input type="submit" class="btn btn-success" value="สร้าง">
             </div>
-            </div>
+            </div> 
 
            
             </div>
