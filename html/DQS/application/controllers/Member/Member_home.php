@@ -10,7 +10,8 @@ class Member_home extends DQS_controller
     public function show_member_home()
     {
         $this->load->model('M_DQS_folder', 'fol');
-		$data['arr_fol'] = $this->fol->get_all()->result();
+		$memid = $this->session->userdata('mem_id');
+		$data['arr_fol'] = $this->fol->get_by_id($memid)->result();
         $this->output_sidebar_member("Member/v_member_home",$data);
     }
 
@@ -29,7 +30,6 @@ class Member_home extends DQS_controller
         if (!file_exists($path . $folder_name))/* Check folder exists or not */
 			{
 				@mkdir($path . $folder_name, 0777);/* Create folder by using mkdir function */
-				
 				
 			//ตั้งชื่อไฟล์ใหม่โดยเอาเวลาไว้หน้าชื่อไฟล์เดิม
 				$newname = $this->input->post('fol_name');
