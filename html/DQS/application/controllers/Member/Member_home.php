@@ -13,11 +13,13 @@ class Member_home extends DQS_controller
 		$data['arr_fol'] = $this->fol->get_all()->result();
         $this->output_sidebar_member("Member/v_member_home",$data);
     }
+
     public function create_folder()
     {
 		
 		$this->load->model('Da_DQS_folder','folder');
 		$this->folder->fol_name = $this->input->post('fol_name');
+		$this->folder->fol_mem_id = $this->session->userdata('mem_id');
 
 
         $folder_name=$_POST['fol_name'];
@@ -37,6 +39,7 @@ class Member_home extends DQS_controller
 		
 		$this->folder->fol_location = $newpath;
 		$this->folder->insert();
+		
 		redirect('Member/Member_home/show_member_home');
         
      }

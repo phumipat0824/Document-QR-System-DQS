@@ -35,10 +35,10 @@ class Da_DQS_folder extends DQS_model {
 * @Create Date 2564-11-19
 */
     public function insert(){//insert folder into database    
-        $sql = "INSERT INTO {$this->db_name}.DQS_Folder(fol_name,fol_location) 
-                VALUES (?,?)";
+        $sql = "INSERT INTO {$this->db_name}.DQS_Folder(fol_name,fol_location,fol_mem_id) 
+                VALUES (?,?,?)";
                 
-        $this->db->query($sql,array($this->fol_name,$this->fol_location));        
+        $this->db->query($sql,array($this->fol_name,$this->fol_location,$this->fol_mem_id));        
     }//end insert folder into database
 
 }
