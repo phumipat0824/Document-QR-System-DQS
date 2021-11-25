@@ -31,7 +31,7 @@
                 </div>
                 <br>
                 <!-- div header end   -->
-
+                <!-- <?php echo site_url() ?> -->
                 <div class="card-body" style="margin-top: -20px;">
 
                     <div id="create_table"></div> <!-- ตำแหน่งที่สร้าง data table -->
@@ -49,14 +49,15 @@
 
 <script>
 $(document).ready(function() {
+    // alert('1');
     get_member();
 });
 
 function get_member() {
+    // alert('2');
     $.ajax({
         url: "<?php echo site_url() ?>/Admin/Admin_home/get_admin_list_ajax",
         type: 'POST',
-        data: {},
         dataType: 'JSON',
         success: function(data) {
             console.log(data);
@@ -67,6 +68,7 @@ function get_member() {
 } // recieve json then send to create data table
 
 function create_Table(arr_member) {
+    // alert('3');
     let html_code = ''; // ตัวแปร generate code html
     html_code += '<div class="table-responsive">';
     html_code +=
@@ -190,7 +192,7 @@ function make_dataTable_byId(id_name) {
 $('#add-form').submit(function() {
     $.ajax({
         type: 'post',
-        url: "<?php echo site_url().'/Department/Department_list/add_department'?>",
+        url: "<?php echo site_url().'/Admin/Admin_home/get_admin_list_ajax'?>",
         data: $("#add-form").serialize(),
         dataType: 'json',
         success: function(data) {
@@ -231,49 +233,3 @@ $('#add-form').submit(function() {
         </div>
     </div>
 </div>
-<!-- send dep_id to edit modal -->
-<script type="text/javascript">
-$(document).on("click", ".editModal", function() {
-    var id = $(this).attr('data-id');
-    $("#dep_id").val(id);
-});
-</script>
-
-<!-- edit modal -->
-<script type="text/javascript">
-$('#edit-form').submit(function() {
-    $.ajax({
-        type: 'post',
-        url: "<?php echo site_url().'/Department/Department_list/edit_department'?>",
-        data: $("#edit-form").serialize(),
-        dataType: 'json',
-        success: function(data) {
-            // console.log("succ");
-            alert('มีข้อมูลนี้ในระบบอยู่แล้วหรือไม่ได้กรอกข้อมูล กรุณากรอกใหม่');
-        },
-        error: function(error) {
-            // console.log("error");
-            location.reload();
-        }
-    });
-});
-</script>
-
-
-<!-- ajax update status -->
-<script type="text/javascript">
-function update_status(dep_id, dep_active) {
-    $.ajax({
-        url: "<?php echo site_url().'/Department/Department_list/update_status'?>",
-        type: 'POST',
-        data: {
-            dep_id: dep_id,
-            dep_active: dep_active
-        },
-        dataType: "JSON",
-        success: function(data) {
-            get_member();
-        }
-    });
-}
-</script>

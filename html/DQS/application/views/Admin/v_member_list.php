@@ -98,7 +98,7 @@
                                                                 ยืนยันการลบบัญชีผู้ใช้</h5>
                                                             <br>
                                                             <!-- <?php echo $arr_member[$i]->mem_id; ?> -->
-                                                            <?php echo $i; ?>
+                                                            <!-- <?php echo $i; ?> -->
                                                             <center><input type="submit" class="btn bg-gradient-primary"
                                                                     value="ยืนยัน">
                                                                 <button type="button" class="btn bg-gradient-secondary"
