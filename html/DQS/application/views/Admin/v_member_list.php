@@ -74,43 +74,18 @@
                                     </td>
                                     <td>
 
-                                        <a href="<?php echo site_url() ?>/Admin/Admin_home/show_member_list">
-                                            <i type=" submit" class="fas fa-trash"></i>
+                                    <button type="button" class="btn deleteModal" data-toggle="modal" data-target="#deleteModal" data-id= '<?php echo $arr_member[$i]->mem_id; ?>' >
+                                            <i class="fas fa-trash"></i>
+                                    </button>
 
 
-
-                                            <!-- Delete modal -->
-                                            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <form id="add-form" method="POST"
-                                                        action="<?php echo site_url() ?>/Admin/Admin_home/delete_admin">
-                                                        <div class="modal-body">
-                                                            <input type="hidden" name="mem_id"
-                                                                value='<?php echo $arr_member[$i]->mem_id; ?>'>
-
-                                                            <h5 class="modal-title font-weight-normal"
-                                                                id="exampleModalLabel">
-                                                                ยืนยันการลบบัญชีผู้ใช้</h5>
-                                                            <br>
-                                                            <?php echo $arr_member[$i]->mem_id; ?>
-                                                            <?php echo $i; ?>
-                                                            <center><button type="submit"
-                                                                    class="btn bg-gradient-primary">ยืนยัน</button>
-                                                                <button type="button" class="btn bg-gradient-secondary"
-                                                                    data-bs-dismiss="modal">ยกเลิก</button>
-                                                            </center>
-                                                        </div>
-                                                    </form>
-
-                                                </div>
-                                            </div>
-                                        </div> -->
+                                            
                                     </td>
 
                                 </tr>
                                 <?php } ?>
+
+                                
                             </table>
 
                         </div>
@@ -119,7 +94,61 @@
         </div>
     </div>
 </div>
-<script>
+
+<!-- Delete modal -->
+<!-- <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form id="delete-form" method="POST" action="<?php echo site_url() . "/Admin/Admin_home/delete_admin" ?>">
+            <form id="delete-form" method="POST" onsubmit="return false">
+                <div class="modal-body">
+                    <input type="hidden" name="mem_id" id="mem_id" value="">
+
+                    <h5 class="modal-title font-weight-normal"
+                        id="exampleModalLabel">
+                        ยืนยันการลบบัญชีผู้ใช้</h5>
+                    <br>
+                    <center>
+                    <input type="submit" class="btn bg-gradient-primary" value="บันทึก">
+                        <button type="submit"
+                            class="btn bg-gradient-primary">ยืนยัน</button>
+                        <button type="button" class="btn bg-gradient-secondary"
+                            data-bs-dismiss="modal">ยกเลิก</button>
+                            <button type="button" class="btn bg-gradient-secondary" data-dismiss="modal">ยกเลิก</button>
+                    </center>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div> -->
+
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ยืนยันการลบบัญชีผู้ใช้</h5>
+      </div>
+      <!-- <form id="delete-form" method="POST" action="<?php echo site_url() . "/Admin/Admin_home/delete_admin" ?>"> -->
+      <form id="delete-form" method="POST" onsubmit="return false">
+        <div class="modal-body">
+            <input type="hidden" name="mem_id" id="mem_id" value="">
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn bg-gradient-primary" value="บันทึก">
+            <button type="button" class="btn bg-gradient-secondary" data-dismiss="modal">ยกเลิก</button>
+        </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- <script>
 function delete_admin(element, mem_id) {
 
     $.ajax({
@@ -135,4 +164,33 @@ function delete_admin(element, mem_id) {
         }
     })
 }
+</script> -->
+
+
+<script type="text/javascript">
+  $('#delete-form').submit(function(){
+    alert('YES');
+    $.ajax({
+        type: 'post',
+        url: "<?php echo site_url().'/Admin/Admin_home/delete_admin'?>",
+        data: $( "#delete-form" ).serialize(),
+        dataType: 'json',
+        success: function(data) {
+            //   console.log("succ");
+              alert('YES');
+        },
+        error: function (error) {
+            alert('NO');
+        //   location.reload();
+        }
+    });
+  });
+
+</script>
+<script type="text/javascript">
+  $(document).on("click", ".deleteModal", function () {
+    alert('YES');
+    var id = $(this).attr('data-id');
+    $("#mem_id").val(id);
+  });
 </script>
