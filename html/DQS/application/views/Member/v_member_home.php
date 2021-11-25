@@ -36,7 +36,7 @@
             <div id="folder" class="dropdown-content">
               <a href="#home">เปิด</a>
               <a href="#about">แก้ไข</a>
-              <a href="#contact">ลบ</a>
+              <a href="<?php echo site_url() . '/Member/Member_home/delete_folder/';?><?php echo $arr_fol[$i]->fol_id;?>">ลบ</a>
             </div>
             </div>
             
@@ -46,7 +46,7 @@
   
    <?php }  ?>
 </div>
-   <form method="POST" name="form" action="<?php echo site_url() . '/Member/Member_home/create_folder'; ?>"> 
+  <form method="POST" name="form" action="<?php echo site_url() . '/Member/Member_home/create_folder'; ?>"> 
     
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -60,40 +60,39 @@
           </div>
           <div class="modal-body">
                 <center><input style="font-size: 25px;font-family:TH Sarabun New; " type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name" required ></center>    
-            </div>
-            <div class="modal-footer">
+          </div>
+          <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
               <input type="submit" class="btn btn-success" value="สร้าง">
-            </div>
-            </div>
-
-            <?php }  ?>
+          </div>
         </div>
-        <form method="POST" name="form" action="<?php echo site_url() . '/Member/Member_home/create_folder'; ?>">
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title" id="exampleModalLabel" style="font-weight: 900;font-size: 36px; font-family:TH Sarabun New;">โฟลเดอร์ใหม่</h1>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <center><input style="font-size: 25px;font-family:TH Sarabun New; " type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name" required></center>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                            <input type="submit" class="btn btn-success" value="สร้าง">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
+      </div>
     </div>
+  </form>
 </div>
+    <!-- Modal -->
+    <!-- <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title" id="exampleModalLabel" style="font-weight: 900;font-size: 36px; font-family:TH Sarabun New;">ยืนยันการลบโฟลเดอร์</h1>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div> -->
+          <!-- <div class="modal-body">
+                <center><input style="font-size: 25px;font-family:TH Sarabun New; " type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name" required ></center>    
+          </div> -->
+          <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+              <button type="submit" class="btn btn-success" >ยืนยัน</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+
+
 
 
 <script>
