@@ -34,6 +34,7 @@ class Member_login extends DQS_controller
     * @output view
     * @author Ashirawat, Krsiada
     * @Create Date 2564-08-05
+    * @update Date 2564-10-29
     */
     public function login()
     {
