@@ -25,5 +25,12 @@ class M_DQS_folder extends Da_DQS_folder
         $query = $this->db->query($sql);
         return $query;
     }
+
+    public function get_by_id_fol($fol_id)
+    {
+        $sql = "SELECT * FROM {$this->db_name}.DQS_Folder  WHERE fol_id = $fol_id";
+        $query = $this->db->query($sql,array());
+        return $query;
+    }
     
 }

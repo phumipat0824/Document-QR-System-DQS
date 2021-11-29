@@ -36,7 +36,7 @@
             <div id="folder" class="dropdown-content">
               <a href="#home">เปิด</a>
               <a href="#about">แก้ไข</a>
-              <a href="<?php echo site_url() . '/Member/Member_home/delete_folder/';?><?php echo $arr_fol[$i]->fol_id;?>">ลบ</a>
+              <a href="<?php echo site_url() . '/Member/Member_home/delete_folder/';?><?php echo $arr_fol[$i]->fol_id;?>/<?php echo $arr_fol[$i]->fol_name;?>">ลบ</a>
             </div>
             </div>
             
