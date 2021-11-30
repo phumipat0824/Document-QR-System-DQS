@@ -14,8 +14,9 @@ class Member_edit extends DQS_controller {
 		* @author Natruja
 		* @Create Date 
 		*/
-	public function show_member_edit()
+	public function show_member_edit($mem_id)
 	{
+	
 		$this->output_sidebar_admin("Member/v_member_edit");
 	}
     
