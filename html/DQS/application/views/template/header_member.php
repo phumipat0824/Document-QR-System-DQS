@@ -76,15 +76,15 @@
 
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url() . 'Member/Member_login/logout' ?>" style="font-size:18px">logout</a>
+                        <a class="nav-link" style="font-size:18px"><?php echo $this->session->mem_username?></a>
                     </li>
-                    <!--<li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url() . 'Member/Member_register/show_member_register' ?>" style="font-size:18px">สมัครสมาชิก</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url() . 'Member/Member_login/show_member_login' ?>" style="font-size:18px">เข้าสู่ระบบ</a>
-          </li>
-        </ul> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url() . 'Member/Member_login/logout' ?>" style="font-size:18px">ออกจากระบบ</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url() . 'Member/Member_login/show_member_login' ?>" style="font-size:18px">เข้าสู่ระบบ</a>
+                    </li> -->
+                </ul>
 
             </form>
         </div>
