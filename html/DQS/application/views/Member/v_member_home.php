@@ -27,12 +27,12 @@
             <div class="col-3">        
             <!-- <div class="card card-frame" style=" height: 60px; width: 260px;"> -->
             <div class="dropdown">
-            <button   onmousedown="rightclickfolder()"  class="dropbtn btn btn-secondary btn-lg" style=" height: 60px; width: 260px;"  >
+
+            <button   onmousedown="rightclickfolder()" class="dropbtn btn btn-secondary btn-lg" style=" height: 60px; width: 260px;"  >
             <i class="material-icons"  style="margin-left: 1px;" >folder</i>
             <a style=" font-size: 26px; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
-            
-
             </button>
+
             <div id="folder" class="dropdown-content">
               <a href="#home">เปิด</a>
               <a href="#about">แก้ไข</a>

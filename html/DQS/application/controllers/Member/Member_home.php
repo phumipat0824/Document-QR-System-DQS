@@ -56,9 +56,11 @@ class Member_home extends DQS_controller
 			{
 				@rmdir($path.$folder_name);/* Delete folder by using rmdir function */
         	}
-		redirect('Member/Member_home/show_member_home');
-		
-
+		// redirect('/Member/Member_home/show_member_home');
+		$this->load->model('M_DQS_folder', 'fol');
+		$memid = $this->session->userdata('mem_id');
+		$data['arr_fol'] = $this->fol->get_by_id($memid)->result();
+		$this->output_sidebar_member("Member/v_member_home",$data);
 	 }
 }
 ?>
