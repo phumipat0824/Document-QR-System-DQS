@@ -35,7 +35,7 @@
 
             <div id="folder" class="dropdown-content">
               <a href="#home">เปิด</a>
-              <a href="#about">แก้ไข</a>
+              <a href="#" class="editModal" data-toggle="modal" data-target="#editModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>" >แก้ไข</a>
               <a href="<?php echo site_url() . '/Member/Member_home/delete_folder/';?><?php echo $arr_fol[$i]->fol_id;?>/<?php echo $arr_fol[$i]->fol_name;?>">ลบ</a>
             </div>
             </div>
@@ -70,26 +70,39 @@
     </div>
   </form>
 </div>
-    <!-- Modal -->
-    <!-- <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title" id="exampleModalLabel" style="font-weight: 900;font-size: 36px; font-family:TH Sarabun New;">ยืนยันการลบโฟลเดอร์</h1>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div> -->
-          <!-- <div class="modal-body">
-                <center><input style="font-size: 25px;font-family:TH Sarabun New; " type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name" required ></center>    
-          </div> -->
-          <!-- <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-              <button type="submit" class="btn btn-success" >ยืนยัน</button>
-          </div>
-        </div>
+
+<!-- edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">แก้ไขชื่อโฟลเดอร์</h5>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
       </div>
-    </div> -->
+      <!-- action="<?php echo site_url() ?>/Department/Department_list/add_department" -->
+      <form id="edit-form" method="POST" actiom="<?php echo site_url() . '/Member/Member_home/update_folder/';?>">
+        <div class="modal-body">
+            <center><input type="text" class="col-md-10" placeholder="กรอกชื่อโฟลเดอร์" name="fol_name" required ></center>
+            <input type="hidden" name="fol_id" id="fol_id" value="">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+          <input type="submit" class="btn btn-success" value="บันทึก">
+        </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<!-- send fol_id to edit modal -->
+<script type="text/javascript">
+  $(document).on("click", ".editModal", function () {
+    var id = $(this).attr('data-id');
+    $("#fol_id").val(id);
+  });
+</script>
 
 
 

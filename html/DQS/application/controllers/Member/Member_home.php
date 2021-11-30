@@ -41,8 +41,20 @@ class Member_home extends DQS_controller
 		$this->folder->insert();
 		
 		redirect('Member/Member_home/show_member_home');
-        
      }
+
+	 function update_folder() 
+	 {
+		$this->load->model('Da_crs_member','dfol');
+
+        $this->dfol->fol_id = $this->input->post('fol_id');
+        $this->dfol->fol_name = $this->input->post('fol_name');
+
+        $this->dfol->update();
+
+        redirect('Member/Member_home/show_member_home');//เรียกกลับมาหน้านี้อีกครั้งอยู่หน้าเดียวกันใส่ชื่อได้เลย
+	
+	 }
 
 	 function delete_folder($fol_id,$fol_name) 
 	 {
