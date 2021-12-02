@@ -20,12 +20,12 @@ class M_DQS_member extends Da_DQS_member
         $query = $this->db->query($sql);
         return $query;
     }
-    public function get_by_id($mem_emp_id)
-    {
-        $sql = "SELECT * FROM {$this->db_name}.DQS_Member LEFT JOIN {$this->db_name}.DQS_Department ON mem_dep_id = dep_id WHERE mem_emp_id = $mem_emp_id";
-        $query = $this->db->query($sql);
-        return $query;
-    }
+    // public function get_by_id($mem_emp_id)
+    // {
+    //     $sql = "SELECT * FROM {$this->db_name}.DQS_Member LEFT JOIN {$this->db_name}.DQS_Department ON mem_dep_id = dep_id WHERE mem_emp_id = $mem_emp_id";
+    //     $query = $this->db->query($sql);
+    //     return $query;
+    // }
 
     public function get_by_email($mem_email)
     {
@@ -41,7 +41,8 @@ class M_DQS_member extends Da_DQS_member
         return $query;
     }
     
-    public function get_member(){
+    public function get_member()
+    {
        $sql = "SELECT * FROM {$this->db_name}.DQS_Member AS member
         LEFT JOIN {$this->db_name}.DQS_Department AS department
         ON member.mem_dep_id = department.dep_id";
@@ -49,7 +50,8 @@ class M_DQS_member extends Da_DQS_member
         return $query;
     }
 
-    public function get_member_all(){
+    public function get_member_all()
+    {
         $sql = "SELECT * FROM {$this->db_name}.DQS_Member AS member
         LEFT JOIN {$this->db_name}.DQS_Department AS department
         ON member.mem_dep_id = department.dep_id
@@ -58,4 +60,43 @@ class M_DQS_member extends Da_DQS_member
         $query = $this->db->query($sql);
         return $query;
     }
+    public function get_by_username()
+    {
+        $sql = "SELECT * FROM {$this->db_name}.DQS_Member WHERE mem_username ='$mem_username'";
+        $query = $this->db->query($sql);
+        return $query;
+
+        // $sql="SELECT * FROM {$this->db_name}.DQS_Member AS member 
+        // WHERE mem_username ='".$mem_username."'";  //บรรทัดนี้เป็นการ  เลือก ว่าจะต้องการติดต่อกับ product อะไร และโดยใช้ product_name เป็นตัวแปรเงื่อนไขในการเลือกข้อมูลที่ product_name ทึ่ต้องการทราบ
+        // $query = mysql_query($sql); //การ เก็บค่า โดยใช้ mysql_query ครับ  เพื่อทำการ query คำสั่งที่ เก็บ อยู่ใน $sql
+        // if(mysql_num_rows($query) != 0){ // ใช้ if ตั้งเงื่อนไขตรวจสอบมีชื่อสินค้าซ้ำหรือไม่ โดยนับจำนวนแถวของข้อมูลชื่อสินค้า mysql_num_rows(ตัวแปรที่แทนค่าการจัดการฐานข้อมูล) นับจำนวนแถวของ Result ที่ได้จากการ Query
+        // //!= 0 คือ จำนวนแถวของ Result ที่ได้ และไม่มีค่าเท่ากับ 0 หรือว่างเปล่าครับ
+        // echo "<script>alert ('ข้อมูลซ้ำค่ะอีควัย');history.back();</script>"; // ใส่ alert เลยครับ //ชื่อสินค้าซ้ำ กรุณาตรวจสอบใหม่
+        // exit(); //จบกระบวนการทำงาน
+        // }else{ //ถ้าไม่มีชื่อสินค้าซ้ำ ก็ออกไปทำกระบวนการ insert
+        //     this->load->(member/v_member_register);
+    }
+    public function get_by_pro_id()
+    {
+        $sql = "SELECT * FROM {$this->db_name}.DQS_Member WHERE mem_pro_id ='$mem_pro_id'";
+        $query = $this->db->query($sql);
+        return $query;
+
+    }
+    public function get_by_dep_id()
+    {
+        $sql = "SELECT * FROM {$this->db_name}.DQS_Member WHERE mem_dep_id ='$mem_dep_id'";
+        $query = $this->db->query($sql);
+        return $query;
+
+    }
+    public function get_by_dep_id_and_pro_id($mem_dep_id, $mem_pro_id)
+    {
+        $sql = "SELECT * 
+            FROM {$this->db_name}.DQS_Member
+            WHERE mem_dep_id = '$mem_dep_id'AND mem_pro_id = '$mem_pro_id'";
+        $query = $this->db->query($sql);
+        return $query;
+    }//รับค่าผ่านตัวแปร mem_dep_id และ mem_pro_id.
+
 }

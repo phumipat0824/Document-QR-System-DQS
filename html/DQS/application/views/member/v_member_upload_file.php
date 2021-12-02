@@ -7,7 +7,7 @@
          <h1 style="color:#100575; font-family:TH sarabun new; font-size: 80px;">สร้างคิวอาร์โค้ด</h1>
          <h2 style="font-family:TH sarabun new; ">เริ่มสร้าง QR Code กันเลย </h2>
          <div class="col-md-5">
-             <div class="card card-nav-tabs card-plain" style="color: #E0FFFF; width: 100%;">
+             <div class="card card-nav-tabs card-plain" style=" radius: 100px; color: #E0FFFF; width: 100%;">
                  <ul class="nav nav-tabs">
                      <li class="nav-item">
                          <div class="card" style="margin: 0px; color: #E0FFFF">
@@ -164,5 +164,18 @@ select {
 
 body {
     background-color: #EFF3F7;
+
 }
+
+/* .card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+  border-radius: 5px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+} */
+
  </style>
