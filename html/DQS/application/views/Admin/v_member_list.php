@@ -1,6 +1,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'assets/plugin' ?>/DataTables/datatables.css" />
 <script type="text/javascript" src="<?php echo base_url() . 'assets/plugin' ?>/DataTables/datatables.js"></script>
-<link href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/css/CSS_table_list.css" rel="stylesheet" />
+<link href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/css/CSS_table_list.css"
+    rel="stylesheet" />
 
 <div class="main-panel">
     <div class="container">
@@ -74,30 +75,32 @@
                                     </td>
                                     <td>
 
-                                        <a href="<?php echo site_url() ?>/Admin/Admin_home/show_member_list">
-                                            <i type=" submit" class="fas fa-trash"></i>
+                                        <!-- <a href="<?php echo site_url() ?>/Admin/Admin_home/delete_admin">-->
+                                        <!-- <i type=" submit" class="fas fa-trash"></i> -->
 
-
-
-                                            <!-- Delete modal -->
-                                            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                        <button type="button" class="btn bg-gradient-primary deleteModal"
+                                            data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                            data-id='<?php echo $arr_member[$i]->mem_id; ?>'> <i
+                                                class="fas fa-trash"></i>
+                                        </button>
+                                        <!-- Delete modal -->
+                                        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
-                                                    <form id="add-form" method="POST"
-                                                        action="<?php echo site_url() ?>/Admin/Admin_home/delete_admin">
+                                                    <form id="delete-form" method="POST" action="">
+
                                                         <div class="modal-body">
-                                                            <input type="hidden" name="mem_id"
-                                                                value='<?php echo $arr_member[$i]->mem_id; ?>'>
+                                                            <input type="hidden" name="mem_id" id="mem_id" value="">
 
                                                             <h5 class="modal-title font-weight-normal"
                                                                 id="exampleModalLabel">
                                                                 ยืนยันการลบบัญชีผู้ใช้</h5>
                                                             <br>
-                                                            <?php echo $arr_member[$i]->mem_id; ?>
-                                                            <?php echo $i; ?>
-                                                            <center><button type="submit"
-                                                                    class="btn bg-gradient-primary">ยืนยัน</button>
+                                                            <!-- <?php echo $arr_member[$i]->mem_id; ?> -->
+                                                            <!-- <?php echo $i; ?> -->
+                                                            <center><input type="submit" class="btn bg-gradient-primary"
+                                                                    value="ยืนยัน">
                                                                 <button type="button" class="btn bg-gradient-secondary"
                                                                     data-bs-dismiss="modal">ยกเลิก</button>
                                                             </center>
@@ -106,11 +109,14 @@
 
                                                 </div>
                                             </div>
-                                        </div> -->
+                                        </div>
+
                                     </td>
 
                                 </tr>
                                 <?php } ?>
+
+                                
                             </table>
 
                         </div>
@@ -119,7 +125,7 @@
         </div>
     </div>
 </div>
-<script>
+<!-- <script>
 function delete_admin(element, mem_id) {
 
     $.ajax({
@@ -135,4 +141,32 @@ function delete_admin(element, mem_id) {
         }
     })
 }
+</script> -->
+
+<script type="text/javascript">
+$(document).on("click", ".deleteModal", function() {
+    var id = $(this).attr('data-id');
+    $("#mem_id").val(id);
+});
+</script>
+
+
+
+<script type="text/javascript">
+$('#delete-form').submit(function() {
+    $.ajax({
+        type: 'post',
+        url: "<?php echo site_url().'/Admin/Admin_home/delete_admin'?>",
+        data: $("#delete-form").serialize(),
+        dataType: 'json',
+        success: function(data) {
+            // console.log("succ");
+            alert('มีข้อมูลนี้ในระบบอยู่แล้วหรือไม่ได้กรอกข้อมูล กรุณากรอกใหม่');
+        },
+        error: function(error) {
+            // console.log("error");
+            location.reload();
+        }
+    });
+});
 </script>

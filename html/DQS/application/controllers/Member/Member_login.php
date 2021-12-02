@@ -34,6 +34,7 @@ class Member_login extends DQS_controller
     * @output view
     * @author Ashirawat, Krsiada
     * @Create Date 2564-08-05
+    * @update Date 2564-10-29
     */
     public function login()
     {
@@ -56,6 +57,8 @@ class Member_login extends DQS_controller
 
             // set id and name for user
             $this->session->set_userdata('mem_username', $mem_username);
+            $this->session->set_userdata('mem_password', md5($mem_password));
+            $this->session->set_userdata('mem_id', $obj_mem->mem_id);
             if ($obj_mem->mem_role == 0) {
                 // session_unset();
                 // session_destroy();

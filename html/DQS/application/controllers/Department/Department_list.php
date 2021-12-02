@@ -1,5 +1,10 @@
 <?php
-
+/*
+* Department
+* Department Management
+* @author Kiattisak
+* @Create Date 2564-08-05
+*/
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 require dirname(__FILE__).'/../DQS_controller.php';

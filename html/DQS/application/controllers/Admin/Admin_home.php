@@ -40,10 +40,18 @@ class Admin_home extends DQS_controller
 
     public function delete_admin(){
         $this->load->model('M_DQS_member', 'MDM');
-        $this->MDM->mem_id = $this->input->post('mem_id');
-		$this->MDM->delete_member();
-        redirect('/Admin/Admin_home/show_member_list');
+        $this->MDM->mem_id=$this->input->post('mem_id');
+        $this->MDM->delete_member();
+
+        // redirect('/Admin/Admin_home/show_member_list');
         
+    }
+
+    public function get_admin_list_ajax()
+    {
+        $this->load->model('M_DQS_member', 'MDM');
+        $data['json_member'] = $this->MDM->get_member_all()->result();
+        echo json_encode($data);
     }
 
 }

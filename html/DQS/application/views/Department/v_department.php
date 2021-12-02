@@ -41,7 +41,7 @@
 </div>
 
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 
 <script>
 $(document).ready(function(){
@@ -52,7 +52,6 @@ function get_dept(){
     $.ajax({
       url: "<?php echo site_url() ?>/Department/Department_list/get_dept_list_ajax",
       type: 'POST',
-      data:{},
       dataType: 'JSON',
       success:function(data){
           // console.log(data);

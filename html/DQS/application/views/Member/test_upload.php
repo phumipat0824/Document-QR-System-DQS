@@ -39,3 +39,12 @@
         </div>
     </form>
 </div>
+<div class="content">
+    <div class="row" style="padding: 100px 10px 10px 20%;">
+        <div class="col-md-10">
+            <div class="card" style="border-radius: 10px;">
+                <div class="text-center mb-4">
+                    <div class="card-header card-header-" style="border-radius: 10px; background-color: #191970;">
+                        <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 35px; margin-right: 1000px; font-weight:bold;">คิวอาร์โค้ด</h>
+                    </div>
+                </div>
