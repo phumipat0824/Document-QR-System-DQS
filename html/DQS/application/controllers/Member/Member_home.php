@@ -34,8 +34,7 @@ class Member_home extends DQS_controller
 			//ตั้งชื่อไฟล์ใหม่โดยเอาเวลาไว้หน้าชื่อไฟล์เดิม
 				$newname = $this->input->post('fol_name');
 				$newpath ='./assets/folder/'.$newname;
-                
-        }
+        	}
 		
 		$this->folder->fol_location = $newpath;
 		$this->folder->insert();
@@ -45,15 +44,16 @@ class Member_home extends DQS_controller
 
 	 function update_folder() 
 	 {
-		$this->load->model('Da_crs_member','dfol');
+		$this->load->model('M_DQS_folder','Mfol');
 
-        $this->dfol->fol_id = $this->input->post('fol_id');
-        $this->dfol->fol_name = $this->input->post('fol_name');
-
-        $this->dfol->update();
-
-        redirect('Member/Member_home/show_member_home');//เรียกกลับมาหน้านี้อีกครั้งอยู่หน้าเดียวกันใส่ชื่อได้เลย
-	
+		$this->Mfol->fol_name = $this->input->post('fol_name');
+        $this->Mfol->fol_id = $this->input->post('fol_id');
+		if ($this->Mfol->check_exist_name($this->Mfol->fol_name) == 0 && trim($this->Mfol->fol_name) != "") {
+			$this->Mfol->update();
+			redirect('Member/Member_home/show_member_home');//เรียกกลับมาหน้านี้อีกครั้งอยู่หน้าเดียวกันใส่ชื่อได้เลย
+		}
+    
+        
 	 }
 
 	 function delete_folder($fol_id,$fol_name) 

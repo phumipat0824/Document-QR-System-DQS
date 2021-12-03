@@ -39,9 +39,6 @@
               <a href="<?php echo site_url() . '/Member/Member_home/delete_folder/';?><?php echo $arr_fol[$i]->fol_id;?>/<?php echo $arr_fol[$i]->fol_name;?>">ลบ</a>
             </div>
             </div>
-            
-                
-              
             </div> 
   
    <?php }  ?>
@@ -103,10 +100,6 @@
     $("#fol_id").val(id);
   });
 </script>
-
-
-
-
 
 <script>
 var cm = document.querySelector(".custom-cm");
