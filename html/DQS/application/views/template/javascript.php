@@ -19,4 +19,5 @@
 <script src="sweetalert2.all.min.js"></script>
 <script src="sweetalert2.min.js"></script>
 <script src="<?php echo base_url() . 'assets/template/material-dashboard-master/html2canvas.js' ?>"></script>
+<script src="<?php echo base_url() . 'assets/template/material-dashboard-master/easy.qrcode.js' ?>"></script>
 <link rel="stylesheet" href="sweetalert2.min.css">   

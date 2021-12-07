@@ -1,11 +1,9 @@
-<script src="<?php echo base_url() . 'node_modules/easyqrcodejs/src' ?>/easy.qrcode.js"></script>
-<!-- <script src="<?php echo base_url() . 'node_modules/html2canvas/dist' ?>/html2canvas"></script> -->
-<div class="content" id="print">
+<div class="content">
     <div class="row" style="padding: 100px 10px 10px 20%;">
-        <h1 style="color:#100575; font-family:TH sarabun new; font-size: 80px;">สร้างคิวอาร์โค้ด</h1>
-        <h2 style="font-family:TH sarabun new; ">เริ่มสร้าง QR Code กันเลย </h2>
+        <a style="color:#100575; font-size: 50px;">สร้างคิวอาร์โค้ด</a>
+        <a style="font-size: 20px;">เริ่มสร้าง QR Code กันเลย </a>
         <div class="col-md-5">
-            <div class="card card-nav-tabs card-plain" style="color: #E0FFFF">
+            <div class="card card-nav-tabs card-plain">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a class="nav-link active" href="#">เว็บไซต์</a>
@@ -17,22 +15,23 @@
                         <a class="nav-link" href="#">รูปภาพ</a>
                     </li>
                 </ul>
-                <div class="card-body" style="margin: auto;margin-top: 50px;">
+                <div class="card-body" style="margin-left:65px;margin-top: 30px;">
                     <div class="form-row">
                         <div class="form-group col-md-5">
-                            <label style="margin-top: 10px;">เว็บไซต์</label>
-                            <input id="text" type="text" style="width: 230px;" value=""><br />
+                            <a style="margin-top: 10px;">เว็บไซต์</a>
+                            <label style = "color: #FF0000;">*</label>
+                            <input id="text" type="text" style="width: 350px;" value=""><br />
 
                         </div>
                         <br><br>
                     </div>
-                    <label style="margin-top: 10px;">โลโก้:</label><br>
+                    <a style="margin-top: 10px;">โลโก้:</a><br>
                     <div class="parent-div">
-                    <button class="btn-upload">สวัสดีจ้า</button> 
+                    <button class="btn-upload"><i class="fas fa-upload"></i></button> 
                     <input id="logo_img" type="file" name="logo" accept="image/png, image/gif, image/jpeg"><br><br>
                     </div>
                     <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name')?>" hidden>
-                    <button onclick="make()" class="btn btn-dark_blue" style="margin-right:80px;margin-bottom: 50px;margin-top:100px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button>
+                    <button onclick="make()" class="btn btn-dark_blue" style="margin-left:55px;margin-bottom: 50px;margin-top:35px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button>
                 </div>
             </div>
         </div>
@@ -49,15 +48,12 @@
                     </div> 
                     <image id="theimage"></image> 
                     <br>
-                    <button id="download" onclick="doCapture();" class="btn btn-warning" style="font-family:TH sarabun new; font-size: 20px; width: 240; ">ดาวน์โหลด</button>               
+                    <button id="download" onclick="doCapture();" class="btn btn-warning" style="margin-top:40px;font-family:TH sarabun new; font-size: 20px; width: 240; ">ดาวน์โหลด</button>               
                     </div>
             </div>
         </div>
-
-        <div class="block"></div>
     </div>
 </div>
-<!-- </form> -->
 
 <script type="text/javascript">
 async function uploadFile() {
@@ -92,13 +88,13 @@ function make() {
             //logoBackgroundColor: '#ffffff',
             logoBackgroundTransparent: true,
 
-            title: 'QR Title', // content 
-            titleFont: "normal normal bold 18px Arial", //font. default is "bold 16px Arial"
-            titleColor: "#004284", // color. default is "#000"
-            titleBackgroundColor: "#fff", // background color. default is "#fff"
-            titleHeight: 70, // height, including subTitle. default is 0
-            titleTop: 25, // draws y coordinates. default is 30
-            drawer: 'canvas',// Which drawing method to use. 'canvas', 'svg'. default is 'canvas'
+            // title: 'QR Title', // content 
+            // titleFont: "normal normal bold 18px Arial", //font. default is "bold 16px Arial"
+            // titleColor: "#004284", // color. default is "#000"
+            // titleBackgroundColor: "#fff", // background color. default is "#fff"
+            // titleHeight: 70, // height, including subTitle. default is 0
+            // titleTop: 25, // draws y coordinates. default is 30
+            // drawer: 'canvas',// Which drawing method to use. 'canvas', 'svg'. default is 'canvas'
         });
 
     }
@@ -176,26 +172,23 @@ select {
   font-size: 90px;
 }
 .btn-upload {
-  width: 100%;
+    width: 350px;
+    height : 47px;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    background-color: #fff;
 }
 #img {
     -webkit-filter: blur(2px);
     /* Safari 6.0 - 9.0 */
     filter: blur(2px);
 }
-
-.block {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-flex: 0 0 48px;
-    -webkit-flex: 0 0 48px;
-    flex: 0 0 48px;
+label{
+  color: #000;
 }
+
 </style>
