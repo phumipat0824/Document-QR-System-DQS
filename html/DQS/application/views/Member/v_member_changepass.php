@@ -1,8 +1,3 @@
-<?php
-$old_password = $this->session->mem_password;
-?>
-
-
 <div class="content">
 <div class="container-fluid" style="padding-top: 100px ;margin: auto;">
     <div class="row">
@@ -21,19 +16,27 @@ $old_password = $this->session->mem_password;
                 
                 <label style = "color: #000000;  font-size: 15px;" for="">รหัสผ่านปัจจุบัน</label>
                 <label style = "color: #FF0000;">*</label>
-                <input type="password" class="form-control"  id="mem_password" name="mem_password" placeholder="รหัสผ่านปัจจุบัน" > <br>
-                <span id="indicator">
+                
+                
+                <div class="input-group input-group-outline">
+                <input type="password" class="form-control"  id="mem_password" name="mem_password" placeholder="รหัสผ่านปัจจุบัน">
+                <i style="display:none" id="myDIV" class="fas fa-check icon"></i>
+                </div>
+
+                <br>
                 <label style = "color: #000000;  font-size: 15px;" for="">รหัสผ่านใหม่</label>
                 <label style = "color: #FF0000;">*</label>
                 <input type="password" class="form-control"  id="new_password" name="new_password" placeholder="รหัสผ่านใหม่"><br>
                 <label style = "color: #000000; font-size: 15px;" for="">ยืนยันรหัสผ่านใหม่</label>
                 <label style = "color: #FF0000;">*</label>
                 <input type="password" class="form-control" id="mem_confirm" name="mem_confirm" placeholder="ยืนยันรหัสผ่านใหม่"><br>
-                
+                <div id="submit">
+                <span id="message">
+                </div>
                 </div>
             </div>
                 <center>
-                <input type="button" id="btn-ok" style="background-color: #100575; border-radius: 30px; padding-left:50px; padding-right:50px;" name="reset_password" class="btn btn-primary" value='บันทึก'>
+                <input type="button" id="btn-ok" style="background-color: #100575; border-radius: 30px; padding-left:50px; padding-right:50px;" name="reset_password" class="btn btn-primary" onclick="make()" value='บันทึก'>
                 </center>
             </form>
             </div>
@@ -47,88 +50,65 @@ $old_password = $this->session->mem_password;
     body {
         background-color: #eff3f7;
     }
-   
+    .input-container {
+        position:relative;
+        
+  /* display: -ms-flexbox;
+  display: flex; */
+  /* width: 100%;
+  margin-bottom: 15px; */
+}
+.icon {
+  padding: 10px;
+  color: black;
+  right:5px;
+  min-width: 50px;
+  text-align: rtl;
+  position:absolute;
+  direction: rtl;
+}
 </style>
-<script>
-     $(document).ready(function() {
-    $('#mem_password').keyup(function(){
-    var inputpass    =   $('#mem_password').val();
-    var oldpass   =   "111";
-    if(inputpass!=oldpass){
-        $('#indicator').attr({class:'red'});
-        $('#regbtn').attr({disabled:true});
-    }
-    else{
-        $('#indicator').attr({class:'green'});
-        $('#regbtn').attr({disabled:false});
-    }
-});
+
+<script type="text/javascript">
+
+     $('#mem_password').on('change', function () {
+    if ($('#mem_password').val() == '1') {
+            var x = document.getElementById("myDIV");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    $('#message').html('รหัสผ่านปัจจุบันถูกต้อง กรอกรหัสผ่านใหม่และยืนยันรหัสผ่าน').css('color', 'green');
     
-    // var typingTimer;                //timer identifier
-    // var doneTypingInterval = 5000;  //time in ms, 5 second for example
-    // var $input_old_password = $('#mem_password');
-
-    // //on keyup, start the countdown
-    // $input_old_password.on('keyup', function () {
-    // clearTimeout(typingTimer);
-    // typingTimer = setTimeout(doneTyping, doneTypingInterval);
-    // });
-
-    // //on keydown, clear the countdown 
-    // $input_old_password.on('keydown', function () {
-    // clearTimeout(typingTimer);
-    // });
-
-    // //user is "finished typing," do something
-    // function doneTyping () {
-    //     if ($input_old_password == "") {
-    //     $(".error-msg").html("กรุณากรอกรหัสผ่านปัจจุบัน.").show();
-    //     return false;
-    //     }
-    //     validate();
-    // }
-    // function validate() {
-    // var password1 = $input_old_password;
-    // var password2 = $old_password;
-    // if (password1 != password2) {
-    //     $(".error-msg").html("รหัสผ่านปัจจุบันไม่ถูกต้อง กรุณากรอกอีกครั้ง").show();
-    // }
-    // }
+  } else 
+    $('#message').html('Not Matching').css('color', 'red');
+});
+$('#new_password').on('change', function () {
+    document.getElementById("submit").disabled = false;
+    if ($('#new_password').val() == '') {
+    $('#message').html('');
+    
+  }
+}); 
+$('#mem_confirm').on('keyup', function () {
+    document.getElementById("submit").disabled = false;
+  if ($('#new_password').val() == $('#mem_confirm').val()) {
+    $('#message').html('รหัสตรงกัน').css('color', 'green');
+    
+  } else 
+  
+    $('#message').html('รหัสไม่ตรงกัน').css('color', 'red');
+});
 
 
-
-    /     // Get the input box
-    // let input = document.getElementById('mem_password');
-
-    // // Init a timeout variable to be used below
-    // let timeout = null;
-
-    // // Listen for keystroke events
-    // input.addEventListener('keyup', function (e) {
-    //     // Clear the timeout if it has already been set.
-    //     // This will prevent the previous task from executing
-    //     // if it has been less than <MILLISECONDS>
-    //     clearTimeout(timeout);
-
-    //     // Make a new timeout set to go off in 1000ms (1 second)
-    //     timeout = setTimeout(function () {
-    //        document.getElementById(".error-msg").innerHTML=input.value;
-    //     }, 1000);
-    // });
-   
-    $('form #btn-ok').click(function(e) {
+    function make() {
         Swal.fire({
             icon: 'success',
             title: 'เปลี่ยนแปลงรหัสผ่านสำเร็จ',
             showConfirmButton: false,
             timer: 1500
             })
-    });
- 
-
-
-
-    });
-
+}
     
 </script>

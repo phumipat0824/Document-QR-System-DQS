@@ -1,5 +1,6 @@
 <script src="<?php echo base_url() . 'node_modules/easyqrcodejs/src' ?>/easy.qrcode.js"></script>
-<div class="content">
+<!-- <script src="<?php echo base_url() . 'node_modules/html2canvas/dist' ?>/html2canvas"></script> -->
+<div class="content" id="print">
     <div class="row" style="padding: 100px 10px 10px 20%;">
         <h1 style="color:#100575; font-family:TH sarabun new; font-size: 80px;">สร้างคิวอาร์โค้ด</h1>
         <h2 style="font-family:TH sarabun new; ">เริ่มสร้าง QR Code กันเลย </h2>
@@ -26,11 +27,12 @@
                         <br><br>
                     </div>
                     <label style="margin-top: 10px;">โลโก้:</label><br>
-                    <input id="logo" type="file" name="logo" onchange="uploadFile()" accept="image/png, image/gif, image/jpeg"><br><br>
+                    <div class="parent-div">
+                    <button class="btn-upload">สวัสดีจ้า</button> 
+                    <input id="logo_img" type="file" name="logo" accept="image/png, image/gif, image/jpeg"><br><br>
+                    </div>
                     <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name')?>" hidden>
-                    <button onclick="make()" class="btn btn-dark_blue" style="margin-left: 10px;margin-bottom: 50px;margin-top:50px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button>
-
-
+                    <button onclick="make()" class="btn btn-dark_blue" style="margin-right:80px;margin-bottom: 50px;margin-top:100px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button>
                 </div>
             </div>
         </div>
@@ -38,13 +40,17 @@
         <div class="col-md-5">
             <div class="card" style="padding: 10%" height="500">
                 <div class="card-body" style="margin: auto;">
-                    <div id="qrcode">
-                        <img id="img" src="<?php echo base_url(). '/assets/image/QR_home.PNG' ?>" height="256" width="256" style="margin: auto;">
-                    </div>
-                    <br>
 
-                    <a href="#" download><button class="btn btn-warning" style="font-family:TH sarabun new; font-size: 20px; width: 240; ">ดาวน์โหลด</button> </a>
-                </div>
+                <!-- <canvas id="cnv1" width="252" height="322"></canvas> -->
+                <div id="capture">
+                    <div id="qrcode">              
+                        <img id="img" src="<?php echo base_url(). '/assets/image/QR_home.PNG' ?>" height="256" width="256" style="margin: auto;">                       
+                    </div> 
+                    </div> 
+                    <image id="theimage"></image> 
+                    <br>
+                    <button id="download" onclick="doCapture();" class="btn btn-warning" style="font-family:TH sarabun new; font-size: 20px; width: 240; ">ดาวน์โหลด</button>               
+                    </div>
             </div>
         </div>
 
@@ -64,10 +70,15 @@ async function uploadFile() {
     // alert('The file has been uploaded successfully.');
 }
 function make() {
+  const [file] = logo_img.files
+  if (file) {
+    var logoin = URL.createObjectURL(file);
+  }
     var text = document.getElementById('text');
     var qrcode = document.getElementById('qrcode');
     var logo = "<?php echo base_url(). '/assets/logo/' ?>+<?php echo $this->session->userdata('logo_name')?>";
-    // var logoin = "<?php echo base_url(). '/assets/logo/' ?><?php echo $this->session->userdata('logo_name')?>"
+     var logoin = URL.createObjectURL(file);
+
 
     if (text.value.trim() !== '') {
         qrcode.innerHTML = '';
@@ -75,7 +86,7 @@ function make() {
             text: text.value,
             width: 256,
             height: 256,
-            logo: "<?php echo base_url(). '/assets/logo/' ?><?php echo $this->session->userdata('logo_name')?>",
+            logo: logoin,
             logoWidth: 80,
             logoHeight: 80,
             //logoBackgroundColor: '#ffffff',
@@ -91,18 +102,46 @@ function make() {
         });
 
     }
+    //qrcode.resize(480, 480);
 }
 
-// var qrcode = new QRCode(document.getElementById("qrcode"), {
-//     text: "https://cssscript.com",
-//     logo: "<?php echo base_url(). '/assets/image/logo_dqs.png' ?>",
-//     logoWidth: undefined,
-//     logoHeight: undefined,
-//     logoBackgroundColor: '#ffffff',
-//     logoBackgroundTransparent: false
-// });
+document.getElementById("download").addEventListener("click", function() {
+    
+    html2canvas(document.querySelector('#capture')).then(function(canvas) {
+
+        saveAs(canvas.toDataURL(), 'file-name.png');
+    });
+});
+
+
+function saveAs(uri, filename) {
+
+    var link = document.createElement('a');
+
+    if (typeof link.download === 'string') {
+
+        link.href = uri;
+        link.download = filename;
+
+        //Firefox requires the link to be in the body
+        document.body.appendChild(link);
+
+        //simulate click
+        link.click();
+
+        //remove the link when done
+        document.body.removeChild(link);
+
+    } else {
+
+        window.open(uri);
+
+    }
+}
 </script>
 <style>
+  
+.show {display: block;}
 .nav-tabs .nav-item .nav-link,
 .nav-tabs .nav-item .nav-link:focus,
 .nav-tabs .nav-item .nav-link:hover {
@@ -122,6 +161,29 @@ select {
     box-sizing: border-box;
 }
 
+
+
+.parent-div {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+.parent-div input[type=file] {
+  left: 0;
+  top: 0;
+  opacity: 0;
+  position: absolute;
+  font-size: 90px;
+}
+.btn-upload {
+  width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
 #img {
     -webkit-filter: blur(2px);
     /* Safari 6.0 - 9.0 */

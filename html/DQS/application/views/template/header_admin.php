@@ -92,4 +92,4 @@
     </nav>
 </head>
 
-<body>
+<body style="background-color:#EFF3F7">
