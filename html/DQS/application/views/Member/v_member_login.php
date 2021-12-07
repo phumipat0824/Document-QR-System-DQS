@@ -19,7 +19,7 @@
     <div class="col-lg-4 col-md-4">
     </div>
     <div class="col-lg-4 col-md-4" style="padding-left: 100px ">
-        <div class="card"  style="border-radius: 10px;">
+        <div class="card" style="border-radius: 10px;">
             <div class="text-center mb-4">
                 <div class="card-header card-header-warning" style="border-radius: 10px;">
                     <h style="color:#000; font-family:TH Sarabun New; font-size: 28px">เข้าสู่ระบบ</h>
@@ -33,7 +33,7 @@
                                 </div>
                                 <!-- Insert username -->
 
-                                <input style="font-family:TH Sarabun New;" class="form-control" id="mem_username" name="mem_username" placeholder="ชื่อผู้ใช้/อีเมล" type="text" required>
+                                <input style="font-family:TH Sarabun New;" class="form-control" id="mem_username" name="mem_username" placeholder="ชื่อผู้ใช้/อีเมล" type="text" required oninvalid="this.setCustomValidity('กรุณากรอกชื่อผู้ใช้งานหรืออีเมล')" oninput="this.setCustomValidity('')">
                             </div>
                         </div>
                         <div class="form-group">
@@ -42,7 +42,7 @@
                                     <span class="input-group-text"></span>
                                 </div>
                                 <!-- Insert password -->
-                                <input style="font-family:TH Sarabun New;" class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" type="password" required>
+                                <input style="font-family:TH Sarabun New;" class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" type="password" required oninvalid="this.setCustomValidity('กรุณากรอกรหัสผ่าน')" oninput="this.setCustomValidity('')">
                             </div>
                         </div>
                         <center>
@@ -50,7 +50,7 @@
                             <p id="error" class="py-2 text-danger"> <?php echo $error; ?> </p>
                         </center>
                         <br>
-                        
+
                         <div class="text-center" style="margin-top: -20px">
                             <!-- Button login -->
                             <button type="submit" class="btn btn-primary my-4" id="btn_login" style="background-color: #100575 ; width:200px; font-family:TH Sarabun New; "> เข้าสู่ระบบ</button>

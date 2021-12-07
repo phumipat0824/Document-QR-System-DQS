@@ -28,20 +28,19 @@
             <!-- <div class="card card-frame" style=" height: 60px; width: 260px;"> -->
             <div class="dropdown">
 
-            <button   onmousedown="rightclickfolder()" class="dropbtn btn btn-secondary btn-lg" style=" height: 60px; width: 260px;"  >
+            <button   onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" style=" height: 60px; width: 260px;"  >
             <i class="material-icons"  style="margin-left: 1px;" >folder</i>
             <a style=" font-size: 26px; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
             </button>
-
-            <div id="folder" class="dropdown-content">
+            <div id="showmenu" style ="display:block"  >
+            <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
               <a href="#home">เปิด</a>
               <a href="#" class="editModal" data-toggle="modal" data-target="#editModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>" >แก้ไข</a>
+              <a href="#ย้าย">ย้าย</a>
               <a href="<?php echo site_url() . '/Member/Member_home/delete_folder/';?><?php echo $arr_fol[$i]->fol_id;?>/<?php echo $arr_fol[$i]->fol_name;?>">ลบ</a>
             </div>
             </div>
-            
-                
-              
+            </div>
             </div> 
   
    <?php }  ?>
@@ -104,10 +103,6 @@
   });
 </script>
 
-
-
-
-
 <script>
 var cm = document.querySelector(".custom-cm");
 
@@ -151,25 +146,33 @@ function rightclick() {
     }
   }
 }
-    //alert(rightclick); // true or false, you can trap right click here by if comparison
+    
 }
-function rightclickfolder() {
+function rightclickfolder(folder) {
     var rightclick;
     var e = window.event;
+    var getnamefolder = 'folder' + folder;
+    var x = document.getElementById("showmenu");
+        
      if (e.button == 2){
-    document.getElementById("folder").classList.toggle("show");
+    document.getElementById(getnamefolder).classList.toggle("show");
     if (!event.target.matches('.dropbtn')) {
     var dropdowns = document.getElementsByClassName("dropdown-content");
     var i;
     for (i = 0; i < dropdowns.length; i++) {
       var openDropdown = dropdowns[i];
+      if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
       if (openDropdown.classList.contains('show')) {
         openDropdown.classList.remove('show');
       }
     }
   }
 }
-    //alert(rightclick); // true or false, you can trap right click here by if comparison
+    
 }
 
 
