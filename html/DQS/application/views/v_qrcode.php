@@ -1,41 +1,38 @@
 <div class="content">
     <div class="row" style="padding: 100px 10px 10px 20%;">
-        <a style="color:#100575; font-size: 50px;">สร้างคิวอาร์โค้ด</a>
-        <a style="font-size: 20px;">เริ่มสร้าง QR Code กันเลย </a>
-        <div class="col-md-5">
-            <div class="card card-nav-tabs card-plain">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">เว็บไซต์</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">PDF</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">รูปภาพ</a>
-                    </li>
-                </ul>
+        <a style="color:#100575; font-size: 60px;">สร้างคิวอาร์โค้ด</a>
+        <a style="font-size: 30px;">เริ่มสร้าง QR Code กันเลย </a>
+            <div class="col-md-5">
+                <div class="card card-nav-tabs card-plain">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">เว็บไซต์</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url() . 'Member/Member_login/show_member_login' ?>">PDF</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url() . 'Member/Member_login/show_member_login' ?>">รูปภาพ</a>
+                        </li>
+                    </ul>
                 <div class="card-body" style="margin-left:65px;margin-top: 30px;">
                     <div class="form-row">
-                        <div class="form-group col-md-5">
+                        <div class="form-group col-md-5" style="margin-bottom: 30px">
                             <a style="margin-top: 10px;">เว็บไซต์</a>
                             <label style = "color: #FF0000;">*</label>
-                            <input id="text" type="text" style="width: 350px;" value=""><br />
-
+                            <input id="text" type="text" style="width: 350px;"placeholder="http://"><br>
                         </div>
                         <br><br>
                     </div>
-                    <a style="margin-top: 10px;">โลโก้:</a><br>
-                    <div class="parent-div">
-                    <button class="btn-upload"><i class="fas fa-upload"></i></button> 
-                    <input id="logo_img" type="file" name="logo" accept="image/png, image/gif, image/jpeg"><br><br>
-                    </div>
-                    <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name')?>" hidden>
+                            <a style="margin-top: 10px;">โลโก้:</a><br>
+                            <div class="parent-div">
+                                <button class="btn-upload" style="color:#cfcfcf;"><i class="fas fa-upload"></i> เลือกโลโก้คิวอาร์โค้ด</button> 
+                                <input id="logo_img" type="file" name="logo" accept="image/png, image/gif, image/jpeg"><br><br>
+                        </div>
                     <button onclick="make()" class="btn btn-dark_blue" style="margin-left:55px;margin-bottom: 50px;margin-top:35px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button>
                 </div>
             </div>
         </div>
-
         <div class="col-md-5">
             <div class="card" style="padding: 10%" height="500">
                 <div class="card-body" style="margin: auto;">
@@ -69,11 +66,13 @@ function make() {
   const [file] = logo_img.files
   if (file) {
     var logoin = URL.createObjectURL(file);
-  }
+  }else{
+      var logoin = '';
+} 
     var text = document.getElementById('text');
     var qrcode = document.getElementById('qrcode');
     var logo = "<?php echo base_url(). '/assets/logo/' ?>+<?php echo $this->session->userdata('logo_name')?>";
-     var logoin = URL.createObjectURL(file);
+    
 
 
     if (text.value.trim() !== '') {
@@ -105,7 +104,7 @@ document.getElementById("download").addEventListener("click", function() {
     
     html2canvas(document.querySelector('#capture')).then(function(canvas) {
 
-        saveAs(canvas.toDataURL(), 'file-name.png');
+        saveAs(canvas.toDataURL(), 'DQS_QR.png');
     });
 });
 
@@ -143,7 +142,7 @@ function saveAs(uri, filename) {
 .nav-tabs .nav-item .nav-link:hover {
     border: 0 !important;
     color: #000 !important;
-    font-weight: 500;
+    font-size: 16px
 }
 
 input[type=text],
@@ -187,8 +186,8 @@ select {
     /* Safari 6.0 - 9.0 */
     filter: blur(2px);
 }
-label{
-  color: #000;
+a{
+    font-size: 16px
 }
 
 </style>
