@@ -94,7 +94,7 @@ function create_Table(arr_dept){
     html_code += '</label>';
     html_code += '</td>';
 // สถานะของหน่วยงาน
-    html_code += '<td style="text-align: center;">' +  '<button type="button" class="btn btn-orange editModal" data-toggle="modal" data-target="#editModal" data-id= '+row_dept['dep_id']+' >'+'<i class="material-icons">edit</i>'+'&nbsp;</button>' + '</td>';
+    html_code += '<td style="text-align: center;">' +  '<button type="button" class="btn btn-orange editModal" data-toggle="modal" data-target="#editModal" data-id= '+row_dept['dep_id']+' data-name= '+row_dept['dep_name']+' >'+'<i class="material-icons">edit</i>'+'&nbsp;</button>' + '</td>';
     // button edit data
     html_code += '</td>';
 		html_code += '</tr>';
@@ -213,7 +213,7 @@ function make_dataTable_byId(id_name) {
       <!-- action="<?php echo site_url() ?>/Department/Department_list/add_department" -->
       <form id="edit-form" method="POST" onsubmit="return false">
         <div class="modal-body">
-            <center><input type="text" class="col-md-10" placeholder="กรอกชื่อหน่วยงาน" name="dep_name" required ></center>
+            <center><input type="text" class="col-md-10" placeholder="กรอกชื่อหน่วยงาน" name="dep_name" id="dep_name" value="" required ></center>
             <input type="hidden" name="dep_id" id="dep_id" value="">
         </div>
         <div class="modal-footer">
@@ -229,6 +229,8 @@ function make_dataTable_byId(id_name) {
   $(document).on("click", ".editModal", function () {
     var id = $(this).attr('data-id');
     $("#dep_id").val(id);
+    var name = $(this).attr('data-name');
+    $("#dep_name").val(name);
   });
 </script>
 
