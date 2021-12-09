@@ -16,11 +16,13 @@
                         </li>
                     </ul>
                 <div class="card-body" style="margin-left:65px;margin-top: 30px;">
+                    <form action='' method="post">
                     <div class="form-row">
                         <div class="form-group col-md-5" style="margin-bottom: 30px">
+
                             <a style="margin-top: 10px;">เว็บไซต์</a>
                             <label style = "color: #FF0000;">*</label>
-                            <input id="text" type="text" style="width: 350px;"placeholder="http://"><br>
+                            <input id="text" type="text" style="width: 350px;"placeholder="http://"oninvalid="InvalidMsg(this);"oninput="InvalidMsg(this);"required="required"><br>
                         </div>
                         <br><br>
                     </div>
@@ -29,7 +31,8 @@
                                 <button class="btn-upload" style="color:#cfcfcf;"><i class="fas fa-upload"></i> เลือกโลโก้คิวอาร์โค้ด</button> 
                                 <input id="logo_img" type="file" name="logo" accept="image/png, image/gif, image/jpeg"><br><br>
                         </div>
-                    <button onclick="make()" class="btn btn-dark_blue" style="margin-left:55px;margin-bottom: 50px;margin-top:35px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button>
+                    <button type="submit"  onclick="make()" class="btn btn-dark_blue" style="margin-left:55px;margin-bottom: 50px;margin-top:35px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -45,7 +48,7 @@
                     </div> 
                     <image id="theimage"></image> 
                     <br>
-                    <button id="download" onclick="doCapture();" class="btn btn-warning" style="margin-top:40px;font-family:TH sarabun new; font-size: 20px; width: 240; ">ดาวน์โหลด</button>               
+                    <button id="download" onclick="doCapture();" class="btn btn-warning" style="margin-left:10px;margin-top:40px;font-family:TH sarabun new; font-size: 20px; width: 240; ">ดาวน์โหลด</button>               
                     </div>
             </div>
         </div>
@@ -132,6 +135,19 @@ function saveAs(uri, filename) {
         window.open(uri);
 
     }
+}
+function InvalidMsg(textbox) {
+    
+    if (textbox.value == '') {
+        textbox.setCustomValidity('กรุณากรอกลิงก์เว็บไซต์');
+    }
+    // else if(textbox.validity.typeMismatch){
+    //     textbox.setCustomValidity('please enter a valid email address');
+    // }
+    else {
+        textbox.setCustomValidity('');
+    }
+    return true;
 }
 </script>
 <style>
