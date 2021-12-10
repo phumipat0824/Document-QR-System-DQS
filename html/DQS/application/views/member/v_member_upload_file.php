@@ -11,14 +11,14 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <div class="card" style="margin: 0px; color: #E0FFFF">
-                            <a class="nav-link active" href="#">PDF</a>
+                            <a class="nav-link active" href="<?php echo site_url().'/Member/Member_upload_file/show_member_upload_file'?>">PDF</a>
                         </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">เว็บไซต์</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">รูปภาพ</a>
+                        <a class="nav-link active" href="<?php echo site_url().'/Member/Member_upload_photo/show_member_upload_photo'?>">รูปภาพ</a>
                     </li>
                 </ul>
 
@@ -178,5 +178,4 @@ body {
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 } */
-
- </style>
+</style>
