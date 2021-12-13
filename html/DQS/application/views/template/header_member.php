@@ -72,9 +72,16 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <img src="<?php echo base_url() . '/assets/image/logo_dqs.PNG' ?>" height="50" width="50">
             <a class="navbar-brand" href="<?php echo base_url() . 'Qrcode/Qrcode_generator/show_qrcode' ?>"><b>Document QR</b></a>
+            <div class="search-container" style="margin-left: 20%;">
+                    <form action="">
+                        <i class="fa fa-search"></i>
+                        <input type="text" style="width: 400px;" placeholder="Search.." name="search">
+                    </form>
+                </div>
             <form class="form-inline ml-auto">
 
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <span class="material-icons" style="margin-right: -15;">account_circle</span>
                     <li class="nav-item">
                         <a class="nav-link" style="font-size:18px"><?php echo $this->session->mem_username?></a>
                     </li>
