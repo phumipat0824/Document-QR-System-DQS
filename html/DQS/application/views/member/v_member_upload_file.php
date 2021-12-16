@@ -66,7 +66,7 @@
                     </div>
                     <br>
 
-                    <a href="#" download><button class="btn btn-warning" style="font-family:TH sarabun new; font-size: 20px; width: 240; ">ดาวน์โหลด</button> </a>
+                    <button id="download" onclick="doCapture();" class="btn btn-warning" style="margin-left:10px;margin-top:40px;font-family:TH sarabun new; font-size: 20px; width: 240; ">ดาวน์โหลด</button>
                 </div>
             </div>
         </div>
@@ -84,46 +84,106 @@ async function uploadFile() {
         method: "POST",
         body: formData
     });
-    //alert('The file has been uploaded successfully.');
+    // alert('The file has been uploaded successfully.');
 }
 
-
 function make() {
+    const [file] = logo_img.files
+    if (file) {
+        var logoin = URL.createObjectURL(file);
+    } else {
+        var logoin = '';
+    }
     var text = document.getElementById('text');
     var qrcode = document.getElementById('qrcode');
-    var logo = <?php echo base_url() . '/assets/logo/' ?><?php echo $this->session->userdata('logo_name') ?>;
-    // var logoin = "<?php echo base_url() . '/assets/logo/' ?><?php echo $this->session->userdata('logo_name') ?>"
+    var logo = "<?php echo base_url(). '/assets/logo/' ?>+<?php echo $this->session->userdata('logo_name')?>";
+
+
 
     if (text.value.trim() !== '') {
         qrcode.innerHTML = '';
         new QRCode(document.getElementById("qrcode"), {
             text: text.value,
-            logo: "<?php echo base_url() . '/assets/logo/' ?><?php echo $this->session->userdata('logo_name') ?>",
-            logoWidth: undefined,
-            logoHeight: undefined,
-            logoBackgroundColor: '#ffffff',
-            logoBackgroundTransparent: false
+            width: 256,
+            height: 256,
+            logo: logoin,
+            logoWidth: 80,
+            logoHeight: 80,
+            //logoBackgroundColor: '#ffffff',
+            logoBackgroundTransparent: true,
+
+            // title: 'QR Title', // content 
+            // titleFont: "normal normal bold 18px Arial", //font. default is "bold 16px Arial"
+            // titleColor: "#004284", // color. default is "#000"
+            // titleBackgroundColor: "#fff", // background color. default is "#fff"
+            // titleHeight: 70, // height, including subTitle. default is 0
+            // titleTop: 25, // draws y coordinates. default is 30
+            // drawer: 'canvas',// Which drawing method to use. 'canvas', 'svg'. default is 'canvas'
         });
+
+    }
+    //qrcode.resize(480, 480);
+}
+
+document.getElementById("download").addEventListener("click", function() {
+
+    html2canvas(document.querySelector('#capture')).then(function(canvas) {
+
+        saveAs(canvas.toDataURL(), 'DQS_QR.png');
+    });
+});
+
+
+function saveAs(uri, filename) {
+
+    var link = document.createElement('a');
+
+    if (typeof link.download === 'string') {
+
+        link.href = uri;
+        link.download = filename;
+
+        //Firefox requires the link to be in the body
+        document.body.appendChild(link);
+
+        //simulate click
+        link.click();
+
+        //remove the link when done
+        document.body.removeChild(link);
+
+    } else {
+
+        window.open(uri);
 
     }
 }
 
-// var qrcode = new QRCode(document.getElementById("qrcode"), {
-//     text: "https://cssscript.com",
-//     logo: "<?php echo base_url() . '/assets/image/logo_dqs.png' ?>",
-//     logoWidth: undefined,
-//     logoHeight: undefined,
-//     logoBackgroundColor: '#ffffff',
-//     logoBackgroundTransparent: false
-// });
+function InvalidMsg(textbox) {
+
+    if (textbox.value == '') {
+        textbox.setCustomValidity('กรุณากรอกลิงก์เว็บไซต์');
+    }
+    // else if(textbox.validity.typeMismatch){
+    //     textbox.setCustomValidity('please enter a valid email address');
+    // }
+    else {
+        textbox.setCustomValidity('');
+    }
+    return true;
+}
 </script>
 <style>
+.show {
+    display: block;
+}
+
 .nav-tabs .nav-item .nav-link,
 .nav-tabs .nav-item .nav-link:focus,
 .nav-tabs .nav-item .nav-link:hover {
     border: 0 !important;
     color: #000 !important;
-    font-weight: 500;
+    font-size: 16px
 }
 
 input[type=text],
@@ -137,45 +197,41 @@ select {
     box-sizing: border-box;
 }
 
+
+
+.parent-div {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+.parent-div input[type=file] {
+    left: 0;
+    top: 0;
+    opacity: 0;
+    position: absolute;
+    font-size: 90px;
+}
+
+.btn-upload {
+    width: 350px;
+    height: 47px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
 #img {
     -webkit-filter: blur(2px);
     /* Safari 6.0 - 9.0 */
     filter: blur(2px);
 }
 
-.block {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-flex: 0 0 48px;
-    -webkit-flex: 0 0 48px;
-    flex: 0 0 48px;
+a {
+    font-size: 16px
 }
-
-.blockInput {
-    width: 100%;
-    height: 80%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    border-radius: 0px 20px 0px 0px;
-}
-
-body {
-    background-color: #EFF3F7;
-
-}
-
-/* .card {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  width: 40%;
-  border-radius: 5px;
-}
-
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-} */
 </style>
