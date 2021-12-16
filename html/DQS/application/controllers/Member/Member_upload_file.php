@@ -18,10 +18,10 @@ class Member_upload_file extends DQS_controller {
 		$this->output("member/test_upload");
 	}
 		public function upload(){
-			
+			$nameid = "Dome3";
 			$this->load->model('Da_DQS_qrcode','dqrc');
 			$this->dqrc->doc_type = "pdf";
-			$this->dqrc->doc_name = "Dome";
+			$this->dqrc->doc_name = $nameid;
 			$upload=$_FILES['doc_path'];
 			if($upload != '') {   //not select file
 			//โฟลเดอร์ที่จะ upload file เข้าไป 
@@ -31,7 +31,7 @@ class Member_upload_file extends DQS_controller {
 				$type = strrchr($_FILES['doc_path']['name'],".");
 				
 			//ตั้งชื่อไฟล์ใหม่โดยเอาเวลาไว้หน้าชื่อไฟล์เดิม
-				$newname = "Dome".$type;
+				$newname = $nameid.$type;
 				$path_copy=$path.$newname;
 				
 				$newpath = '/assets/pdf/fileupload_Member/'.$newname;
