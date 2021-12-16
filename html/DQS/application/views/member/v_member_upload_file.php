@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name') ?>" hidden>
-                <input type="hidden" id="text" name='text' value='<?php echo base_url().'/assets/pdf/fileupload_Member/'.'doc_name'.'.'.'doc_type'?>;'>
+                <input type="text" id="text" name='text' value='<?php echo $this->session->userdata('newpath')?>' hidden>
                 <button onclick="uploadFile()" class="btn btn-dark_blue" style="margin-left: 25%; margin-bottom: 50px;margin-top:50px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button>
 
                 <!-- </form> -->
@@ -63,7 +63,7 @@
                     </div>
                     <br>
 
-                    <button id="download " onclick="doCapture();" class="btn btn-warning" style="margin-left:10px;margin-top:40px;font-family:TH sarabun new; font-size: 20px; width: 240; ">ดาวน์โหลด</button>
+                    <button id="download" onclick="doCapture();" class="btn btn-warning" style="margin-left:10px;margin-top:40px;font-family:TH sarabun new; font-size: 20px; width: 240; ">ดาวน์โหลด</button>
                 </div>
             </div>
         </div>
@@ -84,16 +84,16 @@ async function uploadFile() {
         },
         body: formData
     });
-    // alert('The file has been uploaded successfully.');
+    make();
 }
 
 function make() {
-    const [file] = logo_img.files
-    if (file) {
-        var logoin = URL.createObjectURL(file);
-    } else {
-        var logoin = '';
-    }
+    // const [file] = logo_img.files
+    // if (file) {
+    //     var logoin = URL.createObjectURL(file);
+    // } else {
+    //     var logoin = '';
+    // }
     var text = document.getElementById('text');
     var qrcode = document.getElementById('qrcode');
     var logo = "<?php echo base_url(). '/assets/logo/' ?>+<?php echo $this->session->userdata('logo_name')?>";
@@ -103,10 +103,10 @@ function make() {
     if (text.value.trim() !== '') {
         qrcode.innerHTML = '';
         new QRCode(document.getElementById("qrcode"), {
-            text: <?php echo $this->session->userdata('newpath')?>,
-            width: 256,
-            height: 256,
-            logo: logoin,
+            text: '<?php echo site_url().$this->session->userdata('newpath')?>',
+            width: 300,
+            height: 300,
+            // logo: logoin,
             logoWidth: 80,
             logoHeight: 80,
             //logoBackgroundColor: '#ffffff',
