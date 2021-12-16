@@ -22,39 +22,38 @@
                     </li>
                 </ul>
 
-                <form method="post" action="<?php echo site_url() . 'Member/Member_upload_file/upload_file' ?>" enctype="multipart/form-data">
-                    <label class=" form-control-label" style="padding-left: 45px; padding-top: 20px; color: #000000">ไฟล์ รูปภาพ</label><br>
-                    <div class="row">
-                        <div class="col-md-2 offset-md-1">
-                            <div class="card" style=" margin-left: 10%; width:640%">
-                                <input type="hidden" id="doc_type" name='doc_type' value='pdf'>
-                                <input type="file" id="doc_path" name="doc_path" class="form-control" accept="application/pdf" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;"><br>
-                            </div>
+                <!-- <form method="post" action="<?php echo site_url() . 'Member/Member_upload_file/upload_file' ?>" enctype="multipart/form-data"> -->
+                <label class=" form-control-label" style="padding-left: 45px; padding-top: 20px; color: #000000">ไฟล์ รูปภาพ</label><br>
+                <div class="row">
+                    <div class="col-md-2 offset-md-1">
+                        <div class="card" style=" margin-left: 10%; width:640%">
+                            <input type="file" id="doc_path" name="doc_path" class="form-control" accept="application/pdf" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;"><br>
                         </div>
                     </div>
+                </div>
 
-                    <label class="form-control-label" style="padding-left: 40px; padding-top: 20px; color: #000000">ชื่อ:</label><br>
-                    <div class="row">
-                        <div class="col-md-2 offset-md-1">
-                            <input type="text" id="doc_name" name="doc_name" class="form-control" style="margin: 0px;  width: 400px;" placeholder="ชื่อไฟล์"><br />
+                <label class="form-control-label" style="padding-left: 40px; padding-top: 20px; color: #000000">ชื่อ:</label><br>
+                <div class="row">
+                    <div class="col-md-2 offset-md-1">
+                        <input type="text" id="doc_name" name="doc_name" class="form-control" style="margin: 0px;  width: 400px;" placeholder="ชื่อไฟล์"><br />
+                    </div>
+                </div>
+
+
+                <label style="padding-left: 40px; padding-top: 20px; color: #000000">โลโก้:</label><br>
+
+                <div class="row">
+                    <div class="col-md-2 offset-md-1">
+                        <div class="card" style=" margin-left: 10%; width:640%">
+                            <input id="logo" type="file" name="logo" onchange="uploadFile()" accept="image/png, image/gif, image/jpeg"><br><br>
                         </div>
                     </div>
+                </div>
+                <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name') ?>" hidden>
+                <input type="hidden" id="text" name='text' value='<?php echo base_url().'/assets/pdf/fileupload_Member/'.'doc_name'.'.'.'doc_type'?>;'>
+                <button onclick="make()" class="btn btn-dark_blue" style="margin-left: 25%; margin-bottom: 50px;margin-top:50px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button>
 
-
-                    <label style="padding-left: 40px; padding-top: 20px; color: #000000">โลโก้:</label><br>
-
-                    <div class="row">
-                        <div class="col-md-2 offset-md-1">
-                            <div class="card" style=" margin-left: 10%; width:640%">
-                                <input id="logo" type="file" name="logo" onchange="uploadFile()" accept="image/png, image/gif, image/jpeg"><br><br>
-                            </div>
-                        </div>
-                    </div>
-                    <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name') ?>" hidden>
-                    <input type="hidden" id="text" name='text' value='<?php echo base_url().'/assets/pdf/fileupload_Member/'.'doc_name'.'.'.'doc_type'?>;'>
-                    <button onclick="make()" class="btn btn-dark_blue" style="margin-left: 25%; margin-bottom: 50px;margin-top:50px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button>
-
-                </form>
+                <!-- </form> -->
             </div>
         </div>
         <!-- <div class="col-md-1"></div> -->
@@ -79,8 +78,8 @@
 <script type="text/javascript">
 async function uploadFile() {
     let formData = new FormData();
-    formData.append("logo", logo.files[0]);
-    await fetch("<?php echo site_url() . "/Qrcode/QRcode_generator/upload/" ?>", {
+    formData.append("doc_name", logo.files[0]);
+    await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload/" ?>", {
         method: "POST",
         body: formData
     });
