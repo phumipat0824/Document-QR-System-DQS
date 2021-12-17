@@ -12,6 +12,13 @@ class Member_upload_file extends DQS_controller {
 		$this->output_sidebar_member("Member/v_member_upload_file");
 	}
 
+	
+	public function show_member_upload_photo()
+	{
+
+		$this->output_sidebar_member("Member/v_member_upload_photo");
+	}
+
 	public function show_test()
 	{
 
