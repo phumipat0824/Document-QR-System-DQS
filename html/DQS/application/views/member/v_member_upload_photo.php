@@ -17,7 +17,7 @@
                     </li>
                     <li class="nav-item">
                         <div class="card" style="margin: 0px; color: #E0FFFF">
-                            <a class="nav-link active" href="<?php echo site_url().'/Member/Member_upload_photo/show_member_upload_photo'?>">รูปภาพ</a>
+                            <a class="nav-link active" href="<?php echo site_url().'/Member/Member_upload_file/show_member_upload_photo'?>">รูปภาพ</a>
                         </div>
                     </li>
                 </ul>
@@ -26,9 +26,9 @@
                 <label class=" form-control-label" style="padding-left: 45px; padding-top: 20px; color: #000000">ไฟล์ รูปภาพ</label><br>
                 <div class="row">
                     <div class="col-md-2 offset-md-1">
-                        <div class="card" style=" margin-left: 10%; width:640%">
-                            <input type="file" id="doc_path" name="doc_path" class="form-control" accept="application/pdf" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;"><br>
-                        </div>
+                        <!-- <div class="card" style=" margin-left: 10%; width:640%"> -->
+                        <input type="file" id="doc_path" name="doc_path" class="form-control" accept="application/pdf" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;"><br>
+                        <!-- </div> -->
                     </div>
                 </div>
 
@@ -44,9 +44,9 @@
 
                 <div class="row">
                     <div class="col-md-2 offset-md-1">
-                        <div class="card" style=" margin-left: 10%; width:640%">
-                            <input id="logo" type="file" name="logo" onchange="uploadFile()" accept="image/png, image/gif, image/jpeg"><br><br>
-                        </div>
+                        <!-- <div class="card" style=" margin-left: 10%; width:640%"> -->
+                        <input id="logo" type="file" name="logo" onchange="uploadFile()" accept="image/png, image/gif, image/jpeg"><br><br>
+                        <!-- </div> -->
                     </div>
                 </div>
                 <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name') ?>" hidden>

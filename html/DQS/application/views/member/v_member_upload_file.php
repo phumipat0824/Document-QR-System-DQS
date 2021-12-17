@@ -18,7 +18,7 @@
                         <a class="nav-link" href="#">เว็บไซต์</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="<?php echo site_url().'/Member/Member_upload_photo/show_member_upload_photo'?>">รูปภาพ</a>
+                        <a class="nav-link active" href="<?php echo site_url().'/Member/Member_upload_file/show_member_upload_photo'?>">รูปภาพ</a>
                     </li>
                 </ul>
 
