@@ -16,7 +16,7 @@
                         </li>
                     </ul>
                 <div class="card-body" style="margin-left:65px;margin-top: 30px;">
-                    <form action='' method="post">
+                    <!-- <form action='' method="post"> -->
                     <div class="form-row">
                         <div class="form-group col-md-5" style="margin-bottom: 30px">
 
@@ -32,7 +32,7 @@
                                 <input id="logo_img" type="file" name="logo" accept="image/png, image/gif, image/jpeg"><br><br>
                         </div>
                     <button type="submit"  onclick="make()" class="btn btn-dark_blue" style="margin-left:55px;margin-bottom: 50px;margin-top:35px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button>
-                    </form>
+                    <!-- </form> -->
                 </div>
             </div>
         </div>

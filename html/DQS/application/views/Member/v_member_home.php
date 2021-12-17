@@ -28,7 +28,7 @@
             <!-- <div class="card card-frame" style=" height: 60px; width: 260px;"> -->
             <div class="dropdown">
 
-            <button   onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" style=" height: 60px; width: 260px;"  >
+            <button   onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" style="border: 1px solid #dddada; height: 60px; width: 260px;"  >
             <i class="material-icons"  style="margin-left: 1px;" >folder</i>
             <a style=" font-size: 26px; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
             </button>
@@ -133,7 +133,7 @@ window.addEventListener("contextmenu", e => {
 function rightclick() {
     var rightclick;
     var e = window.event;
-     if (e.button == 2){
+  
     document.getElementById("myDropdown").classList.toggle("show");
     if (!event.target.matches('.dropbtn')) {
     var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -145,7 +145,7 @@ function rightclick() {
       }
     }
   }
-}
+
     
 }
 function rightclickfolder(folder) {
