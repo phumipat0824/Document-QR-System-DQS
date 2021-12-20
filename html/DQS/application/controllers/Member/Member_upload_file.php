@@ -47,7 +47,7 @@ class Member_upload_file extends DQS_controller {
 			}//if
 			$this->session->set_userdata('newpath', $newpath);
 			$this->dqrc->doc_path = $newpath;
-			$this->dqrc->insert();
+			$this->dqrc->insert_doc();
 			
 		}
 
