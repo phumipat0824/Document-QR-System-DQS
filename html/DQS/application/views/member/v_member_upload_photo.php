@@ -45,7 +45,7 @@
                 <div class="row">
                     <div class="col-md-2 offset-md-1">
                         <!-- <div class="card" style=" margin-left: 10%; width:640%"> -->
-                        <input id="logo" type="file" name="logo" onchange="uploadFile()" accept="image/png, image/gif, image/jpeg"><br><br>
+                        <input id="logo" type="file" name="logo" onchange="uploadFile()" accept="image/png, image/jpeg"><br><br>
                         <!-- </div> -->
                     </div>
                 </div>
