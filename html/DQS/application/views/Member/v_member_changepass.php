@@ -1,5 +1,6 @@
 <?php
 $old_password = $this->session->mem_password;
+
 ?>
 
 
@@ -15,25 +16,28 @@ $old_password = $this->session->mem_password;
         <div class="card"  style="border-radius: 30px;">
             <center><h2 style="color:black; padding-top:50px ">เปลี่ยนรหัสผ่าน</h2></center>
             <div class="card-body " style="padding-top: 10px; padding-right:80px; padding-left:80px; padding-bottom:30px">
-            <form action="<?php echo site_url() . 'Member/Member_changepass/changepass' ?>" method="post">
+            <form id="changepass"  method="post" novalidate>
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                 
                 <label style = "color: #000000;  font-size: 15px;" for="">รหัสผ่านปัจจุบัน</label>
                 <label style = "color: #FF0000;">*</label>
-                <input type="password" class="form-control"  id="mem_password" name="mem_password" placeholder="รหัสผ่านปัจจุบัน" > <br>
-                <span id="indicator">
+                <input type="password" class="form-control"  id="mem_password" name="mem_password" placeholder="รหัสผ่านปัจจุบัน" required pattern="<?php echo $this->session->userdata('old_password')?>"> <br>
+                <div class="invalid-feedback">รหัสผ่านปัจจุบันไม่ถูกต้องหรือไม่กรอกรหัสผ่าน กรุณากรอกใหม่อีกครั้ง</div>
                 <label style = "color: #000000;  font-size: 15px;" for="">รหัสผ่านใหม่</label>
                 <label style = "color: #FF0000;">*</label>
-                <input type="password" class="form-control"  id="new_password" name="new_password" placeholder="รหัสผ่านใหม่"><br>
+                <input type="password" class="form-control"  id="new_password" name="new_password" placeholder="รหัสผ่านใหม่" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"><br>
+                <div class="invalid-feedback">โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษรพิมพ์ใหญ่ พิมพ์เล็ก และตัวเลขผสมกัน</div>
                 <label style = "color: #000000; font-size: 15px;" for="">ยืนยันรหัสผ่านใหม่</label>
                 <label style = "color: #FF0000;">*</label>
-                <input type="password" class="form-control" id="mem_confirm" name="mem_confirm" placeholder="ยืนยันรหัสผ่านใหม่"><br>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="ยืนยันรหัสผ่านใหม่" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"><br>
+                <div class="invalid-feedback">โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษรพิมพ์ใหญ่ พิมพ์เล็ก และตัวเลขผสมกัน</div>
+                <div id="check"> <span id="message"></div>
                 
                 </div>
             </div>
                 <center>
-                <input type="button" id="btn-ok" style="background-color: #100575; border-radius: 30px; padding-left:50px; padding-right:50px;" name="reset_password" class="btn btn-primary" value='บันทึก'>
+                <input type="submit" id="btn-ok" style="background-color: #100575; border-radius: 30px; padding-left:50px; padding-right:50px;" name="reset_password" class="btn btn-primary" value='บันทึก'>
                 </center>
             </form>
             </div>
@@ -49,86 +53,49 @@ $old_password = $this->session->mem_password;
     }
    
 </style>
-<script>
-     $(document).ready(function() {
-    $('#mem_password').keyup(function(){
-    var inputpass    =   $('#mem_password').val();
-    var oldpass   =   "111";
-    if(inputpass!=oldpass){
-        $('#indicator').attr({class:'red'});
-        $('#regbtn').attr({disabled:true});
-    }
-    else{
-        $('#indicator').attr({class:'green'});
-        $('#regbtn').attr({disabled:false});
-    }
-});
-    
-    // var typingTimer;                //timer identifier
-    // var doneTypingInterval = 5000;  //time in ms, 5 second for example
-    // var $input_old_password = $('#mem_password');
+<script  type="text/javascript">
+    $('#confirm_password').on('change', function () {
+        document.getElementById("check").disabled = false;
+        if ($('#new_password').val() == $('#confirm_password').val() ) {
+            $('#message').html('รหัสผ่านตรงกัน').css('color', 'green');
 
-    // //on keyup, start the countdown
-    // $input_old_password.on('keyup', function () {
-    // clearTimeout(typingTimer);
-    // typingTimer = setTimeout(doneTyping, doneTypingInterval);
-    // });
+        } else 
+        $('#message').html('รหัสผ่านใหม่และยืนยันรหัสผ่านไม่ตรงกัน กรุณากรอกใหม่อีกครั้ง').css('color', 'red');
+    });
+    $('#confirm_password').on('change', function () {
+        document.getElementById("check").disabled = false;
+        if ($('#new_password').val() == $('#confirm_password').val() && $('#new_password').val() != "Angoon272553.") {
+            $('#message').html('รหัสผ่านตรงกัน').css('color', 'green');
 
-    // //on keydown, clear the countdown 
-    // $input_old_password.on('keydown', function () {
-    // clearTimeout(typingTimer);
-    // });
+        } else 
+        $('#message').html('รหัสผ่านใหม่ตรงกับรหัสผ่านปัจจุบัน กรุณากรอกใหม่อีกครั้ง').css('color', 'red');
+    });
 
-    // //user is "finished typing," do something
-    // function doneTyping () {
-    //     if ($input_old_password == "") {
-    //     $(".error-msg").html("กรุณากรอกรหัสผ่านปัจจุบัน.").show();
-    //     return false;
-    //     }
-    //     validate();
-    // }
-    // function validate() {
-    // var password1 = $input_old_password;
-    // var password2 = $old_password;
-    // if (password1 != password2) {
-    //     $(".error-msg").html("รหัสผ่านปัจจุบันไม่ถูกต้อง กรุณากรอกอีกครั้ง").show();
-    // }
-    // }
+    $(function(){
+        $("#changepass").on("submit",function(){
+            var form = $(this)[0];
+            if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+            }else if(form.checkValidity() === true){
+                Swal.fire({
+                icon: 'success',
+                title: 'เปลี่ยนแปลงรหัสผ่านสำเร็จ',
+                showConfirmButton: false,
+                timer: 1500
+                })
+            }
+            form.classList.add('was-validated');
+        });
+    });
 
-
-
-    /     // Get the input box
-    // let input = document.getElementById('mem_password');
-
-    // // Init a timeout variable to be used below
-    // let timeout = null;
-
-    // // Listen for keystroke events
-    // input.addEventListener('keyup', function (e) {
-    //     // Clear the timeout if it has already been set.
-    //     // This will prevent the previous task from executing
-    //     // if it has been less than <MILLISECONDS>
-    //     clearTimeout(timeout);
-
-    //     // Make a new timeout set to go off in 1000ms (1 second)
-    //     timeout = setTimeout(function () {
-    //        document.getElementById(".error-msg").innerHTML=input.value;
-    //     }, 1000);
-    // });
    
-    $('form #btn-ok').click(function(e) {
-        Swal.fire({
-            icon: 'success',
-            title: 'เปลี่ยนแปลงรหัสผ่านสำเร็จ',
-            showConfirmButton: false,
-            timer: 1500
-            })
-    });
- 
 
 
+   
+       
+   
 
-    });
-
+    
     
 </script>
