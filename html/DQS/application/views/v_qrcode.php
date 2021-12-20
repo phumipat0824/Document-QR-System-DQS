@@ -1,8 +1,8 @@
 <div class="content">
     <div class="row" style="padding: 100px 10px 10px 20%;">
-        <a style="color:#100575; font-size: 60px;">สร้างคิวอาร์โค้ด</a>
-        <a style="font-size: 30px;">เริ่มสร้าง QR Code กันเลย </a>
-            <div class="col-md-5">
+        <a style="color:#100575; font-size: 80px;">สร้างคิวอาร์โค้ด</a>
+        <a style="font-size: 35px;">เริ่มสร้าง QR Code กันเลย </a>
+            <div class="col-md-9">
                 <div class="card card-nav-tabs card-plain">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
@@ -16,46 +16,51 @@
                         </li>
                     </ul>
                 <div class="card-body" style="margin-left:65px;margin-top: 30px;">
-                    <form action='' method="post">
+                    <!-- <form action='' method="post"> -->
                     <div class="form-row">
-                        <div class="form-group col-md-5" style="margin-bottom: 30px">
-
+                        <div class="form-group col-md-6" style="margin-bottom: 30px">
                             <a style="margin-top: 10px;">เว็บไซต์</a>
-                            <label style = "color: #FF0000;">*</label>
-                            <input id="text" type="text" style="width: 350px;"placeholder="http://"oninvalid="InvalidMsg(this);"oninput="InvalidMsg(this);"required="required"><br>
+                            <label style = "color: #FF0000;">*</label><br>
+                            <input id="text" type="text" style="width: 350px;"placeholder="http://"oninvalid="InvalidMsg(this);"oninput="InvalidMsg(this);"required="required">
+                                <div id="inputlogo"style="margin-top: 30px;">
+                                    <input type="checkbox" onclick="showinputlogo()">
+                                    <label>เพิ่มโลโก้</label><br>
+                                </div>    
+                                        <div id="myDIV"style="display:none;margin-top: 30px;">
+                                            <a style="margin-top: 10px;">โลโก้</a>
+                                            <label>     jpg/png</label><br>
+                                                <div class="parent-div">
+                                                    <button class="btn-upload" style="color:#cfcfcf;"><i class="fas fa-upload"></i> เลือกโลโก้คิวอาร์โค้ด</button>                   
+                                                    <input id="logo_img" type="file" name="logo" accept="image/png, image/gif, image/jpeg"><br><br>
+                                                </div>
+                                        </div>
+                                
                         </div>
-                        <br><br>
+                        <div class="form-group col-md-6">
+                            <div id="capture" style="margin-left:50px">
+                                <div id="qrcode">              
+                                    <img id="img" src="<?php echo base_url(). '/assets/image/QR_home.PNG' ?>" height="300" width="300" style="margin: auto;">                       
+                                </div> 
+                            </div> 
+                        </div>
                     </div>
-                            <a style="margin-top: 10px;">โลโก้:</a><br>
-                            <div class="parent-div">
-                                <button class="btn-upload" style="color:#cfcfcf;"><i class="fas fa-upload"></i> เลือกโลโก้คิวอาร์โค้ด</button> 
-                                <input id="logo_img" type="file" name="logo" accept="image/png, image/gif, image/jpeg"><br><br>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <button type="submit"  onclick="make()" class="btn btn-dark_blue" style="margin-left:55px;margin-bottom: 50px;margin-top:35px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 35px;">สร้างคิวอาร์โค้ด</button>
                         </div>
-                    <button type="submit"  onclick="make()" class="btn btn-dark_blue" style="margin-left:55px;margin-bottom: 50px;margin-top:35px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button>
-                    </form>
+                        <div class="form-group col-md-6">
+                            <button id="download" onclick="doCapture();" class="btn btn-warning" style="margin-left:75px;margin-top:40px;font-family:TH sarabun new; font-size: 35px; width: 240; ">ดาวน์โหลด</button>
+                    <!-- </form> -->
+                        </div>  
+                    </div>             
                 </div>
-            </div>
-        </div>
-        <div class="col-md-5">
-            <div class="card" style="padding: 10%" height="500">
-                <div class="card-body" style="margin: auto;">
-
-                <!-- <canvas id="cnv1" width="252" height="322"></canvas> -->
-                <div id="capture">
-                    <div id="qrcode">              
-                        <img id="img" src="<?php echo base_url(). '/assets/image/QR_home.PNG' ?>" height="256" width="256" style="margin: auto;">                       
-                    </div> 
-                    </div> 
-                    <image id="theimage"></image> 
-                    <br>
-                    <button id="download" onclick="doCapture();" class="btn btn-warning" style="margin-left:10px;margin-top:40px;font-family:TH sarabun new; font-size: 20px; width: 240; ">ดาวน์โหลด</button>               
-                    </div>
             </div>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
+    
 async function uploadFile() {
     let formData = new FormData();
     formData.append("logo", logo.files[0]);
@@ -82,8 +87,8 @@ function make() {
         qrcode.innerHTML = '';
         new QRCode(document.getElementById("qrcode"), {
             text: text.value,
-            width: 256,
-            height: 256,
+            width: 300,
+            height: 300,
             logo: logoin,
             logoWidth: 80,
             logoHeight: 80,
@@ -149,6 +154,19 @@ function InvalidMsg(textbox) {
     }
     return true;
 }
+
+function showinputlogo() { 
+    var x = document.getElementById("myDIV");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+        
+}
+
+
+
 </script>
 <style>
   
