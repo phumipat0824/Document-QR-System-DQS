@@ -79,37 +79,10 @@
                                         <!-- <i type=" submit" class="fas fa-trash"></i> -->
 
                                         <button type="button" class="btn bg-gradient-primary deleteModal"
-                                            data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                            data-id='<?php echo $arr_member[$i]->mem_id; ?>'> <i
+                                            value='<?php echo $arr_member[$i]->mem_id; ?>'> <i
                                                 class="fas fa-trash"></i>
                                         </button>
-                                        <!-- Delete modal -->
-                                        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <form id="delete-form" method="POST" action="">
-
-                                                        <div class="modal-body">
-                                                            <input type="hidden" name="mem_id" id="mem_id" value="">
-
-                                                            <h5 class="modal-title font-weight-normal"
-                                                                id="exampleModalLabel">
-                                                                ยืนยันการลบบัญชีผู้ใช้</h5>
-                                                            <br>
-                                                            <!-- <?php echo $arr_member[$i]->mem_id; ?> -->
-                                                            <!-- <?php echo $i; ?> -->
-                                                            <center><input type="submit" class="btn bg-gradient-primary"
-                                                                    value="ยืนยัน">
-                                                                <button type="button" class="btn bg-gradient-secondary"
-                                                                    data-bs-dismiss="modal">ยกเลิก</button>
-                                                            </center>
-                                                        </div>
-                                                    </form>
-
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
 
                                     </td>
 
@@ -125,12 +98,42 @@
         </div>
     </div>
 </div>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+<!-- Delete modal -->
+<!-- <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form id="delete-form" method="POST" onsubmit="return false">
+
+                <div class="modal-body">
+                    <input type="hidden" name="mem_id" id="mem_id" value="">
+
+                    <h5 class="modal-title font-weight-normal"
+                        id="exampleModalLabel">
+                        ยืนยันการลบบัญชีผู้ใช้</h5>
+                    <br>
+                    <center><input type="submit" class="btn bg-gradient-primary"
+                            value="ยืนยัน">
+                        <button type="button" class="btn bg-gradient-secondary"
+                            data-bs-dismiss="modal">ยกเลิก</button>
+                    </center>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div> -->
+
 <!-- <script>
 function delete_admin(element, mem_id) {
 
     $.ajax({
         type: "POST",
-        url: "<?php echo site_url() . "/Admin/Admin_home/delete_admin" ?>",
+        url: "<?php echo site_url()."/Admin/Admin_home/delete_admin" ?>",
         data: {
             'mem_id': mem_id
         },
@@ -142,31 +145,82 @@ function delete_admin(element, mem_id) {
     })
 }
 </script> -->
-
+<!-- 
 <script type="text/javascript">
 $(document).on("click", ".deleteModal", function() {
+    // alert('1');
     var id = $(this).attr('data-id');
     $("#mem_id").val(id);
 });
-</script>
+</script> -->
 
 
-
+<!-- 
 <script type="text/javascript">
-$('#delete-form').submit(function() {
+$('#edit-form').submit(function() {
+    alert('2');
     $.ajax({
         type: 'post',
         url: "<?php echo site_url().'/Admin/Admin_home/delete_admin'?>",
-        data: $("#delete-form").serialize(),
+        data: $("#edit-form").serialize(),
         dataType: 'json',
         success: function(data) {
-            // console.log("succ");
-            alert('มีข้อมูลนี้ในระบบอยู่แล้วหรือไม่ได้กรอกข้อมูล กรุณากรอกใหม่');
+            console.log("succ");
+            alert('yes');
         },
         error: function(error) {
-            // console.log("error");
+            alert('no');
+            console.log("error");
             location.reload();
         }
     });
 });
+</script> -->
+<script>
+    $(document).ready(function(){
+        $('.deleteModal').click(function(e){
+            e.preventDefault();
+            var mem_id = $(this).val() ;
+            // console.log(mem_id);
+
+            swal({
+            title: "คุณต้องการลบป็อปอัปหรือไม่",
+                text: "หากคุณยืนยันการลบแล้วคุณจะไม่สามารถกู้คืนป็อปอัปนี้ได้",
+                icon: "warning",
+                buttons: ["ยกเลิก","ตกลง"],
+                dangerMode: true,
+	        })
+            .then((willDelete) => {
+                if (willDelete) 
+                {
+                    $.ajax({
+                        url: "<?php echo site_url().'/Admin/Admin_home/delete_admin'?>",
+                        type:'POST',
+                        data:{
+                            mem_id :  mem_id
+                        },
+                        success: function(response){
+                            console.log("success")
+                            swal({
+                                title: "ลบสำเร็จ",
+                                text: 'ป็อปอัปถูกลบเรียบร้อยแล้ว',
+                                icon: 'success',
+                                buttons: false,
+                            }).then((confirmed)=>{
+                                window.location.reload();
+                            });
+                        }   
+                    });
+
+
+                } 
+            });
+
+
+        });
+        
+
+    
+
+    });
 </script>

@@ -39,7 +39,7 @@ class Da_DQS_member extends DQS_model
         $this->db->query($sql, array($this->mem_password, $this->mem_email)); //ถ้า SQL ที่เราใส่มี ? ต้องใส่ array ด้วย
     }
     public function delete_member(){
-        $sql = "DELETE {$this->db_name}.DQS_Member
+        $sql = "DELETE FROM {$this->db_name}.DQS_Member
                 WHERE mem_id = ? "; // ? = ค่าที่เราจะใส่ไปอยู่แล้ว , อย่าใช้ " ' " เพราะอาจจะเออเร่อได้
         $this-> db->query($sql, array($this->mem_id)); //ถ้า SQL ที่เราใส่มี ? ต้องใส่ array ด้วย
     }//ลบข้อมูลสมาชิก
