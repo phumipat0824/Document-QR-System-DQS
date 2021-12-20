@@ -72,19 +72,26 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <img src="<?php echo base_url() . '/assets/image/logo_dqs.PNG' ?>" height="50" width="50">
             <a class="navbar-brand" href="<?php echo base_url() . 'Qrcode/Qrcode_generator/show_qrcode' ?>"><b>Document QR</b></a>
+            <div class="search-container" style="margin-left: 20%;">
+                    <form action="">
+                        <i class="fa fa-search"></i>
+                        <input type="text" style="width: 400px;" placeholder="Search.." name="search">
+                    </form>
+                </div>
             <form class="form-inline ml-auto">
 
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <span class="material-icons" style="margin-right: -15;">account_circle</span>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url() . 'Member/Member_login/logout' ?>" style="font-size:18px">logout</a>
+                        <a class="nav-link" style="font-size:18px"><?php echo $this->session->mem_username?></a>
                     </li>
-                    <!--<li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url() . 'Member/Member_register/show_member_register' ?>" style="font-size:18px">สมัครสมาชิก</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url() . 'Member/Member_login/show_member_login' ?>" style="font-size:18px">เข้าสู่ระบบ</a>
-          </li>
-        </ul> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url() . 'Member/Member_login/logout' ?>" style="font-size:18px">ออกจากระบบ</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url() . 'Member/Member_login/show_member_login' ?>" style="font-size:18px">เข้าสู่ระบบ</a>
+                    </li> -->
+                </ul>
 
             </form>
         </div>
@@ -92,4 +99,4 @@
     </nav>
 </head>
 
-<body>
+<body style="background-color:#EFF3F7">

@@ -51,7 +51,23 @@ $old_password = $this->session->mem_password;
     body {
         background-color: #eff3f7;
     }
-   
+    .input-container {
+        position:relative;
+        
+  /* display: -ms-flexbox;
+  display: flex; */
+  /* width: 100%;
+  margin-bottom: 15px; */
+}
+.icon {
+  padding: 10px;
+  color: black;
+  right:5px;
+  min-width: 50px;
+  text-align: rtl;
+  position:absolute;
+  direction: rtl;
+}
 </style>
 <script  type="text/javascript">
     $('#confirm_password').on('change', function () {
