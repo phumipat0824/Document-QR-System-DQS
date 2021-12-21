@@ -106,7 +106,7 @@
             </div>
             <div class="card-body">
                 <div class="form-row">
-                    <div  class="form-group col-md-4" id="qrcode">
+                    <div class="form-group col-md-4" id="qrcode">
                         <img id="img" src="<?php echo base_url() . '/assets/image/QR_home.PNG' ?>" height="128" width="128" style="margin: auto;">
                         <button id="download" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button>
                     </div>
