@@ -15,7 +15,7 @@
                         <div class="col-10_5">
                             <h1 class="card-title " style="padding-top: 10px;" font-size="150px;" font_color="Blue">
                                 จัดการบัญชีใช้งาน
-                                </h1s>
+                            </h1>
                         </div>
                     </div>
                 </div>
@@ -79,17 +79,16 @@
                                         <!-- <i type=" submit" class="fas fa-trash"></i> -->
 
                                         <button type="button" class="btn bg-gradient-primary deleteModal"
-                                            value='<?php echo $arr_member[$i]->mem_id; ?>'> <i
-                                                class="fas fa-trash"></i>
+                                            value='<?php echo $arr_member[$i]->mem_id; ?>'> <i class="fas fa-trash"></i>
                                         </button>
-                                        
+
 
                                     </td>
 
                                 </tr>
                                 <?php } ?>
 
-                                
+
                             </table>
 
                         </div>
@@ -177,50 +176,49 @@ $('#edit-form').submit(function() {
 });
 </script> -->
 <script>
-    $(document).ready(function(){
-        $('.deleteModal').click(function(e){
-            e.preventDefault();
-            var mem_id = $(this).val() ;
-            // console.log(mem_id);
+$(document).ready(function() {
+    $('.deleteModal').click(function(e) {
+        e.preventDefault();
+        var mem_id = $(this).val();
+        // console.log(mem_id);
 
-            swal({
-            title: "คุณต้องการลบป็อปอัปหรือไม่",
+        swal({
+                title: "คุณต้องการลบป็อปอัปหรือไม่",
                 text: "หากคุณยืนยันการลบแล้วคุณจะไม่สามารถกู้คืนป็อปอัปนี้ได้",
                 icon: "warning",
-                buttons: ["ยกเลิก","ตกลง"],
+                buttons: ["ยกเลิก", "ตกลง"],
                 dangerMode: true,
-	        })
+            })
             .then((willDelete) => {
-                if (willDelete) 
-                {
+                if (willDelete) {
                     $.ajax({
                         url: "<?php echo site_url().'/Admin/Admin_home/delete_admin'?>",
-                        type:'POST',
-                        data:{
-                            mem_id :  mem_id
+                        type: 'POST',
+                        data: {
+                            mem_id: mem_id
                         },
-                        success: function(response){
+                        success: function(response) {
                             console.log("success")
                             swal({
                                 title: "ลบสำเร็จ",
                                 text: 'ป็อปอัปถูกลบเรียบร้อยแล้ว',
                                 icon: 'success',
                                 buttons: false,
-                            }).then((confirmed)=>{
+                            }).then((confirmed) => {
                                 window.location.reload();
                             });
-                        }   
+                        }
                     });
 
 
-                } 
+                }
             });
 
 
-        });
-        
-
-    
-
     });
+
+
+
+
+});
 </script>
