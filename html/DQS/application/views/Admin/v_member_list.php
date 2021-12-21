@@ -15,7 +15,7 @@
                         <div class="col-10_5">
                             <h1 class="card-title " style="padding-top: 10px;" font-size="150px;" font_color="Blue">
                                 จัดการบัญชีใช้งาน
-                                </h1s>
+                            </h1>
                         </div>
                     </div>
                 </div>
@@ -79,17 +79,16 @@
                                         <!-- <i type=" submit" class="fas fa-trash"></i> -->
 
                                         <button type="button" class="btn bg-gradient-primary deleteModal"
-                                            value='<?php echo $arr_member[$i]->mem_id; ?>'> <i
-                                                class="fas fa-trash"></i>
+                                            value='<?php echo $arr_member[$i]->mem_id; ?>'> <i class="fas fa-trash"></i>
                                         </button>
-                                        
+
 
                                     </td>
 
                                 </tr>
                                 <?php } ?>
 
-                                
+
                             </table>
 
                         </div>
@@ -118,9 +117,9 @@
             if (result.isConfirmed) {
                 $.ajax({
                         url: "<?php echo site_url().'/Admin/Admin_home/delete_admin'?>",
-                        type:'POST',
-                        data:{
-                            mem_id :  mem_id
+                        type: 'POST',
+                        data: {
+                            mem_id: mem_id
                         },
                         success: function(response){
                             
