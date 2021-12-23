@@ -6,7 +6,7 @@
         // }
 
 ?> -->
-<div class="sidebar" data-color="yellow" data-background-color="white" data-image="<?php echo base_url().'/assets/img/sidebar-1.jpg'?>">
+<div class="sidebar" data-color="yellow" data-background-color="white" data-image="<?php echo base_url().'/assets/img/sidebar-1.jpg'?>"style="margin-top: 20px;">
     
     <div class="logo">
     </div>
