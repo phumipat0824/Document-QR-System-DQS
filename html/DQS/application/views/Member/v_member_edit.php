@@ -93,6 +93,9 @@
 </style>
 
 <script>
+    function goBack() {
+            window.history.back();
+        }
     $(document).ready(function() {
         $('form #btn-ok').click(function(e) {
             let $form = $(this).closest('form');
