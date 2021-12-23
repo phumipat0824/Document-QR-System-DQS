@@ -10,8 +10,10 @@ class Member_home extends DQS_controller
     public function show_member_home()
     {
         $this->load->model('M_DQS_folder', 'fol');
+		// $this->load->model('M_DQS_qrcode', 'qrc');
 		$memid = $this->session->userdata('mem_id');
 		$data['arr_fol'] = $this->fol->get_by_id($memid)->result();
+		// $data['arr_qr'] = $this->qrc->get_by_id($memid)->result();
         $this->output_sidebar_member("Member/v_member_home",$data);
     }
 
@@ -40,10 +42,10 @@ class Member_home extends DQS_controller
 		$this->folder->insert();
 		
 		redirect('Member/Member_home/show_member_home');
-     }
+    }
 
-	 function update_folder() 
-	 {
+	function update_folder() 
+	{
 		$this->load->model('M_DQS_folder','Mfol');
 
 		$this->Mfol->fol_name = $this->input->post('fol_name');
@@ -54,16 +56,16 @@ class Member_home extends DQS_controller
 		}
     
         
-	 }
+	}
 
-	 function delete_folder($fol_id,$fol_name) 
-	 {
+	function delete_folder($fol_id,$fol_name) 
+	{
 		$this->load->model('M_DQS_folder','folder');
 		$this->folder->delete($fol_id);
 	
 		$folder_name=$fol_name;
-		 $path='./assets/folder/';
-		 
+		$path='./assets/folder/';
+		
 		 if (file_exists($path.$folder_name))/* Check folder exists or not */
 			{
 				@rmdir($path.$folder_name);/* Delete folder by using rmdir function */
@@ -73,6 +75,6 @@ class Member_home extends DQS_controller
 		$memid = $this->session->userdata('mem_id');
 		$data['arr_fol'] = $this->fol->get_by_id($memid)->result();
 		$this->output_sidebar_member("Member/v_member_home",$data);
-	 }
+	}
 }
 ?>

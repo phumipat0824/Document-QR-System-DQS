@@ -99,4 +99,16 @@ class M_DQS_member extends Da_DQS_member
         return $query;
     }//รับค่าผ่านตัวแปร mem_dep_id และ mem_pro_id.
 
+
+    public function get_by_id($mem_id)
+    {
+        $sql = "SELECT * FROM {$this->db_name}.DQS_Member AS member
+        LEFT JOIN {$this->db_name}.DQS_Department AS department
+        ON member.mem_dep_id = department.dep_id
+        LEFT JOIN {$this->db_name}.DQS_Province AS province
+        ON member.mem_pro_id = province.pro_id
+        WHERE mem_id = $mem_id";
+        $query = $this->db->query($sql);
+        return $query;
+    }
 }
