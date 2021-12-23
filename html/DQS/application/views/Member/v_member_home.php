@@ -1,33 +1,31 @@
 <link href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/css/dqs_right_click_menu.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <div class="content">
-    <div class="row" style="padding: 100px 10px 10px 20%;">
-        <div class="col-md-8">
-            <h1 style="color:#003399; font-family:TH Sarabun New; font-weight: 900; font-size: 80px;">คิวอาร์โค้ดของฉัน</h1>
-        </div>
-        <div class="col-md-4">
-            <div class="dropdown">
-                <button onmousedown="rightclick()" class="dropbtn btn btn-round" style=" width: 145px; background-color: #F5F5F5 ; border: none;">
-                    <h1 style="font-weight: 900; color:#003399 ; font-size: 50px; font-family:TH Sarabun New; height: 40; width: 50px;" id="button-folder">+ สร้าง</h1>
-                </button>
-                <div id="myDropdown" class="dropdown-content">
-                    <div class="custom-cm__item" data-toggle="modal" data-target="#exampleModal"><a>สร้างโฟลเดอร์</a></div>
-
-                    <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file'; ?>">อัปโหลดไฟล์</a></div>
-                </div>
-            </div>
-        </div>
-
-        <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">โฟลเดอร์</h3>
-
+<div class="row" style="padding: 100px 10px 10px 20%;"> 
+    <div class="col-md-8">
+    <h1 style="color:#003399; font-family:TH Sarabun New; font-weight: 900; font-size: 80px;" >คิวอาร์โค้ดของฉัน</h1>
+    </div>
+    <div class="col-md-4">
+    <div class="dropdown">
+    <button onmousedown="rightclick()" class="dropbtn btn btn-round"  style=" width: 145px; background-color: #F5F5F5 ; border: none;" >
+    <h1 style="font-weight: 900; color:#003399 ; font-size: 50px; font-family:TH Sarabun New; height: 40; width: 50px;" id="button-folder" >+ สร้าง</h1>
+    </button>
+    <div id="myDropdown" class="dropdown-content">
+    <div class="custom-cm__item" data-toggle="modal" data-target="#exampleModal"><a>สร้างโฟลเดอร์</a></div>
+    
+    <div class="custom-cm__item" ><a href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file'; ?>">อัปโหลดไฟล์</a></div>
+  </div>
+    </div>
     </div>
 
-    <?php 
-    for ($i = 0; $i < count($arr_fol); $i++) {   ?>
-    <!-- style="margin-left: -200px;" -->
-    <div class="col-3">
-        <!-- <div class="card card-frame" style=" height: 60px; width: 260px;"> -->
-        <div class="dropdown">
+<h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;" >โฟลเดอร์</h3>
+
+<?php 
+    for ($i = 0; $i < count($arr_fol); $i++) {   ?>   
+        <!-- style="margin-left: -200px;" -->
+            <div class="col-3">        
+            <!-- <div class="card card-frame" style=" height: 60px; width: 260px;"> -->
+            <div class="dropdown">
 
             <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" style="border: 1px solid #dddada; height: 60px; width: 260px;">
                 <i class="material-icons" style="margin-left: 1px;">folder</i>
