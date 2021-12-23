@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 require dirname(__FILE__).'/../DQS_controller.php';
@@ -38,7 +38,7 @@ class Member_edit extends DQS_controller {
         $this->mem->mem_id = $this->input->post('mem_id');
 		$this->mem->update();
 	
-		//redirect('/Member/Member_home/show_member_home');
+		redirect('/Admin/Admin_home/show_member_list');
 		
 		
 

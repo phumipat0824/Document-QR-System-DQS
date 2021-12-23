@@ -109,13 +109,13 @@
                         <button id="download" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button>
                     </div>
                     <div class="form-group col-md-4">
-                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">ชื่อ</h5>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">ชื่อ : </h5>
 
-                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">วันที่สร้าง</h5>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">วันที่สร้าง : </h5>
 
-                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">ชนิด</h5>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">ชนิด : </h5>
 
-                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">ราายงานสรุปผล</h5>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">ราายงานสรุปผล : </h5>
                     </div>
                     <div class="form-group col-md-4">
                         <button id="edit" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 120; ">ดาวน์โหลด</button>
