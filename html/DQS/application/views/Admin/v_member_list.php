@@ -70,7 +70,8 @@
                                         <?php echo $arr_member[$i]->mem_firstname." ".$arr_member[$i]->mem_lastname; ?>
                                     </td>
                                     <td>
-                                        <a href="<?php echo site_url()."/Member/Member_edit/show_member_edit/".$arr_member[$i]->mem_id?>"> 
+                                        <a
+                                            href="<?php echo site_url()."/Member/Member_edit/show_member_edit/".$arr_member[$i]->mem_id?>">
                                             <i class="far fa-edit"></i></a>
                                     </td>
                                     <td>
@@ -100,46 +101,46 @@
 
 
 <script>
-    $(document).ready(function(){
-        $('.deleteModal').click(function(e){
-            e.preventDefault();
-            var mem_id = $(this).val() ;
-            // console.log(mem_id);
+$(document).ready(function() {
+    $('.deleteModal').click(function(e) {
+        e.preventDefault();
+        var mem_id = $(this).val();
+        // console.log(mem_id);
 
-            Swal.fire({
-                title: 'ยืนยันการลบบัญชีผู้ใช้',
-                showCancelButton: true,
-                confirmButtonColor: '#0c83e2',
-                cancelButtonColor: '#fffff',
-                confirmButtonText: 'ยืนยัน',
-                cancelButtonText: 'ยกเลิก'
-            }).then((result) => {
+        Swal.fire({
+            title: 'ยืนยันการลบบัญชีผู้ใช้',
+            showCancelButton: true,
+            confirmButtonColor: '#0c83e2',
+            cancelButtonColor: '#fffff',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก'
+        }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                        url: "<?php echo site_url().'/Admin/Admin_home/delete_admin'?>",
-                        type: 'POST',
-                        data: {
-                            mem_id: mem_id
-                        },
-                        success: function(response){
-                            
-                                window.location.reload();
-                            
-                        }   
-                    });
-                
+                    url: "<?php echo site_url().'/Admin/Admin_home/delete_admin'?>",
+                    type: 'POST',
+                    data: {
+                        mem_id: mem_id
+                    },
+                    success: function(response) {
+
+                        window.location.reload();
+
+                    }
+                });
+
             }
-            })
+        })
 
 
-        });
     });
+});
 </script>
-<style> 
-     /*ปรับรูปแบบตัวอักษร */
-    @import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');
-    *{
-        font-family: 'Sarabun', sans-serif;
-    }
+<style>
+/*ปรับรูปแบบตัวอักษร */
+@import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');
 
+* {
+    font-family: 'Sarabun', sans-serif;
+}
 </style>
