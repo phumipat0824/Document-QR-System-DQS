@@ -51,7 +51,6 @@ $(document).ready(function(){
 function get_dept(){
     $.ajax({
       url: "<?php echo site_url() ?>/Department/Department_list/get_dept_list_ajax",
-      type: 'POST',
       dataType: 'JSON',
       success:function(data){
           // console.log(data);
