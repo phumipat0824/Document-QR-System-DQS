@@ -3,8 +3,14 @@
         <a style="color:#100575; font-size: 80px;">สร้างคิวอาร์โค้ด</a>
         <a style="font-size: 35px;">เริ่มสร้าง QR Code กันเลย </a>
             <div class="col-md-9">
-                <div class="card card-nav-tabs card-plain">
-                    <ul class="nav nav-tabs">
+                <!-- <div class="card card-nav-tabs card-plain"> -->
+                <div class="card">
+                <!-- <div class="card-body" style="margin-left:65px;margin-top: 30px;"> -->
+                    <!-- <form action='' method="post"> -->
+                    <div class="form-row">
+                    <!-- <div class="card-body col-md-6" style="margin-bottom: 30px"> -->
+                        <div class="form-group col-md-6" style="margin-left:65px;margin-top: 50px;">
+                        <!-- <ul class="nav nav-tabs">
                         <li class="nav-item">
                             <a class="nav-link active" href="#">เว็บไซต์</a>
                         </li>
@@ -14,46 +20,49 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url() . 'Member/Member_login/show_member_login' ?>">รูปภาพ</a>
                         </li>
-                    </ul>
-                <div class="card-body" style="margin-left:65px;margin-top: 30px;">
-                    <!-- <form action='' method="post"> -->
-                    <div class="form-row">
-                        <div class="form-group col-md-6" style="margin-bottom: 30px">
+                    </ul> -->
                             <a style="margin-top: 10px;">เว็บไซต์</a>
                             <label style = "color: #FF0000;">*</label><br>
-                            <input id="text" type="text" style="width: 350px;"placeholder="http://"oninvalid="InvalidMsg(this);"oninput="InvalidMsg(this);"required="required">
+                            <input id="text" type="text" style="width: 350px;"placeholder="http://"oninvalid="InvalidMsg(this);"oninput="InvalidMsg(this);"value="https://www.example.com"required="required">
                                 <div id="inputlogo"style="margin-top: 30px;">
-                                    <input type="checkbox" onclick="showinputlogo()">
-                                    <label>เพิ่มโลโก้</label><br>
+                                    <button class = "slide" style="width: 350px;" onclick="showinputlogo()">เพิ่มโลโก้</button>
+                                 
                                 </div>    
                                         <div id="myDIV"style="display:none;margin-top: 30px;">
                                             <a style="margin-top: 10px;">โลโก้</a>
                                             <label>     jpg/png</label><br>
                                                 <div class="parent-div">
                                                     <button class="btn-upload" style="color:#cfcfcf;"><i class="fas fa-upload"></i> เลือกโลโก้คิวอาร์โค้ด</button>                   
-                                                    <input id="logo_img" type="file" name="logo" accept="image/png, image/gif, image/jpeg"><br><br>
+                                                    <input id="logo_img" type="file" name="logo" accept="image/png, image/jpeg"><br><br>
                                                 </div>
                                         </div>
-                                
+                                       
+                                        <button type="submit"  onclick="make()" class="btn btn-dark_blue" style="margin-left:50;margin-bottom: 50px;margin-top:35px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 35px;">สร้างคิวอาร์โค้ด</button>
+                                        
                         </div>
-                        <div class="form-group col-md-6">
-                            <div id="capture" style="margin-left:50px">
+                        <!-- <div class="form-group col-md-6"> -->
+                        <div class="card-body "style="background-color:#100575; border: 1px solid #ccc;">
+                        <center>
+                            <div id="capture" style="margin-top:40px;">
                                 <div id="qrcode">              
                                     <img id="img" src="<?php echo base_url(). '/assets/image/QR_home.PNG' ?>" height="300" width="300" style="margin: auto;">                       
                                 </div> 
-                            </div> 
+                            </div>
+                            <button id="download" onclick="doCapture();" class="btn btn-warning" style="margin-top:40px;margin-bottom: 30px;font-family:TH sarabun new; font-size: 35px; width: 240; ">ดาวน์โหลด</button> 
+                        <!-- </div> -->
+                        </center>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <button type="submit"  onclick="make()" class="btn btn-dark_blue" style="margin-left:55px;margin-bottom: 50px;margin-top:35px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 35px;">สร้างคิวอาร์โค้ด</button>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <button id="download" onclick="doCapture();" class="btn btn-warning" style="margin-left:75px;margin-top:40px;font-family:TH sarabun new; font-size: 35px; width: 240; ">ดาวน์โหลด</button>
+                    <!-- <div class="form-row"> -->
+                        <!-- <div class="form-group col-md-6"> -->
+                            <!-- <button type="submit"  onclick="make()" class="btn btn-dark_blue" style="margin-left:55px;margin-bottom: 50px;margin-top:35px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 35px;">สร้างคิวอาร์โค้ด</button> -->
+                        <!-- </div> -->
+                        <!-- <div class="form-group col-md-6"> -->
+                            <!-- <button id="download" onclick="doCapture();" class="btn btn-warning" style="margin-left:75px;margin-top:40px;font-family:TH sarabun new; font-size: 35px; width: 240; ">ดาวน์โหลด</button> -->
                     <!-- </form> -->
-                        </div>  
-                    </div>             
-                </div>
+                        <!-- </div>   -->
+                    <!-- </div>              -->
+                <!-- </div> -->
             </div>
         </div>
     </div>
@@ -222,6 +231,15 @@ select {
 }
 a{
     font-size: 16px
+}
+.slide{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 </style>
