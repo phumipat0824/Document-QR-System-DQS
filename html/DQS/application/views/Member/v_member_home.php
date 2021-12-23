@@ -20,28 +20,6 @@
 
 <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;" >โฟลเดอร์</h3>
 
-</div>
-<div class="col-md-6" style="padding-left: 350px;height:10px;width:20px padding-top: 100px; border-radius: 10px;">
-    <div class="card">
-        <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
-            <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 40px; ">คิวอาร์โค้ด</h>
-        </div>
-        <div class="card-body">
-        <div id="qrcode">
-                        <img id="img" src="<?php echo base_url() . '/assets/image/QR_home.PNG' ?>" height="256" width="256" style="margin: auto;">
-                    </div>
-                    
-                    <button id="download" onclick="doCapture();" class="btn btn-warning" style="margin-left:10px;margin-top:40px;font-family:TH sarabun new; font-size: 20px; width: 240; ">ดาวน์โหลด</button>
-                </div>
-                
-
-
-            
-        </div>
-    </div>
-</div>
-    
-
 <?php 
     for ($i = 0; $i < count($arr_fol); $i++) {   ?>   
         <!-- style="margin-left: -200px;" -->
