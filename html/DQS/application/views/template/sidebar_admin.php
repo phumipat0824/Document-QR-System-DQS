@@ -6,10 +6,9 @@
         // }
 
 ?> -->
-<div class="sidebar" data-color="yellow" data-background-color="white"
-    data-image="<?php echo base_url().'/assets/img/sidebar-1.jpg'?>">
+<div class="sidebar" data-color="yellow" data-background-color="white" data-image="<?php echo base_url().'/assets/img/sidebar-1.jpg'?>">
+    
     <div class="logo">
-        Document QR
     </div>
     <div class="sidebar-wrapper ps-container ps-theme-default ps-active-y"
         data-ps-id="a5787ac4-4df1-fec6-f8e0-33c5f4784969">

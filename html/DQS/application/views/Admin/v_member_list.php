@@ -70,7 +70,7 @@
                                         <?php echo $arr_member[$i]->mem_firstname." ".$arr_member[$i]->mem_lastname; ?>
                                     </td>
                                     <td>
-                                        <a href="<?php echo site_url() ?>/Member/Member_edit/show_member_edit">
+                                        <a href="<?php echo site_url()."/Member/Member_edit/show_member_edit/".$arr_member[$i]->mem_id?>"> 
                                             <i class="far fa-edit"></i></a>
                                     </td>
                                     <td>
@@ -224,3 +224,11 @@ $('#edit-form').submit(function() {
 
     });
 </script>
+<style> 
+     /*ปรับรูปแบบตัวอักษร */
+    @import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');
+    *{
+        font-family: 'Sarabun', sans-serif;
+    }
+
+</style>
