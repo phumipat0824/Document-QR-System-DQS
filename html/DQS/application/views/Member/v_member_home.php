@@ -96,6 +96,39 @@
     </div>
 </div>
 
+<!-- QR-code -->
+<div class="row" style="padding: 100px 10px 10px 20%;">
+    <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">คิวอาร์โค้ด</h3>
+    <div class="col-md-6">
+        <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px; width:500;">
+            <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
+                <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px;">คิวอาร์โค้ด</h>
+            </div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-4" id="qrcode">
+                        <img id="img" src="<?php echo base_url() . '/assets/image/QR_home.PNG' ?>" height="128" width="128" style="margin: auto;">
+                        <button id="download" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">ชื่อ</h5>
+
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">วันที่สร้าง</h5>
+
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">ชนิด</h5>
+
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">ราายงานสรุปผล</h5>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <button id="edit" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 120; ">ดาวน์โหลด</button>
+                        <button id="remove" class="btn btn-" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
+                        <button id="delete" class="btn btn-" style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ลบ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!-- send fol_id to edit modal -->

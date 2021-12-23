@@ -20,6 +20,12 @@ class Da_DQS_qrcode extends DQS_model {
     public $doc_view;
     public $doc_download;
     public $doc_datetime;
+    public $qr_id ;
+    public $qr_name;
+    public $qr_path;
+    public $qr_view;
+    public $qr_download;
+    public $qr_datetime;
     
     public function __construct()
 	{
