@@ -20,6 +20,12 @@ class Da_DQS_qrcode extends DQS_model {
     public $doc_view;
     public $doc_download;
     public $doc_datetime;
+    public $qr_id ;
+    public $qr_name;
+    public $qr_path;
+    public $qr_view;
+    public $qr_download;
+    public $qr_datetime;
     
     public function __construct()
 	{
@@ -34,11 +40,26 @@ class Da_DQS_qrcode extends DQS_model {
 * @author Ashirawat
 * @Create Date 2564-11-14
 */
-    public function insert(){//insert document into database    
+    public function insert_doc(){//insert document into database    
         $sql = "INSERT INTO {$this->db_name}.DQS_Document(doc_name,doc_type,doc_path) 
                 VALUES (?,?,?)";
                 
         $this->db->query($sql,array($this->doc_name,$this->doc_type,$this->doc_path));        
     }//end insert document into database
+
+/*
+* insert
+* Insert qrcode into database 
+* @input qrcode data
+* @output -
+* @author Ashirawat
+* @Create Date 2564-12-17
+*/
+public function insert_qr(){//insert document into database    
+    $sql = "INSERT INTO {$this->db_name}.DQS_QR(qr_name,qr_path) 
+            VALUES (?,?)";
+            
+    $this->db->query($sql,array($this->qr_name,$this->qr_path));        
+}//end insert document into database
 
 }
