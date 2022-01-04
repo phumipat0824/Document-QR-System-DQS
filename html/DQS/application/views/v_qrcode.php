@@ -3,52 +3,63 @@
         <a style="color:#100575; font-size: 80px;">สร้างคิวอาร์โค้ด</a>
         <a style="font-size: 35px;">เริ่มสร้าง QR Code กันเลย </a>
     </div>
-    <div class="row"style="padding-left:20%; padding-bottom :1000px;">
+    <div class="row"style="padding-left:20%;">
             <div class="col-md-5">
+                <div class="card"style="border-color:#E4E4E4;border-width: 5px;"> 
             <nav>
-            <div class="nav nav-tabs" id="nav-tab" role="tablist"style="padding-b :50px;">
-                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">เว็บไซต์</a>
-                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">PDF</a>
-                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">รูปภาพ</a>
-            </div>
-            </nav>            
-                <div class="card">                
+                <div class="nav nav-tabs" id="nav-tab" role="tablist"style="padding-b :50px;">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fas fa-paperclip"></i> เว็บไซต์</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="far fa-file-pdf"></i> PDF</a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="far fa-images"></i> รูปภาพ</a>
+                </div>
+            </nav>                                         
                     <!-- <form action='' method="post"> -->
-                    <div class="form-row">                
-                        <div class="form-group col-md-6" style="margin-left:65px;margin-top: 50px;">
+                    <div class="form-row"style="margin-left:15%;margin-top: 10%;">                
                             <a style="margin-top: 10px;">เว็บไซต์</a>
                             <label style = "color: #FF0000;">*</label><br>
-                            <input id="text" type="text" style="width: 350px;"placeholder="http://"oninvalid="InvalidMsg(this);"oninput="InvalidMsg(this);"value="https://www.example.com"required="required">
+                    </div>
+                    <div class="form-row"style="margin: auto;">
+                    <div class="col-25"> 
+                            <input id="text" type="text"placeholder="http://"oninvalid="InvalidMsg(this);"oninput="InvalidMsg(this);"value="https://www.example.com"required="required">
+                    </div>
+                    </div>
+                    <div class="form-row"style="margin: auto;"> 
                                 <div id="inputlogo"style="margin-top: 30px;">
-                                    <button class = "slide" style="width: 350px;" onclick="showinputlogo()">เพิ่มโลโก้</button>                               
-                                </div>    
+                                    <button class = "slide" style="width: 100%;" onclick="showinputlogo()">เพิ่มโลโก้</button>                               
+                                </div>
+                    </div>    
                                         <div id="myDIV"style="display:none;margin-top: 30px;">
-                                            <a style="margin-top: 10px;">โลโก้</a>
+                                        <div class="form-row"style="margin-left:65px;margin-top: 50px;"> 
+                                        <a style="margin-top: 10px;">โลโก้</a>
                                             <label>     jpg/png</label><br>
+                                        </div> 
                                                 <div class="parent-div">
+                                                <div class="form-row"style="margin: auto;">
                                                     <button class="btn-upload" style="color:#cfcfcf;"><i class="fas fa-upload"></i> เลือกโลโก้คิวอาร์โค้ด</button>                   
                                                     <input id="logo_img" type="file" name="logo" accept="image/png, image/jpeg"><br><br>
                                                 </div>
-                                        </div>                                      
-                                        <button type="submit"  onclick="make()" class="btn btn-dark_blue" style="margin-left:50;margin-bottom: 50px;margin-top:35px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 35px;">สร้างคิวอาร์โค้ด</button>     
-                        </div>
-                        </div>
+                                                </div>
+                                        </div> 
+                                        <div class="form-row"style="margin: auto;">                                      
+                                        <button type="submit"  onclick="make()" class="btn btn-dark_blue" style="margin-bottom: 30px;margin-top: 40px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 35px;">สร้างคิวอาร์โค้ด</button>
+                                        </div>     
+                    
                     </div>
                     </div>
                     
             <div class="col-md-5">
-                <div class="card" >
+                <div class="card"style="border-color:#E4E4E4;border-width: 5px;">
                         <center>
                             <div id="capture" style="margin-top:40px;">
                                 <div id="qrcode">              
-                                    <img id="img" src="<?php echo base_url(). '/assets/image/QR_home.PNG' ?>" height="300" width="300" style="margin: auto;">                       
+                                    <img id="img" src="<?php echo base_url(). '/assets/image/QR_home.PNG' ?>" height="250" width="250" style="margin: auto;">                       
                                 </div> 
                             </div> 
                             <button id="download" onclick="doCapture();" class="btn btn-warning" style="margin-top:40px;margin-bottom: 30px;font-family:TH sarabun new; font-size: 35px; width: 240; ">ดาวน์โหลด</button> 
                         </center>
                 </div>
             </div>
-            </div>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -106,6 +117,7 @@ document.getElementById("download").addEventListener("click", function() {
 
         saveAs(canvas.toDataURL(), 'DQS_QR.png');
     });
+    
 });
 
 
@@ -156,7 +168,36 @@ function showinputlogo() {
         }
         
 }
-
+function doCapture() {
+    window.scrollTo(0, 0);
+ 
+    html2canvas(document.getElementById("capture")).then(function (canvas) {
+ 
+        // Create an AJAX object
+        var ajax = new XMLHttpRequest();
+ 
+        // Setting method, server file name, and asynchronous
+        ajax.open("POST", "<?php echo site_url() . "/Qrcode/QRcode_generator/save_server/" ?>", true);
+ 
+        // Setting headers for POST method
+        ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+ 
+        // Sending image data to server
+        ajax.send("image=" + canvas.toDataURL("image/jpeg", 0.9));
+ 
+        // Receiving response from server
+        // This function will be called multiple times
+        ajax.onreadystatechange = function () {
+ 
+            // Check when the requested is completed
+            if (this.readyState == 4 && this.status == 200) {
+ 
+                // Displaying response from server
+                console.log(this.responseText);
+            }
+        };
+    });
+}
 
 
 </script>
@@ -197,7 +238,7 @@ select {
   font-size: 90px;
 }
 .btn-upload {
-    width: 350px;
+    width: 100%;
     height : 47px;
     padding: 12px 20px;
     margin: 8px 0;
@@ -223,5 +264,16 @@ a{
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+.nav-tabs .nav-link.active {
+    background-color: #fff;
+    border-color: #fff;
+}
+.nav-tabs .nav-link{
+    background-color: #cfcfcf;
+    border-color: #fff;
+}
+.nav-tabs .nav-link.active:focus, .nav-tabs .nav-link.active:hover {
+    border-color: #fff;
 }
 </style>
