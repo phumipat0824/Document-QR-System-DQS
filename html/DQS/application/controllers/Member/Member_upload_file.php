@@ -109,6 +109,7 @@ class Member_upload_file extends DQS_controller
 			move_uploaded_file($_FILES['doc_path']['tmp_name'], $path_copy);
 		} //if
 		$this->dqrc->doc_path = $newpath;
+		$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
 		$this->dqrc->insert_doc();
 	}
 
