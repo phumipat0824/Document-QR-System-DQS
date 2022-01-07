@@ -178,23 +178,20 @@ class Member_upload_file extends DQS_controller
 		$this->load->model('Da_DQS_qrcode', 'dqrc');
 		$this->dqrc->qr_name = $this->input->post('doc_name');
 
-		$upload = $_FILES['img_qrcode'];
-		if ($upload != '') {   //not select file
 			//โฟลเดอร์ที่จะ upload file เข้าไป 
 			$path = dirname(__FILE__) . '/../../../assets/png/fileupload_Member/';
 
 			//เอาชื่อไฟล์เก่าออกให้เหลือแต่นามสกุล
-			$type = strrchr($_FILES['img_qrcode']['name'], ".");
+			$type = ".jpeg";
 
 			//ตั้งชื่อไฟล์ใหม่โดยเอาเวลาไว้หน้าชื่อไฟล์เดิม
 			$newname = $this->input->post('doc_name') . $type;
 			$path_copy = $path . $newname;
 
 			$newpath = '/assets/png/fileupload_Member/' . $newname;
-			//คัดลอกไฟล์ไปเก็บที่เว็บเซริ์ฟเวอร์
-			move_uploaded_file($_FILES['img_qrcode']['tmp_name'], $path_copy);
-		} //if
+
 		$this->dqrc->qr_path = $newpath;
+		$this->dqrc->qr_mem_id = $this->session->userdata('mem_id');
 		$this->dqrc->insert_qr();
 	}
 }
