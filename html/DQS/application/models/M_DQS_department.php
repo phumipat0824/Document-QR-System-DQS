@@ -51,4 +51,14 @@ class M_DQS_department extends Da_DQS_department
         $query = $this->db->query($sql);
         return $query;
     }
+
+    public function get_member_data(){
+        $sql= "SELECT * FROM {$this->db_name}.DQS_Member AS member 
+        LEFT JOIN {$this->db_name}.DQS_Department AS department 
+        ON member.mem_dep_id = department.dep_id 
+        LEFT JOIN {$this->db_name}.DQS_Province AS province
+        ON member.mem_pro_id = pro_id";
+        $query = $this->db->query($sql);
+        return $query;
+    }
 }

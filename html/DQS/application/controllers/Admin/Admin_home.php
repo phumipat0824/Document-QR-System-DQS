@@ -39,9 +39,11 @@ class Admin_home extends DQS_controller
         // $data['arr_member'] = $this->MDM->get_member_all()->result();
         // $data['arr_department'] = $this->MDD->get_all()->result();
         // $data['arr_province'] = $this->MDP->get_all()->result();
+        // $this->output_sidebar_admin('Admin/v_member_show',$data);
         $this->output_sidebar_admin('Admin/v_member_list');
     }
 
+    
     public function delete_admin(){
         $this->load->model('M_DQS_member', 'MDM');
         $this->MDM->mem_id=$this->input->post('mem_id');
@@ -51,11 +53,10 @@ class Admin_home extends DQS_controller
         
     }
 
-    public function get_admin_list_ajax()
+    public function get_mem_list_ajax()
     {
-        $this->load->model('M_DQS_member', 'MDM');
-        $data['json_member'] = $this->MDM->get_member_by_id()->result();
-        
+        $this->load->model('M_DQS_department', 'MDD');
+        $data['json_mem'] = $this->MDD->get_member_data()->result();
         echo json_encode($data);
     }
 
