@@ -117,7 +117,7 @@ class Member_upload_file extends DQS_controller
 	{
 		// Get the incoming image data
 		$image = $_POST["image"];
-
+		
 		// Remove image/jpeg from left side of image data
 		// and get the remaining part
 		$image = explode(";", $image)[1];
@@ -131,9 +131,9 @@ class Member_upload_file extends DQS_controller
 
 		// Convert back from base64
 		$image = base64_decode($image);
-
+		
 		// Save the image as filename.jpeg
-		file_put_contents(dirname(__FILE__) . '/../../../assets/png/fileupload_Member/qrcode.jpeg', $image);
+		file_put_contents(dirname(__FILE__) . '/../../..'.$this->session->userdata('newpath'), $image);
 
 		// Sending response back to client
 		echo "Done";
@@ -177,9 +177,10 @@ class Member_upload_file extends DQS_controller
 
 		$this->load->model('Da_DQS_qrcode', 'dqrc');
 		$this->dqrc->qr_name = $this->input->post('doc_name');
+		$this->session->set_userdata('mem_username', $mem_username);
 
 			//โฟลเดอร์ที่จะ upload file เข้าไป 
-			$path = dirname(__FILE__) . '/../../../assets/png/fileupload_Member/';
+			$path = dirname(__FILE__) . '/../../../assets/QrCode/Qr_member/';
 
 			//เอาชื่อไฟล์เก่าออกให้เหลือแต่นามสกุล
 			$type = ".jpeg";
@@ -188,9 +189,10 @@ class Member_upload_file extends DQS_controller
 			$newname = $this->input->post('doc_name') . $type;
 			$path_copy = $path . $newname;
 
-			$newpath = '/assets/png/fileupload_Member/' . $newname;
+			$newpath = '/assets/QrCode/Qr_member/' . $newname;
 
 		$this->dqrc->qr_path = $newpath;
+		$this->session->set_userdata('newpath', $newpath);
 		$this->dqrc->qr_mem_id = $this->session->userdata('mem_id');
 		$this->dqrc->insert_qr();
 	}
