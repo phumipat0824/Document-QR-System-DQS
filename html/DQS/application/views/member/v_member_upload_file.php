@@ -113,15 +113,14 @@ async function uploadFile() {
         body: formData
 
     });
+    make();
     await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_qr/" ?>", {
         method: "POST",
         data: {
             doc_name: doc_name
         },
         body: formData
-
     });
-    make();
     doCapture();
 }
 //$(document).ready(function() {
@@ -147,7 +146,7 @@ async function uploadFile() {
 //    
 //});
 
-function doCapture() {
+function doCapture(doc_name) {
     window.scrollTo(0, 0);
 
     html2canvas(document.getElementById("capture")).then(function(canvas) {
