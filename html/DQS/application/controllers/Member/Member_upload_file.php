@@ -146,7 +146,7 @@ class Member_upload_file extends DQS_controller
 		* @author Ashirawat
 		* @Create Date 2564-11-14
 		*/
-<<<<<<< HEAD
+
 	// public function upload_qr()
 	// { //Update department into database
 
@@ -173,7 +173,6 @@ class Member_upload_file extends DQS_controller
 	// 	$this->dqrc->insert_qr();
 	// }
 }
-=======
 	public function upload_qr()
 	{ //Update department into database
 
@@ -199,5 +198,4 @@ class Member_upload_file extends DQS_controller
 		$this->dqrc->qr_path = $newpath;
 		$this->dqrc->insert_qr();
 	}
-}
->>>>>>> 3feff01087e6aa2abc8f152e328d866688d992b3
+
