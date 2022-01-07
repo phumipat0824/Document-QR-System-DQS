@@ -86,7 +86,7 @@
                 html_code += '<td>'+row_mem['dep_name']+'</td>';
                 // สถานะของหน่วยงาน
                 html_code += '<td style="text-align: center;">' +
-                    '<a href="<?php echo site_url() ?>/Member/Member_edit/show_member_edit">' +
+                    '<a href="<?php echo site_url() ?>/Member/Member_edit/show_member_edit/'+ row_mem['mem_id'] +'">' +
                     '<i class="far fa-edit"></i>' + '</a>' + '</td>';
                 // button edit data
                 html_code += '</td>';
