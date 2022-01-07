@@ -3,6 +3,8 @@
 <script type="text/javascript" src="<?php echo base_url() . 'assets/plugin' ?>/DataTables/datatables.js"></script>
 <link href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/css/CSS_table_list.css"
     rel="stylesheet" />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <!-- ===================================== -->
 <div class="main-panel">
     <div class="container">
@@ -38,58 +40,60 @@
         </div>
 
 
-        <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
-
         <script>
         $(document).ready(function() {
-            get_dept();
+            get_mem();
         });
 
-        function get_dept() {
+        function get_mem() {
             $.ajax({
-                url: "<?php echo site_url() ?>/Admin/Admin_home/get_admin_list_ajax",
+                url: "<?php echo site_url() ?>Admin/Admin_home/get_mem_list_ajax",
                 dataType: 'JSON',
                 success: function(data) {
                     console.log(data);
-                    create_Table(data['json_member']);
+                    create_Table(data['json_mem']);
                 }
 
             });
         } // recieve json then send to create data table
 
-        function create_Table(arr_dept) {
+        function create_Table(arr_mem) {
             let html_code = ''; // ตัวแปร generate code html
             html_code += '<div class="table-responsive">';
             html_code +=
-                '<table class="table" id = "datatable_dept_list">'; // ส่ง datatable_dept_list  ไปสร้าง data table
+                '<table class="table" id = "datatable_mem_list">'; // ส่ง datatable_mem_list  ไปสร้าง data table
             html_code += '<thead class=" text">';
             html_code += '<tr>';
 
             html_code += '<th>จังหวัด</th>';
             html_code += '<th>ชื่อผู้ใช้งาน</th>';
             html_code += '<th>ชื่อ - นามสกุล</th>';
+            html_code += '<th>หน่วยงาน</th>';
             html_code += '<th></th>';
             html_code += '<th></th>';
             html_code += '</tr>';
             html_code += '</thead>';
             html_code += '<tbody>';
             // strat loop of department
-            arr_dept.forEach((row_dept, index_dept) => {
+            arr_mem.forEach((row_mem, index_mem) => {
                 html_code += '<tr>';
-                html_code += '<td>' + row_dept['dep_name'] + '</td>';
-                html_code += '<td>' + row_dept['dep_name'] + '</td>';
+                html_code += '<td>' + row_mem['pro_name'] + '</td>';
+                html_code += '<td>' + row_mem['mem_username'] + '</td>';
                 // ชื่อหน่วยงาน
+                html_code += '<td   >' + row_mem['mem_firstname']+' '+ row_mem['mem_lastname']+ '</td>';
 
 
-
-                html_code += '<td style="text-align: center;">';
-                html_code += '</td>';
+                html_code += '<td>'+row_mem['dep_name']+'</td>';
                 // สถานะของหน่วยงาน
                 html_code += '<td style="text-align: center;">' +
-                    '<button type="button" class="btn btn-orange editModal" data-toggle="modal" data-target="#editModal" data-id= ' +
-                    row_dept['dep_id'] + ' data-name= ' + row_dept['dep_name'] + ' >' +
-                    '<i class="material-icons">edit</i>' + '&nbsp;</button>' + '</td>';
+                    '<a href="<?php echo site_url() ?>/Member/Member_edit/show_member_edit">' +
+                    '<i class="far fa-edit"></i>' + '</a>' + '</td>';
                 // button edit data
+                html_code += '</td>';
+                html_code += '<td style="text-align: center;">' +
+                    '<button type="button" class="btn bg-gradient-primary" onclick="delete_member('+ row_mem['mem_id'] +')">' +
+                    '<i class="fas fa-trash">' + '</button>' + '</td>';
+                // button delete data
                 html_code += '</td>';
                 html_code += '</tr>';
             }); // end loop of department
@@ -98,7 +102,7 @@
             html_code += '</div>';
 
             $('#create_table').html(html_code); // call function create table to make data table
-            make_dataTable_byId('datatable_dept_list');
+            make_dataTable_byId('datatable_mem_list');
 
         }
 
@@ -148,11 +152,8 @@
 
 
         <script>
-        $(document).ready(function() {
-            $('.deleteModal').click(function(e) {
-                e.preventDefault();
-                var mem_id = $(this).val();
-                // console.log(mem_id);
+        function delete_member(mem_id) {
+           console.log(mem_id);
 
                 Swal.fire({
                     title: 'ยืนยันการลบบัญชีผู้ใช้',
@@ -180,8 +181,8 @@
                 })
 
 
-            });
-        });
+            
+        };
         </script>
         <style>
         /*ปรับรูปแบบตัวอักษร */

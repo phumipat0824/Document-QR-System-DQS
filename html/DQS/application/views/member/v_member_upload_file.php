@@ -80,24 +80,24 @@
         $('#upload').click(function(e) {
             e.preventDefault();
             uploadFile();
-            html2canvas($("#capture"), {
-                onrendered: function(canvas) {
-                    var doc_name = document.getElementById('doc_name').value;
-                    var imgsrc = canvas.toDataURL("image/png");
-                    console.log(imgsrc);
-                    var dataURL = canvas.toDataURL();
-                    $.ajax({
-                        type: "POST",
-                        url: "../../Member/Member_upload_file/upload_qr",
-                        data: {
-                            doc_name: doc_name,
-                            img_qrcode: dataURL
-                        }
-                    }).done(function(o) {
-                        console.log('saved');
-                    });
-                }
-            });
+            // html2canvas($("#capture"), {
+            //     onrendered: function(canvas) {
+            //         var doc_name = document.getElementById('doc_name').value;
+            //         var imgsrc = canvas.toDataURL("image/png");
+            //         console.log(imgsrc);
+            //         var dataURL = canvas.toDataURL();
+            //         $.ajax({
+            //             type: "POST",
+            //             url: "../../Member/Member_upload_file/upload_qr",
+            //             data: {
+            //                 doc_name: doc_name,
+            //                 img_qrcode: dataURL
+            //             }
+            //         }).done(function(o) {
+            //             console.log('saved');
+            //         });
+            //     }
+            // });
         });
     });
 
@@ -111,8 +111,10 @@
                 doc_name: doc_name
             },
             body: formData
+            
         }); 
         make();
+        doCapture();
     }
     //$(document).ready(function() {
     //    $('#upload').click(function(e) {
@@ -136,6 +138,37 @@
     //    });
     //    
     //});
+
+    function doCapture() {
+    window.scrollTo(0, 0);
+ 
+    html2canvas(document.getElementById("capture")).then(function (canvas) {
+ 
+        // Create an AJAX object
+        var ajax = new XMLHttpRequest();
+ 
+        // Setting method, server file name, and asynchronous
+        ajax.open("POST", "<?php echo site_url() . "/Member/Member_upload_file/save_server/" ?>", true);
+ 
+        // Setting headers for POST method
+        ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+ 
+        // Sending image data to server
+        ajax.send("image=" + canvas.toDataURL("image/jpeg", 0.9));
+ 
+        // Receiving response from server
+        // This function will be called multiple times
+        ajax.onreadystatechange = function () {
+ 
+            // Check when the requested is completed
+            if (this.readyState == 4 && this.status == 200) {
+ 
+                // Displaying response from server
+                console.log(this.responseText);
+            }
+        };
+    });
+}
 
     function make() {
         // const [file] = logo_img.files
