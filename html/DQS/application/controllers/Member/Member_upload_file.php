@@ -172,7 +172,6 @@ class Member_upload_file extends DQS_controller
 	// 	$this->dqrc->qr_path = $newpath;
 	// 	$this->dqrc->insert_qr();
 	// }
-}
 	public function upload_qr()
 	{ //Update department into database
 
@@ -198,4 +197,4 @@ class Member_upload_file extends DQS_controller
 		$this->dqrc->qr_path = $newpath;
 		$this->dqrc->insert_qr();
 	}
-
+}
