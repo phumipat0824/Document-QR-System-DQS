@@ -76,16 +76,14 @@ async function uploadFile() {
     // alert('The file has been uploaded successfully.');
 }
 
-function make() {
+function make() { 
+  var logoin = '';
   const [file] = logo_img.files
   if (file) {
     var logoin = URL.createObjectURL(file);
-  }else{
-      var logoin = '';
-} 
+  }
     var text = document.getElementById('text');
     var qrcode = document.getElementById('qrcode');
-    var logo = "<?php echo base_url(). '/assets/logo/' ?>+<?php echo $this->session->userdata('logo_name')?>";
     
 
 
@@ -219,6 +217,7 @@ $(document).ready(function(){
           $("#onsave").css("border-color","green");
           $("#oninput").css("border-color","#E4E4E4");
           make();
+          document.getElementById("logo_img").value = "";
         }else{
           $("#text").css("border-color","red");
           $("#oninput").css("border-color","red");
