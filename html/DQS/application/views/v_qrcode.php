@@ -6,7 +6,7 @@
     
     <div class="row"style="padding-left:20%;">
             <div class="col-md-5">
-                <div class="card"style="border-color:#E4E4E4;border-width: 5px;"> 
+                <div class="card" id="oninput"style="border-color:#E4E4E4;border-width: 5px;"> 
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist"style="padding-b :50px;">
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fas fa-paperclip"></i> เว็บไซต์</a>
@@ -17,11 +17,14 @@
                     <!-- <form action='' method="post"> -->
                     <div class="form-row"style="margin-left:10%;margin-top: 10%;margin-bottom: 20px">                
                             <a style="margin-top: 10px;">เว็บไซต์</a>
-                            <label style = "color: #FF0000;">*</label>
+                            <label style = "color: #FF0000;">*</label>&emsp;
+                            <label id="target_div" style = "display:none;margin-top: 3%;color: #FF0000;">กรอกข้อมูลลิงค์เว็บไซต์ (URL)</label>
                     </div>
 
-                            <input id="text" type="text"style="margin: auto;" placeholder="http://"oninvalid="InvalidMsg(this);"oninput="InvalidMsg(this);"value="https://www.example.com"required="required">
-                                <div id="inputlogo"style="margin-top: 30px;">
+                            <input id="text" type="text"style="margin: auto;" oninvalid="InvalidMsg(this);"oninput="InvalidMsg(this);"value="https://www.example.com"required="required">
+                            <!-- <input id="text" type="text"style="margin: auto;" value="https://www.example.com"required="required"> -->
+    
+                            <div id="inputlogo"style="margin-top: 30px;">
                                 <center>
                                     <button class = "slide" id="up" style="width: 80%;" onclick="showinputlogo()">เพิ่มโลโก้<i class="fas fa-angle-down" style="float: right;"  aria-hidden="true"></i></button>
                                 </center>                               
@@ -29,19 +32,19 @@
                                         
                                         <div class="form-row" id="vanish"style="display:none;margin-left:10%;margin-top: 30px;"> 
                                         <a style="margin-top: 10px;">โลโก้</a>&emsp;
-                                            <label>     jpg/png</label>
+                                            <label>     jpeg/png</label>
                                         </div> 
                                         <div class="parent-div" id="vanish1"style="display:none;margin-left:10%;">      
                                                 <button class="btn-upload" style="color:#cfcfcf;"><i class="fas fa-upload"></i> เลือกโลโก้คิวอาร์โค้ด</button>                   
                                                 <input id="logo_img" type="file" name="logo" accept="image/png, image/jpeg"><br><br>
                                         </div>        
                                         <div class="form-row"style="margin: auto;">                                      
-                                        <button type="submit"  onclick="make()" class="btn btn-dark_blue" style="margin-bottom: 30px;margin-top: 40px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 35px;">สร้างคิวอาร์โค้ด</button>
+                                        <button type="submit"class="btn btn-dark_blue" id="make" style="margin-bottom: 30px;margin-top: 40px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 35px;">สร้างคิวอาร์โค้ด</button>
                                         </div>                                
                     </div>
                     </div>                   
             <div class="col-md-5">
-                <div class="card"style="border-color:#E4E4E4;border-width: 5px;">
+                <div class="card" id="onsave" style="border-color:#E4E4E4;border-width: 5px;">
                         <center>
                             <div id="capture" style="margin-top:40px;">
                                 <div id="qrcode">              
@@ -54,174 +57,6 @@
             </div>
     </div>
 
-    <div class="stage" id="tour-edit-save">
-  <div class="layer"></div>
-  <div class="layer"></div>
-  <div class="layer"></div>
-  <div class="layer"></div>
-  <div class="layer"></div>
-  <div class="layer"></div>
-  <div class="layer"></div>
-  <div class="layer"></div>
-  <div class="layer"></div>
-  <div class="layer"></div>
-  <div class="layer"></div>
-  <div class="layer"></div>
-  <div class="layer"></div>
-  <div class="layer"></div>
-  <div class="layer"></div>
-  <div class="layer"></div>
-  <div class="layer"></div>
-  <div class="layer"></div>
-  <div class="layer"></div>
-  <div class="layer"></div>
-</div>
-<style>
-.stage {
-  height: 300px;
-  width: 500px;
-  margin: auto;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  perspective: 9999px;
-  transform-style: preserve-3d;
-}
-
-.layer {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  transform-style: preserve-3d;
-  animation: ಠ_ಠ 5s infinite alternate ease-in-out -7.5s;
-  animation-fill-mode: forwards;
-  transform: rotateY(40deg) rotateX(33deg) translateZ(0);
-}
-
-.layer:after {
-  font: 150px/0.65 "Pacifico", "Kaushan Script", Futura, "Roboto", "Trebuchet MS", Helvetica, sans-serif;
-  content: "Phumipat\a    Katsuwan!";
-  white-space: pre;
-  text-align: center;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 50px;
-  color: whitesmoke;
-  letter-spacing: -2px;
-  text-shadow: 4px 0 10px rgba(0, 0, 0, 0.13);
-}
-
-.layer:nth-child(1):after {
-  transform: translateZ(0px);
-}
-
-.layer:nth-child(2):after {
-  transform: translateZ(-1.5px);
-}
-
-.layer:nth-child(3):after {
-  transform: translateZ(-3px);
-}
-
-.layer:nth-child(4):after {
-  transform: translateZ(-4.5px);
-}
-
-.layer:nth-child(5):after {
-  transform: translateZ(-6px);
-}
-
-.layer:nth-child(6):after {
-  transform: translateZ(-7.5px);
-}
-
-.layer:nth-child(7):after {
-  transform: translateZ(-9px);
-}
-
-.layer:nth-child(8):after {
-  transform: translateZ(-10.5px);
-}
-
-.layer:nth-child(9):after {
-  transform: translateZ(-12px);
-}
-
-.layer:nth-child(10):after {
-  transform: translateZ(-13.5px);
-}
-
-.layer:nth-child(11):after {
-  transform: translateZ(-15px);
-}
-
-.layer:nth-child(12):after {
-  transform: translateZ(-16.5px);
-}
-
-.layer:nth-child(13):after {
-  transform: translateZ(-18px);
-}
-
-.layer:nth-child(14):after {
-  transform: translateZ(-19.5px);
-}
-
-.layer:nth-child(15):after {
-  transform: translateZ(-21px);
-}
-
-.layer:nth-child(16):after {
-  transform: translateZ(-22.5px);
-}
-
-.layer:nth-child(17):after {
-  transform: translateZ(-24px);
-}
-
-.layer:nth-child(18):after {
-  transform: translateZ(-25.5px);
-}
-
-.layer:nth-child(19):after {
-  transform: translateZ(-27px);
-}
-
-.layer:nth-child(20):after {
-  transform: translateZ(-28.5px);
-}
-
-.layer:nth-child(n+10):after {
-  -webkit-text-stroke: 3px rgba(0, 0, 0, 0.25);
-}
-
-.layer:nth-child(n+11):after {
-  -webkit-text-stroke: 15px dodgerblue;
-  text-shadow: 6px 0 6px #00366b, 5px 5px 5px #002951, 0 6px 6px #00366b;
-}
-
-.layer:nth-child(n+12):after {
-  -webkit-text-stroke: 15px #0077ea;
-}
-
-.layer:last-child:after {
-  -webkit-text-stroke: 17px rgba(0, 0, 0, 0.1);
-}
-
-.layer:first-child:after {
-  color: #fff;
-  text-shadow: none;
-}
-
-@keyframes ಠ_ಠ {
-  100% {
-    transform: rotateY(-40deg) rotateX(-43deg);
-  }
-}
-</style>
 </div>
 
 <script type="text/javascript">
@@ -370,6 +205,30 @@ function doCapture() {
         };
     });
 }
+$(document).ready(function(){   
+     function validateURL(textval) {
+  var urlregex = new RegExp( "^(http|https|ftp)\://([a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\?\'\\\+&amp;%\$#\=~_\-]+))*$");
+  return urlregex.test(textval);
+}
+    $("#make").on('click', function() {
+      var div = document.getElementById('target_div');
+        var url = $("#text").val().trim();
+        if(validateURL(url)) {
+          $("#text").css("border-color","green");
+          div.style.display = "none";
+          $("#onsave").css("border-color","green");
+          $("#oninput").css("border-color","#E4E4E4");
+          make();
+        }else{
+          $("#text").css("border-color","red");
+          $("#oninput").css("border-color","red");
+          $("#onsave").css("border-color","#E4E4E4");
+          var div = document.getElementById('target_div');
+          div.style.display = "block";
+        }
+    });
+
+});
 
         
   
