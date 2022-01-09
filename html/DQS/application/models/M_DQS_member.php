@@ -20,12 +20,12 @@ class M_DQS_member extends Da_DQS_member
         $query = $this->db->query($sql);
         return $query;
     }
-    // public function get_by_id($mem_emp_id)
-    // {
-    //     $sql = "SELECT * FROM {$this->db_name}.DQS_Member LEFT JOIN {$this->db_name}.DQS_Department ON mem_dep_id = dep_id WHERE mem_emp_id = $mem_emp_id";
-    //     $query = $this->db->query($sql);
-    //     return $query;
-    // }
+    public function get_by_id($mem_dep_id)
+    {
+        $sql = "SELECT * FROM {$this->db_name}.DQS_Member LEFT JOIN {$this->db_name}.DQS_Department ON mem_dep_id = dep_id WHERE mem_dep_id = $mem_dep_id";
+        $query = $this->db->query($sql);
+        return $query;
+    }
 
     public function get_by_email($mem_email)
     {
