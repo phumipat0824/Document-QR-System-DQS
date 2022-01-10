@@ -16,6 +16,15 @@ class Member_home extends DQS_controller
 		// $data['arr_qr'] = $this->qrc->get_by_id($memid)->result();
         $this->output_sidebar_member("Member/v_member_home",$data);
     }
+	public function show_in_folder($fol_location_id)
+    {
+        $this->load->model('M_DQS_folder', 'fol');
+		// $this->load->model('M_DQS_qrcode', 'qrc');
+		$memid = $this->session->userdata('mem_id');
+		$data['arr_fol'] = $this->fol->get_by_member_id($memid,$fol_location_id)->result();
+		// $data['arr_qr'] = $this->qrc->get_by_id($memid)->result();
+        $this->output_sidebar_member("Member/v_member_home",$data);
+    }
 
     public function create_folder()
     {
@@ -39,9 +48,10 @@ class Member_home extends DQS_controller
         	}
 		
 		$this->folder->fol_location = $newpath;
+		$this->folder->fol_location_id = $this->input->post('fol_location_id');
 		$this->folder->insert();
 		
-		redirect('Member/Member_home/show_member_home');
+		redirect('Member/Member_home/show_in_folder/'.$this->input->post('fol_location_id'));
     }
 
 	function update_folder() 
