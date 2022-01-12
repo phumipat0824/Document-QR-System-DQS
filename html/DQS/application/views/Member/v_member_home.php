@@ -31,7 +31,7 @@
                 <div class="dropdown">
 
                     <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" style="border: 1px solid #dddada; height: 60px; width: 260px;">
-                        <i class="material-icons" style="margin-left: 1px;">folder</i>
+                        <i class="material-icons" style="margin-left: 1px;" >folder</i>
                         <a style=" font-size: 26px; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
                     </button>
                     <div id="showmenu" style="display:block">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
 
         <?php }  ?>
     </div>
@@ -69,7 +69,7 @@
                         <input type="hidden" value="<?php echo $arr_fol[0]->fol_location_id ?>" name="fol_location_id"></input>
                         
                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                        <input type="submit" class="btn btn-success" id="create" value="สร้าง">
+                        <input type="submit" class="btn btn-success" id="create" disabled ="disable" value="สร้าง">
                     </div>
                 </div>
             </div>
@@ -167,6 +167,7 @@
         var check_name ;
         var div = document.getElementById('target_div');
         var dis_button = document.getElementById('create');
+        
         for (let x in t) {
         if(t[x].fol_name == new_name.value){
             check_name = 1;
@@ -180,11 +181,14 @@
     if(check_name == 1){
         $("#fol_name").css("border-color","red");  
            div.style.display = "block";
-           dis_button.innerHTML = disable;
+           dis_button.disabled = true;
+           
     }
     else{
             $("#fol_name").css("border-color","green");
             div.style.display = "none";
+            dis_button.disabled = false;
+            
         }
 });
     
