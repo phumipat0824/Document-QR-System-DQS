@@ -27,7 +27,7 @@
                 <div class="row">
                     <div class="col-md-2 offset-md-1">
                         <!-- <div class="card" style=" margin-left: 10%; width:640%"> -->
-                        <input type="file" id="doc_path" name="doc_path" class="form-control" accept="application/pdf" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;"><br>
+                        <input type="file" id="doc_path" name="doc_path" class="form-control" accept="image/*" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;"><br>
                         <!-- </div> -->
                     </div>
                 </div>
@@ -76,36 +76,127 @@
 <!-- </form> -->
 
 <script type="text/javascript">
+$(document).ready(function() {
+    $('#upload').click(function(e) {
+        e.preventDefault();
+        uploadFile();
+        // html2canvas($("#capture"), {
+        //     onrendered: function(canvas) {
+        //         var doc_name = document.getElementById('doc_name').value;
+        //         var imgsrc = canvas.toDataURL("image/png");
+        //         console.log(imgsrc);
+        //         var dataURL = canvas.toDataURL();
+        //         $.ajax({
+        //             type: "POST",
+        //             url: "../../Member/Member_upload_file/upload_qr",
+        //             data: {
+        //                 doc_name: doc_name,
+        //                 img_qrcode: dataURL
+        //             }
+        //         }).done(function(o) {
+        //             console.log('saved');
+        //         });
+        //     }
+        // });
+    });
+});
+
 async function uploadFile() {
     let formData = new FormData();
-    formData.append("doc_name", logo.files[0]);
-    await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload/" ?>", {
+    formData.append("doc_path", doc_path.files[0]);
+    formData.append("doc_name", doc_name.value);
+    await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_img/" ?>", {
         method: "POST",
+        data: {
+            doc_name: doc_name
+        },
+        body: formData
+
+    });
+    make();
+    await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_qr/" ?>", {
+        method: "POST",
+        data: {
+            doc_name: doc_name
+        },
         body: formData
     });
-    // alert('The file has been uploaded successfully.');
+    doCapture();
+}
+//$(document).ready(function() {
+//    $('#upload').click(function(e) {
+//        e.preventDefault();
+//        var doc_name = document.getElementById("doc_name").value;
+//        //var file_doc_path = doc_path.files[0];
+//        let formData = new FormData();
+//        formData.append("doc_path", doc_path.files[0]);
+//        $.ajax({
+//             type: 'POST',
+//            url: '../../Member/Member_upload_file/upload',
+//            data: {
+//                doc_name: doc_name
+//            },
+//            datatype: "JSON",
+//            success: function(res) {
+//                make();
+//            }
+//        });
+//        
+//    });
+//    
+//});
+
+function doCapture(doc_name) {
+    window.scrollTo(0, 0);
+
+    html2canvas(document.getElementById("capture")).then(function(canvas) {
+
+        // Create an AJAX object
+        var ajax = new XMLHttpRequest();
+
+        // Setting method, server file name, and asynchronous
+        ajax.open("POST", "<?php echo site_url() . "/Member/Member_upload_file/save_server/" ?>", true);
+
+        // Setting headers for POST method
+        ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        // Sending image data to server
+        ajax.send("image=" + canvas.toDataURL("image/jpeg", 0.9));
+
+        // Receiving response from server
+        // This function will be called multiple times
+        ajax.onreadystatechange = function() {
+
+            // Check when the requested is completed
+            if (this.readyState == 4 && this.status == 200) {
+
+                // Displaying response from server
+                console.log(this.responseText);
+            }
+        };
+    });
 }
 
 function make() {
-    const [file] = logo_img.files
-    if (file) {
-        var logoin = URL.createObjectURL(file);
-    } else {
-        var logoin = '';
-    }
+    // const [file] = logo_img.files
+    // if (file) {
+    //     var logoin = URL.createObjectURL(file);
+    // } else {
+    //     var logoin = '';
+    // }
     var text = document.getElementById('text');
     var qrcode = document.getElementById('qrcode');
-    var logo = "<?php echo base_url(). '/assets/logo/' ?>+<?php echo $this->session->userdata('logo_name')?>";
+    var logo = "<?php echo base_url() . '/assets/logo/' ?>+<?php echo $this->session->userdata('logo_name') ?>";
 
 
 
     if (text.value.trim() !== '') {
         qrcode.innerHTML = '';
         new QRCode(document.getElementById("qrcode"), {
-            text: text.value,
-            width: 256,
-            height: 256,
-            logo: logoin,
+            text: '<?php echo site_url() . $this->session->userdata('newpath') ?>',
+            width: 300,
+            height: 300,
+            //logo: logoin,
             logoWidth: 80,
             logoHeight: 80,
             //logoBackgroundColor: '#ffffff',
@@ -121,6 +212,7 @@ function make() {
         });
 
     }
+
     //qrcode.resize(480, 480);
 }
 

@@ -5,8 +5,7 @@
     * @author Ashirawat
     * @Create Date 2564-11-14
 */
-?>
-<?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 require 'DQS_model.php';
