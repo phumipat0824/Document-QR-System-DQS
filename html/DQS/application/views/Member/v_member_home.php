@@ -38,7 +38,7 @@
                             <a href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
                             <a href="#" class="editModal" data-toggle="modal" data-target="#editModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>">แก้ไข</a>
                             <a href="#ย้าย">ย้าย</a>
-                            <a href="<?php echo site_url() . '/Member/Member_home/delete_folder/'; ?><?php echo $arr_fol[$i]->fol_id; ?>/<?php echo $arr_fol[$i]->fol_name; ?>">ลบ</a>
+                            <a href="#" class="deleteModal" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo $arr_fol[$i]->fol_id; ?>">ลบ</a>
                         </div>
                     </div>
                 </div>
@@ -60,11 +60,10 @@
                     </div>
                     <div class="modal-body">
                         <center><input style="font-size: 25px;font-family:TH Sarabun New; " type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name" required></center>
-                        <?php if ($arr_fol[$i]->fol_name = $arr_fol[$i]->$fol_name) {
-                        } ?>
+                       
                     </div>
                     <div class="modal-footer">
-                        <input type="hidden" value="<?php echo $arr_fol[0]->fol_location_id ?>" name="fol_location_id"></input>
+                        <input type="hidden" value="kkk" name="fol_location_id"></input>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                         <input type="submit" class="btn btn-success" value="สร้าง">
                     </div>
@@ -85,16 +84,34 @@
         </button> -->
             </div>
             <!-- action="<?php echo site_url() ?>/Department/Department_list/add_department" -->
-            <form id="edit-form" method="POST" actiom="<?php echo site_url() . '/Member/Member_home/update_folder/'; ?>">
+            <form id="edit-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/update_folder/'; ?>">
                 <div class="modal-body">
                     <center><input type="text" class="col-md-10" placeholder="กรอกชื่อโฟลเดอร์" name="fol_name" required></center>
-                    <input type="hidden" name="fol_id" id="fol_id" value="">
+                    <input type="hidden" name="fol_location_id" id="fol_location_id" value="<?php echo $arr_fol[0]->fol_location_id; ?>">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                     <input type="submit" class="btn btn-success" value="บันทึก">
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<!-- edit Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">ยืนยันการลบโฟลเดอร์</h5>
+            </div>
+
+            <form id="delete-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/delete_folder/'; ?>">
+            <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                    <input type="submit" class="btn btn-success" value="ยืนยัน"> 
+            </div>
+        </form>
         </div>
     </div>
 </div>
