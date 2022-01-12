@@ -19,7 +19,7 @@ class M_DQS_folder extends Da_DQS_folder
 
     public function get_by_id($fol_mem_id)
     {
-        $sql = "SELECT * FROM {$this->db_name}.DQS_Folder  WHERE fol_mem_id = $fol_mem_id AND fol_location_id is null ";
+        $sql = "SELECT * FROM {$this->db_name}.DQS_Folder  WHERE fol_mem_id = $fol_mem_id AND fol_location_id = 0 ";
         $query = $this->db->query($sql);
         return $query;
     }
