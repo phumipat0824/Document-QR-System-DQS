@@ -60,7 +60,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <center><input style="font-size: 25px;font-family:TH Sarabun New; " id="fol_name" type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name" required></center><br>
+                        <center><input style="font-size: 25px;font-family:TH Sarabun New; "  id="fol_name" type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name" required></center><br>
                         <a id="target_div" style="display: none; color:red;" align = 'center'>ชื่อโฟลเดอร์ซ้ำ กรุณากรอกใหม่</a>
                         
                     </div>
@@ -68,7 +68,7 @@
                         <input type="hidden" value="<?php echo $arr_fol[0]->fol_location_id ?>" name="fol_location_id"></input>
                         
                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                        <input type="button" onclick="get_folder()" class="btn btn-success" value="สร้าง">
+                        <input type="submit" class="btn btn-success" id="create" value="สร้าง">
                     </div>
                 </div>
             </div>
@@ -140,49 +140,44 @@
 
 
 
-<!-- send fol_id to edit modal -->
+
+<script>  
+    $(document).on("keyup", "#fol_name", function() {
+        var t = <?php echo json_encode($arr_fol ) ?>;
+        var new_name = document.getElementById("fol_name");
+        var check_name ;
+        var div = document.getElementById('target_div');
+        var dis_button = document.getElementById('create');
+        for (let x in t) {
+        if(t[x].fol_name == new_name.value){
+            check_name = 1;
+            break;
+        } 
+        else{
+            check_name = 0;
+        }
+    }
+    console.log(check_name);
+    if(check_name == 1){
+        $("#fol_name").css("border-color","red");  
+           div.style.display = "block";
+           dis_button.innerHTML = disable;
+    }
+    else{
+            $("#fol_name").css("border-color","green");
+            div.style.display = "none";
+        }
+});
+    
+
+</script>
 <script type="text/javascript">
 $(document).on("click", ".editModal", function() {
     var id = $(this).attr('data-id');
     $("#fol_id").val(id);
 });
-</script>
 
-<script type="text/javascript">
-function check_folder() {
-    for (var i = 0; i < count($arr_fol); $i++) {
-        if (fol_name = $fol_name) {
 
-        }
-    }
-
-    function get_folder(){
-       var check_fol ;
-       check_fol = document.getElementById('fol_name');
-    $.ajax({
-        type : "post",
-      url: "<?php echo site_url() ?>/Member/Member_home/get_folder_ajax",
-      data : {'fol_name' : check_fol },
-      dataType: 'JSON',
-      success:function(data_1){
-          
-        if(data_1 == 0) {
-          $("#fol_name").css("border-color","green");
-         // div.style.display = "none";
-          
-        }else{
-          $("#fol_name").css("border-color","red");     
-           var div = document.getElementById('target_div');
-           div.style.display = "block";
-        }
-        console.log(data_1);
-            }
-
-        });
-    }
-</script>
-
-<script>
 var cm = document.querySelector(".custom-cm");
 
 function showContextMenu(show = true) {
@@ -227,6 +222,7 @@ function rightclick() {
 
 
 }
+
 
 function rightclickfolder(folder) {
     var rightclick;
