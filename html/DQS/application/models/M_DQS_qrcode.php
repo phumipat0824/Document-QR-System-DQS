@@ -18,4 +18,17 @@ class M_DQS_qrcode extends Da_DQS_qrcode
         $query = $this->db->query($sql);
         return $query;
     }
+
+    // public function get_all()
+    // {
+    //     $sql = "SELECT * 
+    //             From {$this->db_name}.DQS_Document
+    //             Left Join {$this->db_name}.DQS_QR
+    //                 On doc_name = qr_name";
+
+    //     $query = $this->db->query($sql);
+    //     return $query;
+
+    // }
+
 }

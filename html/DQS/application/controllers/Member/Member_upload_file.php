@@ -25,6 +25,21 @@ class Member_upload_file extends DQS_controller
 
 		$this->output("member/test_upload");
 	}
+
+	// public function update()
+    // {
+    //     $this->load->model('M_DQS_qrcode', 'qrc');
+	// 	$data['arr_qr'] = $this->fol->get_by_id($memid)->result();
+	// 	for ($i = 0; $i < count($arr_qr); $i++) {
+
+	// 		$this->load->model('Da_DQS_qrcode','qro');
+	// 		$this->qro->qr_id = $arr_qr->qr_id;
+	// 		$this->qro->qr_doc_id = $arr_qr->doc_id;
+	// 		$this->qro->set_id();
+
+	// 	}
+    // }
+
 	public function upload()
 	{
 		$doc_name = $_POST['doc_name'];
