@@ -21,30 +21,30 @@
         </div>
 
         <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">โฟลเดอร์</h3>
-        
-        
+
+
         <?php
         for ($i = 0; $i < count($arr_fol); $i++) {   ?>
-            <!-- style="margin-left: -200px;" -->
-            <div class="col-3">
-                <!-- <div class="card card-frame" style=" height: 60px; width: 260px;"> -->
-                <div class="dropdown">
+        <!-- style="margin-left: -200px;" -->
+        <div class="col-3">
+            <!-- <div class="card card-frame" style=" height: 60px; width: 260px;"> -->
+            <div class="dropdown">
 
-                    <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" style="border: 1px solid #dddada; height: 60px; width: 260px;">
-                        <i class="material-icons" style="margin-left: 1px;" >folder</i>
-                        <a style=" font-size: 26px; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
-                    </button>
-                    <div id="showmenu" style="display:block">
-                        <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
-                            <a href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
-                            <a href="#" class="editModal" data-toggle="modal" data-target="#editModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>">แก้ไข</a>
-                            <a href="#ย้าย">ย้าย</a>
-                            <a href="#" class="deleteModal" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo $arr_fol[$i]->fol_id; ?>">ลบ</a>
-                        </div>
+                <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" style="border: 1px solid #dddada; height: 60px; width: 260px;">
+                    <i class="material-icons" style="margin-left: 1px;">folder</i>
+                    <a style=" font-size: 26px; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
+                </button>
+                <div id="showmenu" style="display:block">
+                    <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
+                        <a href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
+                        <a href="#" class="editModal" data-toggle="modal" data-target="#editModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>">แก้ไข</a>
+                        <a href="#ย้าย">ย้าย</a>
+                        <a href="#" class="deleteModal" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo $arr_fol[$i]->fol_id; ?>">ลบ</a>
                     </div>
                 </div>
             </div>
-        
+        </div>
+
 
         <?php }  ?>
     </div>
@@ -61,15 +61,15 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <center><input style="font-size: 25px;font-family:TH Sarabun New; "  id="fol_name" type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name" required></center><br>
-                        <a id="target_div" style="display: none; color:red;" align = 'center'>ชื่อโฟลเดอร์ซ้ำ กรุณากรอกใหม่</a>
-                        
+                        <center><input style="font-size: 25px;font-family:TH Sarabun New; " id="fol_name" type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name" required></center><br>
+                        <a id="target_div" style="display: none; color:red;" align='center'>ชื่อโฟลเดอร์ซ้ำ กรุณากรอกใหม่</a>
+
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" value="<?php echo $arr_fol[0]->fol_location_id ?>" name="fol_location_id"></input>
-                        
+
                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                        <input type="submit" class="btn btn-success" id="create" disabled ="disable" value="สร้าง">
+                        <input type="submit" class="btn btn-success" id="create" disabled="disable" value="สร้าง">
                     </div>
                 </div>
             </div>
@@ -111,11 +111,11 @@
             </div>
 
             <form id="delete-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/delete_folder/'; ?>">
-            <div class="modal-footer">
+                <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                    <input type="submit" class="btn btn-success" value="ยืนยัน"> 
-            </div>
-        </form>
+                    <input type="submit" class="btn btn-success" value="ยืนยัน">
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -125,10 +125,10 @@
 <div class="row" style="padding: 100px 10px 10px 20%;">
     <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">คิวอาร์โค้ด</h3>
     <?php for ($i = 0; $i < count($arr_qr); $i++) {   ?>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px; width:500;">
             <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
-                <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px;">คิวอาร์โค้ด</h>
+                <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;">คิวอาร์โค้ด</h>
             </div>
             <div class="card-body">
                 <div class="form-row">
@@ -137,13 +137,16 @@
                         <button id="download" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button>
                     </div>
                     <div class="form-group col-md-4">
-                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">ชื่อ : <?php echo $arr_qr[$i]->qr_name ?></h5>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชื่อ : </h5>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"><?php echo $arr_qr[$i]->qr_name ?></h5>
 
-                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">วันที่สร้าง : <?php echo $arr_qr[$i]->qr_datetime ?></h5>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">วันที่สร้าง : </h5>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"><?php echo $arr_qr[$i]->qr_datetime ?></h5>
 
-                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">ชนิด : pdf</h5>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิด : </h5>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">pdf</h5>
 
-                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">ราายงานสรุปผล : </h5>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ราายงานสรุปผล : </h5>
                     </div>
                     <div class="form-group col-md-4">
                         <button id="edit" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 120; ">แก้ไข</button>
@@ -160,39 +163,35 @@
 
 
 
-<script>  
-    $(document).on("keyup", "#fol_name", function() {
-        var t = <?php echo json_encode($arr_fol ) ?>;
-        var new_name = document.getElementById("fol_name");
-        var check_name ;
-        var div = document.getElementById('target_div');
-        var dis_button = document.getElementById('create');
-        
-        for (let x in t) {
-        if(t[x].fol_name == new_name.value){
+<script>
+$(document).on("keyup", "#fol_name", function() {
+    var t = <?php echo json_encode($arr_fol ) ?>;
+    var new_name = document.getElementById("fol_name");
+    var check_name;
+    var div = document.getElementById('target_div');
+    var dis_button = document.getElementById('create');
+
+    for (let x in t) {
+        if (t[x].fol_name == new_name.value) {
             check_name = 1;
             break;
-        } 
-        else{
+        } else {
             check_name = 0;
         }
     }
     console.log(check_name);
-    if(check_name == 1){
-        $("#fol_name").css("border-color","red");  
-           div.style.display = "block";
-           dis_button.disabled = true;
-           
-    }
-    else{
-            $("#fol_name").css("border-color","green");
-            div.style.display = "none";
-            dis_button.disabled = false;
-            
-        }
-});
-    
+    if (check_name == 1) {
+        $("#fol_name").css("border-color", "red");
+        div.style.display = "block";
+        dis_button.disabled = true;
 
+    } else {
+        $("#fol_name").css("border-color", "green");
+        div.style.display = "none";
+        dis_button.disabled = false;
+
+    }
+});
 </script>
 <script type="text/javascript">
 $(document).on("click", ".editModal", function() {
