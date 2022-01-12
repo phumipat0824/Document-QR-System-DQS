@@ -39,7 +39,7 @@
                             <a href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
                             <a href="#" class="editModal" data-toggle="modal" data-target="#editModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>">แก้ไข</a>
                             <a href="#ย้าย">ย้าย</a>
-                            <a href="#" class="deleteModal" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo $arr_fol[$i]->fol_id; ?>">ลบ</a>
+                            <a href=" <?php echo site_url() . '/Member/Member_home/delete_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>/<?php echo $arr_fol[$i]->fol_name ?>">ลบ</a>
                         </div>
                     </div>
                 </div>
@@ -102,22 +102,12 @@
     </div>
 </div>
 
-<!-- edit Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">ยืนยันการลบโฟลเดอร์</h5>
-            </div>
-
-            <form id="delete-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/delete_folder/'; ?>">
-            <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                    <input type="submit" class="btn btn-success" value="ยืนยัน"> 
-            </div>
+<!-- Confirm Delete -->
+<div class="delete " id="deletefol">
+<form id="delete-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/delete_folder/'; ?>">
+<button type="button" class="btn btn-danger" data-dismiss="">ยกเลิก</button>
+<input name="ยืนยัน" onclick="return confirm('ยืนยันการลบโฟลเดอร์')" type="submit" value="ยืนยัน" />
         </form>
-        </div>
-    </div>
 </div>
 
 <!-- QR-code -->
@@ -174,6 +164,7 @@ function check_folder() {
 
         }
     }
+}
 
     function get_folder(){
        var check_fol ;
@@ -274,3 +265,31 @@ function rightclickfolder(folder) {
 
 }
 </script>
+
+<script>
+        function goBack() {
+            window.history.back();
+        }
+
+        $(document).ready(function() {
+            $('form #btn-ok').click(function(e) {
+                let $form = $(this).closest('form');
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false,
+                })
+
+                swalWithBootstrapButtons.fire({  
+                    icon: 'success',
+                    title: 'ลบโฟลเดอร์สำเร็จ',
+                }).then((result) => {
+                    document.getElementById('btn-ok').type = 'submit';
+                    $form.submit();
+                });
+            });
+        });
+    </script>
+
