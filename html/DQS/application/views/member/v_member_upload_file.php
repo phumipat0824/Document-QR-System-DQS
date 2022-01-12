@@ -43,7 +43,7 @@
                     <div class="row">
                         <div class="col-md-2 offset-md-1">
 
-                            <input id="logo" type="file" name="logo" accept="image/png, image/gif, image/jpeg"><br><br>
+                            <input id="logo_img" type="file" name="logo" accept="image/png, image/gif, image/jpeg"><br><br>
 
                         </div>
                     </div>
@@ -58,9 +58,9 @@
         <div class="col-md-5">
             <div class="card" style="padding: 10%" height="500">
                 <div class="card-body" style="margin: auto;">
-                    <div id="capture" style="margin-left:50px">
+                    <div id="capture" style="margin-top:40px;">
                         <div id="qrcode">
-                            <img id="img" src="<?php echo base_url() . '/assets/image/QR_home.PNG' ?>" height="256" width="256" style="margin: auto;">
+                            <img id="img" src="<?php echo base_url(). '/assets/image/QR_home.PNG' ?>" height="250" width="250" style="margin: auto;">
                         </div>
                     </div>
                     <br>
@@ -178,15 +178,13 @@ function doCapture(doc_name) {
 }
 
 function make() {
-    // const [file] = logo_img.files
-    // if (file) {
-    //     var logoin = URL.createObjectURL(file);
-    // } else {
-    //     var logoin = '';
-    // }
+    var logoin = '';
+    const [file] = logo_img.files
+    if (file) {
+        var logoin = URL.createObjectURL(file);
+    }
     var text = document.getElementById('text');
     var qrcode = document.getElementById('qrcode');
-    var logo = "<?php echo base_url() . '/assets/logo/' ?>+<?php echo $this->session->userdata('logo_name') ?>";
 
 
 
@@ -196,7 +194,7 @@ function make() {
             text: '<?php echo site_url() . $this->session->userdata('newpath') ?>',
             width: 300,
             height: 300,
-            //logo: logoin,
+            logo: logoin,
             logoWidth: 80,
             logoHeight: 80,
             //logoBackgroundColor: '#ffffff',
@@ -212,7 +210,6 @@ function make() {
         });
 
     }
-
     //qrcode.resize(480, 480);
 }
 
