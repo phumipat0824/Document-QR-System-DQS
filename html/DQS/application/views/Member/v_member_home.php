@@ -37,7 +37,7 @@
                     <div id="showmenu" style="display:block">
                         <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
                             <a href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
-                            <a href="#" class="editModal" data-toggle="modal" data-target="#editModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>">แก้ไข</a>
+                            <a href="#" class="editModal" data-toggle="modal" data-target="#editModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">แก้ไข</a>
                             <a href="#ย้าย">ย้าย</a>
                             <a href="#" class="deleteModal" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>">ลบ</a>
                         </div>
@@ -68,7 +68,7 @@
                         <input type="hidden" value="<?php echo $arr_fol[0]->fol_location_id ?>" name="fol_location_id"></input>
                         
                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                        <input type="submit" class="btn btn-success" id="create" disabled ="disable" value="สร้าง">
+                        <input type="submit" class="btn btn-success" id="create"  value="สร้าง">
                     </div>
                     </form>
                 </div>
@@ -116,13 +116,15 @@
             <!-- action="<?php echo site_url() ?>/Department/Department_list/add_department" -->
             <form id="edit-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/update_folder/'; ?>">
                 <div class="modal-body">
-                    <center><input type="text" class="col-md-10" placeholder="กรอกชื่อโฟลเดอร์" name="fol_name" required></center>
+                    <center><input onkeyup = "check_fol_edit()" type="text" class="col-md-10" id="fol_edit" placeholder="" name="fol_name" required></center>
+                    <br>
+                    <a id="edit_mss" style="display: none; color:red;" align = 'center'>กรุณากรอกข้อมูลใหม่</a>
                     <input type="hidden" name="fol_id" id="folder_id" value="">
                     <input type="hidden" name="fol_location_id" id="fol_location_id" value="<?php echo $arr_fol[0]->fol_location_id; ?>">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                    <input type="submit" class="btn btn-success" value="บันทึก">
+                    <input type="submit" class="btn btn-success" id="edit"  value="บันทึก">
                 </div>
             </form>
         </div>
@@ -232,6 +234,44 @@
             
         }
     });
+
+    function check_fol_edit(){
+
+        var dis_button = document.getElementById('edit');
+        dis_button.disabled = false;
+
+        var t = <?php echo json_encode($arr_fol ) ?>;
+        var new_name = document.getElementById("fol_edit");
+        var check_name ;
+        var div = document.getElementById('edit_mss');
+        
+        
+        for (let x in t) {
+        if(t[x].fol_name == new_name.value || new_name.value == " "){
+            check_name = 1;
+            break;
+        } 
+        else{
+            check_name = 0;
+        }
+    }
+    console.log(check_name);
+    if(check_name == 1){
+        $("#fol_edit").css("border-color","red");  
+           div.style.display = "block";
+           dis_button.disabled = true;
+           
+    }
+    else{
+            $("#fol_edit").css("border-color","green");
+            div.style.display = "none";
+            dis_button.disabled = false;
+            
+    }
+    }
+
+
+
 </script>
 
 
@@ -242,8 +282,10 @@ $(document).on("click", ".editModal", function(){
     var id = $(this).attr('data-id');
     $("#fol_id").val(id);
     console.log(id);
-
+    var name = $(this).attr('data-name');
+    $("#fol_name").val(name);
     document.getElementById("folder_id").value = id;
+    document.getElementById("fol_edit").placeholder = name;
 });
 
 
