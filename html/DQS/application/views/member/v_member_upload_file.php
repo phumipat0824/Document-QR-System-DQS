@@ -58,9 +58,9 @@
         <div class="col-md-5">
             <div class="card" style="padding: 10%" height="500">
                 <div class="card-body" style="margin: auto;">
-                    <div id="capture" style="margin-left:50px">
+                    <div id="capture" style="margin-top:40px;">
                         <div id="qrcode">
-                            <img id="img" src="<?php echo base_url() . '/assets/image/QR_home.PNG' ?>" height="256" width="256" style="margin: auto;">
+                            <img id="img" src="<?php echo base_url(). '/assets/image/QR_home.PNG' ?>" height="250" width="250" style="margin: auto;">
                         </div>
                     </div>
                     <br>
@@ -179,19 +179,19 @@ function doCapture(doc_name) {
 
 function make() {
     var logoin = '';
-  const [file] = logo_img.files
-  if (file) {
-    var logoin = URL.createObjectURL(file);
-  }
+    const [file] = logo_img.files
+    if (file) {
+        var logoin = URL.createObjectURL(file);
+    }
     var text = document.getElementById('text');
     var qrcode = document.getElementById('qrcode');
-    
+
 
 
     if (text.value.trim() !== '') {
         qrcode.innerHTML = '';
         new QRCode(document.getElementById("qrcode"), {
-            text: text.value,
+            text: '<?php echo site_url() . $this->session->userdata('newpath') ?>',
             width: 300,
             height: 300,
             logo: logoin,

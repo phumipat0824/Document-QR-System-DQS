@@ -278,12 +278,7 @@
                     }
                 }
 
-            } <<
-            <<
-            <<
-            < HEAD
-            </script>
-            =======
+            }
             </script>
 
             <script>
