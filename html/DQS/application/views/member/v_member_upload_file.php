@@ -196,7 +196,7 @@ function make() {
             text: '<?php echo site_url() . $this->session->userdata('newpath') ?>',
             width: 300,
             height: 300,
-            logo: logoin,
+            //logo: logoin,
             logoWidth: 80,
             logoHeight: 80,
             //logoBackgroundColor: '#ffffff',
