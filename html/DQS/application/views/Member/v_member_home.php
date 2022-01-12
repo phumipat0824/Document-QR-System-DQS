@@ -39,7 +39,7 @@
                             <a href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
                             <a href="#" class="editModal" data-toggle="modal" data-target="#editModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>">แก้ไข</a>
                             <a href="#ย้าย">ย้าย</a>
-                            <a href=" <?php echo site_url() . '/Member/Member_home/delete_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>/<?php echo $arr_fol[$i]->fol_name ?>">ลบ</a>
+                            <a href="#" class="deleteModal" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>">ลบ</a>
                         </div>
                     </div>
                 </div>
@@ -47,8 +47,8 @@
         
 
         <?php }  ?>
-    </div>
-    <form method="POST" name="form" action="<?php echo site_url() . '/Member/Member_home/create_folder'; ?>">
+   
+    
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -60,6 +60,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    <form method="POST" name="form" action="<?php echo site_url() .'/Member/Member_home/create_folder'; ?>">
                     <div class="modal-body">
                         <center><input style="font-size: 25px;font-family:TH Sarabun New; "  id="fol_name" type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name" required></center><br>
                         <a id="target_div" style="display: none; color:red;" align = 'center'>ชื่อโฟลเดอร์ซ้ำ กรุณากรอกใหม่</a>
@@ -71,11 +72,38 @@
                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                         <input type="submit" class="btn btn-success" id="create" disabled ="disable" value="สร้าง">
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </form>
-</div>
+   
+
+    <!-- delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">ยืนยันการลบโฟลเดอร์</h5>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+            </div>
+            <!-- action="<?php echo site_url() ?>/Department/Department_list/add_department" -->
+            <form id="delete-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/delete_folder/'; ?>">
+                <div class="modal-body">
+                    <!-- <center><input type="text" class="col-md-10" placeholder="กรอกชื่อโฟลเดอร์" name="fol_name" required></center> -->
+                    <input type="hidden" name="fol_id" id="fol_id" value="">
+                    <!-- <input type="hidden" name="fol_name" id="fol_name" value=""> -->
+                    <input type="hidden" name="fol_location_id" id="fol_location_id" value="<?php echo $arr_fol[0]->fol_location_id; ?>">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                    <input type="submit" class="btn btn-success" value="บันทึก">
+                </div>
+            </form>
+        </div>
+    </div>
+</div> 
 
 <!-- edit Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -91,6 +119,7 @@
             <form id="edit-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/update_folder/'; ?>">
                 <div class="modal-body">
                     <center><input type="text" class="col-md-10" placeholder="กรอกชื่อโฟลเดอร์" name="fol_name" required></center>
+                    <input type="hidden" name="fol_id" id="folder_id" value="">
                     <input type="hidden" name="fol_location_id" id="fol_location_id" value="<?php echo $arr_fol[0]->fol_location_id; ?>">
                 </div>
                 <div class="modal-footer">
@@ -102,13 +131,11 @@
     </div>
 </div>
 
-<!-- Confirm Delete -->
-<div class="delete " id="deletefol">
-<form id="delete-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/delete_folder/'; ?>">
-<button type="button" class="btn btn-danger" data-dismiss="">ยกเลิก</button>
-<input name="ยืนยัน" onclick="return confirm('ยืนยันการลบโฟลเดอร์')" type="submit" value="ยืนยัน" />
-        </form>
+
 </div>
+</div>
+
+
 
 <!-- QR-code -->
 
@@ -180,14 +207,30 @@
             dis_button.disabled = false;
             
         }
-});
-    
-
+    });
 </script>
+
+
+
+
 <script type="text/javascript">
 $(document).on("click", ".editModal", function() {
     var id = $(this).attr('data-id');
     $("#fol_id").val(id);
+    console.log(id);
+
+    document.getElementById("folder_id").value = id;
+});
+
+
+
+$(document).on("click", ".deleteModal", function() {
+    var id = $(this).attr('data-id');
+    $("#fol_id").val(id);
+    // var name = $(this).attr('data-name');
+    // $("#fol_name").val(name);
+    
+    // console.log(name);
 });
 
 
@@ -264,31 +307,3 @@ function rightclickfolder(folder) {
 
 }
 </script>
-
-<script>
-        function goBack() {
-            window.history.back();
-        }
-
-        $(document).ready(function() {
-            $('form #btn-ok').click(function(e) {
-                let $form = $(this).closest('form');
-                const swalWithBootstrapButtons = Swal.mixin({
-                    customClass: {
-                        confirmButton: 'btn btn-success',
-                        cancelButton: 'btn btn-danger'
-                    },
-                    buttonsStyling: false,
-                })
-
-                swalWithBootstrapButtons.fire({  
-                    icon: 'success',
-                    title: 'ลบโฟลเดอร์สำเร็จ',
-                }).then((result) => {
-                    document.getElementById('btn-ok').type = 'submit';
-                    $form.submit();
-                });
-            });
-        });
-    </script>
-

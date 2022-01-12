@@ -69,19 +69,27 @@ class Member_home extends DQS_controller
 
 		$this->Mfol->fol_name = $this->input->post('fol_name');
         $this->Mfol->fol_id = $this->input->post('fol_id');
+		$fol_location_id = $this->input->post('fol_location_id');
 		if ($this->Mfol->check_exist_name($this->Mfol->fol_name) == 0 && trim($this->Mfol->fol_name) != "") {
 			$this->Mfol->update();
-			
 		}
-		redirect('Member/Member_home/show_in_folder/',$this->input->post('fol_location_id'));
+		redirect('Member/Member_home/show_in_folder/'.$this->input->post('fol_location_id'));
+		// echo $this->input->post('fol_name');
+		// echo $this->input->post('fol_id');
 	}
 
-	function delete_folder($fol_id,$fol_name) 
+	function delete_folder() 
 	{
 		$this->load->model('M_DQS_folder','folder');
+
+		$fol_id = $this->input->post('fol_id');
+		// $fol_name = $this->input->post('fol_name');
+		$fol_location_id = $this->input->post('fol_location_id');
+
+		$fol_name = $this->folder->get_by_id_fol($fol_id)->result();
+		$folder_name= $fol_name[0]->fol_name;
 		$this->folder->delete($fol_id);
 	
-		$folder_name=$fol_name;
 		$path='./assets/folder/';
 		
 		 if (file_exists($path.$folder_name))/* Check folder exists or not */
@@ -93,6 +101,8 @@ class Member_home extends DQS_controller
 		$memid = $this->session->userdata('mem_id');
 		$data['arr_fol'] = $this->fol->get_by_id($memid)->result();
 		$this->output_sidebar_member("Member/v_member_home",$data);
+		echo $this->input->post('fol_name');
+		// echo $this->input->post('fol_id');
 	}
 }
 ?>
