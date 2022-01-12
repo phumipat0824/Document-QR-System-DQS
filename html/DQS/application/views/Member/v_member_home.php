@@ -21,7 +21,8 @@
         </div>
 
         <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">โฟลเดอร์</h3>
-
+        
+        
         <?php
         for ($i = 0; $i < count($arr_fol); $i++) {   ?>
             <!-- style="margin-left: -200px;" -->
@@ -59,14 +60,15 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <center><input style="font-size: 25px;font-family:TH Sarabun New; " type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name" required></center>
-                        <?php if ($arr_fol[$i]->fol_name = $arr_fol[$i]->$fol_name) {
-                        } ?>
+                        <center><input style="font-size: 25px;font-family:TH Sarabun New; " id="fol_name" type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name" required></center><br>
+                        <a id="target_div" style="display: none; color:red;" align = 'center'>ชื่อโฟลเดอร์ซ้ำ กรุณากรอกใหม่</a>
+                        
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" value="<?php echo $arr_fol[0]->fol_location_id ?>" name="fol_location_id"></input>
+                        
                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                        <input type="submit" class="btn btn-success" value="สร้าง">
+                        <input type="button" onclick="get_folder()" class="btn btn-success" value="สร้าง">
                     </div>
                 </div>
             </div>
@@ -87,7 +89,7 @@
             <!-- action="<?php echo site_url() ?>/Department/Department_list/add_department" -->
             <form id="edit-form" method="POST" actiom="<?php echo site_url() . '/Member/Member_home/update_folder/'; ?>">
                 <div class="modal-body">
-                    <center><input type="text" class="col-md-10" placeholder="กรอกชื่อโฟลเดอร์" name="fol_name" required></center>
+                    <center><input  type="text" class="col-md-10" placeholder="กรอกชื่อโฟลเดอร์" name="fol_name" required></center>
                     <input type="hidden" name="fol_id" id="fol_id" value="">
                 </div>
                 <div class="modal-footer">
@@ -150,6 +152,31 @@
                 
             }
         }
+    }
+
+    function get_folder(){
+       var check_fol ;
+       check_fol = document.getElementById('fol_name');
+    $.ajax({
+        type : "post",
+      url: "<?php echo site_url() ?>/Member/Member_home/get_folder_ajax",
+      data : {'fol_name' : check_fol },
+      dataType: 'JSON',
+      success:function(data_1){
+          
+        if(data_1 == 0) {
+          $("#fol_name").css("border-color","green");
+         // div.style.display = "none";
+          
+        }else{
+          $("#fol_name").css("border-color","red");     
+           var div = document.getElementById('target_div');
+           div.style.display = "block";
+        }
+        console.log(data_1);
+            }
+
+        });
     }
 </script>
 

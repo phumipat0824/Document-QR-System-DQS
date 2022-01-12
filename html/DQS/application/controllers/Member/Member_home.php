@@ -25,11 +25,23 @@ class Member_home extends DQS_controller
 		// $data['arr_qr'] = $this->qrc->get_by_id($memid)->result();
         $this->output_sidebar_member("Member/v_member_home",$data);
     }
+	public function get_folder_ajax()
+    {
+        $this->load->model('M_DQS_folder', 'fol');
+		$this->fol->fol_name = $this->input->post('fol_name');
+		if ($this->fol->check_exist_name($this->fol->fol_name) == 0 && trim($this->fol->fol_name) != "") {
+				$checkname = 0;
+ 		}
+		else{
+			$checkname = 1;
+		}
+		echo json_encode($checkname);
+    }
 
     public function create_folder()
     {
 		
-		$this->load->model('Da_DQS_folder','folder');
+		$this->load->model('M_DQS_folder','folder');
 		$this->folder->fol_name = $this->input->post('fol_name');
 		$this->folder->fol_mem_id = $this->session->userdata('mem_id');
 
@@ -45,13 +57,12 @@ class Member_home extends DQS_controller
 			//ตั้งชื่อไฟล์ใหม่โดยเอาเวลาไว้หน้าชื่อไฟล์เดิม
 				$newname = $this->input->post('fol_name');
 				$newpath ='./assets/folder/'.$newname;
-        	}
+				$this->folder->fol_location = $newpath;
+        	}	
+			$this->folder->fol_location_id = $this->input->post('fol_location_id');
+			$this->folder->insert();		
+		    redirect('Member/Member_home/show_in_folder/'.$this->input->post('fol_location_id'));
 		
-		$this->folder->fol_location = $newpath;
-		$this->folder->fol_location_id = $this->input->post('fol_location_id');
-		$this->folder->insert();
-		
-		redirect('Member/Member_home/show_in_folder/'.$this->input->post('fol_location_id'));
     }
 
 	function update_folder() 
