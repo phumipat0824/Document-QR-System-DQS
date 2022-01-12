@@ -71,10 +71,9 @@ class Member_home extends DQS_controller
         $this->Mfol->fol_id = $this->input->post('fol_id');
 		if ($this->Mfol->check_exist_name($this->Mfol->fol_name) == 0 && trim($this->Mfol->fol_name) != "") {
 			$this->Mfol->update();
-			redirect('Member/Member_home/show_member_home');//เรียกกลับมาหน้านี้อีกครั้งอยู่หน้าเดียวกันใส่ชื่อได้เลย
+			
 		}
-    
-        
+		redirect('Member/Member_home/show_in_folder/',$this->input->post('fol_location_id'));
 	}
 
 	function delete_folder($fol_id,$fol_name) 

@@ -25,21 +25,22 @@
         
         <?php
         for ($i = 0; $i < count($arr_fol); $i++) {   ?>
-        <!-- style="margin-left: -200px;" -->
-        <div class="col-3">
-            <!-- <div class="card card-frame" style=" height: 60px; width: 260px;"> -->
-            <div class="dropdown">
+            <!-- style="margin-left: -200px;" -->
+            <div class="col-3">
+                <!-- <div class="card card-frame" style=" height: 60px; width: 260px;"> -->
+                <div class="dropdown">
 
-                <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" style="border: 1px solid #dddada; height: 60px; width: 260px;">
-                    <i class="material-icons" style="margin-left: 1px;">folder</i>
-                    <a style=" font-size: 26px; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
-                </button>
-                <div id="showmenu" style="display:block">
-                    <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
-                        <a href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
-                        <a href="#" class="editModal" data-toggle="modal" data-target="#editModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>">แก้ไข</a>
-                        <a href="#ย้าย">ย้าย</a>
-                        <a href="<?php echo site_url() . '/Member/Member_home/delete_folder/'; ?><?php echo $arr_fol[$i]->fol_id; ?>/<?php echo $arr_fol[$i]->fol_name; ?>">ลบ</a>
+                    <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" style="border: 1px solid #dddada; height: 60px; width: 260px;">
+                        <i class="material-icons" style="margin-left: 1px;">folder</i>
+                        <a style=" font-size: 26px; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
+                    </button>
+                    <div id="showmenu" style="display:block">
+                        <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
+                            <a href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
+                            <a href="#" class="editModal" data-toggle="modal" data-target="#editModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>">แก้ไข</a>
+                            <a href="#ย้าย">ย้าย</a>
+                            <a href="#" class="deleteModal" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo $arr_fol[$i]->fol_id; ?>">ลบ</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -87,16 +88,34 @@
         </button> -->
             </div>
             <!-- action="<?php echo site_url() ?>/Department/Department_list/add_department" -->
-            <form id="edit-form" method="POST" actiom="<?php echo site_url() . '/Member/Member_home/update_folder/'; ?>">
+            <form id="edit-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/update_folder/'; ?>">
                 <div class="modal-body">
-                    <center><input  type="text" class="col-md-10" placeholder="กรอกชื่อโฟลเดอร์" name="fol_name" required></center>
-                    <input type="hidden" name="fol_id" id="fol_id" value="">
+                    <center><input type="text" class="col-md-10" placeholder="กรอกชื่อโฟลเดอร์" name="fol_name" required></center>
+                    <input type="hidden" name="fol_location_id" id="fol_location_id" value="<?php echo $arr_fol[0]->fol_location_id; ?>">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                     <input type="submit" class="btn btn-success" value="บันทึก">
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<!-- edit Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">ยืนยันการลบโฟลเดอร์</h5>
+            </div>
+
+            <form id="delete-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/delete_folder/'; ?>">
+            <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                    <input type="submit" class="btn btn-success" value="ยืนยัน"> 
+            </div>
+        </form>
         </div>
     </div>
 </div>
