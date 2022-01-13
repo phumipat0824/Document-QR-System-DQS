@@ -7,16 +7,15 @@ require dirname(__FILE__) . '/../DQS_controller.php';
 class Member_home extends DQS_controller
 {
 
-	public function show_member_home()
-	{
-		$this->load->model('M_DQS_folder', 'fol');
-		// $this->load->model('M_DQS_qrcode', 'qrc');
+    public function show_member_home()
+    {
+        $this->load->model('M_DQS_folder', 'fol');
+		$this->load->model('M_DQS_login', 'qrc');
 		$memid = $this->session->userdata('mem_id');
 		$data['arr_fol'] = $this->fol->get_by_id($memid)->result();
-		// $data['arr_qr'] = $this->qrc->get_by_id($memid)->result();
-		$this->output_sidebar_member("Member/v_member_home", $data);
-	}
-
+		$data['arr_qr'] = $this->qrc->get_by_id($memid)->result();
+        $this->output_sidebar_member("Member/v_member_home",$data);
+    }
 	public function show_in_folder($fol_location_id)
 	{
 		$this->load->model('M_DQS_folder', 'fol');
