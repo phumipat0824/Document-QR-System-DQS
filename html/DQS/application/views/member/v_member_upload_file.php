@@ -4,10 +4,10 @@
 
 <div class="content">
     <div class="row" style="padding: 100px 10px 10px 20%;">
-        <h1 style="color:#100575; font-family:TH sarabun new; font-size: 80px;">สร้างคิวอาร์โค้ด</h1>
-        <h2 style="font-family:TH sarabun new; ">เริ่มสร้าง QR Code กันเลย </h2>
+        <a style="color:#100575; font-size: 80px;">สร้างคิวอาร์โค้ด</a>
+        <a style="font-size: 35px;">เริ่มสร้าง QR Code กันเลย </a>
         <div class="col-md-5">
-            <div class="card card-nav-tabs card-plain" style="color: #E0FFFF; width: 100%;">
+            <div class="card card-nav-tabs card-plain" style="border-color:#E4E4E4;border-width: 5px;">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <div class="card" style="margin: 0px; color: #E0FFFF">
@@ -15,7 +15,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">เว็บไซต์</a>
+                        <a class="nav-link" href="<?php echo site_url().'/Member/Member_upload_file/show_member_upload_web'?>">เว็บไซต์</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_photo' ?>">รูปภาพ</a>
@@ -56,7 +56,7 @@
         </div>
         <!-- <div class="col-md-1"></div> -->
         <div class="col-md-5">
-            <div class="card" style="padding: 10%" height="500">
+            <div class="card" style="border-color:#E4E4E4;border-width: 5px;" height="500">
                 <div class="card-body" style="margin: auto;">
                     <div id="capture" style="margin-top:40px;">
                         <div id="qrcode">
@@ -123,12 +123,12 @@ async function uploadFile() {
     });
     doCapture();
     setTimeout('', 5000);
-        Swal.fire({
-            icon: 'success',
-            title: 'บันทึกไฟล์สำเร็จ',
-            showConfirmButton: false,
-            timer: 2500
-        })
+    Swal.fire({
+        icon: 'success',
+        title: 'บันทึกไฟล์สำเร็จ',
+        showConfirmButton: false,
+        timer: 2500
+    })
     // await fetch("<?php echo site_url() . "/Member/Member_upload_file/update/" ?>");
 }
 //$(document).ready(function() {

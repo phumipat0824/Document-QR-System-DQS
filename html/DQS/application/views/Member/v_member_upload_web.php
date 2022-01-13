@@ -4,21 +4,22 @@
 
 <div class="content">
     <div class="row" style="padding: 100px 10px 10px 20%;">
-        <h1 style="color:#100575; font-family:TH sarabun new; font-size: 80px;">สร้างคิวอาร์โค้ด</h1>
-        <h2 style="font-family:TH sarabun new; ">เริ่มสร้าง QR Code กันเลย </h2>
+        <a style="color:#100575; font-size: 80px;">สร้างคิวอาร์โค้ด</a>
+        <a style="font-size: 35px;">เริ่มสร้าง QR Code กันเลย </a>
         <div class="col-md-5">
-            <div class="card card-nav-tabs card-plain" style="color: #E0FFFF; width: 100%;">
+            <div class="card card-nav-tabs card-plain" style="border-color:#E4E4E4;border-width: 5px;">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a class="nav-link active" href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file' ?>">PDF</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_web' ?>">เว็บไซต์</a>
+                        <div class="card" style="margin: 0px; color: #E0FFFF">
+                            <a class="nav-link active" href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_web' ?>">เว็บไซต์</a>
+                        </div>
                     </li>
                     <li class="nav-item">
-                        <div class="card" style="margin: 0px; color: #E0FFFF">
-                            <a class="nav-link active" href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_photo' ?>">รูปภาพ</a>
-                        </div>
+                        <a class="nav-link active" href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_photo' ?>">รูปภาพ</a>
+
                     </li>
                 </ul>
 
@@ -48,7 +49,7 @@
         </div>
         <!-- <div class="col-md-1"></div> -->
         <div class="col-md-5">
-            <div class="card" style="padding: 10%" height="500">
+            <div class="card" style="border-color:#E4E4E4;border-width: 5px;" height="500">
                 <div class="card-body" style="margin: auto;">
                     <div id="capture" style="margin-top:40px;">
                         <div id="qrcode">
@@ -68,12 +69,12 @@
 </form>
 
 <script type="text/javascript">
-    $(document).ready(function(){   
-        $('#upload').click(function(e) {
+$(document).ready(function() {
+    $('#upload').click(function(e) {
         e.preventDefault();
-          make();
-          setTimeout('', 5000);
-            Swal.fire({
+        make();
+        setTimeout('', 5000);
+        Swal.fire({
             icon: 'success',
             title: 'สร้างคิวอาร์โค้ดสำเร็จ',
             showConfirmButton: false,
@@ -82,79 +83,79 @@
     });
 });
 
-    async function uploadFile() {
-        let formData = new FormData();
-        formData.append("logo", logo.files[0]);
-        await fetch("<?php echo site_url() . "/Qrcode/QRcode_generator/upload/" ?>", {
-            method: "POST",
-            body: formData
-        });
-        make();
-        doCapture();
-        setTimeout('', 5000);
-        Swal.fire({
-            icon: 'success',
-            title: 'สร้างคิวอาร์โค้ดสำเร็จ',
-            showConfirmButton: false,
-            timer: 2500
-        })
-    }
-    //$(document).ready(function() {
-    //    $('#upload').click(function(e) {
-    //        e.preventDefault();
-    //        var doc_name = document.getElementById("doc_name").value;
-    //        //var file_doc_path = doc_path.files[0];
-    //        let formData = new FormData();
-    //        formData.append("doc_path", doc_path.files[0]);
-    //        $.ajax({
-    //             type: 'POST',
-    //            url: '../../Member/Member_upload_file/upload',
-    //            data: {
-    //                doc_name: doc_name
-    //            },
-    //            datatype: "JSON",
-    //            success: function(res) {
-    //                make();
-    //            }
-    //        });
-    //        
-    //    });
-    //    
-    //});
+async function uploadFile() {
+    let formData = new FormData();
+    formData.append("logo", logo.files[0]);
+    await fetch("<?php echo site_url() . "/Qrcode/QRcode_generator/upload/" ?>", {
+        method: "POST",
+        body: formData
+    });
+    make();
+    doCapture();
+    setTimeout('', 5000);
+    Swal.fire({
+        icon: 'success',
+        title: 'สร้างคิวอาร์โค้ดสำเร็จ',
+        showConfirmButton: false,
+        timer: 2500
+    })
+}
+//$(document).ready(function() {
+//    $('#upload').click(function(e) {
+//        e.preventDefault();
+//        var doc_name = document.getElementById("doc_name").value;
+//        //var file_doc_path = doc_path.files[0];
+//        let formData = new FormData();
+//        formData.append("doc_path", doc_path.files[0]);
+//        $.ajax({
+//             type: 'POST',
+//            url: '../../Member/Member_upload_file/upload',
+//            data: {
+//                doc_name: doc_name
+//            },
+//            datatype: "JSON",
+//            success: function(res) {
+//                make();
+//            }
+//        });
+//        
+//    });
+//    
+//});
 
-    function doCapture(doc_name) {
-        window.scrollTo(0, 0);
+function doCapture(doc_name) {
+    window.scrollTo(0, 0);
 
-        html2canvas(document.getElementById("capture")).then(function(canvas) {
+    html2canvas(document.getElementById("capture")).then(function(canvas) {
 
-            // Create an AJAX object
-            var ajax = new XMLHttpRequest();
+        // Create an AJAX object
+        var ajax = new XMLHttpRequest();
 
-            // Setting method, server file name, and asynchronous
-            ajax.open("POST", "<?php echo site_url() . "/Member/Member_upload_file/save_server/" ?>", true);
+        // Setting method, server file name, and asynchronous
+        ajax.open("POST", "<?php echo site_url() . "/Member/Member_upload_file/save_server/" ?>", true);
 
-            // Setting headers for POST method
-            ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        // Setting headers for POST method
+        ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-            // Sending image data to server
-            ajax.send("image=" + canvas.toDataURL("image/jpeg", 0.9));
+        // Sending image data to server
+        ajax.send("image=" + canvas.toDataURL("image/jpeg", 0.9));
 
-            // Receiving response from server
-            // This function will be called multiple times
-            ajax.onreadystatechange = function() {
+        // Receiving response from server
+        // This function will be called multiple times
+        ajax.onreadystatechange = function() {
 
-                // Check when the requested is completed
-                if (this.readyState == 4 && this.status == 200) {
+            // Check when the requested is completed
+            if (this.readyState == 4 && this.status == 200) {
 
-                    // Displaying response from server
-                    console.log(this.responseText);
-                }
-            };
-        });
-    }
+                // Displaying response from server
+                console.log(this.responseText);
+            }
+        };
+    });
+}
 
-    function make() {
-        var logoin = '';
+function make() {
+    var logoin = '';
     const [file] = logo_img.files
     if (file) {
         var logoin = URL.createObjectURL(file);
@@ -187,115 +188,115 @@
 
     }
     //qrcode.resize(480, 480);
-    }
+}
 
-    document.getElementById("download").addEventListener("click", function() {
+document.getElementById("download").addEventListener("click", function() {
 
-        html2canvas(document.querySelector('#capture')).then(function(canvas) {
+    html2canvas(document.querySelector('#capture')).then(function(canvas) {
 
-            saveAs(canvas.toDataURL(), 'DQS_QR.png');
-        });
+        saveAs(canvas.toDataURL(), 'DQS_QR.png');
     });
+});
 
 
-    function saveAs(uri, filename) {
+function saveAs(uri, filename) {
 
-        var link = document.createElement('a');
+    var link = document.createElement('a');
 
-        if (typeof link.download === 'string') {
+    if (typeof link.download === 'string') {
 
-            link.href = uri;
-            link.download = filename;
+        link.href = uri;
+        link.download = filename;
 
-            //Firefox requires the link to be in the body
-            document.body.appendChild(link);
+        //Firefox requires the link to be in the body
+        document.body.appendChild(link);
 
-            //simulate click
-            link.click();
+        //simulate click
+        link.click();
 
-            //remove the link when done
-            document.body.removeChild(link);
+        //remove the link when done
+        document.body.removeChild(link);
 
-        } else {
+    } else {
 
-            window.open(uri);
+        window.open(uri);
 
-        }
     }
+}
 
-    function InvalidMsg(textbox) {
+function InvalidMsg(textbox) {
 
-        if (textbox.value == '') {
-            textbox.setCustomValidity('กรุณากรอกลิงก์เว็บไซต์');
-        }
-        // else if(textbox.validity.typeMismatch){
-        //     textbox.setCustomValidity('please enter a valid email address');
-        // }
-        else {
-            textbox.setCustomValidity('');
-        }
-        return true;
+    if (textbox.value == '') {
+        textbox.setCustomValidity('กรุณากรอกลิงก์เว็บไซต์');
     }
+    // else if(textbox.validity.typeMismatch){
+    //     textbox.setCustomValidity('please enter a valid email address');
+    // }
+    else {
+        textbox.setCustomValidity('');
+    }
+    return true;
+}
 </script>
 <style>
-    .show {
-        display: block;
-    }
+.show {
+    display: block;
+}
 
-    .nav-tabs .nav-item .nav-link,
-    .nav-tabs .nav-item .nav-link:focus,
-    .nav-tabs .nav-item .nav-link:hover {
-        border: 0 !important;
-        color: #000 !important;
-        font-size: 16px
-    }
+.nav-tabs .nav-item .nav-link,
+.nav-tabs .nav-item .nav-link:focus,
+.nav-tabs .nav-item .nav-link:hover {
+    border: 0 !important;
+    color: #000 !important;
+    font-size: 16px
+}
 
-    input[type=text],
-    select {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
+input[type=text],
+select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
 
 
 
-    .parent-div {
-        display: inline-block;
-        position: relative;
-        overflow: hidden;
-    }
+.parent-div {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
 
-    .parent-div input[type=file] {
-        left: 0;
-        top: 0;
-        opacity: 0;
-        position: absolute;
-        font-size: 90px;
-    }
+.parent-div input[type=file] {
+    left: 0;
+    top: 0;
+    opacity: 0;
+    position: absolute;
+    font-size: 90px;
+}
 
-    .btn-upload {
-        width: 350px;
-        height: 47px;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        background-color: #fff;
-    }
+.btn-upload {
+    width: 350px;
+    height: 47px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #fff;
+}
 
-    #img {
-        -webkit-filter: blur(2px);
-        /* Safari 6.0 - 9.0 */
-        filter: blur(2px);
-    }
+#img {
+    -webkit-filter: blur(2px);
+    /* Safari 6.0 - 9.0 */
+    filter: blur(2px);
+}
 
-    a {
-        font-size: 16px
-    }
+a {
+    font-size: 16px
+}
 </style>
