@@ -122,6 +122,7 @@ async function uploadFile() {
         body: formData
     });
     doCapture();
+    // await fetch("<?php echo site_url() . "/Member/Member_upload_file/update/" ?>");
 }
 //$(document).ready(function() {
 //    $('#upload').click(function(e) {
