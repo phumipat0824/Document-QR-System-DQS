@@ -13,7 +13,7 @@
                     <h1 style="font-weight: 900; color:#003399 ; font-size: 50px; font-family:TH Sarabun New; height: 40; width: 50px;" id="button-folder">+ สร้าง</h1>
                 </button>
                 <div id="myDropdown" class="dropdown-content">
-                    <div class="custom-cm__item" data-toggle="modal" data-target="#exampleModal"><a>สร้างโฟลเดอร์</a></div>
+                    <div class="custom-cm__item" data-toggle="modal" data-target="#exampleModal" ><a>สร้างโฟลเดอร์</a></div>
 
                     <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file'; ?>">อัปโหลดไฟล์</a></div>
                 </div>
@@ -44,11 +44,10 @@
                 </div>
 
 
-
+                </div>
             </div>
-        </div>
-        <?php }  ?>
-        <!-- Modal -->
+            <?php }  ?>
+        <!--create Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -59,17 +58,18 @@
                         </button>
                     </div>
                     <form method="POST" name="form" action="<?php echo site_url() .'/Member/Member_home/create_folder'; ?>">
-                        <div class="modal-body">
-                            <center><input style="font-size: 25px;font-family:TH Sarabun New; " id="fol_name" type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name" required></center><br>
-                            <a id="target_div" style="display: none; color:red;" align='center'>ชื่อโฟลเดอร์ซ้ำ กรุณากรอกใหม่</a>
-
-                        </div>
-                        <div class="modal-footer">
-                            <input type="hidden" value="<?php echo $arr_fol[0]->fol_location_id ?>" name="fol_location_id"></input>
-
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                            <input type="submit" class="btn btn-success" id="create" value="สร้าง">
-                        </div>
+                    <div class="modal-body">
+                        <center><input style="font-size: 25px;font-family:TH Sarabun New; "  id="fol_name" type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name" required></center><br>
+                        <a id="target_div" style="display: none; color:red;" align = 'center'>ชื่อโฟลเดอร์ซ้ำ กรุณากรอกใหม่</a>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        
+                        <input type="hidden" value="<?php  echo $arr_fol[0]->fol_location_id ?>" name="fol_location_id"></input>
+                
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                        <input type="submit" class="btn btn-success" id="create"  value="สร้าง">
+                    </div>
                     </form>
                 </div>
             </div>
@@ -265,6 +265,15 @@ $(document).on("click", ".deleteModal", function() {
     // var name = $(this).attr('data-name');
     // $("#fol_name").val(name);
 
+    // console.log(name);
+});
+
+$(document).on("click", ".exampleModal", function(){
+    var id = $(this).attr('data-id');
+    $("#fol_id").val(id);
+    // var name = $(this).attr('data-name');
+    // $("#fol_name").val(name);
+    
     // console.log(name);
 });
 
