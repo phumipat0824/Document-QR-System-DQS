@@ -13,7 +13,7 @@
                     <h1 style="font-weight: 900; color:#003399 ; font-size: 50px; font-family:TH Sarabun New; height: 40; width: 50px;" id="button-folder">+ สร้าง</h1>
                 </button>
                 <div id="myDropdown" class="dropdown-content">
-                    <div class="custom-cm__item" data-toggle="modal" data-target="#exampleModal" ><a>สร้างโฟลเดอร์</a></div>
+                    <div class="custom-cm__item" data-toggle="modal" data-target="#exampleModal"><a>สร้างโฟลเดอร์</a></div>
 
                     <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file'; ?>">อัปโหลดไฟล์</a></div>
                 </div>
@@ -64,7 +64,7 @@
                     </div>
                     <div class="modal-footer">
                         
-                        <input type="hidden" value="<?php  echo $arr_fol[0]->fol_location_id ?>" name="fol_location_id"></input>
+                        <input type="hidden" value="<?php  echo $this->session->userdata('fol_location_id'); ?>" name="fol_location_id"></input>
                 
                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                         <input type="submit" class="btn btn-success" id="create"  value="สร้าง">
@@ -290,15 +290,6 @@ $(document).on("click", ".editModal", function(){
 
 
 $(document).on("click", ".deleteModal", function(){
-    var id = $(this).attr('data-id');
-    $("#fol_id").val(id);
-    // var name = $(this).attr('data-name');
-    // $("#fol_name").val(name);
-    
-    // console.log(name);
-});
-
-$(document).on("click", ".exampleModal", function(){
     var id = $(this).attr('data-id');
     $("#fol_id").val(id);
     // var name = $(this).attr('data-name');
