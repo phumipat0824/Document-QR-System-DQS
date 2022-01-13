@@ -13,7 +13,7 @@
                         <a class="nav-link active" href="<?php echo site_url().'/Member/Member_upload_file/show_member_upload_file'?>">PDF</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">เว็บไซต์</a>
+                        <a class="nav-link" href="<?php echo site_url().'/Member/Member_upload_file/show_member_upload_web'?>">เว็บไซต์</a>
                     </li>
                     <li class="nav-item">
                         <div class="card" style="margin: 0px; color: #E0FFFF">
@@ -122,6 +122,13 @@ async function uploadFile() {
         body: formData
     });
     doCapture();
+    setTimeout('', 5000);
+        Swal.fire({
+            icon: 'success',
+            title: 'บันทึกไฟล์สำเร็จ',
+            showConfirmButton: false,
+            timer: 2500
+        })
 }
 //$(document).ready(function() {
 //    $('#upload').click(function(e) {

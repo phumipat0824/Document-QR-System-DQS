@@ -122,6 +122,13 @@ async function uploadFile() {
         body: formData
     });
     doCapture();
+    setTimeout('', 5000);
+        Swal.fire({
+            icon: 'success',
+            title: 'บันทึกไฟล์สำเร็จ',
+            showConfirmButton: false,
+            timer: 2500
+        })
     // await fetch("<?php echo site_url() . "/Member/Member_upload_file/update/" ?>");
 }
 //$(document).ready(function() {
