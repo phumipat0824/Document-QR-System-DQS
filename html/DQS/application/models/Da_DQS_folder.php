@@ -44,9 +44,11 @@ class Da_DQS_folder extends DQS_model {
 
     public function update(){//update folder into database    
         $sql ="UPDATE {$this->db_name}.DQS_Folder
-        SET fol_name = ?
-        WHERE fol_id = ?";
-        $this->db->query($sql,array($this->fol_name,$this->fol_id));         
+        SET fol_name = ? ,  fol_location = ?
+        WHERE fol_id = ? ";
+        // $this->db->query($sql,array($this->fol_name,$this->fol_id));
+        $this->db->query($sql,array($this->fol_name,$this->fol_location,$this->fol_id));     
+                 
     }//end update folder into database
 
     public function delete($fol_id)   

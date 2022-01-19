@@ -82,15 +82,37 @@ class Member_home extends DQS_controller
 		$this->Mfol->fol_name = $this->input->post('fol_name');
 		$this->Mfol->fol_id = $this->input->post('fol_id');
 		$fol_location_id = $this->input->post('fol_location_id');
+		$obj_fol = $this->Mfol->get_by_id_fol($this->input->post('fol_id'))->result();
+		// print_r($obj_fol);
+
+		if ($this->input->post('fol_location_id') == 0) {
+			$newpath = './assets/user/' . $this->session->userdata('mem_username') . '/';
+		} else {
+			$get_name_location = $this->folder->get_by_id_fol($this->input->post('fol_location_id'))->result();
+			$newpath = $get_name_location[0]->fol_location . '/';
+		}
+		//ตั้งชื่อไฟล์ใหม่โดยเอาเวลาไว้หน้าชื่อไฟล์เดิม
+		$newname = $this->input->post('fol_name');
+		$newpath = $newpath . $newname;
+		$this->Mfol->fol_location = $newpath;
+
 		if ($this->Mfol->check_exist_name($this->Mfol->fol_name) == 0 && trim($this->Mfol->fol_name) != "") {
 			$this->Mfol->update();
 		}
+		
+		$obj_newfol = $this->Mfol->get_by_id_fol($this->input->post('fol_id'))->result();
+		// print_r($obj_newfol);
+
+		rename($obj_fol[0]->fol_location , $obj_newfol[0]->fol_location );
+		
+		
+		
 		redirect('Member/Member_home/show_in_folder/' . $this->input->post('fol_location_id'));
 		// echo $this->input->post('fol_name');
 		// echo $this->input->post('fol_id');
+		// print_r(Mfol);
 	}
 	
-
 	function delete_folder()
 	{
 		$this->load->model('M_DQS_folder', 'folder');
@@ -104,17 +126,24 @@ class Member_home extends DQS_controller
 		$this->folder->delete($fol_id);
 
 
-		$newpath = './assets/user/' . $this->session->userdata('mem_username') . '/'. $folder_name.'/';
 
-		@rmdir($newpath);/* Delete folder by using rmdir function */
+		$newpath = './assets/user/' . $this->session->userdata('mem_username') . '/'. $folder_name ;
+		$new_path = base_url().$newpath;
+
+		if(file_exists($newpath)){
+			$di = new RecursiveDirectoryIterator($newpath, FilesystemIterator::SKIP_DOTS);
+			$ri = new RecursiveIteratorIterator($di, RecursiveIteratorIterator::CHILD_FIRST);
+			foreach ( $ri as $file ) {
+				$file->isDir() ?  rmdir($file) : unlink($file);
+			}
+		}
+
+		rmdir($newpath);/* Delete folder by using rmdir function */
 		
 		redirect('/Member/Member_home/show_member_home');
-		$this->load->model('M_DQS_folder', 'fol');
-		$memid = $this->session->userdata('mem_id');
-		$data['arr_fol'] = $this->fol->get_by_id($memid)->result();
-		$this->output_sidebar_member("Member/v_member_home", $data);
-		echo $this->input->post('fol_name');
-		// // echo $this->input->post('fol_id');
+
 		
 	}
+
+	
 }
