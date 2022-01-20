@@ -8,20 +8,14 @@
         <a style="font-size: 35px;">เริ่มสร้าง QR Code กันเลย </a>
         <div class="col-md-5">
             <div class="card card-nav-tabs card-plain" style="border-color:#E4E4E4;border-width: 5px;">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <div class="card" style="margin: 0px; color: #E0FFFF">
-                            <a class="nav-link active" href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file' ?>">PDF</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url().'/Member/Member_upload_file/show_member_upload_web'?>">เว็บไซต์</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_photo' ?>">รูปภาพ</a>
-                    </li>
-                </ul>
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist" style="padding-b :50px;">
+                        <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="far fa-file-pdf"></i> PDF</a>
+                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="far fa-images"></i> รูปภาพ</a>
+                        <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="false"><i class="fas fa-paperclip"></i> เว็บไซต์</a>
 
+                    </div>
+                </nav>
                 <form method="post" action="" enctype="multipart/form-data">
                     <label class=" form-control-label" style="padding-left: 45px; padding-top: 20px; color: #000000">ไฟล์ PDF</label><br>
                     <div class="row">
@@ -37,19 +31,23 @@
                         </div>
                     </div>
 
+                    <div id="inputlogo" style="margin-top: 30px;">
+                        <center>
+                            <button type="button" class="slide" id="up" style="width: 80%; " onclick="showinputlogo()">เพิ่มโลโก้<i class="fas fa-angle-down" style="float: right;" aria-hidden="true"></i></button>
+                        </center>
+                    </div>
 
-                    <label style="padding-left: 40px; padding-top: 20px; color: #000000">โลโก้:</label><br>
-
-                    <div class="row">
-                        <div class="col-md-2 offset-md-1">
-
-                            <input id="logo_img" type="file" name="logo" accept="image/png, image/gif, image/jpeg"><br><br>
-
-                        </div>
+                    <div class="form-row" id="vanish" style="display:none;margin-left:10%;margin-top: 30px;">
+                        <a style="margin-top: 10px;">โลโก้</a>&emsp;
+                        <label> jpeg/png</label>
+                    </div>
+                    <div class="parent-div" id="vanish1" style="display:none;margin-left:10%;">
+                        <button class="btn-upload" style="color:#cfcfcf;"><i class="fas fa-upload"></i> เลือกโลโก้คิวอาร์โค้ด</button>
+                        <input id="logo_img" type="file" name="logo" accept="image/png, image/jpeg"><br><br>
                     </div>
                     <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name') ?>" hidden>
                     <input type="text" id="text" name='text' value='<?php echo $this->session->userdata('newpath') ?>' hidden>
-                    <button id="upload" name="upload" class="btn btn-dark_blue" style="margin-left: 25%; margin-bottom: 50px;margin-top:50px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button>
+                    <button id="upload" name="upload" class="btn btn-dark_blue" style="margin-left: 25%; margin-bottom: 30px;margin-top: 40px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 35px;">สร้างคิวอาร์โค้ด</button>
 
                     <!-- </form> -->
             </div>
@@ -65,7 +63,7 @@
                     </div>
                     <br>
 
-                    <button id="download" onclick="doCapture();" class="btn btn-warning" style="margin-left:10px;margin-top:40px;font-family:TH sarabun new; font-size: 20px; width: 240; ">ดาวน์โหลด</button>
+                    <button id="download" onclick="doCapture();" class="btn btn-warning" style="margin-top:40px;margin-bottom: 30px;font-family:TH sarabun new; font-size: 35px; width: 240; ">ดาวน์โหลด</button>
                 </div>
             </div>
         </div>
@@ -255,6 +253,20 @@ function saveAs(uri, filename) {
     }
 }
 
+function showinputlogo() {
+    $('#up').find("i").toggleClass("fa-angle-down fa-angle-up");
+    var x = document.getElementById("vanish");
+    var y = document.getElementById("vanish1");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+        y.style.display = "block";
+    } else {
+        x.style.display = "none";
+        y.style.display = "none";
+    }
+
+}
+
 function InvalidMsg(textbox) {
 
     if (textbox.value == '') {
@@ -284,7 +296,7 @@ function InvalidMsg(textbox) {
 
 input[type=text],
 select {
-    width: 100%;
+    width: 80%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -299,6 +311,7 @@ select {
     display: inline-block;
     position: relative;
     overflow: hidden;
+    /* margin: auto; */
 }
 
 .parent-div input[type=file] {
@@ -310,10 +323,10 @@ select {
 }
 
 .btn-upload {
-    width: 350px;
+    width: 89%;
     height: 47px;
     padding: 12px 20px;
-    margin: 8px 0;
+    margin: auto;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -329,5 +342,30 @@ select {
 
 a {
     font-size: 16px
+}
+
+.slide {
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #fff;
+    border-color: #fff;
+}
+
+.nav-tabs .nav-link {
+    background-color: #cfcfcf;
+    border-color: #fff;
+}
+
+.nav-tabs .nav-link.active:focus,
+.nav-tabs .nav-link.active:hover {
+    border-color: #fff;
 }
 </style>
