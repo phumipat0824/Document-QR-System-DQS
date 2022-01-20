@@ -166,6 +166,35 @@
             </div>
         </div>
 
+        <!-- move Modal -->
+        <div class="modal fade" id="moveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">ย้ายไปที่</h5>
+                    </div>
+                    <form id="move-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/move_folder/';?>">
+                        <div class="modal-body">
+                            <input type="hidden" name="fol_id" id="foler_id" value="">   
+                            <select name="fol_location_id" id="fol_location_id" class="form-select" aria-label="Default select example" required>
+                                <?php for ($i = 0; $i < count($arr_fol); $i++) {   ?>
+                                    <?php if($arr_fol[$i]->fol_id != $value){ ?>
+                                        <option value='<?php echo $arr_fol[$i]->fol_id ?>|<?php echo $arr_fol[$i]->fol_name ?>'><?php echo $arr_fol[$i]->fol_name ?></option>
+                                    <?php } ?>
+                                <?php } ?>
+                            </select><br>
+                            <input type="hidden" name="fol_name" id="foler_name" value="">
+                            <!-- //search folder name -->
+                        </div>
+                        <div class="modal-footer">  
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                            <input type="submit" class="btn btn-success" value="บันทึก">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
 
     </div>
 </div>

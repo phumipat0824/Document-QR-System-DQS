@@ -294,7 +294,7 @@ $(document).on("click", ".editModal", function(){
     var name = $(this).attr('data-name');
     $("#fol_name").val(name);
     document.getElementById("folder_id").value = id;
-    document.getElementById("fol_edit").placeholder = name;
+    document.getElementById("fol_edit").value = name;
 });
 
 
