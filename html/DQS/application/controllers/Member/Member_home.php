@@ -15,6 +15,7 @@ class Member_home extends DQS_controller
 		$data['arr_fol'] = $this->fol->get_by_id($memid)->result();
 		$data['arr_qr'] = $this->qrc->get_by_id($memid)->result();
 		$data['arr_folder'] = $this->fol->get_all()->result();
+		$data['path_fol'] = array('@');
         $this->output_sidebar_member("Member/v_member_home",$data);
     }
 	public function show_in_folder($fol_location_id)
