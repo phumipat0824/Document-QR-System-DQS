@@ -56,5 +56,11 @@ class Da_DQS_folder extends DQS_model {
         $this->db->query($sql , array($this->fol_id));  
 	}
 
+    public function move(){//update location folder into database    
+        $sql ="UPDATE {$this->db_name}.DQS_Folder
+        SET fol_location = ?, fol_location_id = ?
+        WHERE fol_id = ?";
+        $this->db->query($sql,array($this->fol_location,$this->fol_location_id,$this->fol_id));         
+    }//end update location folder into database
 }
 ?>

@@ -117,4 +117,31 @@ class Member_home extends DQS_controller
 		// // echo $this->input->post('fol_id');
 		
 	}
+
+	function move_folder() 
+	{
+		$this->load->model('Da_DQS_folder','folder');
+		// $this->folder->fol_location_id = $this->input->post('fol_location_id');
+		$this->folder->fol_id = $this->input->post('fol_id');
+		$this->folder->fol_name = $this->input->post('fol_name');
+		// echo $this->input->post('fol_location_id');
+		// echo $this->input->post('fol_id');
+		// echo $this->input->post('fol_name');
+
+		$arr_folder = $this->input->post('fol_location_id');
+		// echo $arr_folder;
+		$arr_folder_explode = explode('|', $arr_folder);
+        $this->folder->fol_location_id = $arr_folder_explode[0];
+        $folder_name = $arr_folder_explode[1];
+		
+        // $folder_name=$_POST['fol_name'];
+
+		if($this->folder->fol_name != $folder_name){
+			$newpath = './assets/user/' . $this->session->userdata('mem_username') . '/'. $folder_name .'/'. $this->folder->fol_name;
+			$this->folder->fol_location = $newpath;
+			$this->folder->move();
+		}
+		
+		redirect('Member/Member_home/show_member_home');
+	}
 }
