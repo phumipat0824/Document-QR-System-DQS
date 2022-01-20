@@ -32,7 +32,6 @@ class Member_home extends DQS_controller
 		$sub_path_folder = strpos($sub_folder,'/'); // sub pos แยกตัว '/' ออกมาแต่ละชื่อ
 		$show_path_folder = substr($sub_folder,$sub_path_folder);
 		$arr = array();
-		echo '<br/>' ;
 		do{
 			$sub_path_folder = strpos($get_sub_folder,'/'); 	
 			$sub_path_folder = $sub_path_folder + 1;
@@ -43,6 +42,7 @@ class Member_home extends DQS_controller
 			
 		}while(strpos($get_sub_folder,'/') != null);
 		$data['path_fol'] = $arr;
+
 		if ($data['arr_fol'] == null) {
 			$this->output_sidebar_member("Member/v_member_home_in_folder", $data);
 		} else {

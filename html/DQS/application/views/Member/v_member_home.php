@@ -42,6 +42,7 @@
                 <!-- <div class="card card-frame" style=" height: 60px; width: 260px;"> -->
                 <div class="dropdown">
                     <?php if ($arr_fol[$i]->fol_name == 'เอกสารราชการ') { ?>
+                        <!--  โฟลเดอร์พิเศษ -->
                         <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" style=" background-color:#a19078; border: 2px solid #876a43; height: 60px; width: 260px;">
                             <i class="material-icons" style="margin-left: -20px; font-size:30px;  color:#f3ff41;">folder</i>
                             <a style=" font-size: 26px; font-weight:900; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
@@ -53,6 +54,7 @@
                             </div>
                         </div>
                     <?php } else if ($arr_fol[$i]->fol_name == 'เอกสารการประชุม') { ?>
+                        <!--  โฟลเดอร์พิเศษ -->
                         <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" style=" background-color:#4876d3; border: 2px solid #002b83; height: 60px; width: 260px;">
                             <i class="material-icons" style="margin-left: -20px; font-size:30px;  color:#f3ff41;">folder</i>
                             <a style=" font-size: 26px; font-weight:900; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
@@ -64,7 +66,8 @@
                             </div>
                         </div>
 
-                    <?php } else { ?>
+                    <?php } else { ?> 
+                        <!--  โฟลเดอร์ปกติ -->
                         <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" style=" background-color:#ffff; border: 2px solid#c7c6c4; height: 60px; width: 260px;">
                             <i class="material-icons" style="margin-left: -20px; font-size:30px;  color:#f3ff41;">folder</i>
                             <a style=" font-size: 26px; font-weight:900; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
@@ -131,7 +134,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                            <input type="submit" class="btn btn-success" value="บันทึก">
+                            <input type="submit" class="btn btn-success" value="ยืนยัน">
                         </div>
                     </form>
                 </div>
@@ -318,7 +321,7 @@
         var name = $(this).attr('data-name');
         $("#fol_name").val(name);
         document.getElementById("folder_id").value = id;
-        document.getElementById("fol_edit").placeholder = name;
+        document.getElementById("fol_edit").value = name;
     });
 
 
