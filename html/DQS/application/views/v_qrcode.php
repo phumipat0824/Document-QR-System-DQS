@@ -10,8 +10,8 @@
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist"style="padding-b :50px;">
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fas fa-paperclip"></i> เว็บไซต์</a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="far fa-file-pdf"></i> PDF</a>
-                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="far fa-images"></i> รูปภาพ</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="<?php echo base_url() . 'Member/Member_login/show_member_login' ?>" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="far fa-file-pdf"></i> PDF</a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="<?php echo base_url() . 'Member/Member_login/show_member_login' ?>" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="far fa-images"></i> รูปภาพ</a>
                 </div>
             </nav>                                         
                     <!-- <form action='' method="post"> -->
@@ -32,11 +32,13 @@
                                         
                                         <div class="form-row" id="vanish"style="display:none;margin-left:10%;margin-top: 30px;"> 
                                         <a style="margin-top: 10px;">โลโก้</a>&emsp;
-                                            <label>     jpeg/png</label>
+                                        <label style = "color: #FF0000;">*</label>
+                                        <label>jpeg/png</label>&emsp;
+                                        <label id="name_img"style = "color: #000;"></label>
                                         </div> 
                                         <div class="parent-div" id="vanish1"style="display:none;margin-left:10%;">      
-                                                <button class="btn-upload" style="color:#cfcfcf;"><i class="fas fa-upload"></i> เลือกโลโก้คิวอาร์โค้ด</button>                   
-                                                <input id="logo_img" type="file" name="logo" accept="image/png, image/jpeg"><br><br>
+                                                <button class="btn-upload" style="color:#000;"><i class="fas fa-upload"></i> เลือกโลโก้คิวอาร์โค้ด</button>                   
+                                                <input id="logo_img" type="file" name="logo"onchange="getFileData();" accept="image/png, image/jpeg"><br><br>
                                         </div>        
                                         <div class="form-row"style="margin: auto;">                                      
                                         <button type="submit"class="btn btn-dark_blue" id="make" style="margin-bottom: 30px;margin-top: 40px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 35px;">สร้างคิวอาร์โค้ด</button>
@@ -65,7 +67,12 @@
   $(document).on('click', '.stage', function() {
     $(this).remove('.stage');
   });
-});   
+}); 
+function getFileData (){
+    var file = document.getElementById("logo_img");
+    var file_name = document.getElementById("name_img");
+    $('#name_img').text(file.files[0].name);
+}
 async function uploadFile() {
     let formData = new FormData();
     formData.append("logo", logo.files[0]);
@@ -120,6 +127,7 @@ document.getElementById("download").addEventListener("click", function() {
     });
     
 });
+
 
 
 function saveAs(uri, filename) {
@@ -280,7 +288,7 @@ select {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    background-color: #fff;
+    background-color: #cfcfcf;
 }
 #img {
     -webkit-filter: blur(2px);
