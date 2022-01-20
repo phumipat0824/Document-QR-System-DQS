@@ -69,6 +69,7 @@
             html_code += '<th>ชื่อผู้ใช้งาน</th>';
             html_code += '<th>ชื่อ - นามสกุล</th>';
             html_code += '<th>หน่วยงาน</th>';
+            html_code += '<th>อีเมล</th>';
             html_code += '<th></th>';
             html_code += '<th></th>';
             html_code += '</tr>';
@@ -84,6 +85,7 @@
 
 
                 html_code += '<td>'+row_mem['dep_name']+'</td>';
+                html_code += '<td>' + row_mem['mem_email'] + '</td>';
                 // สถานะของหน่วยงาน
                 html_code += '<td style="text-align: center;">' +
                     '<a href="<?php echo site_url() ?>/Member/Member_edit/show_member_edit/'+ row_mem['mem_id'] +'">' +
