@@ -488,8 +488,7 @@
     }
 
 
-<script type="text/javascript">
-  $(document).on("click", ".moveModal", function() {
+$(document).on("click", ".moveModal", function() {
     var id = $(this).attr('data-id');
     $("#fol_id").val(id);
     var name = $(this).attr('data-name');
@@ -500,13 +499,15 @@
     console.log(name);
   });
 
-  $(document).ready(function(){
-  $('.dropdown-submenu a.test').on("click", function(e){
-    $(this).next('ul').toggle();
-    e.stopPropagation();
-    e.preventDefault();
-  });
-});
+    $(document).ready(function(){
+        $('.dropdown-submenu a.test').on("click", function(e){
+            $(this).next('ul').toggle();
+            e.stopPropagation();
+            e.preventDefault();
+        });
+    });    
+
+
 // $(document).on("click", ".moveModal", function() {
 //     var location = $(this).attr('data-location');
 //     var id = $(this).attr('data-id');
@@ -515,6 +516,7 @@
 //     $("#fol_id").val(id);
 //     $("#fol_name").val(name);
 // });
+
 </script>
 
 <style>
