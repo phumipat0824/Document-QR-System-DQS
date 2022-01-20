@@ -140,11 +140,31 @@
                     </div>
                     <form id="move-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/move_folder/';?>">
                         <div class="modal-body">
-                            <input type="hidden" name="fol_id" id="foler_id" value="">   
+                            <input type="hidden" name="fol_id" id="foler_id" value="">  
+                                            
+                                <!-- <div class="dropdown">
+                                    <button name="fol_location_id" id="fol_location_id" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" placeholder="" required><?php echo $arr_folder[0]->fol_name ?><span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                        <?php for ($i = 0; $i < count($arr_folder); $i++) {   ?>
+                                            <?php if($arr_folder[$i]->fol_location_id == 0){ ?>
+                                                <li class="dropdown-submenu">
+                                                    <li><a tabindex="-1" href="#" value='<?php echo $arr_folder[$i]->fol_id ?>'><?php echo $arr_folder[$i]->fol_name ?></a></li>
+                                                </li>
+                                                <?php if($arr_folder[$i]->fol_location_id == $arr_folder[$i]->fol_id){ ?>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a tabindex="-1" href="#" value='<?php echo $arr_folder[$i]->fol_id ?>'><?php echo $arr_folder[$i]->fol_name ?></a></li>
+                                                    </ul>
+                                                    </li>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        <?php } ?>
+                                    </ul>
+                                </div> -->
+                            
                             <select name="fol_location_id" id="fol_location_id" class="form-select" aria-label="Default select example" required>
                                 <?php for ($i = 0; $i < count($arr_fol); $i++) {   ?>
                                     <?php if($arr_fol[$i]->fol_id != $value){ ?>
-                                        <option value='<?php echo $arr_fol[$i]->fol_id ?>|<?php echo $arr_fol[$i]->fol_name ?>'><?php echo $arr_fol[$i]->fol_name ?></option>
+                                        <option value='<?php echo $arr_fol[$i]->fol_id ?>'><?php echo $arr_fol[$i]->fol_name ?></option>
                                     <?php } ?>
                                 <?php } ?>
                             </select><br>
@@ -473,6 +493,13 @@ function rightclickfolder(folder) {
     console.log(name);
   });
 
+  $(document).ready(function(){
+  $('.dropdown-submenu a.test').on("click", function(e){
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
+  });
+});
 // $(document).on("click", ".moveModal", function() {
 //     var location = $(this).attr('data-location');
 //     var id = $(this).attr('data-id');
@@ -482,3 +509,15 @@ function rightclickfolder(folder) {
 //     $("#fol_name").val(name);
 // });
 </script>
+
+<style>
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -1px;
+}
+</style>
