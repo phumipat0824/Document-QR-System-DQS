@@ -14,14 +14,17 @@ class Member_home extends DQS_controller
 		$memid = $this->session->userdata('mem_id');
 		$data['arr_fol'] = $this->fol->get_by_id($memid)->result();
 		$data['arr_qr'] = $this->qrc->get_by_id($memid)->result();
+		$data['arr_folder'] = $this->fol->get_all()->result();
         $this->output_sidebar_member("Member/v_member_home",$data);
     }
 	public function show_in_folder($fol_location_id)
 	{
 		$this->load->model('M_DQS_folder', 'fol');
+		$this->load->model('M_DQS_login', 'qrc');
 		$memid = $this->session->userdata('mem_id');
 		$this->session->set_userdata('fol_location_id', $fol_location_id);
 		$data['arr_fol'] = $this->fol->get_by_member_id($memid, $fol_location_id)->result();
+		$data['arr_folder'] = $this->fol->get_all()->result();
 
 		if ($data['arr_fol'] == null) {
 			$this->output_sidebar_member("Member/v_member_home_in_folder", $data);
@@ -82,15 +85,37 @@ class Member_home extends DQS_controller
 		$this->Mfol->fol_name = $this->input->post('fol_name');
 		$this->Mfol->fol_id = $this->input->post('fol_id');
 		$fol_location_id = $this->input->post('fol_location_id');
+		$obj_fol = $this->Mfol->get_by_id_fol($this->input->post('fol_id'))->result();
+		// print_r($obj_fol);
+
+		if ($this->input->post('fol_location_id') == 0) {
+			$newpath = './assets/user/' . $this->session->userdata('mem_username') . '/';
+		} else {
+			$get_name_location = $this->folder->get_by_id_fol($this->input->post('fol_location_id'))->result();
+			$newpath = $get_name_location[0]->fol_location . '/';
+		}
+		//ตั้งชื่อไฟล์ใหม่โดยเอาเวลาไว้หน้าชื่อไฟล์เดิม
+		$newname = $this->input->post('fol_name');
+		$newpath = $newpath . $newname;
+		$this->Mfol->fol_location = $newpath;
+
 		if ($this->Mfol->check_exist_name($this->Mfol->fol_name) == 0 && trim($this->Mfol->fol_name) != "") {
 			$this->Mfol->update();
 		}
+		
+		$obj_newfol = $this->Mfol->get_by_id_fol($this->input->post('fol_id'))->result();
+		// print_r($obj_newfol);
+
+		rename($obj_fol[0]->fol_location , $obj_newfol[0]->fol_location );
+		
+		
+		
 		redirect('Member/Member_home/show_in_folder/' . $this->input->post('fol_location_id'));
 		// echo $this->input->post('fol_name');
 		// echo $this->input->post('fol_id');
+		// print_r(Mfol);
 	}
 	
-
 	function delete_folder()
 	{
 		$this->load->model('M_DQS_folder', 'folder');
@@ -104,17 +129,55 @@ class Member_home extends DQS_controller
 		$this->folder->delete($fol_id);
 
 
-		$newpath = './assets/user/' . $this->session->userdata('mem_username') . '/'. $folder_name.'/';
 
-		@rmdir($newpath);/* Delete folder by using rmdir function */
+		$newpath = './assets/user/' . $this->session->userdata('mem_username') . '/'. $folder_name ;
+		$new_path = base_url().$newpath;
+
+		if(file_exists($newpath)){
+			$di = new RecursiveDirectoryIterator($newpath, FilesystemIterator::SKIP_DOTS);
+			$ri = new RecursiveIteratorIterator($di, RecursiveIteratorIterator::CHILD_FIRST);
+			foreach ( $ri as $file ) {
+				$file->isDir() ?  rmdir($file) : unlink($file);
+			}
+		}
+
+		rmdir($newpath);/* Delete folder by using rmdir function */
 		
 		redirect('/Member/Member_home/show_member_home');
-		$this->load->model('M_DQS_folder', 'fol');
-		$memid = $this->session->userdata('mem_id');
-		$data['arr_fol'] = $this->fol->get_by_id($memid)->result();
-		$this->output_sidebar_member("Member/v_member_home", $data);
-		echo $this->input->post('fol_name');
-		// // echo $this->input->post('fol_id');
+
 		
+	}
+
+	function move_folder() 
+	{
+		$this->load->model('Da_DQS_folder','folder');
+		$this->load->model('M_DQS_folder','Mfol');
+		$this->folder->fol_location_id = $this->input->post('fol_location_id');
+		$this->folder->fol_id = $this->input->post('fol_id');
+		$this->folder->fol_name = $this->input->post('fol_name');
+		
+        $obj_fol = $this->Mfol->get_by_id_fol($this->input->post('fol_id'))->result();
+		// print_r($obj_fol);
+		
+		// $arr_folder = $this->input->post('fol_location_id');
+		
+		// $arr_folder_explode = explode('|', $arr_folder);
+        // $this->folder->fol_location_id = $arr_folder_explode[0];
+        // $new_name = $arr_folder_explode[1];
+
+		$get_name_location = $this->Mfol->get_by_id_fol($this->input->post('fol_location_id'))->result();
+		
+		if($this->folder->fol_location != $get_name_location[0]->fol_location){
+			$newpath = $get_name_location[0]->fol_location . '/' . $this->folder->fol_name;
+			$this->folder->fol_location = $newpath;
+			$this->folder->move();
+		}
+
+		$obj_newfol = $this->Mfol->get_by_id_fol($this->input->post('fol_id'))->result();
+		// print_r($obj_newfol);
+
+		rename($obj_fol[0]->fol_location , $obj_newfol[0]->fol_location );
+		
+		redirect('Member/Member_home/show_member_home');
 	}
 }

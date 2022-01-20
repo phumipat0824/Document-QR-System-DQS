@@ -20,7 +20,7 @@ class Member_edit extends DQS_controller {
         $this->load->model('M_DQS_department', 'MDD');
 		$this->load->model('M_DQS_member', 'mem');
 
-        $data['obj_mem'] = $this->mem->get_by_id($mem_id)->row();
+        $data['obj_mem'] = $this->mem->get_by_mem_id($mem_id)->row();
 		$data['arr_department'] = $this->MDD->get_all()->result();
         $data['arr_province'] = $this->MDP->get_all()->result();
       
