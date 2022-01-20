@@ -5,8 +5,7 @@
     * @author Ashirawat
     * @Create Date 2564-11-14
 */
-?>
-<?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 require 'DQS_model.php';
@@ -62,5 +61,13 @@ public function insert_qr(){//insert document into database
             
     $this->db->query($sql,array($this->qr_name,$this->qr_path,$this->qr_mem_id));        
 }//end insert document into database
+
+// public function set_id(){//update department into database 
+//     $sql = "UPDATE {$this->db_name}.DQS_QR
+//         SET qr_doc_id = ?
+//         WHERE qr_id = ?";
+//         $this->db->query($sql, array($this->qr_doc_id,$this->qr_id));
+
+// }
 
 }

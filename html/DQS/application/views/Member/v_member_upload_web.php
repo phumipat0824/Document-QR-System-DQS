@@ -10,34 +10,27 @@
             <div class="card card-nav-tabs card-plain" style="border-color:#E4E4E4;border-width: 5px;">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
+                        <a class="nav-link active" href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file' ?>">PDF</a>
+                    </li>
+                    <li class="nav-item">
                         <div class="card" style="margin: 0px; color: #E0FFFF">
-                            <a class="nav-link active" href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file' ?>">PDF</a>
+                            <a class="nav-link active" href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_web' ?>">เว็บไซต์</a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url().'/Member/Member_upload_file/show_member_upload_web'?>">เว็บไซต์</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link active" href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_photo' ?>">รูปภาพ</a>
+
                     </li>
                 </ul>
 
                 <form method="post" action="" enctype="multipart/form-data">
-                    <label class=" form-control-label" style="padding-left: 45px; padding-top: 20px; color: #000000">ไฟล์ PDF</label><br>
+                    <label class=" form-control-label" style="padding-left: 45px; padding-top: 20px; color: #000000">เว็ปไซต์</label>
+                    <label style="color: #FF0000;">*</label>&emsp;<br>
                     <div class="row">
                         <div class="col-md-2 offset-md-1">
-                            <input type="file" id="doc_path" name="doc_path" class="form-control" accept="application/pdf" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;"><br>
+                            <input id="text" name="text" type="text" value="https://www.example.com" required="required">
                         </div>
                     </div>
-
-                    <label class="form-control-label" style="padding-left: 40px; padding-top: 20px; color: #000000">ชื่อ:</label><br>
-                    <div class="row">
-                        <div class="col-md-2 offset-md-1">
-                            <input type="text" id="doc_name" name="doc_name" class="form-control" style="margin: 0px;  width: 400px;" placeholder="ชื่อไฟล์"><br />
-                        </div>
-                    </div>
-
-
                     <label style="padding-left: 40px; padding-top: 20px; color: #000000">โลโก้:</label><br>
 
                     <div class="row">
@@ -60,7 +53,7 @@
                 <div class="card-body" style="margin: auto;">
                     <div id="capture" style="margin-top:40px;">
                         <div id="qrcode">
-                            <img id="img" src="<?php echo base_url(). '/assets/image/QR_home.PNG' ?>" height="250" width="250" style="margin: auto;">
+                            <img id="img" src="<?php echo base_url() . '/assets/image/QR_home.PNG' ?>" height="250" width="250" style="margin: auto;">
                         </div>
                     </div>
                     <br>
@@ -79,57 +72,33 @@
 $(document).ready(function() {
     $('#upload').click(function(e) {
         e.preventDefault();
-        uploadFile();
-        // html2canvas($("#capture"), {
-        //     onrendered: function(canvas) {
-        //         var doc_name = document.getElementById('doc_name').value;
-        //         var imgsrc = canvas.toDataURL("image/png");
-        //         console.log(imgsrc);
-        //         var dataURL = canvas.toDataURL();
-        //         $.ajax({
-        //             type: "POST",
-        //             url: "../../Member/Member_upload_file/upload_qr",
-        //             data: {
-        //                 doc_name: doc_name,
-        //                 img_qrcode: dataURL
-        //             }
-        //         }).done(function(o) {
-        //             console.log('saved');
-        //         });
-        //     }
-        // });
+        make();
+        setTimeout('', 5000);
+        Swal.fire({
+            icon: 'success',
+            title: 'สร้างคิวอาร์โค้ดสำเร็จ',
+            showConfirmButton: false,
+            timer: 2500
+        })
     });
 });
 
 async function uploadFile() {
     let formData = new FormData();
-    formData.append("doc_path", doc_path.files[0]);
-    formData.append("doc_name", doc_name.value);
-    await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_file/" ?>", {
+    formData.append("logo", logo.files[0]);
+    await fetch("<?php echo site_url() . "/Qrcode/QRcode_generator/upload/" ?>", {
         method: "POST",
-        data: {
-            doc_name: doc_name
-        },
         body: formData
-
     });
     make();
-    await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_qr/" ?>", {
-        method: "POST",
-        data: {
-            doc_name: doc_name
-        },
-        body: formData
-    });
     doCapture();
     setTimeout('', 5000);
     Swal.fire({
         icon: 'success',
-        title: 'บันทึกไฟล์สำเร็จ',
+        title: 'สร้างคิวอาร์โค้ดสำเร็จ',
         showConfirmButton: false,
         timer: 2500
     })
-    // await fetch("<?php echo site_url() . "/Member/Member_upload_file/update/" ?>");
 }
 //$(document).ready(function() {
 //    $('#upload').click(function(e) {
@@ -199,7 +168,7 @@ function make() {
     if (text.value.trim() !== '') {
         qrcode.innerHTML = '';
         new QRCode(document.getElementById("qrcode"), {
-            text: '<?php echo site_url() . $this->session->userdata('newpath') ?>',
+            text: text.value,
             width: 300,
             height: 300,
             logo: logoin,

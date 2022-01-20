@@ -4,16 +4,16 @@
 
 <div class="content">
     <div class="row" style="padding: 100px 10px 10px 20%;">
-        <h1 style="color:#100575; font-family:TH sarabun new; font-size: 80px;">สร้างคิวอาร์โค้ด</h1>
-        <h2 style="font-family:TH sarabun new; ">เริ่มสร้าง QR Code กันเลย </h2>
+        <a style="color:#100575; font-size: 80px;">สร้างคิวอาร์โค้ด</a>
+        <a style="font-size: 35px;">เริ่มสร้าง QR Code กันเลย </a>
         <div class="col-md-5">
-            <div class="card card-nav-tabs card-plain" style="color: #E0FFFF; width: 100%;">
+            <div class="card card-nav-tabs card-plain" style="border-color:#E4E4E4;border-width: 5px;">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a class="nav-link active" href="<?php echo site_url().'/Member/Member_upload_file/show_member_upload_file'?>">PDF</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">เว็บไซต์</a>
+                        <a class="nav-link" href="<?php echo site_url().'/Member/Member_upload_file/show_member_upload_web'?>">เว็บไซต์</a>
                     </li>
                     <li class="nav-item">
                         <div class="card" style="margin: 0px; color: #E0FFFF">
@@ -22,46 +22,46 @@
                     </li>
                 </ul>
 
-                <!-- <form method="post" action="<?php echo site_url() . 'Member/Member_upload_file/upload_file' ?>" enctype="multipart/form-data"> -->
-                <label class=" form-control-label" style="padding-left: 45px; padding-top: 20px; color: #000000">ไฟล์ รูปภาพ</label><br>
-                <div class="row">
-                    <div class="col-md-2 offset-md-1">
-                        <!-- <div class="card" style=" margin-left: 10%; width:640%"> -->
-                        <input type="file" id="doc_path" name="doc_path" class="form-control" accept="application/pdf" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;"><br>
-                        <!-- </div> -->
+                <form method="post" action="" enctype="multipart/form-data">
+                    <label class=" form-control-label" style="padding-left: 45px; padding-top: 20px; color: #000000">ไฟล์รูปภาพ</label><br>
+                    <div class="row">
+                        <div class="col-md-2 offset-md-1">
+                            <input type="file" id="doc_path" name="doc_path" class="form-control" accept="image/*" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;"><br>
+                        </div>
                     </div>
-                </div>
 
-                <label class="form-control-label" style="padding-left: 40px; padding-top: 20px; color: #000000">ชื่อ:</label><br>
-                <div class="row">
-                    <div class="col-md-2 offset-md-1">
-                        <input type="text" id="doc_name" name="doc_name" class="form-control" style="margin: 0px;  width: 400px;" placeholder="ชื่อไฟล์"><br />
+                    <label class="form-control-label" style="padding-left: 40px; padding-top: 20px; color: #000000">ชื่อ:</label><br>
+                    <div class="row">
+                        <div class="col-md-2 offset-md-1">
+                            <input type="text" id="doc_name" name="doc_name" class="form-control" style="margin: 0px;  width: 400px;" placeholder="ชื่อไฟล์"><br />
+                        </div>
                     </div>
-                </div>
 
 
-                <label style="padding-left: 40px; padding-top: 20px; color: #000000">โลโก้:</label><br>
+                    <label style="padding-left: 40px; padding-top: 20px; color: #000000">โลโก้:</label><br>
 
-                <div class="row">
-                    <div class="col-md-2 offset-md-1">
-                        <!-- <div class="card" style=" margin-left: 10%; width:640%"> -->
-                        <input id="logo" type="file" name="logo" onchange="uploadFile()" accept="image/png, image/jpeg"><br><br>
-                        <!-- </div> -->
+                    <div class="row">
+                        <div class="col-md-2 offset-md-1">
+
+                            <input id="logo_img" type="file" name="logo" accept="image/png, image/gif, image/jpeg"><br><br>
+
+                        </div>
                     </div>
-                </div>
-                <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name') ?>" hidden>
-                <input type="hidden" id="text" name='text' value='<?php echo base_url().'/assets/pdf/fileupload_Member/'.'doc_name'.'.'.'doc_type'?>;'>
-                <button onclick="make()" class="btn btn-dark_blue" style="margin-left: 25%; margin-bottom: 50px;margin-top:50px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button>
+                    <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name') ?>" hidden>
+                    <input type="text" id="text" name='text' value='<?php echo $this->session->userdata('newpath') ?>' hidden>
+                    <button id="upload" name="upload" class="btn btn-dark_blue" style="margin-left: 25%; margin-bottom: 50px;margin-top:50px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 20px;">สร้างคิวอาร์โค้ด</button>
 
-                <!-- </form> -->
+                    <!-- </form> -->
             </div>
         </div>
         <!-- <div class="col-md-1"></div> -->
         <div class="col-md-5">
-            <div class="card" style="padding: 10%" height="500">
+            <div class="card" style="border-color:#E4E4E4;border-width: 5px;" height="500">
                 <div class="card-body" style="margin: auto;">
-                    <div id="qrcode">
-                        <img id="img" src="<?php echo base_url() . '/assets/image/QR_home.PNG' ?>" height="256" width="256" style="margin: auto;">
+                    <div id="capture" style="margin-top:40px;">
+                        <div id="qrcode">
+                            <img id="img" src="<?php echo base_url(). '/assets/image/QR_home.PNG' ?>" height="250" width="250" style="margin: auto;">
+                        </div>
                     </div>
                     <br>
 
@@ -73,38 +73,134 @@
         <div class="block"></div>
     </div>
 </div>
-<!-- </form> -->
+</form>
 
 <script type="text/javascript">
+$(document).ready(function() {
+    $('#upload').click(function(e) {
+        e.preventDefault();
+        uploadFile();
+        // html2canvas($("#capture"), {
+        //     onrendered: function(canvas) {
+        //         var doc_name = document.getElementById('doc_name').value;
+        //         var imgsrc = canvas.toDataURL("image/png");
+        //         console.log(imgsrc);
+        //         var dataURL = canvas.toDataURL();
+        //         $.ajax({
+        //             type: "POST",
+        //             url: "../../Member/Member_upload_file/upload_qr",
+        //             data: {
+        //                 doc_name: doc_name,
+        //                 img_qrcode: dataURL
+        //             }
+        //         }).done(function(o) {
+        //             console.log('saved');
+        //         });
+        //     }
+        // });
+    });
+});
+
 async function uploadFile() {
     let formData = new FormData();
-    formData.append("doc_name", logo.files[0]);
-    await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload/" ?>", {
+    formData.append("doc_path", doc_path.files[0]);
+    formData.append("doc_name", doc_name.value);
+    await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_img/" ?>", {
         method: "POST",
+        data: {
+            doc_name: doc_name
+        },
+        body: formData
+
+    });
+    make();
+    await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_qr/" ?>", {
+        method: "POST",
+        data: {
+            doc_name: doc_name
+        },
         body: formData
     });
-    // alert('The file has been uploaded successfully.');
+    doCapture();
+    setTimeout('', 5000);
+    Swal.fire({
+        icon: 'success',
+        title: 'บันทึกไฟล์สำเร็จ',
+        showConfirmButton: false,
+        timer: 2500
+    })
+}
+//$(document).ready(function() {
+//    $('#upload').click(function(e) {
+//        e.preventDefault();
+//        var doc_name = document.getElementById("doc_name").value;
+//        //var file_doc_path = doc_path.files[0];
+//        let formData = new FormData();
+//        formData.append("doc_path", doc_path.files[0]);
+//        $.ajax({
+//             type: 'POST',
+//            url: '../../Member/Member_upload_file/upload',
+//            data: {
+//                doc_name: doc_name
+//            },
+//            datatype: "JSON",
+//            success: function(res) {
+//                make();
+//            }
+//        });
+//        
+//    });
+//    
+//});
+
+function doCapture(doc_name) {
+    window.scrollTo(0, 0);
+
+    html2canvas(document.getElementById("capture")).then(function(canvas) {
+
+        // Create an AJAX object
+        var ajax = new XMLHttpRequest();
+
+        // Setting method, server file name, and asynchronous
+        ajax.open("POST", "<?php echo site_url() . "/Member/Member_upload_file/save_server/" ?>", true);
+
+        // Setting headers for POST method
+        ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        // Sending image data to server
+        ajax.send("image=" + canvas.toDataURL("image/jpeg", 0.9));
+
+        // Receiving response from server
+        // This function will be called multiple times
+        ajax.onreadystatechange = function() {
+
+            // Check when the requested is completed
+            if (this.readyState == 4 && this.status == 200) {
+
+                // Displaying response from server
+                console.log(this.responseText);
+            }
+        };
+    });
 }
 
 function make() {
+    var logoin = '';
     const [file] = logo_img.files
     if (file) {
         var logoin = URL.createObjectURL(file);
-    } else {
-        var logoin = '';
     }
     var text = document.getElementById('text');
     var qrcode = document.getElementById('qrcode');
-    var logo = "<?php echo base_url(). '/assets/logo/' ?>+<?php echo $this->session->userdata('logo_name')?>";
 
 
 
     if (text.value.trim() !== '') {
         qrcode.innerHTML = '';
         new QRCode(document.getElementById("qrcode"), {
-            text: text.value,
-            width: 256,
-            height: 256,
+            text: '<?php echo site_url() . $this->session->userdata('newpath') ?>',
+            width: 300,
+            height: 300,
             logo: logoin,
             logoWidth: 80,
             logoHeight: 80,
