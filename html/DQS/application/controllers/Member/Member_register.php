@@ -22,6 +22,7 @@ class Member_register extends DQS_controller
         $data['arr_department'] = $this->MDD->get_all()->result();
         $data['arr_province'] = $this->MDP->get_all()->result();
         $this->output_navbar('Member/v_member_register', $data);
+        
   
     }
 
@@ -40,6 +41,15 @@ class Member_register extends DQS_controller
     //     print_r($b);
 
     // }
+    public function insert_province()
+    {          
+        $this->load->model('M_DQS_member', 'MDM');
+        $this->MDM-> insert_province($mem_pro_id);
+        
+        $data= true;
+        echo json_encode("2");
+         //เรียกกลับมาหน้านี้อีกครั้งอยู่หน้าเดียวกันใส่ชื่อได้เลย
+    }
 
     public function insert_member()
     {          
@@ -61,6 +71,7 @@ class Member_register extends DQS_controller
 
     public function insert_session()
     {
+        // $this->check_dep_id_pro_id($mem_dep_id, $mem_pro_id);
         $this->load->model('M_DQS_province', 'MDP');
         $this->load->model('M_DQS_department', 'MDD');
         //session
@@ -121,10 +132,8 @@ class Member_register extends DQS_controller
         // check user from database
         $obj_mem = $this->check_dep_id_pro_id($mem_dep_id, $mem_pro_id);
 
-        if ($obj_mem == NULL) {
+        if ($obj_mem != NULL) {
                 // log in failed
-            $data = [];
-            $data['error'] = "Username หรือ Password ไม่ถูกต้อง";
             $data['$mem_dep_id'] = $mem_dep_id;
             $data['mem_pro_id'] = $mem_pro_id;
                 $this->output_navbar('Member/Member_register/insert_session', $data);

@@ -35,23 +35,36 @@
                             <!-- เลือกจังหวัดแบบ dropdown list -->
                                 <div class="row gx-5">
                                     <div class="col"><br><br>
+                                    
                                         <label style = "color: #000000;">จังหวัด</label>
                                         <label style = "color: #FF0000;">*</label>
+                                        
+                                            <!-- <div class="dropdown">
+                                            <select onclick="myFunction()">--------- เลือกจังหวัด ---- -----</select>
+                                            <div id="province_choice" class="dropdown-content">
+                                            <input type="text" placeholder="ค้นหา" id="mem_province_id" onkeyup="filterFunction()"> -->
                                         <select name="mem_province_id" id="mem_province_id" class="form-select" aria-label="Default select example" required>
-                                            <option value="" selected>--------- เลือกจังหวัด ---- -----</option>
+                                            <option value="" selected>--------- เลือกจังหวัด ---------</option>
                                             <?php foreach ($arr_province as $value) { ?>
-                                                <option value='<?php echo $value->pro_id ?>'><?php echo $value->pro_name ?></option>
+                                                <option onclick="getprovince(<?php echo $value->pro_id ?>)" value='<?php echo $value->pro_id ?>'><?php echo $value->pro_name ?></option>
                                             <?php } ?>
                                         </select><br>
-
+                                        
+                                            
                                 </div>
                                 <div class="col"><br><br>
                                         <label style = "color: #000000;">หน่วยงาน</label>
                                         <label style = "color: #FF0000;">*</label>
                                         <select name="mem_dep_id" id="mem_dep_id" class="form-select" aria-label="Default select example" required>
                                             <option value="" selected>--------- เลือกหน่วยงาน ---------</option>
+                                            <?php $i=0; ?>
                                             <?php foreach ($arr_department as $value) { ?>
-                                                <option value='<?php echo $value->dep_id ?>'><?php echo $value->dep_name ?></option>
+                                                <?php if($arr_department[$i] -> dep_id == "1" ){?>
+                                                    <option disabled value='<?php echo $value->dep_id ?>'><?php echo $value->dep_name ?></option>
+                                                <?php }else{?>
+                                                    <option value='<?php echo $value->dep_id ?>'><?php echo $value->dep_name ?></option>
+                                                <?php }?>
+                                                <?php $i++; ?>
                                             <?php } ?>
                                         </select><br>
                                     </div>
@@ -154,6 +167,46 @@ hide.onclick = function(){//รหัสผ่านถูกปิดการ�
     show.style.display = "block";
 }
 
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// function filterFunction() {
+//   var input, filter, ul, li, a, i;
+//   input = document.getElementById("mem_province_id");
+//   filter = input.value.toUpperCase();
+//   div = document.getElementById("province_choice");
+//   a = div.getElementsByTagName("a");
+//   for (i = 0; i < a.length; i++) {
+//     txtValue = a[i].textContent || a[i].innerText;
+//     if (txtValue.toUpperCase().indexOf(filter) > -1) {
+//       a[i].style.display = "";
+//     } else {
+//       a[i].style.display = "none";
+//     }
+//   }
+
+// }
+
+function getprovince(value_pro){
+    
+    var input = document.getElementById("mem_province_id");
+
+    $.ajax({
+        type: "POST",
+        url: "<?php echo site_url() . "Member/Member_register/insert_province" ?>",
+        data: {
+            'mem_pro_id': value_pro
+        },
+        dataType: 'JSON',
+        async: false,
+        success: function(jsondata) {
+            alert(jsondata)
+        }
+    })
+
+}
+
 // const togglePassword = document.querySelector('#togglePassword');
 // const password = document.querySelector('#mem_password');
 
@@ -200,6 +253,45 @@ hide.onclick = function(){//รหัสผ่านถูกปิดการ�
     /* color:#DCDCDC;
 
     } */ 
+
+/* #mem_province_id {
+  box-sizing: border-box;
+  background-image: url('searchicon.png');
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 14px 20px 12px 45px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+#mem_province_id:focus {outline: 3px solid #ddd;}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f6f6f6;
+  min-width: 230px;
+  overflow: auto;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;} */
+
+/* .show {display: block;}
     .show,
     .hide{
         position: absolute;
@@ -211,6 +303,6 @@ hide.onclick = function(){//รหัสผ่านถูกปิดการ�
     }
     .hide{
         display: none;
-    }
+    } */
 
 </style>
