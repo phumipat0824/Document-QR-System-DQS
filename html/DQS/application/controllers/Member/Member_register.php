@@ -109,6 +109,7 @@ class Member_register extends DQS_controller
         //ที่อยู่
     }
 
+
     public function check_dep_id_pro_id($mem_dep_id, $mem_pro_id)
     {
         $this->load->model('M_DQS_register', 'mlog');
@@ -171,3 +172,17 @@ class Member_register extends DQS_controller
     }
 
 }
+
+    // public function insert_appellant()
+    // {
+    //     //session
+    //     $this->session->set_userdata('ID_ssn', $this->input->post('ID_ssn'));
+    //     $this->session->set_userdata('Mem_firstname', $this->input->post('Mem_firstname'));
+    //     $this->session->set_userdata('Mem_lastname', $this->input->post('Mem_lastname'));
+    //     $this->session->set_userdata('mem_email', $this->input->post('mem_email'));
+    //     $this->session->set_userdata('mem_password', $this->input->post('mem_password'));
+    //     $this->session->set_userdata('mem_dep_id', $this->input->post('mem_dep_id'));
+    //     //ที่อยู่
+    // }
+
+

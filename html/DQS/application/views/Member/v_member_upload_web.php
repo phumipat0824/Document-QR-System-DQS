@@ -6,52 +6,43 @@
     <div class="row" style="padding: 100px 10px 10px 20%;">
         <a style="color:#100575; font-size: 80px;">สร้างคิวอาร์โค้ด</a>
         <a style="font-size: 35px;">เริ่มสร้าง QR Code กันเลย </a>
+
         <div class="col-md-5">
             <div class="card card-nav-tabs card-plain" style="border-color:#E4E4E4;border-width: 5px;">
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist" style="padding-b :50px;">
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="far fa-file-pdf"></i> PDF</a>
-                        <a class="nav-item nav-link active" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="far fa-images"></i> รูปภาพ</a>
-                        <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="false"><i class="fas fa-paperclip"></i> เว็บไซต์</a>
+                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="far fa-images"></i> รูปภาพ</a>
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="false"><i class="fas fa-paperclip"></i> เว็บไซต์</a>
 
                     </div>
                 </nav>
 
-                <form method="post" action="" enctype="multipart/form-data">
-                    <label class=" form-control-label" style="padding-left: 45px; padding-top: 20px; color: #000000">ไฟล์รูปภาพ</label><br>
-                    <div class="row">
-                        <div class="col-md-2 offset-md-1">
-                            <input type="file" id="doc_path" name="doc_path" class="form-control" accept="image/*" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;"><br>
-                        </div>
-                    </div>
+                <div class="form-row" style="margin-left:6%;margin-top: 10%;margin-bottom: 10px">
+                    <a style="margin-top: 10px;">เว็บไซต์</a>
+                    <!-- <label style="color: #FF0000;">*</label>&emsp; -->
+                    <label id="target_div" style="display:none;margin-top: 3%;color: #FF0000;">กรอกข้อมูลลิงค์เว็บไซต์ (URL)</label>
+                </div>
+                <input id="text" type="text" style="margin: auto;" oninvalid="InvalidMsg(this);" oninput="InvalidMsg(this);" value="https://www.example.com" required="required">
+                <div id="inputlogo" style="margin-top: 30px;">
+                    <center>
+                        <button type="button" class="slide" id="up" style="width: 80%; " onclick="showinputlogo()">เพิ่มโลโก้<i class="fas fa-angle-down" style="float: right;" aria-hidden="true"></i></button>
+                    </center>
+                </div>
 
-                    <label class="form-control-label" style="padding-left: 40px; padding-top: 20px; color: #000000">ชื่อ:</label><br>
-                    <div class="row">
-                        <div class="col-md-2 offset-md-1">
-                            <input type="text" id="doc_name" name="doc_name" class="form-control" style="margin: 0px;  width: 400px;" placeholder="ชื่อไฟล์"><br />
-                        </div>
-                    </div>
+                <div class="form-row" id="vanish" style="display:none;margin-left:10%;margin-top: 30px;">
+                    <a style="margin-top: 10px;">โลโก้</a>&emsp;
+                    <label> jpeg/png</label>
+                </div>
+                <div class="parent-div" id="vanish1" style="display:none;margin-left:10%;">
+                    <button class="btn-upload" style="color:#cfcfcf;"><i class="fas fa-upload"></i> เลือกโลโก้คิวอาร์โค้ด</button>
+                    <input id="logo_img" type="file" name="logo" accept="image/png, image/jpeg"><br><br>
+                </div>
+                <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name') ?>" hidden>
+                <input type="text" id="text" name='text' value='<?php echo $this->session->userdata('newpath') ?>' hidden>
+                <button id="upload" name="upload" class="btn btn-dark_blue" style="margin-left: 25%; margin-bottom: 30px;margin-top: 40px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 35px;">สร้างคิวอาร์โค้ด</button>
 
-
-                    <div id="inputlogo" style="margin-top: 30px;">
-                        <center>
-                            <button type="button" class="slide" id="up" style="width: 80%; " onclick="showinputlogo()">เพิ่มโลโก้<i class="fas fa-angle-down" style="float: right;" aria-hidden="true"></i></button>
-                        </center>
-                    </div>
-
-                    <div class="form-row" id="vanish" style="display:none;margin-left:10%;margin-top: 30px;">
-                        <a style="margin-top: 10px;">โลโก้</a>&emsp;
-                        <label> jpeg/png</label>
-                    </div>
-                    <div class="parent-div" id="vanish1" style="display:none;margin-left:10%;">
-                        <button class="btn-upload" style="color:#cfcfcf;"><i class="fas fa-upload"></i> เลือกโลโก้คิวอาร์โค้ด</button>
-                        <input id="logo_img" type="file" name="logo" accept="image/png, image/jpeg"><br><br>
-                    </div>
-                    <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name') ?>" hidden>
-                    <input type="text" id="text" name='text' value='<?php echo $this->session->userdata('newpath') ?>' hidden>
-                    <button id="upload" name="upload" class="btn btn-dark_blue" style="margin-left: 25%; margin-bottom: 30px;margin-top: 40px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 35px;">สร้างคิวอาร์โค้ด</button>
-
-                    <!-- </form> -->
+                <!-- </form> -->
             </div>
         </div>
         <!-- <div class="col-md-1"></div> -->
@@ -66,6 +57,7 @@
                     <br>
 
                     <button id="download" onclick="doCapture();" class="btn btn-warning" style="margin-top:40px;margin-bottom: 30px;font-family:TH sarabun new; font-size: 35px; width: 240; ">ดาวน์โหลด</button>
+
                 </div>
             </div>
         </div>
@@ -73,59 +65,36 @@
         <div class="block"></div>
     </div>
 </div>
-</form>
+
 
 <script type="text/javascript">
 $(document).ready(function() {
     $('#upload').click(function(e) {
         e.preventDefault();
-        uploadFile();
-        // html2canvas($("#capture"), {
-        //     onrendered: function(canvas) {
-        //         var doc_name = document.getElementById('doc_name').value;
-        //         var imgsrc = canvas.toDataURL("image/png");
-        //         console.log(imgsrc);
-        //         var dataURL = canvas.toDataURL();
-        //         $.ajax({
-        //             type: "POST",
-        //             url: "../../Member/Member_upload_file/upload_qr",
-        //             data: {
-        //                 doc_name: doc_name,
-        //                 img_qrcode: dataURL
-        //             }
-        //         }).done(function(o) {
-        //             console.log('saved');
-        //         });
-        //     }
-        // });
+        make();
+        setTimeout('', 5000);
+        Swal.fire({
+            icon: 'success',
+            title: 'สร้างคิวอาร์โค้ดสำเร็จ',
+            showConfirmButton: false,
+            timer: 2500
+        })
     });
 });
 
 async function uploadFile() {
     let formData = new FormData();
-    formData.append("doc_path", doc_path.files[0]);
-    formData.append("doc_name", doc_name.value);
-    await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_img/" ?>", {
+    formData.append("logo", logo.files[0]);
+    await fetch("<?php echo site_url() . "/Qrcode/QRcode_generator/upload/" ?>", {
         method: "POST",
-        data: {
-            doc_name: doc_name
-        },
         body: formData
-
     });
     make();
-    await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_qr/" ?>", {
-        method: "POST",
-        data: {
-            doc_name: doc_name
-        },
-        body: formData
-    });
     doCapture();
     setTimeout('', 5000);
     Swal.fire({
         icon: 'success',
-        title: 'บันทึกไฟล์สำเร็จ',
+        title: 'สร้างคิวอาร์โค้ดสำเร็จ',
         showConfirmButton: false,
         timer: 2500
     })
@@ -198,7 +167,7 @@ function make() {
     if (text.value.trim() !== '') {
         qrcode.innerHTML = '';
         new QRCode(document.getElementById("qrcode"), {
-            text: '<?php echo site_url() . $this->session->userdata('newpath') ?>',
+            text: text.value,
             width: 300,
             height: 300,
             logo: logoin,
@@ -228,6 +197,19 @@ document.getElementById("download").addEventListener("click", function() {
     });
 });
 
+function InvalidMsg(textbox) {
+
+    if (textbox.value == '') {
+        textbox.setCustomValidity('กรุณากรอกลิงก์เว็บไซต์');
+    }
+    // else if(textbox.validity.typeMismatch){
+    //     textbox.setCustomValidity('please enter a valid email address');
+    // }
+    else {
+        textbox.setCustomValidity('');
+    }
+    return true;
+}
 
 function saveAs(uri, filename) {
 

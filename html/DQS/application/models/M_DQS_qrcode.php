@@ -11,4 +11,5 @@ class M_DQS_qrcode extends Da_DQS_qrcode
     {
         parent::__construct();
     }
+
 }

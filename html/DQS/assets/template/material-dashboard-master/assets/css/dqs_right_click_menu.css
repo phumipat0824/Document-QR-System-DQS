@@ -1,10 +1,10 @@
 a{
   text-decoration: none;
-      color: black;
+      color: rgb(241, 238, 238);
 }
 a:hover{
   text-decoration: none;
-      color: black;
+      color: rgb(252, 245, 245);
 }
 .custom-cm {
 background-color: #ffffff;
@@ -24,7 +24,7 @@ padding: 8px 15px;
 }
 
 .custom-cm__item:hover {
-background-color: #f8f8f8;
+background-color: #ffffff;
 }
 
 .custom-cm__divider {
@@ -55,21 +55,21 @@ margin: 10px 0;
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
+  background-color: #f7f7f7;
   min-width: 160px;
   overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-}
+} 
 
 .dropdown-content a {
-  color: black;
+  color: rgb(0, 0, 0);
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
-.dropdown a:hover {background-color: #ddd;}
+.dropdown a:hover {background-color: rgb(208 208 208);}
 
 .show {display: block;}
 

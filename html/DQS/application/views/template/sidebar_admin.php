@@ -6,10 +6,10 @@
         // }
 
 ?> -->
-<div class="sidebar" data-color="yellow" data-background-color="white"
-    data-image="<?php echo base_url().'/assets/img/sidebar-1.jpg'?>">
-    <div class="logo">
-        Document QR
+<div class="sidebar" data-color="yellow" data-background-color="white" data-image="<?php echo base_url().'/assets/img/sidebar-1.jpg'?>">
+    <div class="logo simple-text logo-normal" >
+            
+        </a>
     </div>
     <div class="sidebar-wrapper ps-container ps-theme-default ps-active-y"
         data-ps-id="a5787ac4-4df1-fec6-f8e0-33c5f4784969">
@@ -35,8 +35,8 @@
                     <p style="color: rgb(0,0,0);">จัดการบัญชีผู้ใช้งาน</p>
                 </a>
             </li>
-            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/" ?  'active'  : '' ?> ">
-                <a class="nav-link" href="./user.html">
+            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Admin/Admin_report/show_admin_report" ?  'active'  : '' ?> ">
+                <a class="nav-link" href="<?php echo site_url().'/admin/Admin_report/show_admin_report'?>">
                     <i class="fas fa-chart-bar" style="color: rgb(125, 123, 122);"></i>
                     <p style="color: rgb(0,0,0);">รายงานสรุปผล</p>
                 </a>
