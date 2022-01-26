@@ -14,7 +14,6 @@
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="<?php echo base_url() . 'Member/Member_login/show_member_login' ?>" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="far fa-images"></i> รูปภาพ</a>
                 </div>
             </nav>                                         
-                    <!-- <form action='' method="post"> -->
                     <div class="form-row"style="margin-left:10%;margin-top: 10%;margin-bottom: 20px">                
                             <a style="margin-top: 10px;">เว็บไซต์</a>
                             <label style = "color: #FF0000;">*</label>&emsp;
@@ -22,8 +21,6 @@
                     </div>
 
                             <input id="text" type="text"style="margin: auto;" oninvalid="InvalidMsg(this);"oninput="InvalidMsg(this);"value="https://www.example.com"required="required">
-                            <!-- <input id="text" type="text"style="margin: auto;" value="https://www.example.com"required="required"> -->
-    
                             <div id="inputlogo"style="margin-top: 30px;">
                                 <center>
                                     <button class = "slide" id="up" style="width: 80%;" onclick="showinputlogo()">เพิ่มโลโก้<i class="fas fa-angle-down" style="float: right;"  aria-hidden="true"></i></button>
@@ -58,7 +55,6 @@
                 </div>
             </div>
     </div>
-
 </div>
 
 <script type="text/javascript">
