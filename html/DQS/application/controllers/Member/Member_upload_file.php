@@ -69,7 +69,7 @@ class Member_upload_file extends DQS_controller
 	public function upload_file()
 	{ //Update department into database
 
-		$this->load->model('Da_DQS_qrcode', 'dqrc');
+		$this->load->model('M_DQS_qrcode', 'dqrc');
 		$this->dqrc->doc_name = $this->input->post('doc_name');
 		$this->dqrc->doc_type = "pdf";
 
@@ -86,14 +86,21 @@ class Member_upload_file extends DQS_controller
 			$newname = $this->input->post('doc_name') . $type;
 			$path_copy = $path . $newname;
 
-			$newpath = '/assets/users/'.$this->session->userdata('username').'/'.'home/' . $newname;
+			//$newpath = '/assets/users/'.$this->session->userdata('username').'/'.'home/' . $newname;
 			//คัดลอกไฟล์ไปเก็บที่เว็บเซริ์ฟเวอร์
-			move_uploaded_file($_FILES['doc_path']['tmp_name'], $path_copy);
+			
+			//move_uploaded_file($_FILES['doc_path']['tmp_name'], $path_copy);
+			if ($this->dqrc->check_exist_name($this->dqrc->doc_name) == 0 && trim($this->dqrc->doc_name) != ""){
+				$newpath = '/assets/users/'.$this->session->userdata('username').'/'.'home/' . $newname;
+				move_uploaded_file($_FILES['doc_path']['tmp_name'], $path_copy);
+				$this->session->set_userdata('new', $newpath);
+				$this->dqrc->doc_path = $newpath;
+				$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
+				$this->dqrc->insert_doc();
+			}
 		} //if
-		$this->session->set_userdata('new', $newpath);
-		$this->dqrc->doc_path = $newpath;
-		$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
-		$this->dqrc->insert_doc();
+		
+		
 		
 	}
 
@@ -157,7 +164,7 @@ class Member_upload_file extends DQS_controller
 	public function upload_qr()
 	{ //Update department into database
 
-		$this->load->model('Da_DQS_qrcode', 'dqrc');
+		$this->load->model('M_DQS_qrcode', 'dqrc');
 		$this->dqrc->qr_name = $this->input->post('doc_name');
 		$user = $this->session->userdata('mem_username');
 		$this->session->set_userdata('username', $user);
@@ -173,10 +180,14 @@ class Member_upload_file extends DQS_controller
 			$path_copy = $path . $newname;
 
 			$newpath = '/assets/users/'.$this->session->userdata('username').'/'.'home/' . $newname;
-
-		$this->dqrc->qr_path = $newpath;
-		$this->session->set_userdata('newpath', $newpath);
-		$this->dqrc->qr_mem_id = $this->session->userdata('mem_id');
-		$this->dqrc->insert_qr();
+		
+		
+		if ($this->dqrc->check_exist_nameqr($this->dqrc->qr_name) == 0 && trim($this->dqrc->qr_name) != ""){
+			$this->dqrc->qr_path = $newpath;
+			$this->session->set_userdata('newpath', $newpath);
+			$this->dqrc->qr_mem_id = $this->session->userdata('mem_id');
+			$this->dqrc->insert_qr();
+		}
 	}
+	
 }
