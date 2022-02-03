@@ -43,10 +43,11 @@
                                             <select onclick="myFunction()">--------- เลือกจังหวัด ---- -----</select>
                                             <div id="province_choice" class="dropdown-content">
                                             <input type="text" placeholder="ค้นหา" id="mem_province_id" onkeyup="filterFunction()"> -->
-                                        <select name="mem_province_id" id="mem_province_id" class="form-select" aria-label="Default select example" required>
+                                        <select  onchange="get_pro()" name="mem_province_id" id="mem_province_id" class="form-select" aria-label="Default select example" required>
                                             <option value="" selected>--------- เลือกจังหวัด ---------</option>
                                             <?php foreach ($arr_province as $value) { ?>
-                                                <option onclick="getprovince(<?php echo $value->pro_id ?>)" value='<?php echo $value->pro_id ?>'><?php echo $value->pro_name ?></option>
+                                                <option value='<?php echo $value->pro_id ?>'><?php echo $value->pro_name ?></option>
+                                                
                                             <?php } ?>
                                         </select><br>
                                         
@@ -56,16 +57,7 @@
                                         <label style = "color: #000000;">หน่วยงาน</label>
                                         <label style = "color: #FF0000;">*</label>
                                         <select name="mem_dep_id" id="mem_dep_id" class="form-select" aria-label="Default select example" required>
-                                            <option value="" selected>--------- เลือกหน่วยงาน ---------</option>
-                                            <?php $i=0; ?>
-                                            <?php foreach ($arr_department as $value) { ?>
-                                                <?php if($arr_department[$i] -> dep_id == "1" ){?>
-                                                    <option disabled value='<?php echo $value->dep_id ?>'><?php echo $value->dep_name ?></option>
-                                                <?php }else{?>
-                                                    <option value='<?php echo $value->dep_id ?>'><?php echo $value->dep_name ?></option>
-                                                <?php }?>
-                                                <?php $i++; ?>
-                                            <?php } ?>
+                                        <option value="" selected>--------- เลือกหน่วยงาน ---------</option>
                                         </select><br>
                                     </div>
                                     </div>
@@ -188,46 +180,56 @@ function myFunction() {
 
 // }
 
-function getprovince(value_pro){
-    
-    var input = document.getElementById("mem_province_id");
 
+function get_dept(value_pro_ID){
     $.ajax({
         type: "POST",
-        url: "<?php echo site_url() . "Member/Member_register/insert_province" ?>",
-        data: {
-            'mem_pro_id': value_pro
+      url: "<?php echo site_url() ."Member/Member_register/get_dept_list_ajax" ?>",
+      dataType: 'JSON',
+      data: {
+            'mem_pro_ID': value_pro_ID
         },
-        dataType: 'JSON',
-        async: false,
-        success: function(jsondata) {
-            alert(jsondata)
-        }
-    })
+      success:function(data){
+          console.log(data);
+        //   console.log("335");
+        //   create_Table(data['json_dept']);   
+        dep_input( data['json_station']);
+      }
+      
+     });
+     
+}// recieve json then send to create data table
 
-}
-
-// const togglePassword = document.querySelector('#togglePassword');
-// const password = document.querySelector('#mem_password');
-
-// togglePassword.addEventListener('click', function (e) {
-//     // toggle the type attribute
-//     const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-//     password.setAttribute('type', type);
-//     // toggle the eye / eye slash icon
-//     this.classList.toggle('bi-eye');
-// });
-// const togglePassword2 = document.querySelector('#togglePassword2');
-// const confirm_password = document.querySelector('#confirm_password');
-
-// togglePassword2.addEventListener('click', function (e) {
-//     // toggle the type attribute
-//     const type = confirm_password.getAttribute('type') === 'password' ? 'text' : 'password';
-//     confirm_password.setAttribute('type', type);
-//     // toggle the eye / eye slash icon
-//     this.classList.toggle('bi-eye');
+function dep_input(arr_dep) {//
     
-//});
+        var select = document.getElementById("mem_dep_id");
+        const elmts =  arr_dep;
+        console.log(arr_dep);
+        const dep_optn = JSON.parse(JSON.stringify(elmts));
+        
+        // console.log(arr_dep.dep_name);
+        // console.log(dep_optn);
+        // // Main function
+         
+            for (var i of elmts) {
+                console.log(i.dep_name);
+                var optn = i.dep_name;
+                var el = document.createElement("option");
+                el.textContent = optn;
+                el.value = optn;
+                select.appendChild(el);
+            }
+    
+}
+function get_pro(){
+    var mem_pro_ID = document.getElementById("mem_province_id");
+    console.log(mem_pro_ID);
+    $("#mem_dep_id").empty();
+	get_dept(mem_pro_ID.value);
+}
+// finction check_depart
+
+
 </script>
 <style> 
      /*ปรับรูปแบบตัวอักษร */
@@ -235,74 +237,6 @@ function getprovince(value_pro){
     *{
         font-family: 'Sarabun', sans-serif;
     }
-    /* .i {
-
-        margin-left: 300px;
-        cursor: pointer   
-    } */
-
-    /* .card-header{
-        border: 2px solid red;
-        padding: 10px;
-        border-bottom-left-radius: 50px;
-
-    } */
-
-    /* .select{
-    /* margin:40px; */
-    /* color:#DCDCDC;
-
-    } */ 
-
-/* #mem_province_id {
-  box-sizing: border-box;
-  background-image: url('searchicon.png');
-  background-position: 14px 12px;
-  background-repeat: no-repeat;
-  font-size: 16px;
-  padding: 14px 20px 12px 45px;
-  border: none;
-  border-bottom: 1px solid #ddd;
-}
-
-#mem_province_id:focus {outline: 3px solid #ddd;}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f6f6f6;
-  min-width: 230px;
-  overflow: auto;
-  border: 1px solid #ddd;
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown a:hover {background-color: #ddd;} */
-
-/* .show {display: block;}
-    .show,
-    .hide{
-        position: absolute;
-        right: 15px;
-        top: 10px;
-        font-size: 28px;
-        color: #333;
-
-    }
-    .hide{
-        display: none;
-    } */
+    
 
 </style>
