@@ -51,5 +51,12 @@ class Da_DQS_member extends DQS_model
         WHERE mem_id = ?";
         $this->db->query($sql, array($this->mem_dep_id, $this->mem_pro_id, $this->mem_firstname,$this->mem_lastname,$this->mem_email,$this->mem_id));
     }
+    public function change_password()
+    {
+        $sql = "UPDATE {$this->db_name}.DQS_Member
+                SET mem_password = ?
+                WHERE mem_id = ? "; 
+        $this->db->query($sql, array($this->mem_password, $this->mem_id)); 
+    }
 
 }

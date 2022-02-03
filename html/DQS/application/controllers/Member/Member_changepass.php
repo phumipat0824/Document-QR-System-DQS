@@ -19,7 +19,20 @@ class Member_changepass extends DQS_controller {
 		$this->output_sidebar_member("Member/v_member_changepass");
 	}
     
+	public function change_password()
+	{
+		
+		$this->load->model('Da_DQS_member', 'mem');
+	
+        $this->mem->mem_password = md5($this->input->post('new_password'));
+        $this->mem->mem_id = $this->input->post('mem_id');
+		$this->mem->change_password();
+	
+		$this->output_sidebar_member("Member/v_member_changepass");
+		
+		
 
+	}
 
 }
 ?>

@@ -32,46 +32,6 @@ class Member_upload_file extends DQS_controller
 		$this->output("member/test_upload");
 	}
 
-	// public function update()
-    // {
-    //     $this->load->model('M_DQS_qrcode', 'qrc');
-	// 	$data['arr_qr'] = $this->fol->get_by_id($memid)->result();
-	// 	for ($i = 0; $i < count($arr_qr); $i++) {
-
-	// 		$this->load->model('Da_DQS_qrcode','qro');
-	// 		$this->qro->qr_id = $arr_qr->qr_id;
-	// 		$this->qro->qr_doc_id = $arr_qr->doc_id;
-	// 		$this->qro->set_id();
-
-	// 	}
-    // }
-
-	public function upload()
-	{
-		$doc_name = $_POST['doc_name'];
-		$this->load->model('Da_DQS_qrcode', 'dqrc');
-		$this->dqrc->doc_type = "pdf";
-		$this->dqrc->doc_name = $doc_name;
-		$upload = $_FILES['doc_path'];
-		if ($upload != '') {   //not select file
-			//โฟลเดอร์ที่จะ upload file เข้าไป 
-			$path = dirname(__FILE__) . '/../../../assets/pdf/fileupload_Member/';
-			//เอาชื่อไฟล์เก่าออกให้เหลือแต่นามสกุล
-			$type = strrchr($_FILES['doc_path']['name'], ".");
-
-			//ตั้งชื่อไฟล์ใหม่โดยเอาเวลาไว้หน้าชื่อไฟล์เดิม
-			$newname = $doc_name . $type;
-			$path_copy = $path . $newname;
-
-			$newpath = '/assets/pdf/fileupload_Member/' . $newname;
-			//คัดลอกไฟล์ไปเก็บที่เว็บเซริ์ฟเวอร์
-			move_uploaded_file($_FILES['doc_path']['tmp_name'], $path_copy);
-		}
-		$this->session->set_userdata('newpath', $newpath);
-		$this->dqrc->doc_path = $newpath;
-		$this->dqrc->insert_doc();
-	}
-
 	public function save_qrcode()
 	{
 		// Get the incoming image data
@@ -109,14 +69,14 @@ class Member_upload_file extends DQS_controller
 	public function upload_file()
 	{ //Update department into database
 
-		$this->load->model('Da_DQS_qrcode', 'dqrc');
+		$this->load->model('M_DQS_qrcode', 'dqrc');
 		$this->dqrc->doc_name = $this->input->post('doc_name');
 		$this->dqrc->doc_type = "pdf";
 
 		$upload = $_FILES['doc_path'];
 		if ($upload != '') {   //not select file
 			//โฟลเดอร์ที่จะ upload file เข้าไป 
-			$path = dirname(__FILE__) . '/../../../assets/users/'.$this->session->mem_username.'/'.'home/';
+			$path = dirname(__FILE__) . '/../../../assets/users/'.$this->session->userdata('username').'/'.'home/';
 			
 
 			//เอาชื่อไฟล์เก่าออกให้เหลือแต่นามสกุล
@@ -126,13 +86,22 @@ class Member_upload_file extends DQS_controller
 			$newname = $this->input->post('doc_name') . $type;
 			$path_copy = $path . $newname;
 
-			$newpath = '/assets/users/'.$this->session->mem_username.'/'.'home/' . $newname;
+			//$newpath = '/assets/users/'.$this->session->userdata('username').'/'.'home/' . $newname;
 			//คัดลอกไฟล์ไปเก็บที่เว็บเซริ์ฟเวอร์
-			move_uploaded_file($_FILES['doc_path']['tmp_name'], $path_copy);
+			
+			//move_uploaded_file($_FILES['doc_path']['tmp_name'], $path_copy);
+			if ($this->dqrc->check_exist_name($this->dqrc->doc_name) == 0 && trim($this->dqrc->doc_name) != ""){
+				$newpath = '/assets/users/'.$this->session->userdata('username').'/'.'home/' . $newname;
+				move_uploaded_file($_FILES['doc_path']['tmp_name'], $path_copy);
+				$this->session->set_userdata('new', $newpath);
+				$this->dqrc->doc_path = $newpath;
+				$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
+				$this->dqrc->insert_doc();
+			}
 		} //if
-		$this->dqrc->doc_path = $newpath;
-		$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
-		$this->dqrc->insert_doc();
+		
+		
+		
 	}
 
 	public function upload_img() ///แก้
@@ -160,6 +129,7 @@ class Member_upload_file extends DQS_controller
 			//คัดลอกไฟล์ไปเก็บที่เว็บเซริ์ฟเวอร์
 			move_uploaded_file($_FILES['doc_path']['tmp_name'], $path_copy);
 		} //if
+		$this->session->set_userdata('new', $newpath);
 		$this->dqrc->doc_path = $newpath;
 		$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
 		$this->dqrc->insert_doc();
@@ -194,12 +164,13 @@ class Member_upload_file extends DQS_controller
 	public function upload_qr()
 	{ //Update department into database
 
-		$this->load->model('Da_DQS_qrcode', 'dqrc');
+		$this->load->model('M_DQS_qrcode', 'dqrc');
 		$this->dqrc->qr_name = $this->input->post('doc_name');
-		$this->session->set_userdata('mem_username', $mem_username);
+		$user = $this->session->userdata('mem_username');
+		$this->session->set_userdata('username', $user);
 
 			//โฟลเดอร์ที่จะ upload file เข้าไป 
-			$path = dirname(__FILE__) . '/../../../assets/users/'.$this->session->mem_username.'/'.'home/';
+			$path = dirname(__FILE__) . '/../../../assets/users/'.$this->session->userdata('username').'/'.'home/';
 
 			//เอาชื่อไฟล์เก่าออกให้เหลือแต่นามสกุล
 			$type = ".jpeg";
@@ -208,11 +179,15 @@ class Member_upload_file extends DQS_controller
 			$newname = $this->input->post('doc_name') . $type;
 			$path_copy = $path . $newname;
 
-			$newpath = '/assets/users/'.$this->session->mem_username.'/'.'home/' . $newname;
-
-		$this->dqrc->qr_path = $newpath;
-		$this->session->set_userdata('newpath', $newpath);
-		$this->dqrc->qr_mem_id = $this->session->userdata('mem_id');
-		$this->dqrc->insert_qr();
+			$newpath = '/assets/users/'.$this->session->userdata('username').'/'.'home/' . $newname;
+		
+		
+		if ($this->dqrc->check_exist_nameqr($this->dqrc->qr_name) == 0 && trim($this->dqrc->qr_name) != ""){
+			$this->dqrc->qr_path = $newpath;
+			$this->session->set_userdata('newpath', $newpath);
+			$this->dqrc->qr_mem_id = $this->session->userdata('mem_id');
+			$this->dqrc->insert_qr();
+		}
 	}
+	
 }

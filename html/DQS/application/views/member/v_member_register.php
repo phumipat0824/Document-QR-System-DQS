@@ -35,24 +35,29 @@
                             <!-- เลือกจังหวัดแบบ dropdown list -->
                                 <div class="row gx-5">
                                     <div class="col"><br><br>
+                                    
                                         <label style = "color: #000000;">จังหวัด</label>
                                         <label style = "color: #FF0000;">*</label>
-                                        <select name="mem_province_id" id="mem_province_id" class="form-select" aria-label="Default select example" required>
-                                            <option value="" selected>--------- เลือกจังหวัด ---- -----</option>
+                                        
+                                            <!-- <div class="dropdown">
+                                            <select onclick="myFunction()">--------- เลือกจังหวัด ---- -----</select>
+                                            <div id="province_choice" class="dropdown-content">
+                                            <input type="text" placeholder="ค้นหา" id="mem_province_id" onkeyup="filterFunction()"> -->
+                                        <select  onchange="get_pro()" name="mem_province_id" id="mem_province_id" class="form-select" aria-label="Default select example" required>
+                                            <option value="" selected>--------- เลือกจังหวัด ---------</option>
                                             <?php foreach ($arr_province as $value) { ?>
                                                 <option value='<?php echo $value->pro_id ?>'><?php echo $value->pro_name ?></option>
+                                                
                                             <?php } ?>
                                         </select><br>
-
+                                        
+                                            
                                 </div>
                                 <div class="col"><br><br>
                                         <label style = "color: #000000;">หน่วยงาน</label>
                                         <label style = "color: #FF0000;">*</label>
                                         <select name="mem_dep_id" id="mem_dep_id" class="form-select" aria-label="Default select example" required>
-                                            <option value="" selected>--------- เลือกหน่วยงาน ---------</option>
-                                            <?php foreach ($arr_department as $value) { ?>
-                                                <option value='<?php echo $value->dep_id ?>'><?php echo $value->dep_name ?></option>
-                                            <?php } ?>
+                                        <option value="" selected>--------- เลือกหน่วยงาน ---------</option>
                                         </select><br>
                                     </div>
                                     </div>
@@ -154,27 +159,77 @@ hide.onclick = function(){//รหัสผ่านถูกปิดการ�
     show.style.display = "block";
 }
 
-// const togglePassword = document.querySelector('#togglePassword');
-// const password = document.querySelector('#mem_password');
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
 
-// togglePassword.addEventListener('click', function (e) {
-//     // toggle the type attribute
-//     const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-//     password.setAttribute('type', type);
-//     // toggle the eye / eye slash icon
-//     this.classList.toggle('bi-eye');
-// });
-// const togglePassword2 = document.querySelector('#togglePassword2');
-// const confirm_password = document.querySelector('#confirm_password');
+// function filterFunction() {
+//   var input, filter, ul, li, a, i;
+//   input = document.getElementById("mem_province_id");
+//   filter = input.value.toUpperCase();
+//   div = document.getElementById("province_choice");
+//   a = div.getElementsByTagName("a");
+//   for (i = 0; i < a.length; i++) {
+//     txtValue = a[i].textContent || a[i].innerText;
+//     if (txtValue.toUpperCase().indexOf(filter) > -1) {
+//       a[i].style.display = "";
+//     } else {
+//       a[i].style.display = "none";
+//     }
+//   }
 
-// togglePassword2.addEventListener('click', function (e) {
-//     // toggle the type attribute
-//     const type = confirm_password.getAttribute('type') === 'password' ? 'text' : 'password';
-//     confirm_password.setAttribute('type', type);
-//     // toggle the eye / eye slash icon
-//     this.classList.toggle('bi-eye');
+// }
+
+
+function get_dept(value_pro_ID){
+    $.ajax({
+        type: "POST",
+      url: "<?php echo site_url() ."Member/Member_register/get_dept_list_ajax" ?>",
+      dataType: 'JSON',
+      data: {
+            'mem_pro_ID': value_pro_ID
+        },
+      success:function(data){
+          console.log(data);
+        //   console.log("335");
+        //   create_Table(data['json_dept']);   
+        dep_input( data['json_station']);
+      }
+      
+     });
+     
+}// recieve json then send to create data table
+
+function dep_input(arr_dep) {//
     
-//});
+        var select = document.getElementById("mem_dep_id");
+        const elmts =  arr_dep;
+        console.log(arr_dep);
+        const dep_optn = JSON.parse(JSON.stringify(elmts));
+        
+        // console.log(arr_dep.dep_name);
+        // console.log(dep_optn);
+        // // Main function
+         
+            for (var i of elmts) {
+                console.log(i.dep_name);
+                var optn = i.dep_name;
+                var el = document.createElement("option");
+                el.textContent = optn;
+                el.value = optn;
+                select.appendChild(el);
+            }
+    
+}
+function get_pro(){
+    var mem_pro_ID = document.getElementById("mem_province_id");
+    console.log(mem_pro_ID);
+    $("#mem_dep_id").empty();
+	get_dept(mem_pro_ID.value);
+}
+// finction check_depart
+
+
 </script>
 <style> 
      /*ปรับรูปแบบตัวอักษร */
@@ -182,35 +237,6 @@ hide.onclick = function(){//รหัสผ่านถูกปิดการ�
     *{
         font-family: 'Sarabun', sans-serif;
     }
-    /* .i {
-
-        margin-left: 300px;
-        cursor: pointer   
-    } */
-
-    /* .card-header{
-        border: 2px solid red;
-        padding: 10px;
-        border-bottom-left-radius: 50px;
-
-    } */
-
-    /* .select{
-    /* margin:40px; */
-    /* color:#DCDCDC;
-
-    } */ 
-    .show,
-    .hide{
-        position: absolute;
-        right: 15px;
-        top: 10px;
-        font-size: 28px;
-        color: #333;
-
-    }
-    .hide{
-        display: none;
-    }
+    
 
 </style>

@@ -126,8 +126,8 @@
             text_fname.style.color = "#ff0000";
            fname_check = 0;
             
-        }if(f_name = ""){
-            text_fname.innerHTML = "กรอกข้อมูลไม่ถูกต้องกรุณากรอกใหม่อีกครั้ง";
+        }if(f_name == ""){
+            text_fname.innerHTML = "กรุณากรอกชื่อ";
             text_fname.style.color = "#ff0000";
             fname_check = 0;
             
@@ -146,8 +146,8 @@
             text_lname.innerHTML = "กรอกข้อมูลไม่ถูกต้องกรุณากรอกใหม่อีกครั้ง";
             text_lname.style.color = "#ff0000";
             lname_check =0;
-        }if(l_name = ""){
-            text_lname.innerHTML = "กรอกข้อมูลไม่ถูกต้องกรุณากรอกใหม่อีกครั้ง";
+        }if(l_name == ""){
+            text_lname.innerHTML = "กรุณากรอกนามสกุล";
             text_lname.style.color = "#ff0000";
             lname_check =0;
         }
@@ -166,8 +166,8 @@
             text.innerHTML = "อีเมลไม่ถูกต้อง กรุณากรอกใหม่อีกครั้ง";
             text.style.color = "#ff0000";
             email_check =0;
-        }if(email = ""){
-            text.innerHTML = "อีเมลไม่ถูกต้อง กรุณากรอกใหม่อีกครั้ง";
+        }if(email == ""){
+            text.innerHTML = "กรุณากรอกอีเมล";
             text.style.color = "#ff0000";
             email_check =0;
         }

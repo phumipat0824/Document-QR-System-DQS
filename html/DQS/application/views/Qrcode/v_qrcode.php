@@ -1,9 +1,16 @@
+<!-- /*
+* v_qrcode.php
+* Display Qrcode
+* @input url,logo
+* @output qrcode
+* @author Phumipat
+* @Create Date 2564-08-05
+*/ -->
 <div class="content">
     <div class="row" style="padding: 100px 10px 10px 20%;">
         <a style="color:#100575; font-size: 80px;">สร้างคิวอาร์โค้ด</a>
         <a style="font-size: 35px;">เริ่มสร้าง QR Code กันเลย </a>
     </div>
-    
     <div class="row"style="padding-left:20%;">
             <div class="col-md-5">
                 <div class="card" id="oninput"style="border-color:#E4E4E4;border-width: 5px;"> 
@@ -14,22 +21,17 @@
                     <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="<?php echo base_url() . 'Member/Member_login/show_member_login' ?>" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="far fa-images"></i> รูปภาพ</a>
                 </div>
             </nav>                                         
-                    <!-- <form action='' method="post"> -->
                     <div class="form-row"style="margin-left:10%;margin-top: 10%;margin-bottom: 20px">                
                             <a style="margin-top: 10px;">เว็บไซต์</a>
                             <label style = "color: #FF0000;">*</label>&emsp;
                             <label id="target_div" style = "display:none;margin-top: 3%;color: #FF0000;">กรอกข้อมูลลิงค์เว็บไซต์ (URL)</label>
                     </div>
-
                             <input id="text" type="text"style="margin: auto;" oninvalid="InvalidMsg(this);"oninput="InvalidMsg(this);"value="https://www.example.com"required="required">
-                            <!-- <input id="text" type="text"style="margin: auto;" value="https://www.example.com"required="required"> -->
-    
                             <div id="inputlogo"style="margin-top: 30px;">
                                 <center>
                                     <button class = "slide" id="up" style="width: 80%;" onclick="showinputlogo()">เพิ่มโลโก้<i class="fas fa-angle-down" style="float: right;"  aria-hidden="true"></i></button>
                                 </center>                               
-                                </div> 
-                                        
+                                </div>      
                                         <div class="form-row" id="vanish"style="display:none;margin-left:10%;margin-top: 30px;"> 
                                         <a style="margin-top: 10px;">โลโก้</a>&emsp;
                                         <label style = "color: #FF0000;">*</label>
@@ -58,7 +60,6 @@
                 </div>
             </div>
     </div>
-
 </div>
 
 <script type="text/javascript">
@@ -76,7 +77,7 @@ function getFileData (){
 async function uploadFile() {
     let formData = new FormData();
     formData.append("logo", logo.files[0]);
-    await fetch("<?php echo site_url() . "/Qrcode/QRcode_generator/upload/" ?>", {
+    await fetch("<?php echo site_url() . "/Qrcode/Qrcode_generator/upload/" ?>", {
         method: "POST",
         body: formData
     });
@@ -190,7 +191,7 @@ function doCapture() {
         var ajax = new XMLHttpRequest();
  
         // Setting method, server file name, and asynchronous
-        ajax.open("POST", "<?php echo site_url() . "/Qrcode/QRcode_generator/save_server/" ?>", true);
+        ajax.open("POST", "<?php echo site_url() . "/Qrcode/Qrcode_generator/save_server/" ?>", true);
  
         // Setting headers for POST method
         ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

@@ -13,21 +13,22 @@
                         <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="far fa-file-pdf"></i> PDF</a>
                         <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="far fa-images"></i> รูปภาพ</a>
                         <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="false"><i class="fas fa-paperclip"></i> เว็บไซต์</a>
-
                     </div>
                 </nav>
                 <form method="post" action="" enctype="multipart/form-data">
-                    <label class=" form-control-label" style="padding-left: 45px; padding-top: 20px; color: #000000">ไฟล์ PDF</label><br>
+                    <label class=" form-control-label" style="padding-left: 45px; padding-top: 20px; color: #000000">ไฟล์ PDF</label>
+                    <label style="color: #FF0000;">* <span id="text_namef"> </span> </label><br><br>
                     <div class="row">
                         <div class="col-md-2 offset-md-1">
-                            <input type="file" id="doc_path" name="doc_path" class="form-control" accept="application/pdf" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;"><br>
+                            <input type="file" id="doc_path" name="doc_path" class="form-control" accept="application/pdf" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;" value="" onchange="file_validation()"><br>
                         </div>
                     </div>
 
-                    <label class="form-control-label" style="padding-left: 40px; padding-top: 20px; color: #000000">ชื่อ:</label><br>
+                    <label class="form-control-label" style="padding-left: 40px; padding-top: 20px; color: #000000">ชื่อ:</label>
+                    <label style="color: #FF0000;">* <span id="text_name"> </span> </label><br>
                     <div class="row">
                         <div class="col-md-2 offset-md-1">
-                            <input type="text" id="doc_name" name="doc_name" class="form-control" style="margin: 0px;  width: 400px;" placeholder="ชื่อไฟล์"><br />
+                            <input type="text" class="form-control" id="doc_name" name="doc_name" class="form-control" style="margin: 0px;  width: 400px;" placeholder="ชื่อไฟล์" value="" onchange="name_validation()"><br />
                         </div>
                     </div>
 
@@ -46,7 +47,7 @@
                         <input id="logo_img" type="file" name="logo" accept="image/png, image/jpeg"><br><br>
                     </div>
                     <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name') ?>" hidden>
-                    <input type="text" id="text" name='text' value='<?php echo $this->session->userdata('newpath') ?>' hidden>
+                    <input type="text" id="text" name='text' value='1' hidden>
                     <button id="upload" name="upload" class="btn btn-dark_blue" style="margin-left: 25%; margin-bottom: 30px;margin-top: 40px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 35px;">สร้างคิวอาร์โค้ด</button>
 
                     <!-- </form> -->
@@ -63,7 +64,7 @@
                     </div>
                     <br>
 
-                    <button id="download" onclick="doCapture();" class="btn btn-warning" style="margin-top:40px;margin-bottom: 30px;font-family:TH sarabun new; font-size: 35px; width: 240; ">ดาวน์โหลด</button>
+                    <button id="download" class="btn btn-warning" style="margin-top:40px;margin-bottom: 30px;font-family:TH sarabun new; font-size: 35px; width: 240; ">ดาวน์โหลด</button>
                 </div>
             </div>
         </div>
@@ -109,8 +110,8 @@ async function uploadFile() {
             doc_name: doc_name
         },
         body: formData
-
     });
+
     make();
     await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_qr/" ?>", {
         method: "POST",
@@ -129,6 +130,7 @@ async function uploadFile() {
     })
     // await fetch("<?php echo site_url() . "/Member/Member_upload_file/update/" ?>");
 }
+
 //$(document).ready(function() {
 //    $('#upload').click(function(e) {
 //        e.preventDefault();
@@ -183,6 +185,65 @@ function doCapture(doc_name) {
     });
 }
 
+function name_validation() {
+    var text_n = document.getElementById("text_name");
+    var d_name = document.getElementById("doc_name").value;
+    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+    var n_check;
+    if (d_name.match(pattern)) {
+        text_n.innerHTML = "";
+        n_check = 1;
+
+    } else {
+        text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+        text_n.style.color = "#ff0000";
+        n_check = 0;
+
+    }
+    if (d_name == "") {
+        text_n.innerHTML = "กรุณากรอกชื่อเอกสาร";
+        text_n.style.color = "#ff0000";
+        n_check = 0;
+
+    }
+    return n_check;
+}
+
+function file_validation() {
+    var text_f = document.getElementById("text_namef");
+    var f_name = document.getElementById("doc_path").value;
+    var f_check;
+    if (f_name != "") {
+        text_f.innerHTML = "";
+        f_check = 1;
+
+    } else {
+        text_f.innerHTML = "กรุณาเลือกไฟล์";
+        text_f.style.color = "#ff0000";
+        f_check = 0;
+
+    }
+    if (f_name == "") {
+        text_f.innerHTML = "กรุณาเลือกไฟล์";
+        text_f.style.color = "#ff0000";
+        f_check = 0;
+
+    }
+    return f_check;
+}
+$(document).on('change', '.form-control', function() {
+    var submit = document.getElementById("upload");
+
+    if (name_validation() == 0 || file_validation() == 0) {
+        submit.disabled = true;
+
+    } else {
+        submit.disabled = false;
+
+    }
+
+});
+
 function make() {
     var logoin = '';
     const [file] = logo_img.files
@@ -197,7 +258,7 @@ function make() {
     if (text.value.trim() !== '') {
         qrcode.innerHTML = '';
         new QRCode(document.getElementById("qrcode"), {
-            text: '<?php echo site_url() . $this->session->userdata('newpath') ?>',
+            text: '<?php echo site_url() . $this->session->userdata('new') ?>',
             width: 300,
             height: 300,
             logo: logoin,
@@ -225,7 +286,9 @@ document.getElementById("download").addEventListener("click", function() {
 
         saveAs(canvas.toDataURL(), 'DQS_QR.png');
     });
+
 });
+
 
 
 function saveAs(uri, filename) {
