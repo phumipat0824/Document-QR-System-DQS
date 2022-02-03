@@ -26,7 +26,7 @@ class Member_edit extends DQS_controller {
       
 		$this->output_sidebar_admin("Member/v_member_edit", $data);
 	}
-	public function edit_member()
+	public function edit_member() ///แก้ไข
 	{
 		
 		$this->load->model('Da_DQS_member', 'mem');

@@ -32,14 +32,7 @@ class Member_register extends DQS_controller
     }
 
 
-    // public function test_parameter($a,$b=null)
-    // {
-    //     echo $a;
-    //     echo '<br>';
-    //     var_dump($b);
-    //     print_r($b);
-
-    // }
+   
 
     public function insert_member()
     {          
