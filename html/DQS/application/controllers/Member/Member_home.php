@@ -1,5 +1,11 @@
 <?php
 
+/*
+* Member_home
+* @author Pongthorn,Onticha,Chanyapat
+* @Create Date 2565-11-19
+*/
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 require dirname(__FILE__) . '/../DQS_controller.php';
