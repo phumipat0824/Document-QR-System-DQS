@@ -3,7 +3,7 @@
 <script type="text/javascript" src="<?php echo base_url() . 'assets/plugin' ?>/DataTables/datatables.js"></script>
 <link href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/css/CSS_table_list.css"
     rel="stylesheet" />
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- ===================================== -->
 <div class="main-panel">
@@ -81,19 +81,21 @@
                 html_code += '<td>' + row_mem['pro_name'] + '</td>';
                 html_code += '<td>' + row_mem['mem_username'] + '</td>';
                 // ชื่อหน่วยงาน
-                html_code += '<td   >' + row_mem['mem_firstname']+' '+ row_mem['mem_lastname']+ '</td>';
+                html_code += '<td   >' + row_mem['mem_firstname'] + ' ' + row_mem['mem_lastname'] + '</td>';
 
 
-                html_code += '<td>'+row_mem['dep_name']+'</td>';
+                html_code += '<td>' + row_mem['dep_name'] + '</td>';
                 html_code += '<td>' + row_mem['mem_email'] + '</td>';
                 // สถานะของหน่วยงาน
                 html_code += '<td style="text-align: center;">' +
-                    '<a href="<?php echo site_url() ?>/Member/Member_edit/show_member_edit/'+ row_mem['mem_id'] +'">' +
+                    '<a href="<?php echo site_url() ?>/Member/Member_edit/show_member_edit/' + row_mem[
+                        'mem_id'] + '">' +
                     '<i class="far fa-edit"></i>' + '</a>' + '</td>';
                 // button edit data
                 html_code += '</td>';
                 html_code += '<td style="text-align: center;">' +
-                    '<button type="button" class="btn bg-gradient-primary" onclick="delete_member('+ row_mem['mem_id'] +')">' +
+                    '<button type="button" class="btn bg-gradient-primary" onclick="delete_member(' + row_mem[
+                        'mem_id'] + ')">' +
                     '<i class="fas fa-trash">' + '</button>' + '</td>';
                 // button delete data
                 html_code += '</td>';
@@ -155,35 +157,35 @@
 
         <script>
         function delete_member(mem_id) {
-           console.log(mem_id);
+            console.log(mem_id);
 
-                Swal.fire({
-                    title: 'ยืนยันการลบบัญชีผู้ใช้',
-                    showCancelButton: true,
-                    confirmButtonColor: '#0c83e2',
-                    cancelButtonColor: '#fffff',
-                    confirmButtonText: 'ยืนยัน',
-                    cancelButtonText: 'ยกเลิก'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            url: "<?php echo site_url().'/Admin/Admin_home/delete_admin'?>",
-                            type: 'POST',
-                            data: {
-                                mem_id: mem_id
-                            },
-                            success: function(response) {
+            Swal.fire({
+                title: 'ยืนยันการลบบัญชีผู้ใช้',
+                showCancelButton: true,
+                confirmButtonColor: '#0c83e2',
+                cancelButtonColor: '#fffff',
+                confirmButtonText: 'ยืนยัน',
+                cancelButtonText: 'ยกเลิก'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "<?php echo site_url().'/Admin/Admin_home/delete_admin'?>",
+                        type: 'POST',
+                        data: {
+                            mem_id: mem_id
+                        },
+                        success: function(response) {
 
-                                window.location.reload();
+                            window.location.reload();
 
-                            }
-                        });
+                        }
+                    });
 
-                    }
-                })
+                }
+            })
 
 
-            
+
         };
         </script>
         <style>

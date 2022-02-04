@@ -104,7 +104,7 @@ class Member_upload_file extends DQS_controller
 		
 	}
 
-	public function upload_img()
+	public function upload_img() ///แก้
 	{ //Update department into database
 
 		$this->load->model('Da_DQS_qrcode', 'dqrc');
