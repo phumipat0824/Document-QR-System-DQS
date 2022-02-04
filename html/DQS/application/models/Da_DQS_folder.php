@@ -1,8 +1,8 @@
 <?php
 /*
 	* Da_DQS_folder.php
-    * Da_DQS_folder upload folder
-    * @author pongthorn
+    * insert ,update ,delete ,move folder
+    * @author Pongthorn,Onticha,Chanyapat
     * @Create Date 2564-11-19
 */
 ?>
@@ -28,11 +28,11 @@ class Da_DQS_folder extends DQS_model {
 	}
 
 /*
-* insert
+* insert()
 * Insert folder into database 
 * @input folder data
 * @output -
-* @author pongthorn
+* @author Pongthorn
 * @Create Date 2564-11-19
 */
     public function insert(){//insert folder into database    
@@ -42,6 +42,14 @@ class Da_DQS_folder extends DQS_model {
         $this->db->query($sql,array($this->fol_name,$this->fol_location,$this->fol_mem_id,$this->fol_location_id));        
     }//end insert folder into database
 
+/*
+* update()
+* Update folder into database 
+* @input folder_name
+* @output update folder name
+* @author Onticha
+* @Create Date 2564-11-30
+*/
     public function update(){//update folder into database    
         $sql ="UPDATE {$this->db_name}.DQS_Folder
         SET fol_name = ? ,  fol_location = ?
@@ -51,12 +59,20 @@ class Da_DQS_folder extends DQS_model {
                  
     }//end update folder into database
 
-    public function delete($fol_id)   
+/*
+* delete()
+* Delete folder from database 
+* @input folder_id
+* @output -
+* @author Onticha
+* @Create Date 2564-11-30
+*/
+    public function delete($fol_id)//delete folder from database     
 	{
         $sql ="DELETE FROM {$this->db_name}.DQS_Folder
         WHERE fol_id = $fol_id";
         $this->db->query($sql , array($this->fol_id));  
-	}
+	}//end delete folder from database     
 
     public function move(){//update location folder into database    
         $sql ="UPDATE {$this->db_name}.DQS_Folder
