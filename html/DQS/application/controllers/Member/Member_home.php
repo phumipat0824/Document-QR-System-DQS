@@ -25,17 +25,17 @@ class Member_home extends DQS_controller
 * @author pongthorn
 * @Create Date 2564-12-05
 */
-    public function show_member_home()
-    {
-        $this->load->model('M_DQS_folder', 'fol');
-		$this->load->model('M_DQS_login', 'qrc');
-		$memid = $this->session->userdata('mem_id');
-		$data['arr_fol'] = $this->fol->get_by_id($memid)->result();
-		$data['arr_qr'] = $this->qrc->get_by_id($memid)->result();
-		$data['arr_folder'] = $this->fol->get_all()->result();
-		$data['path_fol'] = array('@');
-        $this->output_sidebar_member("Member/v_member_home",$data);
-    }
+public function show_member_home()
+{
+	$this->load->model('M_DQS_folder', 'fol');
+	$this->load->model('M_DQS_login', 'qrc');
+	$memid = $this->session->userdata('mem_id');
+	$data['arr_fol'] = $this->fol->get_by_id($memid)->result();
+	$data['arr_qr'] = $this->qrc->get_by_id($memid)->result();
+	$data['arr_folder'] = $this->fol->get_all()->result();
+	$data['path_fol'] = array('@');
+	$this->output_sidebar_member("Member/v_member_home",$data);
+}
 /*
 * show_in_folder()
 * show  folder

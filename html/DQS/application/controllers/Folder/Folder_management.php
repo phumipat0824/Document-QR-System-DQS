@@ -69,7 +69,12 @@ class Folder_management extends DQS_controller {
 		}
 		$this->folder->fol_location_id = $this->input->post('fol_location_id');
 		$this->folder->insert();
-		redirect('Member/Member_home/show_in_folder/' . $this->input->post('fol_location_id'));
+		if($this->input->post('fol_location_id') != 0){
+			redirect('Member/Member_home/show_in_folder/' . $this->input->post('fol_location_id'));
+		}
+		else{
+			redirect('Member/Member_home/show_member_home/');
+		}
 	}//end funtion insert_folder()
 	
 	/*
