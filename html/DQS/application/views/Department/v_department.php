@@ -1,3 +1,10 @@
+<!-- 
+  * View of department
+	* @input -
+	* @output -
+	* @author Kiattisak
+  * @Create Date 2564-08-05
+ -->
 <!-- load plugin data table -->
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'assets/plugin' ?>/DataTables/datatables.css"/>
 <script type="text/javascript" src="<?php echo base_url() . 'assets/plugin' ?>/DataTables/datatables.js"></script>

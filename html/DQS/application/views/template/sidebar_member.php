@@ -21,8 +21,8 @@
                 </a>
             </li>
 
-            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Member/Member_changepass/show_changepass" ?  'active'  : '' ?> ">
-                <a class="nav-link" href="<?php echo site_url().'/Member/Member_changepass/show_changepass'?>">
+            <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Member/Member_change_password/show_change_password" ?  'active'  : '' ?> ">
+                <a class="nav-link" href="<?php echo site_url().'/Member/Member_change_password/show_change_password'?>">
                     <i class="fas fa-cog" style="color: rgb(125, 123, 122);"></i>
                     <p style="color: rgb(0,0,0); ">จัดการบัญชีผู้ใช้งาน</p>
                 </a>

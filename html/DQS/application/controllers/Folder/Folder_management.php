@@ -2,9 +2,10 @@
 
 /*
 * management folder
-* @author Pongthorn,Onticha
-* @Create Date 2565-13-01
+* @author Pongthorn,Onticha,Chanyapat
+* @Create Date 2565-11-19
 */
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 require dirname(__FILE__).'/../DQS_controller.php';
@@ -28,15 +29,16 @@ class Folder_management extends DQS_controller {
 			$checkname = 1;
 		}
 		echo json_encode($checkname);
-	}
-/*
-* insert_folder()
-* create folder
-* @input folder name
-* @output show folder
-* @author pongthorn
-* @Create Date 2564-12-03
-*/
+	}//end funtion get_folder_ajax()
+	
+	/*
+	* insert_folder()
+	* insert folder 
+	* @input -
+	* @output -
+	* @author Pongthorn
+	* @Create Date 2564-11-19
+	*/
     public function insert_folder() // สร้างโฟลเดอร์
 	{
 		$this->load->model('M_DQS_folder', 'folder');
@@ -67,14 +69,17 @@ class Folder_management extends DQS_controller {
 		}
 		$this->folder->fol_location_id = $this->input->post('fol_location_id');
 		$this->folder->insert();
-		if($this->input->post('fol_location_id') != 0){
-			redirect('Member/Member_home/show_in_folder/' . $this->input->post('fol_location_id'));
-		}
-		else{
-			redirect('Member/Member_home/show_member_home/');
-		}
-		
-	}
+		redirect('Member/Member_home/show_in_folder/' . $this->input->post('fol_location_id'));
+	}//end funtion insert_folder()
+	
+	/*
+	* update_folder()
+	* update folder name
+	* @input folder name
+	* @output update folder name
+	* @author Onticha
+	* @Create Date 2564-11-30
+	*/
 	function update_folder()
 	{
 		$this->load->model('M_DQS_folder', 'Mfol');
@@ -113,8 +118,16 @@ class Folder_management extends DQS_controller {
 		}
 		
 	
-	}
+	}//end funtion update_folder()
 	
+	/*
+	* delete_folder()
+	* delete folder 
+	* @input -
+	* @output -
+	* @author Onticha
+	* @Create Date 2564-11-30
+	*/
 	function delete_folder()
 	{
 		$this->load->model('M_DQS_folder', 'folder');
@@ -145,7 +158,7 @@ class Folder_management extends DQS_controller {
 		redirect('Member/Member_home/show_member_home');
 
 		
-	}
+	}//end funtion delete_folder()
     
 
 

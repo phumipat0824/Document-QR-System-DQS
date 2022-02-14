@@ -143,12 +143,12 @@
                         <h5 class="modal-title" id="exampleModalLabel">ยืนยันการลบโฟลเดอร์</h5>
 
                     </div>
-                    <!-- action="<?php echo site_url() ?>/Department/Department_list/add_department" -->
+                   
                     <form id="delete-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/delete_folder/'; ?>">
                         <div class="modal-body">
-                            <!-- <center><input type="text" class="col-md-10" placeholder="กรอกชื่อโฟลเดอร์" name="fol_name" required></center> -->
+                           
                             <input type="hidden" name="fol_id" id="fol_id" value="">
-                            <!-- <input type="hidden" name="fol_name" id="fol_name" value=""> -->
+                    
                             <input type="hidden" name="fol_location_id" id="fol_location_id" value="<?php echo $arr_fol[0]->fol_location_id; ?>">
                         </div>
                         <div class="modal-footer">
@@ -176,7 +176,6 @@
                         <h5 class="modal-title" id="exampleModalLabel">แก้ไขชื่อโฟลเดอร์</h5>
 
                     </div>
-                    <!-- action="<?php echo site_url() ?>/Department/Department_list/add_department" -->
                     <form id="edit-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/update_folder/'; ?>">
                         <div class="modal-body">
                             <center><input onkeyup="check_fol_edit()" type="text" class="col-md-10" id="fol_edit" placeholder="" name="fol_name" required></center>
