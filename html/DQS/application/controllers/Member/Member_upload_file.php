@@ -56,24 +56,15 @@ class Member_upload_file extends DQS_controller
 			//ตั้งชื่อไฟล์ใหม่โดยเอาเวลาไว้หน้าชื่อไฟล์เดิม
 			$newname = $this->input->post('doc_name') . $type;
 			$path_copy = $path . $newname;
-
-			//$newpath = '/assets/users/'.$this->session->userdata('username').'/'.'home/' . $newname;
+			$newpath = '/assets/users/'.$this->session->userdata('username').'/'.'home/' . $newname;
 			//คัดลอกไฟล์ไปเก็บที่เว็บเซริ์ฟเวอร์
-			
-			//move_uploaded_file($_FILES['doc_path']['tmp_name'], $path_copy);
-			if ($this->dqrc->check_exist_name($this->dqrc->doc_name) == 0 && trim($this->dqrc->doc_name) != ""){
-				$newpath = '/assets/users/'.$this->session->userdata('username').'/'.'home/' . $newname;
 				move_uploaded_file($_FILES['doc_path']['tmp_name'], $path_copy);
-				$this->session->set_userdata('new', $newpath);
-				$this->dqrc->doc_path = $newpath;
-				$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
-				$this->dqrc->insert_doc();
 			}
-		} //if
-		$this->session->set_userdata('new', $newpath);
-		$this->dqrc->doc_path = $newpath;
-		$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
-		$this->dqrc->insert_document();
+			$this->session->set_userdata('new', $newpath);
+			$this->dqrc->doc_path = $newpath;
+			$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
+			$this->dqrc->insert_document();
+			
 		
 	}
 
