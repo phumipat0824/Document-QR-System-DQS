@@ -1,3 +1,10 @@
+ <!--* v_member_home
+                * Display show_member_home , 
+                * @input  -
+                * @output show folder
+                * @author Pongthorn
+                * @Create Date 2565-13-01
+*/ -->
 <link href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/css/dqs_right_click_menu.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
@@ -37,13 +44,7 @@
         <br>
         <?php
         for ($i = 0; $i < count($arr_fol); $i++) {   ?>
-            <!-- * v_member_home
-                * Display show_member_home
-                * @input  -
-                * @output show folder
-                * @author Pongthorn
-                * @Create Date 2565-13-01
-*/ -->
+           
             <div class="col-3">
 
                 <div class="dropdown">
@@ -91,9 +92,9 @@
                 </div>
             </div>
         <?php }  ?>
-        <!-- /*
+<!-- /*
     * create folder
-    * Display show_member_home
+    * create folder
     * @input folder name
     * @output show folder
     * @author Pongthorn
@@ -125,7 +126,14 @@
                 </div>
             </div>
         </div>
-
+<!-- /*
+    * delete folder
+    * delete folder
+    * @input  -
+    * @output show folder 
+    * @author Onticha
+    * @Create Date 2565-13-01
+*/ -->
 
         <!-- delete Modal -->
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -152,6 +160,14 @@
             </div>
         </div>
 
+                 <!-- /*
+    * edit folder
+    * edit folder
+    * @input folder name
+    * @output show folder edit
+    * @author Onticha
+    * @Create Date 2565-13-01
+*/ -->
         <!-- edit Modal -->
         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -177,7 +193,15 @@
                 </div>
             </div>
         </div>
-
+        
+               <!-- /*
+    * move folder
+    * Display show_member_home
+    * @input -
+    * @output show folder move
+    * @author chanyapat
+    * @Create Date 2565-13-01
+*/ -->
         <!-- move Modal -->
         <div class="modal fade" id="moveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">

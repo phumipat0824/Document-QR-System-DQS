@@ -10,7 +10,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require dirname(__FILE__).'/../DQS_controller.php';
 
 class Folder_management extends DQS_controller {
-
+/*
+* get_folder_ajax()
+* check name ajax
+* @input -
+* @output -
+* @author pongthorn
+* @Create Date 2564-12-10
+*/
 	public function get_folder_ajax()
 	{
 		$this->load->model('M_DQS_folder', 'fol');
@@ -22,7 +29,14 @@ class Folder_management extends DQS_controller {
 		}
 		echo json_encode($checkname);
 	}
-	
+/*
+* insert_folder()
+* create folder
+* @input folder name
+* @output show folder
+* @author pongthorn
+* @Create Date 2564-12-03
+*/
     public function insert_folder() // สร้างโฟลเดอร์
 	{
 		$this->load->model('M_DQS_folder', 'folder');
@@ -53,7 +67,13 @@ class Folder_management extends DQS_controller {
 		}
 		$this->folder->fol_location_id = $this->input->post('fol_location_id');
 		$this->folder->insert();
-		redirect('Member/Member_home/show_in_folder/' . $this->input->post('fol_location_id'));
+		if($this->input->post('fol_location_id') != 0){
+			redirect('Member/Member_home/show_in_folder/' . $this->input->post('fol_location_id'));
+		}
+		else{
+			redirect('Member/Member_home/show_member_home/');
+		}
+		
 	}
 	function update_folder()
 	{
@@ -84,8 +104,14 @@ class Folder_management extends DQS_controller {
 		
 
 		rename($obj_fol[0]->fol_location , $obj_newfol[0]->fol_location );
+
+		if($this->input->post('fol_location_id') != 0){
+			redirect('Member/Member_home/show_in_folder/' . $this->input->post('fol_location_id'));
+		}
+		else{
+			redirect('Member/Member_home/show_member_home/');
+		}
 		
-		redirect('Member/Member_home/show_in_folder/' . $this->input->post('fol_location_id'));
 	
 	}
 	
@@ -116,7 +142,7 @@ class Folder_management extends DQS_controller {
 
 		rmdir($newpath);/* Delete folder by using rmdir function */
 		
-		redirect('/Member/Member_home/show_member_home');
+		redirect('Member/Member_home/show_member_home');
 
 		
 	}

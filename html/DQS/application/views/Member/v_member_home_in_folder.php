@@ -35,11 +35,17 @@
         <br>
         <?php
         for ($i = 0; $i < count($arr_fol); $i++) {   ?>
-            <!-- style="margin-left: -200px;" -->
+        <!-- * v_member_home_in_floder
+                * show_folder
+                * @input  -
+                * @output show folder
+                * @author Pongthorn
+                * @Create Date 2565-01-13
+*/ -->
+            
             <div class="col-3">
-                <!-- <div class="card card-frame" style=" height: 60px; width: 260px;"> -->
+                
                 <div class="dropdown">
-
                     <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" style="border: 1px solid #dddada; height: 60px; width: 260px;">
                         <i class="material-icons" style="margin-left: 1px;" >folder</i>
                         <a style=" font-size: 26px; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
@@ -56,6 +62,14 @@
                 </div>
             </div>
             <?php }  ?>
+<!-- /*
+    * create folder
+    * create folder 
+    * @input folder name
+    * @output show folder
+    * @author Pongthorn
+    * @Create Date 2565-13-01
+*/ -->
         <!--create Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -66,7 +80,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form method="POST" name="form" action="<?php echo site_url() .'/Member/Member_home/create_folder'; ?>">
+                    <form method="POST" name="form" action="<?php echo site_url() . '/Folder/Folder_management/insert_folder'; ?>">
                     <div class="modal-body">
                         <center><input style="font-size: 25px;font-family:TH Sarabun New; "  id="fol_name" type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name" required></center><br>
                         <a id="target_div" style="display: none; color:red;" align = 'center'>ชื่อโฟลเดอร์ซ้ำ กรุณากรอกใหม่</a>
@@ -84,19 +98,24 @@
             </div>
         </div>
    
-
+<!-- /*
+    * delete folder
+    * delete folder
+    * @input -
+    * @output show folder 
+    * @author Onticha
+    * @Create Date 2565-13-01
+*/ -->
     <!-- delete Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">ยืนยันการลบโฟลเดอร์</h5>
-                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button> -->
+              
             </div>
             <!-- action="<?php echo site_url() ?>/Department/Department_list/add_department" -->
-            <form id="delete-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/delete_folder/'; ?>">
+            <form id="delete-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/delete_folder/'; ?>">
                 <div class="modal-body">
                     <!-- <center><input type="text" class="col-md-10" placeholder="กรอกชื่อโฟลเดอร์" name="fol_name" required></center> -->
                     <input type="hidden" name="fol_id" id="fol_id" value="">
@@ -112,18 +131,24 @@
     </div>
 </div> 
 
+ <!-- /*
+    * edit folder
+    * edit folder
+    * @input folder name
+    * @output show folder edit
+    * @author Onticha
+    * @Create Date 2565-13-01
+*/ -->
 <!-- edit Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">แก้ไขชื่อโฟลเดอร์</h5>
-                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button> -->
+                
             </div>
             <!-- action="<?php echo site_url() ?>/Department/Department_list/add_department" -->
-            <form id="edit-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/update_folder/'; ?>">
+            <form id="edit-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/update_folder/'; ?>">
                 <div class="modal-body">
                     <center><input onkeyup = "check_fol_edit()" type="text" class="col-md-10" id="fol_edit" placeholder="" name="fol_name" required></center>
                     <br>
@@ -139,6 +164,43 @@
         </div>
     </div>
 </div>
+<!-- /*
+    * move folder
+    * move folder
+    * @input -
+    * @output show folder move
+    * @author chanyapat
+    * @Create Date 2565-13-01
+*/ -->
+
+ <!-- move Modal -->
+ <div class="modal fade" id="moveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">ย้ายไปที่</h5>
+                    </div>
+                    <form id="move-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/move_folder/'; ?>">
+                        <div class="modal-body">
+                            <input type="hidden" name="fol_id" id="foler_id" value="">
+                            <select name="fol_location_id" id="fol_location_id" class="form-select" aria-label="Default select example" required>
+                                <?php for ($i = 0; $i < count($arr_fol); $i++) {   ?>
+                                    <?php if ($arr_fol[$i]->fol_id != $value) { ?>
+                                        <option value='<?php echo $arr_fol[$i]->fol_id ?>|<?php echo $arr_fol[$i]->fol_name ?>'><?php echo $arr_fol[$i]->fol_name ?></option>
+                                    <?php } ?>
+                                <?php } ?>
+                            </select><br>
+                            <input type="hidden" name="fol_name" id="foler_name" value="">
+                            <!-- //search folder name -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                            <input type="submit" class="btn btn-success" value="บันทึก">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
 
 </div>

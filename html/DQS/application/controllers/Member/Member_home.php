@@ -3,10 +3,22 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 require dirname(__FILE__) . '/../DQS_controller.php';
-
+/*
+* Member_home
+* show member home
+* @author pongthorn
+* @Create Date 2565-01-02
+*/
 class Member_home extends DQS_controller
 {
-
+/*
+* show_member_home()
+* show  member home
+* @input -
+* @output member home
+* @author pongthorn
+* @Create Date 2564-12-05
+*/
     public function show_member_home()
     {
         $this->load->model('M_DQS_folder', 'fol');
@@ -18,6 +30,14 @@ class Member_home extends DQS_controller
 		$data['path_fol'] = array('@');
         $this->output_sidebar_member("Member/v_member_home",$data);
     }
+/*
+* show_in_folder()
+* show  folder
+* @input -
+* @output show folder
+* @author pongthorn
+* @Create Date 2564-12-10
+*/
 	public function show_in_folder($fol_location_id)
 	{
 		$this->load->model('M_DQS_folder', 'fol');
