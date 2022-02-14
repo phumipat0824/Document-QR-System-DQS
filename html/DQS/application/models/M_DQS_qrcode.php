@@ -17,5 +17,16 @@ class M_DQS_qrcode extends Da_DQS_qrcode
     {
         parent::__construct();
     }
-
+    public function check_exist_name($doc_name)
+    {
+        $this->db->where('doc_name', $doc_name);
+        $query = $this->db->get('DQS_Document');
+        return $query->num_rows();
+    }
+    public function check_exist_nameqr($qr_name)
+    {
+        $this->db->where('qr_name', $qr_name);
+        $query = $this->db->get('DQS_QR');
+        return $query->num_rows();
+    }
 }

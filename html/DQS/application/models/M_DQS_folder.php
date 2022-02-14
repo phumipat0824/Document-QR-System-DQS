@@ -1,4 +1,12 @@
 <?php
+
+/*
+	* M_DQS_folder.php
+    * M_DQS_folder upload folder
+    * @author Pongthorn,Onticha,Chanyapat
+    * @Create Date 2564-11-19
+*/ 
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 include_once 'Da_DQS_folder.php';
@@ -39,6 +47,14 @@ class M_DQS_folder extends Da_DQS_folder
         return $query;
     }
 
+    /*
+    * check_exist_name($fol_name)
+    * check exist name
+    * @input fol_name
+    * @output -
+    * @author Onticha
+    * @Create Date 2564-11-30
+    */
     public function check_exist_name($fol_name)
     {
         $this->db->where('fol_name', $fol_name);
