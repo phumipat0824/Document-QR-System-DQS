@@ -23,7 +23,6 @@ class Member_register extends DQS_controller
         $data['arr_province'] = $this->MDP->get_all()->result();
         $this->output_navbar('Member/v_member_register', $data);
         
-  
     }
 
 
@@ -50,7 +49,13 @@ class Member_register extends DQS_controller
         echo json_encode("2");
          //เรียกกลับมาหน้านี้อีกครั้งอยู่หน้าเดียวกันใส่ชื่อได้เลย
     }
-
+    public function get_dept_list_ajax()
+    {
+        $this->load->model('M_DQS_station_state_of_province', 'MSS');
+        $mem_pro_ID = $this->input->post('mem_pro_ID');
+        $data['json_station'] = $this->MSS->get_station_by_id($mem_pro_ID)->result();
+        echo json_encode($data);
+    }
     public function insert_member()
     {          
         $this->load->model('Da_DQS_member', 'dmem');

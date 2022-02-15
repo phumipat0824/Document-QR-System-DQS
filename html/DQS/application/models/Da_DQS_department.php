@@ -1,4 +1,10 @@
 <?php
+/*
+* Model of Department
+* query insert update delete data in database 
+* @author Kiattisak
+* @Create Date 2564-08-05
+*/
 defined('BASEPATH') or exit('No direct script access allowed');
 
 include_once 'DQS_model.php';

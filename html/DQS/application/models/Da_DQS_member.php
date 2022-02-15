@@ -44,14 +44,31 @@ class Da_DQS_member extends DQS_model
         $this-> db->query($sql, array($this->mem_id)); //ถ้า SQL ที่เราใส่มี ? ต้องใส่ array ด้วย
     }//ลบข้อมูลสมาชิก
 
-    public function update()
+    /*
+		* update_member
+		* update member on DQS_Member 
+		* @input -
+		* @output -
+		* @author Natruja
+		* @Create Date 2564-12-17
+	*/
+    public function update_member()
     {
         $sql = "UPDATE {$this->db_name}.DQS_Member
         SET mem_dep_id = ?, mem_pro_id = ?, mem_firstname = ?, mem_lastname = ?, mem_email =?
         WHERE mem_id = ?";
         $this->db->query($sql, array($this->mem_dep_id, $this->mem_pro_id, $this->mem_firstname,$this->mem_lastname,$this->mem_email,$this->mem_id));
     }
-    public function change_password()
+
+    /*
+		* update_new_password
+		* change password on DQS_Member 
+		* @input -
+		* @output -
+		* @author Natruja
+		* @Create Date 2564-12-02
+	*/
+    public function update_new_password()
     {
         $sql = "UPDATE {$this->db_name}.DQS_Member
                 SET mem_password = ?

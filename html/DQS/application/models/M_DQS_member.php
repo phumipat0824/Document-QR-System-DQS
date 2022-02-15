@@ -137,6 +137,6 @@ class M_DQS_member extends Da_DQS_member
         $query = $this->db->query($sql);
         return $query;
     }
-
+    
 
 }
