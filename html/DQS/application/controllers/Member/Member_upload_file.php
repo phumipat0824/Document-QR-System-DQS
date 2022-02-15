@@ -60,13 +60,21 @@ class Member_upload_file extends DQS_controller
 			//คัดลอกไฟล์ไปเก็บที่เว็บเซริ์ฟเวอร์
 				move_uploaded_file($_FILES['doc_path']['tmp_name'], $path_copy);
 			}
-			$this->session->set_userdata('new', $newpath);
+
 			$this->dqrc->doc_path = $newpath;
 			$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
 			$this->dqrc->insert_document();
+			$this->get_id_document();
 			
-		
 	}
+
+	public function get_id_document()
+    {
+        $this->load->model('M_DQS_qrcode', 'mqrc');	
+        $obj_doc = $this->mqrc->get_id()->row();
+		$data = site_url().$obj_doc->doc_path;
+		echo json_encode($data);	
+    }
 
 	/*
 	* upload_image
@@ -101,11 +109,20 @@ class Member_upload_file extends DQS_controller
 			//คัดลอกไฟล์ไปเก็บที่เว็บเซริ์ฟเวอร์
 			move_uploaded_file($_FILES['doc_pathimg']['tmp_name'], $path_copy);
 		} //if
-		$this->session->set_userdata('new2', $newpath);
+
 		$this->dqrc->doc_path = $newpath;
 		$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
 		$this->dqrc->insert_document();
+		$this->get_id_image();
 	}
+
+	public function get_id_image()
+    {
+        $this->load->model('M_DQS_qrcode', 'mqri');	
+        $obj_doc = $this->mqri->get_id()->row();
+		$data = site_url().$obj_doc->doc_path;
+		echo json_encode($data);	
+    }
 
 	/*
 	* save_qrcode_image

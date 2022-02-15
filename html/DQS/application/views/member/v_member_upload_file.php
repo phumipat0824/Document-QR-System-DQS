@@ -57,11 +57,11 @@
 
                             <div class="form-row" id="vanish" style="display:none;margin-left:10%;margin-top: 30px;">
                                 <a style="margin-top: 10px;">โลโก้</a>&emsp;
-                                <label> jpeg/png</label>
+                                <label style="color: #000;"> jpeg/png : </label>
                                 <label id="name_img" style="color: #000;"></label>
                             </div>
                             <div class="parent-div" id="vanish1" style="display:none;margin-left:10%;">
-                                <button class="btn-upload" style="color:#cfcfcf;"><i class="fas fa-upload"></i> เลือกโลโก้คิวอาร์โค้ด</button>
+                                <button class="btn-upload" style="color:#000;"><i class="fas fa-upload"></i> เลือกโลโก้คิวอาร์โค้ด</button>
                                 <input id="logo_img" type="file" name="logo" onchange="getFileData();" accept="image/png, image/jpeg"><br><br>
                             </div>
                             <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name') ?>" hidden>
@@ -101,11 +101,11 @@
 
                             <div class="form-row" id="vanish2" style="display:none;margin-left:10%;margin-top: 30px;">
                                 <a style="margin-top: 10px;">โลโก้</a>&emsp;
-                                <label> jpeg/png</label>
+                                <label style="color: #000;"> jpeg/png : </label>
                                 <label id="name_img2" style="color: #000;"></label>
                             </div>
                             <div class="parent-div" id="vanish3" style="display:none;margin-left:10%;">
-                                <button class="btn-upload" style="color:#cfcfcf;"><i class="fas fa-upload"></i> เลือกโลโก้คิวอาร์โค้ด</button>
+                                <button class="btn-upload" style="color:#000;"><i class="fas fa-upload"></i> เลือกโลโก้คิวอาร์โค้ด</button>
                                 <input id="logo_img2" type="file" name="logo" onchange="getFileData2();" accept="image/png, image/jpeg"><br><br>
                             </div>
                             <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name') ?>" hidden>
@@ -137,11 +137,11 @@
 
                         <div class="form-row" id="vanish4" style="display:none;margin-left:10%;margin-top: 30px;">
                             <a style="margin-top: 10px;">โลโก้</a>&emsp;
-                            <label> jpeg/png</label>
+                            <label style="color: #000;"> jpeg/png : </label>
                             <label id="name_img3" style="color: #000;"></label>
                         </div>
                         <div class="parent-div" id="vanish5" style="display:none;margin-left:10%;">
-                            <button class="btn-upload" style="color:#cfcfcf;"><i class="fas fa-upload"></i> เลือกโลโก้คิวอาร์โค้ด</button>
+                            <button class="btn-upload" style="color:#000;"><i class="fas fa-upload"></i> เลือกโลโก้คิวอาร์โค้ด</button>
                             <input id="logo_img3" type="file" name="logo" onchange="getFileData3();" accept="image/png, image/jpeg"><br><br>
                         </div>
                         <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name') ?>" hidden>
@@ -174,7 +174,6 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $('#upload').click(function(e) {
-        console.log("test");
         e.preventDefault();
         uploadFile();
     });
@@ -222,7 +221,6 @@ async function uploadFile() {
         },
         body: formData
     });
-
     make();
     await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_qrcode_file/" ?>", {
         method: "POST",
@@ -496,24 +494,34 @@ function make() {
 
 
     if (text.value.trim() !== '') {
-        qrcode.innerHTML = '';
-        new QRCode(document.getElementById("qrcode"), {
-            text: '<?php echo site_url() . $this->session->userdata('new') ?>',
-            width: 300,
-            height: 300,
-            logo: logoin,
-            logoWidth: 80,
-            logoHeight: 80,
-            //logoBackgroundColor: '#ffffff',
-            logoBackgroundTransparent: true,
 
-            // title: 'QR Title', // content 
-            // titleFont: "normal normal bold 18px Arial", //font. default is "bold 16px Arial"
-            // titleColor: "#004284", // color. default is "#000"
-            // titleBackgroundColor: "#fff", // background color. default is "#fff"
-            // titleHeight: 70, // height, including subTitle. default is 0
-            // titleTop: 25, // draws y coordinates. default is 30
-            // drawer: 'canvas',// Which drawing method to use. 'canvas', 'svg'. default is 'canvas'
+        $.ajax({
+            url: "<?php echo site_url() ?>/Member/Member_upload_file/get_id_document",
+            dataType: 'JSON',
+            success: function(data) {
+                // console.log(data);
+                qrcode.innerHTML = '';
+                new QRCode(document.getElementById("qrcode"), {
+                    text: data,
+                    width: 300,
+                    height: 300,
+                    logo: logoin,
+                    logoWidth: 80,
+                    logoHeight: 80,
+                    //logoBackgroundColor: '#ffffff',
+                    logoBackgroundTransparent: true,
+
+                    // title: 'QR Title', // content 
+                    // titleFont: "normal normal bold 18px Arial", //font. default is "bold 16px Arial"
+                    // titleColor: "#004284", // color. default is "#000"
+                    // titleBackgroundColor: "#fff", // background color. default is "#fff"
+                    // titleHeight: 70, // height, including subTitle. default is 0
+                    // titleTop: 25, // draws y coordinates. default is 30
+                    // drawer: 'canvas',// Which drawing method to use. 'canvas', 'svg'. default is 'canvas'
+                });
+
+            }
+
         });
 
     }
@@ -541,24 +549,34 @@ function make2() {
 
 
     if (text.value.trim() !== '') {
-        qrcode.innerHTML = '';
-        new QRCode(document.getElementById("qrcode"), {
-            text: '<?php echo site_url() . $this->session->userdata('new2') ?>',
-            width: 300,
-            height: 300,
-            logo: logoin,
-            logoWidth: 80,
-            logoHeight: 80,
-            //logoBackgroundColor: '#ffffff',
-            logoBackgroundTransparent: true,
 
-            // title: 'QR Title', // content 
-            // titleFont: "normal normal bold 18px Arial", //font. default is "bold 16px Arial"
-            // titleColor: "#004284", // color. default is "#000"
-            // titleBackgroundColor: "#fff", // background color. default is "#fff"
-            // titleHeight: 70, // height, including subTitle. default is 0
-            // titleTop: 25, // draws y coordinates. default is 30
-            // drawer: 'canvas',// Which drawing method to use. 'canvas', 'svg'. default is 'canvas'
+        $.ajax({
+            url: "<?php echo site_url() ?>/Member/Member_upload_file/get_id_image",
+            dataType: 'JSON',
+            success: function(data) {
+                // console.log(data);
+                qrcode.innerHTML = '';
+                new QRCode(document.getElementById("qrcode"), {
+                    text: data,
+                    width: 300,
+                    height: 300,
+                    logo: logoin,
+                    logoWidth: 80,
+                    logoHeight: 80,
+                    //logoBackgroundColor: '#ffffff',
+                    logoBackgroundTransparent: true,
+
+                    // title: 'QR Title', // content 
+                    // titleFont: "normal normal bold 18px Arial", //font. default is "bold 16px Arial"
+                    // titleColor: "#004284", // color. default is "#000"
+                    // titleBackgroundColor: "#fff", // background color. default is "#fff"
+                    // titleHeight: 70, // height, including subTitle. default is 0
+                    // titleTop: 25, // draws y coordinates. default is 30
+                    // drawer: 'canvas',// Which drawing method to use. 'canvas', 'svg'. default is 'canvas'
+                });
+
+            }
+
         });
 
     }

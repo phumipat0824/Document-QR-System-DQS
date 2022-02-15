@@ -29,4 +29,14 @@ class M_DQS_qrcode extends Da_DQS_qrcode
         $query = $this->db->get('DQS_QR');
         return $query->num_rows();
     }
+
+    public function get_id(){
+
+        $sql = "SELECT * 
+        FROM {$this->db_name}.DQS_Document
+        ORDER BY doc_id DESC LIMIT 1";
+        $query = $this->db->query($sql);
+        return $query;
+
+    }
 }
