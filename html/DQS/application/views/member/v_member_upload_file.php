@@ -37,7 +37,7 @@
                             <label style="color: #FF0000;">* <span id="text_namef"> </span> </label><br><br>
                             <div class="row">
                                 <div class="col-md-2 offset-md-1">
-                                    <input class="form-control" type="file" id="doc_path" name="doc_path" accept="application/pdf" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;" value="" onkeyup="file_validation()"><br>
+                                    <input class="form-control" type="file" id="doc_path" name="doc_path" accept="application/pdf" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;" value="" onchange="file_validation()"><br>
                                 </div>
                             </div>
 
@@ -45,7 +45,7 @@
                             <label style="color: #FF0000;">* <span id="text_name"> </span> </label><br>
                             <div class="row">
                                 <div class="col-md-2 offset-md-1">
-                                    <input type="text" class="form-control" id="doc_name" name="doc_name" style="margin: 0px;  width: 400px;" placeholder="ชื่อไฟล์" value="" onkeyup="name_validation()"><br />
+                                    <input type="text" class="form-control" id="doc_name" name="doc_name" style="margin: 0px;  width: 400px;" placeholder="ชื่อไฟล์" value="" onchange="name_validation()"><br />
                                 </div>
                             </div>
 
@@ -80,7 +80,7 @@
                             <label style="color: #FF0000;">* <span id="text_nameimgf"> </span> </label><br><br>
                             <div class="row">
                                 <div class="col-md-2 offset-md-1">
-                                    <input class="form-control" type="file" id="doc_pathimg" name="doc_pathimg" accept="image/*" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;" value="" onkeyup="file_validationimg()"><br>
+                                    <input class="form-control" type="file" id="doc_pathimg" name="doc_pathimg" accept="image/*" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;" value="" onchange="file_validationimg()"><br>
                                 </div>
                             </div>
 
@@ -88,7 +88,7 @@
                             <label style="color: #FF0000;">* <span id="text_imgname"> </span> </label><br>
                             <div class="row">
                                 <div class="col-md-2 offset-md-1">
-                                    <input type="text" id="doc_nameimg" name="doc_nameimg" class="form-control" style="margin: 0px;  width: 400px;" placeholder="ชื่อไฟล์" value="" onkeyup="name_validationimg()"><br />
+                                    <input type="text" id="doc_nameimg" name="doc_nameimg" class="form-control" style="margin: 0px;  width: 400px;" placeholder="ชื่อไฟล์" value="" onchange="name_validationimg()"><br />
                                 </div>
                             </div>
 
