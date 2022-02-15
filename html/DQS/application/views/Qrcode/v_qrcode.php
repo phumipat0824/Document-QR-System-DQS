@@ -17,8 +17,8 @@
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist"style="padding-b :50px;">
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fas fa-paperclip"></i> เว็บไซต์</a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="<?php echo base_url() . 'Member/Member_login/show_member_login' ?>" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="far fa-file-pdf"></i> PDF</a>
-                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="<?php echo base_url() . 'Member/Member_login/show_member_login' ?>" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="far fa-images"></i> รูปภาพ</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" href="<?php echo base_url() . 'Member/Member_login/show_member_login' ?>" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="far fa-file-pdf"></i> PDF</a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" href="<?php echo base_url() . 'Member/Member_login/show_member_login' ?>" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="far fa-images"></i> รูปภาพ</a>
                 </div>
             </nav>                                         
                     <div class="form-row"style="margin-left:10%;margin-top: 10%;margin-bottom: 20px">                

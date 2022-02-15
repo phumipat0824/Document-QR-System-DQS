@@ -1,10 +1,10 @@
-<!-- /*
+<?php
+/*
 * Qrcode_generator
 * show_qrcode
 * @author Phumipat 
 * @Create Date 2564-08-05
-*/ -->
-<?php
+*/
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 require dirname(__FILE__).'/../DQS_controller.php';
