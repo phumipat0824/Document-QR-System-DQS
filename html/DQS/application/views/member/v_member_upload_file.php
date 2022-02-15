@@ -272,7 +272,7 @@ async function uploadFile() {
         },
         body: formData
     });
-    doCapture();
+    setTimeout(doCapture(), 2000);
     setTimeout('', 5000);
     Swal.fire({
         icon: 'success',
