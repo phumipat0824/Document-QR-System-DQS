@@ -42,6 +42,8 @@ class Member_upload_file extends DQS_controller
 
 		$this->load->model('M_DQS_qrcode', 'dqrc');
 		$this->dqrc->doc_name = $this->input->post('doc_name');
+		$user = $this->session->userdata('mem_username');
+		$this->session->set_userdata('username', $user);
 		$this->dqrc->doc_type = "pdf";
 
 		$upload = $_FILES['doc_path'];
@@ -115,6 +117,8 @@ class Member_upload_file extends DQS_controller
 
 		$this->load->model('Da_DQS_qrcode', 'dqrc');
 		$this->dqrc->doc_name = $this->input->post('doc_nameimg');
+		$user = $this->session->userdata('mem_username');
+		$this->session->set_userdata('username', $user);
 		$this->dqrc->doc_type = "img";
 
 		$upload = $_FILES['doc_pathimg'];
