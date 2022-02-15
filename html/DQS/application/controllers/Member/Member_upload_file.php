@@ -47,7 +47,7 @@ class Member_upload_file extends DQS_controller
 		$upload = $_FILES['doc_path'];
 		if ($upload != '') {   //not select file
 			//โฟลเดอร์ที่จะ upload file เข้าไป 
-			$path = dirname(__FILE__) . '/../../../assets/users/'.$this->session->userdata('username').'/'.'home/';
+			$path = dirname(__FILE__) . '/../../../assets/user/'.$this->session->userdata('username').'/'.'home/';
 			
 
 			//เอาชื่อไฟล์เก่าออกให้เหลือแต่นามสกุล
@@ -56,7 +56,7 @@ class Member_upload_file extends DQS_controller
 			//ตั้งชื่อไฟล์ใหม่โดยเอาเวลาไว้หน้าชื่อไฟล์เดิม
 			$newname = $this->input->post('doc_name') . $type;
 			$path_copy = $path . $newname;
-			$newpath = '/assets/users/'.$this->session->userdata('username').'/'.'home/' . $newname;
+			$newpath = '/assets/user/'.$this->session->userdata('username').'/'.'home/' . $newname;
 			//คัดลอกไฟล์ไปเก็บที่เว็บเซริ์ฟเวอร์
 				move_uploaded_file($_FILES['doc_path']['tmp_name'], $path_copy);
 			}
@@ -122,7 +122,7 @@ class Member_upload_file extends DQS_controller
 		if ($upload != '') {   //not select file
 			//addslashes(file_get_contents($_FILES['doc_path']['tmp_name']));
 			//โฟลเดอร์ที่จะ upload file เข้าไป 
-			$path = dirname(__FILE__) . '/../../../assets/users/'.$this->session->userdata('username').'/'.'home/';
+			$path = dirname(__FILE__) . '/../../../assets/user/'.$this->session->userdata('username').'/'.'home/';
 			//เอาชื่อไฟล์เก่าออกให้เหลือแต่นามสกุล
 			$type = strrchr($_FILES['doc_pathimg']['name'], ".");
 
@@ -130,7 +130,7 @@ class Member_upload_file extends DQS_controller
 			$newname = $this->input->post('doc_nameimg') . $type;
 			$path_copy = $path . $newname;
 
-			$newpath = '/assets/users/'.$this->session->userdata('username').'/'.'home/' . $newname;
+			$newpath = '/assets/user/'.$this->session->userdata('username').'/'.'home/' . $newname;
 			//คัดลอกไฟล์ไปเก็บที่เว็บเซริ์ฟเวอร์
 			move_uploaded_file($_FILES['doc_pathimg']['tmp_name'], $path_copy);
 		} //if
@@ -202,7 +202,7 @@ class Member_upload_file extends DQS_controller
 		$this->session->set_userdata('username', $user);
 
 			//โฟลเดอร์ที่จะ upload file เข้าไป 
-			$path = dirname(__FILE__) . '/../../../assets/users/'.$this->session->userdata('username').'/'.'home/';
+			$path = dirname(__FILE__) . '/../../../assets/user/'.$this->session->userdata('username').'/'.'home/Qrcode/';
 
 			//เอาชื่อไฟล์เก่าออกให้เหลือแต่นามสกุล
 			$type = ".jpeg";
@@ -211,7 +211,7 @@ class Member_upload_file extends DQS_controller
 			$newname = $this->input->post('doc_name') . $type;
 			$path_copy = $path . $newname;
 
-			$newpath = '/assets/users/'.$this->session->userdata('username').'/'.'home/' . $newname;
+			$newpath = '/assets/user/'.$this->session->userdata('username').'/'.'home/Qrcode/' . $newname;
 
 		$this->dqrc->qr_path = $newpath;
 		$this->session->set_userdata('newpath', $newpath);
@@ -237,7 +237,7 @@ class Member_upload_file extends DQS_controller
 		$this->session->set_userdata('username', $user);
 
 			//โฟลเดอร์ที่จะ upload file เข้าไป 
-			$path = dirname(__FILE__) . '/../../../assets/users/'.$this->session->userdata('username').'/'.'home/';
+			$path = dirname(__FILE__) . '/../../../assets/user/'.$this->session->userdata('username').'/'.'home/Qrcode/';
 
 			//เอาชื่อไฟล์เก่าออกให้เหลือแต่นามสกุล
 			$type = ".jpeg";
@@ -246,7 +246,7 @@ class Member_upload_file extends DQS_controller
 			$newname = $this->input->post('doc_nameimg') . $type;
 			$path_copy = $path . $newname;
 
-			$newpath = '/assets/users/'.$this->session->userdata('username').'/'.'home/' . $newname;
+			$newpath = '/assets/user/'.$this->session->userdata('username').'/'.'home/Qrcode/' . $newname;
 
 		$this->dqrc->qr_path = $newpath;
 		$this->session->set_userdata('newpath', $newpath);
