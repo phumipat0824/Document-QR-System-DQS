@@ -244,6 +244,14 @@ $(document).ready(function() {
     });
 });
 
+function delay(delayInms) {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(2);
+        }, delayInms);
+    });
+}
+
 /*
  * uploadFile
  * send file pdf data and generate qr code
@@ -265,6 +273,7 @@ async function uploadFile() {
         body: formData
     });
     make();
+    let delayres = await delay(3000);
     await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_qrcode_file/" ?>", {
         method: "POST",
         data: {
@@ -272,8 +281,9 @@ async function uploadFile() {
         },
         body: formData
     });
-    setTimeout(doCapture(), 2000);
-    setTimeout('', 5000);
+
+    doCapture();
+
     Swal.fire({
         icon: 'success',
         title: 'บันทึกไฟล์สำเร็จ',
@@ -305,6 +315,7 @@ async function uploadimg() {
 
     });
     make2();
+    let delayres = await delay(3000);
     await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_qrcode_image/" ?>", {
         method: "POST",
         data: {
