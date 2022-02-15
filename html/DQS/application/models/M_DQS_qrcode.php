@@ -39,4 +39,14 @@ class M_DQS_qrcode extends Da_DQS_qrcode
         return $query;
 
     }
+
+    public function checkname($doc_name){
+        $sql = "SELECT * 
+        FROM {$this->db_name}.DQS_Document
+        WHERE doc_name = '$doc_name'";
+
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
 }

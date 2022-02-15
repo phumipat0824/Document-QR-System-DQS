@@ -76,6 +76,18 @@ class Member_upload_file extends DQS_controller
 		echo json_encode($data);	
     }
 
+	public function check_name()
+	{
+		$this->load->model('M_DQS_qrcode','mqrc');
+		$doc_name = $this->input->post('doc_name');
+		$obj_name= $this->mqrc->checkname($doc_name)->row();
+		if(empty($obj_name)){
+			echo json_encode(true);
+		}else{
+			echo json_encode(false);
+		}
+		
+	}
 	/*
 	* upload_image
 	* upload file image into database and server

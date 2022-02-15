@@ -159,7 +159,7 @@
                 <div class="card-body" style="margin: auto;">
                     <div id="capture" style="margin-top:40px;">
                         <div id="qrcode">
-                            <img id="img" src="<?php echo base_url(). '/assets/image/QR_home.PNG' ?>" height="250" width="250" style="margin: auto;">
+                            <img id="img" src="<?php echo base_url() . '/assets/image/QR_home.PNG' ?>" height="250" width="250" style="margin: auto;">
                         </div>
                     </div>
                     <br>
@@ -172,704 +172,726 @@
     </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function() {
-    $('#upload').click(function(e) {
-        e.preventDefault();
-        uploadFile();
+    $(document).ready(function() {
+        $('#upload').click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url() ?>/Member/Member_upload_file/check_name",
+                dataType: 'JSON',
+                data: {
+                    'doc_name': doc_name.value
+                },
+                success: function(data) {
+                    if (data == true) {
+                        console.log('thailand success');
+                        uploadFile();
+                    } else {
+                        console.log('thailand fail');
+                        setTimeout('', 5000);
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'ชื่อซ้ำ กรุณาตั้งชื่อเอกสารใหม่',
+                            showConfirmButton: false,
+                            timer: 2500
+                        })
+                    }
+                }
+            })
+        });
     });
-});
 
-$(document).ready(function() {
-    $('#uploadimg').click(function(e) {
-        e.preventDefault();
-        uploadimg();
+    $(document).ready(function() {
+        $('#uploadimg').click(function(e) {
+            e.preventDefault();
+            uploadimg();
 
+        });
     });
-});
 
-$(document).ready(function() {
-    $('#uploadweb').click(function(e) {
-        e.preventDefault();
-        make3();
+    $(document).ready(function() {
+        $('#uploadweb').click(function(e) {
+            e.preventDefault();
+            make3();
+            setTimeout('', 5000);
+            Swal.fire({
+                icon: 'success',
+                title: 'สร้างคิวอาร์โค้ดสำเร็จ',
+                showConfirmButton: false,
+                timer: 2500
+            })
+        });
+    });
+
+    /*
+     * uploadFile
+     * send file pdf data and generate qr code
+     * @input data file pdf
+     * @output data file pdf
+     * @author Ashirawat, Jerasak
+     * @Create Date 2564-11-17
+     */
+
+    async function uploadFile() {
+        let formData = new FormData();
+        formData.append("doc_path", doc_path.files[0]);
+        formData.append("doc_name", doc_name.value);
+        await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_file/" ?>", {
+            method: "POST",
+            data: {
+                doc_name: doc_name
+            },
+            body: formData
+        });
+        make();
+        await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_qrcode_file/" ?>", {
+            method: "POST",
+            data: {
+                doc_name: doc_name
+            },
+            body: formData
+        });
+        doCapture();
         setTimeout('', 5000);
         Swal.fire({
             icon: 'success',
-            title: 'สร้างคิวอาร์โค้ดสำเร็จ',
+            title: 'บันทึกไฟล์สำเร็จ',
             showConfirmButton: false,
             timer: 2500
         })
-    });
-});
-
-/*
- * uploadFile
- * send file pdf data and generate qr code
- * @input data file pdf
- * @output data file pdf
- * @author Ashirawat, Jerasak
- * @Create Date 2564-11-17
- */
-
-async function uploadFile() {
-    let formData = new FormData();
-    formData.append("doc_path", doc_path.files[0]);
-    formData.append("doc_name", doc_name.value);
-    await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_file/" ?>", {
-        method: "POST",
-        data: {
-            doc_name: doc_name
-        },
-        body: formData
-    });
-    make();
-    await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_qrcode_file/" ?>", {
-        method: "POST",
-        data: {
-            doc_name: doc_name
-        },
-        body: formData
-    });
-    doCapture();
-    setTimeout('', 5000);
-    Swal.fire({
-        icon: 'success',
-        title: 'บันทึกไฟล์สำเร็จ',
-        showConfirmButton: false,
-        timer: 2500
-    })
-
-}
-
-/*
- * uploadimg
- * send file image data and generate qr code
- * @input data file image
- * @output data file image
- * @author Ashirawat
- * @Create Date 2565-02-03
- */
-
-async function uploadimg() {
-    let formData = new FormData();
-    formData.append("doc_pathimg", doc_pathimg.files[0]);
-    formData.append("doc_nameimg", doc_nameimg.value);
-    await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_image/" ?>", {
-        method: "POST",
-        data: {
-            doc_nameimg: doc_nameimg
-        },
-        body: formData
-
-    });
-    make2();
-    await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_qrcode_image/" ?>", {
-        method: "POST",
-        data: {
-            doc_nameimg: doc_nameimg
-        },
-        body: formData
-    });
-    doCapture();
-    setTimeout('', 5000);
-    Swal.fire({
-        icon: 'success',
-        title: 'บันทึกไฟล์สำเร็จ',
-        showConfirmButton: false,
-        timer: 2500
-    })
-}
-
-/*
- * doCapture
- * capture qrcode
- * @input file name
- * @output file image qrcode
- * @author Ashirawat, Jerasak
- * @Create Date 2565-01-05
- */
-
-function doCapture(doc_name) {
-    window.scrollTo(0, 0);
-
-    html2canvas(document.getElementById("capture")).then(function(canvas) {
-
-        // Create an AJAX object
-        var ajax = new XMLHttpRequest();
-
-        // Setting method, server file name, and asynchronous
-        ajax.open("POST", "<?php echo site_url() . "/Member/Member_upload_file/save_qrcode_image/" ?>", true);
-
-        // Setting headers for POST method
-        ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-        // Sending image data to server
-        ajax.send("image=" + canvas.toDataURL("image/jpeg", 0.9));
-
-        // Receiving response from server
-        // This function will be called multiple times
-        ajax.onreadystatechange = function() {
-
-            // Check when the requested is completed
-            if (this.readyState == 4 && this.status == 200) {
-
-                // Displaying response from server
-                console.log(this.responseText);
-            }
-        };
-    });
-}
-
-/*
- * name_validation
- * check filename pdf
- * @input file name
- * @output warning message
- * @author Ashirawat
- * @Create Date 2565-01-27
- */
-
-function name_validation() {
-    var text_n = document.getElementById("text_name");
-    var d_name = document.getElementById("doc_name").value;
-    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
-    var n_check;
-    if (d_name.match(pattern)) {
-        text_n.innerHTML = "";
-        n_check = 1;
-
-    } else {
-        text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
-        text_n.style.color = "#ff0000";
-        n_check = 0;
-
-    }
-    if (d_name == "") {
-        text_n.innerHTML = "กรุณากรอกชื่อเอกสาร";
-        text_n.style.color = "#ff0000";
-        n_check = 0;
-
-    }
-    return n_check;
-}
-
-/*
- * file_validation
- * check the file pdf
- * @input file
- * @output warning message
- * @author Ashirawat
- * @Create Date 2565-01-27
- */
-
-function file_validation() {
-    var text_f = document.getElementById("text_namef");
-    var f_name = document.getElementById("doc_path").value;
-    var f_check;
-    if (f_name != "") {
-        text_f.innerHTML = "";
-        f_check = 1;
-
-    } else {
-        text_f.innerHTML = "กรุณาเลือกไฟล์";
-        text_f.style.color = "#ff0000";
-        f_check = 0;
-
-    }
-    if (f_name == "") {
-        text_f.innerHTML = "กรุณาเลือกไฟล์";
-        text_f.style.color = "#ff0000";
-        f_check = 0;
-
-    }
-    return f_check;
-}
-$(document).on('change', '.form-control', function() {
-    var submit = document.getElementById("upload");
-
-    if (name_validation() == 0 || file_validation() == 0) {
-        submit.disabled = true;
-
-    } else {
-        submit.disabled = false;
 
     }
 
-});
+    /*
+     * uploadimg
+     * send file image data and generate qr code
+     * @input data file image
+     * @output data file image
+     * @author Ashirawat
+     * @Create Date 2565-02-03
+     */
 
-/*
- * name_validation
- * check filename image
- * @input file name
- * @output warning message
- * @author Ashirawat
- * @Create Date 2565-01-28
- */
-
-function name_validationimg() {
-    var text_in = document.getElementById("text_imgname");
-    var id_name = document.getElementById("doc_nameimg").value;
-    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
-    var in_check;
-    if (id_name.match(pattern)) {
-        text_in.innerHTML = "";
-        in_check = 1;
-
-    } else {
-        text_in.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
-        text_in.style.color = "#ff0000";
-        in_check = 0;
-
-    }
-    if (id_name == "") {
-        text_in.innerHTML = "กรุณากรอกชื่อเอกสาร";
-        text_in.style.color = "#ff0000";
-        in_check = 0;
-
-    }
-    return in_check;
-}
-
-/*
- * file_validation
- * check the file image
- * @input file
- * @output warning message
- * @author Ashirawat
- * @Create Date 2565-01-28
- */
-
-function file_validationimg() {
-    var text_if = document.getElementById("text_nameimgf");
-    var if_name = document.getElementById("doc_pathimg").value;
-    var if_check;
-    if (if_name != "") {
-        text_if.innerHTML = "";
-        if_check = 1;
-
-    } else {
-        text_if.innerHTML = "กรุณาเลือกไฟล์";
-        text_if.style.color = "#ff0000";
-        if_check = 0;
-
-    }
-    if (if_name == "") {
-        text_if.innerHTML = "กรุณาเลือกไฟล์";
-        text_if.style.color = "#ff0000";
-        if_check = 0;
-
-    }
-    return if_check;
-}
-$(document).on('change', '.form-control', function() {
-    var submit = document.getElementById("uploadimg");
-
-    if (name_validationimg() == 0 || file_validationimg() == 0) {
-        submit.disabled = true;
-
-    } else {
-        submit.disabled = false;
-
-    }
-
-});
-
-/*
- * make
- * generate qrcode from pdf file
- * @input file pdf data and logo data
- * @output qrcode file
- * @author Ashirawat, Jerasak
- * @Create Date 2564-11-17
- */
-
-function make() {
-    var logoin = '';
-    const [file] = logo_img.files
-    if (file) {
-        var logoin = URL.createObjectURL(file);
-    }
-    var text = document.getElementById('text');
-    var qrcode = document.getElementById('qrcode');
-
-
-
-    if (text.value.trim() !== '') {
-
-        $.ajax({
-            url: "<?php echo site_url() ?>/Member/Member_upload_file/get_id_document",
-            dataType: 'JSON',
-            success: function(data) {
-                // console.log(data);
-                qrcode.innerHTML = '';
-                new QRCode(document.getElementById("qrcode"), {
-                    text: data,
-                    width: 300,
-                    height: 300,
-                    logo: logoin,
-                    logoWidth: 80,
-                    logoHeight: 80,
-                    //logoBackgroundColor: '#ffffff',
-                    logoBackgroundTransparent: true,
-
-                    // title: 'QR Title', // content 
-                    // titleFont: "normal normal bold 18px Arial", //font. default is "bold 16px Arial"
-                    // titleColor: "#004284", // color. default is "#000"
-                    // titleBackgroundColor: "#fff", // background color. default is "#fff"
-                    // titleHeight: 70, // height, including subTitle. default is 0
-                    // titleTop: 25, // draws y coordinates. default is 30
-                    // drawer: 'canvas',// Which drawing method to use. 'canvas', 'svg'. default is 'canvas'
-                });
-
-            }
+    async function uploadimg() {
+        let formData = new FormData();
+        formData.append("doc_pathimg", doc_pathimg.files[0]);
+        formData.append("doc_nameimg", doc_nameimg.value);
+        await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_image/" ?>", {
+            method: "POST",
+            data: {
+                doc_nameimg: doc_nameimg
+            },
+            body: formData
 
         });
-
-    }
-    //qrcode.resize(480, 480);
-}
-
-/*
- * make2
- * generate qrcode from image file
- * @input file image data and logo data
- * @output qrcode file
- * @author Ashirawat
- * @Create Date 2565-02-03
- */
-
-function make2() {
-    var logoin = '';
-    const [file] = logo_img2.files
-    if (file) {
-        var logoin = URL.createObjectURL(file);
-    }
-    var text = document.getElementById('text2');
-    var qrcode = document.getElementById('qrcode');
-
-
-
-    if (text.value.trim() !== '') {
-
-        $.ajax({
-            url: "<?php echo site_url() ?>/Member/Member_upload_file/get_id_image",
-            dataType: 'JSON',
-            success: function(data) {
-                // console.log(data);
-                qrcode.innerHTML = '';
-                new QRCode(document.getElementById("qrcode"), {
-                    text: data,
-                    width: 300,
-                    height: 300,
-                    logo: logoin,
-                    logoWidth: 80,
-                    logoHeight: 80,
-                    //logoBackgroundColor: '#ffffff',
-                    logoBackgroundTransparent: true,
-
-                    // title: 'QR Title', // content 
-                    // titleFont: "normal normal bold 18px Arial", //font. default is "bold 16px Arial"
-                    // titleColor: "#004284", // color. default is "#000"
-                    // titleBackgroundColor: "#fff", // background color. default is "#fff"
-                    // titleHeight: 70, // height, including subTitle. default is 0
-                    // titleTop: 25, // draws y coordinates. default is 30
-                    // drawer: 'canvas',// Which drawing method to use. 'canvas', 'svg'. default is 'canvas'
-                });
-
-            }
-
+        make2();
+        await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_qrcode_image/" ?>", {
+            method: "POST",
+            data: {
+                doc_nameimg: doc_nameimg
+            },
+            body: formData
         });
-
+        doCapture();
+        setTimeout('', 5000);
+        Swal.fire({
+            icon: 'success',
+            title: 'บันทึกไฟล์สำเร็จ',
+            showConfirmButton: false,
+            timer: 2500
+        })
     }
-    //qrcode.resize(480, 480);
-}
 
-/*
- * make3
- * generate qrcode from web
- * @input text web and logo data
- * @output qrcode file
- * @author Ashirawat
- * @Create Date 2565-02-03
- */
+    /*
+     * doCapture
+     * capture qrcode
+     * @input file name
+     * @output file image qrcode
+     * @author Ashirawat, Jerasak
+     * @Create Date 2565-01-05
+     */
 
-function make3() {
-    var logoin = '';
-    const [file] = logo_img3.files
-    if (file) {
-        var logoin = URL.createObjectURL(file);
-    }
-    var text = document.getElementById('text3');
-    var qrcode = document.getElementById('qrcode');
+    function doCapture(doc_name) {
+        window.scrollTo(0, 0);
 
+        html2canvas(document.getElementById("capture")).then(function(canvas) {
 
+            // Create an AJAX object
+            var ajax = new XMLHttpRequest();
 
-    if (text.value.trim() !== '') {
-        qrcode.innerHTML = '';
-        new QRCode(document.getElementById("qrcode"), {
-            text: text.value,
-            width: 300,
-            height: 300,
-            logo: logoin,
-            logoWidth: 80,
-            logoHeight: 80,
-            //logoBackgroundColor: '#ffffff',
-            logoBackgroundTransparent: true,
+            // Setting method, server file name, and asynchronous
+            ajax.open("POST", "<?php echo site_url() . "/Member/Member_upload_file/save_qrcode_image/" ?>", true);
 
-            // title: 'QR Title', // content 
-            // titleFont: "normal normal bold 18px Arial", //font. default is "bold 16px Arial"
-            // titleColor: "#004284", // color. default is "#000"
-            // titleBackgroundColor: "#fff", // background color. default is "#fff"
-            // titleHeight: 70, // height, including subTitle. default is 0
-            // titleTop: 25, // draws y coordinates. default is 30
-            // drawer: 'canvas',// Which drawing method to use. 'canvas', 'svg'. default is 'canvas'
+            // Setting headers for POST method
+            ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            // Sending image data to server
+            ajax.send("image=" + canvas.toDataURL("image/jpeg", 0.9));
+
+            // Receiving response from server
+            // This function will be called multiple times
+            ajax.onreadystatechange = function() {
+
+                // Check when the requested is completed
+                if (this.readyState == 4 && this.status == 200) {
+
+                    // Displaying response from server
+                    console.log(this.responseText);
+                }
+            };
         });
-
     }
-    //qrcode.resize(480, 480);
-}
 
-document.getElementById("download").addEventListener("click", function() {
+    /*
+     * name_validation
+     * check filename pdf
+     * @input file name
+     * @output warning message
+     * @author Ashirawat
+     * @Create Date 2565-01-27
+     */
 
-    html2canvas(document.querySelector('#capture')).then(function(canvas) {
+    function name_validation() {
+        var text_n = document.getElementById("text_name");
+        var d_name = document.getElementById("doc_name").value;
+        var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+        var n_check;
+        if (d_name.match(pattern)) {
+            text_n.innerHTML = "";
+            n_check = 1;
 
-        saveAs(canvas.toDataURL(), 'DQS_QR.png');
+        } else {
+            text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+            text_n.style.color = "#ff0000";
+            n_check = 0;
+
+        }
+        if (d_name == "") {
+            text_n.innerHTML = "กรุณากรอกชื่อเอกสาร";
+            text_n.style.color = "#ff0000";
+            n_check = 0;
+
+        }
+        return n_check;
+    }
+
+    /*
+     * file_validation
+     * check the file pdf
+     * @input file
+     * @output warning message
+     * @author Ashirawat
+     * @Create Date 2565-01-27
+     */
+
+    function file_validation() {
+        var text_f = document.getElementById("text_namef");
+        var f_name = document.getElementById("doc_path").value;
+        var f_check;
+        if (f_name != "") {
+            text_f.innerHTML = "";
+            f_check = 1;
+
+        } else {
+            text_f.innerHTML = "กรุณาเลือกไฟล์";
+            text_f.style.color = "#ff0000";
+            f_check = 0;
+
+        }
+        if (f_name == "") {
+            text_f.innerHTML = "กรุณาเลือกไฟล์";
+            text_f.style.color = "#ff0000";
+            f_check = 0;
+
+        }
+        return f_check;
+    }
+    $(document).on('change', '.form-control', function() {
+        var submit = document.getElementById("upload");
+
+        if (name_validation() == 0 || file_validation() == 0) {
+            submit.disabled = true;
+
+        } else {
+            submit.disabled = false;
+
+        }
+
     });
 
-});
+    /*
+     * name_validation
+     * check filename image
+     * @input file name
+     * @output warning message
+     * @author Ashirawat
+     * @Create Date 2565-01-28
+     */
 
-/*
- * saveAs
- * download file qrcode 
- * @input filename
- * @output file qrcode 
- * @author Ashirawat, Jerasak
- * @Create Date 2565-01-12
- */
+    function name_validationimg() {
+        var text_in = document.getElementById("text_imgname");
+        var id_name = document.getElementById("doc_nameimg").value;
+        var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+        var in_check;
+        if (id_name.match(pattern)) {
+            text_in.innerHTML = "";
+            in_check = 1;
 
-function saveAs(uri, filename) {
+        } else {
+            text_in.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+            text_in.style.color = "#ff0000";
+            in_check = 0;
 
-    var link = document.createElement('a');
+        }
+        if (id_name == "") {
+            text_in.innerHTML = "กรุณากรอกชื่อเอกสาร";
+            text_in.style.color = "#ff0000";
+            in_check = 0;
 
-    if (typeof link.download === 'string') {
-
-        link.href = uri;
-        link.download = filename;
-
-        //Firefox requires the link to be in the body
-        document.body.appendChild(link);
-
-        //simulate click
-        link.click();
-
-        //remove the link when done
-        document.body.removeChild(link);
-
-    } else {
-
-        window.open(uri);
-
-    }
-}
-
-/*
- * getFileData
- * get and show name logo
- * @input file logo
- * @output name file logo
- * @author Ashirawat, Jerasak
- * @Create Date 2565-01-12
- */
-
-function getFileData() {
-    var file = document.getElementById("logo_img");
-    var file_name = document.getElementById("name_img");
-    $('#name_img').text(file.files[0].name);
-}
-
-/*
- * getFileData2
- * get and show name logo
- * @input file logo
- * @output name file logo
- * @author Ashirawat
- * @Create Date 2565-02-03
- */
-
-function getFileData2() {
-    var file = document.getElementById("logo_img2");
-    var file_name = document.getElementById("name_img2");
-    $('#name_img2').text(file.files[0].name);
-}
-
-/*
- * getFileData3
- * get and show name logo
- * @input file logo
- * @output name file logo
- * @author Ashirawat
- * @Create Date 2565-02-03
- */
-
-function getFileData3() {
-    var file = document.getElementById("logo_img3");
-    var file_name = document.getElementById("name_img3");
-    $('#name_img3').text(file.files[0].name);
-}
-
-/*
- * showinputlogo
- * show button input logo
- * @input -
- * @output button input logo
- * @author Ashirawat, Jerasak
- * @Create Date 2565-01-13
- */
-
-function showinputlogo() {
-    $('#up').find("i").toggleClass("fa-angle-down fa-angle-up");
-    var x = document.getElementById("vanish");
-    var y = document.getElementById("vanish1");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-        y.style.display = "block";
-    } else {
-        x.style.display = "none";
-        y.style.display = "none";
+        }
+        return in_check;
     }
 
-}
+    /*
+     * file_validation
+     * check the file image
+     * @input file
+     * @output warning message
+     * @author Ashirawat
+     * @Create Date 2565-01-28
+     */
 
-/*
- * showinputlogo2
- * show button input logo
- * @input -
- * @output button input logo
- * @author Ashirawat
- * @Create Date 2565-02-03
- */
+    function file_validationimg() {
+        var text_if = document.getElementById("text_nameimgf");
+        var if_name = document.getElementById("doc_pathimg").value;
+        var if_check;
+        if (if_name != "") {
+            text_if.innerHTML = "";
+            if_check = 1;
 
-function showinputlogo2() {
-    $('#up2').find("i").toggleClass("fa-angle-down fa-angle-up");
-    var x = document.getElementById("vanish2");
-    var y = document.getElementById("vanish3");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-        y.style.display = "block";
-    } else {
-        x.style.display = "none";
-        y.style.display = "none";
+        } else {
+            text_if.innerHTML = "กรุณาเลือกไฟล์";
+            text_if.style.color = "#ff0000";
+            if_check = 0;
+
+        }
+        if (if_name == "") {
+            text_if.innerHTML = "กรุณาเลือกไฟล์";
+            text_if.style.color = "#ff0000";
+            if_check = 0;
+
+        }
+        return if_check;
+    }
+    $(document).on('change', '.form-control', function() {
+        var submit = document.getElementById("uploadimg");
+
+        if (name_validationimg() == 0 || file_validationimg() == 0) {
+            submit.disabled = true;
+
+        } else {
+            submit.disabled = false;
+
+        }
+
+    });
+
+    /*
+     * make
+     * generate qrcode from pdf file
+     * @input file pdf data and logo data
+     * @output qrcode file
+     * @author Ashirawat, Jerasak
+     * @Create Date 2564-11-17
+     */
+
+    function make() {
+        var logoin = '';
+        const [file] = logo_img.files
+        if (file) {
+            var logoin = URL.createObjectURL(file);
+        }
+        var text = document.getElementById('text');
+        var qrcode = document.getElementById('qrcode');
+
+
+
+        if (text.value.trim() !== '') {
+
+            $.ajax({
+                url: "<?php echo site_url() ?>/Member/Member_upload_file/get_id_document",
+                dataType: 'JSON',
+                success: function(data) {
+                    // console.log(data);
+                    qrcode.innerHTML = '';
+                    new QRCode(document.getElementById("qrcode"), {
+                        text: data,
+                        width: 300,
+                        height: 300,
+                        logo: logoin,
+                        logoWidth: 80,
+                        logoHeight: 80,
+                        //logoBackgroundColor: '#ffffff',
+                        logoBackgroundTransparent: true,
+
+                        // title: 'QR Title', // content 
+                        // titleFont: "normal normal bold 18px Arial", //font. default is "bold 16px Arial"
+                        // titleColor: "#004284", // color. default is "#000"
+                        // titleBackgroundColor: "#fff", // background color. default is "#fff"
+                        // titleHeight: 70, // height, including subTitle. default is 0
+                        // titleTop: 25, // draws y coordinates. default is 30
+                        // drawer: 'canvas',// Which drawing method to use. 'canvas', 'svg'. default is 'canvas'
+                    });
+
+                }
+
+            });
+
+        }
+        //qrcode.resize(480, 480);
     }
 
-}
+    /*
+     * make2
+     * generate qrcode from image file
+     * @input file image data and logo data
+     * @output qrcode file
+     * @author Ashirawat
+     * @Create Date 2565-02-03
+     */
 
-/*
- * showinputlogo3
- * show button input logo
- * @input -
- * @output button input logo
- * @author Ashirawat
- * @Create Date 2565-02-03
- */
+    function make2() {
+        var logoin = '';
+        const [file] = logo_img2.files
+        if (file) {
+            var logoin = URL.createObjectURL(file);
+        }
+        var text = document.getElementById('text2');
+        var qrcode = document.getElementById('qrcode');
 
-function showinputlogo3() {
-    $('#up3').find("i").toggleClass("fa-angle-down fa-angle-up");
-    var x = document.getElementById("vanish4");
-    var y = document.getElementById("vanish5");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-        y.style.display = "block";
-    } else {
-        x.style.display = "none";
-        y.style.display = "none";
+
+
+        if (text.value.trim() !== '') {
+
+            $.ajax({
+                url: "<?php echo site_url() ?>/Member/Member_upload_file/get_id_image",
+                dataType: 'JSON',
+                success: function(data) {
+                    // console.log(data);
+                    qrcode.innerHTML = '';
+                    new QRCode(document.getElementById("qrcode"), {
+                        text: data,
+                        width: 300,
+                        height: 300,
+                        logo: logoin,
+                        logoWidth: 80,
+                        logoHeight: 80,
+                        //logoBackgroundColor: '#ffffff',
+                        logoBackgroundTransparent: true,
+
+                        // title: 'QR Title', // content 
+                        // titleFont: "normal normal bold 18px Arial", //font. default is "bold 16px Arial"
+                        // titleColor: "#004284", // color. default is "#000"
+                        // titleBackgroundColor: "#fff", // background color. default is "#fff"
+                        // titleHeight: 70, // height, including subTitle. default is 0
+                        // titleTop: 25, // draws y coordinates. default is 30
+                        // drawer: 'canvas',// Which drawing method to use. 'canvas', 'svg'. default is 'canvas'
+                    });
+
+                }
+
+            });
+
+        }
+        //qrcode.resize(480, 480);
     }
 
-}
+    /*
+     * make3
+     * generate qrcode from web
+     * @input text web and logo data
+     * @output qrcode file
+     * @author Ashirawat
+     * @Create Date 2565-02-03
+     */
+
+    function make3() {
+        var logoin = '';
+        const [file] = logo_img3.files
+        if (file) {
+            var logoin = URL.createObjectURL(file);
+        }
+        var text = document.getElementById('text3');
+        var qrcode = document.getElementById('qrcode');
+
+
+
+        if (text.value.trim() !== '') {
+            qrcode.innerHTML = '';
+            new QRCode(document.getElementById("qrcode"), {
+                text: text.value,
+                width: 300,
+                height: 300,
+                logo: logoin,
+                logoWidth: 80,
+                logoHeight: 80,
+                //logoBackgroundColor: '#ffffff',
+                logoBackgroundTransparent: true,
+
+                // title: 'QR Title', // content 
+                // titleFont: "normal normal bold 18px Arial", //font. default is "bold 16px Arial"
+                // titleColor: "#004284", // color. default is "#000"
+                // titleBackgroundColor: "#fff", // background color. default is "#fff"
+                // titleHeight: 70, // height, including subTitle. default is 0
+                // titleTop: 25, // draws y coordinates. default is 30
+                // drawer: 'canvas',// Which drawing method to use. 'canvas', 'svg'. default is 'canvas'
+            });
+
+        }
+        //qrcode.resize(480, 480);
+    }
+
+    document.getElementById("download").addEventListener("click", function() {
+
+        html2canvas(document.querySelector('#capture')).then(function(canvas) {
+
+            saveAs(canvas.toDataURL(), 'DQS_QR.png');
+        });
+
+    });
+
+    /*
+     * saveAs
+     * download file qrcode 
+     * @input filename
+     * @output file qrcode 
+     * @author Ashirawat, Jerasak
+     * @Create Date 2565-01-12
+     */
+
+    function saveAs(uri, filename) {
+
+        var link = document.createElement('a');
+
+        if (typeof link.download === 'string') {
+
+            link.href = uri;
+            link.download = filename;
+
+            //Firefox requires the link to be in the body
+            document.body.appendChild(link);
+
+            //simulate click
+            link.click();
+
+            //remove the link when done
+            document.body.removeChild(link);
+
+        } else {
+
+            window.open(uri);
+
+        }
+    }
+
+    /*
+     * getFileData
+     * get and show name logo
+     * @input file logo
+     * @output name file logo
+     * @author Ashirawat, Jerasak
+     * @Create Date 2565-01-12
+     */
+
+    function getFileData() {
+        var file = document.getElementById("logo_img");
+        var file_name = document.getElementById("name_img");
+        $('#name_img').text(file.files[0].name);
+    }
+
+    /*
+     * getFileData2
+     * get and show name logo
+     * @input file logo
+     * @output name file logo
+     * @author Ashirawat
+     * @Create Date 2565-02-03
+     */
+
+    function getFileData2() {
+        var file = document.getElementById("logo_img2");
+        var file_name = document.getElementById("name_img2");
+        $('#name_img2').text(file.files[0].name);
+    }
+
+    /*
+     * getFileData3
+     * get and show name logo
+     * @input file logo
+     * @output name file logo
+     * @author Ashirawat
+     * @Create Date 2565-02-03
+     */
+
+    function getFileData3() {
+        var file = document.getElementById("logo_img3");
+        var file_name = document.getElementById("name_img3");
+        $('#name_img3').text(file.files[0].name);
+    }
+
+    /*
+     * showinputlogo
+     * show button input logo
+     * @input -
+     * @output button input logo
+     * @author Ashirawat, Jerasak
+     * @Create Date 2565-01-13
+     */
+
+    function showinputlogo() {
+        $('#up').find("i").toggleClass("fa-angle-down fa-angle-up");
+        var x = document.getElementById("vanish");
+        var y = document.getElementById("vanish1");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+            y.style.display = "block";
+        } else {
+            x.style.display = "none";
+            y.style.display = "none";
+        }
+
+    }
+
+    /*
+     * showinputlogo2
+     * show button input logo
+     * @input -
+     * @output button input logo
+     * @author Ashirawat
+     * @Create Date 2565-02-03
+     */
+
+    function showinputlogo2() {
+        $('#up2').find("i").toggleClass("fa-angle-down fa-angle-up");
+        var x = document.getElementById("vanish2");
+        var y = document.getElementById("vanish3");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+            y.style.display = "block";
+        } else {
+            x.style.display = "none";
+            y.style.display = "none";
+        }
+
+    }
+
+    /*
+     * showinputlogo3
+     * show button input logo
+     * @input -
+     * @output button input logo
+     * @author Ashirawat
+     * @Create Date 2565-02-03
+     */
+
+    function showinputlogo3() {
+        $('#up3').find("i").toggleClass("fa-angle-down fa-angle-up");
+        var x = document.getElementById("vanish4");
+        var y = document.getElementById("vanish5");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+            y.style.display = "block";
+        } else {
+            x.style.display = "none";
+            y.style.display = "none";
+        }
+
+    }
 </script>
 <style>
-.show {
-    display: block;
-}
+    .show {
+        display: block;
+    }
 
-.nav-tabs .nav-item .nav-link,
-.nav-tabs .nav-item .nav-link:focus,
-.nav-tabs .nav-item .nav-link:hover {
-    border: 0 !important;
-    color: #000 !important;
-    font-size: 16px
-}
+    .nav-tabs .nav-item .nav-link,
+    .nav-tabs .nav-item .nav-link:focus,
+    .nav-tabs .nav-item .nav-link:hover {
+        border: 0 !important;
+        color: #000 !important;
+        font-size: 16px
+    }
 
-input[type=text],
-select {
-    width: 80%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
+    input[type=text],
+    select {
+        width: 80%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
 
 
 
-.parent-div {
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
-    /* margin: auto; */
-}
+    .parent-div {
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+        /* margin: auto; */
+    }
 
-.parent-div input[type=file] {
-    left: 0;
-    top: 0;
-    opacity: 0;
-    position: absolute;
-    font-size: 90px;
-}
+    .parent-div input[type=file] {
+        left: 0;
+        top: 0;
+        opacity: 0;
+        position: absolute;
+        font-size: 90px;
+    }
 
-.btn-upload {
-    width: 89%;
-    height: 47px;
-    padding: 12px 20px;
-    margin: auto;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    background-color: #fff;
-}
+    .btn-upload {
+        width: 89%;
+        height: 47px;
+        padding: 12px 20px;
+        margin: auto;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        background-color: #fff;
+    }
 
-#img {
-    -webkit-filter: blur(2px);
-    /* Safari 6.0 - 9.0 */
-    filter: blur(2px);
-}
+    #img {
+        -webkit-filter: blur(2px);
+        /* Safari 6.0 - 9.0 */
+        filter: blur(2px);
+    }
 
-a {
-    font-size: 16px
-}
+    a {
+        font-size: 16px
+    }
 
-.slide {
-    width: 80%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
+    .slide {
+        width: 80%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
 
-.nav-tabs .nav-link.active {
-    background-color: #fff;
-    border-color: #fff;
-}
+    .nav-tabs .nav-link.active {
+        background-color: #fff;
+        border-color: #fff;
+    }
 
-.nav-tabs .nav-link {
-    background-color: #cfcfcf;
-    border-color: #fff;
-}
+    .nav-tabs .nav-link {
+        background-color: #cfcfcf;
+        border-color: #fff;
+    }
 
-.nav-tabs .nav-link.active:focus,
-.nav-tabs .nav-link.active:hover {
-    border-color: #fff;
-}
+    .nav-tabs .nav-link.active:focus,
+    .nav-tabs .nav-link.active:hover {
+        border-color: #fff;
+    }
 </style>
