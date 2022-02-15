@@ -188,7 +188,7 @@ $(document).ready(function() {
                     uploadFile();
                 } else {
                     console.log('thailand fail');
-                    setTimeout('', 5000);
+                    setTimeout('', 2000);
                     Swal.fire({
                         icon: 'warning',
                         title: 'ชื่อซ้ำ กรุณาตั้งชื่อเอกสารใหม่',
@@ -217,7 +217,7 @@ $(document).ready(function() {
                     uploadimg();
                 } else {
                     console.log('thailand fail');
-                    setTimeout('', 5000);
+                    setTimeout('', 2000);
                     Swal.fire({
                         icon: 'warning',
                         title: 'ชื่อซ้ำ กรุณาตั้งชื่อเอกสารใหม่',
@@ -234,7 +234,7 @@ $(document).ready(function() {
     $('#uploadweb').click(function(e) {
         e.preventDefault();
         make3();
-        setTimeout('', 5000);
+        setTimeout('', 2000);
         Swal.fire({
             icon: 'success',
             title: 'สร้างคิวอาร์โค้ดสำเร็จ',
@@ -273,7 +273,7 @@ async function uploadFile() {
         body: formData
     });
     make();
-    let delayres = await delay(3000);
+    let delayres = await delay(1000);
     await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_qrcode_file/" ?>", {
         method: "POST",
         data: {
@@ -283,7 +283,7 @@ async function uploadFile() {
     });
 
     doCapture();
-
+    setTimeout('', 2000);
     Swal.fire({
         icon: 'success',
         title: 'บันทึกไฟล์สำเร็จ',
@@ -315,7 +315,7 @@ async function uploadimg() {
 
     });
     make2();
-    let delayres = await delay(3000);
+    let delayres = await delay(1000);
     await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_qrcode_image/" ?>", {
         method: "POST",
         data: {
@@ -324,7 +324,7 @@ async function uploadimg() {
         body: formData
     });
     doCapture();
-    setTimeout('', 5000);
+    setTimeout('', 2000);
     Swal.fire({
         icon: 'success',
         title: 'บันทึกไฟล์สำเร็จ',
