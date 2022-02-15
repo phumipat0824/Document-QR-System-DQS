@@ -1,9 +1,9 @@
 <?php 
-        if(!$this->session->has_userdata('mem_username')){
-            $path = site_url()."/Member/Member_login/show_member_login";
-            header("Location: ".$path);
-            exit();
-        }
+        // if(!$this->session->has_userdata('mem_username')){
+        //     $path = site_url()."/Member/Member_login/show_member_login";
+        //     header("Location: ".$path);
+        //     exit();
+        // }
 
 ?>
 
