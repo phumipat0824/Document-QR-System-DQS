@@ -190,9 +190,7 @@ function get_dept(value_pro_ID){
             'mem_pro_ID': value_pro_ID
         },
       success:function(data){
-          console.log(data);
-        //   console.log("335");
-        //   create_Table(data['json_dept']);   
+          console.log(data); 
         dep_input( data['json_station']);
       }
       
@@ -203,21 +201,21 @@ function get_dept(value_pro_ID){
 function dep_input(arr_dep) {//
     
         var select = document.getElementById("mem_dep_id");
+
         const elmts =  arr_dep;
+        
         console.log(arr_dep);
         const dep_optn = JSON.parse(JSON.stringify(elmts));
-        
-        // console.log(arr_dep.dep_name);
-        // console.log(dep_optn);
-        // // Main function
          
             for (var i of elmts) {
+                
                 console.log(i.dep_name);
                 var optn = i.dep_name;
                 var el = document.createElement("option");
                 el.textContent = optn;
-                el.value = optn;
+                el.value = i.dep_id;
                 select.appendChild(el);
+
             }
     
 }
@@ -227,10 +225,28 @@ function get_pro(){
     $("#mem_dep_id").empty();
 	get_dept(mem_pro_ID.value);
 }
-// finction check_depart
 
 
 </script>
+<script type="text/javascript">
+  $('#add-form').submit(function(){
+    $.ajax({
+        type: 'post',
+        url: "<?php echo site_url().'/Member/Member_register/insert_member'?>",
+        data: $( "#add-form" ).serialize(),
+        dataType: 'json',
+        success: function(data) {
+              // console.log("succ");
+              alert('มีชื่อนี้ในระบบอยู่แล้วหรือไม่ได้กรอกข้อมูล กรุณากรอกใหม่');
+        },
+        error: function (error) {
+          // console.log("error");
+          location.reload();
+        }
+    });
+  });
+  </script>
+  
 <style> 
      /*ปรับรูปแบบตัวอักษร */
     @import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');

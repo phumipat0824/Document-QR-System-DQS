@@ -10,4 +10,14 @@ class Da_DQS_station_state_of_province extends DQS_model
     public $station_status;
     public $station_pro_id;
     public $station_dep_id; 
+
+    public function update_status($mem_pro_id,$mem_dep_id)
+    {
+        $sql = "UPDATE {$this->db_name}.DQS_Station_State_of_Province
+        SET station_status = 0
+        WHERE station_pro_id = $mem_pro_id && station_dep_id = $mem_dep_id";
+        $this->db->query($sql, array($this-> station_status));
+    }
+
 }
+

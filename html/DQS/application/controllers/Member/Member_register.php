@@ -16,11 +16,14 @@ class Member_register extends DQS_controller
 
     public function show_member_register()
     {
+        $this->load->model('Da_DQS_member', 'dmem');
         
         $this->load->model('M_DQS_province', 'MDP');
         $this->load->model('M_DQS_department', 'MDD');
         $data['arr_department'] = $this->MDD->get_all()->result();
         $data['arr_province'] = $this->MDP->get_all()->result();
+
+        
         $this->output_navbar('Member/v_member_register', $data);
         
     }
@@ -32,23 +35,6 @@ class Member_register extends DQS_controller
     }
 
 
-    // public function test_parameter($a,$b=null)
-    // {
-    //     echo $a;
-    //     echo '<br>';
-    //     var_dump($b);
-    //     print_r($b);
-
-    // }
-    public function insert_province()
-    {          
-        $this->load->model('M_DQS_member', 'MDM');
-        $this->MDM-> insert_province($mem_pro_id);
-        
-        $data= true;
-        echo json_encode("2");
-         //เรียกกลับมาหน้านี้อีกครั้งอยู่หน้าเดียวกันใส่ชื่อได้เลย
-    }
     public function get_dept_list_ajax()
     {
         $this->load->model('M_DQS_station_state_of_province', 'MSS');
@@ -56,9 +42,12 @@ class Member_register extends DQS_controller
         $data['json_station'] = $this->MSS->get_station_by_id($mem_pro_ID)->result();
         echo json_encode($data);
     }
+
     public function insert_member()
     {          
         $this->load->model('Da_DQS_member', 'dmem');
+        $this->load->model('M_DQS_member', 'mmem');
+        $this->load->model('Da_DQS_station_state_of_province', 'dssp');
         $this->dmem->mem_pref_id = $this->session->userdata('mem_pref_id');
         $this->dmem->mem_firstname = $this->session->userdata('mem_firstname');
         $this->dmem->mem_lastname = $this->session->userdata('mem_lastname');
@@ -68,11 +57,22 @@ class Member_register extends DQS_controller
         $this->dmem->mem_role = $this->session->userdata('mem_role');
         $this->dmem->mem_dep_id = $this->session->userdata('mem_dep_id');
         $this->dmem->mem_pro_id = $this->session->userdata('mem_province_id');
+        
+
+        $this->mmem->mem_firstname = $this->session->userdata('mem_firstname');
+		$this->mmem->mem_lastname = $this->session->userdata('mem_lastname');
+        if ($this->mmem->check_name($this->mmem->mem_firstname,$this->mmem->mem_lastname) == 0 && trim($this->mmem->mem_firstname,$this->mmem->mem_lastname) != "") {
+        
+                $this->dmem->insert(); 
+                $this->dssp->update_status( $this->session->userdata('mem_province_id'),$this->session->userdata('mem_dep_id'));
+            }
+        
          
-        $this->dmem->insert();
+        // $this->dmem->update_status();
 
         $this->output_navbar("Member/v_member_login"); //เรียกกลับมาหน้านี้อีกครั้งอยู่หน้าเดียวกันใส่ชื่อได้เลย
     }
+
 
     public function insert_session()
     {
@@ -91,12 +91,12 @@ class Member_register extends DQS_controller
         $pro_id = $this->input->post('mem_province_id');
         $data['obj_province'] = $this->MDP->get_by_id($pro_id)->row();
 
-
+        
         $pro_name =  $data['obj_province']->pro_name;
         $pro_short =  $data['obj_province']->pro_short;
 
         $this->session->set_userdata('pro_name', $pro_name);
-
+        
         $dep_id = $this->input->post('mem_dep_id');
         $data['obj_department'] = $this->MDD->get_by_id($dep_id)->row();
 
@@ -106,7 +106,7 @@ class Member_register extends DQS_controller
         $this->session->set_userdata('pro_name', $pro_name);
 
         $username = $pro_short . str_pad($dep_id, 3, "0", STR_PAD_LEFT);
-
+        
         $this->session->set_userdata('mem_username', $username);
 
         $this->output_navbar('Member/v_member_confirm');
@@ -178,16 +178,5 @@ class Member_register extends DQS_controller
 
 }
 
-    // public function insert_appellant()
-    // {
-    //     //session
-    //     $this->session->set_userdata('ID_ssn', $this->input->post('ID_ssn'));
-    //     $this->session->set_userdata('Mem_firstname', $this->input->post('Mem_firstname'));
-    //     $this->session->set_userdata('Mem_lastname', $this->input->post('Mem_lastname'));
-    //     $this->session->set_userdata('mem_email', $this->input->post('mem_email'));
-    //     $this->session->set_userdata('mem_password', $this->input->post('mem_password'));
-    //     $this->session->set_userdata('mem_dep_id', $this->input->post('mem_dep_id'));
-    //     //ที่อยู่
-    // }
 
 

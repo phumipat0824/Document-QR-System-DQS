@@ -1,4 +1,10 @@
 <?php
+/*
+* Model of Department
+* Check and get data of department
+* @author Kiattisak
+* @Create Date 2564-08-05
+*/
 defined('BASEPATH') or exit('No direct script access allowed');
 
 include_once 'Da_DQS_department.php';
@@ -25,14 +31,6 @@ class M_DQS_department extends Da_DQS_department
         return $query;
     }
 
-    // public function check_exist_name($dep_name)
-    // {
-    //     $sql = "SELECT * 
-    //         FROM {$this->db_name}.DQS_Department
-    //         WHERE dep_name = $dep_name";
-    //     $query = $this->db->query($sql);
-    //     return $query;
-    // }
 
     public function check_exist_name($dep_name)
     {
