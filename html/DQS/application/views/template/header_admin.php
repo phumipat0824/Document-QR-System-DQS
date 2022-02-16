@@ -85,10 +85,10 @@
                         <a class="nav-link" style="font-size:18px"><?php echo $this->session->mem_username?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url() . 'Member/Member_login/logout' ?>" style="font-size:18px">ออกจากระบบ</a>
+                        <a class="nav-link" href="<?php echo site_url() . '/Member/Member_login/logout' ?>" style="font-size:18px">ออกจากระบบ</a>
                     </li>
                     <!-- <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url() . 'Member/Member_login/show_member_login' ?>" style="font-size:18px">เข้าสู่ระบบ</a>
+                        <a class="nav-link" href="<?php echo site_url() . '/Member/Member_login/show_member_login' ?>" style="font-size:18px">เข้าสู่ระบบ</a>
                     </li> -->
                 </ul>
 
