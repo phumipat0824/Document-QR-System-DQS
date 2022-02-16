@@ -69,7 +69,7 @@
                         <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
                             <a href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
                             <a href="#" class="editModal" data-toggle="modal" data-target="#editModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">แก้ไข</a>
-                            <a href="#ย้าย">ย้าย</a>
+                            <a href="#" class="moveModal" data-toggle="modal" data-target="#moveModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">ย้าย</a>
                             <a href="#" class="deleteModal" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>">ลบ</a>
                         </div>
                     </div>
@@ -201,35 +201,39 @@
     * @author chanyapat
     * @Create Date 2565-13-01
 */ -->
-
- <!-- move Modal -->
- <div class="modal fade" id="moveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- start move Modal -->
+        <div class="modal fade" id="moveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">ย้ายไปที่</h5>
                     </div>
-                    <form id="move-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/move_folder/'; ?>">
+                    <form id="move-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/move_folder/';?>"> 
                         <div class="modal-body">
-                            <input type="hidden" name="fol_id" id="foler_id" value="">
-                            <select name="fol_location_id" id="fol_location_id" class="form-select" aria-label="Default select example" required>
-                                <?php for ($i = 0; $i < count($arr_fol); $i++) {   ?>
-                                    <?php if ($arr_fol[$i]->fol_id != $value) { ?>
-                                        <option value='<?php echo $arr_fol[$i]->fol_id ?>|<?php echo $arr_fol[$i]->fol_name ?>'><?php echo $arr_fol[$i]->fol_name ?></option>
-                                    <?php } ?>
+
+                            <!-- dropdown folder name -->
+                            <select name="fol_location_id" id="fol_location_id" class="form-select" aria-label="Default select example" placeholder="" required>
+                                <option value="" disabled selected hidden>เลือกโฟลเดอร์</option>
+                                <option value='0'>หน้าหลัก</option>
+                                <?php for ($i = 0; $i < count($arr_folder); $i++) {   ?> 
+                                    <?php if($arr_folder[$i]->fol_mem_id == $this->session->userdata('mem_id')){ ?> 
+                                        <option value='<?php echo $arr_folder[$i]->fol_id ?>'><?php echo $arr_folder[$i]->fol_name ?></option>
+                                    <?php } ?> 
                                 <?php } ?>
                             </select><br>
-                            <input type="hidden" name="fol_name" id="foler_name" value="">
-                            <!-- //search folder name -->
+                            
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer">  
                             <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                             <input type="submit" class="btn btn-success" value="บันทึก">
+                            <input type="hidden" name="fol_id" id="fold_id" value="">
+                            <input type="hidden" name="fol_name" id="folder_name" value="">
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+    <!-- end move Modal -->
 
 
     </div>
@@ -562,4 +566,30 @@ function rightclick() {
                 }
 
             }
+
+/* moveModal()
+* moveModal 
+* @input -
+* @output -
+* @author Chanyapat
+* @Create Date 2564-11-30
+*/
+    $(document).on("click", ".moveModal", function() {
+        var id = $(this).attr('data-id');
+        $("#fol_id").val(id);
+        var name = $(this).attr('data-name');
+        $("#fol_name").val(name);
+        var x = document.getElementById("fold_id").value = id;
+        document.getElementById("folder_name").value = name;
+        console.log(x);
+        console.log(name);
+    });
+
+    $(document).ready(function(){
+        $('.dropdown-submenu a.test').on("click", function(e){
+            $(this).next('ul').toggle();
+            e.stopPropagation();
+            e.preventDefault();
+        });
+    });    
 </script>

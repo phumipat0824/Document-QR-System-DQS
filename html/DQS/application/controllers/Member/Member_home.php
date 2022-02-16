@@ -33,7 +33,34 @@ public function show_member_home()
 	$data['arr_fol'] = $this->fol->get_by_id($memid)->result();
 	$data['arr_qr'] = $this->qrc->get_by_id($memid)->result();
 	$data['arr_folder'] = $this->fol->get_all()->result();
+	$folder = $this->fol->get_all()->result();
 	$data['path_fol'] = array('@');
+	
+	// $id = 0;
+	// $level = 0;
+	// $num = 0;
+	// 	for($i = 0; $i < count($folder); $i++){
+			
+	// 			$value = $folder[$i]->fol_id;
+	// 			$folder_name = $folder[$i]->fol_name;
+	// 			$sub_folder = $value;
+	// 			echo  $folder_name." ";
+	// 			echo "<br>";
+	// 			if($folder[$id]->fol_location_id == $value){
+	// 				$num++;
+	// 			}
+	// 			echo $num;
+	// 			echo "<br>";
+	// 			while($sub_folder == $folder[$i]->fol_location_id){
+	// 				$value = $folder[$i]->fol_id;
+	// 				$folder_name = $folder[$i]->fol_name;
+	// 				echo $folder_name."  ";
+	// 				echo "<br>";
+	// 				$id = $sub_folder;
+	// 			}
+	// 		$id++;
+	// 	}
+
 	$this->output_sidebar_member("Member/v_member_home",$data);
 }
 /*
@@ -53,6 +80,7 @@ public function show_member_home()
 		$path_folder = $this->fol->get_by_id_fol($fol_location_id)->result();
 		$data['arr_fol'] = $this->fol->get_by_member_id($memid, $fol_location_id,)->result();
 		$data['arr_qr'] = $this->qrc->get_by_id($memid)->result();
+		$data['arr_folder'] = $this->fol->get_all()->result();
 		$path_location =  $path_folder[0]->fol_location ; //เช็คค่า ที่อยู่ใน data base
 		$sub_folder = substr($path_location, 21 ).'/'; // sub string เอาแต่ location ชือของ folder
 		$get_sub_folder = ' '.$sub_folder;
@@ -77,38 +105,4 @@ public function show_member_home()
 		}
 	}
 
-	
-
-	function move_folder() 
-	{
-		$this->load->model('Da_DQS_folder','folder');
-		$this->load->model('M_DQS_folder','Mfol');
-		$this->folder->fol_location_id = $this->input->post('fol_location_id');
-		$this->folder->fol_id = $this->input->post('fol_id');
-		$this->folder->fol_name = $this->input->post('fol_name');
-		
-        $obj_fol = $this->Mfol->get_by_id_fol($this->input->post('fol_id'))->result();
-		// print_r($obj_fol);
-		
-		// $arr_folder = $this->input->post('fol_location_id');
-		
-		// $arr_folder_explode = explode('|', $arr_folder);
-        // $this->folder->fol_location_id = $arr_folder_explode[0];
-        // $new_name = $arr_folder_explode[1];
-
-		$get_name_location = $this->Mfol->get_by_id_fol($this->input->post('fol_location_id'))->result();
-		
-		if($this->folder->fol_location != $get_name_location[0]->fol_location){
-			$newpath = $get_name_location[0]->fol_location . '/' . $this->folder->fol_name;
-			$this->folder->fol_location = $newpath;
-			$this->folder->move();
-		}
-
-		$obj_newfol = $this->Mfol->get_by_id_fol($this->input->post('fol_id'))->result();
-		// print_r($obj_newfol);
-
-		rename($obj_fol[0]->fol_location , $obj_newfol[0]->fol_location );
-		
-		redirect('Member/Member_home/show_member_home');
-	}
 }
