@@ -19,5 +19,12 @@ class Da_DQS_station_state_of_province extends DQS_model
         $this->db->query($sql, array($this-> station_status));
     }
 
+    public function insert($mem_pro_id,$dep_id)
+	{
+		$sql = "INSERT INTO DQS_Station_State_of_Province(station_pro_id,station_status,station_dep_id ) 
+                VALUES ($mem_pro_id,1,$dep_id)
+                ";
+        $this->db->query($sql, array($this->station_pro_id,$this->station_status,$this->station_dep_id));
+	}//insert
 }
 

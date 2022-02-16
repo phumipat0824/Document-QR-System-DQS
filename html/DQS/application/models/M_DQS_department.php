@@ -24,6 +24,16 @@ class M_DQS_department extends Da_DQS_department
         $query = $this->db->query($sql);
         return $query;
     }
+
+    public function get_all_by_pro_id($mem_pro_id)
+    {
+        $sql = "SELECT * from {$this->db_name}.DQS_Station_State_of_Province
+                INNER JOIN DQS_Department
+                WHERE station_pro_id = $mem_pro_id AND station_dep_id = DQS_Department.dep_id";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
     public function get_by_id($dep_id)
     {
         $sql = "SELECT * from {$this->db_name}.DQS_Department WHERE dep_id = $dep_id";
@@ -31,6 +41,14 @@ class M_DQS_department extends Da_DQS_department
         return $query;
     }
 
+    public function get_last_id()
+    {
+        $sql = "SELECT dep_id 
+        FROM {$this->db_name}.DQS_Department
+        ORDER BY dep_id DESC LIMIT 1";
+        $query = $this->db->query($sql);
+        return $query;
+    }
 
     public function check_exist_name($dep_name)
     {
