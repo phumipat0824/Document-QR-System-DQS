@@ -137,6 +137,16 @@ class M_DQS_member extends Da_DQS_member
         $query = $this->db->query($sql);
         return $query;
     }
-    
+    public function check_name($mem_firstname,$mem_lastname)
+    {
+        // $sql = "SELECT * 
+        // FROM {$this->db_name}.DQS_Department
+        // WHERE dep_name = $dep_name";
+        // $query = $this->db->query($sql);
+        $array = array('mem_firstname' => $mem_firstname, 'mem_lastname' => $mem_lastname);
+        $this->db->where($array);
+        $query = $this->db->get('DQS_Member');
+        return $query->num_rows($array);
+    }
 
 }
