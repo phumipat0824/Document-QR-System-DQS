@@ -216,7 +216,9 @@
                                 <option value="" disabled selected hidden>เลือกโฟลเดอร์</option>
                                 <option value='0'>หน้าหลัก</option>
                                 <?php for ($i = 0; $i < count($arr_folder); $i++) {   ?> 
-                                    <option value='<?php echo $arr_folder[$i]->fol_id ?>'><?php echo $arr_folder[$i]->fol_name ?></option>
+                                    <?php if($arr_folder[$i]->fol_mem_id == $this->session->userdata('mem_id')){ ?> 
+                                        <option value='<?php echo $arr_folder[$i]->fol_id ?>'><?php echo $arr_folder[$i]->fol_name ?></option>
+                                    <?php } ?> 
                                 <?php } ?>
                             </select><br>
                             
