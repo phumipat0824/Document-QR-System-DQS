@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Jan 13, 2022 at 09:11 AM
+-- Generation Time: Feb 14, 2022 at 11:40 AM
 -- Server version: 10.3.28-MariaDB-1:10.3.28+maria~focal
 -- PHP Version: 7.4.16
 
@@ -28,57 +28,56 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `DQS_Department` (
-  `dep_id` int(11) NOT NULL,
-  `dep_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dep_eng_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dep_active` tinyint(1) DEFAULT NULL
+  `dep_id` int(11) NOT NULL COMMENT 'จำนวน หน่วยงาน',
+  `dep_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'ชื่อหน่วยงาน',
+  `dep_eng_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'ชื่อหน่วยงานภาษาอังกฤษ'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `DQS_Department`
 --
 
-INSERT INTO `DQS_Department` (`dep_id`, `dep_name`, `dep_eng_name`, `dep_active`) VALUES
-(1, 'บูรพา', '', 1),
-(2, 'สำนักงานจังหวัด', '', 1),
-(3, 'สำนักงานสาธารณสุขจังหวัด', '', 1),
-(4, 'สำนักงานที่ดินจังหวัด', '', 1),
-(5, 'สำนักงานพัฒนาชุมชนจังหวัด', '', 1),
-(6, 'สำนักงานโยธาธิการและผังเมืองจังหวัด', '', 1),
-(7, 'เรือนจำจังหวัด', '', 1),
-(8, 'สำนักงานคลังจังหวัด', '', 1),
-(9, 'สำนักงานพาณิชย์จังหวัด', '', 1),
-(10, 'สำนักงานพัฒนาสังคมและความมั่นคงของมนุษย์จังหวัด', '', 1),
-(11, 'สำนักงานแรงงานจังหวัด', '', 1),
-(12, 'สำนักงานสวัสดิการและคุ้มครองแรงงานจังหวัด', '', 1),
-(13, 'สำนักงานจัดหางานจังหวัด', '', 1),
-(14, 'สำนักงานประกันสังคมจังหวัด', '', 1),
-(15, 'สำนักงานเกษตรและสหกรณ์จังหวัด', '', 1),
-(16, 'สำนักงานเกษตรจังหวัด', '', 1),
-(17, 'สำนักงานปศุสัตว์จังหวัด', '', 1),
-(18, 'สำนักงานสหกรณ์จังหวัด', '', 1),
-(19, 'สำนักงานปฏิรูปที่ดินจังหวัด', '', 1),
-(20, 'สำนักงานประมงจังหวัด', '', 1),
-(21, 'สำนักงานขนส่งจังหวัด', '', 1),
-(22, 'สำนักงานประชาสัมพันธ์จังหวัด', '', 1),
-(23, 'สำนักงานสถิติจังหวัด', '', 1),
-(24, 'สำนักงานทรัพยากรธรรมชาติและสิ่งแวดล้อมจังหวัด', '', 1),
-(25, 'สำนักงานวัฒนธรรมจังหวัด', '', 1),
-(26, 'สำนักงานป้องกันและบรรเทาสาธารณภัยจังหวัด', '', 1),
-(27, 'สำนักงานบังคับคดีจังหวัด', '', 1),
-(28, 'สำนักงานพระพุทธศาสนาจังหวัด', '', 1),
-(29, 'สำนักงานการท่องเที่ยวและกีฬาจังหวัด', '', 1),
-(30, 'สำนักงานส่งเสริมการปกครองส่วนท้องถิ่นจังหวัด', '', 1),
-(31, 'สำนักงานพลังงานจังหวัด', '', 1),
-(32, 'สำนักงานสัสดีจังหวัด', '', 1),
-(33, 'สำนักงานยุติธรรมจังหวัด', '', 1),
-(34, 'สำนักงานอุตสาหกรรมจังหวัด', '', 1),
-(35, 'สำนักงานคุมประพฤติจังหวัด', '', 1),
-(36, 'หน่วยงานใหม่', '', 1),
-(37, 'บูรพา2', '', 1),
-(38, 'สำนักการศึกษา2', '', 0),
-(39, 'สำนักการศึกษา3', '', 0),
-(40, 'หน่วยงานจังหวัด', '', 1);
+INSERT INTO `DQS_Department` (`dep_id`, `dep_name`, `dep_eng_name`) VALUES
+(1, 'บูรพา', 'Burapha'),
+(2, 'สำนักงานจังหวัด', ' Provincial office'),
+(3, 'สำนักงานสาธารณสุขจังหวัด', 'Provincial Public Health Office'),
+(4, 'สำนักงานที่ดินจังหวัด', 'Provincial land office'),
+(5, 'สำนักงานพัฒนาชุมชนจังหวัด', 'Provincial Community Development Office'),
+(6, 'สำนักงานโยธาธิการและผังเมืองจังหวัด', 'Provincial Public Works and Town Planning Office'),
+(7, 'เรือนจำจังหวัด', 'Provincial prison'),
+(8, 'สำนักงานคลังจังหวัด', 'Provincial treasury office'),
+(9, 'สำนักงานพาณิชย์จังหวัด', 'Provincial commercial office'),
+(10, 'สำนักงานพัฒนาสังคมและความมั่นคงของมนุษย์จังหวัด', 'Provincial Social Development and Human Security Office'),
+(11, 'สำนักงานแรงงานจังหวัด', 'Provincial Labor Office'),
+(12, 'สำนักงานสวัสดิการและคุ้มครองแรงงานจังหวัด', 'Provincial Labor Protection and Welfare Office'),
+(13, 'สำนักงานจัดหางานจังหวัด', 'Provincial employment office'),
+(14, 'สำนักงานประกันสังคมจังหวัด', 'Provincial Social Security Office'),
+(15, 'สำนักงานเกษตรและสหกรณ์จังหวัด', 'Provincial Agriculture and Cooperatives Office'),
+(16, 'สำนักงานเกษตรจังหวัด', 'Provincial Agriculture Office'),
+(17, 'สำนักงานปศุสัตว์จังหวัด', 'Provincial Livestock Office'),
+(18, 'สำนักงานสหกรณ์จังหวัด', 'Provincial cooperative office'),
+(19, 'สำนักงานปฏิรูปที่ดินจังหวัด', 'Provincial Land Reform Office'),
+(20, 'สำนักงานประมงจังหวัด', 'Provincial Fisheries Office'),
+(21, 'สำนักงานขนส่งจังหวัด', 'Provincial Transport Office'),
+(22, 'สำนักงานประชาสัมพันธ์จังหวัด', 'Provincial Public Relations Office'),
+(23, 'สำนักงานสถิติจังหวัด', ' Provincial Statistical Office'),
+(24, 'สำนักงานทรัพยากรธรรมชาติและสิ่งแวดล้อมจังหวัด', 'Provincial Office of Natural Resources and Environment'),
+(25, 'สำนักงานวัฒนธรรมจังหวัด', 'Provincial Cultural Office'),
+(26, 'สำนักงานป้องกันและบรรเทาสาธารณภัยจังหวัด', 'Provincial Disaster Prevention and Mitigation Office'),
+(27, 'สำนักงานบังคับคดีจังหวัด', ' Provincial Legal Execution Office'),
+(28, 'สำนักงานพระพุทธศาสนาจังหวัด', 'Provincial Buddhism Office'),
+(29, 'สำนักงานการท่องเที่ยวและกีฬาจังหวัด', 'Provincial Tourism and Sports Office'),
+(30, 'สำนักงานส่งเสริมการปกครองส่วนท้องถิ่นจังหวัด', 'Provincial Local Administration Promotion Office'),
+(31, 'สำนักงานพลังงานจังหวัด', ' Provincial energy office'),
+(32, 'สำนักงานสัสดีจังหวัด', 'Provincial recruiting office'),
+(33, 'สำนักงานยุติธรรมจังหวัด', 'Provincial justice office'),
+(34, 'สำนักงานอุตสาหกรรมจังหวัด', 'Provincial Industrial Office'),
+(35, 'สำนักงานคุมประพฤติจังหวัด', 'Provincial probation office'),
+(36, 'หน่วยงานใหม่', 'New agency'),
+(37, 'บูรพา2', ' Burapha 2'),
+(38, 'สำนักการศึกษา2', 'Education Bureau 2'),
+(39, 'สำนักการศึกษา3', 'Office of Education 3'),
+(40, 'หน่วยงานจังหวัด', 'Provincial agency');
 
 -- --------------------------------------------------------
 
@@ -88,14 +87,14 @@ INSERT INTO `DQS_Department` (`dep_id`, `dep_name`, `dep_eng_name`, `dep_active`
 
 CREATE TABLE `DQS_Document` (
   `doc_id` int(11) NOT NULL,
-  `doc_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `doc_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `doc_view` int(11) DEFAULT NULL,
-  `doc_download` int(11) DEFAULT NULL,
-  `doc_path` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `doc_datetime` timestamp NOT NULL DEFAULT current_timestamp(),
-  `doc_mem_id` int(11) DEFAULT NULL,
-  `doc_fol_id` int(11) DEFAULT NULL
+  `doc_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'ชื่อเอกสาร',
+  `doc_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ประเภทเอกสาร',
+  `doc_view` int(11) DEFAULT NULL COMMENT 'จํานวนการเข้าดูเอกสาร',
+  `doc_download` int(11) DEFAULT NULL COMMENT 'จํานวนการดาวน์โหลด',
+  `doc_path` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ตําแหน่งที่จัดเก็บเอกสาร',
+  `doc_datetime` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'วันที่อัปโหลดเอกสาร',
+  `doc_mem_id` int(11) DEFAULT NULL COMMENT 'รหัสสมาชิก',
+  `doc_fol_id` int(11) DEFAULT NULL COMMENT 'รหัส folder'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -103,9 +102,15 @@ CREATE TABLE `DQS_Document` (
 --
 
 INSERT INTO `DQS_Document` (`doc_id`, `doc_name`, `doc_type`, `doc_view`, `doc_download`, `doc_path`, `doc_datetime`, `doc_mem_id`, `doc_fol_id`) VALUES
-(1, 'Retrospective', 'pdf', NULL, NULL, '/assets/pdf/fileupload_Member/Retrospective.pdf', '2021-12-21 07:58:00', 1, NULL),
-(26, '', 'pdf', NULL, NULL, NULL, '2022-01-12 10:19:03', 1, NULL),
-(27, '', 'pdf', NULL, NULL, NULL, '2022-01-12 10:19:05', 1, NULL);
+(32, 'HW1', 'pdf', NULL, NULL, '/assets/users/SPK001/home/HW1.pdf', '2022-02-01 08:15:55', 1, NULL),
+(33, 'HW2', 'pdf', NULL, NULL, '/assets/users/SPK001/home/HW2.pdf', '2022-02-01 08:19:21', 1, NULL),
+(34, 'HW3', 'pdf', NULL, NULL, '/assets/users/SPK001/home/HW3.pdf', '2022-02-01 08:21:23', 1, NULL),
+(35, 'HW4', 'pdf', NULL, NULL, '/assets/users/SPK001/home/HW4.pdf', '2022-02-01 08:24:09', 1, NULL),
+(36, 'HW5', 'pdf', NULL, NULL, '/assets/users/SPK001/home/HW5.pdf', '2022-02-01 08:25:52', 1, NULL),
+(37, 'HW6', 'pdf', NULL, NULL, '/assets/users/SPK001/home/HW6.pdf', '2022-02-01 08:28:36', 1, NULL),
+(38, 'HW7', 'pdf', NULL, NULL, '/assets/users/SPK001/home/HW7.pdf', '2022-02-01 08:35:06', 1, NULL),
+(39, 'HW8', 'pdf', NULL, NULL, '/assets/users/SPK001/home/HW8.pdf', '2022-02-01 08:37:22', 1, NULL),
+(40, 'HW9', 'pdf', NULL, NULL, '/assets/users/SPK001/home/HW9.pdf', '2022-02-01 08:39:14', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -114,11 +119,11 @@ INSERT INTO `DQS_Document` (`doc_id`, `doc_name`, `doc_type`, `doc_view`, `doc_d
 --
 
 CREATE TABLE `DQS_Folder` (
-  `fol_id` int(11) NOT NULL,
-  `fol_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fol_datetime` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `fol_location` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fol_mem_id` int(11) DEFAULT NULL,
+  `fol_id` int(11) NOT NULL COMMENT 'จำนวน folder',
+  `fol_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'ชื่อ folder',
+  `fol_datetime` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT 'วันที่ folder',
+  `fol_location` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'ตําแหน่ง folder',
+  `fol_mem_id` int(11) DEFAULT NULL COMMENT 'รหัสสมาชิก',
   `fol_location_id` int(11) DEFAULT NULL COMMENT 'เก็บ id ของที่อยู่ folder'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -127,15 +132,34 @@ CREATE TABLE `DQS_Folder` (
 --
 
 INSERT INTO `DQS_Folder` (`fol_id`, `fol_name`, `fol_datetime`, `fol_location`, `fol_mem_id`, `fol_location_id`) VALUES
-(1, 'เอกสารสำคัญ', '2022-01-13 09:10:25', './assets/folder/เอกสารสำคัญ', 1, 0),
-(2, 'เทสรอบล้าน', '2022-01-13 09:10:23', './assets/folder/เทสรอบล้าน', 2, 0),
-(3, 'เอกสารลับ3', '2022-01-13 09:10:22', './assets/folder/เอกสารลับ3', 2, 0),
-(4, 'เอกสารลับ 4', '2022-01-13 09:10:21', './assets/folder/เอกสารลับ 4', 2, 0),
-(5, 'เทสรอบล้านnice', '2022-01-07 12:05:23', './assets/folder/เทสรอบล้านnice', 2, 2),
-(7, 'testfirst', '2022-01-13 09:10:20', './assets/folder/testfirst', 2, 0),
-(8, 'เทสรอบล้านnice2', '2022-01-07 12:38:28', './assets/folder/เทสรอบล้านnice2', 2, 2),
-(9, 'เทสรอบล้านnice3', '2022-01-07 12:39:11', './assets/folder/เทสรอบล้านnice3', 2, 2),
-(10, 'เทสรอบล้านnice4', '2022-01-07 12:42:01', './assets/folder/เทสรอบล้านnice4', 2, 2);
+(1, 'เอกสารราชการ', '2022-01-28 13:22:34', './assets/user/SPK001/เอกสารราชการ\r\n', 1, 0),
+(2, 'เอกสารการประชุม', '2022-02-03 10:07:31', './assets/user/SPK001/เอกสารประชุม', 1, 0),
+(3, 'เอกสารราชการ', '2022-01-28 13:23:31', './assets/user/KAB001/เอกสารราชการ', 2, 0),
+(4, 'เอกสารการประชุม', '2022-02-03 10:07:42', './assets/user/KAB001/เอกสารประชุม', 2, 0),
+(5, 'เอกสารราชการ', '2022-01-28 13:25:01', './assets/user/KAN001/เอกสารราชการ', 3, 0),
+(6, 'เอกสารการประชุม', '2022-02-03 10:07:44', './assets/user/KAN001/เอกสารประชุม', 3, 0),
+(7, 'เอกสารราชการ', '2022-01-28 13:25:01', './assets/user/KLS001/เอกสารราชการ', 4, 0),
+(8, 'เอกสารการประชุม', '2022-02-03 10:07:47', './assets/user/KLS001/เอกสารประชุม', 4, 0),
+(9, 'เอกสารราชการ', '2022-01-28 13:25:01', './assets/user/SKN001/เอกสารราชการ', 5, 0),
+(10, 'เอกสารการประชุม', '2022-02-03 10:07:48', './assets/user/SKN001/เอกสารประชุม', 5, 0),
+(11, 'เอกสารราชการ', '2022-01-28 13:25:01', './assets/user/KPP001/เอกสารราชการ', 6, 0),
+(12, 'เอกสารการประชุม', '2022-02-03 10:07:50', './assets/user/KPP001/เอกสารประชุม', 6, 0),
+(13, 'เอกสารราชการ', '2022-01-28 13:25:01', './assets/user/KHK001/เอกสารราชการ', 7, 0),
+(14, 'เอกสารการประชุม', '2022-02-03 10:07:52', './assets/user/KHK001/เอกสารประชุม', 7, 0),
+(15, 'เอกสารราชการ', '2022-01-28 13:28:36', './assets/user/CTB001/เอกสารราชการ', 8, 0),
+(16, 'เอกสารการประชุม', '2022-02-03 10:07:54', './assets/user/CTB001/เอกสารประชุม', 8, 0),
+(17, 'เอกสารราชการ', '2022-01-28 13:28:36', './assets/user/CCS001/เอกสารราชการ', 9, 0),
+(18, 'เอกสารการประชุม', '2022-02-03 10:07:55', './assets/user/CCS001/เอกสารประชุม', 9, 0),
+(19, 'เอกสารราชการ', '2022-01-28 13:30:22', './assets/user/CHB001/เอกสารราชการ', 10, 0),
+(20, 'เอกสารการประชุม', '2022-02-03 10:07:57', './assets/user/CHB001/เอกสารประชุม', 10, 0),
+(21, 'เอกสารราชการ', '2022-01-28 13:30:22', './assets/user/CHN001/เอกสารราชการ', 11, 0),
+(22, 'เอกสารการประชุม', '2022-02-03 10:07:59', './assets/user/CHN001/เอกสารประชุม', 11, 0),
+(23, 'เอกสารราชการ', '2022-01-28 13:41:46', './assets/user/NBL001ad/เอกสารราชการ', 12, 0),
+(24, 'เอกสารการประชุม', '2022-02-03 10:08:03', './assets/user/NBL001ad/เอกสารประชุม', 12, 0),
+(25, 'เอกสารราชการ', '2022-01-28 13:41:51', './assets/user/PCB001ad/เอกสารราชการ', 13, 0),
+(26, 'เอกสารการประชุม', '2022-02-03 10:08:07', './assets/user/PCB001ad/เอกสารประชุม', 13, 0),
+(27, 'เอกสารราชการ', '2022-01-28 13:41:53', './assets/user/LPH001ad/เอกสารราชการ', 14, 0),
+(28, 'เอกสารการประชุม', '2022-02-03 10:08:12', './assets/user/LPH001ad/เอกสารประชุม', 14, 0);
 
 -- --------------------------------------------------------
 
@@ -144,18 +168,18 @@ INSERT INTO `DQS_Folder` (`fol_id`, `fol_name`, `fol_datetime`, `fol_location`, 
 --
 
 CREATE TABLE `DQS_Member` (
-  `mem_id` int(11) NOT NULL,
-  `mem_firstname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mem_lastname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mem_email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mem_username` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mem_password` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mem_role` tinyint(1) DEFAULT NULL,
-  `mem_time_in` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `mem_time_out` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `mem_dep_id` int(11) NOT NULL,
-  `mem_pref_id` tinyint(1) NOT NULL,
-  `mem_pro_id` int(3) NOT NULL
+  `mem_id` int(11) NOT NULL COMMENT 'จำนวนสมาชิก',
+  `mem_firstname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'ชื่อจริง',
+  `mem_lastname` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'นามสกุล',
+  `mem_email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'อีเมล',
+  `mem_username` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อสมาชิก',
+  `mem_password` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'รหัสผ่าน',
+  `mem_role` tinyint(1) DEFAULT NULL COMMENT 'ตําแหน่งของสมาชิก',
+  `mem_time_in` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT 'เวลาที่เข้าสู่ระบบ',
+  `mem_time_out` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT 'เวลาที่ออกจากระบบ',
+  `mem_dep_id` int(11) NOT NULL COMMENT 'รหัสหน่วยงาน',
+  `mem_pref_id` tinyint(1) NOT NULL COMMENT 'รหัสคํานําหน้าชื่อ',
+  `mem_pro_id` int(3) NOT NULL COMMENT 'รหัสจังหวัด'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -163,20 +187,20 @@ CREATE TABLE `DQS_Member` (
 --
 
 INSERT INTO `DQS_Member` (`mem_id`, `mem_firstname`, `mem_lastname`, `mem_email`, `mem_username`, `mem_password`, `mem_role`, `mem_time_in`, `mem_time_out`, `mem_dep_id`, `mem_pref_id`, `mem_pro_id`) VALUES
-(1, 'กฤษฎา', 'ปาลพันธุ์', '62160147@hotmail.com', 'SPK002', '9b45297cb96a57639aa820250d990522', 0, '2022-01-06 07:01:06', '2022-01-06 07:01:06', 2, 1, 2),
-(2, 'พงศ์ธร', 'จอสูงเนิน', '62160332@hotmail.com', '62160332', '832a0aef52b5b70179e291bebee62e65', 0, '2022-01-06 07:26:51', '2022-01-06 07:26:51', 2, 1, 64),
-(3, 'ณัฐรุจา', 'คะปัญญา', '62160152@hotmail.com', '62160152', 'aeac1a70723cf418ead30af1ffdba919', 0, '2022-01-06 07:27:17', '2022-01-06 07:27:17', 3, 3, 56),
-(4, 'อรธิชา ', 'ชุนกิจ', '62160343@hotmail.com', '62160343', '7f50599ccea3c8c5c147a6f19d2feafa', 0, '2022-01-06 07:27:27', '2022-01-06 07:27:27', 4, 3, 34),
-(5, 'ภูมิพัฒน์', 'เกตุสุวรรณ์', '62160333@hotmail.com', '62160333', 'e9190b9723d6f6dfb152db465fbc6ff9', 0, '2022-01-06 07:27:35', '2022-01-06 07:27:35', 5, 1, 35),
-(6, 'เกียรติศักดิ์', 'พุ่มจันทร์', '62160075@hotmail.com', '62160075', '7b9fc60627eed7525c1303918534d5f5', 0, '2022-01-06 07:27:42', '2022-01-06 07:27:42', 6, 1, 49),
-(7, 'จีรศักดิ์ ', 'บุญธรรม', '62160078@hotmail.com', '62160078', '66ee4904a64d8c90eb05b32489add8c3', 0, '2022-01-06 07:27:51', '2022-01-06 07:27:51', 7, 1, 28),
-(8, 'อชิรวัชร์', 'สิริโชติกุลพงษ์', '62160115@hotmail.com', '62160115', 'b3ce234c3654a649e1be9071ce07cf5d', 0, '2022-01-06 07:27:59', '2022-01-06 07:27:59', 8, 1, 13),
-(9, 'ชัญญาพัชญ์', 'อาภรณ์หิรัญ', '62160080@hotmail.com', '62160080', '6a73acfcf7250bb00e0016f6beb939e0', 0, '2022-01-06 07:28:05', '2022-01-06 07:28:05', 9, 3, 15),
-(10, 'อภิญญา', 'สิงห์รักษ์', '62160342@hotmail.com', '62160342', '370cbebd338f8fbdcd69acb9a03993c4', 0, '2022-01-06 07:28:11', '2022-01-06 07:28:11', 10, 3, 11),
-(11, 'รัชนีกร', 'ป้อชุมภู', '62160335@hotmail.com', '62160335', 'c093a90c7fc78e7a12470111e4ae7dcf', 0, '2022-01-06 07:28:30', '2022-01-06 07:28:30', 11, 3, 9),
-(12, 'พงศ์ธร', 'จอสูงเนิน', '62160332ad@hotmail.com', '62160332ad', '832a0aef52b5b70179e291bebee62e65', 1, '2022-01-06 07:29:21', '2022-01-06 07:29:21', 13, 1, 27),
-(13, 'ภูมิพัฒน์', 'เกตุสุวรรณ์', '62160333ad@hotmail.com', '62160333ad', 'e9190b9723d6f6dfb152db465fbc6ff9', 1, '2022-01-06 07:29:57', '2022-01-06 07:29:57', 14, 1, 54),
-(14, 'เกียรติศักดิ์', 'พุ่มจันทร์', '62160075ad@hotmail.com', '62160075ad', '7b9fc60627eed7525c1303918534d5f5', 1, '2022-01-06 07:30:05', '2022-01-06 07:30:05', 15, 1, 39);
+(1, 'กฤษฎา', 'ปาลพันธุ์', '62160147@hotmail.com', 'SPK001', 'c30eb2ef720fe99ae308b8d96f3e02bc', 0, '2022-01-28 12:54:58', '2022-01-28 12:54:58', 2, 1, 2),
+(2, 'พงศ์ธร', 'จอสูงเนิน', '62160332@hotmail.com', 'KAB001', '832a0aef52b5b70179e291bebee62e65', 0, '2022-01-28 12:54:54', '2022-01-28 12:54:54', 2, 1, 64),
+(3, 'ณัฐรุจา', 'คะปัญญา', '62160152@hotmail.com', 'KAN001', 'aeac1a70723cf418ead30af1ffdba919', 0, '2022-01-28 12:55:19', '2022-01-28 12:55:19', 3, 3, 56),
+(4, 'อรธิชา ', 'ชุนกิจ', '62160343@hotmail.com', 'KLS001', '7f50599ccea3c8c5c147a6f19d2feafa', 0, '2022-01-28 12:55:34', '2022-01-28 12:55:34', 4, 3, 34),
+(5, 'ภูมิพัฒน์', 'เกตุสุวรรณ์', '62160333@hotmail.com', 'SKN001', 'e9190b9723d6f6dfb152db465fbc6ff9', 0, '2022-01-28 12:55:57', '2022-01-28 12:55:57', 5, 1, 35),
+(6, 'เกียรติศักดิ์', 'พุ่มจันทร์', '62160075@hotmail.com', 'KPP001', '7b9fc60627eed7525c1303918534d5f5', 0, '2022-01-28 12:56:09', '2022-01-28 12:56:09', 6, 1, 49),
+(7, 'จีรศักดิ์ ', 'บุญธรรม', '62160078@hotmail.com', 'KHK001', '66ee4904a64d8c90eb05b32489add8c3', 0, '2022-01-28 12:56:24', '2022-01-28 12:56:24', 7, 1, 28),
+(8, 'อชิรวัชร์', 'สิริโชติกุลพงษ์', '62160115@hotmail.com', 'CTB001', 'b3ce234c3654a649e1be9071ce07cf5d', 0, '2022-01-28 12:56:38', '2022-01-28 12:56:38', 8, 1, 13),
+(9, 'ชัญญาพัชญ์', 'อาภรณ์หิรัญ', '62160080@hotmail.com', 'CCS001', '6a73acfcf7250bb00e0016f6beb939e0', 0, '2022-01-28 12:56:53', '2022-01-28 12:56:53', 9, 3, 15),
+(10, 'อภิญญา', 'สิงห์รักษ์', '62160342@hotmail.com', 'CHB001', '370cbebd338f8fbdcd69acb9a03993c4', 0, '2022-01-28 12:57:10', '2022-01-28 12:57:10', 10, 3, 11),
+(11, 'รัชนีกร', 'ป้อชุมภู', '62160335@hotmail.com', 'CHN001', 'c093a90c7fc78e7a12470111e4ae7dcf', 0, '2022-01-28 12:57:18', '2022-01-28 12:57:18', 11, 3, 9),
+(12, 'พงศ์ธร', 'จอสูงเนิน', '62160332ad@hotmail.com', 'NBL001ad', '832a0aef52b5b70179e291bebee62e65', 1, '2022-01-28 13:02:36', '2022-01-28 13:02:36', 13, 1, 27),
+(13, 'ภูมิพัฒน์', 'เกตุสุวรรณ์', '62160333ad@hotmail.com', 'PCB001ad', 'e9190b9723d6f6dfb152db465fbc6ff9', 1, '2022-01-28 13:03:00', '2022-01-28 13:03:00', 14, 1, 54),
+(14, 'เกียรติศักดิ์', 'พุ่มจันทร์', '62160075ad@hotmail.com', 'LPH001ad', '7b9fc60627eed7525c1303918534d5f5', 1, '2022-01-28 13:02:55', '2022-01-28 13:02:55', 15, 1, 39);
 
 -- --------------------------------------------------------
 
@@ -185,8 +209,8 @@ INSERT INTO `DQS_Member` (`mem_id`, `mem_firstname`, `mem_lastname`, `mem_email`
 --
 
 CREATE TABLE `DQS_Prefix` (
-  `pref_id` int(1) NOT NULL,
-  `perf_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
+  `pref_id` int(1) NOT NULL COMMENT 'รหัสคํานําหน้า',
+  `perf_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'ชื่อคํานําหน้า'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -205,9 +229,9 @@ INSERT INTO `DQS_Prefix` (`pref_id`, `perf_name`) VALUES
 --
 
 CREATE TABLE `DQS_Province` (
-  `pro_id` int(3) NOT NULL,
-  `pro_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pro_short` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `pro_id` int(3) NOT NULL COMMENT 'รหัสจังหวัด',
+  `pro_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อจังหวัด',
+  `pro_short` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'อักษรย่อของจังหวัด'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -296,32 +320,32 @@ INSERT INTO `DQS_Province` (`pro_id`, `pro_name`, `pro_short`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `DQS_QR`
+-- Table structure for table `DQS_Qrcode`
 --
 
-CREATE TABLE `DQS_QR` (
-  `qr_id` int(11) NOT NULL,
-  `qr_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `qr_view` int(11) DEFAULT NULL,
-  `qr_download` int(11) DEFAULT NULL,
-  `qr_datetime` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
-  `qr_path` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `qr_mem_id` int(11) DEFAULT NULL,
-  `qr_doc_id` int(11) DEFAULT NULL
+CREATE TABLE `DQS_Qrcode` (
+  `qr_id` int(11) NOT NULL COMMENT 'จำนวน QR',
+  `qr_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ชื่อ QR',
+  `qr_view` int(11) DEFAULT NULL COMMENT 'จํานวนการเข้าดู',
+  `qr_download` int(11) DEFAULT NULL COMMENT 'จํานวนการดาวน์โหลด',
+  `qr_datetime` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp() COMMENT 'วันที่สร้าง QR',
+  `qr_path` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'ตําแหน่งที่จัดเก็บเอกสาร',
+  `qr_mem_id` int(11) DEFAULT NULL COMMENT 'QR ของสมาชิก',
+  `qr_doc_id` int(11) DEFAULT NULL COMMENT 'รหัสเอกสาร'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `DQS_QR`
+-- Dumping data for table `DQS_Qrcode`
 --
 
-INSERT INTO `DQS_QR` (`qr_id`, `qr_name`, `qr_view`, `qr_download`, `qr_datetime`, `qr_path`, `qr_mem_id`, `qr_doc_id`) VALUES
-(1, 'Retrospective', NULL, NULL, '2021-12-21 15:31:41', '/assets/QrCode/Qr_member/Retrospective.png', 1, 1),
-(15, 'nice', NULL, NULL, NULL, '/assets/png/fileupload_Member/nice.jpeg', 2, NULL),
-(16, 'nice', NULL, NULL, NULL, '/assets/png/fileupload_Member/nice.jpeg', 2, NULL),
-(17, 'nice123', NULL, NULL, NULL, '/assets/png/fileupload_Member/nice123.jpeg', 2, NULL),
-(18, 'nice', NULL, NULL, NULL, '/assets/png/fileupload_Member/nice.jpeg', 2, NULL),
-(19, '', NULL, NULL, NULL, '/assets/QrCode/Qr_member/.jpeg', 1, NULL),
-(20, '', NULL, NULL, NULL, '/assets/QrCode/Qr_member/.jpeg', 1, NULL);
+INSERT INTO `DQS_Qrcode` (`qr_id`, `qr_name`, `qr_view`, `qr_download`, `qr_datetime`, `qr_path`, `qr_mem_id`, `qr_doc_id`) VALUES
+(28, 'HW1', NULL, NULL, NULL, '/assets/users/SPK001/home/HW1.jpeg', 1, NULL),
+(29, 'HW1', NULL, NULL, NULL, '/assets/users/SPK001/home/HW1.jpeg', 1, NULL),
+(30, 'HW5', NULL, NULL, NULL, '/assets/users/SPK001/home/HW5.jpeg', 1, NULL),
+(31, 'HW5', NULL, NULL, NULL, '/assets/users/SPK001/home/HW5.jpeg', 1, NULL),
+(32, 'HW7', NULL, NULL, NULL, '/assets/users/SPK001/home/HW7.jpeg', 1, NULL),
+(33, 'HW8', NULL, NULL, NULL, '/assets/users/SPK001/home/HW8.jpeg', 1, NULL),
+(34, 'HW9', NULL, NULL, NULL, '/assets/users/SPK001/home/HW9.jpeg', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -330,10 +354,10 @@ INSERT INTO `DQS_QR` (`qr_id`, `qr_name`, `qr_view`, `qr_download`, `qr_datetime
 --
 
 CREATE TABLE `DQS_Station_State_of_Province` (
-  `station_id` int(11) NOT NULL,
-  `station_status` tinyint(1) NOT NULL,
-  `station_pro_id` int(3) NOT NULL,
-  `station_dep_id` int(11) NOT NULL
+  `station_id` int(11) NOT NULL COMMENT 'รหัสตําแหน่ง',
+  `station_status` tinyint(1) NOT NULL COMMENT 'สถานะหน่วยงาน',
+  `station_pro_id` int(3) NOT NULL COMMENT 'รหัสจังหวัด',
+  `station_dep_id` int(11) NOT NULL COMMENT 'รหัสหน่วยงาน'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -2314,9 +2338,9 @@ ALTER TABLE `DQS_Province`
   ADD PRIMARY KEY (`pro_id`);
 
 --
--- Indexes for table `DQS_QR`
+-- Indexes for table `DQS_Qrcode`
 --
-ALTER TABLE `DQS_QR`
+ALTER TABLE `DQS_Qrcode`
   ADD PRIMARY KEY (`qr_id`),
   ADD KEY `qr_mem_id` (`qr_mem_id`),
   ADD KEY `qr_doc_id` (`qr_doc_id`);
@@ -2337,49 +2361,49 @@ ALTER TABLE `DQS_Station_State_of_Province`
 -- AUTO_INCREMENT for table `DQS_Department`
 --
 ALTER TABLE `DQS_Department`
-  MODIFY `dep_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `dep_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'จำนวน หน่วยงาน', AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `DQS_Document`
 --
 ALTER TABLE `DQS_Document`
-  MODIFY `doc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `doc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `DQS_Folder`
 --
 ALTER TABLE `DQS_Folder`
-  MODIFY `fol_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `fol_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'จำนวน folder', AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `DQS_Member`
 --
 ALTER TABLE `DQS_Member`
-  MODIFY `mem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `mem_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'จำนวนสมาชิก', AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `DQS_Prefix`
 --
 ALTER TABLE `DQS_Prefix`
-  MODIFY `pref_id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `pref_id` int(1) NOT NULL AUTO_INCREMENT COMMENT 'รหัสคํานําหน้า', AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `DQS_Province`
 --
 ALTER TABLE `DQS_Province`
-  MODIFY `pro_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `pro_id` int(3) NOT NULL AUTO_INCREMENT COMMENT 'รหัสจังหวัด', AUTO_INCREMENT=78;
 
 --
--- AUTO_INCREMENT for table `DQS_QR`
+-- AUTO_INCREMENT for table `DQS_Qrcode`
 --
-ALTER TABLE `DQS_QR`
-  MODIFY `qr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+ALTER TABLE `DQS_Qrcode`
+  MODIFY `qr_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'จำนวน QR', AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `DQS_Station_State_of_Province`
 --
 ALTER TABLE `DQS_Station_State_of_Province`
-  MODIFY `station_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2667;
+  MODIFY `station_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสตําแหน่ง', AUTO_INCREMENT=2668;
 
 --
 -- Constraints for dumped tables
@@ -2405,11 +2429,11 @@ ALTER TABLE `DQS_Member`
   ADD CONSTRAINT `DQS_Member_ibfk_1` FOREIGN KEY (`mem_pro_id`) REFERENCES `DQS_Province` (`pro_id`);
 
 --
--- Constraints for table `DQS_QR`
+-- Constraints for table `DQS_Qrcode`
 --
-ALTER TABLE `DQS_QR`
-  ADD CONSTRAINT `DQS_QR_ibfk_1` FOREIGN KEY (`qr_mem_id`) REFERENCES `DQS_Member` (`mem_id`),
-  ADD CONSTRAINT `DQS_QR_ibfk_2` FOREIGN KEY (`qr_doc_id`) REFERENCES `DQS_Document` (`doc_id`);
+ALTER TABLE `DQS_Qrcode`
+  ADD CONSTRAINT `DQS_Qrcode_ibfk_1` FOREIGN KEY (`qr_mem_id`) REFERENCES `DQS_Member` (`mem_id`),
+  ADD CONSTRAINT `DQS_Qrcode_ibfk_2` FOREIGN KEY (`qr_doc_id`) REFERENCES `DQS_Document` (`doc_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

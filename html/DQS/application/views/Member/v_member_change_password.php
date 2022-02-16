@@ -1,4 +1,14 @@
+
 <?php
+/*
+	* v_member_change_password
+	* Display member change password
+	* @input new_password,confirm_password,mem_password
+	* @output change password
+	* @author Natruja
+	* @Create Date 2564-12-17
+    * @Update Date 2565-02-04 change font and name of function
+*/
 $old_password = $this->session->mem_password;
 
 ?>
@@ -8,34 +18,33 @@ $old_password = $this->session->mem_password;
 <div class="container-fluid" style="padding-top: 100px ;margin: auto;">
     <div class="row">
         <div class="col-md-6 offset-md-4">
-        <center><h1 style="color:#003399">บัญชีผู้ใช้งาน</h1></center>
+        <center><h1 style="color:#003399; font-family:TH Sarabun New; font-size:4em; font-weight: bold;">จัดการบัญชีผู้ใช้งาน</h1></center>
         </div>
     </div>
     <div class="row">
     <div class="col-md-6 offset-md-4">
         <div class="card"  style="border-radius: 30px;">
-            <center><h2 style="color:black; padding-top:50px ">เปลี่ยนรหัสผ่าน</h2></center>
+            <center><h2 style="color:black; padding-top:50px; font-family:TH Sarabun New; font-weight: bold;">เปลี่ยนรหัสผ่าน</h2></center>
             <div class="card-body " style="padding-top: 10px; padding-right:80px; padding-left:80px; padding-bottom:30px">
-            <form id="changepass" action="<?php echo site_url() . '/Member/Member_changepass/change_password' ?>" method="post" >
+            <form id="changepass" action="<?php echo site_url() . '/Member/Member_change_password/change_password' ?>" method="post" >
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                 <input type="hidden" class="form-control"  id="mem_id" name="mem_id" value="<?php echo $this->session->userdata('mem_id')?>">
-                <label style = "color: #000000;  font-size: 15px;" for="">รหัสผ่านปัจจุบัน</label>
+                <label style = "color: #000000;  font-size: 22px; font-family:TH Sarabun New; font-weight: bold;" for="">รหัสผ่านปัจจุบัน</label>
                 <label style = "color: #FF0000;">*<span id ="text_mempass"></label>
                 <input type="hidden" class="form-control"  id="old_password" name="old_password" value="<?php echo $this->session->userdata('old_password')?>">
-                <input type="password" class="form-control"  id="mem_password" name="mem_password" placeholder="รหัสผ่านปัจจุบัน" required onchange="mempass_validation()" > <br>
+                <input type="password" class="form-control"  id="mem_password" name="mem_password" placeholder="รหัสผ่านปัจจุบัน" required onchange="old_password_validation()" > <br>
                 <!-- <div class="invalid-feedback">รหัสผ่านปัจจุบันไม่ถูกต้องหรือไม่กรอกรหัสผ่าน กรุณากรอกใหม่อีกครั้ง</div> -->
                 <input type="hidden" class="form-control"  id="check_oldpass" name="check_oldpass" value="0">
                 <input type="hidden" class="form-control"  id="check_newpass" name="check_newpass" value="0">
                 <input type="hidden" class="form-control"  id="check_confirmpass" name="check_confirmpass" value="0">
-                <label style = "color: #000000;  font-size: 15px;" for="">รหัสผ่านใหม่</label>
+                <label style = "color: #000000;  font-size: 22px; font-family:TH Sarabun New;font-weight: bold;" for="">รหัสผ่านใหม่</label>
                 <label style = "color: #FF0000;">*<span id ="text_newpass"></span></label>
-                <input type="password" class="form-control"  id="new_password" name="new_password" placeholder="รหัสผ่านใหม่" required onchange="newpass_validation()"><br>
-                
-                <label style = "color: #000000; font-size: 15px;" for="">ยืนยันรหัสผ่านใหม่</label>
+                <input type="password" class="form-control"  id="new_password" name="new_password" placeholder="รหัสผ่านใหม่" required onchange="new_password_validation()"><br>
+                <p style="font-size: 17px; font-family:TH Sarabun New;">โปรดกรอกอย่างน้อย 8 ตัวอักษร ประกอบด้วยตัวพิมพ์ใหญ่ พิมพ์เล็ก และอักขระพิเศษ</p>
+                <label style = "color: #000000; font-size: 22px; font-family:TH Sarabun New; font-weight: bold;" for="">ยืนยันรหัสผ่านใหม่</label>
                 <label style = "color: #FF0000;">*<span id ="text_confirmpass"></span></label>
-                <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="ยืนยันรหัสผ่านใหม่" required onchange="confirmpass_validation()"><br>
-                
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="ยืนยันรหัสผ่านใหม่" required onchange="confirm_password_validation()"><br>
                 <!-- <div id="check"> <span id="message"></div> -->
                 <span id ="text_match" ></span>
                 </div>
@@ -52,6 +61,10 @@ $old_password = $this->session->mem_password;
 </div>
 </div>
 <style>
+    p{
+        color:#003399;
+        
+    }
     body {
         background-color: #eff3f7;
     }
@@ -74,39 +87,18 @@ $old_password = $this->session->mem_password;
 }
 </style>
 <script  type="text/javascript">
-    // $('#confirm_password').on('change', function () {
-    //     document.getElementById("check").disabled = false;
-        
-    //     if ($('#new_password').val() == $('#confirm_password').val() ) {
-    //         $('#message').html('รหัสผ่านตรงกัน').css('color', 'green');
+    
 
-    //     } else 
-    //     $('#message').html('รหัสผ่านใหม่และยืนยันรหัสผ่านไม่ตรงกัน กรุณากรอกใหม่อีกครั้ง').css('color', 'red');
-        
-    // });
-    // $('#confirm_password').on('change', function () {
-    //     document.getElementById("check").disabled = false;
-    //     if ($('#new_password').val() == $('#confirm_password').val() && $('#new_password').val() != "Angoon272553.") {
-    //         $('#message').html('รหัสผ่านตรงกัน').css('color', 'green');
-
-    //     }if ($('#new_password').val() == $('#confirm_password').val() && $('#new_password').val() != "Angoon272553.") {
-    //         $('#message').html('รหัสผ่านตรงกัน').css('color', 'green');
-
-    //     } else 
-    //     $('#message').html('รหัสผ่านใหม่ตรงกับรหัสผ่านปัจจุบัน กรุณากรอกใหม่อีกครั้ง').css('color', 'red');
-    // });
-
-    // // Document Ready Function
-    // $(document).ready(() => {
-
-    // // When Click Button Checkbox it is checked
-    // $("#check_all").click(function() {
-    //     $('input:checkbox').prop('checked', this.checked)
-    // })
-
-
-    // })
-    function mempass_validation(){
+    /*
+		* old_password_validation
+		* check old password with input password
+		* @input mem_password,old_password
+		* @output -
+		* @author Natruja
+		* @Create Date 2565-01-27
+        * @Update Date 2565-02-04 change name function oldpass_validation to old_password_validation
+	*/
+    function old_password_validation(){
         var text_mempass = document.getElementById("text_mempass");
         var old_pass = document.getElementById("old_password").value;
         var mem_pass = document.getElementById("mem_password").value;
@@ -129,16 +121,20 @@ $old_password = $this->session->mem_password;
             text_mempass.style.color = "#ff0000";
             check_oldpass.value = 0;
        
-        }
-            
-        
-       
-        
-       
- 
+        }   
     }
 
-    function newpass_validation(){
+
+    /*
+		* new_password_validation
+		* check new password validation
+		* @input new_password
+		* @output -
+		* @author Natruja
+		* @Create Date 2565-01-27
+        * @Update Date 2565-02-04 change name function newpass_validation to new_password_validation
+	*/
+    function new_password_validation(){
         var text_newpass = document.getElementById("text_newpass");
         var new_pass = document.getElementById("new_password").value;
         var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
@@ -163,12 +159,19 @@ $old_password = $this->session->mem_password;
             console.log('ใหม่ไม่แมท');
             
         }
-        console.log(document.getElementById("check_newpass").value);
-        
-       
+        console.log(document.getElementById("check_newpass").value);  
     }
 
-    function confirmpass_validation(){
+    /*
+		* confirm_password_validation
+		* check confirm password validation
+		* @input confirm_password
+		* @output -
+		* @author Natruja
+		* @Create Date 2564-12-17
+        * @Update Date 2565-02-04 change name function confirmpass_validation to confirm_password_validation
+	*/
+    function confirm_password_validation(){
         var text_confirmpass = document.getElementById("text_confirmpass");
         var confirm_pass = document.getElementById("confirm_password").value;
         var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
@@ -191,14 +194,18 @@ $old_password = $this->session->mem_password;
             text_confirmpass.innerHTML = "โปรดกรอกตัวอักษรพิมพ์ใหญ่ พิมพ์เล็ก ตัวเลขและอักขระพิเศษ";
             text_confirmpass.style.color = "#ff0000";
             check_confirmpass.value = 0;
-            console.log('ยืนไม่แมท');
-          
-        }
-       
-    
+            console.log('ยืนไม่แมท'); 
+        } 
     }
    
-
+    /*
+		* check_all_password
+		* check all password validation
+		* @input new_password,confirm_password,check_newpass,check_oldpass,check_confirmpass
+		* @output password can update if it valid at all
+		* @author Natruja
+		* @Create Date 2564-12-17
+	*/
     $(document).on('change', '.form-control', function() {
         console.log("สวัสดีจ้า");
         var submit = document.getElementById("btn-ok");

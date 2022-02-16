@@ -53,7 +53,7 @@
 
                         <div class="text-center" style="margin-top: -20px">
                             <!-- Button login -->
-                            <button type="submit" class="btn btn-primary my-4" id="btn_login" onclick='login()' style="background-color: #100575 ; width:200px; font-family:TH Sarabun New; "> เข้าสู่ระบบ</button>
+                            <button type="submit" class="btn btn-primary my-4" id="btn_login" style="background-color: #100575 ; width:200px; font-family:TH Sarabun New; "> เข้าสู่ระบบ</button>
                         </div><br>
                         <div class="text-center" style="padding-top: 20px margin-bottom: 1rem">
                             <!-- Button login -->
@@ -115,10 +115,10 @@ function login() { //login member
             console.log('success')
             console.log(res)
             if (res == true) {
-                setTimeout(function() {
-                    window.location.href =
-                        '<?php echo site_url() . 'Member/Member_login/v_member_home' ?>'
-                }, 500)
+                // setTimeout(function() {
+                //     window.location.href =
+                //         '<?php echo site_url() . 'Member/Member_login/v_member_home' ?>'
+                // }, 500)
             } //if
             else {
                 console.log('fail')

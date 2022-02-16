@@ -1,14 +1,14 @@
 <?php
-/*
-	* Da_DQS_qrcode.php
-    * Da_DQS_qrcode upload file
-    * @author Ashirawat
-    * @Create Date 2564-11-14
-*/
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 require 'DQS_model.php';
+
+/*
+* Da_DQS_qrcode
+* @author Ashirawat
+* @Create Date 2564-11-14
+*/
 
 class Da_DQS_qrcode extends DQS_model {
 	
@@ -33,14 +33,14 @@ class Da_DQS_qrcode extends DQS_model {
 	}
 
 /*
-* insert
+* insert_document
 * Insert document into database 
-* @input document data
+* @input doc_name,doc_type,doc_path,doc_mem_id
 * @output -
 * @author Ashirawat
 * @Create Date 2564-11-14
 */
-    public function insert_doc(){//insert document into database    
+    public function insert_document(){//insert document into database    
         $sql = "INSERT INTO {$this->db_name}.DQS_Document(doc_name,doc_type,doc_path,doc_mem_id ) 
                 VALUES (?,?,?,?)";
                 
@@ -48,26 +48,18 @@ class Da_DQS_qrcode extends DQS_model {
     }//end insert document into database
 
 /*
-* insert
+* insert_qrcode
 * Insert qrcode into database 
-* @input qrcode data
+* @input doc_name,doc_type,doc_path,doc_mem_id
 * @output -
 * @author Ashirawat
 * @Create Date 2564-12-17
 */
-public function insert_qr(){//insert document into database    
+public function insert_qrcode(){//insert document into database    
     $sql = "INSERT INTO {$this->db_name}.DQS_QR(qr_name,qr_path,qr_mem_id) 
             VALUES (?,?,?)";
             
     $this->db->query($sql,array($this->qr_name,$this->qr_path,$this->qr_mem_id));        
 }//end insert document into database
-
-// public function set_id(){//update department into database 
-//     $sql = "UPDATE {$this->db_name}.DQS_QR
-//         SET qr_doc_id = ?
-//         WHERE qr_id = ?";
-//         $this->db->query($sql, array($this->qr_doc_id,$this->qr_id));
-
-// }
 
 }

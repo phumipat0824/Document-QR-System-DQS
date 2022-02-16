@@ -22,11 +22,10 @@ class DQS_controller extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		
 	}
 	public function index()
 	{
-		redirect('Qrcode/QRcode_generator/show_qrcode');
+		redirect('Qrcode/Qrcode_generator/show_qrcode');
 	}
 	public function test_2()
 	{
