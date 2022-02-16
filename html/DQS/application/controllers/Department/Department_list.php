@@ -36,7 +36,8 @@ class Department_list extends DQS_controller {
 	public function get_dept_list_ajax()
     {
         $this->load->model('M_DQS_department', 'MDD');
-        $data['json_dept'] = $this->MDD->get_all()->result();
+		
+        $data['json_dept'] = $this->MDD->get_all_by_pro_id($this->session->mem_pro_id)->result();
         echo json_encode($data);
     }
 	
@@ -51,10 +52,15 @@ class Department_list extends DQS_controller {
     {
 		
         $this->load->model('M_DQS_department', 'MDD');
+		$this->load->model('M_DQS_station_state_of_province', 'MDSS');
 		$this->MDD->dep_name = $this->input->post('dep_name');
-		$this->MDD->dep_active = $this->input->post('dep_active');
+		// $this->MDSS->station_status = $this->input->post('station_status');
 		if ($this->MDD->check_exist_name($this->MDD->dep_name) == 0 && trim($this->MDD->dep_name) != "") {
 			$this->MDD->insert();
+			// insert departmenr
+			$dep_last_id=$this->MDD->get_last_id()->row();
+			$this->MDSS->insert($this->session->mem_pro_id,$dep_last_id->dep_id);
+			// insert station
 			redirect('/department/department_list/show_department');
 		}
 		
@@ -87,8 +93,8 @@ class Department_list extends DQS_controller {
 	public function update_status(){
 		$this->load->model('M_DQS_department', 'MDD');
         $this->MDD->dep_id = $this->input->post('dep_id');
-		$this->MDD->dep_active = $this->input->post('dep_active');
-		$this->MDD->status_update( $this->MDD->dep_id,$this->MDD->dep_active);
+		$this->MDD->station_status = $this->input->post('station_status');
+		$this->MDD->status_update( $this->MDD->dep_id,$this->MDD->station_status,$this->session->mem_pro_id);
 	}
 
 }
