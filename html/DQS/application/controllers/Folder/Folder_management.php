@@ -165,7 +165,63 @@ class Folder_management extends DQS_controller {
 		
 	}//end funtion delete_folder()
     
+	/*
+	* move_folder()
+	* update folder location
+	* @input -
+	* @output -
+	* @author Chanyapat
+	* @Create Date 2564-11-30
+	*/
+	function move_folder() 
+	{
+		$this->load->model('Da_DQS_folder','folder');
+		$this->load->model('M_DQS_folder','mfol');
 
+		//fol_location_id นี้ คือตัวแปรที่เก็บค่า fol_id ไอดีของโฟลเดอร์ที่จะย้ายไป
+		$this->folder->fol_location_id = $this->input->post('fol_location_id');
+		//fol_id คือ ตัวแปรที่เก็บไอดีของโฟลเดอร์ที่ต้องการย้ายตำแหน่ง
+		$this->folder->fol_id = $this->input->post('fol_id');
+		//fol_name คือ ตัวแปรที่เก็บชื่อของโฟลเดอร์ที่ต้องการย้ายตำแหน่ง
+		$this->folder->fol_name = $this->input->post('fol_name');
 
+		
+
+		//ตัวแปรที่เก็บข้อมูล path เดิมของ user ใน server
+        $obj_fol = $this->mfol->get_by_id_fol($this->input->post('fol_id'))->result();		
+		
+		
+		
+		//ตัวแปรที่เก็บข้อมูล folder โดยดึงข้อมูลจาก id ไอดีของโฟลเดอร์ที่จะย้ายไป
+		$get_name_location = $this->mfol->get_by_id_fol($this->input->post('fol_location_id'))->result();
+	
+
+		// if($this->folder->fol_location != $get_name_location[0]->fol_location){
+			if($this->input->post('fol_id') != $this->input->post('fol_location_id')){
+				if($this->input->post('fol_location_id') == '0'){
+					$path = './assets/user/' . $this->session->userdata('mem_username') . '/'. $this->folder->fol_name;
+					$this->folder->fol_location = $path;
+
+					//set newpath (fol_location) & new fol_location_id in database
+					$this->folder->update_location(); 
+				}
+				else{
+					$newpath = $get_name_location[0]->fol_location . '/' . $this->folder->fol_name;
+					$this->folder->fol_location = $newpath;
+
+					//set newpath (fol_location) & new fol_location_id in database
+					$this->folder->update_location(); 
+				}
+				//ตัวแปรที่เก็บข้อมูล path ใหม่ของ user ใน server
+					$obj_newfol = $this->mfol->get_by_id_fol($this->input->post('fol_id'))->result();
+
+					//rename folder name in server
+					rename($obj_fol[0]->fol_location , $obj_newfol[0]->fol_location ); 
+			}
+		// }
+		
+		
+		redirect('Member/Member_home/show_member_home');
+	}//end funtion move_folder()
 }
 ?>
