@@ -44,13 +44,29 @@ class M_DQS_login extends Da_DQS_login {
         return $query;
     }//รับค่าผ่านตัวแปร mem_username และ mem_password.
 
+	public function get_by_id_folder($qr_mem_id)
+    {
+        // $sql = "SELECT * FROM {$this->db_name}.DQS_QR  WHERE qr_mem_id = $qr_mem_id";
+        // $query = $this->db->query($sql);
+        // return $query;
+        $sql = "SELECT * 
+        FROM {$this->db_name}.DQS_Document AS document
+        LEFT JOIN {$this->db_name}.DQS_Qrcode AS qr
+        ON document.doc_name = qr.qr_name
+		LEFT JOIN {$this->db_name}.DQS_Folder AS fol
+        ON fol.fol_id = document.doc_fol_id 
+        WHERE qr_mem_id = $qr_mem_id AND fol.fol_id = document.doc_fol_id  ";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
 	public function get_by_id($qr_mem_id)
     {
         // $sql = "SELECT * FROM {$this->db_name}.DQS_QR  WHERE qr_mem_id = $qr_mem_id";
         // $query = $this->db->query($sql);
         // return $query;
         $sql = "SELECT * 
-        FROM {$this->db_name}.DQS_QR AS qr
+        FROM {$this->db_name}.DQS_Qrcode AS qr
         LEFT JOIN {$this->db_name}.DQS_Document AS document
         ON qr.qr_name = document.doc_name
         WHERE qr_mem_id = $qr_mem_id ";
