@@ -26,7 +26,7 @@ class M_DQS_qrcode extends Da_DQS_qrcode
     public function check_exist_nameqr($qr_name)
     {
         $this->db->where('qr_name', $qr_name);
-        $query = $this->db->get('DQS_QR');
+        $query = $this->db->get('DQS_Qrcode');
         return $query->num_rows();
     }
 
@@ -43,7 +43,7 @@ class M_DQS_qrcode extends Da_DQS_qrcode
     public function checkname($doc_name){
         $sql = "SELECT * 
         FROM {$this->db_name}.DQS_Document AS document
-        LEFT JOIN {$this->db_name}.DQS_QR AS qr
+        LEFT JOIN {$this->db_name}.DQS_Qrcode AS qr
         ON document.doc_name = qr.qr_name
         WHERE doc_name = '$doc_name' AND qr_name = '$doc_name'";
 
@@ -57,7 +57,7 @@ class M_DQS_qrcode extends Da_DQS_qrcode
         // $query = $this->db->query($sql);
         // return $query;
         $sql = "SELECT * 
-        FROM {$this->db_name}.DQS_QR AS qr
+        FROM {$this->db_name}.DQS_Qrcode AS qr
         LEFT JOIN {$this->db_name}.DQS_Document AS document
         ON qr.qr_name = document.doc_name
         WHERE qr_mem_id = '$qr_mem_id' ";

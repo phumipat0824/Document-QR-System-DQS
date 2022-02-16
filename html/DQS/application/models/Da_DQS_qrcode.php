@@ -41,7 +41,7 @@ class Da_DQS_qrcode extends DQS_model {
 * @Create Date 2564-11-14
 */
     public function insert_document(){//insert document into database    
-        $sql = "INSERT INTO {$this->db_name}.DQS_Document(doc_name,doc_type,doc_path,doc_mem_id ) 
+        $sql = "INSERT INTO {$this->db_name}.DQS_Document(doc_name,doc_type,doc_path,doc_mem_id) 
                 VALUES (?,?,?,?)";
                 
         $this->db->query($sql,array($this->doc_name,$this->doc_type,$this->doc_path,$this->doc_mem_id));        
@@ -56,7 +56,7 @@ class Da_DQS_qrcode extends DQS_model {
 * @Create Date 2564-12-17
 */
 public function insert_qrcode(){//insert document into database    
-    $sql = "INSERT INTO {$this->db_name}.DQS_QR(qr_name,qr_path,qr_mem_id) 
+    $sql = "INSERT INTO {$this->db_name}.DQS_Qrcode(qr_name,qr_path,qr_mem_id) 
             VALUES (?,?,?)";
             
     $this->db->query($sql,array($this->qr_name,$this->qr_path,$this->qr_mem_id));        
