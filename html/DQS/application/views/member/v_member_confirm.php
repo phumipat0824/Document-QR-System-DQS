@@ -106,11 +106,11 @@
                                             <input type="button" id="btn-ok" style="background-color: #100575" value="ยืนยัน" name="register" class="btn btn-primary accept">
                                         </div>
                                     </div>
-                                    <div class="col-2"></div>
+                                    
                                 </div>
                             </form>
                         </div>
-                        <div class="col"></div>
+                        
                     </div>
                     
                 </div>
@@ -146,4 +146,6 @@
                 });
             });
         });
+
+        
     </script>

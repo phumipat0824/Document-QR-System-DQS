@@ -31,7 +31,7 @@
 
                                 </div>
                             </div>
-                            <form action='<?php echo site_url() . 'Member/Member_register/insert_session' ?>' method="post" name='form'>
+                            <form action='<?php echo site_url() . 'Member/Member_register/insert_session' ?>'id="form_id" method="post" name='form'>
                             <!-- เลือกจังหวัดแบบ dropdown list -->
                                 <div class="row gx-5">
                                     <div class="col"><br><br>
@@ -99,6 +99,7 @@
 
                                     <div class="form-group col-md-4"> <!-- กรอกรหัสผ่านลงใน กล่องบันทึกข้อความ -->
                                         <label for="inputPassword4" style = "color: #000000;">รหัสผ่าน</label>
+                                        <label style = "color: #FF0000;">*</label>
                                         <input type="password" class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" onchange="checkpassword()" required oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
                                             <!-- <i class="show fa fa-eye"></i>
                                             <i class="hide fa fa-eye-slash"></i> -->
@@ -113,7 +114,7 @@
                                     </div>
                                     <div class="d-grid gap-2 col-6 mx-auto"><!-- ปุ่มสมัครสมาชิก -->
                                         <span id='message'> </span>
-                                        <br><button class="btn btn-primary my-4" id='submit' type="submit" style="background-color: #100575">สมัครสมาชิก</button>
+                                        <br><button onclick="check_email_input()" class="btn btn-primary my-4" id='regis' type="button" style="background-color: #100575">สมัครสมาชิก</button>
                                     </div>
                                     </div> 
                                     
@@ -129,9 +130,14 @@
                 </div>
                 <div class="row gx-5">
             </div>
+            
+    
         </div>
     </div>
 </div>
+
+
+
 <script type="text/javascript"> //ตรวจสอบการเปิด/ปิดการมองเห็นรหัสผ่าน
 var passwordField = document.querySelector('.password');
 var show = document.querySelector('.show');
@@ -179,6 +185,42 @@ function myFunction() {
 //   }
 
 // }
+
+function check_email_input(){
+// $(document).ready(function() {
+    // $('#regis').click(function(e) {
+             let $form = $(this).closest('form');      
+           $.ajax({
+            type: 'POST',
+            dataType: "JSON",
+            url: "<?php echo site_url().'/Member/Member_register/check_email'?>",
+            data:{
+                mem_email: $('#mem_email').val(),
+            },
+            
+
+            success: function(data) {
+                if (data == 0) {
+                    console.log('success');
+                    document.getElementById('regis').type = 'submit';
+                    document.getElementById('form_id').submit();
+                } else if (data == 1) {
+                    console.log('error');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'อีเมลถูกใช้แล้ว',
+                        text: 'กรุณากรอกอีเมลใหม่'
+                    })
+                }
+            },
+                    
+        });
+}
+        
+    // });
+// }); 
+
+
 
 
 function get_dept(value_pro_ID){
@@ -228,7 +270,7 @@ function get_pro(){
 
 
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   $('#add-form').submit(function(){
     $.ajax({
         type: 'post',
@@ -245,7 +287,85 @@ function get_pro(){
         }
     });
   });
-  </script>
+  </script> -->
+
+  <!-- Edit name -->
+
+<script>
+    // $(document).on("keyup", "#mem_firstname",function() {
+    //     var t = <?php echo json_encode($arr_name) ?>;
+    //     var firstname_input = document.getElementById("mem_firstname");
+    //     var check_name;
+    //     // var div = document.getElementById('target_div');
+    //     var dis_button = document.getElementById('regis');
+
+    //     for (let x in t) {
+    //         if (t[x].mem_firstname == firstname_input.value) {
+                
+    //                 check_name = 1;
+    //                 break;
+                
+    //         } else {
+    //             check_name = 0;
+    //         }
+    //     }
+    //     console.log(check_name);
+    //     if (check_name == 1) {
+    //         $("#mem_firstname").css("border-color", "red");
+            
+    //         // div.style.display = "block";
+    //         dis_button.disabled = true;
+
+    //     } else {
+    //         $("#mem_firstname").css("border-color", "green");
+           
+    //         // div.style.display = "none";
+    //         dis_button.disabled = false;
+
+    //     }
+    // });
+
+     
+    // $(document).ready(function() {
+    //     $('form #regis').click(function(e) {
+    //         let $form = $(this).closest('form');
+    //         $.ajax({
+    //             type: "POST",
+    //             url: "../../Member_register/check_email",
+    //             data: {
+    //                 mem_email: $('#mem_email').val(),
+                    
+    //             },
+                
+    //             success: function(res) {
+    //                 console.log(res);
+    //                 if (res == "true") {
+    //                     // Swal.fire({
+    //                     //     icon: 'success',
+    //                     //     title: 'รีเซ็ตรหัสผ่านเสร็จสิ้น',
+    //                     //     text: 'กำลังกลับไปหน้าหลัก'
+    //                     // })
+                        
+    //                     setTimeout(function() {
+    //                         // document.getElementById('regis').type = 'submit';
+    //                         // $form.submit();
+    //                     }, 1800)
+    //                 } else if (res == "false") {
+    //                     Swal.fire({
+    //                         icon: 'error',
+    //                         title: 'อีเมลนี้ถูกใช้งานแล้ว',
+    //                         text: 'กรุณากรอกอีเมลใหม่'
+    //                     })
+    //                 }
+    //             }
+    //         });
+    //     });
+    // });
+
+    
+</script>
+
+
   
 <style> 
      /*ปรับรูปแบบตัวอักษร */

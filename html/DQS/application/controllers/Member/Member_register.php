@@ -16,21 +16,45 @@ class Member_register extends DQS_controller
 
     public function show_member_register()
     {
-        $this->load->model('Da_DQS_member', 'dmem');
+        $this->load->model('M_DQS_member', 'mmem');
         
         $this->load->model('M_DQS_province', 'MDP');
         $this->load->model('M_DQS_department', 'MDD');
         $data['arr_department'] = $this->MDD->get_all()->result();
         $data['arr_province'] = $this->MDP->get_all()->result();
+        
+
 
         
         $this->output_navbar('Member/v_member_register', $data);
         
     }
+    public function check_email()
+    {
+        $this->load->model('M_DQS_department', 'MDD');
+        $data = $this->MDD->get_member()->result();
+        // $this->load->model('M_DQS_member','mmem');
+        // $data['arr_member'] = $this->mmem->get_member()->result();
+        $mem_email = $this->input->post('mem_email');
+        $check = 0;
+
+        for ($i=0 ; $i<count($data);$i++){
+            if($data[$i]->mem_email == $mem_email ){
+                $check = 1;
+                // echo json_encode($check);
+            }
+                // echo $data[$i]->mem_email;
+        }
+        echo json_encode($check);
+        
+        // print_r($data);
+
+    }
 
 
     public function show_member_confirm()
     {
+        
         $this->output_navbar('Member/v_member_confirm');
     }
 
@@ -42,6 +66,12 @@ class Member_register extends DQS_controller
         $data['json_station'] = $this->MSS->get_station_by_id($mem_pro_ID)->result();
         echo json_encode($data);
     }
+
+  
+		
+	
+	//end funtion update_folder()
+	
 
     public function insert_member()
     {          

@@ -148,5 +148,13 @@ class M_DQS_member extends Da_DQS_member
         $query = $this->db->get('DQS_Member');
         return $query->num_rows($array);
     }
+    public function get_by_firstname_and_lastname($mem_firstname,$mem_lastname)
+    {
+        $array = array('mem_firstname' => $mem_firstname, 'mem_lastname' => $mem_lastname);
+        $this->db->where($array);
+        $query = $this->db->get('DQS_Member');
+        return $query->num_rows($array);
+    }//รับค่าผ่านตัวแปร mem_dep_id และ mem_pro_id.
+
 
 }
