@@ -17,6 +17,7 @@ class Da_DQS_member extends DQS_model
     public $mem_role;
     public $mem_dep_id;
     public $mem_pro_id;
+    public $mem_id;
 
 
     public function __construct()

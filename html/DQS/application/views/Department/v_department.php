@@ -24,7 +24,7 @@
           <div class="card-header ">
             <div class="row">
               <div class="col-10">
-                <h4 class="card-title " style="padding-top: 10px;" >ข้อมูลหน่วยงาน </h4>
+                <h4 class="card-title " style="padding-top: 10px;" >ข้อมูลหน่วยงาน</h4>
               </div>
               <div class="col-2">
                 <button class="btn btn-success" data-toggle="modal" data-target="#addModal" >+ เพิ่มหน่วยงาน</button> <!-- ปุ่มเพิ่มหน่วยงาน -->
@@ -60,7 +60,7 @@ function get_dept(){
       url: "<?php echo site_url() ?>/Department/Department_list/get_dept_list_ajax",
       dataType: 'JSON',
       success:function(data){
-          // console.log(data);
+          console.log(data);
           create_Table(data['json_dept']);
       }
 
@@ -86,21 +86,26 @@ function create_Table(arr_dept){
     html_code += '<td style="text-align: center;">' + (index_dept+1) + '</td>';
     html_code += '<td>' +  row_dept['dep_name'] + '</td>';
 // ชื่อหน่วยงาน
-    if (row_dept['dep_active'] == 1) {
+    if (row_dept['station_status'] == 1) {
         var check_status ='checked';
     } else {
         var check_status ='';
+    }
+    if (index_dept <25) {
+        var edit_check ='disabled';
+    } else {
+        var edit_check ='';
     }
 // ตรวจสอบสถานะการแสดงผลของหน่วยงาน 
 
     html_code += '<td style="text-align: center;">' ;
     html_code += '<label class="switch">';
-    html_code += '<input type="checkbox"  '+check_status+' onchange="update_status('+ row_dept['dep_id'] +',' +  row_dept['dep_active'] + ')" >';
+    html_code += '<input type="checkbox"  '+check_status+' '+edit_check+' onchange="update_status('+ row_dept['dep_id'] +',' +  row_dept['station_status'] + ')" >';
     html_code += '<span class="slider round"></span>';
     html_code += '</label>';
     html_code += '</td>';
 // สถานะของหน่วยงาน
-    html_code += '<td style="text-align: center;">' +  '<button type="button" class="btn btn-orange editModal" data-toggle="modal" data-target="#editModal" data-id= '+row_dept['dep_id']+' data-name= '+row_dept['dep_name']+' >'+'<i class="material-icons">edit</i>'+'&nbsp;</button>' + '</td>';
+    html_code += '<td style="text-align: center;">' +  '<button type="button"'+edit_check+' class="btn btn-orange editModal" data-toggle="modal" data-target="#editModal" data-id= '+row_dept['dep_id']+' data-name= '+row_dept['dep_name']+' >'+'<i class="material-icons">edit</i>'+'&nbsp;</button>' + '</td>';
     // button edit data
     html_code += '</td>';
 		html_code += '</tr>';
@@ -173,7 +178,7 @@ function make_dataTable_byId(id_name) {
       <form id="add-form" method="POST" onsubmit="return false">
         <div class="modal-body">
             <center><input type="text" class="col-md-10" placeholder="กรอกชื่อหน่วยงาน" name="dep_name" required ></center>
-            <input type="hidden" name="dep_active" value="1">
+            <!-- <input type="hidden" name="station_status" value="1"> -->
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
@@ -264,13 +269,13 @@ function make_dataTable_byId(id_name) {
 
 <!-- ajax update status -->
 <script type="text/javascript">
-function update_status(dep_id,dep_active){
+function update_status(dep_id,station_status){
   $.ajax({
   url: "<?php echo site_url().'/Department/Department_list/update_status'?>",
     type: 'POST',
     data:{
       dep_id : dep_id,
-      dep_active : dep_active
+      station_status : station_status
     },
     dataType: "JSON",
     success:function(data){

@@ -19,12 +19,11 @@ class Da_DQS_department extends DQS_model
 
     public function insert()
 	{
-		$sql = "INSERT INTO {$this->db_name}.DQS_Department(dep_name, dep_active) 
-                VALUES (?,?)";
-        $this->db->query($sql, array($this->dep_name,$this->dep_active));
+		$sql = "INSERT INTO {$this->db_name}.DQS_Department(dep_name) 
+                VALUES (?)";
+        $this->db->query($sql, array($this->dep_name));
 	}//insert
 
-    
 	
     public function name_update()
     {
@@ -35,20 +34,20 @@ class Da_DQS_department extends DQS_model
         $this->db->query($sql , array( $this->dep_name , $this->dep_id ) );
     }
 
-    public function status_update($dep_id,$dep_active)
+    public function status_update($dep_id,$station_status,$mem_pro_id)
     {
-        if ($dep_active == 0) {
-            $sql = "UPDATE {$this->db_name}.DQS_Department
-                set dep_active = 1
-                where dep_id = $dep_id";
+        if ($station_status == 0) {
+            $sql = "UPDATE {$this->db_name}.DQS_Station_State_of_Province
+                set station_status = 1
+                where station_dep_id = $dep_id AND station_pro_id = $mem_pro_id";
 
-            $this->db->query($sql , array( $this->dep_active , $this->dep_id ) );
-        }else if ($dep_active == 1) {
-            $sql = "UPDATE {$this->db_name}.DQS_Department
-                set dep_active = 0
-                where dep_id = $dep_id";
+            $this->db->query($sql , array( $this->station_status , $this->station_dep_id ) );
+        }else if ($station_status == 1) {
+            $sql = "UPDATE {$this->db_name}.DQS_Station_State_of_Province
+                set station_status = 0
+                where station_dep_id = $dep_id AND station_pro_id = $mem_pro_id";
 
-            $this->db->query($sql , array( $this->dep_active , $this->dep_id ) );
+            $this->db->query($sql , array( $this->station_status , $this->station_dep_id ) );
         }
         
     }

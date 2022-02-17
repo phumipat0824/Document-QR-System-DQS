@@ -61,6 +61,18 @@ class M_DQS_folder extends Da_DQS_folder
         $query = $this->db->get('DQS_Folder');
         return $query->num_rows();
     }
-    
+
+    public function get_by_username_folder($mem_username)
+    {
+        $sql = "SELECT * FROM {$this->db_name}.DQS_member WHERE mem_username = $mem_username";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+    public function get_by_email($mem_email)
+    {
+        $sql = "SELECT * FROM {$this->db_name}.DQS_Member WHERE mem_username = '$mem_email'";
+        $query = $this->db->query($sql);
+        return $query;
+    }
 }
 ?>

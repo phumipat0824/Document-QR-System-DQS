@@ -56,7 +56,9 @@ class Admin_home extends DQS_controller
     public function get_mem_list_ajax()
     {
         $this->load->model('M_DQS_department', 'MDD');
-        $data['json_mem'] = $this->MDD->get_member_data()->result();
+        $pro_id = $this->session->userdata('mem_pro_id');
+        $mem_id = $this->session->userdata('mem_id');
+        $data['json_mem'] = $this->MDD->get_member_data($pro_id,$mem_id)->result();
         echo json_encode($data);
     }
 
