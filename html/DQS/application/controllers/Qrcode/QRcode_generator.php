@@ -14,5 +14,6 @@ class Qrcode_generator extends DQS_controller {
 	public function show_qrcode(){
 		$this->output("Qrcode/v_qrcode");
 	}
+	
 }
 ?>

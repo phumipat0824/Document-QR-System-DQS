@@ -1,5 +1,3 @@
-<!-- ผู้จัดทำ: นางสาวรัชนีกร ป้อชุมภู 
-     Date:   5/8/2021-->
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
@@ -13,7 +11,7 @@ class M_DQS_member extends Da_DQS_member
     {
         parent::__construct();
     }
-
+    
     public function get_all()
     {
         $sql = "SELECT * from {$this->db_name}.DQS_Member left join {$this->db_name}.DQS_Department on mem_dep_id = dep_id";
@@ -25,6 +23,12 @@ class M_DQS_member extends Da_DQS_member
         $sql = "SELECT * FROM {$this->db_name}.DQS_Member LEFT JOIN {$this->db_name}.DQS_Department ON mem_dep_id = dep_id WHERE mem_dep_id = $mem_dep_id";
         $query = $this->db->query($sql);
         return $query;
+    }
+    public function get_by_username_folder($mem_username)
+    {
+        $sql = "SELECT * FROM {$this->db_name}.DQS_Member WHERE mem_username = '$mem_username'";
+        $query = $this->db->query($sql);
+        return $query; 
     }
 
     public function get_by_email($mem_email)
@@ -40,6 +44,7 @@ class M_DQS_member extends Da_DQS_member
         $query = $this->db->query($sql);
         return $query;
     }
+   
     
     public function get_member()
     {
@@ -66,16 +71,9 @@ class M_DQS_member extends Da_DQS_member
         $query = $this->db->query($sql);
         return $query;
 
-        // $sql="SELECT * FROM {$this->db_name}.DQS_Member AS member 
-        // WHERE mem_username ='".$mem_username."'";  //บรรทัดนี้เป็นการ  เลือก ว่าจะต้องการติดต่อกับ product อะไร และโดยใช้ product_name เป็นตัวแปรเงื่อนไขในการเลือกข้อมูลที่ product_name ทึ่ต้องการทราบ
-        // $query = mysql_query($sql); //การ เก็บค่า โดยใช้ mysql_query ครับ  เพื่อทำการ query คำสั่งที่ เก็บ อยู่ใน $sql
-        // if(mysql_num_rows($query) != 0){ // ใช้ if ตั้งเงื่อนไขตรวจสอบมีชื่อสินค้าซ้ำหรือไม่ โดยนับจำนวนแถวของข้อมูลชื่อสินค้า mysql_num_rows(ตัวแปรที่แทนค่าการจัดการฐานข้อมูล) นับจำนวนแถวของ Result ที่ได้จากการ Query
-        // //!= 0 คือ จำนวนแถวของ Result ที่ได้ และไม่มีค่าเท่ากับ 0 หรือว่างเปล่าครับ
-        // echo "<script>alert ('ข้อมูลซ้ำค่ะอีควัย');history.back();</script>"; // ใส่ alert เลยครับ //ชื่อสินค้าซ้ำ กรุณาตรวจสอบใหม่
-        // exit(); //จบกระบวนการทำงาน
-        // }else{ //ถ้าไม่มีชื่อสินค้าซ้ำ ก็ออกไปทำกระบวนการ insert
-        //     this->load->(member/v_member_register);
+        
     }
+   
     public function get_by_pro_id()
     {
         $sql = "SELECT * FROM {$this->db_name}.DQS_Member WHERE mem_pro_id ='?'";

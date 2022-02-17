@@ -42,12 +42,21 @@ class Member_register extends DQS_controller
         $data['json_station'] = $this->MSS->get_station_by_id($mem_pro_ID)->result();
         echo json_encode($data);
     }
-
+/*
+* insert_member
+* insert member
+* @input -
+* @output insert member
+* @author Ratchaneekorn,Pongthorn
+* @Create Date 2565-2-16
+*/
     public function insert_member()
     {          
-        $this->load->model('Da_DQS_member', 'dmem');
-        $this->load->model('M_DQS_member', 'mmem');
-        $this->load->model('Da_DQS_station_state_of_province', 'dssp');
+        $this->load->model('M_DQS_folder', 'folder');
+        $this->load->model('M_DQS_member', 'fmem');
+        $this->load->model('M_DQS_member', 'dmem');
+       
+        $this->load->model('M_DQS_station_state_of_province', 'dssp');
         $this->dmem->mem_pref_id = $this->session->userdata('mem_pref_id');
         $this->dmem->mem_firstname = $this->session->userdata('mem_firstname');
         $this->dmem->mem_lastname = $this->session->userdata('mem_lastname');
@@ -58,28 +67,66 @@ class Member_register extends DQS_controller
         $this->dmem->mem_dep_id = $this->session->userdata('mem_dep_id');
         $this->dmem->mem_pro_id = $this->session->userdata('mem_province_id');
         
-
-        $this->mmem->mem_firstname = $this->session->userdata('mem_firstname');
-		$this->mmem->mem_lastname = $this->session->userdata('mem_lastname');
-        if ($this->mmem->check_name($this->mmem->mem_firstname,$this->mmem->mem_lastname) == 0 && trim($this->mmem->mem_firstname,$this->mmem->mem_lastname) != "") {
-        
                 $this->dmem->insert(); 
+                
                 $this->dssp->update_status( $this->session->userdata('mem_province_id'),$this->session->userdata('mem_dep_id'));
-            }
-        
-         
-        // $this->dmem->update_status();
-
-        $this->output_navbar("Member/v_member_login"); //เรียกกลับมาหน้านี้อีกครั้งอยู่หน้าเดียวกันใส่ชื่อได้เลย
+           
+                
+                $data = $this->fmem->get_by_username_folder($this->session->userdata('mem_username'))->result();
+                $newpath = './assets/user/' . $this->session->userdata('mem_username');
+                   
+                $get_address = './assets/user/';
+                $create_folder_user = $this->session->userdata('mem_username');
+                $path_new = $get_address . '/';
+                if (!file_exists($path_new . $create_folder_user)) {
+                    @mkdir($path_new . $create_folder_user, 0777);
+                }
+                 //$path_in_user
+                $create_folde_home = 'Home';
+                $path_new = $newpath . '/';
+                if (!file_exists($path_new . 'Home')) {
+                    @mkdir($path_new . 'Home', 0777);
+                }
+                $create_folder_service = 'เอกสารราชการ';
+                
+                $path_new = $newpath . '/';
+                if (!file_exists($path_new . 'เอกสารราชการ')) {
+                    @mkdir($path_new . 'เอกสารราชการ', 0777);
+                }
+                $create_folde_meeting = 'เอกสารการประชุม';
+                $path_new = $newpath . '/';
+                if (!file_exists($path_new . 'เอกสารการประชุม')) {
+                    @mkdir($path_new . 'เอกสารการประชุม', 0777);
+                }
+                for($i = 0 ; $i < 2;$i++){
+                        if($i == 0){
+                            $this->folder->fol_name = 'เอกสารราชการ';
+                            $this->folder->fol_location = $path_new.'เอกสารราชการ';
+                            $this->folder->fol_mem_id = $data[0]->mem_id;
+                            $this->folder->fol_location_id = 0;
+                            $this->folder->insert();
+                        }
+                        else{
+                            $this->folder->fol_name = 'เอกสารการประชุม';
+                            $this->folder->fol_location = $path_new.'เอกสารการประชุม';
+                            $this->folder->fol_mem_id = $data[0]->mem_id ;
+                            $this->folder->fol_location_id = 0;
+                            $this->folder->insert();
+                        }
+                }
+               
+                $this->output_navbar("Member/v_member_login"); //เรียกกลับมาหน้านี้อีกครั้งอยู่หน้าเดียวกันใส่ชื่อได้เลย
     }
-
-
+    
+    
     public function insert_session()
     {
-        // $this->check_dep_id_pro_id($mem_dep_id, $mem_pro_id);
+        
         $this->load->model('M_DQS_province', 'MDP');
         $this->load->model('M_DQS_department', 'MDD');
         //session
+        
+        
         $this->session->set_userdata('mem_firstname', $this->input->post('mem_firstname'));
         $this->session->set_userdata('mem_lastname', $this->input->post('mem_lastname'));
         $this->session->set_userdata('mem_email', $this->input->post('mem_email'));
