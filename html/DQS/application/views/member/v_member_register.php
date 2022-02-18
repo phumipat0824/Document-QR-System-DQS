@@ -141,8 +141,8 @@
 <script> 
 
 /*
-	* email_validation
-	* check email validation
+	* check_email_input()
+	* check email input
 	* @input mem_email
 	* @output success,error
 	* @author Ratchaneekorn
@@ -150,8 +150,7 @@
 */
 
 function check_email_input(){
-// $(document).ready(function() {
-    // $('#regis').click(function(e) {
+
              let $form = $(this).closest('form');      
            $.ajax({
             type: 'POST',
@@ -182,8 +181,8 @@ function check_email_input(){
 }
 
 /*
-	* email_validation
-	* check email validation
+	* get_dept(value_pro_id)
+	* get dept
 	* @input value_pro_id
 	* @output data
 	* @author Ratchaneekorn
@@ -206,10 +205,10 @@ function get_dept(value_pro_id){
      
 }// recieve json then send to create data table
 /*
-	* check_dep_validation
-	* check email validation
-	* @input value_pro_id
-	* @output data
+	* dep_input(arr_dep)
+	*  dep input
+	* @input mem_dep_id
+	* @output arr_dep
 	* @author Ratchaneekorn
 	* @Create Date 2565-02-15
 */
@@ -235,10 +234,10 @@ function dep_input(arr_dep) {//
     
 }
 /*
-	* _validation
-	* check email validation
-	* @input value_pro_id
-	* @output data
+	* get_pro()
+	* get pro station
+	* @input mem_province_id
+	* @output mem_pro_list
 	* @author Ratchaneekorn
 	* @Create Date 2565-02-15
 */
