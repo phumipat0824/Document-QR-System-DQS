@@ -97,7 +97,7 @@ public function show_member_home()
 			
 		}while(strpos($get_sub_folder,'/') != null);
 		$data['path_fol'] = $arr;
-
+		$data['path_loc'] = $path_folder;
 		if ($data['arr_fol'] == null) {
 			$this->output_sidebar_member("Member/v_member_home_in_folder", $data);
 		} else {
