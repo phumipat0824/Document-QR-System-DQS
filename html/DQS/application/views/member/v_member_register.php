@@ -141,7 +141,7 @@
 <script> 
 
 /*
-	* email_validation
+	* check_email_input
 	* check email validation
 	* @input mem_email
 	* @output success,error
@@ -182,7 +182,7 @@ function check_email_input(){
 }
 
 /*
-	* email_validation
+	* get_dept
 	* check email validation
 	* @input value_pro_id
 	* @output data
@@ -206,7 +206,7 @@ function get_dept(value_pro_id){
      
 }// recieve json then send to create data table
 /*
-	* check_dep_validation
+	* dep_input
 	* check email validation
 	* @input value_pro_id
 	* @output data
@@ -235,7 +235,7 @@ function dep_input(arr_dep) {//
     
 }
 /*
-	* _validation
+	* get_pro
 	* check email validation
 	* @input value_pro_id
 	* @output data
