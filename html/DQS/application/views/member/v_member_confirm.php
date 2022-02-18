@@ -106,11 +106,11 @@
                                             <input type="button" id="btn-ok" style="background-color: #100575" value="ยืนยัน" name="register" class="btn btn-primary accept">
                                         </div>
                                     </div>
-                                    
+                                    <div class="col-2"></div>
                                 </div>
                             </form>
                         </div>
-                        
+                        <div class="col"></div>  
                     </div>
                     
                 </div>
@@ -139,7 +139,8 @@
                 swalWithBootstrapButtons.fire({  
                     icon: 'success',
                     title: 'สมัครสมาชิกเสร็จสิ้น...',
-                    text: 'ชื่อผู้ใช้ : '+mem_username +'    รหัสผ่าน : '+mem_password
+                    text: 'ชื่อผู้ใช้ : '+mem_username +' ',
+                    confirmButtonText: 'ตกลง'
                 }).then((result) => {
                     document.getElementById('btn-ok').type = 'submit';
                     $form.submit();

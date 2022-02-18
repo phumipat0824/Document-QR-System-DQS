@@ -14,6 +14,15 @@ class Member_register extends DQS_controller
         //$this->load->view('welcome_message');
     }
 
+    /*
+	* 
+	* show_member_register()
+    * show member register
+	* @input -
+	* @output data
+	* @author Ratchaneekorn
+	* @Create Date 2564-09-01
+    */
     public function show_member_register()
     {
         $this->load->model('M_DQS_member', 'mmem');
@@ -23,12 +32,19 @@ class Member_register extends DQS_controller
         $data['arr_department'] = $this->MDD->get_all()->result();
         $data['arr_province'] = $this->MDP->get_all()->result();
         
-
-
-        
         $this->output_navbar('Member/v_member_register', $data);
         
     }
+
+      /*
+	* 
+	* check_email()
+    * check email
+	* @input -
+	* @output check
+	* @author Ratchaneekorn
+	* @Create Date 2565-02-15
+    */
     public function check_email()
     {
         $this->load->model('M_DQS_department', 'MDD');
@@ -41,29 +57,41 @@ class Member_register extends DQS_controller
         for ($i=0 ; $i<count($data);$i++){
             if($data[$i]->mem_email == $mem_email ){
                 $check = 1;
-                // echo json_encode($check);
+            
             }
-                // echo $data[$i]->mem_email;
+              
         }
         echo json_encode($check);
-        
-        // print_r($data);
 
     }
 
-
+      /*
+	* 
+	* show_member_confirm()
+    * show member confirm
+	* @input -
+	* @output member confirm
+	* @author Ratchaneekorn
+	* @Create Date 2565-02-15
+    */
     public function show_member_confirm()
     {
         
         $this->output_navbar('Member/v_member_confirm');
     }
-
-
+      /*
+	* get_dept_list_ajax()
+    * get dept list ajax
+	* @input -
+	* @output data
+	* @author Ratchaneekorn
+	* @Create Date 2565-01-30
+    */
     public function get_dept_list_ajax()
     {
         $this->load->model('M_DQS_station_state_of_province', 'MSS');
-        $mem_pro_ID = $this->input->post('mem_pro_ID');
-        $data['json_station'] = $this->MSS->get_station_by_id($mem_pro_ID)->result();
+        $mem_pro_list = $this->input->post('mem_pro_list');
+        $data['json_station'] = $this->MSS->get_station_by_id($mem_pro_list)->result();
         echo json_encode($data);
     }
 /*
@@ -142,14 +170,20 @@ class Member_register extends DQS_controller
                 $this->output_navbar("Member/v_member_login"); //เรียกกลับมาหน้านี้อีกครั้งอยู่หน้าเดียวกันใส่ชื่อได้เลย
     }
     
-    
+    /*
+    * insert_session()
+    * insert session
+    * @input -
+    * @output insert session
+    * @author Ratchaneekorn
+    * @Create Date 2565-2-16
+    */
     public function insert_session()
     {
         
         $this->load->model('M_DQS_province', 'MDP');
         $this->load->model('M_DQS_department', 'MDD');
         //session
-        
         
         $this->session->set_userdata('mem_firstname', $this->input->post('mem_firstname'));
         $this->session->set_userdata('mem_lastname', $this->input->post('mem_lastname'));
@@ -186,66 +220,7 @@ class Member_register extends DQS_controller
     }
 
 
-    public function check_dep_id_pro_id($mem_dep_id, $mem_pro_id)
-    {
-        $this->load->model('M_DQS_register', 'mlog');
-        return $this->mlog->get_by_dep_id_and_pro_id($mem_dep_id, $mem_pro_id)->row();
-                  
-    }
-    public function register()
-    {
-        // get username and password from v_login.php
-        $mem_dep_id = $this->input->post('mem_dep_id');
-        $mem_pro_id = $this->input->post('mem_pro_id');
-        // $this->load->model('M_DQS_province', 'MDP');
-        // $this->load->model('M_DQS_department', 'MDD');
 
-        // $pro_id = $this->input->post('mem_province_id');
-        // $data['obj_province'] = $this->MDP->get_by_id($pro_id)->row();
-        // $dep_id = $this->input->post('mem_department_id');
-        // $data['obj_fepartment'] = $this->MDP->get_by_id($dep_id)->row();
-
-
-        // check user from database
-        $obj_mem = $this->check_dep_id_pro_id($mem_dep_id, $mem_pro_id);
-
-        if ($obj_mem != NULL) {
-                // log in failed
-            $data['$mem_dep_id'] = $mem_dep_id;
-            $data['mem_pro_id'] = $mem_pro_id;
-                $this->output_navbar('Member/Member_register/insert_session', $data);
-        } else {
-                $this->output_navbar('Member/Member_register/show_member_register');
-        }
-
-
-        // if ($pro_id !== $data['obj_province']  || ($dep_id !== $data['obj_department']) {
-        //     // log in failed
-        //     $data = [];
-        //     $data['error'] = "Username หรือ Password ไม่ถูกต้อง";
-        //     $data['$mem_dep_id'] = $mem_dep_id;
-        //     $data['mem_pro_id'] = $mem_pro_id;
-        //     $this->output_navbar('Member/v_member_register', $data);
-        // } else {
-        //     // log in complete
-
-        //     // set id and name for user
-        //     $this->session->set_userdata('mem_username', $mem_username);
-        //     if ($obj_mem->mem_role == 0) {
-        //         // session_unset();
-        //         // session_destroy();
-        //         //$this->output_sidebar_member("Member/v_member_home");
-        //         redirect('/Member/Member_home/show_member_home');
-        //     } else if ($obj_mem->mem_role == 1) {
-        //         // session_unset();
-        //         // session_destroy();
-        //         redirect('/Admin/Admin_home/show_Admin_home');
-        //         //$this->output_sidebar_admin('Admin/v_admin_home');
-        //     }
-        //     //redirect('/Member/Member_login/show_member_home');
-
-        // }
-    }
 
 }
 
