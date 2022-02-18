@@ -47,7 +47,7 @@
 
         function get_mem() {
             $.ajax({
-                url: "<?php echo site_url() ?>Admin/Admin_home/get_mem_list_ajax",
+                url: "<?php echo site_url() .'/Admin/Admin_home/get_mem_list_ajax'?>",
                 dataType: 'JSON',
                 success: function(data) {
                     console.log(data);
