@@ -53,9 +53,9 @@ class M_DQS_login extends Da_DQS_login {
         FROM {$this->db_name}.DQS_Document AS document
         LEFT JOIN {$this->db_name}.DQS_Qrcode AS qr
         ON document.doc_name = qr.qr_name
-		LEFT JOIN {$this->db_name}.DQS_Folder AS fol
+        LEFT JOIN {$this->db_name}.DQS_Folder AS fol
         ON fol.fol_id = document.doc_fol_id 
-        WHERE qr_mem_id = $qr_mem_id AND fol.fol_id = document.doc_fol_id  ";
+        WHERE qr_mem_id = $qr_mem_id ";
         $query = $this->db->query($sql);
         return $query;
     }

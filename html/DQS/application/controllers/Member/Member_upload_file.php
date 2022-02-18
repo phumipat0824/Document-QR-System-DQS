@@ -211,6 +211,43 @@ class Member_upload_file extends DQS_controller
 		$this->get_id_image();
 	}
 
+	public function upload_image_in_folder()
+	{ //Update department into database
+
+		$this->load->model('Da_DQS_qrcode', 'dqrc');
+		$this->dqrc->doc_name = $this->input->post('doc_nameimg');
+		$user = $this->session->userdata('mem_username');
+		$fol_location_id = $this->input->post('fol_location_id2');
+		$fol_id = $this->session->userdata('fol_location_id');
+		$this->session->set_userdata('username', $user);
+		$this->dqrc->doc_fol_id = $fol_id;
+		$this->dqrc->doc_type = "img";
+		$fol_location_id = substr($fol_location_id, 1);
+
+		$upload = $_FILES['doc_pathimg'];
+		echo $_FILES['doc_pathimg'];
+		if ($upload != '') {   //not select file
+			//addslashes(file_get_contents($_FILES['doc_path']['tmp_name']));
+			//โฟลเดอร์ที่จะ upload file เข้าไป 
+			$path = dirname(__FILE__) . '/../../../assets/user/'.$this->session->userdata('username').'/'.$fol_location_id.'/';
+			//เอาชื่อไฟล์เก่าออกให้เหลือแต่นามสกุล
+			$type = strrchr($_FILES['doc_pathimg']['name'], ".");
+
+			//ตั้งชื่อไฟล์ใหม่โดยเอาเวลาไว้หน้าชื่อไฟล์เดิม
+			$newname = $this->input->post('doc_nameimg') . $type;
+			$path_copy = $path . $newname;
+
+			$newpath = '/assets/user/'.$this->session->userdata('username').'/'.$fol_location_id.'/' . $newname;
+			//คัดลอกไฟล์ไปเก็บที่เว็บเซริ์ฟเวอร์
+			move_uploaded_file($_FILES['doc_pathimg']['tmp_name'], $path_copy);
+		} //if
+
+		$this->dqrc->doc_path = $newpath;
+		$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
+		$this->dqrc->insert_document_in_folder();
+		$this->get_id_image();
+	}
+
 	public function get_id_image()
     {
         $this->load->model('M_DQS_qrcode', 'mqri');	
@@ -345,6 +382,36 @@ class Member_upload_file extends DQS_controller
 			$path_copy = $path . $newname;
 
 			$newpath = '/assets/user/'.$this->session->userdata('username').'/'.'home/Qrcode/' . $newname;
+
+		$this->dqrc->qr_path = $newpath;
+		$this->session->set_userdata('newpath', $newpath);
+		$this->dqrc->qr_mem_id = $this->session->userdata('mem_id');
+		$this->dqrc->insert_qrcode();
+	}
+
+	public function upload_qrcode_image_in_folder()
+	{ //Update department into database
+
+		$this->load->model('Da_DQS_qrcode', 'dqrc');
+		$this->dqrc->qr_name = $this->input->post('doc_nameimg');
+		$user = $this->session->userdata('mem_username');
+		$fol_location_id = $this->input->post('fol_location_id2');
+		$fol_id = $this->session->userdata('fol_location_id');
+		$this->session->set_userdata('username', $user);
+		$this->dqrc->doc_fol_id = $fol_id;
+		$fol_location_id = substr($fol_location_id, 1);
+
+			//โฟลเดอร์ที่จะ upload file เข้าไป 
+			$path = dirname(__FILE__) . '/../../../assets/user/'.$this->session->userdata('username').'/'.$fol_location_id.'/Qrcode/';
+
+			//เอาชื่อไฟล์เก่าออกให้เหลือแต่นามสกุล
+			$type = ".jpeg";
+
+			//ตั้งชื่อไฟล์ใหม่โดยเอาเวลาไว้หน้าชื่อไฟล์เดิม
+			$newname = $this->input->post('doc_nameimg') . $type;
+			$path_copy = $path . $newname;
+
+			$newpath = '/assets/user/'.$this->session->userdata('username').'/'.$fol_location_id.'/Qrcode/' . $newname;
 
 		$this->dqrc->qr_path = $newpath;
 		$this->session->set_userdata('newpath', $newpath);

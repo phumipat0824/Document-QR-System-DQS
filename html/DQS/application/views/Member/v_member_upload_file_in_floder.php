@@ -86,6 +86,11 @@
                             <div class="row">
                                 <div class="col-md-2 offset-md-1">
                                     <input class="form-control" type="file" id="doc_pathimg" name="doc_pathimg" accept="image/*" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;" value="" onchange="file_validationimg()"><br>
+                                    <?php for($i = 0; $i < count($path_fol); $i++){?>
+                                        <?php  if($path_fol[$i] != '@' ){?>
+                                            <input type="hidden" value="<?php echo $path_fol[$i] ?>" id="fol_location_id2" name="fol_location_id2"></input>
+                                        <?php }?>
+                                    <?php }?>
                                 </div>
                             </div>
 
@@ -315,23 +320,24 @@ async function uploadFile() {
 async function uploadimg() {
     let formData = new FormData();
     formData.append("doc_pathimg", doc_pathimg.files[0]);
+    formData.append("fol_location_id2", fol_location_id2.value);
     formData.append("doc_nameimg", doc_nameimg.value);
-    await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_image/" ?>", {
+    await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_image_in_folder/" ?>", {
         method: "POST",
         data: {
             doc_nameimg: doc_nameimg,
-            fol_location_id : fol_location_id
+            fol_location_id2 : fol_location_id2
         },
         body: formData
 
     });
     make2();
     let delayres = await delay(1000);
-    await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_qrcode_image/" ?>", {
+    await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_qrcode_image_in_folder/" ?>", {
         method: "POST",
         data: {
             doc_nameimg: doc_nameimg,
-            fol_location_id : fol_location_id
+            fol_location_id2 : fol_location_id2
         },
         body: formData
     });

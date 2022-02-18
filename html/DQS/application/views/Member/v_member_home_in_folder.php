@@ -242,6 +242,7 @@
 <div class="row" style="padding: 100px 10px 10px 20%;">
     <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">คิวอาร์โค้ด</h3>
     <?php for ($i = 0; $i < count($arr_qr); $i++) {   ?>
+        <?php if($arr_qr[$i]->doc_fol_id == $this->session->userdata('fol_location_id')){ ?>
         <div class="col-md-4">
             <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px; width:500;">
                 <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
@@ -261,7 +262,7 @@
                             <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"><?php echo $arr_qr[$i]->qr_datetime ?></h5>
 
                             <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิด : </h5>
-                            <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">pdf</h5>
+                            <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"> <?php echo $arr_qr[$i]->doc_type ?></h5>
 
                             <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ราายงานสรุปผล : </h5>
                         </div>
@@ -274,6 +275,7 @@
                 </div>
             </div>
         </div>
+        <?php }  ?>
     <?php }  ?>
 </div>
 
