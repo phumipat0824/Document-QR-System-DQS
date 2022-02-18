@@ -126,7 +126,7 @@ class Member_register extends DQS_controller
                 
                 $data = $this->fmem->get_by_username_folder($this->session->userdata('mem_username'))->result();
                 $newpath = './assets/user/' . $this->session->userdata('mem_username');
-                   
+                $path_in_fol_home = $newpath . '/Home'.'/';   
                 $get_address = './assets/user/';
                 $create_folder_user = $this->session->userdata('mem_username');
                 $path_new = $get_address . '/';
@@ -138,6 +138,11 @@ class Member_register extends DQS_controller
                 $path_new = $newpath . '/';
                 if (!file_exists($path_new . 'Home')) {
                     @mkdir($path_new . 'Home', 0777);
+                }
+                $create_folde_qrcode = 'Qrcode';
+                $path_new = $path_in_fol_home . '/';
+                if (!file_exists($path_new . 'Qrcode')) {
+                    @mkdir($path_new . 'Qrcode', 0777);
                 }
                 $create_folder_service = 'เอกสารราชการ';
                 
