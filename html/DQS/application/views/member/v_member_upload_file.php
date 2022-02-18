@@ -16,8 +16,9 @@
     <div class="row" style="padding: 100px 10px 10px 20%;">
         <a style="color:#100575; font-size: 80px;">สร้างคิวอาร์โค้ด</a>
         <a style="font-size: 35px;">เริ่มสร้าง QR Code กันเลย </a>
+    </div>
 
-
+    <div class="row" style="padding-left:20%;">
         <div class="col-md-5">
             <div class="card" style="border-color:#E4E4E4;border-width: 5px;">
                 <nav>
@@ -37,7 +38,7 @@
                             <label style="color: #FF0000;">* <span id="text_namef"> </span> </label><br><br>
                             <div class="row">
                                 <div class="col-md-2 offset-md-1">
-                                    <input class="form-control" type="file" id="doc_path" name="doc_path" accept="application/pdf" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;" value="" onchange="file_validation()"><br>
+                                    <input class="form-control" type="file" id="doc_path" name="doc_path" style="margin: 0px;  width: 500px; height: 50px; padding: 10px;" accept="application/pdf" placeholder="อัปโหลดไฟล์" value="" onchange="file_validation()"><br>
                                 </div>
                             </div>
 
@@ -45,7 +46,7 @@
                             <label style="color: #FF0000;">* <span id="text_name"> </span> </label><br>
                             <div class="row">
                                 <div class="col-md-2 offset-md-1">
-                                    <input type="text" class="form-control" id="doc_name" name="doc_name" style="margin: 0px;  width: 400px;" placeholder="ชื่อไฟล์" value="" onchange="name_validation()"><br />
+                                    <input type="text" id="doc_name" name="doc_name" style="margin: 0px;  width: 500px;" placeholder="ชื่อไฟล์" value="" onchange="name_validation()"><br />
                                 </div>
                             </div>
 
@@ -80,7 +81,7 @@
                             <label style="color: #FF0000;">* <span id="text_nameimgf"> </span> </label><br><br>
                             <div class="row">
                                 <div class="col-md-2 offset-md-1">
-                                    <input class="form-control" type="file" id="doc_pathimg" name="doc_pathimg" accept="image/*" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;" value="" onchange="file_validationimg()"><br>
+                                    <input class="form-control" type="file" id="doc_pathimg" name="doc_pathimg" style="margin: 0px;  width: 500px; height: 50px; padding: 10px;" accept="image/*" placeholder="อัปโหลดไฟล์" value="" onchange="file_validationimg()"><br>
                                 </div>
                             </div>
 
@@ -88,7 +89,7 @@
                             <label style="color: #FF0000;">* <span id="text_imgname"> </span> </label><br>
                             <div class="row">
                                 <div class="col-md-2 offset-md-1">
-                                    <input type="text" id="doc_nameimg" name="doc_nameimg" class="form-control" style="margin: 0px;  width: 400px;" placeholder="ชื่อไฟล์" value="" onchange="name_validationimg()"><br />
+                                    <input type="text" id="doc_nameimg" name="doc_nameimg" style="margin: 0px;  width: 500px;" placeholder="ชื่อไฟล์" value="" onchange="name_validationimg()"><br />
                                 </div>
                             </div>
 
@@ -110,6 +111,7 @@
                             </div>
                             <input id="logoinqr" type="text" name="logoinqr" value="<?php echo $this->session->userdata('logo_name') ?>" hidden>
                             <input type="text" id="text2" name='text2' value='1' hidden>
+
                             <button id="uploadimg" name="uploadimg" class="btn btn-dark_blue" style="margin-left: 25%; margin-bottom: 30px;margin-top: 40px;background-color: #100575;color: #fff; width: 240;font-family:TH sarabun new; font-size: 35px;">สร้างคิวอาร์โค้ด</button>
 
                         </form>
@@ -126,7 +128,7 @@
                         <label id="target_div" style="display:none;margin-top: 3%;color: #FF0000;">กรอกข้อมูลลิงค์เว็บไซต์ (URL)</label>
                         <div class="row">
                             <div class="col-md-2 offset-md-1">
-                                <input class="form-control" id="text3" type="text" style="margin: 0px;  width: 400px;" oninvalid="InvalidMsg(this);" oninput="InvalidMsg(this);" value="https://www.example.com" required="required">
+                                <input id="text3" type="text" style="margin: 0px;  width: 500px;" oninvalid="InvalidMsg(this);" oninput="InvalidMsg(this);" value="https://www.example.com" required="required">
                             </div>
                         </div>
                         <div id="inputlogo" style="margin-top: 30px;">
