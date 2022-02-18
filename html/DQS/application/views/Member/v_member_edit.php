@@ -34,16 +34,17 @@
                 <div class="card-body table-responsive">
                     <div class="row" style="margin-top: 20px;">
                     <div class="col-md-5" style="margin: auto;">
-                        <label style = "color: #000000;  font-size: 22px; font-family: TH Sarabun New;" for="">หน่วยงาน</label>
+                    <label style = "color: #000000;  font-size: 22px; font-family: TH Sarabun New;" for="">จังหวัด</label>
                         <label style = "color: #FF0000;">*</label>
-                        <select name="mem_dep_id" id="mem_dep_id" class="form-select" aria-label="Default select example"    required>
-                            <option style = "color: #000000;  font-size: 22px;" value="<?php echo $obj_mem->dep_id ?>"><?php echo $obj_mem->dep_name ?></option>
-                            <?php foreach ($arr_department as $value) { ?>
-                                <?php if($value ->dep_id != $obj_mem->dep_id){ ?>
-                                    <option value='<?php echo $value->dep_id ?>'><?php echo $value->dep_name ?></option>             
-                                <?php }?>
-                            <?php } ?>  
+                        <select onchange="get_pro()" name="mem_pro_id" id="mem_pro_id" class="form-select" aria-label="Default select example"  required>
+                            <option style = "color: #000000;  " value="<?php echo $obj_mem->pro_id ?>"><?php echo $obj_mem->pro_name ?></option>
+                            <?php foreach ($arr_province as $value) { ?>
+                                <?php if($value ->pro_id != $obj_mem->pro_id){ ?>
+                                        <option value='<?php echo $value->pro_id ?>'><?php echo $value->pro_name ?></option>
+                                <?php } ?>
+                            <?php }?>
                         </select>
+
 
                         <input type="hidden"  value="<?php echo $obj_mem->mem_id ?>" name='mem_id' required>
                         <label style = "color: #000000;  font-size: 22px; margin-top:20px; font-family: TH Sarabun New;" for="">ชื่อ</label>
@@ -58,23 +59,23 @@
                     </div>
 
                     <div class="col-md-5" style="margin: auto;">
-                        <label style = "color: #000000;  font-size: 22px; font-family: TH Sarabun New;" for="">จังหวัด</label>
+                    <label style = "color: #000000;  font-size: 22px; font-family: TH Sarabun New;" for="">หน่วยงาน</label>
                         <label style = "color: #FF0000;">*</label>
-                        <select name="mem_pro_id" id="mem_pro_id" class="form-select" aria-label="Default select example"  required>
-                            <option style = "color: #000000;  font-size: 22px;" value="<?php echo $obj_mem->pro_id ?>"><?php echo $obj_mem->pro_name ?></option>
-                            <?php foreach ($arr_province as $value) { ?>
-                                <?php if($value ->pro_id != $obj_mem->pro_id){ ?>
-                                        <option value='<?php echo $value->pro_id ?>'><?php echo $value->pro_name ?></option>
-                                <?php } ?>
-                            <?php }?>
+                        <select name="mem_dep_id" id="mem_dep_id" class="form-select" aria-label="Default select example"    required>
+                            <option style = "color: #000000;  " value="<?php echo $obj_mem->dep_id ?>"><?php echo $obj_mem->dep_name ?></option>
+                            <?php foreach ($arr_department as $value) { ?>
+                                <?php if($value ->dep_id != $obj_mem->dep_id){ ?>
+                                    <option value='<?php echo $value->dep_id ?>'><?php echo $value->dep_name ?></option>             
+                                <?php }?>
+                            <?php } ?>  
                         </select>
 
                         <label style = "color: #000000;  font-size: 22px; margin-top:20px; font-family: TH Sarabun New;" for="">นามสกุล</label>
                         <label style = "color: #FF0000;">* <span id ="text_lname"></span>   </label>
                         <input type="text" class="form-control"  id="mem_lastname" name="mem_lastname" placeholder="นามสกุล" required value="<?php echo $obj_mem->mem_lastname?>" onchange="lname_validation()">
-                         
+                        <input type="hidden" class="form-control"  id="user_email" name="user_email" value="<?php echo $obj_mem->mem_email?>">
                         <label style = "color: #000000; font-size: 22px; margin-top:25px; font-family: TH Sarabun New;" for="">อีเมล</label>
-                        <label style = "color: #FF0000;">* <span id ="text"></span></label>
+                        <label style = "color: #FF0000;">* <span id ="text"></span></span></label>
                         <input type="text" class="form-control" id="mem_email" name="mem_email" placeholder="อีเมล" required value="<?php echo $obj_mem->mem_email?>" onchange="email_validation()">
                         
                     </div>
@@ -214,6 +215,47 @@
     }
 
 /*
+	* check_email_input
+	* check email used or not
+	* @input mem_email
+	* @output -
+	* @author Natruja
+	* @Create Date 2565-02-18
+*/
+    function check_email_input(){
+        var submit = document.getElementById("btn-ok");
+        var email_used_check;
+        var user_email = document.getElementById("user_email").value;
+        var email = document.getElementById("mem_email").value;
+        console.log(user_email);
+     $.ajax({
+        type: 'POST',
+        dataType: "JSON",
+        url: "<?php echo site_url().'/Member/Member_register/check_email'?>",
+        data:{
+            mem_email: $('#mem_email').val(),
+        },
+        
+
+        success: function(data) {
+            if (data == 0) {
+                email_used_check = 1;
+            } else if (data == 1 && (user_email != email)) {
+                text.innerHTML = "อีเมลนี้ถูกใช้แล้ว กรุณากรอกอีเมลใหม่อีกครั้ง";
+                text.style.color = "#ff0000";
+                email_used_check = 0;
+                submit.disabled = true ;
+            }
+            //console.log(email_used_check);
+        
+            return data;
+        },
+                
+        });
+      
+    }
+
+/*
 	* check_all_validation
 	* check all validation for submit form
 	* @input fname_validation,lname_validation,email_validation
@@ -223,8 +265,7 @@
 */
     $(document).on('change', '.form-control', function() {
         var submit = document.getElementById("btn-ok");
-       
-        if(fname_validation() == 0 || lname_validation() == 0 || email_validation() == 0){
+        if(fname_validation() == 0 || lname_validation() == 0 || email_validation() == 0 || check_email_input() == 0){
             submit.disabled = true ;
            
             
@@ -262,6 +303,79 @@
             
         });
     });
+
+    /*
+	* get_province
+	* get province from database
+	* @input -
+	* @output mem_pro_id
+	* @author Natruja
+	* @Create Date 2565-02-18
+    */
+    function get_pro(){
+        var mem_pro_ID = document.getElementById("mem_pro_id");
+        console.log(mem_pro_ID.value);
+        $("#mem_dep_id").empty();
+        get_dept(mem_pro_ID.value);
+    }
+
+    /*
+	* get_dept
+	* get department from get province
+	* @input -
+	* @output mem_pro_id
+	* @author Natruja
+	* @Create Date 2565-02-18
+    */
+    function get_dept(value_pro_id){
+    $.ajax({
+        type: "POST",
+      url: "<?php echo site_url() ."Member/Member_register/get_dept_list_ajax" ?>",
+      dataType: 'JSON',
+      data: {
+            'mem_pro_ID': value_pro_id
+        },
+      success:function(data){
+          console.log(data); 
+        dep_input( data['json_station']);
+      }
+      
+     });
+     
+    }// recieve json then send to create data table
+
+
+    /*
+	* dep_input
+	* get deparment to select option
+	* @input -
+	* @output -
+	* @author Natruja
+	* @Create Date 2565-02-18
+    */
+    function dep_input(arr_dep) {//
+    
+        var select = document.getElementById("mem_dep_id");
+
+        const elmts =  arr_dep;
+        
+        console.log(arr_dep);
+        const dep_optn = JSON.parse(JSON.stringify(elmts));
+         
+            for (var i of elmts) {
+                
+                console.log(i.dep_name);
+                var optn = i.dep_name;
+                var el = document.createElement("option");
+                el.textContent = optn;
+                el.value = i.dep_id;
+                select.appendChild(el);
+
+            }
+    }
+
+   
+
     
   
 </script>
