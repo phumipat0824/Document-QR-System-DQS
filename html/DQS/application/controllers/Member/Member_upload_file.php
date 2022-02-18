@@ -69,14 +69,14 @@ class Member_upload_file extends DQS_controller
 	public function upload_file_in_floder()
 	{ //Update department into database
 
-		$this->load->model('M_DQS_qrcode', 'dqrc');
-		$this->dqrc->doc_name = $this->input->post('doc_name');
+		$this->load->model('M_DQS_qrcode', 'qrc');
+		$this->qrc->doc_name = $this->input->post('doc_name');
 		$user = $this->session->userdata('mem_username');
 		$fol_location_id = $this->input->post('fol_location_id');
-		$fol_id = $this->session->userdata('fol_location_id');
+		
 		$this->session->set_userdata('username', $user);
-		$this->dqrc->doc_fol_id = $fol_id;
-		$this->dqrc->doc_type = "pdf";
+		
+		$this->qrc->doc_type = "pdf";
 		$fol_location_id = substr($fol_location_id, 1);
 
 		$upload = $_FILES['doc_path'];
@@ -96,9 +96,10 @@ class Member_upload_file extends DQS_controller
 				move_uploaded_file($_FILES['doc_path']['tmp_name'], $path_copy);
 			}
 
-			$this->dqrc->doc_path = $newpath;
-			$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
-			$this->dqrc->insert_document_in_folder();
+			$this->qrc->doc_path = $newpath;
+			$this->qrc->doc_mem_id = $this->session->userdata('mem_id');
+			$this->qrc->doc_fol_id = $this->session->userdata('fol_id');
+			$this->qrc->insert_document_in_folder();
 			$this->get_id_document();
 			
 	}
@@ -218,9 +219,7 @@ class Member_upload_file extends DQS_controller
 		$this->dqrc->doc_name = $this->input->post('doc_nameimg');
 		$user = $this->session->userdata('mem_username');
 		$fol_location_id = $this->input->post('fol_location_id2');
-		$fol_id = $this->session->userdata('fol_location_id');
 		$this->session->set_userdata('username', $user);
-		$this->dqrc->doc_fol_id = $fol_id;
 		$this->dqrc->doc_type = "img";
 		$fol_location_id = substr($fol_location_id, 1);
 
@@ -244,6 +243,7 @@ class Member_upload_file extends DQS_controller
 
 		$this->dqrc->doc_path = $newpath;
 		$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
+		$this->dqrc->doc_fol_id = $this->session->userdata('fol_id');
 		$this->dqrc->insert_document_in_folder();
 		$this->get_id_image();
 	}
