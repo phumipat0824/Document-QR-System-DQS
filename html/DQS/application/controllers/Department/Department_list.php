@@ -61,7 +61,7 @@ class Department_list extends DQS_controller {
 			$dep_last_id=$this->MDD->get_last_id()->row();
 			$this->MDSS->insert($this->session->mem_pro_id,$dep_last_id->dep_id);
 			// insert station
-			redirect('/department/department_list/show_department');
+			redirect('/Department/Department_list/show_department');
 		}
 		
     }
@@ -80,7 +80,7 @@ class Department_list extends DQS_controller {
 		$this->MDD->dep_id = $this->input->post('dep_id');
 		if ($this->MDD->check_exist_name($this->MDD->dep_name) == 0 && trim($this->MDD->dep_name) != "") {
 			$this->MDD->name_update();
-			redirect('/department/department_list/show_department');
+			redirect('/Department/Department_list/show_department');
 		}
 		
     }

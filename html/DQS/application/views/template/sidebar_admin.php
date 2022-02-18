@@ -36,7 +36,7 @@
                 </a>
             </li>
             <li class="<?= $_SERVER['REQUEST_URI'] == "/DQS/index.php/Admin/Admin_report/show_admin_report" ?  'active'  : '' ?> ">
-                <a class="nav-link" href="<?php echo site_url().'/admin/Admin_report/show_admin_report'?>">
+                <a class="nav-link" href="<?php echo site_url().'/Admin/Admin_report/show_admin_report'?>">
                     <i class="fas fa-chart-bar" style="color: rgb(125, 123, 122);"></i>
                     <p style="color: rgb(0,0,0);">รายงานสรุปผล</p>
                 </a>

@@ -47,6 +47,13 @@ class Da_DQS_qrcode extends DQS_model {
         $this->db->query($sql,array($this->doc_name,$this->doc_type,$this->doc_path,$this->doc_mem_id));        
     }//end insert document into database
 
+    public function insert_document_in_folder(){//insert document into database    
+        $sql = "INSERT INTO {$this->db_name}.DQS_Document(doc_name,doc_type,doc_path,doc_mem_id,doc_fol_id) 
+                VALUES (?,?,?,?,?)";
+                
+        $this->db->query($sql,array($this->doc_name,$this->doc_type,$this->doc_path,$this->doc_mem_id,$this->doc_fol_id));        
+    }//end insert document into database
+
 /*
 * insert_qrcode
 * Insert qrcode into database 
