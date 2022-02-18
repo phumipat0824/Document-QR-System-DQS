@@ -216,11 +216,11 @@
 
 /*
 	* check_email_input
-	* check email used or not
+	* check email validation
 	* @input mem_email
-	* @output -
-	* @author Natruja
-	* @Create Date 2565-02-18
+	* @output success,error
+	* @author Ratchaneekorn
+	* @Create Date 2565-02-15
 */
     function check_email_input(){
         var submit = document.getElementById("btn-ok");
@@ -305,12 +305,12 @@
     });
 
     /*
-	* get_province
-	* get province from database
-	* @input -
-	* @output mem_pro_id
-	* @author Natruja
-	* @Create Date 2565-02-18
+        * get_province
+        * get province from database
+        * @input -
+        * @output mem_pro_id
+        * @author Natruja
+        * @Create Date 2565-02-18
     */
     function get_pro(){
         var mem_pro_ID = document.getElementById("mem_pro_id");
@@ -320,12 +320,12 @@
     }
 
     /*
-	* get_dept
-	* get department from get province
-	* @input -
-	* @output mem_pro_id
-	* @author Natruja
-	* @Create Date 2565-02-18
+        * get_dept
+        * check email validation
+        * @input value_pro_id
+        * @output data
+        * @author Ratchaneekorn
+        * @Create Date 2565-02-15
     */
     function get_dept(value_pro_id){
     $.ajax({
@@ -346,12 +346,12 @@
 
 
     /*
-	* dep_input
-	* get deparment to select option
-	* @input -
-	* @output -
-	* @author Natruja
-	* @Create Date 2565-02-18
+        * dep_input
+        * check email validation
+        * @input value_pro_id
+        * @output data
+        * @author Ratchaneekorn
+        * @Create Date 2565-02-15
     */
     function dep_input(arr_dep) {//
     
