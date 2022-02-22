@@ -2351,7 +2351,9 @@ pre code {
 
 .form-control::placeholder {
   color: #6c757d;
-  opacity: 1;
+  opacity: 20;
+  font-size: 20px;
+  line-height: 3;
 }
 
 .form-control:disabled,
@@ -11883,19 +11885,20 @@ form {
 .form-control::-moz-placeholder {
   color: #AAAAAA;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 26px;
 }
 
 .form-control:-ms-input-placeholder {
   color: #AAAAAA;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 26px;
 }
 
 .form-control::-webkit-input-placeholder {
   color: #AAAAAA;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 26px;
+  line-height: 3;
 }
 
 .has-white .form-control::-moz-placeholder {
@@ -13509,7 +13512,7 @@ fieldset[disabled][disabled] .has-rose .form-control,
 .form-control,
 label,
 input::placeholder {
-  line-height: 1.1;
+  line-height: 30;
 }
 
 label {
