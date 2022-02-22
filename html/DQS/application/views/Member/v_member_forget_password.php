@@ -21,9 +21,9 @@
                         <div class="col-2 "></div>
                         <div class="col-8 " style="text-align: center">
                             <br>
-                            <form action="<?php echo site_url() . "Member/Member_login/show_reset_password/" ?>" method="post">
+                            <form method="POST" name="form" action="<?php echo site_url() . '/Member/Member_login/check_email'; ?>">
                                 <input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="อีเมล"><br>
-                                <input type="button" id="btn-ok" style="background-color: #100575" name="reset_password" class="btn btn-primary" value="ส่งอีเมลกู้คืนรหัสผ่าน">
+                                <input type="button" id="send_pass" style="background-color: #100575" name="reset_password" class="btn btn-primary " value="ส่งอีเมลกู้คืนรหัสผ่าน"><br><br>
                             </form>
 
                         </div>
@@ -31,6 +31,30 @@
 
                     </div>
 
+                    <div>
+
+                        <!-- Modal send password   -->
+                        <!-- <div class="modal fade" id="send_pass_modal" tabindex="-1" role="dialog" aria-labelledby="SendPassModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">ส่งอีเมลกู้คืนรหัสผ่าน</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>                                  
+                                    </div>
+                                     
+                                        <div class="modal-body">
+                                        ส่งอีเมลกู้คืนรหัสผ่านไปทาง
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="submit" id="btn-ok" class="btn btn-primary">ตกลง</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
                 </div>
 
 
@@ -42,80 +66,72 @@
 </div>
 </div>
 </div>
+<!-- <script>
+        
+        $(document).ready(function() {
+            $('form #send_pass').click(function(e) {
+                let $form = $(this).closest('form');
+                var $mem_email = $('#mem_username').val();
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false,
+                })
+
+                swalWithBootstrapButtons.fire({  
+                    icon: 'success',
+                    title: 'ส่งอีเมลกู้คืนทาง Email',          
+                    confirmButtonText: 'ตกลง'
+                }).then((result) => {
+                    document.getElementById('btn-ok').type = 'submit';
+                    $form.submit();
+                });
+            });
+        });
+
+        
+    </script> -->
 <script>
-    $(document).ready(function() {
-        $('form #btn-ok').click(function(e) {
-            let $form = $(this).closest('form');
+function check_email_send_pass(){
+    let $form = $(this).closest('form');
             $.ajax({
                 type: "POST",
                 url: "../../Member/Member_login/check_email",
                 data: {
                     mem_email: $('#mem_email').val()
+
                 },
                 success: function(res) {
-                    if (res == true) {
-                        Swal.fire({
-                            title: 'กรุณาใส่ชื่อและนามสกุล',
-                            html: ` <input type="hidden" id="mem_email" name="mem_email" class="swal2-input" placeholder="ชื่อ" value='` + mem_email.value + `'>
-                                <input type="text" id="mem_firstname" name="mem_firstname" class="swal2-input" placeholder="ชื่อ">
-                                <input type="text" id="mem_lastname" name="mem_lastname" class="swal2-input" placeholder="นามสกุล">`,
-                            confirmButtonText: 'ยืนยัน',
-                            focusConfirm: false,
-                            preConfirm: () => {
-                                const mem_email = Swal.getPopup().querySelector('#mem_email').value
-                                const mem_firstname = Swal.getPopup().querySelector('#mem_firstname').value
-                                const mem_lastname = Swal.getPopup().querySelector('#mem_lastname').value
-                                if (!mem_firstname || !mem_lastname) {
-                                    Swal.showValidationMessage(`โปรดใส่ชื่อ และ นามสกุล`)
-                                }
-                                return {
-                                    mem_firstname: mem_firstname,
-                                    mem_lastname: mem_firstname,
-                                    mem_email: mem_email
-                                }
-                            }
-                        }).then((result) => {
-                            $.ajax({
-                                type: "POST",
-                                url: "../../Member/Member_login/check_name",
-                                data: {
-                                    mem_firstname: $('#mem_firstname').val(),
-                                    mem_lastname: $('#mem_lastname').val(),
-                                    mem_email: $('#mem_email').val()
-                                },
-                                success: function(res) {
-                                    if (res == true) {
-                                        setTimeout(function() {
-                                            document.getElementById('btn-ok').type = 'submit';
-                                            $form.submit();
-                                        }, 1800)
 
-                                        Swal.fire({
-                                            icon: 'success',
-                                            title: 'ยืนยันตัวตนสำเร็จ',
-                                            text: 'กำลังไปหน้ารีเซ็ตรหัสผ่าน'
-                                        })
-                                    } else {
-                                        Swal.fire({
-                                            icon: 'error',
-                                            title: 'ขออภัย...',
-                                            text: 'ชื่อกับนามสกุลไม่ตรงกับฐานข้อมูล'
-                                        })
-                                    }
-                                }
-                            });
-                        })
+                    if (res == true) {
+                        swalWithBootstrapButtons.fire({
+                            icon: 'success',
+                            title: 'ส่งอีเมลกู้คืนทาง Email',
+                            confirmButtonText: 'ตกลง'
+                        }).then((result) => {
+                            document.getElementById('btn-ok').type = 'submit';
+                            $form.submit();
+                        });
 
                     } else if (res == false) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'ขออภัย...',
-                            text: 'ไม่เจออีเมลนี้ในระบบ'
-                        })
+                        if (data == 0) {
+                            console.log('success');
+                            document.getElementById('send_pass').type = 'submit';
+                            document.getElementById('form_id').submit();
+                        } else if (data == 1) {
+                            console.log('error');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'อีเมลถูกใช้แล้ว',
+                                text: 'กรุณากรอกอีเมลใหม่',
+                                confirmButtonText: 'ตกลง'
+                            })
+                        }
                     }
                 }
 
             });
-        });
-    });
+}
 </script>

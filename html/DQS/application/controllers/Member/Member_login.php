@@ -169,23 +169,26 @@ class Member_login extends DQS_controller
     {
         $mem_email = $this->input->post('mem_email');
         $data['mem_email'] = $mem_email;
+        
         $this->output_navbar("Member/v_member_reset_password", $data);
     }
-
-
-
+    
+    
+    
     public function check_email()
     {
         $this->load->model('M_DQS_member', 'MDM');
         $mem_email = $this->input->post('mem_email');
-        $mem_email_cut = substr($mem_email, 0, strpos($mem_email, '@'));
         $data['arr_mem_email'] = $this->MDM->get_by_email($mem_email)->result();
         $count_mem_email = count($data['arr_mem_email']);
         if ($count_mem_email == 1 || $count_mem_email >= 1) {
+            echo "จริง";
             echo true;
         } else {
+            echo "ไม่จริง";
             echo false;
         }
+        
     }
 
     public function check_name()

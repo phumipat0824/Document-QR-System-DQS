@@ -95,7 +95,7 @@ class Member_register extends DQS_controller
         echo json_encode($data);
     }
 /*
-* insert_member
+* insert_member()
 * insert member
 * @input -
 * @output insert member
