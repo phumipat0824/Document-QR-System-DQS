@@ -119,51 +119,51 @@ class Member_login extends DQS_controller
 
     public function reset_password()
     {
-        $mem_email = $this->input->post('mem_email');
+        $this->load->model('M_DQS_member', 'MEM');
+        $mem_id = $this->input->post('mem_id');
         $mem_password = $this->input->post('mem_password');
-        $mem_confirm = $this->input->post('mem_confirm');
-
-        if($mem_password == NULL || $mem_confirm == NULL){
-            echo $mem_email;
-            echo $mem_password;
-            echo $mem_confirm;
-            echo json_encode(false);
-        }else if($mem_password != $mem_confirm){
-            echo json_encode(false);
-        }else if($mem_password == $mem_confirm ){
-            $this->load->model('M_DQS_member', 'MDM');
-            $this->MDM->mem_email = $mem_email;
-            $this->MDM->mem_password = md5($mem_password);
-            $this->MDM->update_password();
-            echo json_encode(true);
-        }
-    }
-
-
-    public function show_reset_password()
-    {
-        $mem_email = $this->input->post('mem_email');
-        $data['mem_email'] = $mem_email;
+        $this->MEM->mem_password = md5($mem_password);
+        $this->MEM->mem_id = $mem_id;
+		$this->MEM->update_password();
+		$this->output_navbar("Member/v_member_login");
         
-        $this->output_navbar("Member/v_member_reset_password", $data);
     }
-    
-    
-    
+
+
+    public function show_reset_password($user_name)
+    {
+        $mem_user;
+        $this->load->model('M_DQS_member', 'MEM');
+        $user = $this->MEM->get_all_user()->result();
+        //$member_username =  $data['arr_mem_email']->mem_username;
+        for ($i = 0; $i < count($user); $i++){
+            $member_username = $user[$i]->mem_username;
+            $member_username = md5($member_username);
+            if($member_username == $user_name){
+                $data["mem_id"] = $user[$i]->mem_id;
+                $this->output_navbar("Member/v_member_reset_password",$data);
+            }
+     
+           
+        }
+            //echo $mem_user;
+        
+    }
+
+
+
     public function check_email()
     {
         $this->load->model('M_DQS_member', 'MDM');
         $mem_email = $this->input->post('mem_email');
+        $mem_email_cut = substr($mem_email, 0, strpos($mem_email, '@'));
         $data['arr_mem_email'] = $this->MDM->get_by_email($mem_email)->result();
         $count_mem_email = count($data['arr_mem_email']);
         if ($count_mem_email == 1 || $count_mem_email >= 1) {
-            echo "จริง";
             echo true;
         } else {
-            echo "ไม่จริง";
             echo false;
         }
-        
     }
 
     public function check_name()
@@ -183,7 +183,7 @@ class Member_login extends DQS_controller
 
     /*
     * send_mail
-    *  send_mail for reset passwolrd
+    * send e-mail for reset passwolrd
     * @input email
     * @output -
     * @author Phumipat
@@ -192,13 +192,18 @@ class Member_login extends DQS_controller
     public function send_mail(){
 
     if(isset($_POST['email'])) {
+
         $email = $_POST['email'];
         $name = "Document QR System : DQS";
         $header = "แจ้งรีเซ็ตรหัสผ่านระบบจัดเก็บเอกสารเพื่อสร้างคิวอาร์โค้ด (Document QR System : DQS)";
-        $detail  = "กดที่ลิงค์เพื่อรีเซ็ตรหัสผ่านของคุณ";
+        //$detail  = "กดที่ลิงค์เพื่อรีเซ็ตรหัสผ่านของคุณ";
 
+        $this->load->model('M_DQS_member', 'MDM');
+        $obj_mail = $this->MDM->get_by_email($email)->result();
+        $user_name = md5($obj_mail[0]->mem_username);
+        $detail  = "กดที่ลิงค์เพื่อรีเซ็ตรหัสผ่านของคุณ ".site_url()."/Member/Member_login/show_reset_password/" .  $user_name;
 
-
+        //exit(print ($user_name));
         $mail = new PHPMailer();
 
         // SMTP Settings

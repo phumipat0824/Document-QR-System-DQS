@@ -27,72 +27,18 @@
                             </form>
 
                         </div>
-                        <div class="col-2"></div>
-
                     </div>
-
                     <div>
-
-                        <!-- Modal send password   -->
-                        <!-- <div class="modal fade" id="send_pass_modal" tabindex="-1" role="dialog" aria-labelledby="SendPassModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">ส่งอีเมลกู้คืนรหัสผ่าน</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>                                  
-                                    </div>
-                                     
-                                        <div class="modal-body">
-                                        ส่งอีเมลกู้คืนรหัสผ่านไปทาง
-                                        </div>
-                                        <div class="modal-footer">
-                                        <button type="submit" id="btn-ok" class="btn btn-primary">ตกลง</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
-    <div class="col-lg-4 col-md-4"></div>
 </div>
 </div>
 </div>
 </div>
-<!-- <script>
-        
-        $(document).ready(function() {
-            $('form #send_pass').click(function(e) {
-                let $form = $(this).closest('form');
-                var $mem_email = $('#mem_username').val();
-                const swalWithBootstrapButtons = Swal.mixin({
-                    customClass: {
-                        confirmButton: 'btn btn-success',
-                        cancelButton: 'btn btn-danger'
-                    },
-                    buttonsStyling: false,
-                })
 
-                swalWithBootstrapButtons.fire({  
-                    icon: 'success',
-                    title: 'ส่งอีเมลกู้คืนทาง Email',          
-                    confirmButtonText: 'ตกลง'
-                }).then((result) => {
-                    document.getElementById('btn-ok').type = 'submit';
-                    $form.submit();
-                });
-            });
-        });
-
-        
-    </script> -->
 <script>
 function check_email_send_pass(){
     let $form = $(this).closest('form');
