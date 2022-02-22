@@ -21,9 +21,9 @@
                         <div class="col-2 "></div>
                         <div class="col-8 " style="text-align: center">
                             <br>
-                            <form method="POST" name="form" action="<?php echo site_url() . '/Member/Member_login/check_email'; ?>">
-                                <input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="อีเมล"><br>
-                                <input type="button" id="send_pass" style="background-color: #100575" name="reset_password" class="btn btn-primary " value="ส่งอีเมลกู้คืนรหัสผ่าน"><br><br>
+                            <form action="<?php echo site_url() . "Member/Member_login/send_mail" ?>" method="post">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="อีเมล"><br>
+                                <input type="submit" id="btn-ok" style="background-color: #100575" name="reset_password" class="btn btn-primary" value="ส่งอีเมลกู้คืนรหัสผ่าน">
                             </form>
 
                         </div>
