@@ -46,38 +46,3 @@
 </div>
 </div>
 
-<script>
-    $(document).ready(function() {
-        $('form #btn-ok').click(function(e) {
-            let $form = $(this).closest('form');
-            $.ajax({
-                type: "POST",
-                url: "../../Member_login/reset_password",
-                data: {
-                    mem_email: $('#mem_email').val(),
-                    mem_password: $('#mem_password').val(),
-                    mem_confirm: $('#mem_confirm').val()
-                },
-                success: function(res) {
-                    if (res == "true") {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'รีเซ็ตรหัสผ่านเสร็จสิ้น',
-                            text: 'กำลังกลับไปหน้าหลัก'
-                        })
-                        setTimeout(function() {
-                            document.getElementById('btn-ok').type = 'submit';
-                            $form.submit();
-                        }, 1800)
-                    } else if (res == "false") {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'รหัสผ่านไม่ตรงกัน',
-                            text: 'รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน'
-                        })
-                    }
-                }
-            });
-        });
-    });
-</script>
