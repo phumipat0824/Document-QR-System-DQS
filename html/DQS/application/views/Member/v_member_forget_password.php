@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/all.min.css">
 <div class="content">
     <div class="container-fluid" style="padding-top: 100px ;margin: auto;">
         <div class="row gx-5">
@@ -10,7 +11,7 @@
                         </div>
                         <div class="col-md-8 justify-content-md-center">
                             <div class="card-header card-header-warning ">
-                                <h2 class="text-center">กู้คืนรหัสผ่าน</h2>
+                                <h2 class="text-center" style=" font-family:TH Sarabun New sans-serif;">กู้คืนรหัสผ่าน</h2>
                             </div>
                         </div>
                         <div class="col col-lg-2">
@@ -21,9 +22,11 @@
                         <div class="col-2 "></div>
                         <div class="col-8 " style="text-align: center">
                             <br>
-                            <form action="<?php echo site_url() . "Member/Member_login/send_mail" ?>" method="post">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="อีเมล"><br>
-                                <input type="submit" id="btn-ok" style="background-color: #100575" name="reset_password" class="btn btn-primary" value="ส่งอีเมลกู้คืนรหัสผ่าน">
+                            
+                            <form action='<?php echo site_url() . "/Member/Member_login/send_mail" ?>' id="form_id" method="post">
+                                <p align=left style="color:#000000; font-size: 26px; font-family:TH Sarabun New " for="InputEmail1">อีเมล : </p>                    
+                                <input type="text" style="font-size: 26px; height: 55px; font-family:TH Sarabun New;" class="form-control" id="mem_email" name="email" placeholder="อีเมล" required><br>
+                                <button onclick="check_email_send_pass()" class="btn btn-primary my-4" id='btn-ok' type="button" style="background-color: #100575; height: 55px;">ส่งอีเมลกู้คืนรหัสผ่าน</button><br><br>
                             </form>
 
                         </div>
@@ -33,27 +36,7 @@
 
                     <div>
 
-                        <!-- Modal send password   -->
-                        <!-- <div class="modal fade" id="send_pass_modal" tabindex="-1" role="dialog" aria-labelledby="SendPassModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">ส่งอีเมลกู้คืนรหัสผ่าน</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>                                  
-                                    </div>
-                                     
-                                        <div class="modal-body">
-                                        ส่งอีเมลกู้คืนรหัสผ่านไปทาง
-                                        </div>
-                                        <div class="modal-footer">
-                                        <button type="submit" id="btn-ok" class="btn btn-primary">ตกลง</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div> -->
+
                     </div>
                 </div>
 
@@ -66,72 +49,122 @@
 </div>
 </div>
 </div>
-<!-- <script>
-        
-        $(document).ready(function() {
-            $('form #send_pass').click(function(e) {
-                let $form = $(this).closest('form');
-                var $mem_email = $('#mem_username').val();
-                const swalWithBootstrapButtons = Swal.mixin({
-                    customClass: {
-                        confirmButton: 'btn btn-success',
-                        cancelButton: 'btn btn-danger'
-                    },
-                    buttonsStyling: false,
-                })
-
-                swalWithBootstrapButtons.fire({  
-                    icon: 'success',
-                    title: 'ส่งอีเมลกู้คืนทาง Email',          
-                    confirmButtonText: 'ตกลง'
-                }).then((result) => {
-                    document.getElementById('btn-ok').type = 'submit';
-                    $form.submit();
-                });
-            });
-        });
-
-        
-    </script> -->
-<script>
-function check_email_send_pass(){
-    let $form = $(this).closest('form');
-            $.ajax({
-                type: "POST",
-                url: "../../Member/Member_login/check_email",
-                data: {
-                    mem_email: $('#mem_email').val()
-
-                },
-                success: function(res) {
-
-                    if (res == true) {
-                        swalWithBootstrapButtons.fire({
-                            icon: 'success',
-                            title: 'ส่งอีเมลกู้คืนทาง Email',
-                            confirmButtonText: 'ตกลง'
-                        }).then((result) => {
-                            document.getElementById('btn-ok').type = 'submit';
-                            $form.submit();
-                        });
-
-                    } else if (res == false) {
-                        if (data == 0) {
-                            console.log('success');
-                            document.getElementById('send_pass').type = 'submit';
-                            document.getElementById('form_id').submit();
-                        } else if (data == 1) {
-                            console.log('error');
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'อีเมลถูกใช้แล้ว',
-                                text: 'กรุณากรอกอีเมลใหม่',
-                                confirmButtonText: 'ตกลง'
-                            })
-                        }
-                    }
-                }
-
-            });
+<style>
+    input {
+    width: 600px;
+    padding: 0px 15px;
 }
+
+input,
+input::-webkit-input-placeholder {
+    font-size: 25px;
+    line-height: 4;
+}
+</style>
+
+<script type="text/javascript">
+    function check_email_send_pass() {
+
+        let $form = $(this).closest('form');
+        $.ajax({
+            type: 'POST',
+            dataType: "JSON",
+            url: "<?php echo site_url() . '/Member/Member_login/check_email' ?>",
+            data: {
+                mem_email: $('#mem_email').val(),
+            },
+
+
+            success: function(data) {
+                if (data == 0) {
+                    console.log('error');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'ไม่มีอีเมลนี้อยู่ในระบบ',
+                        text: 'กรุณากรอกอีเมลใหม่',
+                        confirmButtonText: 'ตกลง'
+                    })
+
+                } else if (data == 1) {
+                    const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            confirmButton: 'btn btn-success',
+                            cancelButton: 'btn btn-danger'
+                        },
+                        buttonsStyling: false,
+                    })
+
+                    swalWithBootstrapButtons.fire({
+                        icon: 'success',
+                        title: 'ส่งอีเมลกู้คืนทาง Email',
+
+                    }).then((result) => {
+                        document.getElementById('btn-ok').type = 'button';
+                        $form.submit();
+                    });
+                    console.log('success');
+
+                }
+            },
+
+        });
+    }
+    //  $(document).ready(function() {
+    //           $('form #btn-ok').click(function(e) {
+    //                 let $form = $(this).closest('form');
+    //            $.ajax({
+    //             type: "POST",
+    //             url: "<?php echo site_url() . '/Member/Member_login/check_email' ?>",
+    //                data: {
+    //                     mem_email: $('#mem_email').val()
+    //                 },
+    //                 success: function(res) {
+    //                     if (res == 0) {
+    //                         const swalWithBootstrapButtons = Swal.mixin({
+    //                     customClass: {
+    //                         confirmButton: 'btn btn-success',
+    //                         cancelButton: 'btn btn-danger'
+    //                     },
+    //                     buttonsStyling: false,
+    //                 })
+
+    //                 swalWithBootstrapButtons.fire({  
+    //                     icon: 'success',
+    //                     title: 'ส่งอีเมลกู้คืนทาง Email',          
+
+    //                 }).then((result) => {
+    //                     document.getElementById('btn-ok').type = 'submit';
+    //                     $form.submit();
+    //                 });
+    //                     } else if (res == 1) {
+
+    //                             console.log('error');
+    //                             Swal.fire({
+    //                                 icon: 'error',
+    //                                 title: 'อีเมลถูกใช้แล้ว',
+    //                                 text: 'กรุณากรอกอีเมลใหม่',
+    //                                 confirmButtonText: 'ตกลง'
+    //                             })
+
+    //                     }
+    //                 }
+
+    //             });
+    //             });
+    //         }); 
 </script>
+<!-- success: function(data) {
+                if (data == 0) {
+                    console.log('success');
+                    document.getElementById('regis').type = 'submit';
+                    document.getElementById('form_id').submit();
+                } else if (data == 1) {
+                    console.log('error');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'อีเมลถูกใช้แล้ว',
+                        text: 'กรุณากรอกอีเมลใหม่',
+                        confirmButtonText: 'ตกลง'
+                    })
+                }
+            }, -->

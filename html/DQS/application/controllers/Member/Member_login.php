@@ -180,17 +180,20 @@ class Member_login extends DQS_controller
     
     public function check_email()
     {
-        $this->load->model('M_DQS_member', 'MDM');
+        $this->load->model('M_DQS_department', 'MDD');
+        $data = $this->MDD->get_member()->result();
+        
         $mem_email = $this->input->post('mem_email');
-        $data['arr_mem_email'] = $this->MDM->get_by_email($mem_email)->result();
-        $count_mem_email = count($data['arr_mem_email']);
-        if ($count_mem_email == 1 || $count_mem_email >= 1) {
-            echo "จริง";
-            echo true;
-        } else {
-            echo "ไม่จริง";
-            echo false;
+        $check = 0;
+
+        for ($i=0 ; $i<count($data);$i++){
+            if($data[$i]->mem_email == $mem_email ){
+                $check = 1;
+            
+            }
+              
         }
+        echo json_encode($check);
         
     }
 
@@ -217,7 +220,8 @@ class Member_login extends DQS_controller
 
     public function send_mail(){
     //use PHPMailer\PHPMailer\PHPMailer;
-
+    
+       
     if(isset($_POST['email'])) {
         $email = $_POST['email'];
         $name = "แจ้งรีเซ็ตรหัสผ่านระบบ DQS";
@@ -243,6 +247,7 @@ class Member_login extends DQS_controller
         $mail->addAddress($email); // Send to mail
         $mail->Subject = $header;
         $mail->Body = $detail;
+        
 
         if($mail->send()) {
             $status = "success";
@@ -251,7 +256,7 @@ class Member_login extends DQS_controller
             $status = "failed";
             $response = "Something is wrong" . $mail->ErrorInfo;
         }
-
+    
         //exit(json_encode(array("status" => $status, "response" => $response)));
         $this->output_navbar("Member/v_member_login");
     }
