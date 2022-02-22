@@ -80,35 +80,7 @@ class Member_login extends DQS_controller
 
         }
     }
-     /*
-    * show_member_home
-    * Go to member home
-    * @input -
-    * @output view
-    * @author Ashirawat, Krsiada
-    * @Create Date 2564-08-05
-    */
 
-    
-
-    /*
-    * show_session
-    * Show session member 
-    * @input -
-    * @output view
-    * @author Ashirawat
-    * @Create Date 2564-11-10
-    */
-
-    public function show_session(){
-
-        $arr_session = $this->session->all_userdata();
-        echo '<pre>';
-        print_r($arr_session);
-        echo '</pre>';
-    
-
-    }
 
     /*
     * logout
@@ -205,20 +177,21 @@ class Member_login extends DQS_controller
             echo false;
         }
     }
-    // public function send_mail(){
-    //     $mem_email = $this->input->post('mem_email');
-    //     $this->session->set_userdata('mem_email', $mem_email);
-    //     header( "location: " . base_url() . "/mail" );
-    //     exit(0);
-    // }
 
+    /*
+    * send_mail
+    *  send_mail for reset passwolrd
+    * @input email
+    * @output -
+    * @author Phumipat
+    * @Create Date 2565-02-22
+    */
     public function send_mail(){
-    //use PHPMailer\PHPMailer\PHPMailer;
 
     if(isset($_POST['email'])) {
         $email = $_POST['email'];
-        $name = "แจ้งรีเซ็ตรหัสผ่านระบบ DQS";
-        $header = "แจ้งรีเซ็ตรหัสผ่านระบบ DQS";
+        $name = "Document QR System : DQS";
+        $header = "แจ้งรีเซ็ตรหัสผ่านระบบจัดเก็บเอกสารเพื่อสร้างคิวอาร์โค้ด (Document QR System : DQS)";
         $detail  = "กดที่ลิงค์เพื่อรีเซ็ตรหัสผ่านของคุณ";
 
 
@@ -233,11 +206,12 @@ class Member_login extends DQS_controller
         $mail->Password = "1212312121!"; // enter your password
         $mail->Port = 465;
         $mail->SMTPSecure = "ssl";
-
+        
         //Email Settings
         $mail->isHTML(true);
         $mail->setFrom($email, $name);
         $mail->addAddress($email); // Send to mail
+        $mail->CharSet = "utf-8";
         $mail->Subject = $header;
         $mail->Body = $detail;
 
