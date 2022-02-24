@@ -57,11 +57,6 @@ class M_DQS_department extends Da_DQS_department
 
     public function check_exist_name($dep_name)
     {
-        // $sql = "SELECT * 
-        // FROM {$this->db_name}.DQS_Department
-        // WHERE dep_name = $dep_name";
-        // $query = $this->db->query($sql);
-        
         $this->db->where('dep_name', $dep_name);
         $query = $this->db->get('DQS_Department');
         return $query->num_rows();
