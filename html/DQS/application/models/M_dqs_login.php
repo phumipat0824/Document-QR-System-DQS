@@ -44,6 +44,15 @@ class M_DQS_login extends Da_DQS_login {
         return $query;
     }//รับค่าผ่านตัวแปร mem_username และ mem_password.
 
+    /*
+	* get_by_id_folder
+	* Get document qrcode folder data by userid in database
+	* @input userid
+	* @output document qrcode folder data
+	* @author Ashirawat
+	* @Create Date 2565-02-15
+	*/
+
 	public function get_by_id_folder($qr_mem_id)
     {
         // $sql = "SELECT * FROM {$this->db_name}.DQS_QR  WHERE qr_mem_id = $qr_mem_id";
@@ -59,6 +68,15 @@ class M_DQS_login extends Da_DQS_login {
         $query = $this->db->query($sql);
         return $query;
     }
+
+    /*
+	* get_by_id
+	* Get document qrcode data by userid in database
+	* @input userid
+	* @output Get document qrcode data
+	* @author Ashirawat
+	* @Create Date 2564-01-27
+	*/    
 
 	public function get_by_id($qr_mem_id)
     {

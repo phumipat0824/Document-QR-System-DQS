@@ -17,6 +17,7 @@ class M_DQS_qrcode extends Da_DQS_qrcode
     {
         parent::__construct();
     }
+
     public function check_exist_name($doc_name)
     {
         $this->db->where('doc_name', $doc_name);
@@ -30,6 +31,15 @@ class M_DQS_qrcode extends Da_DQS_qrcode
         return $query->num_rows();
     }
 
+    /*
+	* get id
+	* get data document last position
+	* @input -
+	* @output document data
+	* @author Ashirawat
+	* @Create Date 2565-02-15
+	*/
+
     public function get_id(){
 
         $sql = "SELECT * 
@@ -39,6 +49,15 @@ class M_DQS_qrcode extends Da_DQS_qrcode
         return $query;
 
     }
+
+    /*
+	* checkname
+	* check for duplicate document name 
+	* @input doc_name
+	* @output document data
+	* @author Ashirawat
+	* @Create Date 2565-02-15
+	*/
 
     public function checkname($doc_name){
         $sql = "SELECT * 
@@ -50,6 +69,15 @@ class M_DQS_qrcode extends Da_DQS_qrcode
         $query = $this->db->query($sql);
         return $query;
     }
+
+    /*
+	* get_by_id
+	* Get document qrcode data by userid in database
+	* @input userid
+	* @output document qrcode data
+	* @author Ashirawat
+	* @Create Date 2565-02-15
+	*/    
 
     public function get_by_id($qr_mem_id)
     {

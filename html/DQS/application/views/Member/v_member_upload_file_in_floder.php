@@ -37,11 +37,11 @@
                             <label style="color: #FF0000;">* <span id="text_namef"> </span> </label><br><br>
                             <div class="row">
                                 <div class="col-md-2 offset-md-1">
-                                    <input class="form-control" type="file" id="doc_path" name="doc_path" accept="application/pdf" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;" value="" onchange="file_validation()"><br>
+                                    <input class="form-control" type="file" id="doc_path" name="doc_path" accept="application/pdf" placeholder="อัปโหลดไฟล์" style="margin: 0px;  width: 500px; height: 50px; padding: 10px;" value="" onchange="file_validation()"><br>
                                     <?php for($i = 0; $i < count($path_fol); $i++){?>
-                                        <?php  if($path_fol[$i] != '@' ){?>
-                                            <input type="hidden" value="<?php echo $path_fol[$i] ?>" id="fol_location_id" name="fol_location_id"></input>
-                                        <?php }?>
+                                    <?php  if($path_fol[$i] != '@' ){?>
+                                    <input type="hidden" value="<?php echo $path_fol[$i] ?>" id="fol_location_id" name="fol_location_id"></input>
+                                    <?php }?>
                                     <?php }?>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                             <label style="color: #FF0000;">* <span id="text_name"> </span> </label><br>
                             <div class="row">
                                 <div class="col-md-2 offset-md-1">
-                                    <input type="text" class="form-control" id="doc_name" name="doc_name" style="margin: 0px;  width: 400px;" placeholder="ชื่อไฟล์" value="" onchange="name_validation()"><br />
+                                    <input type="text" class="form-control" id="doc_name" name="doc_name" style="margin: 0px; height: 50px;  width: 500px;" placeholder="ชื่อไฟล์" value="" onchange="name_validation()"><br />
                                 </div>
                             </div>
 
@@ -85,11 +85,11 @@
                             <label style="color: #FF0000;">* <span id="text_nameimgf"> </span> </label><br><br>
                             <div class="row">
                                 <div class="col-md-2 offset-md-1">
-                                    <input class="form-control" type="file" id="doc_pathimg" name="doc_pathimg" accept="image/*" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;" value="" onchange="file_validationimg()"><br>
+                                    <input class="form-control" type="file" id="doc_pathimg" name="doc_pathimg" accept="image/*" placeholder="อัปโหลดไฟล์" style="margin: 0px;  width: 500px; height: 50px; padding: 10px;" value="" onchange="file_validationimg()"><br>
                                     <?php for($i = 0; $i < count($path_fol); $i++){?>
-                                        <?php  if($path_fol[$i] != '@' ){?>
-                                            <input type="hidden" value="<?php echo $path_fol[$i] ?>" id="fol_location_id2" name="fol_location_id2"></input>
-                                        <?php }?>
+                                    <?php  if($path_fol[$i] != '@' ){?>
+                                    <input type="hidden" value="<?php echo $path_fol[$i] ?>" id="fol_location_id2" name="fol_location_id2"></input>
+                                    <?php }?>
                                     <?php }?>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@
                             <label style="color: #FF0000;">* <span id="text_imgname"> </span> </label><br>
                             <div class="row">
                                 <div class="col-md-2 offset-md-1">
-                                    <input type="text" id="doc_nameimg" name="doc_nameimg" class="form-control" style="margin: 0px;  width: 400px;" placeholder="ชื่อไฟล์" value="" onchange="name_validationimg()"><br />
+                                    <input type="text" id="doc_nameimg" name="doc_nameimg" class="form-control" style="margin: 0px; height: 50px;  width: 500px;" placeholder="ชื่อไฟล์" value="" onchange="name_validationimg()"><br />
                                 </div>
                             </div>
 
@@ -136,7 +136,7 @@
                         <label id="target_div" style="display:none;margin-top: 3%;color: #FF0000;">กรอกข้อมูลลิงค์เว็บไซต์ (URL)</label>
                         <div class="row">
                             <div class="col-md-2 offset-md-1">
-                                <input class="form-control" id="text3" type="text" style="margin: 0px;  width: 400px;" oninvalid="InvalidMsg(this);" oninput="InvalidMsg(this);" value="https://www.example.com" required="required">
+                                <input class="form-control" id="text3" type="text" style="margin: 0px; height: 50px;  width: 500px;" oninvalid="InvalidMsg(this);" oninput="InvalidMsg(this);" value="https://www.example.com" required="required">
                             </div>
                         </div>
                         <div id="inputlogo" style="margin-top: 30px;">
@@ -216,7 +216,7 @@ $(document).ready(function() {
         e.preventDefault();
         $.ajax({
             type: "POST",
-            url: "<?php echo site_url() ?>/Member/Member_upload_file/check_name2",
+            url: "<?php echo site_url() ?>/Member/Member_upload_file/check_nameimg",
             dataType: 'JSON',
             data: {
                 'doc_nameimg': doc_nameimg.value
@@ -282,7 +282,7 @@ async function uploadFile() {
         method: "POST",
         data: {
             doc_name: doc_name,
-            fol_location_id : fol_location_id
+            fol_location_id: fol_location_id
         },
         body: formData
     });
@@ -292,7 +292,7 @@ async function uploadFile() {
         method: "POST",
         data: {
             doc_name: doc_name,
-            fol_location_id : fol_location_id
+            fol_location_id: fol_location_id
         },
         body: formData
     });
@@ -326,7 +326,7 @@ async function uploadimg() {
         method: "POST",
         data: {
             doc_nameimg: doc_nameimg,
-            fol_location_id2 : fol_location_id2
+            fol_location_id2: fol_location_id2
         },
         body: formData
 
@@ -337,7 +337,7 @@ async function uploadimg() {
         method: "POST",
         data: {
             doc_nameimg: doc_nameimg,
-            fol_location_id2 : fol_location_id2
+            fol_location_id2: fol_location_id2
         },
         body: formData
     });

@@ -37,7 +37,7 @@
                             <label style="color: #FF0000;">* <span id="text_namef"> </span> </label><br><br>
                             <div class="row">
                                 <div class="col-md-2 offset-md-1">
-                                    <input class="form-control" type="file" id="doc_path" name="doc_path" accept="application/pdf" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;" value="" onchange="file_validation()"><br>
+                                    <input class="form-control" type="file" id="doc_path" name="doc_path" accept="application/pdf" placeholder="อัปโหลดไฟล์" style="margin: 0px;  width: 500px; height: 50px; padding: 10px;" value="" onchange="file_validation()"><br>
                                 </div>
                             </div>
 
@@ -45,7 +45,7 @@
                             <label style="color: #FF0000;">* <span id="text_name"> </span> </label><br>
                             <div class="row">
                                 <div class="col-md-2 offset-md-1">
-                                    <input type="text" class="form-control" id="doc_name" name="doc_name" style="margin: 0px;  width: 400px;" placeholder="ชื่อไฟล์" value="" onchange="name_validation()"><br />
+                                    <input type="text" class="form-control" id="doc_name" name="doc_name" style="margin: 0px; height: 50px;  width: 500px;" placeholder="ชื่อไฟล์" value="" onchange="name_validation()"><br />
                                 </div>
                             </div>
 
@@ -80,7 +80,7 @@
                             <label style="color: #FF0000;">* <span id="text_nameimgf"> </span> </label><br><br>
                             <div class="row">
                                 <div class="col-md-2 offset-md-1">
-                                    <input class="form-control" type="file" id="doc_pathimg" name="doc_pathimg" accept="image/*" placeholder="อัปโหลดไฟล์" style="padding: 10px; width: 230px; height: 50px;" value="" onchange="file_validationimg()"><br>
+                                    <input class="form-control" type="file" id="doc_pathimg" name="doc_pathimg" accept="image/*" placeholder="อัปโหลดไฟล์" style="margin: 0px;  width: 500px; height: 50px; padding: 10px;" value="" onchange="file_validationimg()"><br>
                                 </div>
                             </div>
 
@@ -88,7 +88,7 @@
                             <label style="color: #FF0000;">* <span id="text_imgname"> </span> </label><br>
                             <div class="row">
                                 <div class="col-md-2 offset-md-1">
-                                    <input type="text" id="doc_nameimg" name="doc_nameimg" class="form-control" style="margin: 0px;  width: 400px;" placeholder="ชื่อไฟล์" value="" onchange="name_validationimg()"><br />
+                                    <input type="text" id="doc_nameimg" name="doc_nameimg" class="form-control" style="margin: 0px; height: 50px;  width: 500px;" placeholder="ชื่อไฟล์" value="" onchange="name_validationimg()"><br />
                                 </div>
                             </div>
 
@@ -126,7 +126,7 @@
                         <label id="target_div" style="display:none;margin-top: 3%;color: #FF0000;">กรอกข้อมูลลิงค์เว็บไซต์ (URL)</label>
                         <div class="row">
                             <div class="col-md-2 offset-md-1">
-                                <input class="form-control" id="text3" type="text" style="margin: 0px;  width: 400px;" oninvalid="InvalidMsg(this);" oninput="InvalidMsg(this);" value="https://www.example.com" required="required">
+                                <input class="form-control" id="text3" type="text" style="margin: 0px; height: 50px;  width: 500px;" oninvalid="InvalidMsg(this);" oninput="InvalidMsg(this);" value="https://www.example.com" required="required">
                             </div>
                         </div>
                         <div id="inputlogo" style="margin-top: 30px;">
@@ -206,7 +206,7 @@ $(document).ready(function() {
         e.preventDefault();
         $.ajax({
             type: "POST",
-            url: "<?php echo site_url() ?>/Member/Member_upload_file/check_name2",
+            url: "<?php echo site_url() ?>/Member/Member_upload_file/check_nameimg",
             dataType: 'JSON',
             data: {
                 'doc_nameimg': doc_nameimg.value
