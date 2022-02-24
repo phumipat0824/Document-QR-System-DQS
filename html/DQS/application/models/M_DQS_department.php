@@ -2,7 +2,12 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 include_once 'Da_DQS_department.php';
-
+/*
+* Model of Department
+* get data from database
+* @author Kiattisak
+* @Create Date 2564-08-05
+*/
 class M_DQS_department extends Da_DQS_department
 {
 
@@ -12,6 +17,11 @@ class M_DQS_department extends Da_DQS_department
         parent::__construct();
     }
 
+    //  * get_all
+	// 	* get all data of department
+	// 	* @input -
+	// 	* @output -
+	// 	* @author Kiattisak
     public function get_all()
     {
         
@@ -20,6 +30,11 @@ class M_DQS_department extends Da_DQS_department
         return $query;
     }
 
+    //  * get_all_by_pro_id
+	// 	* get all data of department by province id
+	// 	* @input province id of member
+	// 	* @output -
+	// 	* @author Kiattisak
     public function get_all_by_pro_id($mem_pro_id)
     {
         $sql = "SELECT * from {$this->db_name}.DQS_Station_State_of_Province
@@ -29,6 +44,11 @@ class M_DQS_department extends Da_DQS_department
         return $query;
     }
 
+    //  * get_by_id
+	// 	* get a data of department by department id
+	// 	* @input department id
+	// 	* @output -
+	// 	* @author Kiattisak
     public function get_by_id($dep_id)
     {
         // $sql = "SELECT * from {$this->db_name}.DQS_Department WHERE dep_id = $dep_id";
@@ -46,6 +66,12 @@ class M_DQS_department extends Da_DQS_department
     //     $query = $this->db->query($sql);
     //     return $query;
     // }
+
+    //  * get_last_id
+	// 	* get last id of department 
+	// 	* @input -
+	// 	* @output -
+	// 	* @author Kiattisak
     public function get_last_id()
     {
         $sql = "SELECT dep_id 
@@ -55,6 +81,11 @@ class M_DQS_department extends Da_DQS_department
         return $query;
     }
 
+    //  * check_exist_name
+	// 	* check same name of department
+	// 	* @input department name
+	// 	* @output -
+	// 	* @author Kiattisak
     public function check_exist_name($dep_name)
     {
         $this->db->where('dep_name', $dep_name);
@@ -68,6 +99,11 @@ class M_DQS_department extends Da_DQS_department
         return $query;
     }
 
+    //  * get_member_data
+	// 	* get data of member in department
+	// 	* @input province id, member id
+	// 	* @output -
+	// 	* @author Kiattisak
     public function get_member_data($pro_id,$mem_id){
         $sql= "SELECT * FROM {$this->db_name}.DQS_Member AS member 
         LEFT JOIN {$this->db_name}.DQS_Department AS department 
