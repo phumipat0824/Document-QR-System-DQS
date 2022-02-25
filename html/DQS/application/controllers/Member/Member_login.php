@@ -81,6 +81,14 @@ class Member_login extends DQS_controller
         }
     }
 
+    public function show_session(){
+
+        $arr_session = $this->session->all_userdata();
+        echo '<pre>';
+        print_r($arr_session);
+        echo '</pre>';
+
+    }
 
     /*
     * logout
@@ -108,7 +116,7 @@ class Member_login extends DQS_controller
 
     public function check_user($mem_username, $mem_password)
     {
-        $this->load->model('M_DQS_login', 'mlog');
+        $this->load->model('M_DQS_document', 'mlog');
         return $this->mlog->get_by_username_password($mem_username, $mem_password)->row();
     }
 

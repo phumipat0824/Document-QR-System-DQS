@@ -1,15 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-include_once 'Da_DQS_login.php';
+include_once 'Da_DQS_document.php';
 
-class M_DQS_login extends Da_DQS_login {
+class M_DQS_document extends Da_DQS_document {
 
 	public function __construct()
 	{
 		parent::__construct();
 	}
- /*
+
+        /*
 	* check_login
 	* check_login username passwordin database 
 	* @input username, password
@@ -43,6 +44,7 @@ class M_DQS_login extends Da_DQS_login {
         $query = $this->db->query($sql);
         return $query;
     }//รับค่าผ่านตัวแปร mem_username และ mem_password.
+
 
     /*
 	* get_by_id_folder

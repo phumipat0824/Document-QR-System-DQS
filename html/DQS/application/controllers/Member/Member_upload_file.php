@@ -31,7 +31,7 @@ class Member_upload_file extends DQS_controller
 	public function show_member_upload_file_in_floder($fol_location_id){
 
 		$this->load->model('M_DQS_folder', 'fol');
-		$this->load->model('M_DQS_login', 'qrc');
+		$this->load->model('M_DQS_document', 'qrc');
 		$memid = $this->session->userdata('mem_id');
 		$this->session->set_userdata('fol_location_id', $fol_location_id);
 		$path_folder = $this->fol->get_by_id_fol($fol_location_id)->result();
