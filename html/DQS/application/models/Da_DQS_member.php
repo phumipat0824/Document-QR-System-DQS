@@ -32,13 +32,6 @@ class Da_DQS_member extends DQS_model
         $this->db->query($sql, array($this->mem_pref_id, $this->mem_firstname, $this->mem_lastname, $this->mem_email, $this->mem_username, $this->mem_password, $this->mem_role, $this->mem_dep_id, $this->mem_pro_id));
     }//เพิ่มข้อมูลสมาชิกในดาต้าเบส มีการกำหนดจำนวนcolumn = จำนวนvalues
 
-    public function update_password()
-    {
-        $sql = "UPDATE {$this->db_name}.DQS_Member
-                SET mem_password = ?
-                WHERE mem_email = ? "; // ? = ค่าที่เราจะใส่ไปอยู่แล้ว , อย่าใช้ " ' " เพราะอาจจะเออเร่อได้
-        $this->db->query($sql, array($this->mem_password, $this->mem_email)); //ถ้า SQL ที่เราใส่มี ? ต้องใส่ array ด้วย
-    }
     public function delete_member(){
         $sql = "DELETE FROM {$this->db_name}.DQS_Member
                 WHERE mem_id = ? "; // ? = ค่าที่เราจะใส่ไปอยู่แล้ว , อย่าใช้ " ' " เพราะอาจจะเออเร่อได้
