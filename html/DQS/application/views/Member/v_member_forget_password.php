@@ -26,7 +26,7 @@
                             <form action='<?php echo site_url() . "/Member/Member_login/send_mail" ?>' id="form_id" method="post">
                                 <p align=left style="color:#000000; font-size: 26px; font-family:TH Sarabun New " for="InputEmail1">อีเมล : </p>                    
                                 <input type="text" style="font-size: 26px; height: 55px; font-family:TH Sarabun New;" class="form-control" id="mem_email" name="email" placeholder="อีเมล" required><br>
-                                <button onclick="check_email_send_pass()" class="btn btn-primary my-4" id='btn-ok' type="button" style="background-color: #100575; height: 55px;">ส่งอีเมลกู้คืนรหัสผ่าน</button><br><br>
+                                <button onclick="check_email_send_pass()" class="btn btn-primary my-4" id='btn-ok' type="bottom" style="background-color: #100575; height: 55px;">ส่งอีเมลกู้คืนรหัสผ่าน</button><br><br>
                             </form>
 
                         </div>
@@ -82,16 +82,20 @@ input::-webkit-input-placeholder {
                         icon: 'error',
                         title: 'ไม่มีอีเมลนี้อยู่ในระบบ',
                         text: 'กรุณากรอกอีเมลใหม่',
-                        confirmButtonText: 'ตกลง'
+                        showConfirmButton: false,
+                       // confirmButtonText: 'ตกลง'
+                      
                     })
 
                 } else if (data == 1) {
                     const swalWithBootstrapButtons = Swal.mixin({
+                        
                         customClass: {
                             confirmButton: 'btn btn-success',
-                            cancelButton: 'btn btn-danger'
+                            
                         },
                         buttonsStyling: false,
+                        showConfirmButton: false,
                     })
 
                     swalWithBootstrapButtons.fire({
@@ -99,7 +103,7 @@ input::-webkit-input-placeholder {
                         title: 'ส่งอีเมลกู้คืนทาง Email',
 
                     }).then((result) => {
-                        document.getElementById('btn-ok').type = 'button';
+                        document.getElementById('btn-ok').type = 'submit';
                         $form.submit();
                     });
                     console.log('success');
@@ -109,62 +113,5 @@ input::-webkit-input-placeholder {
 
         });
     }
-    //  $(document).ready(function() {
-    //           $('form #btn-ok').click(function(e) {
-    //                 let $form = $(this).closest('form');
-    //            $.ajax({
-    //             type: "POST",
-    //             url: "<?php echo site_url() . '/Member/Member_login/check_email' ?>",
-    //                data: {
-    //                     mem_email: $('#mem_email').val()
-    //                 },
-    //                 success: function(res) {
-    //                     if (res == 0) {
-    //                         const swalWithBootstrapButtons = Swal.mixin({
-    //                     customClass: {
-    //                         confirmButton: 'btn btn-success',
-    //                         cancelButton: 'btn btn-danger'
-    //                     },
-    //                     buttonsStyling: false,
-    //                 })
-
-    //                 swalWithBootstrapButtons.fire({  
-    //                     icon: 'success',
-    //                     title: 'ส่งอีเมลกู้คืนทาง Email',          
-
-    //                 }).then((result) => {
-    //                     document.getElementById('btn-ok').type = 'submit';
-    //                     $form.submit();
-    //                 });
-    //                     } else if (res == 1) {
-
-    //                             console.log('error');
-    //                             Swal.fire({
-    //                                 icon: 'error',
-    //                                 title: 'อีเมลถูกใช้แล้ว',
-    //                                 text: 'กรุณากรอกอีเมลใหม่',
-    //                                 confirmButtonText: 'ตกลง'
-    //                             })
-
-    //                     }
-    //                 }
-
-    //             });
-    //             });
-    //         }); 
+    
 </script>
-<!-- success: function(data) {
-                if (data == 0) {
-                    console.log('success');
-                    document.getElementById('regis').type = 'submit';
-                    document.getElementById('form_id').submit();
-                } else if (data == 1) {
-                    console.log('error');
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'อีเมลถูกใช้แล้ว',
-                        text: 'กรุณากรอกอีเมลใหม่',
-                        confirmButtonText: 'ตกลง'
-                    })
-                }
-            }, -->
