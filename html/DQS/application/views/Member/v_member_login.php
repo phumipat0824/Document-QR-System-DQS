@@ -18,22 +18,24 @@
 <div class="row" style="padding-top: 150px ;margin: auto;" ;>
     <div class="col-lg-4 col-md-4">
     </div>
-    <div class="col-lg-4 col-md-4" style="padding-left: 100px ">
+    <div class="col-lg-4 col-md-4" style="padding-left: 50px ">
         <div class="card" style="border-radius: 10px;">
             <div class="text-center mb-4">
                 <div class="card-header card-header-warning" style="border-radius: 10px;">
-                    <h style="color:#000; font-family:TH Sarabun New; font-size: 28px">เข้าสู่ระบบ</h>
+                    <h style="color:#000; font-family:TH Sarabun New; font-size: 70px">เข้าสู่ระบบ</h>
                 </div>
                 <form method="POST" action="<?php echo site_url() . '/Member/Member_login/login'; ?>">
-                    <div class="card-body " style="padding-top:70px">
+                    <div class="card-body " style="padding-top:100px">
                         <div class="form-group mb-3">
                             <div class="input-group input-group-merge input-group-alternative">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"></span>
                                 </div>
+    
+                                
                                 <!-- Insert username -->
 
-                                <input style="font-family:TH Sarabun New;" class="form-control" id="mem_username" name="mem_username" placeholder="ชื่อผู้ใช้/อีเมล" type="text" required oninvalid="this.setCustomValidity('กรุณากรอกชื่อผู้ใช้งานหรืออีเมล')" oninput="this.setCustomValidity('')">
+                                <input id="mem_username" name="mem_username" placeholder="ชื่อผู้ใช้/อีเมล"   type="text" required oninvalid="this.setCustomValidity('กรุณากรอกชื่อผู้ใช้งานหรืออีเมล')" oninput="this.setCustomValidity('')">
                             </div>
                         </div>
                         <div class="form-group">
@@ -42,7 +44,7 @@
                                     <span class="input-group-text"></span>
                                 </div>
                                 <!-- Insert password -->
-                                <input style="font-family:TH Sarabun New;" class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" type="password" required oninvalid="this.setCustomValidity('กรุณากรอกรหัสผ่าน')" oninput="this.setCustomValidity('')">
+                                <input  id="mem_password" name="mem_password" placeholder="รหัสผ่าน" type="password" required oninvalid="this.setCustomValidity('กรุณากรอกรหัสผ่าน')" oninput="this.setCustomValidity('')">
                             </div>
                         </div>
                         <center>
@@ -53,11 +55,11 @@
 
                         <div class="text-center" style="margin-top: -20px">
                             <!-- Button login -->
-                            <button type="submit" class="btn btn-primary my-4" id="btn_login" style="background-color: #100575 ; width:200px; font-family:TH Sarabun New; "> เข้าสู่ระบบ</button>
+                            <button type="submit" class="btn btn-primary my-10" id="btn_login" style="background-color: #100575 ; width:400px; font-family:TH Sarabun New; font-size: 40px"> เข้าสู่ระบบ</button>
                         </div><br>
                         <div class="text-center" style="padding-top: 20px margin-bottom: 1rem">
                             <!-- Button login -->
-                            <a href="<?php echo base_url() . 'Member/Member_login/show_forget_password' ?>" style="font-family:TH Sarabun New;">ลืมรหัสผ่าน?</a>
+                            <a href="<?php echo base_url() . 'Member/Member_login/show_forget_password' ?>" style="font-family:TH Sarabun New;font-size: 40px">ลืมรหัสผ่าน?</a>
                         </div>
                     </div>
                 </form>
@@ -134,5 +136,18 @@ function login() { //login member
     });
 } //end login member
 </script>
+<style>
+input {
+    width: 600px;
+    padding: 0px 15px;
+    height:70px; 
+}
 
+input,
+input::-webkit-input-placeholder {
+    font-size: 30px;
+    line-height: 3;
+}
+</style>
 </html>
+
