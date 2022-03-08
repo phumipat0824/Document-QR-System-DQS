@@ -26,6 +26,8 @@ class Da_DQS_qrcode extends DQS_model {
     public $qr_view;
     public $qr_download;
     public $qr_datetime;
+    public $qr_mem_id;
+    public $qr_doc_id;
     
     public function __construct()
 	{
@@ -72,10 +74,10 @@ class Da_DQS_qrcode extends DQS_model {
 * @Create Date 2564-12-17
 */
 public function insert_qrcode(){//insert document into database    
-    $sql = "INSERT INTO {$this->db_name}.DQS_Qrcode(qr_name,qr_path,qr_mem_id) 
-            VALUES (?,?,?)";
+    $sql = "INSERT INTO {$this->db_name}.DQS_Qrcode(qr_name,qr_path,qr_mem_id,qr_doc_id) 
+            VALUES (?,?,?,?)";
             
-    $this->db->query($sql,array($this->qr_name,$this->qr_path,$this->qr_mem_id));        
+    $this->db->query($sql,array($this->qr_name,$this->qr_path,$this->qr_mem_id,$this->qr_doc_id));        
 }//end insert document into database
 
 }

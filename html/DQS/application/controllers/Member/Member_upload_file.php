@@ -101,7 +101,7 @@ class Member_upload_file extends DQS_controller
 			$this->qrc->doc_mem_id = $this->session->userdata('mem_id');
 			$this->qrc->doc_fol_id = $this->session->userdata('fol_id');
 			$this->qrc->insert_document_in_folder();
-			$this->get_id_document();
+			$this->get_path_document();
 			
 	}
 
@@ -143,25 +143,40 @@ class Member_upload_file extends DQS_controller
 			$this->dqrc->doc_path = $newpath;
 			$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
 			$this->dqrc->insert_document();
-			$this->get_id_document();
+			$this->get_path_document();
 			
 	}
 
 	/*
-	* get id document
-	* get path by id document
+	* get path document
+	* get path document
 	* @input -
 	* @output document path
 	* @author Ashirawat
 	* @Create Date 2565-02-16
 	*/
 
-	public function get_id_document()
+	public function get_path_document()
     {
         $this->load->model('M_DQS_qrcode', 'mqrc');	
         $obj_doc = $this->mqrc->get_id()->row();
 		$data = site_url().$obj_doc->doc_path;
 		echo json_encode($data);	
+    }
+
+	/*
+	* get id document
+	* get id document
+	* @input -
+	* @output document path
+	* @author Ashirawat
+	* @Create Date 2565-03-03
+	*/
+
+	public function get_id_document()
+    {
+        $this->load->model('M_DQS_qrcode', 'mqrc');
+        return $this->mqrc->get_id()->row();
     }
 
 	/*
@@ -245,7 +260,7 @@ class Member_upload_file extends DQS_controller
 		$this->dqrc->doc_path = $newpath;
 		$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
 		$this->dqrc->insert_document();
-		$this->get_id_image();
+		$this->get_path_image();
 	}
 
 	/*
@@ -291,10 +306,10 @@ class Member_upload_file extends DQS_controller
 		$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
 		$this->dqrc->doc_fol_id = $this->session->userdata('fol_id');
 		$this->dqrc->insert_document_in_folder();
-		$this->get_id_image();
+		$this->get_path_image();
 	}
 
-	public function get_id_image()
+	public function get_path_image()
     {
         $this->load->model('M_DQS_qrcode', 'mqri');	
         $obj_doc = $this->mqri->get_id()->row();
@@ -369,6 +384,8 @@ class Member_upload_file extends DQS_controller
 		$this->dqrc->qr_path = $newpath;
 		$this->session->set_userdata('newpath', $newpath);
 		$this->dqrc->qr_mem_id = $this->session->userdata('mem_id');
+		$obj_doc = $this->get_id_document();
+		$this->dqrc->qr_doc_id = $obj_doc->doc_id;
 		$this->dqrc->insert_qrcode();
 	}
 
@@ -407,6 +424,8 @@ class Member_upload_file extends DQS_controller
 		$this->dqrc->qr_path = $newpath;
 		$this->session->set_userdata('newpath', $newpath);
 		$this->dqrc->qr_mem_id = $this->session->userdata('mem_id');
+		$obj_doc = $this->get_id_document();
+		$this->dqrc->qr_doc_id = $obj_doc->doc_id;
 		$this->dqrc->insert_qrcode();
 	}
 	/*
@@ -441,6 +460,8 @@ class Member_upload_file extends DQS_controller
 		$this->dqrc->qr_path = $newpath;
 		$this->session->set_userdata('newpath', $newpath);
 		$this->dqrc->qr_mem_id = $this->session->userdata('mem_id');
+		$obj_doc = $this->get_id_document();
+		$this->dqrc->qr_doc_id = $obj_doc->doc_id;
 		$this->dqrc->insert_qrcode();
 	}
 
@@ -480,6 +501,8 @@ class Member_upload_file extends DQS_controller
 		$this->dqrc->qr_path = $newpath;
 		$this->session->set_userdata('newpath', $newpath);
 		$this->dqrc->qr_mem_id = $this->session->userdata('mem_id');
+		$obj_doc = $this->get_id_document();
+		$this->dqrc->qr_doc_id = $obj_doc->doc_id;
 		$this->dqrc->insert_qrcode();
 	}
 	

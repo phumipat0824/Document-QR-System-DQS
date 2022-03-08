@@ -568,7 +568,7 @@ function make() {
     if (text.value.trim() !== '') {
 
         $.ajax({
-            url: "<?php echo site_url() ?>/Member/Member_upload_file/get_id_document",
+            url: "<?php echo site_url() ?>/Member/Member_upload_file/get_path_document",
             dataType: 'JSON',
             success: function(data) {
                 // console.log(data);
@@ -623,7 +623,7 @@ function make2() {
     if (text.value.trim() !== '') {
 
         $.ajax({
-            url: "<?php echo site_url() ?>/Member/Member_upload_file/get_id_image",
+            url: "<?php echo site_url() ?>/Member/Member_upload_file/get_path_image",
             dataType: 'JSON',
             success: function(data) {
                 // console.log(data);

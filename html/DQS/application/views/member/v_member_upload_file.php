@@ -14,8 +14,8 @@
 
 <div class="content">
     <div class="row" style="padding: 100px 10px 10px 20%;">
-        <a style="color:#100575; font-size: 80px;">สร้างคิวอาร์โค้ด</a>
-        <a style="font-size: 35px;">เริ่มสร้าง QR Code กันเลย </a>
+        <a style="color:#100575;font-family:TH sarabun new; font-size: 80px;">สร้างคิวอาร์โค้ด</a>
+        <a style="font-family:TH sarabun new;font-size: 35px;">เริ่มสร้าง QR Code กันเลย </a>
 
 
         <div class="col-md-5">
@@ -550,7 +550,7 @@ function make() {
     if (text.value.trim() !== '') {
 
         $.ajax({
-            url: "<?php echo site_url() ?>/Member/Member_upload_file/get_id_document",
+            url: "<?php echo site_url() ?>/Member/Member_upload_file/get_path_document",
             dataType: 'JSON',
             success: function(data) {
                 // console.log(data);
@@ -605,7 +605,7 @@ function make2() {
     if (text.value.trim() !== '') {
 
         $.ajax({
-            url: "<?php echo site_url() ?>/Member/Member_upload_file/get_id_image",
+            url: "<?php echo site_url() ?>/Member/Member_upload_file/get_path_image",
             dataType: 'JSON',
             success: function(data) {
                 // console.log(data);
