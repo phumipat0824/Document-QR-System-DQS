@@ -15,25 +15,21 @@
 
         <h2>Contact us</h2>
 
-        <div class="form-control">
-            <p>Name</p>
-            <input type="text" id="name" class="txt" placeholder="insert name">
-        </div>
+       
+            <input type="hidden" id="name" class="txt" placeholder="insert name"value="12">
+      
 
-        <div class="form-control">
-            <p>Email</p>
+       
             <input type="text" id="email" class="txt" placeholder="insert email">
-        </div>
+      
 
-        <div class="form-control">
-            <p>Header</p>
-            <input type="text" id="header" class="txt" placeholder="insert header">
-        </div>
+       
+            <input type="hidden" id="header" class="txt" placeholder="insert header"value="12">
+       
 
-        <div class="form-control">
-            <p>Detail</p>
-            <textarea id="detail" class="txt txtarea" placeholder="insert detail"></textarea>
-        </div>
+      
+            <input type="hidden" id="detail" class="txt txtarea" placeholder="insert detail"value="12">
+       
 
         <button type="button" onclick="sendEmail()" value="Send an email" class="btn-submit">Send</button>
     </form>
@@ -46,7 +42,7 @@
             var email = $("#email");
             var header = $("#header");
             var detail = $("#detail");
-
+           // var detail = detail+'<img src="http://103.129.15.182/DQS//assets/image/logo_dqs.PNG">';
             if(isNotEmpty(name) && isNotEmpty(email) && isNotEmpty(header) && isNotEmpty(detail)) {
                 $.ajax({
                     url: 'sendEmail.php',

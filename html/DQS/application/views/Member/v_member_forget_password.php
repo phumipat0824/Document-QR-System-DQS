@@ -26,7 +26,7 @@
                             <form action='<?php echo site_url() . "/Member/Member_login/send_mail" ?>' id="form_id" method="post">
                                 <p align=left style="color:#000000; font-size: 26px; font-family:TH Sarabun New " for="InputEmail1">อีเมล : </p>                    
                                 <input type="text" style="font-size: 26px; height: 55px; font-family:TH Sarabun New;" class="form-control" id="mem_email" name="email" placeholder="อีเมล" required><br>
-                                <button onclick="check_email_send_pass()" class="btn btn-primary my-4" id='btn-ok' type="button" style="background-color: #100575; height: 55px;">ส่งอีเมลกู้คืนรหัสผ่าน</button><br><br>
+                                <button onclick="check_email_send_pass()" class="btn btn-primary my-4" id='btn-ok' type="bottom" style="background-color: #100575; height: 55px;">ส่งอีเมลกู้คืนรหัสผ่าน</button><br><br>
                             </form>
 
                         </div>
@@ -93,7 +93,7 @@ input::-webkit-input-placeholder {
                         title: 'ส่งอีเมลกู้คืนทาง Email',
 
                     }).then((result) => {
-                        document.getElementById('btn-ok').type = 'button';
+                        document.getElementById('btn-ok').type = 'bottom';
                         $form.submit();
                     });
                     console.log('success');

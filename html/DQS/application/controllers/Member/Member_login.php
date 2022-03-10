@@ -208,7 +208,29 @@ class Member_login extends DQS_controller
         $this->load->model('M_DQS_member', 'MDM');
         $obj_mail = $this->MDM->get_by_email($email)->result();
         $user_name = md5($obj_mail[0]->mem_username);
-        $detail  = "กดที่ลิงค์เพื่อรีเซ็ตรหัสผ่านของคุณ ".site_url()."/Member/Member_login/show_reset_password/" .  $user_name;
+        $link = site_url()."/Member/Member_login/show_reset_password/" .  $user_name;
+        $ftag = '<a href="';
+        $ltag = '"> คลิกที่นี่</a>';
+        $atag = $ftag.$link.$ltag;
+        $detail = ' <div style="border: 1px solid #eeeeee;">
+        <center>
+            <div style="padding-top:2%">
+                <img src="http://103.129.15.182/DQS/assets/image/logo_dqs.PNG" height="150" width="150">
+            </div>    
+        </center>
+        <center style="margin-bottom:10px;">
+        <h2>Document QR System : DQS</h2>
+        </center>
+        <br>
+        <div style="margin-left: 5%;margin-bottom: 2%;">
+            <a>ท่านได้ทำการแจ้งลืมรหัสผ่าน</a><br>
+            <a>โปรดคลิกที่ลิงค์ดังกล่าวเพื่อตั้งรหัสผ่านใหม่</a><br>
+            <a>Please click the link below to set new password </a>'
+            . $atag.
+            
+        '</div>
+        </div>';
+        
 
         //exit(print ($user_name));
         $mail = new PHPMailer();
