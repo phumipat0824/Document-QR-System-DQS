@@ -59,8 +59,8 @@ class Member_login extends DQS_controller
             // log in complete
 
             // set id and name for user
-            $this->session->set_userdata('mem_username', $mem_username);
-            $this->session->set_userdata('username', $mem_username);
+            $this->session->set_userdata('mem_username', $obj_mem->mem_username);
+            $this->session->set_userdata('username', $obj_mem->mem_username);
             $this->session->set_userdata('mem_password', md5($mem_password));
             $this->session->set_userdata('old_password', $mem_password);
             $this->session->set_userdata('mem_id', $obj_mem->mem_id);
@@ -81,6 +81,14 @@ class Member_login extends DQS_controller
         }
     }
 
+    public function show_session(){
+
+        $arr_session = $this->session->all_userdata();
+        echo '<pre>';
+        print_r($arr_session);
+        echo '</pre>';
+
+    }
 
     /*
     * logout
@@ -108,7 +116,7 @@ class Member_login extends DQS_controller
 
     public function check_user($mem_username, $mem_password)
     {
-        $this->load->model('M_DQS_login', 'mlog');
+        $this->load->model('M_DQS_document', 'mlog');
         return $this->mlog->get_by_username_password($mem_username, $mem_password)->row();
     }
 

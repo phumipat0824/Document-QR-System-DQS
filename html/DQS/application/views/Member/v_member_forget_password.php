@@ -76,16 +76,20 @@ input::-webkit-input-placeholder {
                         icon: 'error',
                         title: 'ไม่มีอีเมลนี้อยู่ในระบบ',
                         text: 'กรุณากรอกอีเมลใหม่',
-                        confirmButtonText: 'ตกลง'
+                        showConfirmButton: false,
+                       // confirmButtonText: 'ตกลง'
+                      
                     })
 
                 } else if (data == 1) {
                     const swalWithBootstrapButtons = Swal.mixin({
+                        
                         customClass: {
                             confirmButton: 'btn btn-success',
-                            cancelButton: 'btn btn-danger'
+                            
                         },
                         buttonsStyling: false,
+                        showConfirmButton: false,
                     })
 
                     swalWithBootstrapButtons.fire({
@@ -93,7 +97,7 @@ input::-webkit-input-placeholder {
                         title: 'ส่งอีเมลกู้คืนทาง Email',
 
                     }).then((result) => {
-                        document.getElementById('btn-ok').type = 'bottom';
+                        document.getElementById('btn-ok').type = 'submit';
                         $form.submit();
                     });
                     console.log('success');

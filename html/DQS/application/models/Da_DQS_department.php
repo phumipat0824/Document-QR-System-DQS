@@ -16,7 +16,11 @@ class Da_DQS_department extends DQS_model
     {
         parent::__construct();
     }
-
+    //  * insert
+	// 	* insert data to database
+	// 	* @input -
+	// 	* @output -
+	// 	* @author Kiattisak
     public function insert()
 	{
 		$sql = "INSERT INTO {$this->db_name}.DQS_Department(dep_name) 
@@ -24,7 +28,11 @@ class Da_DQS_department extends DQS_model
         $this->db->query($sql, array($this->dep_name));
 	}//insert
 
-	
+	//  * name_update
+	// 	* update name of department
+	// 	* @input -
+	// 	* @output -
+	// 	* @author Kiattisak
     public function name_update()
     {
         $sql = "UPDATE {$this->db_name}.DQS_Department
@@ -34,6 +42,11 @@ class Da_DQS_department extends DQS_model
         $this->db->query($sql , array( $this->dep_name , $this->dep_id ) );
     }
 
+    //  * status_update
+	// 	* update status of department
+	// 	* @input -
+	// 	* @output -
+	// 	* @author Kiattisak
     public function status_update($dep_id,$station_status,$mem_pro_id)
     {
         if ($station_status == 0) {

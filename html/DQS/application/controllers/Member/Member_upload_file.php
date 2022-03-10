@@ -31,7 +31,7 @@ class Member_upload_file extends DQS_controller
 	public function show_member_upload_file_in_floder($fol_location_id){
 
 		$this->load->model('M_DQS_folder', 'fol');
-		$this->load->model('M_DQS_login', 'qrc');
+		$this->load->model('M_DQS_document', 'qrc');
 		$memid = $this->session->userdata('mem_id');
 		$this->session->set_userdata('fol_location_id', $fol_location_id);
 		$path_folder = $this->fol->get_by_id_fol($fol_location_id)->result();
@@ -50,20 +50,21 @@ class Member_upload_file extends DQS_controller
 			$new_sub_folder = substr($get_sub_folder, 0, $sub_path_folder);
 			$get_sub_folder = substr($get_sub_folder,$sub_path_folder);
 			$real_path_folder = substr($new_sub_folder,0,-1);
-			 array_push($arr,$real_path_folder);		
+			array_push($arr,$real_path_folder);		
 			
 		}while(strpos($get_sub_folder,'/') != null);
 		$data['path_fol'] = $arr;
 		$data['path_loc'] = $path_folder;
 		$this->output_sidebar_member("Member/v_member_upload_file_in_floder", $data);
 	}
+	
 	/*
-	* upload file
-	* upload file pdf into database and server
+	* upload file in floder
+	* upload file pdf in floder into database and server
 	* @input file pdf file name file type path
 	* @output file path
-	* @author Ashirawat
-	* @Create Date 2564-11-14
+	* @author Ashirawat, Jerasak
+	* @Create Date 2565-02-18
 	*/
 
 	public function upload_file_in_floder()
@@ -100,9 +101,18 @@ class Member_upload_file extends DQS_controller
 			$this->qrc->doc_mem_id = $this->session->userdata('mem_id');
 			$this->qrc->doc_fol_id = $this->session->userdata('fol_id');
 			$this->qrc->insert_document_in_folder();
-			$this->get_id_document();
+			$this->get_path_document();
 			
 	}
+
+	/*
+	* upload file
+	* upload file pdf into database and server
+	* @input file pdf file name file type path
+	* @output file path
+	* @author Ashirawat
+	* @Create Date 2564-11-14
+	*/
 
 	public function upload_file()
 	{ //Update department into database
@@ -133,17 +143,50 @@ class Member_upload_file extends DQS_controller
 			$this->dqrc->doc_path = $newpath;
 			$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
 			$this->dqrc->insert_document();
-			$this->get_id_document();
+			$this->get_path_document();
 			
 	}
 
-	public function get_id_document()
+	/*
+	* get path document
+	* get path document
+	* @input -
+	* @output document path
+	* @author Ashirawat
+	* @Create Date 2565-02-16
+	*/
+
+	public function get_path_document()
     {
         $this->load->model('M_DQS_qrcode', 'mqrc');	
         $obj_doc = $this->mqrc->get_id()->row();
 		$data = site_url().$obj_doc->doc_path;
 		echo json_encode($data);	
     }
+
+	/*
+	* get id document
+	* get id document
+	* @input -
+	* @output document path
+	* @author Ashirawat
+	* @Create Date 2565-03-03
+	*/
+
+	public function get_id_document()
+    {
+        $this->load->model('M_DQS_qrcode', 'mqrc');
+        return $this->mqrc->get_id()->row();
+    }
+
+	/*
+	* check name
+	* check for duplicate name
+	* @input document name
+	* @output -
+	* @author Ashirawat, Jerasak
+	* @Create Date 2565-02-16
+	*/
 
 	public function check_name()
 	{
@@ -157,8 +200,16 @@ class Member_upload_file extends DQS_controller
 		}
 		
 	}
+	/*
+	* check nameimg
+	* check for duplicate name
+	* @input image name
+	* @output -
+	* @author Ashirawat, Jerasak
+	* @Create Date 2565-02-16
+	*/
 
-	public function check_name2()
+	public function check_nameimg()
 	{
 		$this->load->model('M_DQS_qrcode','mqrc');
 		$doc_name = $this->input->post('doc_nameimg');
@@ -171,7 +222,7 @@ class Member_upload_file extends DQS_controller
 		
 	}
 	/*
-	* upload_image
+	* upload image
 	* upload file image into database and server
 	* @input file image file name file type path
 	* @output file path
@@ -209,8 +260,18 @@ class Member_upload_file extends DQS_controller
 		$this->dqrc->doc_path = $newpath;
 		$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
 		$this->dqrc->insert_document();
-		$this->get_id_image();
+		$this->get_path_image();
 	}
+
+	/*
+	* upload image in folder
+	* upload file image in folder into database and server
+	* @input file image file name file type path
+	* @output file path
+	* @author Ashirawat, Jerasak
+	* @Create Date 2565-02-18
+	*/
+
 
 	public function upload_image_in_folder()
 	{ //Update department into database
@@ -245,10 +306,10 @@ class Member_upload_file extends DQS_controller
 		$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
 		$this->dqrc->doc_fol_id = $this->session->userdata('fol_id');
 		$this->dqrc->insert_document_in_folder();
-		$this->get_id_image();
+		$this->get_path_image();
 	}
 
-	public function get_id_image()
+	public function get_path_image()
     {
         $this->load->model('M_DQS_qrcode', 'mqri');	
         $obj_doc = $this->mqri->get_id()->row();
@@ -257,7 +318,7 @@ class Member_upload_file extends DQS_controller
     }
 
 	/*
-	* save_qrcode_image
+	* save qrcode image
 	* upload file qrcode into server
 	* @input file image qrcode file path
 	* @output -
@@ -292,7 +353,7 @@ class Member_upload_file extends DQS_controller
 	}
 
 	/*
-	* upload_qrcode_file
+	* upload qrcode file
 	* upload file qrcode into database and server
 	* @input file image file name file type path
 	* @output file path
@@ -323,8 +384,19 @@ class Member_upload_file extends DQS_controller
 		$this->dqrc->qr_path = $newpath;
 		$this->session->set_userdata('newpath', $newpath);
 		$this->dqrc->qr_mem_id = $this->session->userdata('mem_id');
+		$obj_doc = $this->get_id_document();
+		$this->dqrc->qr_doc_id = $obj_doc->doc_id;
 		$this->dqrc->insert_qrcode();
 	}
+
+	/*
+	* upload qrcode in floder
+	* upload file qrcode in floder into database and server
+	* @input file image file name file type path
+	* @output file path
+	* @author Ashirawat, Jerasak
+	* @Create Date 2565-02-18
+	*/	
 
 	public function upload_qrcode_in_floder()
 	{ //Update department into database
@@ -352,10 +424,12 @@ class Member_upload_file extends DQS_controller
 		$this->dqrc->qr_path = $newpath;
 		$this->session->set_userdata('newpath', $newpath);
 		$this->dqrc->qr_mem_id = $this->session->userdata('mem_id');
+		$obj_doc = $this->get_id_document();
+		$this->dqrc->qr_doc_id = $obj_doc->doc_id;
 		$this->dqrc->insert_qrcode();
 	}
 	/*
-	* upload_qrcode_image
+	* upload qrcode image
 	* upload file qrcode into database and server
 	* @input file image file name file type path
 	* @output file path
@@ -386,8 +460,19 @@ class Member_upload_file extends DQS_controller
 		$this->dqrc->qr_path = $newpath;
 		$this->session->set_userdata('newpath', $newpath);
 		$this->dqrc->qr_mem_id = $this->session->userdata('mem_id');
+		$obj_doc = $this->get_id_document();
+		$this->dqrc->qr_doc_id = $obj_doc->doc_id;
 		$this->dqrc->insert_qrcode();
 	}
+
+	/*
+	* upload qrcode image in floder
+	* upload file qrcode image in floder into database and server
+	* @input file image file name file type path
+	* @output file path
+	* @author Ashirawat, Jerasak
+	* @Create Date 2565-02-18
+	*/	
 
 	public function upload_qrcode_image_in_folder()
 	{ //Update department into database
@@ -416,6 +501,8 @@ class Member_upload_file extends DQS_controller
 		$this->dqrc->qr_path = $newpath;
 		$this->session->set_userdata('newpath', $newpath);
 		$this->dqrc->qr_mem_id = $this->session->userdata('mem_id');
+		$obj_doc = $this->get_id_document();
+		$this->dqrc->qr_doc_id = $obj_doc->doc_id;
 		$this->dqrc->insert_qrcode();
 	}
 	

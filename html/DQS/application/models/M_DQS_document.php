@@ -1,15 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-include_once 'Da_DQS_login.php';
+include_once 'Da_DQS_document.php';
 
-class M_DQS_login extends Da_DQS_login {
+class M_DQS_document extends Da_DQS_document {
 
 	public function __construct()
 	{
 		parent::__construct();
 	}
- /*
+
+        /*
 	* check_login
 	* check_login username passwordin database 
 	* @input username, password
@@ -44,6 +45,16 @@ class M_DQS_login extends Da_DQS_login {
         return $query;
     }//รับค่าผ่านตัวแปร mem_username และ mem_password.
 
+
+    /*
+	* get_by_id_folder
+	* Get document qrcode folder data by userid in database
+	* @input userid
+	* @output document qrcode folder data
+	* @author Ashirawat
+	* @Create Date 2565-02-15
+	*/
+
 	public function get_by_id_folder($qr_mem_id)
     {
         // $sql = "SELECT * FROM {$this->db_name}.DQS_QR  WHERE qr_mem_id = $qr_mem_id";
@@ -53,12 +64,19 @@ class M_DQS_login extends Da_DQS_login {
         FROM {$this->db_name}.DQS_Document AS document
         LEFT JOIN {$this->db_name}.DQS_Qrcode AS qr
         ON document.doc_name = qr.qr_name
-        LEFT JOIN {$this->db_name}.DQS_Folder AS fol
-        ON fol.fol_id = document.doc_fol_id 
         WHERE qr_mem_id = $qr_mem_id ";
         $query = $this->db->query($sql);
         return $query;
     }
+
+    /*
+	* get_by_id
+	* Get document qrcode data by userid in database
+	* @input userid
+	* @output Get document qrcode data
+	* @author Ashirawat
+	* @Create Date 2564-01-27
+	*/    
 
 	public function get_by_id($qr_mem_id)
     {
