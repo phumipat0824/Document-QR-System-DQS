@@ -27,10 +27,7 @@
                 </button>
                 <div id="myDropdown" class="dropdown-content">
                     <div class="custom-cm__item" data-toggle="modal" data-target="#exampleModal"><a>สร้างโฟลเดอร์</a></div>
-                    <?php for ($i = 0; $i < count($path_loc); $i++) { ?>
-                    <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file_in_floder/' . $path_loc[$i]->fol_id; ?>">อัปโหลดไฟล์</a></div>
-                    <?php $this->session->set_userdata('fol_id', $path_loc[$i]->fol_id);?>
-                    <?php } ?>
+                    <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file_in_floder/'.$this->session->userdata('fol_id'); ?>">อัปโหลดไฟล์</a></div>
                 </div>
             </div>
         </div>
@@ -243,7 +240,7 @@
 <div class="row" style="padding: 100px 10px 10px 20%;">
     <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">คิวอาร์โค้ด</h3>
     <?php for ($i = 0; $i < count($arr_qr); $i++) {   ?>
-    <?php if($arr_qr[$i]->doc_fol_id == $this->session->userdata('fol_id')){ ?>
+    <?php if($this->session->userdata('fol_id') == $arr_qr[$i]->doc_fol_id){ ?>
     <div class="col-md-4">
         <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px; width:500;">
             <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
@@ -284,6 +281,8 @@
 
 
 <script>
+<?php $this->session->set_userdata('fol_id', '');?>
+<?php $this->session->set_userdata('path', '');?>
 $(document).on("keyup", "#fol_name", function() {
     var t = <?php echo json_encode($arr_fol) ?>;
     var new_name = document.getElementById("fol_name");

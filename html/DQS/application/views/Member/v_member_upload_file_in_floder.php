@@ -38,11 +38,6 @@
                             <div class="row">
                                 <div class="col-md-2 offset-md-1">
                                     <input class="form-control" type="file" id="doc_path" name="doc_path" accept="application/pdf" placeholder="อัปโหลดไฟล์" style="margin: 0px;  width: 500px; height: 50px; padding: 10px;" value="" onchange="file_validation()"><br>
-                                    <?php for($i = 0; $i < count($path_fol); $i++){?>
-                                    <?php  if($path_fol[$i] != '@' ){?>
-                                    <input type="hidden" value="<?php echo $path_fol[$i] ?>" id="fol_location_id" name="fol_location_id"></input>
-                                    <?php }?>
-                                    <?php }?>
                                 </div>
                             </div>
 
@@ -86,11 +81,6 @@
                             <div class="row">
                                 <div class="col-md-2 offset-md-1">
                                     <input class="form-control" type="file" id="doc_pathimg" name="doc_pathimg" accept="image/*" placeholder="อัปโหลดไฟล์" style="margin: 0px;  width: 500px; height: 50px; padding: 10px;" value="" onchange="file_validationimg()"><br>
-                                    <?php for($i = 0; $i < count($path_fol); $i++){?>
-                                    <?php  if($path_fol[$i] != '@' ){?>
-                                    <input type="hidden" value="<?php echo $path_fol[$i] ?>" id="fol_location_id2" name="fol_location_id2"></input>
-                                    <?php }?>
-                                    <?php }?>
                                 </div>
                             </div>
 
@@ -274,15 +264,12 @@ function delay(delayInms) {
 async function uploadFile() {
     let formData = new FormData();
     formData.append("doc_path", doc_path.files[0]);
-    formData.append("fol_location_id", fol_location_id.value);
     formData.append("doc_name", doc_name.value);
-    console.log("fol_location_id.value : ");
-    console.log(fol_location_id.value);
     await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_file_in_floder/" ?>", {
         method: "POST",
         data: {
             doc_name: doc_name,
-            fol_location_id: fol_location_id
+
         },
         body: formData
     });
@@ -292,7 +279,6 @@ async function uploadFile() {
         method: "POST",
         data: {
             doc_name: doc_name,
-            fol_location_id: fol_location_id
         },
         body: formData
     });
@@ -320,13 +306,12 @@ async function uploadFile() {
 async function uploadimg() {
     let formData = new FormData();
     formData.append("doc_pathimg", doc_pathimg.files[0]);
-    formData.append("fol_location_id2", fol_location_id2.value);
     formData.append("doc_nameimg", doc_nameimg.value);
     await fetch("<?php echo site_url() . "/Member/Member_upload_file/upload_image_in_folder/" ?>", {
         method: "POST",
         data: {
             doc_nameimg: doc_nameimg,
-            fol_location_id2: fol_location_id2
+
         },
         body: formData
 
@@ -337,7 +322,7 @@ async function uploadimg() {
         method: "POST",
         data: {
             doc_nameimg: doc_nameimg,
-            fol_location_id2: fol_location_id2
+
         },
         body: formData
     });

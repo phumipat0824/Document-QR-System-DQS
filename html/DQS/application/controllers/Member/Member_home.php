@@ -78,6 +78,7 @@ public function show_member_home()
 		$memid = $this->session->userdata('mem_id');
 		$this->session->set_userdata('fol_location_id', $fol_location_id);
 		$path_folder = $this->fol->get_by_id_fol($fol_location_id)->result();
+		$this->session->set_userdata('fol_id', $path_folder[0]->fol_id);
 		$data['arr_fol'] = $this->fol->get_by_member_id($memid, $fol_location_id,)->result();
 		$data['arr_qr'] = $this->qrc->get_by_id_folder($memid)->result();
 		$data['arr_folder'] = $this->fol->get_all()->result();
