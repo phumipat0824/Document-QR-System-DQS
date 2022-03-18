@@ -6,6 +6,16 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- ===================================== -->
+
+/*
+* v_member_list
+* Display delete data for member
+* @input -
+* @output delete data of member
+* @author Apinya
+* @Create Date 2565-01-04
+*/
+
 <div class="main-panel">
     <div class="container">
         <div class="content">
@@ -19,8 +29,11 @@
                         <!-- div header start   -->
                         <div class="card-header ">
                             <div class="row">
-                                <div class="col-10">
-                                    <h4 class="card-title " style="padding-top: 10px;">จัดการบัญชีผู้ใช้งาน </h4>
+                                <div class="card-header card-header-warning" style=" height: 60px; width: 300px;">
+
+                                    <h5 class="card-title"
+                                        style="margin-left: 50px; font-family:TH Sarabun New; font-size:2.5em;">
+                                        จัดการบัญชีผู้ใช้งาน </h4>
                                 </div>
                             </div>
                             <hr>
@@ -61,17 +74,15 @@
             let html_code = ''; // ตัวแปร generate code html
             html_code += '<div class="table-responsive">';
             html_code +=
-                '<table class="table" id = "datatable_mem_list">'; // ส่ง datatable_mem_list  ไปสร้าง data table
+                '<table class="table" id="datatable_mem_list">'; // ส่ง datatable_mem_list  ไปสร้าง data table
             html_code += '<thead class=" text">';
             html_code += '<tr>';
-
             html_code += '<th>จังหวัด</th>';
             html_code += '<th>ชื่อผู้ใช้งาน</th>';
             html_code += '<th>ชื่อ - นามสกุล</th>';
             html_code += '<th>หน่วยงาน</th>';
             html_code += '<th>อีเมล</th>';
-            html_code += '<th></th>';
-            html_code += '<th></th>';
+            html_code += '<th style="text-align: center;">ดำเนินการ</th>';
             html_code += '</tr>';
             html_code += '</thead>';
             html_code += '<tbody>';
@@ -80,27 +91,41 @@
                 html_code += '<tr>';
                 html_code += '<td>' + row_mem['pro_name'] + '</td>';
                 html_code += '<td>' + row_mem['mem_username'] + '</td>';
-                // ชื่อหน่วยงาน
                 html_code += '<td   >' + row_mem['mem_firstname'] + ' ' + row_mem['mem_lastname'] + '</td>';
-
-
                 html_code += '<td>' + row_mem['dep_name'] + '</td>';
-                html_code += '<td>' + row_mem['mem_email'] + '</td>';
-                // สถานะของหน่วยงาน
+                let text = row_mem['mem_email'];
+                let result = text.indexOf('@');
+                let result2 = result - 3;
+                let total_email = text.substr(0, result2) + '***' + text.substr(result);
+                html_code += '<input type="hidden" id="' + row_mem['mem_id'] + '" value="' + row_mem[
+                    'mem_email'] + '">';
+
+                html_code += '<td> <div id="email' + row_mem['mem_id'] + '">' + total_email +
+                    '</div></td>';
+
+
                 html_code += '<td style="text-align: center;">' +
-                    '<a href="<?php echo site_url() ?>/Member/Member_edit/show_member_edit/' + row_mem[
+                    '<button type="button" class="btn bg-gradient-primary" onclick="show_email(' +
+                    row_mem[
+                        'mem_id'] + ')" >' +
+                    '<i id="eye' + row_mem['mem_id'] + '" class="far fa-eye-slash"></i>' + '</button>';
+
+
+
+
+
+                html_code += '<a href="<?php echo site_url() ?>/Member/Member_edit/show_member_edit/' + row_mem[
                         'mem_id'] + '">' +
-                    '<i class="far fa-edit"></i>' + '</a>' + '</td>';
+                    '<i class="far fa-edit"></i>' + '</a>';
                 // button edit data
-                html_code += '</td>';
-                html_code += '<td style="text-align: center;">' +
-                    '<button type="button" class="btn bg-gradient-primary" onclick="delete_member(' + row_mem[
+                html_code += '<button type="button" class="btn bg-gradient-primary" onclick="delete_member(' +
+                    row_mem[
                         'mem_id'] + ')">' +
                     '<i class="fas fa-trash">' + '</button>' + '</td>';
                 // button delete data
                 html_code += '</td>';
                 html_code += '</tr>';
-            }); // end loop of department
+            });
             html_code += '</tbody>';
             html_code += '</table>';
             html_code += '</div>';
@@ -109,6 +134,44 @@
             make_dataTable_byId('datatable_mem_list');
 
         }
+
+
+        /*
+         * v_member_list
+         * Display create email
+         * @input -
+         * @output 62160***@go.buu.ac.th
+         * @author Apinya
+         * @Create Date 2565-08-04
+         */
+
+        function show_email(mem_id) {
+
+            var email = $('#' + mem_id).val();
+            var x = document.getElementById("email" + mem_id);
+            console.log(email);
+            console.log(x.innerHTML);
+            if (x.innerHTML == email) {
+                let result = email.indexOf('@');
+                let result2 = result - 3;
+                let total_email = email.substr(0, result2) + '***' + email.substr(result);
+                $("#email" + mem_id).html(total_email);
+                $('#eye' + mem_id).removeClass('far fa-eye').addClass('far fa-eye-slash');
+
+                // $('#eye').removeClass('far fa-eye-slash').addClass('fas fa-trash');
+
+            } else {
+                $("#email" + mem_id).html(email);
+                // $('#eye').removeClass('fas fa-trash').addClass('far fa-eye-slash');
+                $('#eye' + mem_id).removeClass('far fa-eye-slash').addClass('far fa-eye');
+
+            }
+            // html_code += '<td style="text-align: center;">' +
+            //     '<button type="button" class="btn bg-gradient-primary" onclick='
+            // row_mem['mem_email'] + '">' + '<i class="far fa-eye-eye"></i>' + '</button>' + '</td>';
+
+        }
+
 
         function make_dataTable_byId(id_name) {
             var datatable = $('#' + id_name).DataTable({
@@ -140,7 +203,8 @@
                 "stateDuration": -
                     1, //บังคับใช้ sessionStorage แทน localStorage (ดังนั้นแม้ใช้คำสั่งของ localStorage มันก็ไป save ใน sessionStorage อยู่ดี)
                 "fnStateSave": function(oSettings, oData) {
-                    localStorage.setItem('DataTables_' + window.location.pathname, JSON.stringify(oData));
+                    localStorage.setItem('DataTables_' + window.location.pathname, JSON.stringify(
+                        oData));
                 },
                 "fnStateLoad": function(oSettings) {
                     var data = localStorage.getItem('DataTables_' + window.location.pathname);
@@ -162,10 +226,13 @@
             Swal.fire({
                 title: 'ยืนยันการลบบัญชีผู้ใช้',
                 showCancelButton: true,
-                confirmButtonColor: '#0c83e2',
+                confirmButtonColor: '#518FF6',
                 cancelButtonColor: '#fffff',
-                confirmButtonText: 'ยืนยัน',
-                cancelButtonText: 'ยกเลิก'
+                confirmButtonColor: '#198754',
+                cancelButtonColor: '#f44336',
+                cancelButtonText: 'ยกเลิก',
+                confirmButtonText: 'บันทึก'
+
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
@@ -183,11 +250,9 @@
 
                 }
             })
-
-
-
         };
         </script>
+
         <style>
         /*ปรับรูปแบบตัวอักษร */
         @import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');

@@ -179,6 +179,8 @@ function make_dataTable_byId(id_name) {
         <div class="modal-body">
             <center><input type="text" class="col-md-10" placeholder="กรอกชื่อหน่วยงาน" name="dep_name" required ></center>
             <!-- <input type="hidden" name="station_status" value="1"> -->
+            <br>
+            <label style = "color: #FF0000;"><span id ="text_confirm_add"></span></label>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
@@ -192,6 +194,8 @@ function make_dataTable_byId(id_name) {
 <!-- ajax add data -->
 <!-- send value from add modal to add department -->
 <script type="text/javascript">
+  var text_confirm_add = document.getElementById("text_confirm_add");
+  text_confirm_add.innerHTML = "";
   $('#add-form').submit(function(){
     $.ajax({
         type: 'post',
@@ -200,7 +204,8 @@ function make_dataTable_byId(id_name) {
         dataType: 'json',
         success: function(data) {
               // console.log("succ");
-              alert('มีข้อมูลนี้ในระบบอยู่แล้วหรือไม่ได้กรอกข้อมูล กรุณากรอกใหม่');
+              text_confirm_add.innerHTML = "มีข้อมูลนี้ในระบบอยู่แล้วหรือไม่ได้กรอกข้อมูล กรุณากรอกใหม่";
+              // alert('มีข้อมูลนี้ในระบบอยู่แล้วหรือไม่ได้กรอกข้อมูล กรุณากรอกใหม่');
         },
         error: function (error) {
           // console.log("error");
@@ -225,7 +230,8 @@ function make_dataTable_byId(id_name) {
       <form id="edit-form" method="POST" onsubmit="return false">
         <div class="modal-body">
             <center><input type="text" class="col-md-10" placeholder="กรอกชื่อหน่วยงาน" name="dep_name" id="dep_name" value="" required ></center>
-            <input type="hidden" name="dep_id" id="dep_id" value="">
+            <input type="hidden" name="dep_id" id="dep_id" value=""><br>
+            <label style = "color: #FF0000;"><span id ="text_confirm_edit"></span></label>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
@@ -247,6 +253,8 @@ function make_dataTable_byId(id_name) {
 
 <!-- edit modal -->
 <script type="text/javascript">
+  var text_confirm_edit = document.getElementById("text_confirm_edit");
+  text_confirm_edit.innerHTML = "";
   $('#edit-form').submit(function(){
     $.ajax({
         type: 'post',
@@ -255,7 +263,8 @@ function make_dataTable_byId(id_name) {
         dataType: 'json',
         success: function(data) {
               // console.log("succ");
-              alert('มีข้อมูลนี้ในระบบอยู่แล้วหรือไม่ได้กรอกข้อมูล กรุณากรอกใหม่');
+              text_confirm_edit.innerHTML = "มีข้อมูลนี้ในระบบอยู่แล้วหรือไม่ได้กรอกข้อมูล กรุณากรอกใหม่";
+              // alert('มีข้อมูลนี้ในระบบอยู่แล้วหรือไม่ได้กรอกข้อมูล กรุณากรอกใหม่');
         },
         error: function (error) {
           // console.log("error");

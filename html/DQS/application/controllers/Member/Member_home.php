@@ -28,7 +28,7 @@ class Member_home extends DQS_controller
 public function show_member_home()
 {
 	$this->load->model('M_DQS_folder', 'fol');
-	$this->load->model('M_DQS_login', 'qrc');
+	$this->load->model('M_DQS_document', 'qrc');
 	$memid = $this->session->userdata('mem_id');
 	$data['arr_fol'] = $this->fol->get_by_id($memid)->result();
 	$data['arr_qr'] = $this->qrc->get_by_id($memid)->result();
@@ -74,15 +74,17 @@ public function show_member_home()
 	public function show_in_folder($fol_location_id)
 	{
 		$this->load->model('M_DQS_folder', 'fol');
-		$this->load->model('M_DQS_login', 'qrc');
+		$this->load->model('M_DQS_document', 'qrc');
 		$memid = $this->session->userdata('mem_id');
 		$this->session->set_userdata('fol_location_id', $fol_location_id);
 		$path_folder = $this->fol->get_by_id_fol($fol_location_id)->result();
+		$this->session->set_userdata('fol_id', $path_folder[0]->fol_id);
 		$data['arr_fol'] = $this->fol->get_by_member_id($memid, $fol_location_id,)->result();
 		$data['arr_qr'] = $this->qrc->get_by_id_folder($memid)->result();
 		$data['arr_folder'] = $this->fol->get_all()->result();
 		$path_location =  $path_folder[0]->fol_location ; //เช็คค่า ที่อยู่ใน data base
 		$sub_folder = substr($path_location, 21 ).'/'; // sub string เอาแต่ location ชือของ folder
+		$this->session->set_userdata('path', $sub_folder);
 		$get_sub_folder = ' '.$sub_folder;
 		$sub_path_folder = strpos($sub_folder,'/'); // sub pos แยกตัว '/' ออกมาแต่ละชื่อ
 		$show_path_folder = substr($sub_folder,$sub_path_folder);

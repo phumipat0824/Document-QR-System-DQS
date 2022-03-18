@@ -98,7 +98,7 @@ class Folder_management extends DQS_controller {
 		if ($this->input->post('fol_location_id') == 0) {
 			$newpath = './assets/user/' . $this->session->userdata('mem_username') . '/';
 		} else {
-			$get_name_location = $this->folder->get_by_id_fol($this->input->post('fol_location_id'))->result();
+			$get_name_location = $this->Mfol->get_by_id_fol($this->input->post('fol_location_id'))->result();
 			$newpath = $get_name_location[0]->fol_location . '/';
 		}
 		//ตั้งชื่อไฟล์ใหม่โดยเอาเวลาไว้หน้าชื่อไฟล์เดิม
@@ -161,7 +161,6 @@ class Folder_management extends DQS_controller {
 		rmdir($newpath);/* Delete folder by using rmdir function */
 		
 		redirect('Member/Member_home/show_member_home');
-
 		
 	}//end funtion delete_folder()
     

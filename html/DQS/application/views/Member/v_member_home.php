@@ -7,7 +7,8 @@
 */ -->
  <link href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/css/dqs_right_click_menu.css" rel="stylesheet" />
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
+ <?php $this->session->set_userdata('fol_id_new', '');?>
+ <?php $this->session->set_userdata('path_new', '');?>
 
  <div class="content">
      <div class="row" style="padding: 100px 10px 10px 20%;">
@@ -21,8 +22,11 @@
                  </button>
                  <div id="myDropdown" class="dropdown-content">
                      <div class="custom-cm__item" data-toggle="modal" data-target="#exampleModal"><a>สร้างโฟลเดอร์</a></div>
-
-                     <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file'; ?>">อัปโหลดไฟล์</a></div>
+                     <?php if ($this->session->userdata('fol_id') == null) { ?>
+                     <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file/';?>">อัปโหลดไฟล์</a></div>
+                     <?php } else{ ?>
+                     <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file_in_floder/'.$this->session->userdata('fol_id');?>">อัปโหลดไฟล์</a></div>
+                     <?php } ?>
                  </div>
              </div>
          </div>
@@ -32,7 +36,7 @@
          <div>
              <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 
-                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" style="color:#707070; font-weight: 900; font-family:TH Sarabun New; font-size: 25px;" href="<?php echo site_url() . '/Member/Member_home/show_member_home'; ?>">คิวอาร์โค้ดของฉัน</a></li>
+                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" style="color:#707070; font-weight: 900; font-family:TH Sarabun New; font-size: 25px;" href="<?php echo site_url() . '/Member/Member_home/show_member_home'; ?>">หน้าหลัก</a></li>
                  <?php for ($i = 0; $i < count($path_fol); $i++) { ?>
                  <?php if ($path_fol[$i] != '@') { ?>
                  <li class="breadcrumb-item text-sm text-dark active" style="font-size: 20px;"><a class="opacity-5 text-dark" style="color:#707070;  font-weight: 900; font-family:TH Sarabun New; font-size: 25px;" href="<?php echo site_url() . '/Member/Member_home/show_in_folder/66'; ?>"><?php echo $path_fol[$i] ?></a></li>
@@ -43,7 +47,8 @@
          <br>
          <br>
          <?php
-        for ($i = 0; $i < count($arr_fol); $i++) {   ?>
+
+            for ($i = 0; $i < count($arr_fol); $i++) {   ?>
 
          <div class="col-3">
 
@@ -75,9 +80,16 @@
 
                  <?php } else { ?>
                  <!--  โฟลเดอร์ปกติ -->
-                 <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" style=" background-color:#ffff; border: 2px solid#c7c6c4; height: 60px; width: 260px;">
+                 <?php
+                            $sub_name_folder = $arr_fol[$i]->fol_name;
+                            if (strlen($sub_name_folder) > 30) {
+                                $sub_name_folder = substr($sub_name_folder, 0, 30,) . "...";
+                            }
+                            ?>
+
+                 <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" data-placement="bottom" title="<?php echo $arr_fol[$i]->fol_name ?>" style=" background-color:#ffff; border: 2px solid#c7c6c4; height: 60px; width: 260px;">
                      <i class="material-icons" style="margin-left: -20px; font-size:30px;  color:#f3ff41;">folder</i>
-                     <a style=" font-size: 26px; font-weight:900; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
+                     <a style=" font-size: 26px; font-weight:900; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo  $sub_name_folder ?></a>
                  </button>
                  <div id="showmenu" style="display:block">
                      <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
@@ -208,7 +220,7 @@
                      <div class="modal-header">
                          <h5 class="modal-title" id="exampleModalLabel">ย้ายไปที่</h5>
                      </div>
-                     <form id="move-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/move_folder/';?>">
+                     <form id="move-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/move_folder/'; ?>">
                          <div class="modal-body">
 
                              <!-- dropdown folder name -->
@@ -217,7 +229,7 @@
                                  <option value="" disabled selected hidden>เลือกโฟลเดอร์</option>
                                  <option value='0'>หน้าหลัก</option>
                                  <?php for ($i = 0; $i < count($arr_folder); $i++) {   ?>
-                                 <?php if($arr_folder[$i]->fol_mem_id == $this->session->userdata('mem_id')){ ?>
+                                 <?php if ($arr_folder[$i]->fol_mem_id == $this->session->userdata('mem_id')) { ?>
                                  <option value='<?php echo $arr_folder[$i]->fol_id ?>'><?php echo $arr_folder[$i]->fol_name ?></option>
                                  <?php } ?>
                                  <?php } ?>
@@ -246,7 +258,8 @@
  <div class="row" style="padding: 100px 10px 10px 20%;">
      <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">คิวอาร์โค้ด</h3>
      <?php for ($i = 0; $i < count($arr_qr); $i++) {   ?>
-     <?php if($arr_qr[$i]->doc_fol_id == null){ ?>
+     <?php if ($this->session->userdata('fol_id') == null) { ?>
+     <?php if ($arr_qr[$i]->doc_fol_id == null) { ?>
      <div class="col-md-4">
          <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px; width:500;">
              <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
@@ -280,6 +293,42 @@
          </div>
      </div>
      <?php }  ?>
+     <?php } else{ ?>
+     <?php if ($arr_qr[$i]->doc_fol_id == $this->session->userdata('fol_id')) { ?>
+     <div class="col-md-4">
+         <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px; width:500;">
+             <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
+                 <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;">คิวอาร์โค้ด</h>
+             </div>
+             <div class="card-body">
+                 <div class="form-row">
+                     <div class="form-group col-md-4" id="qrcode">
+                         <img id="img" src="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" height="128" width="128" style="margin: auto;">
+                         <button id="download" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button>
+                     </div>
+                     <div class="form-group col-md-4">
+                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชื่อ : </h5>
+                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"><?php echo $arr_qr[$i]->qr_name ?></h5>
+
+                         <!-- <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">วันที่สร้าง : </h5>
+                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"><?php echo $arr_qr[$i]->doc_datetime ?></h5> -->
+
+                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิด : </h5>
+                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"> <?php echo $arr_qr[$i]->doc_type ?></h5>
+
+                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ราายงานสรุปผล : </h5>
+                     </div>
+                     <div class="form-group col-md-4">
+                         <button id="edit2" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">แก้ไข</button>
+                         <button id="remove2" class="btn btn-" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
+                         <button id="delete2" class="btn btn-" style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ลบ</button>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <?php }  ?>
+     <?php }  ?>
      <?php }  ?>
  </div>
 
@@ -287,6 +336,8 @@
 
 
  <script>
+<?php $this->session->set_userdata('fol_id', '');?>
+<?php $this->session->set_userdata('path', '');?>
 $(document).on("keyup", "#fol_name", function() {
     var t = <?php echo json_encode($arr_fol) ?>;
     var new_name = document.getElementById("fol_name");

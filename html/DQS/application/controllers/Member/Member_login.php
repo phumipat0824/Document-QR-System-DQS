@@ -6,8 +6,11 @@
 * @Create Date 2564-08-05
 */
 defined('BASEPATH') or exit('No direct script access allowed');
-
+use PHPMailer\PHPMailer\PHPMailer;
 require dirname(__FILE__) . '/../DQS_controller.php';
+require_once dirname(__FILE__) . "/../../../mail/PHPMailer/PHPMailer.php";
+require_once dirname(__FILE__) . "/../../../mail/PHPMailer/SMTP.php";
+require_once dirname(__FILE__) . "/../../../mail/PHPMailer/Exception.php";
 
 class Member_login extends DQS_controller
 {
@@ -56,8 +59,8 @@ class Member_login extends DQS_controller
             // log in complete
 
             // set id and name for user
-            $this->session->set_userdata('mem_username', $mem_username);
-            $this->session->set_userdata('username', $mem_username);
+            $this->session->set_userdata('mem_username', $obj_mem->mem_username);
+            $this->session->set_userdata('username', $obj_mem->mem_username);
             $this->session->set_userdata('mem_password', md5($mem_password));
             $this->session->set_userdata('old_password', $mem_password);
             $this->session->set_userdata('mem_id', $obj_mem->mem_id);
@@ -77,25 +80,6 @@ class Member_login extends DQS_controller
 
         }
     }
-     /*
-    * show_member_home
-    * Go to member home
-    * @input -
-    * @output view
-    * @author Ashirawat, Krsiada
-    * @Create Date 2564-08-05
-    */
-
-    
-
-    /*
-    * show_session
-    * Show session member 
-    * @input -
-    * @output view
-    * @author Ashirawat
-    * @Create Date 2564-11-10
-    */
 
     public function show_session(){
 
@@ -103,7 +87,6 @@ class Member_login extends DQS_controller
         echo '<pre>';
         print_r($arr_session);
         echo '</pre>';
-    
 
     }
 
@@ -133,7 +116,7 @@ class Member_login extends DQS_controller
 
     public function check_user($mem_username, $mem_password)
     {
-        $this->load->model('M_DQS_login', 'mlog');
+        $this->load->model('M_DQS_document', 'mlog');
         return $this->mlog->get_by_username_password($mem_username, $mem_password)->row();
     }
 
@@ -144,48 +127,56 @@ class Member_login extends DQS_controller
 
     public function reset_password()
     {
-        $mem_email = $this->input->post('mem_email');
+        $this->load->model('M_DQS_member', 'MEM');
+        $mem_id = $this->input->post('mem_id');
         $mem_password = $this->input->post('mem_password');
-        $mem_confirm = $this->input->post('mem_confirm');
-
-        if($mem_password == NULL || $mem_confirm == NULL){
-            echo $mem_email;
-            echo $mem_password;
-            echo $mem_confirm;
-            echo json_encode(false);
-        }else if($mem_password != $mem_confirm){
-            echo json_encode(false);
-        }else if($mem_password == $mem_confirm ){
-            $this->load->model('M_DQS_member', 'MDM');
-            $this->MDM->mem_email = $mem_email;
-            $this->MDM->mem_password = md5($mem_password);
-            $this->MDM->update_password();
-            echo json_encode(true);
-        }
+        $this->MEM->mem_password = md5($mem_password);
+        $this->MEM->mem_id = $mem_id;
+		$this->MEM->update_password();
+		$this->output_navbar("Member/v_member_login");
+        
     }
 
 
-    public function show_reset_password()
+    public function show_reset_password($user_name)
     {
-        $mem_email = $this->input->post('mem_email');
-        $data['mem_email'] = $mem_email;
-        $this->output_navbar("Member/v_member_reset_password", $data);
+        $mem_user;
+        $this->load->model('M_DQS_member', 'MEM');
+        $user = $this->MEM->get_all_user()->result();
+        //$member_username =  $data['arr_mem_email']->mem_username;
+        for ($i = 0; $i < count($user); $i++){
+            $member_username = $user[$i]->mem_username;
+            $member_username = md5($member_username);
+            if($member_username == $user_name){
+                $data["mem_id"] = $user[$i]->mem_id;
+                $this->output_navbar("Member/v_member_reset_password",$data);
+            }
+     
+           
+        }
+            //echo $mem_user;
+        
     }
 
 
 
     public function check_email()
     {
-        $this->load->model('M_DQS_member', 'MDM');
+        $this->load->model('M_DQS_department', 'MDD');
+        $data = $this->MDD->get_member()->result();
+        
         $mem_email = $this->input->post('mem_email');
-        $mem_email_cut = substr($mem_email, 0, strpos($mem_email, '@'));
-        $data['arr_mem_email'] = $this->MDM->get_by_email($mem_email)->result();
-        $count_mem_email = count($data['arr_mem_email']);
-        if ($count_mem_email == 1 || $count_mem_email >= 1) {
-            echo true;
-        } else {
-            echo false;
+        $check = 0;
+
+        for ($i=0 ; $i<count($data);$i++){
+            if($data[$i]->mem_email == $mem_email ){
+                $check = 1;
+            
+            }
+              
         }
+        echo json_encode($check);
+        
     }
 
     public function check_name()
@@ -201,5 +192,86 @@ class Member_login extends DQS_controller
         } else {
             echo false;
         }
+    }
+
+    /*
+    * send_mail
+    * send e-mail for reset passwolrd
+    * @input email
+    * @output -
+    * @author Phumipat
+    * @Create Date 2565-02-22
+    */
+    public function send_mail(){
+    //use PHPMailer\PHPMailer\PHPMailer;
+    
+       
+    if(isset($_POST['email'])) {
+
+        $email = $_POST['email'];
+        $name = "Document QR System : DQS";
+        $header = "แจ้งรีเซ็ตรหัสผ่านระบบจัดเก็บเอกสารเพื่อสร้างคิวอาร์โค้ด (Document QR System : DQS)";
+        //$detail  = "กดที่ลิงค์เพื่อรีเซ็ตรหัสผ่านของคุณ";
+
+        $this->load->model('M_DQS_member', 'MDM');
+        $obj_mail = $this->MDM->get_by_email($email)->result();
+        $user_name = md5($obj_mail[0]->mem_username);
+        $link = site_url()."/Member/Member_login/show_reset_password/" .  $user_name;
+        $ftag = '<a href="';
+        $ltag = '"> คลิกที่นี่</a>';
+        $atag = $ftag.$link.$ltag;
+        $detail = ' <div style="border: 1px solid #eeeeee;">
+        <center>
+            <div style="padding-top:2%">
+                <img src="http://103.129.15.182/DQS/assets/image/logo_dqs.PNG" height="150" width="150">
+            </div>    
+        </center>
+        <center style="margin-bottom:10px;">
+        <h2>Document QR System : DQS</h2>
+        </center>
+        <br>
+        <div style="margin-left: 5%;margin-bottom: 2%;">
+            <a>ท่านได้ทำการแจ้งลืมรหัสผ่าน</a><br>
+            <a>โปรดคลิกที่ลิงค์ดังกล่าวเพื่อตั้งรหัสผ่านใหม่</a><br>
+            <a>Please click the link below to set new password </a>'
+            . $atag.
+            
+        '</div>
+        </div>';
+        
+
+        //exit(print ($user_name));
+        $mail = new PHPMailer();
+
+        // SMTP Settings
+        $mail->isSMTP();
+        $mail->Host = "smtp.gmail.com";
+        $mail->SMTPAuth = true;
+        $mail->Username = "info.dqs.team1@gmail.com"; // enter your email address
+        $mail->Password = "1212312121!"; // enter your password
+        $mail->Port = 465;
+        $mail->SMTPSecure = "ssl";
+        
+        //Email Settings
+        $mail->isHTML(true);
+        $mail->setFrom($email, $name);
+        $mail->addAddress($email); // Send to mail
+        $mail->CharSet = "utf-8";
+        $mail->Subject = $header;
+        $mail->Body = $detail;
+        
+
+        if($mail->send()) {
+            $status = "success";
+            $response = "Email is sent";
+        } else {
+            $status = "failed";
+            $response = "Something is wrong" . $mail->ErrorInfo;
+        }
+    
+        //exit(json_encode(array("status" => $status, "response" => $response)));
+        $this->output_navbar("Member/v_member_login");
+    }
+    
     }
 }

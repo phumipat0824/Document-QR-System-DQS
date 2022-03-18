@@ -154,5 +154,18 @@ class M_DQS_member extends Da_DQS_member
         return $query->num_rows($array);
     }//รับค่าผ่านตัวแปร mem_dep_id และ mem_pro_id.
 
-
+    public function get_all_user()
+    {
+        $sql = "SELECT * from {$this->db_name}.DQS_Member";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+    public function update_password()
+    {
+        $sql = "UPDATE {$this->db_name}.DQS_Member
+                SET mem_password = ?
+                WHERE mem_id = ? "; 
+        $this->db->query($sql, array($this->mem_password, $this->mem_id)); 
+    }
 }
+
