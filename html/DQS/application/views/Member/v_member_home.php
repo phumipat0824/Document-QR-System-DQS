@@ -7,7 +7,8 @@
 */ -->
  <link href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/css/dqs_right_click_menu.css" rel="stylesheet" />
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
+ <?php $this->session->set_userdata('fol_id_new', '');?>
+ <?php $this->session->set_userdata('path_new', '');?>
 
  <div class="content">
      <div class="row" style="padding: 100px 10px 10px 20%;">
