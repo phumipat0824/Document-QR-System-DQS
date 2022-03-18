@@ -305,12 +305,12 @@
     });
 
     /*
-        * get_province
-        * get province from database
-        * @input -
-        * @output mem_pro_id
-        * @author Natruja
-        * @Create Date 2565-02-18
+	* get_province
+	* get province from database
+	* @input -
+	* @output mem_pro_id
+	* @author Natruja
+	* @Create Date 2565-02-18
     */
     function get_pro(){
         var mem_pro_ID = document.getElementById("mem_pro_id");
@@ -320,12 +320,12 @@
     }
 
     /*
-        * get_dept
-        * check email validation
-        * @input value_pro_id
-        * @output data
-        * @author Ratchaneekorn
-        * @Create Date 2565-02-15
+	* get_dept
+	* get department from get province
+	* @input -
+	* @output mem_pro_id
+	* @author Natruja
+	* @Create Date 2565-02-18
     */
     function get_dept(value_pro_id){
     $.ajax({
@@ -333,7 +333,7 @@
       url: "<?php echo site_url() ."Member/Member_register/get_dept_list_ajax" ?>",
       dataType: 'JSON',
       data: {
-            'mem_pro_ID': value_pro_id
+            'mem_pro_list': value_pro_id
         },
       success:function(data){
           console.log(data); 
@@ -346,12 +346,12 @@
 
 
     /*
-        * dep_input
-        * check email validation
-        * @input value_pro_id
-        * @output data
-        * @author Ratchaneekorn
-        * @Create Date 2565-02-15
+	* dep_input
+	* get deparment to select option
+	* @input -
+	* @output -
+	* @author Natruja
+	* @Create Date 2565-02-18
     */
     function dep_input(arr_dep) {//
     
