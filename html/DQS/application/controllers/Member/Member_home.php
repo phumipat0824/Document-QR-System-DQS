@@ -95,7 +95,7 @@ public function show_member_home()
 			$new_sub_folder = substr($get_sub_folder, 0, $sub_path_folder);
 			$get_sub_folder = substr($get_sub_folder,$sub_path_folder);
 			$real_path_folder = substr($new_sub_folder,0,-1);
-			 array_push($arr,$real_path_folder);		
+			array_push($arr,$real_path_folder);		
 			
 		}while(strpos($get_sub_folder,'/') != null);
 		$data['path_fol'] = $arr;
@@ -106,5 +106,16 @@ public function show_member_home()
 			$this->output_sidebar_member("Member/v_member_home", $data);
 		}
 	}
+	public function delete_file($file_id){
+        $this->load->model('M_DQS_document','MDD');
+		$this->MDD->doc_id = $file_id;
+		$data['qr'] = $this->MDD->get_by_qr_id($file_id)->result();
+		$qr_id = $data['qr'][0]->qr_id;
+        $this->MDD->delete_qr_file($qr_id);
+        $this->MDD->delete_file();
+
+        redirect('/Member/Member_home/show_member_home');
+        
+    }
 
 }
