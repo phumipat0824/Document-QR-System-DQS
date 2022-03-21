@@ -202,7 +202,6 @@
                      <form id="delete-form" method="POST"
                          action="<?php echo site_url() . '/Folder/Folder_management/delete_folder/'; ?>">
                          <div class="modal-body">
-
                              <input type="hidden" name="fol_id" id="fol_id" value="">
 
                              <input type="hidden" name="fol_location_id" id="fol_location_id"
@@ -344,14 +343,14 @@
                              <?php echo $arr_qr[$i]->doc_type ?></h5>
 
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
-                             ราายงานสรุปผล : </h5>
+                             รายงานสรุปผล : </h5>
                      </div>
                      <div class="form-group col-md-4">
                          <button id="edit" class="btn btn-"
                              style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">แก้ไข</button>
                          <button id="remove" class="btn btn-"
                              style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
-                         <a href="<?php echo site_url() . '/Member/Member_home/delete_file/'.$arr_qr[$i]->doc_id; ?>">
+                         <a href="#" class="deleteFileModal" data-toggle="modal" data-target="#deleteFileModal">
                              <button id="delete" class="btn btn-"
                                  style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">
                                  ลบ</button></a>
@@ -361,6 +360,38 @@
          </div>
      </div>
      <?php }  ?>
+
+
+     <!-- deleteFile Modal -->
+     <div class="modal fade" id="deleteFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+         <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h6 class="modal-title" id="exampleModalLabel"
+                         style="font-family:TH sarabun new; font-size: 30px; "><b>
+                             ยืนยันการลบเอกสาร</b></h6>
+
+                 </div>
+
+                 <form id="delete-form" method="POST"
+                     action="<?php echo site_url() . '/Member/Member_home/delete_file/'.$arr_qr[$i]->doc_id; ?>">
+                     <div class="modal-body">
+
+                         <input type="hidden" name="doc_id" id="doc_id" value="">
+
+                     </div>
+                     <div class="modal-footer">
+                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                         <input type="submit" class="btn btn-success" value="ยืนยัน">
+                     </div>
+                 </form>
+             </div>
+         </div>
+     </div>
+
+     <!-- End DeleteFile Model -->
+
      <?php } else{ ?>
      <?php if ($arr_qr[$i]->doc_fol_id == $this->session->userdata('fol_id')) { ?>
      <div class="col-md-4">
