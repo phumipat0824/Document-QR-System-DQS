@@ -106,6 +106,7 @@ public function show_member_home()
 			$this->output_sidebar_member("Member/v_member_home", $data);
 		}
 	}
+
 	public function delete_file($file_id){
         $this->load->model('M_DQS_document','MDD');
 		$this->MDD->doc_id = $file_id;
@@ -113,6 +114,25 @@ public function show_member_home()
 		$qr_id = $data['qr'][0]->qr_id;
         $this->MDD->delete_qr_file($qr_id);
         $this->MDD->delete_file();
+
+        redirect('/Member/Member_home/show_member_home');
+        
+    }
+
+	/*
+	* update_document()
+	* update document name
+	* @input doc_name
+	* @output update doc_name
+	* @author Onticha
+	* @Create Date 2565-03-21
+	*/
+	public function update_file($file_id){
+        $this->load->model('M_DQS_document','MDD');
+		$this->MDD->doc_id = $file_id;
+		// $data['qr'] = $this->MDD->get_by_qr_id($file_id)->result();
+		// $qr_id = $data['qr'][0]->qr_id;
+        $this->MDD->update_file();
 
         redirect('/Member/Member_home/show_member_home');
         

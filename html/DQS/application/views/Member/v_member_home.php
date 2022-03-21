@@ -307,6 +307,7 @@
                              รายงานสรุปผล : </h5>
                      </div>
                      <div class="form-group col-md-4">
+                     <a href="#" class="EditFileModal" data-toggle="modal" data-target="#EditFileModal">
                          <button id="edit" class="btn btn-"
                              style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">แก้ไข</button>
                          <button id="remove" class="btn btn-"
@@ -352,6 +353,37 @@
      </div>
 
      <!-- End DeleteFile Model -->
+
+     <!-- EditFile Modal -->
+     <div class="modal fade" id="EditFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; ">
+                    <b>แก้ไขชื่อไฟล์</h6>
+                </div>
+                
+                <form id="edit-form" method="POST" action="<?php echo site_url() .'/Member/Member_home/update_file/'.$arr_qr[$i]->doc_id; ?>">
+                
+                <div class="modal-body">
+                    <center>
+                        <input onkeyup="check_file_edit()" type="text" class="col-md-10" id="doc_edit" placeholder="" name="fol_name" required>
+                    </center>
+                    <br>
+                    <a id="edit_mss" style="display: none; color:red;" align='center'>กรุณากรอกข้อมูลใหม่</a>
+                        <input type="hidden" name="doc_id" id="folder_id" value="">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                    <input type="submit" class="btn btn-success" id="edit" value="บันทึก">
+                </div>
+                
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End UpdateFile Model -->
 
      <?php } else{ ?>
      <?php if ($arr_qr[$i]->doc_fol_id == $this->session->userdata('fol_id')) { ?>
@@ -484,7 +516,15 @@
          document.getElementById("fol_edit").value = name;
      });
 
-
+     $(document).on("click", ".EditFileModal", function() {
+         var id = $(this).attr('data-id');
+         $("#doc_id").val(id);
+         console.log(id);
+         var name = $(this).attr('data-name');
+         $("#doc_name").val(name);
+         document.getElementById("doc_id").value = id;
+         document.getElementById("doc_edit").value = name;
+     });
 
      $(document).on("click", ".deleteModal", function() {
          var id = $(this).attr('data-id');
@@ -671,4 +711,71 @@
              e.preventDefault();
          });
      });
+ </script>
+
+<!-- EditFile Script -->
+<script>
+     <?php $this->session->set_userdata('doc_id', ''); ?>
+     <?php $this->session->set_userdata('path', ''); ?>
+     $(document).on("keyup", "#doc_name", function() {
+         var t = <?php echo json_encode($arr_doc) ?>;
+         var new_name = document.getElementById("doc_name");
+         var check_name;
+         var div = document.getElementById('target_div');
+         var dis_button = document.getElementById('create');
+
+         for (let x in t) {
+             if (t[x].doc_name == new_name.value) {
+                 check_name = 1;
+                 break;
+             } else {
+                 check_name = 0;
+             }
+         }
+         console.log(check_name);
+         if (check_name == 1) {
+             $("#doc_name").css("border-color", "red");
+             div.style.display = "block";
+             dis_button.disabled = true;
+
+         } else {
+             $("#doc_name").css("border-color", "green");
+             div.style.display = "none";
+             dis_button.disabled = false;
+
+         }
+     });
+
+     function check_file_edit() {
+
+         var dis_button = document.getElementById('edit');
+         dis_button.disabled = false;
+
+         var t = <?php echo json_encode($arr_doc) ?>;
+         var new_name = document.getElementById("doc_edit");
+         var check_name;
+         var div = document.getElementById('edit_mss');
+
+
+         for (let x in t) {
+             if (t[x].fol_name == new_name.value || new_name.value == " ") {
+                 check_name = 1;
+                 break;
+             } else {
+                 check_name = 0;
+             }
+         }
+         console.log(check_name);
+         if (check_name == 1) {
+             $("#doc_edit").css("border-color", "red");
+             div.style.display = "block";
+             dis_button.disabled = true;
+
+         } else {
+             $("#doc_edit").css("border-color", "green");
+             div.style.display = "none";
+             dis_button.disabled = false;
+
+         }
+     }
  </script>

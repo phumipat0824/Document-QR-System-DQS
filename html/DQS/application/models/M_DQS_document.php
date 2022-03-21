@@ -100,4 +100,19 @@ class M_DQS_document extends Da_DQS_document {
         $query = $this->db->query($sql);
         return $query;
     }
+
+    /*
+    * check_exist_name($doc_name)
+    * check exist name
+    * @input doc_name
+    * @output -
+    * @author Onticha
+    * @Create Date 2565-03-21
+    */
+    public function check_exist_name($doc_name)
+    {
+        $this->db->where('doc_name', $doc_name);
+        $query = $this->db->get('DQS_Document');
+        return $query->num_rows();
+    }
 }
