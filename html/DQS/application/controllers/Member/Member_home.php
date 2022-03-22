@@ -177,28 +177,28 @@ public function show_member_home()
 		$path_qr = "";
 
 //Edit  Document
-		do{
-			$sub_path_doc = strpos($get_sub_doc,'/'); 	
-			$sub_path_doc = $sub_path_doc + 1;
-			$new_sub_doc = substr($get_sub_doc, 0, $sub_path_doc);
-			$get_sub_doc = substr($get_sub_doc,$sub_path_doc);
-			$real_path_doc = substr($new_sub_doc,0,-1);
-			array_push($arr,$real_path_doc);
-			$i++;
-			if($i != 1){
-				$path_doc = $path_doc."/".$real_path_doc;		
-			}
+		// do{
+		// 	$sub_path_doc = strpos($get_sub_doc,'/'); 	
+		// 	$sub_path_doc = $sub_path_doc + 1;
+		// 	$new_sub_doc = substr($get_sub_doc, 0, $sub_path_doc);
+		// 	$get_sub_doc = substr($get_sub_doc,$sub_path_doc);
+		// 	$real_path_doc = substr($new_sub_doc,0,-1);
+		// 	array_push($arr,$real_path_doc);
+		// 	$i++;
+		// 	if($i != 1){
+		// 		$path_doc = $path_doc."/".$real_path_doc;		
+		// 	}
 			
-		}while(strpos($get_sub_doc,'/') != null);
+		// }while(strpos($get_sub_doc,'/') != null);
 
-		$path_doc = ".".$path_doc."/".$this->input->post('doc_name').".jpeg";
-		$this->MDD->doc_path = $path_doc;
+		// $path_doc = ".".$path_doc."/".$this->input->post('doc_name').".jpeg";
+		// $this->MDD->doc_path = $path_doc;
 
-		$get_sub_doc = $obj_doc[0]->doc_path;
-		$arr = array();
-		$i = 0;
+		// $get_sub_doc = $obj_doc[0]->doc_path;
+		// $arr = array();
+		// $i = 0;
 
-		$path_doc = "";
+		// $path_doc = "";
 		// print_r($arr);
 		// echo "<br>";
 		// echo $path_qr;
@@ -235,16 +235,16 @@ public function show_member_home()
 		}
 
 		//Document
-		if ($this->MDD->check_exist_name($this->MDD->doc_name) == 0 && trim($this->MDD->doc_name) != "") {
-			$this->MDD->update_doc_file();
+		// if ($this->MDD->check_exist_name($this->MDD->doc_name) == 0 && trim($this->MDD->doc_name) != "") {
+		// 	$this->MDD->update_doc_file();
 
-			rename(".".$obj_doc[0]->doc_path , $path_doc);
-			// echo $obj_qr[0]->qr_path;
-			// echo "<br>";
-			// echo $obj_newqr[0]->qr_path;
+		// 	rename(".".$obj_doc[0]->doc_path , $path_doc);
+		// 	// echo $obj_qr[0]->qr_path;
+		// 	// echo "<br>";
+		// 	// echo $obj_newqr[0]->qr_path;
 
 		
-		}
+		// }
 		
 
 		if($this->session->userdata('mem_role') == 1){

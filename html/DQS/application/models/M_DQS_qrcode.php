@@ -109,11 +109,11 @@ class M_DQS_qrcode extends Da_DQS_qrcode
     * @author Onticha
     * @Create Date 2565-03-21
     */
-    public function check_exist_name($qr_name)
-    {
-        $this->db->where('qr_name', $qr_name);
-        $query = $this->db->get('DQS_Qrcode');
-        return $query->num_rows();
-    }
+    // public function check_exist_name($qr_name)
+    // {
+    //     $this->db->where('qr_name', $qr_name);
+    //     $query = $this->db->get('DQS_Qrcode');
+    //     return $query->num_rows();
+    // }
 
 }
