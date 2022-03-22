@@ -376,7 +376,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                    <input type="submit" class="btn btn-success" id="edit" value="บันทึก">
+                    <input type="submit" class="btn btn-success" id="sub_edit" value="บันทึก">
                 </div>
                 
                 </form>
@@ -911,10 +911,10 @@ $(document).ready(function() {
 
      function check_file_edit() {
 
-         var dis_button = document.getElementById('edit');
+         var dis_button = document.getElementById('sub_edit');
          dis_button.disabled = false;
 
-         var t = <?php echo json_encode($arr_doc) ?>;
+         var t = <?php echo json_encode($arr_qr) ?>;
          var new_name = document.getElementById("qr_edit");
          var check_name;
          var div = document.getElementById('edit_mss');

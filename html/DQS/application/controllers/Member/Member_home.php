@@ -135,16 +135,23 @@ public function show_member_home()
 	* @author Onticha
 	* @Create Date 2565-03-21
 	*/
-	public function update_qr_file($doc_id){
+	public function update_qr_file(){
         $this->load->model('M_DQS_qrcode','MDQ');
 		$this->load->model('M_DQS_document','MDD');
-
+		$doc_id = $this->input->post('qr_id');
 		$this->MDQ->qr_name = $this->input->post('qr_name');
 		$this->MDQ->qr_id = $this->input->post('qr_id');
 
-		$obj_qr = $this->MDQ->get_by_qr_id($doc_id)->result();
-		$obj_doc = $this->MDD->get_by_doc_id($doc_id)->result();
+		$this->MDD->doc_name = $this->input->post('qr_name');
 
+
+		$obj_qr = $this->MDQ->get_by_qr_id($doc_id)->result();
+		$obj_doc = $this->MDD->get_by_doc_id($obj_qr[0]->qr_doc_id)->result();
+		$this->MDD->doc_id = $obj_qr[0]->qr_doc_id;
+
+		// print_r($obj_qr);
+		// print_r($obj_doc);
+		// echo $doc_id;
 		$get_sub_qr = $obj_qr[0]->qr_path;
 		$arr = array();
 		$i = 0;
@@ -169,34 +176,42 @@ public function show_member_home()
 		$path_qr = ".".$path_qr."/".$this->input->post('qr_name').".jpeg";
 		$this->MDQ->qr_path = $path_qr;
 
-
-		$get_sub_qr = $obj_qr[0]->qr_path;
+// Edit  Document
+		$get_sub_doc = $obj_doc[0]->doc_path;
 		$arr = array();
 		$i = 0;
-
-		$path_qr = "";
-
-//Edit  Document
-		// do{
-		// 	$sub_path_doc = strpos($get_sub_doc,'/'); 	
-		// 	$sub_path_doc = $sub_path_doc + 1;
-		// 	$new_sub_doc = substr($get_sub_doc, 0, $sub_path_doc);
-		// 	$get_sub_doc = substr($get_sub_doc,$sub_path_doc);
-		// 	$real_path_doc = substr($new_sub_doc,0,-1);
-		// 	array_push($arr,$real_path_doc);
-		// 	$i++;
-		// 	if($i != 1){
-		// 		$path_doc = $path_doc."/".$real_path_doc;		
-		// 	}
+		$path_doc = "";
+		
+		do{
+			$sub_path_doc = strpos($get_sub_doc,'/'); 	
+			$sub_path_doc = $sub_path_doc + 1;
+			$new_sub_doc = substr($get_sub_doc, 0, $sub_path_doc);
+			$get_sub_doc = substr($get_sub_doc,$sub_path_doc);
+			$real_path_doc = substr($new_sub_doc,0,-1);
+			array_push($arr,$real_path_doc);
+			$i++;
+			if($i != 1){
+				$path_doc = $path_doc."/".$real_path_doc;		
+			}
 			
-		// }while(strpos($get_sub_doc,'/') != null);
+		}while(strpos($get_sub_doc,'/') != null);
 
-		// $path_doc = ".".$path_doc."/".$this->input->post('doc_name').".jpeg";
-		// $this->MDD->doc_path = $path_doc;
+		if(strpos($obj_doc[0]->doc_path,'.jpeg',0)>1){
+			$path_doc = ".".$path_doc."/".$this->input->post('qr_name').".jpeg";
+		}else if(strpos($obj_doc[0]->doc_path,'.pdf',0)>1){
+			$path_doc = ".".$path_doc."/".$this->input->post('qr_name').".pdf";
+		}else if(strpos($obj_doc[0]->doc_path,'.png',0)>1){
+			$path_doc = ".".$path_doc."/".$this->input->post('qr_name').".png";
+		}
+		
+		$this->MDD->doc_path = $path_doc;
 
-		// $get_sub_doc = $obj_doc[0]->doc_path;
-		// $arr = array();
-		// $i = 0;
+		
+	
+
+		$get_sub_doc = $obj_doc[0]->doc_path;
+		$arr = array();
+		$i = 0;
 
 		// $path_doc = "";
 		// print_r($arr);
@@ -226,7 +241,7 @@ public function show_member_home()
 		if ($this->MDQ->check_exist_name($this->MDQ->qr_name) == 0 && trim($this->MDQ->qr_name) != "") {
 			$this->MDQ->update_qr_file();
 
-			rename(".".$obj_qr[0]->qr_path , $path_qr);
+			rename($obj_qr[0]->qr_path , $path_qr);
 			// echo $obj_qr[0]->qr_path;
 			// echo "<br>";
 			// echo $obj_newqr[0]->qr_path;
@@ -234,17 +249,22 @@ public function show_member_home()
 		
 		}
 
-		//Document
-		// if ($this->MDD->check_exist_name($this->MDD->doc_name) == 0 && trim($this->MDD->doc_name) != "") {
-		// 	$this->MDD->update_doc_file();
+	// Document
+		if ($this->MDD->check_exist_name($this->input->post("qr_name")) == 0 && trim($this->input->post("qr_name")) != "") {
+			$this->MDD->update_doc_file();
 
-		// 	rename(".".$obj_doc[0]->doc_path , $path_doc);
-		// 	// echo $obj_qr[0]->qr_path;
-		// 	// echo "<br>";
-		// 	// echo $obj_newqr[0]->qr_path;
+			rename($obj_doc[0]->doc_path , $path_doc);
+	// 		// echo $obj_qr[0]->qr_path;
+	// 		// echo "<br>";
+	// 		// echo $obj_newqr[0]->qr_path;
+
+	// echo $obj_doc[0]->doc_path;
+	// echo "<br>";
+	// echo $obj_qr[0]->qr_path;
+	// echo $this->input->post('qr_id');
 
 		
-		// }
+		}
 		
 
 		if($this->session->userdata('mem_role') == 1){
