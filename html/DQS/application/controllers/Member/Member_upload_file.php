@@ -154,7 +154,7 @@ class Member_upload_file extends DQS_controller
 			//ตั้งชื่อไฟล์ใหม่โดยเอาเวลาไว้หน้าชื่อไฟล์เดิม
 			$newname = $this->input->post('doc_name') . $type;
 			$path_copy = $path . $newname;
-			$newpath = '/assets/user/'.$this->session->userdata('username').'/'.$this->session->userdata('path_new').$newname;
+			$newpath = './assets/user/'.$this->session->userdata('username').'/'.$this->session->userdata('path_new').$newname;
 			//คัดลอกไฟล์ไปเก็บที่เว็บเซริ์ฟเวอร์
 			move_uploaded_file($_FILES['doc_path']['tmp_name'], $path_copy);
 			}
@@ -197,7 +197,7 @@ class Member_upload_file extends DQS_controller
 			$newname = $this->input->post('doc_name') . $type;
 			$path_copy = $path . $newname;
 		
-				$newpath = '/assets/user/'.$this->session->userdata('username').'/'.'home/' . $newname;
+				$newpath = './assets/user/'.$this->session->userdata('username').'/'.'home/' . $newname;
 
 			//คัดลอกไฟล์ไปเก็บที่เว็บเซริ์ฟเวอร์
 				move_uploaded_file($_FILES['doc_path']['tmp_name'], $path_copy);
@@ -318,7 +318,7 @@ class Member_upload_file extends DQS_controller
 			$newname = $this->input->post('doc_nameimg') . $type;
 			$path_copy = $path . $newname;
 
-				$newpath = '/assets/user/'.$this->session->userdata('username').'/'.'home/' . $newname;
+				$newpath = './assets/user/'.$this->session->userdata('username').'/'.'home/' . $newname;
 
 			//คัดลอกไฟล์ไปเก็บที่เว็บเซริ์ฟเวอร์
 			move_uploaded_file($_FILES['doc_pathimg']['tmp_name'], $path_copy);
@@ -363,7 +363,7 @@ class Member_upload_file extends DQS_controller
 			$newname = $this->input->post('doc_nameimg') . $type;
 			$path_copy = $path . $newname;
 
-			$newpath = '/assets/user/'.$this->session->userdata('username').'/'.$this->session->userdata('path_new').$newname;
+			$newpath = './assets/user/'.$this->session->userdata('username').'/'.$this->session->userdata('path_new').$newname;
 			//คัดลอกไฟล์ไปเก็บที่เว็บเซริ์ฟเวอร์
 			move_uploaded_file($_FILES['doc_pathimg']['tmp_name'], $path_copy);
 		} //if
