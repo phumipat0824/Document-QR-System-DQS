@@ -33,6 +33,7 @@ public function show_member_home()
 	$data['arr_fol'] = $this->fol->get_by_id($memid)->result();
 	$data['arr_qr'] = $this->qrc->get_by_id($memid)->result();
 	$data['arr_folder'] = $this->fol->get_all()->result();
+	$data['arr_doc'] = $this->qrc->get_all()->result();
 	$folder = $this->fol->get_all()->result();
 	$data['path_fol'] = array('@');
 	
@@ -82,6 +83,7 @@ public function show_member_home()
 		$data['arr_fol'] = $this->fol->get_by_member_id($memid, $fol_location_id,)->result();
 		$data['arr_qr'] = $this->qrc->get_by_id_folder($memid)->result();
 		$data['arr_folder'] = $this->fol->get_all()->result();
+		$data['arr_doc'] = $this->qrc->get_all()->result();
 		$path_location =  $path_folder[0]->fol_location ; //เช็คค่า ที่อยู่ใน data base
 		$sub_folder = substr($path_location, 21 ).'/'; // sub string เอาแต่ location ชือของ folder
 		$this->session->set_userdata('path', $sub_folder);

@@ -109,6 +109,12 @@ class M_DQS_document extends Da_DQS_document {
         return $query;
     }
 
+    public function get_all()
+    {
+        $sql = "SELECT * from {$this->db_name}.DQS_Document";
+        $query = $this->db->query($sql);
+        return $query;
+    }
     /*
     * check_exist_name($doc_name)
     * check exist name

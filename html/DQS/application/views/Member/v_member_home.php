@@ -431,6 +431,53 @@
              <?php }  ?>
          <?php }  ?>
      <?php }  ?>
+    
+     <!-- /*
+    * move file
+    * Display modal move file
+    * @input -
+    * @output show file move
+    * @author natruja
+    * @Create Date 2565-03-21
+    */ -->
+     <!-- Move File Modal -->
+        <div class="modal fade" id="MoveFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="MoveFileModalLabel">ย้ายไฟล์ไปที่</h5>
+                    </div>
+                    <form id="move-form" method="POST" action="<?php echo site_url() . '/File/File_management/move_file/'; ?>">
+                    <div class="modal-body">
+                    <input type="hidden" name="doc_id" id="file_id" value="">
+                    <input type="hidden" name="qr_id" id="qrcode_id" value="">
+                        <!-- dropdown folder name -->
+                        <select name="doc_fol_id" id="doc_fol_id" class="form-select"
+                                 aria-label="Default select example" placeholder="" required>
+                                 <option value="" disabled selected hidden>เลือกโฟลเดอร์</option>
+                                 <option value='0'>หน้าหลัก</option>
+                                 <?php for ($i = 0; $i < count($arr_folder); $i++) {   ?>
+                                 <?php if ($arr_folder[$i]->fol_mem_id == $this->session->userdata('mem_id')) { ?>
+                                 <option value='<?php echo $arr_folder[$i]->fol_id ?>'>
+                                     <?php echo $arr_folder[$i]->fol_name ?></option>
+                                 <?php } ?>
+                                 <?php } ?>
+                             </select><br>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                        <input type="submit" class="btn btn-success" value="บันทึก">
+                        <input type="hidden" name="doc_name" id="file_name" value="">
+                        <input type="hidden" name="qr_name" id="qrcode_name" value="">
+                     
+                    </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+    <!-- End move file modal -->
+   
+         
  </div>
 
 
@@ -613,6 +660,122 @@
      });
  </script>
  <script type="text/javascript">
+$(document).on("click", ".editModal", function() {
+    var id = $(this).attr('data-id');
+    $("#fol_id").val(id);
+});
+
+
+var cm = document.querySelector(".custom-cm");
+
+function showContextMenu(show = true) {
+    cm.style.display = show ? "block" : "none";
+}
+
+window.addEventListener("contextmenu", e => {
+    e.preventDefault();
+
+    showContextMenu();
+    cm.style.top =
+        e.y + cm.offsetHeight > window.innerHeight ?
+        window.innerHeight - cm.offsetHeight :
+        e.y;
+    cm.style.left =
+        e.x + cm.offsetWidth > window.innerWidth ?
+        window.innerWidth - cm.offsetWidth :
+        e.x;
+});
+
+
+$(document).on("click", ".editModal", function() {
+    var id = $(this).attr('data-id');
+    $("#dep_id").val(id);
+});
+
+function rightclick() {
+    var rightclick;
+    var e = window.event;
+
+    document.getElementById("myDropdown").classList.toggle("show");
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+
+
+}
+
+
+function rightclickfolder(folder) {
+    var rightclick;
+    var e = window.event;
+    var getnamefolder = 'folder' + folder;
+    var x = document.getElementById("showmenu");
+
+    if (e.button == 2) {
+        document.getElementById(getnamefolder).classList.toggle("show");
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (x.style.display === "block") {
+                    x.style.display = "none";
+                } else {
+                    x.style.display = "block";
+                }
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+
+}
+
+$(document).on("click", ".moveModal", function() {
+    var id = $(this).attr('data-id');
+    $("#fol_id").val(id);
+    var name = $(this).attr('data-name');
+    $("#fol_name").val(name);
+    var x = document.getElementById("fold_id").value = id;
+    document.getElementById("folder_name").value = name;
+    console.log(x);
+    console.log(name);
+});
+
+$(document).on("click", ".MoveFileModal", function() {
+    var id = $(this).attr('data-id');
+    $("#doc_id").val(id);
+    var name = $(this).attr('data-name');
+    $("#doc_name").val(name);
+    var qr_id = $(this).attr('data-qr-id');
+    $("#qr_id").val(qr_id);
+    var qr_name = $(this).attr('data-qr-name');
+    $("#qr_name").val(qr_name);
+     document.getElementById("file_id").value = id;
+     document.getElementById("file_name").value = name;
+     document.getElementById("qrcode_id").value = qr_id;
+     document.getElementById("qrcode_name").value = qr_name;
+    console.log(id);
+    console.log(name);
+
+});
+
+
+$(document).ready(function() {
+    $('.dropdown-submenu a.test').on("click", function(e) {
+        $(this).next('ul').toggle();
+        e.stopPropagation();
+        e.preventDefault();
+    });
+});
      $(document).on("click", ".editModal", function() {
          var id = $(this).attr('data-id');
          $("#fol_id").val(id);
