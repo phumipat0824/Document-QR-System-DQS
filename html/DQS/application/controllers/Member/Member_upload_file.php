@@ -254,7 +254,8 @@ class Member_upload_file extends DQS_controller
 	{
 		$this->load->model('M_DQS_qrcode','mqrc');
 		$doc_name = $this->input->post('doc_name');
-		$obj_name= $this->mqrc->checkname($doc_name)->row();
+		$doc_mem_id = $this->session->userdata('mem_id');
+		$obj_name= $this->mqrc->checkname($doc_name,$doc_mem_id)->row();
 		if(empty($obj_name)){
 			echo json_encode(true);
 		}else{
@@ -275,7 +276,8 @@ class Member_upload_file extends DQS_controller
 	{
 		$this->load->model('M_DQS_qrcode','mqrc');
 		$doc_name = $this->input->post('doc_nameimg');
-		$obj_name= $this->mqrc->checkname($doc_name)->row();
+		$doc_mem_id = $this->session->userdata('mem_id');
+		$obj_name= $this->mqrc->checkname($doc_name,$doc_mem_id)->row();
 		if(empty($obj_name)){
 			echo json_encode(true);
 		}else{

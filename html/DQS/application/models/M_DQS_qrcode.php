@@ -59,12 +59,12 @@ class M_DQS_qrcode extends Da_DQS_qrcode
 	* @Create Date 2565-02-15
 	*/
 
-    public function checkname($doc_name){
+    public function checkname($doc_name,$doc_mem_id){
         $sql = "SELECT * 
         FROM {$this->db_name}.DQS_Document AS document
         LEFT JOIN {$this->db_name}.DQS_Qrcode AS qr
         ON document.doc_name = qr.qr_name
-        WHERE doc_name = '$doc_name' AND qr_name = '$doc_name'";
+        WHERE doc_name = '$doc_name' AND qr_name = '$doc_name' AND doc_mem_id = '$doc_mem_id' AND qr_mem_id = '$doc_mem_id'";
 
         $query = $this->db->query($sql);
         return $query;
