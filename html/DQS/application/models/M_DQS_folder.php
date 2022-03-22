@@ -32,6 +32,13 @@ class M_DQS_folder extends Da_DQS_folder
         return $query;
     }
 
+    public function get_by_mem_id($fol_mem_id)
+    {
+        $sql = "SELECT * FROM {$this->db_name}.DQS_Folder  WHERE fol_mem_id = $fol_mem_id";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
     
     public function get_by_member_id($fol_mem_id,$fol_location_id)
     {
@@ -74,5 +81,11 @@ class M_DQS_folder extends Da_DQS_folder
         $query = $this->db->query($sql);
         return $query;
     }
+    public function delete_file(){
+        $sql = "DELETE FROM {$this->db_name}.DQS_Member
+                WHERE doc_id = ? "; // ? = ค่าที่เราจะใส่ไปอยู่แล้ว , อย่าใช้ " ' " เพราะอาจจะเออเร่อได้
+        $this-> db->query($sql, array($this->doc_id)); //ถ้า SQL ที่เราใส่มี ? ต้องใส่ array ด้วย
+    }
+    
 }
 ?>

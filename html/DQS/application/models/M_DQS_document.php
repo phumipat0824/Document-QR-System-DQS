@@ -91,4 +91,29 @@ class M_DQS_document extends Da_DQS_document {
         $query = $this->db->query($sql);
         return $query;
     }
+
+	public function get_by_qr_id($doc_id)
+    {
+        $sql = "SELECT * FROM {$this->db_name}.DQS_Qrcode JOIN {$this->db_name}.DQS_Document 
+        ON DQS_Qrcode.qr_doc_id = DQS_Document.doc_id
+        WHERE DQS_Qrcode.qr_doc_id = $doc_id";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
+    public function get_by_doc_id($doc_id)
+    {
+        $sql = "SELECT * 
+        FROM {$this->db_name}.DQS_Document
+        WHERE doc_id = $doc_id";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
+    public function get_all()
+    {
+        $sql = "SELECT * from {$this->db_name}.DQS_Document";
+        $query = $this->db->query($sql);
+        return $query;
+    }
 }

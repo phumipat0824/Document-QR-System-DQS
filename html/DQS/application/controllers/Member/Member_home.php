@@ -33,6 +33,7 @@ public function show_member_home()
 	$data['arr_fol'] = $this->fol->get_by_id($memid)->result();
 	$data['arr_qr'] = $this->qrc->get_by_id($memid)->result();
 	$data['arr_folder'] = $this->fol->get_all()->result();
+	$data['arr_doc'] = $this->qrc->get_all()->result();
 	$folder = $this->fol->get_all()->result();
 	$data['path_fol'] = array('@');
 	
@@ -82,6 +83,7 @@ public function show_member_home()
 		$data['arr_fol'] = $this->fol->get_by_member_id($memid, $fol_location_id,)->result();
 		$data['arr_qr'] = $this->qrc->get_by_id_folder($memid)->result();
 		$data['arr_folder'] = $this->fol->get_all()->result();
+		$data['arr_doc'] = $this->qrc->get_all()->result();
 		$path_location =  $path_folder[0]->fol_location ; //เช็คค่า ที่อยู่ใน data base
 		$sub_folder = substr($path_location, 21 ).'/'; // sub string เอาแต่ location ชือของ folder
 		$this->session->set_userdata('path', $sub_folder);
@@ -95,7 +97,7 @@ public function show_member_home()
 			$new_sub_folder = substr($get_sub_folder, 0, $sub_path_folder);
 			$get_sub_folder = substr($get_sub_folder,$sub_path_folder);
 			$real_path_folder = substr($new_sub_folder,0,-1);
-			 array_push($arr,$real_path_folder);		
+			array_push($arr,$real_path_folder);		
 			
 		}while(strpos($get_sub_folder,'/') != null);
 		$data['path_fol'] = $arr;
@@ -106,5 +108,16 @@ public function show_member_home()
 			$this->output_sidebar_member("Member/v_member_home", $data);
 		}
 	}
+	public function delete_file($file_id){
+        $this->load->model('M_DQS_document','MDD');
+		$this->MDD->doc_id = $file_id;
+		$data['qr'] = $this->MDD->get_by_qr_id($file_id)->result();
+		$qr_id = $data['qr'][0]->qr_id;
+        $this->MDD->delete_qr_file($qr_id);
+        $this->MDD->delete_file();
+
+        redirect('/Member/Member_home/show_member_home');
+        
+    }
 
 }
