@@ -103,7 +103,7 @@ class Member_upload_file extends DQS_controller
 		$data['arr_qr'] = $this->qrc->get_by_id_folder($memid)->result();
 		$data['arr_folder'] = $this->fol->get_all()->result();
 		$path_location =  $path_folder[0]->fol_location ; //เช็คค่า ที่อยู่ใน data base
-		$sub_folder = substr($path_location, 21 ).'/'; // sub string เอาแต่ location ชือของ folder
+		$sub_folder = substr($path_location, 23 ).'/'; // sub string เอาแต่ location ชือของ folder
 		$this->session->set_userdata('path_new', $sub_folder);
 		$get_sub_folder = ' '.$sub_folder;
 		$sub_path_folder = strpos($sub_folder,'/'); // sub pos แยกตัว '/' ออกมาแต่ละชื่อ

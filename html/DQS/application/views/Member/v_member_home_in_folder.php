@@ -37,9 +37,9 @@
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" style=" color:#707070; font-weight: 900; font-family:TH Sarabun New; font-size: 25px;" href="<?php echo site_url() . '/Member/Member_home/show_member_home'; ?>">หน้าหลัก</a></li>
                 <?php for ($i = 0; $i < count($path_fol); $i++) { ?>
-                    <?php if ($path_fol[$i] != '@') { ?>
-                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" style="color:#707070; font-weight: 900; font-family:TH Sarabun New; font-size: 25px;" href="<?php echo site_url() . '/Member/Member_home/show_in_folder/66'; ?>"><?php echo $path_fol[$i] ?></a></li>
-                    <?php } ?>
+                <?php if ($path_fol[$i] != '@') { ?>
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" style="color:#707070; font-weight: 900; font-family:TH Sarabun New; font-size: 25px;" href="<?php echo site_url() . '/Member/Member_home/show_in_folder/66'; ?>"><?php echo $path_fol[$i] ?></a></li>
+                <?php } ?>
                 <?php } ?>
             </ol>
         </div>
@@ -48,7 +48,7 @@
 
         <?php
         for ($i = 0; $i < count($arr_fol); $i++) {   ?>
-            <!-- * v_member_home_in_floder
+        <!-- * v_member_home_in_floder
                 * show_folder
                 * @input  -
                 * @output show folder
@@ -56,8 +56,8 @@
                 * @Create Date 2565-01-13
 */ -->
 
-            <!--  โฟลเดอร์ปกติ -->
-            <?php
+        <!--  โฟลเดอร์ปกติ -->
+        <?php
             $sub_name_folder = $arr_fol[$i]->fol_name;  //แก้ไขจำนวนชื่อโฟลเดอร์
             
             if (preg_match('/^[a-z]+/i', $sub_name_folder)) {
@@ -71,18 +71,18 @@
             }
             ?>
 
-            <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" data-placement="bottom" title="<?php echo $arr_fol[$i]->fol_name ?>" style=" background-color:#ffff; border: 2px solid#c7c6c4; height: 60px; width: 300px;">
-                <i class="material-icons" style="margin-left: -20px; font-size:30px;  color:#f3ff41;">folder</i>
-                <a style=" font-size: 26px; font-weight:900; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo  $sub_name_folder ?></a>
-            </button>
-            <div id="showmenu" style="display:block">
-                <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
-                    <a href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
-                    <a href="#" class="editModal" data-toggle="modal" data-target="#editModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">แก้ไข</a>
-                    <a href="#" class="moveModal" data-toggle="modal" data-target="#moveModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">ย้าย</a>
-                    <a href="#" class="deleteModal" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>">ลบ</a>
-                </div>
+        <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" data-placement="bottom" title="<?php echo $arr_fol[$i]->fol_name ?>" style=" background-color:#ffff; border: 2px solid#c7c6c4; height: 60px; width: 300px;">
+            <i class="material-icons" style="margin-left: -20px; font-size:30px;  color:#f3ff41;">folder</i>
+            <a style=" font-size: 26px; font-weight:900; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo  $sub_name_folder ?></a>
+        </button>
+        <div id="showmenu" style="display:block">
+            <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
+                <a href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
+                <a href="#" class="editModal" data-toggle="modal" data-target="#editModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">แก้ไข</a>
+                <a href="#" class="moveModal" data-toggle="modal" data-target="#moveModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">ย้าย</a>
+                <a href="#" class="deleteModal" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>">ลบ</a>
             </div>
+        </div>
         <?php }  ?>
         <!-- /*
     * create folder
@@ -223,9 +223,9 @@
                             <option value="" disabled selected hidden>เลือกโฟลเดอร์</option>
                             <option value='0'>หน้าหลัก</option>
                             <?php for ($i = 0; $i < count($arr_folder); $i++) {   ?>
-                                <?php if ($arr_folder[$i]->fol_mem_id == $this->session->userdata('mem_id')) { ?>
-                                    <option value='<?php echo $arr_folder[$i]->fol_id ?>'><?php echo $arr_folder[$i]->fol_name ?></option>
-                                <?php } ?>
+                            <?php if ($arr_folder[$i]->fol_mem_id == $this->session->userdata('mem_id')) { ?>
+                            <option value='<?php echo $arr_folder[$i]->fol_id ?>'><?php echo $arr_folder[$i]->fol_name ?></option>
+                            <?php } ?>
                             <?php } ?>
                         </select><br>
 
@@ -249,40 +249,40 @@
 <div class="row" style="padding: 100px 10px 10px 20%;">
     <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">คิวอาร์โค้ด</h3>
     <?php for ($i = 0; $i < count($arr_qr); $i++) {   ?>
-        <?php if ($this->session->userdata('fol_id') == $arr_qr[$i]->doc_fol_id) { ?>
-            <div class="col-md-4">
-                <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px; width:500;">
-                    <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
-                        <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;">คิวอาร์โค้ด</h>
+    <?php if ($this->session->userdata('fol_id') == $arr_qr[$i]->doc_fol_id) { ?>
+    <div class="col-md-4">
+        <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
+            <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
+                <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;">คิวอาร์โค้ด</h>
+            </div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-4" id="qrcode">
+                        <img id="img" src="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" height="128" width="128" style="margin: auto;">
+                        <button id="download" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button>
                     </div>
-                    <div class="card-body">
-                        <div class="form-row">
-                            <div class="form-group col-md-4" id="qrcode">
-                                <img id="img" src="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" height="128" width="128" style="margin: auto;">
-                                <button id="download" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชื่อ : </h5>
-                                <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"><?php echo $arr_qr[$i]->qr_name ?></h5>
+                    <div class="form-group col-md-4">
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชื่อ : </h5>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"><?php echo $arr_qr[$i]->qr_name ?></h5>
 
-                                <!-- <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">วันที่สร้าง : </h5>
+                        <!-- <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">วันที่สร้าง : </h5>
                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"><?php echo $arr_qr[$i]->doc_datetime ?></h5> -->
 
-                                <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิด : </h5>
-                                <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"> <?php echo $arr_qr[$i]->doc_type ?></h5>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิด : </h5>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"> <?php echo $arr_qr[$i]->doc_type ?></h5>
 
-                                <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ราายงานสรุปผล : </h5>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <button id="edit" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">แก้ไข</button>
-                                <button id="remove" class="btn btn-" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
-                                <button id="delete" class="btn btn-" style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ลบ</button>
-                            </div>
-                        </div>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ราายงานสรุปผล : </h5>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <button id="edit" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">แก้ไข</button>
+                        <button id="remove" class="btn btn-" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
+                        <button id="delete" class="btn btn-" style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ลบ</button>
                     </div>
                 </div>
             </div>
-        <?php }  ?>
+        </div>
+    </div>
+    <?php }  ?>
     <?php }  ?>
 </div>
 
@@ -290,288 +290,288 @@
 
 
 <script>
-    <?php $this->session->set_userdata('fol_id', ''); ?>
-    <?php $this->session->set_userdata('path', ''); ?>
-    $(document).on("keyup", "#fol_name", function() {
-        var t = <?php echo json_encode($arr_fol) ?>;
-        var new_name = document.getElementById("fol_name");
-        var check_name;
-        var div = document.getElementById('target_div');
-        var dis_button = document.getElementById('create');
+<?php $this->session->set_userdata('fol_id', ''); ?>
+<?php $this->session->set_userdata('path', ''); ?>
+$(document).on("keyup", "#fol_name", function() {
+    var t = <?php echo json_encode($arr_fol) ?>;
+    var new_name = document.getElementById("fol_name");
+    var check_name;
+    var div = document.getElementById('target_div');
+    var dis_button = document.getElementById('create');
 
-        for (let x in t) {
-            if (t[x].fol_name == new_name.value) {
-                check_name = 1;
-                break;
-            } else {
-                check_name = 0;
-            }
-        }
-        console.log(check_name);
-        if (check_name == 1) {
-            $("#fol_name").css("border-color", "red");
-            div.style.display = "block";
-            dis_button.disabled = true;
-
+    for (let x in t) {
+        if (t[x].fol_name == new_name.value) {
+            check_name = 1;
+            break;
         } else {
-            $("#fol_name").css("border-color", "green");
-            div.style.display = "none";
-            dis_button.disabled = false;
-
+            check_name = 0;
         }
-    });
+    }
+    console.log(check_name);
+    if (check_name == 1) {
+        $("#fol_name").css("border-color", "red");
+        div.style.display = "block";
+        dis_button.disabled = true;
 
-    /* check_fol_edit()
-     * check folder edit
-     * @input -
-     * @output -
-     * @author Onticha
-     * @Create Date 2564-11-30
-     */
-    function check_fol_edit() {
-
-        var dis_button = document.getElementById('edit');
+    } else {
+        $("#fol_name").css("border-color", "green");
+        div.style.display = "none";
         dis_button.disabled = false;
 
-        var t = <?php echo json_encode($arr_fol) ?>;
-        var new_name = document.getElementById("fol_edit");
-        var check_name;
-        var div = document.getElementById('edit_mss');
+    }
+});
+
+/* check_fol_edit()
+ * check folder edit
+ * @input -
+ * @output -
+ * @author Onticha
+ * @Create Date 2564-11-30
+ */
+function check_fol_edit() {
+
+    var dis_button = document.getElementById('edit');
+    dis_button.disabled = false;
+
+    var t = <?php echo json_encode($arr_fol) ?>;
+    var new_name = document.getElementById("fol_edit");
+    var check_name;
+    var div = document.getElementById('edit_mss');
 
 
-        for (let x in t) {
-            if (t[x].fol_name == new_name.value || new_name.value == " ") {
-                check_name = 1;
-                break;
-            } else {
-                check_name = 0;
-            }
-        }
-        console.log(check_name);
-        if (check_name == 1) {
-            $("#fol_edit").css("border-color", "red");
-            div.style.display = "block";
-            dis_button.disabled = true;
-
+    for (let x in t) {
+        if (t[x].fol_name == new_name.value || new_name.value == " ") {
+            check_name = 1;
+            break;
         } else {
-            $("#fol_edit").css("border-color", "green");
-            div.style.display = "none";
-            dis_button.disabled = false;
-
+            check_name = 0;
         }
-    } //end function check_fol_edit()
+    }
+    console.log(check_name);
+    if (check_name == 1) {
+        $("#fol_edit").css("border-color", "red");
+        div.style.display = "block";
+        dis_button.disabled = true;
+
+    } else {
+        $("#fol_edit").css("border-color", "green");
+        div.style.display = "none";
+        dis_button.disabled = false;
+
+    }
+} //end function check_fol_edit()
 </script>
 
 
 
 <script type="text/javascript">
-    $(document).on("click", ".editModal", function() {
-        var id = $(this).attr('data-id');
-        $("#fol_id").val(id);
-        console.log(id);
-        var name = $(this).attr('data-name');
-        $("#fol_name").val(name);
-        document.getElementById("folder_id").value = id;
-        document.getElementById("fol_edit").value = name;
-    });
+$(document).on("click", ".editModal", function() {
+    var id = $(this).attr('data-id');
+    $("#fol_id").val(id);
+    console.log(id);
+    var name = $(this).attr('data-name');
+    $("#fol_name").val(name);
+    document.getElementById("folder_id").value = id;
+    document.getElementById("fol_edit").value = name;
+});
 
 
-    /* deleteModal()
-     * deleteModal 
-     * @input -
-     * @output -
-     * @author Onticha
-     * @Create Date 2564-11-30
-     */
-    $(document).on("click", ".deleteModal", function() {
-        var id = $(this).attr('data-id');
-        $("#fol_id").val(id);
-    });
+/* deleteModal()
+ * deleteModal 
+ * @input -
+ * @output -
+ * @author Onticha
+ * @Create Date 2564-11-30
+ */
+$(document).on("click", ".deleteModal", function() {
+    var id = $(this).attr('data-id');
+    $("#fol_id").val(id);
+});
 
 
-    var cm = document.querySelector(".custom-cm");
+var cm = document.querySelector(".custom-cm");
 
-    function showContextMenu(show = true) {
-        cm.style.display = show ? "block" : "none";
-    }
+function showContextMenu(show = true) {
+    cm.style.display = show ? "block" : "none";
+}
 
-    window.addEventListener("contextmenu", e => {
-        e.preventDefault();
+window.addEventListener("contextmenu", e => {
+    e.preventDefault();
 
-        showContextMenu();
-        cm.style.top =
-            e.y + cm.offsetHeight > window.innerHeight ?
-            window.innerHeight - cm.offsetHeight :
-            e.y;
-        cm.style.left =
-            e.x + cm.offsetWidth > window.innerWidth ?
-            window.innerWidth - cm.offsetWidth :
-            e.x;
-    });
+    showContextMenu();
+    cm.style.top =
+        e.y + cm.offsetHeight > window.innerHeight ?
+        window.innerHeight - cm.offsetHeight :
+        e.y;
+    cm.style.left =
+        e.x + cm.offsetWidth > window.innerWidth ?
+        window.innerWidth - cm.offsetWidth :
+        e.x;
+});
 
 
-    /* editModal()
-     * editModal 
-     * @input -
-     * @output -
-     * @author Onticha
-     * @Create Date 2564-11-30
-     */
-    $(document).on("click", ".editModal", function() {
-        var id = $(this).attr('data-id');
-        $("#dep_id").val(id);
-    });
+/* editModal()
+ * editModal 
+ * @input -
+ * @output -
+ * @author Onticha
+ * @Create Date 2564-11-30
+ */
+$(document).on("click", ".editModal", function() {
+    var id = $(this).attr('data-id');
+    $("#dep_id").val(id);
+});
 
-    function rightclick() {
-        var rightclick;
-        var e = window.event;
+function rightclick() {
+    var rightclick;
+    var e = window.event;
 
-        document.getElementById("myDropdown").classList.toggle("show");
-        if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i <script dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
+    document.getElementById("myDropdown").classList.toggle("show");
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < script dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
             }
         }
     }
+}
 </script>
 <script>
-    $(document).on("keyup", "#fol_name", function() {
-        var t = <?php echo json_encode($arr_fol) ?>;
-        var new_name = document.getElementById("fol_name");
-        var check_name;
-        var div = document.getElementById('target_div');
-        var dis_button = document.getElementById('create');
+$(document).on("keyup", "#fol_name", function() {
+    var t = <?php echo json_encode($arr_fol) ?>;
+    var new_name = document.getElementById("fol_name");
+    var check_name;
+    var div = document.getElementById('target_div');
+    var dis_button = document.getElementById('create');
 
-        for (let x in t) {
-            if (t[x].fol_name == new_name.value) {
-                check_name = 1;
-                break;
-            } else {
-                check_name = 0;
-            }
-        }
-        console.log(check_name);
-        if (check_name == 1) {
-            $("#fol_name").css("border-color", "red");
-            div.style.display = "block";
-            dis_button.disabled = true;
-
+    for (let x in t) {
+        if (t[x].fol_name == new_name.value) {
+            check_name = 1;
+            break;
         } else {
-            $("#fol_name").css("border-color", "green");
-            div.style.display = "none";
-            dis_button.disabled = false;
-
+            check_name = 0;
         }
-    });
+    }
+    console.log(check_name);
+    if (check_name == 1) {
+        $("#fol_name").css("border-color", "red");
+        div.style.display = "block";
+        dis_button.disabled = true;
+
+    } else {
+        $("#fol_name").css("border-color", "green");
+        div.style.display = "none";
+        dis_button.disabled = false;
+
+    }
+});
 </script>
 <script type="text/javascript">
-    $(document).on("click", ".editModal", function() {
-        var id = $(this).attr('data-id');
-        $("#fol_id").val(id);
-    });
+$(document).on("click", ".editModal", function() {
+    var id = $(this).attr('data-id');
+    $("#fol_id").val(id);
+});
 
 
-    var cm = document.querySelector(".custom-cm");
+var cm = document.querySelector(".custom-cm");
 
-    function showContextMenu(show = true) {
-        cm.style.display = show ? "block" : "none";
+function showContextMenu(show = true) {
+    cm.style.display = show ? "block" : "none";
+}
+
+window.addEventListener("contextmenu", e => {
+    e.preventDefault();
+
+    showContextMenu();
+    cm.style.top =
+        e.y + cm.offsetHeight > window.innerHeight ?
+        window.innerHeight - cm.offsetHeight :
+        e.y;
+    cm.style.left =
+        e.x + cm.offsetWidth > window.innerWidth ?
+        window.innerWidth - cm.offsetWidth :
+        e.x;
+});
+
+
+$(document).on("click", ".editModal", function() {
+    var id = $(this).attr('data-id');
+    $("#dep_id").val(id);
+});
+
+function rightclick() {
+    var rightclick;
+    var e = window.event;
+
+    document.getElementById("myDropdown").classList.toggle("show");
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
     }
 
-    window.addEventListener("contextmenu", e => {
-        e.preventDefault();
 
-        showContextMenu();
-        cm.style.top =
-            e.y + cm.offsetHeight > window.innerHeight ?
-            window.innerHeight - cm.offsetHeight :
-            e.y;
-        cm.style.left =
-            e.x + cm.offsetWidth > window.innerWidth ?
-            window.innerWidth - cm.offsetWidth :
-            e.x;
-    });
+}
 
 
-    $(document).on("click", ".editModal", function() {
-        var id = $(this).attr('data-id');
-        $("#dep_id").val(id);
-    });
+function rightclickfolder(folder) {
+    var rightclick;
+    var e = window.event;
+    var getnamefolder = 'folder' + folder;
+    var x = document.getElementById("showmenu");
 
-    function rightclick() {
-        var rightclick;
-        var e = window.event;
-
-        document.getElementById("myDropdown").classList.toggle("show");
+    if (e.button == 2) {
+        document.getElementById(getnamefolder).classList.toggle("show");
         if (!event.target.matches('.dropbtn')) {
             var dropdowns = document.getElementsByClassName("dropdown-content");
             var i;
             for (i = 0; i < dropdowns.length; i++) {
                 var openDropdown = dropdowns[i];
+                if (x.style.display === "block") {
+                    x.style.display = "none";
+                } else {
+                    x.style.display = "block";
+                }
                 if (openDropdown.classList.contains('show')) {
                     openDropdown.classList.remove('show');
                 }
             }
         }
-
-
     }
 
+}
 
-    function rightclickfolder(folder) {
-        var rightclick;
-        var e = window.event;
-        var getnamefolder = 'folder' + folder;
-        var x = document.getElementById("showmenu");
+/* moveModal()
+ * moveModal 
+ * @input -
+ * @output -
+ * @author Chanyapat
+ * @Create Date 2564-11-30
+ */
+$(document).on("click", ".moveModal", function() {
+    var id = $(this).attr('data-id');
+    $("#fol_id").val(id);
+    var name = $(this).attr('data-name');
+    $("#fol_name").val(name);
+    var x = document.getElementById("fold_id").value = id;
+    document.getElementById("folder_name").value = name;
+    console.log(x);
+    console.log(name);
+});
 
-        if (e.button == 2) {
-            document.getElementById(getnamefolder).classList.toggle("show");
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (x.style.display === "block") {
-                        x.style.display = "none";
-                    } else {
-                        x.style.display = "block";
-                    }
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-
-    }
-
-    /* moveModal()
-     * moveModal 
-     * @input -
-     * @output -
-     * @author Chanyapat
-     * @Create Date 2564-11-30
-     */
-    $(document).on("click", ".moveModal", function() {
-        var id = $(this).attr('data-id');
-        $("#fol_id").val(id);
-        var name = $(this).attr('data-name');
-        $("#fol_name").val(name);
-        var x = document.getElementById("fold_id").value = id;
-        document.getElementById("folder_name").value = name;
-        console.log(x);
-        console.log(name);
+$(document).ready(function() {
+    $('.dropdown-submenu a.test').on("click", function(e) {
+        $(this).next('ul').toggle();
+        e.stopPropagation();
+        e.preventDefault();
     });
-
-    $(document).ready(function() {
-        $('.dropdown-submenu a.test').on("click", function(e) {
-            $(this).next('ul').toggle();
-            e.stopPropagation();
-            e.preventDefault();
-        });
-    });
+});
 </script>
