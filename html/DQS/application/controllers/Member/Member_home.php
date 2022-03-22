@@ -119,6 +119,12 @@ public function show_member_home()
         
     }
 
+	// function test($doc_id){
+	// 	$this->load->model('M_DQS_Qrcode','MDQ');
+	// 	$obj_qr = $this->MDQ->get_by_qr_id($doc_id)->result();
+	// 	print_r($obj_qr);
+	// }
+
 	/*
 	* update_document()
 	* update document name
@@ -127,15 +133,135 @@ public function show_member_home()
 	* @author Onticha
 	* @Create Date 2565-03-21
 	*/
-	public function update_file($file_id){
-        $this->load->model('M_DQS_document','MDD');
-		$this->MDD->doc_id = $file_id;
-		// $data['qr'] = $this->MDD->get_by_qr_id($file_id)->result();
-		// $qr_id = $data['qr'][0]->qr_id;
-        $this->MDD->update_file();
+	public function update_qr_file($doc_id){
+        $this->load->model('M_DQS_qrcode','MDQ');
+		$this->load->model('M_DQS_document','MDD');
 
-        redirect('/Member/Member_home/show_member_home');
+		$this->MDQ->qr_name = $this->input->post('qr_name');
+		$this->MDQ->qr_id = $this->input->post('qr_id');
+
+		$obj_qr = $this->MDQ->get_by_qr_id($doc_id)->result();
+		$obj_doc = $this->MDD->get_by_doc_id($doc_id)->result();
+
+		$get_sub_qr = $obj_qr[0]->qr_path;
+		$arr = array();
+		$i = 0;
+
+		$path_qr = "";
+
+
+		do{
+			$sub_path_qr = strpos($get_sub_qr,'/'); 	
+			$sub_path_qr = $sub_path_qr + 1;
+			$new_sub_qr = substr($get_sub_qr, 0, $sub_path_qr);
+			$get_sub_qr = substr($get_sub_qr,$sub_path_qr);
+			$real_path_qr = substr($new_sub_qr,0,-1);
+			array_push($arr,$real_path_qr);
+			$i++;
+			if($i != 1){
+				$path_qr = $path_qr."/".$real_path_qr;		
+			}
+			
+		}while(strpos($get_sub_qr,'/') != null);
+
+		$path_qr = ".".$path_qr."/".$this->input->post('qr_name').".jpeg";
+		$this->MDQ->qr_path = $path_qr;
+
+
+		$get_sub_qr = $obj_qr[0]->qr_path;
+		$arr = array();
+		$i = 0;
+
+		$path_qr = "";
+
+//Edit  Document
+		do{
+			$sub_path_doc = strpos($get_sub_doc,'/'); 	
+			$sub_path_doc = $sub_path_doc + 1;
+			$new_sub_doc = substr($get_sub_doc, 0, $sub_path_doc);
+			$get_sub_doc = substr($get_sub_doc,$sub_path_doc);
+			$real_path_doc = substr($new_sub_doc,0,-1);
+			array_push($arr,$real_path_doc);
+			$i++;
+			if($i != 1){
+				$path_doc = $path_doc."/".$real_path_doc;		
+			}
+			
+		}while(strpos($get_sub_doc,'/') != null);
+
+		$path_doc = ".".$path_doc."/".$this->input->post('doc_name').".jpeg";
+		$this->MDD->doc_path = $path_doc;
+
+		$get_sub_doc = $obj_doc[0]->doc_path;
+		$arr = array();
+		$i = 0;
+
+		$path_doc = "";
+		// print_r($arr);
+		// echo "<br>";
+		// echo $path_qr;
+
+
+
+		// $sub_path_qr = strpos($obj_qr[0]->qr_path,$get_sub_qr,0);
+		// $get_qr = substr($obj_qr[0]->qr_path,$sub_path_qr);
+		// echo "<br>";
+		// echo $get_qr;
+		// echo "<br>";
+		// echo $real_path_qr;
+		// echo "<br>";
+		// echo $sub_path_qr;
+		// echo "<br>";
+		// echo $get_sub_qr; 
+
+		//ตั้งชื่อไฟล์ใหม่โดยเอาเวลาไว้หน้าชื่อไฟล์เดิม
+		// $newname = $this->input->post('qr_name');
+		// $newpath = $newpath . $newname;
+		// $this->MDQ->qr_path = $newpath;
+
+		// echo $newpath;
+
+		if ($this->MDQ->check_exist_name($this->MDQ->qr_name) == 0 && trim($this->MDQ->qr_name) != "") {
+			$this->MDQ->update_qr_file();
+
+			rename(".".$obj_qr[0]->qr_path , $path_qr);
+			// echo $obj_qr[0]->qr_path;
+			// echo "<br>";
+			// echo $obj_newqr[0]->qr_path;
+
+		
+		}
+
+		//Document
+		if ($this->MDD->check_exist_name($this->MDD->doc_name) == 0 && trim($this->MDD->doc_name) != "") {
+			$this->MDD->update_doc_file();
+
+			rename(".".$obj_doc[0]->doc_path , $path_doc);
+			// echo $obj_qr[0]->qr_path;
+			// echo "<br>";
+			// echo $obj_newqr[0]->qr_path;
+
+		
+		}
+		
+
+		if($this->session->userdata('mem_role') == 1){
+			if($this->input->post('qr_doc_id') != 0){
+				redirect('Admin/Admin_home/show_admin_in_folder/' . $this->input->post('qr_doc_id'));
+			}
+			else{
+				redirect('Admin/Admin_home/show_admin_home/');
+			}
+		}else{
+			if($this->input->post('qr_doc_id') != 0){
+				redirect('Member/Member_home/show_in_folder/' . $this->input->post('qr_doc_id'));
+			}
+			else{
+				redirect('Member/Member_home/show_member_home/');
+			}
+		}
+		
         
-    }
+     }
 
 }
