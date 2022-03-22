@@ -42,8 +42,11 @@ class Folder_management extends DQS_controller {
     public function insert_folder() // สร้างโฟลเดอร์
 	{
 		$this->load->model('M_DQS_folder', 'folder');
-		$this->folder->fol_name = $this->input->post('fol_name');
-		$this->folder->fol_mem_id = $this->session->userdata('mem_id');
+		
+		 $this->folder->fol_name = $this->input->post('fol_name');
+		 $this->folder->fol_mem_id = $this->session->userdata('mem_id');
+		 
+
 		if ($this->input->post('fol_location_id') == 0) {
 			$newpath = './assets/user/' . $this->session->userdata('mem_username') . '/';
 		} else {
@@ -69,12 +72,24 @@ class Folder_management extends DQS_controller {
 		}
 		$this->folder->fol_location_id = $this->input->post('fol_location_id');
 		$this->folder->insert();
-		if($this->input->post('fol_location_id') != 0){
-			redirect('Member/Member_home/show_in_folder/' . $this->input->post('fol_location_id'));
+		
+		
+		if($this->session->userdata('mem_role') == 1){
+			if($this->input->post('fol_location_id') != 0){
+				redirect('Admin/Admin_home/show_admin_in_folder/' . $this->input->post('fol_location_id'));
+			}
+			else{
+				redirect('Admin/Admin_home/show_admin_home/');
+			}
+		}else{
+			if($this->input->post('fol_location_id') != 0){
+				redirect('Member/Member_home/show_in_folder/' . $this->input->post('fol_location_id'));
+			}
+			else{
+				redirect('Member/Member_home/show_member_home/');
+			}
 		}
-		else{
-			redirect('Member/Member_home/show_member_home/');
-		}
+		
 	}//end funtion insert_folder()
 	
 	/*
@@ -115,11 +130,20 @@ class Folder_management extends DQS_controller {
 
 		rename($obj_fol[0]->fol_location , $obj_newfol[0]->fol_location );
 
-		if($this->input->post('fol_location_id') != 0){
-			redirect('Member/Member_home/show_in_folder/' . $this->input->post('fol_location_id'));
-		}
-		else{
-			redirect('Member/Member_home/show_member_home/');
+		if($this->session->userdata('mem_role') == 1){
+			if($this->input->post('fol_location_id') != 0){
+				redirect('Admin/Admin_home/show_admin_in_folder/' . $this->input->post('fol_location_id'));
+			}
+			else{
+				redirect('Admin/Admin_home/show_admin_home/');
+			}
+		}else{
+			if($this->input->post('fol_location_id') != 0){
+				redirect('Member/Member_home/show_in_folder/' . $this->input->post('fol_location_id'));
+			}
+			else{
+				redirect('Member/Member_home/show_member_home/');
+			}
 		}
 		
 	
@@ -160,7 +184,21 @@ class Folder_management extends DQS_controller {
 
 		rmdir($newpath);/* Delete folder by using rmdir function */
 		
-		redirect('Member/Member_home/show_member_home');
+		if($this->session->userdata('mem_role') == 1){
+			if($this->input->post('fol_location_id') != 0){
+				redirect('Admin/Admin_home/show_admin_in_folder/' . $this->input->post('fol_location_id'));
+			}
+			else{
+				redirect('Admin/Admin_home/show_admin_home/');
+			}
+		}else{
+			if($this->input->post('fol_location_id') != 0){
+				redirect('Member/Member_home/show_in_folder/' . $this->input->post('fol_location_id'));
+			}
+			else{
+				redirect('Member/Member_home/show_member_home/');
+			}
+		}
 		
 	}//end funtion delete_folder()
     

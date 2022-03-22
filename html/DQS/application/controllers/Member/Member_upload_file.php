@@ -27,6 +27,29 @@ class Member_upload_file extends DQS_controller
 		$this->output_sidebar_member("Member/v_member_upload_file");
 	}
 
+	/*
+	* show_admin_upload_file
+	* show display upload file
+	* @input -
+	* @output display upload file
+	* @author Ashirawat
+	* @Create Date 2564-03-21
+	*/
+
+	public function show_admin_upload_file()
+	{
+		$this->output_sidebar_admin("Admin/v_admin_upload_file");
+	}
+
+	/*
+	* show_member_upload_file_in_floder
+	* show display upload file
+	* @input fol location id
+	* @output display upload file
+	* @author Ashirawat, Jerasak
+	* @Create Date 2564-02-18
+	*/
+
 	public function show_member_upload_file_in_floder($fol_location_id){
 		
 		$this->load->model('M_DQS_folder', 'fol');
@@ -57,6 +80,48 @@ class Member_upload_file extends DQS_controller
 		$data['path_loc'] = $path_folder;
 
 		$this->output_sidebar_member("Member/v_member_upload_file_in_floder",$data);
+	}
+
+	
+	/*
+	* show_member_upload_file_in_floder
+	* show display upload file
+	* @input fol location id
+	* @output display upload file
+	* @author Ashirawat, Jerasak
+	* @Create Date 2564-03-21
+	*/
+
+	public function show_admin_upload_file_in_floder($fol_location_id){
+		
+		$this->load->model('M_DQS_folder', 'fol');
+		$this->load->model('M_DQS_document', 'qrc');
+		$memid = $this->session->userdata('mem_id');
+		$path_folder = $this->fol->get_by_id_fol($fol_location_id)->result();
+		$this->session->set_userdata('fol_id_new', $path_folder[0]->fol_id);
+		$data['arr_fol'] = $this->fol->get_by_member_id($memid, $fol_location_id,)->result();
+		$data['arr_qr'] = $this->qrc->get_by_id_folder($memid)->result();
+		$data['arr_folder'] = $this->fol->get_all()->result();
+		$path_location =  $path_folder[0]->fol_location ; //เช็คค่า ที่อยู่ใน data base
+		$sub_folder = substr($path_location, 23 ).'/'; // sub string เอาแต่ location ชือของ folder
+		$this->session->set_userdata('path_new', $sub_folder);
+		$get_sub_folder = ' '.$sub_folder;
+		$sub_path_folder = strpos($sub_folder,'/'); // sub pos แยกตัว '/' ออกมาแต่ละชื่อ
+		$show_path_folder = substr($sub_folder,$sub_path_folder);
+		$arr = array();
+		do{
+			$sub_path_folder = strpos($get_sub_folder,'/'); 	
+			$sub_path_folder = $sub_path_folder + 1;
+			$new_sub_folder = substr($get_sub_folder, 0, $sub_path_folder);
+			$get_sub_folder = substr($get_sub_folder,$sub_path_folder);
+			$real_path_folder = substr($new_sub_folder,0,-1);
+			array_push($arr,$real_path_folder);		
+			
+		}while(strpos($get_sub_folder,'/') != null);
+		$data['path_fol'] = $arr;
+		$data['path_loc'] = $path_folder;
+
+		$this->output_sidebar_admin("Admin/v_admin_upload_file_in_floder",$data);
 	}
 	
 	/*
@@ -189,7 +254,8 @@ class Member_upload_file extends DQS_controller
 	{
 		$this->load->model('M_DQS_qrcode','mqrc');
 		$doc_name = $this->input->post('doc_name');
-		$obj_name= $this->mqrc->checkname($doc_name)->row();
+		$doc_mem_id = $this->session->userdata('mem_id');
+		$obj_name= $this->mqrc->checkname($doc_name,$doc_mem_id)->row();
 		if(empty($obj_name)){
 			echo json_encode(true);
 		}else{
@@ -210,7 +276,8 @@ class Member_upload_file extends DQS_controller
 	{
 		$this->load->model('M_DQS_qrcode','mqrc');
 		$doc_name = $this->input->post('doc_nameimg');
-		$obj_name= $this->mqrc->checkname($doc_name)->row();
+		$doc_mem_id = $this->session->userdata('mem_id');
+		$obj_name= $this->mqrc->checkname($doc_name,$doc_mem_id)->row();
 		if(empty($obj_name)){
 			echo json_encode(true);
 		}else{
