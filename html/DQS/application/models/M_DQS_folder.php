@@ -87,5 +87,48 @@ class M_DQS_folder extends Da_DQS_folder
         $this-> db->query($sql, array($this->doc_id)); //ถ้า SQL ที่เราใส่มี ? ต้องใส่ array ด้วย
     }
     
+    public function get_mem_folder($mem_id)
+    {
+        $sql = "SELECT * from {$this->db_name}.DQS_Folder WHERE fol_mem_id = "."$mem_id ORDER BY fol_id ASC";
+        $query = $this->db->query($sql);
+        return $query;
+    } //get_mem_folder
+
+    public function get_by_path($fol_location)
+    {
+        $sql = "SELECT * from {$this->db_name}.DQS_Folder WHERE fol_location LIKE '".$fol_location."/%'";
+        $query = $this->db->query($sql);
+        return $query;
+    } //get_by_path 
+
+    public function get_level_1_by_member_id($fol_mem_id)
+    {
+        $sql = "SELECT *
+            FROM {$this->db_name}.DQS_Folder
+            WHERE fol_mem_id = $fol_mem_id AND fol_location_id = 0";
+
+        $query = $this->db->query($sql);
+        return $query;
+    } //get_level_1_by_member_id
+
+    public function get_level_2_or_more_by_member_id($fol_mem_id)
+    {
+        $sql = "SELECT *
+            FROM {$this->db_name}.DQS_Folder
+            WHERE fol_mem_id = $fol_mem_id AND fol_location_id != 0";
+
+        $query = $this->db->query($sql);
+        return $query;
+    } //get_level_2_or_more_by_member_id
+
+    public function get_folder_by_id($fol_id)
+    {
+        $sql = "SELECT *
+            FROM {$this->db_name}.DQS_Folder
+            WHERE fol_id = $fol_id";
+
+        $query = $this->db->query($sql);
+        return $query;
+    } //get_by_id
 }
 ?>
