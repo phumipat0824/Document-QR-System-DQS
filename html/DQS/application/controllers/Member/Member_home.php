@@ -108,8 +108,8 @@ public function show_member_home()
 			$this->output_sidebar_member("Member/v_member_home", $data);
 		}
 	}
-	public function delete_file(){
 
+	public function delete_file($file_id){
         $this->load->model('M_DQS_document','MDD');
 		$this->MDD->doc_id = $this->input->post('doc_id');
 		$data['qr'] = $this->MDD->get_by_qr_id($this->MDD->doc_id)->result();

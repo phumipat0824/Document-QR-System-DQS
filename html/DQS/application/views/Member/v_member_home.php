@@ -413,7 +413,8 @@
                                                      ชนิด :
                                                      <!-- <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"><b> -->
                                                      <?php echo $arr_qr[$i]->doc_type ?>
-                                                 </b></h5>
+                                                 </b>
+                                             </h5>
                                              <br>
                                              <h5
                                                  style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
@@ -629,9 +630,6 @@
 
 
                      </div>
-
-
-
 
                      <script>
                      <?php $this->session->set_userdata('fol_id', ''); ?>
@@ -925,13 +923,7 @@
                              e.stopPropagation();
                              e.preventDefault();
                          });
-                     }); <<
-                     << << < HEAD
-
-                     function set_delete(id) {
-                         $('#doc_id_delete').val(id);
-                     } ===
-                     === =
+                     });
                      $(document).on("click", ".editModal", function() {
                          var id = $(this).attr('data-id');
                          $("#fol_id").val(id);
@@ -1209,6 +1201,5 @@
 
                          }
                          console.log(document.getElementById('edit'));
-                     } >>>
-                     >>> > 9e9 aa20c96c445f469e43f9070124baf774e3765
+                     }
                      </script>
