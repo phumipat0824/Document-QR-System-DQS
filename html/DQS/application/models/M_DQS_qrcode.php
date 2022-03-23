@@ -59,12 +59,12 @@ class M_DQS_qrcode extends Da_DQS_qrcode
 	* @Create Date 2565-02-15
 	*/
 
-    public function checkname($doc_name){
+    public function checkname($doc_name,$doc_mem_id){
         $sql = "SELECT * 
         FROM {$this->db_name}.DQS_Document AS document
         LEFT JOIN {$this->db_name}.DQS_Qrcode AS qr
         ON document.doc_name = qr.qr_name
-        WHERE doc_name = '$doc_name' AND qr_name = '$doc_name'";
+        WHERE doc_name = '$doc_name' AND qr_name = '$doc_name' AND doc_mem_id = '$doc_mem_id' AND qr_mem_id = '$doc_mem_id'";
 
         $query = $this->db->query($sql);
         return $query;
@@ -92,5 +92,28 @@ class M_DQS_qrcode extends Da_DQS_qrcode
         $query = $this->db->query($sql);
         return $query;
     }
+
+    public function get_by_qr_id($doc_id)
+    {
+        $sql = "SELECT * from {$this->db_name}.DQS_Qrcode
+        WHERE DQS_Qrcode.qr_id = $doc_id";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
+       /*
+    * check_exist_name($doc_name)
+    * check exist name
+    * @input doc_name
+    * @output -
+    * @author Onticha
+    * @Create Date 2565-03-21
+    */
+    // public function check_exist_name($qr_name)
+    // {
+    //     $this->db->where('qr_name', $qr_name);
+    //     $query = $this->db->get('DQS_Qrcode');
+    //     return $query->num_rows();
+    // }
 
 }
