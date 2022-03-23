@@ -81,5 +81,11 @@ public function insert_qrcode(){//insert document into database
 }//end insert document into database
 
 
+public function update_qr_file(){
+    $sql = "UPDATE {$this->db_name}.DQS_Qrcode
+            SET qr_name = ? ,qr_path = ? 
+            WHERE qr_id = ? "; // ? = ค่าที่เราจะใส่ไปอยู่แล้ว , อย่าใช้ " ' " เพราะอาจจะเออเร่อได้
+    $this-> db->query($sql, array($this->qr_name,$this->qr_path,$this->qr_id)); //ถ้า SQL ที่เราใส่มี ? ต้องใส่ array ด้วย
+}
 
 }

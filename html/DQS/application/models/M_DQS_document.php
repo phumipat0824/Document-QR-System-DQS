@@ -103,9 +103,8 @@ class M_DQS_document extends Da_DQS_document {
 
     public function get_by_doc_id($doc_id)
     {
-        $sql = "SELECT * 
-        FROM {$this->db_name}.DQS_Document
-        WHERE doc_id = $doc_id";
+        $sql = "SELECT * FROM {$this->db_name}.DQS_Document 
+        WHERE DQS_Document.doc_id = $doc_id";
         $query = $this->db->query($sql);
         return $query;
     }
