@@ -111,8 +111,8 @@ public function show_member_home()
 
 	public function delete_file($file_id){
         $this->load->model('M_DQS_document','MDD');
-		$this->MDD->doc_id = $this->input->post('doc_id');
-		$data['qr'] = $this->MDD->get_by_qr_id($this->MDD->doc_id)->result();
+		$this->MDD->doc_id = $file_id;
+		$data['qr'] = $this->MDD->get_by_qr_id($file_id)->result();
 		$qr_id = $data['qr'][0]->qr_id;
         $this->MDD->delete_qr_file($qr_id);
         $this->MDD->delete_file();
