@@ -91,4 +91,42 @@ class M_DQS_document extends Da_DQS_document {
         $query = $this->db->query($sql);
         return $query;
     }
+
+	public function get_by_qr_id($doc_id)
+    {
+        $sql = "SELECT * FROM {$this->db_name}.DQS_Qrcode JOIN {$this->db_name}.DQS_Document 
+        ON DQS_Qrcode.qr_doc_id = DQS_Document.doc_id
+        WHERE DQS_Qrcode.qr_doc_id = $doc_id";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
+    public function get_by_doc_id($doc_id)
+    {
+        $sql = "SELECT * FROM {$this->db_name}.DQS_Document 
+        WHERE DQS_Document.doc_id = $doc_id";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
+    public function get_all()
+    {
+        $sql = "SELECT * from {$this->db_name}.DQS_Document";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+    /*
+    * check_exist_name($doc_name)
+    * check exist name
+    * @input doc_name
+    * @output -
+    * @author Onticha
+    * @Create Date 2565-03-21
+    */
+    public function check_exist_name($doc_name)
+    {
+        $this->db->where('doc_name', $doc_name);
+        $query = $this->db->get('DQS_Document');
+        return $query->num_rows();
+    }
 }

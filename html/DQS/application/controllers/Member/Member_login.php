@@ -62,6 +62,7 @@ class Member_login extends DQS_controller
             $this->session->set_userdata('mem_username', $obj_mem->mem_username);
             $this->session->set_userdata('username', $obj_mem->mem_username);
             $this->session->set_userdata('mem_password', md5($mem_password));
+            $this->session->set_userdata('mem_role', $obj_mem->mem_role);
             $this->session->set_userdata('old_password', $mem_password);
             $this->session->set_userdata('mem_id', $obj_mem->mem_id);
             $this->session->set_userdata('mem_pro_id', $obj_mem->mem_pro_id);

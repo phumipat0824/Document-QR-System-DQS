@@ -15,27 +15,29 @@
     
     ?>
 
-<div class="row" style="padding-top: 150px ;margin: auto;" ;>
+<div class="row" style="padding-top: 50px ;margin: 50px;" ;>
     <div class="col-lg-4 col-md-4">
     </div>
-    <div class="col-lg-4 col-md-4" style="padding-left: 50px ">
+    <div class="col-lg-4 col-md-4" style="padding-left: 10px ">
         <div class="card" style="border-radius: 10px;">
             <div class="text-center mb-4">
-                <div class="card-header card-header-warning" style="border-radius: 10px;">
-                    <h style="color:#000; font-family:TH Sarabun New; font-size: 70px">เข้าสู่ระบบ</h>
+                <div class="card-header card-header-warning" style="border-radius: 5px;">
+                    <h style="color:#000; font-family:TH Sarabun New; font-size: 50px">เข้าสู่ระบบ</h>
                 </div>
                 <form method="POST" action="<?php echo site_url() . '/Member/Member_login/login'; ?>">
-                    <div class="card-body " style="padding-top:100px">
+                    <div class="card-body " style="padding-top:30px">
                         <div class="form-group mb-3">
                             <div class="input-group input-group-merge input-group-alternative">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"></span>
                                 </div>
-    
-                                
+
+
                                 <!-- Insert username -->
 
-                                <input id="mem_username" name="mem_username" placeholder="ชื่อผู้ใช้/อีเมล"   type="text" required oninvalid="this.setCustomValidity('กรุณากรอกชื่อผู้ใช้งานหรืออีเมล')" oninput="this.setCustomValidity('')">
+                                <input id="mem_username" name="mem_username" placeholder="ชื่อผู้ใช้/อีเมล" type="text"
+                                    required oninvalid="this.setCustomValidity('กรุณากรอกชื่อผู้ใช้งานหรืออีเมล')"
+                                    oninput="this.setCustomValidity('')">
                             </div>
                         </div>
                         <div class="form-group">
@@ -44,7 +46,9 @@
                                     <span class="input-group-text"></span>
                                 </div>
                                 <!-- Insert password -->
-                                <input  id="mem_password" name="mem_password" placeholder="รหัสผ่าน" type="password" required oninvalid="this.setCustomValidity('กรุณากรอกรหัสผ่าน')" oninput="this.setCustomValidity('')">
+                                <input id="mem_password" name="mem_password" placeholder="รหัสผ่าน" type="password"
+                                    required oninvalid="this.setCustomValidity('กรุณากรอกรหัสผ่าน')"
+                                    oninput="this.setCustomValidity('')">
                             </div>
                         </div>
                         <center>
@@ -55,11 +59,14 @@
 
                         <div class="text-center" style="margin-top: -20px">
                             <!-- Button login -->
-                            <button type="submit" class="btn btn-primary my-10" id="btn_login" style="background-color: #100575 ; width:400px; font-family:TH Sarabun New; font-size: 40px"> เข้าสู่ระบบ</button>
+                            <button type="submit" class="btn btn-primary my-10" id="btn_login"
+                                style="background-color: #100575 ;  font-family:TH Sarabun New; font-size: 30px">
+                                เข้าสู่ระบบ</button>
                         </div><br>
                         <div class="text-center" style="padding-top: 20px margin-bottom: 1rem">
                             <!-- Button login -->
-                            <a href="<?php echo base_url() . 'Member/Member_login/show_forget_password' ?>" style="font-family:TH Sarabun New;font-size: 40px">ลืมรหัสผ่าน?</a>
+                            <a href="<?php echo base_url() . 'Member/Member_login/show_forget_password' ?>"
+                                style="font-family:TH Sarabun New;font-size: 30px">ลืมรหัสผ่าน?</a>
                         </div>
                     </div>
                 </form>
@@ -138,16 +145,144 @@ function login() { //login member
 </script>
 <style>
 input {
-    width: 600px;
+    width: 400px;
     padding: 0px 15px;
-    height:70px; 
+    height: 60px;
 }
 
 input,
 input::-webkit-input-placeholder {
-    font-size: 30px;
+    font-size: 20px;
     line-height: 3;
 }
 </style>
-</html>
 
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+</style>
+</head>
+<body>

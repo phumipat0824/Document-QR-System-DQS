@@ -55,7 +55,7 @@ class Department_list extends DQS_controller {
 		$this->load->model('M_DQS_station_state_of_province', 'MDSS');
 		$this->MDD->dep_name = $this->input->post('dep_name');
 		// $this->MDSS->station_status = $this->input->post('station_status');
-		if ($this->MDD->check_exist_name($this->MDD->dep_name) == 0 && trim($this->MDD->dep_name) != "") {
+		if ($this->MDD->check_exist_name($this->session->mem_pro_id,$this->MDD->dep_name) == 0 && trim($this->MDD->dep_name) != "") {
 			$this->MDD->insert();
 			// insert departmenr
 			$dep_last_id=$this->MDD->get_last_id()->row();
@@ -78,7 +78,7 @@ class Department_list extends DQS_controller {
 		$this->MDD->dep_name = $this->input->post('dep_name');
 		$this->MDD->dep_active = $this->input->post('dep_active');
 		$this->MDD->dep_id = $this->input->post('dep_id');
-		if ($this->MDD->check_exist_name($this->MDD->dep_name) == 0 && trim($this->MDD->dep_name) != "") {
+		if ($this->MDD->check_exist_name($this->session->mem_pro_id,$this->MDD->dep_name) == 0 && trim($this->MDD->dep_name) != "") {
 			$this->MDD->name_update();
 			redirect('/Department/Department_list/show_department');
 		}
