@@ -1,11 +1,4 @@
-<!-- css style -->
-<style>
-/* dropdown date */
-#DropdownDate {
-    margin-left: 450px;
-}
-</style>
-<!-- css style -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- main -->
 <div class="content">
@@ -17,156 +10,57 @@
         </div>
         <!-- text -->
 
-        <!-- dropdown date -->
-        <div class="dropdown" id="DropdownDate">
-            <a class="btn btn-secondary dropdown-toggle" id="dropdownDate" data-toggle="dropdown" style="font-family:TH Sarabun New; font-size: 20px;">
-                <span class="material-icons">
-                    calendar_month
-                </span>
-                ค้นหาช่วงเวลา
-            </a>
-            <div class="dropdown-menu" aria-labelledby="dropdownDate">
-                <a class="dropdown-item">Something else here</a>
-            </div>
-        </div>
-        <!-- dropdown date -->
-
-        <!-- card show number -->
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card">
-                    <div class="card-header card-header-icon card-header">
-                        <div class="card-icon" style="background-color: #139447;">
-                            <i class="material-icons">preview</i>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title" style="font-family:TH Sarabun New;">จำนวนการเข้าชม</h4>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- ----------------------------------------------------------------------------------------------------------------------------- -->
-            <div class="col-md-3">
-                <div class="card">
-                    <div class="card-header card-header-icon card-header">
-                        <div class="card-icon" style="background-color: #BE4734;">
-                            <i class="material-icons">file_download</i>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title" style="font-family:TH Sarabun New;">จำนวนการดาวน์โหลด</h4>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- script graph -->
-        <div class="col-md-8">
-            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <div>
+            <canvas id="myChart" width="100" height="100"></canvas>
         </div>
 
         <script>
-        window.onload = function() {
+            const data = {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'จำนวรไฟล์ทั้งหมด',
+                    data: [8, 2, 6, 9, 2, 3, 9],
+                    backgroundColor: 'rgba(255, 26, 104, 0.2)',
+                    borderColor: 'rgba(255, 26, 104, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'จำนวนการดาวน์โหดล',
+                    data: [28, 12, 16, 9, 12, 13, 9],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
 
-            var chart = new CanvasJS.Chart("chartContainer", {
-                animationEnabled: true,
-                title: {
-                    text: "จำนวนการแสกนและดาวน์โหลด"
-                },
-                axisY: {
-                    title: "จำนวนการเข้าชม",
-                    titleFontColor: "#000000",
-                    lineColor: "#000000",
-                    labelFontColor: "#000000",
-                    tickColor: "#000000"
-                },
-                toolTip: {
-                    shared: true
-                },
-                legend: {
-                    cursor: "pointer",
-                    itemclick: toggleDataSeries
-                },
-                data: [{
-                        type: "column",
-                        name: "จำนวนการเข้าชม",
-                        legendText: "จำนวนการเข้าชม",
-                        showInLegend: true,
-                        dataPoints: [{
-                                label: "1/12/2021",
-                                y: 266
-                            },
-                            {
-                                label: "2/12/2021",
-                                y: 302
-                            },
-                            {
-                                label: "3/12/2021",
-                                y: 157
-                            },
-                            {
-                                label: "4/12/2021",
-                                y: 148
-                            },
-                            {
-                                label: "5/12/2021",
-                                y: 152
-                            },
-                            {
-                                label: "6/12/2021",
-                                y: 100
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }, {
+                    label: 'จำนวนการสแกน',
+                    data: [15, 15, 16, 19, 22, 13, 19],
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    borderWidth: 1
+                }]
+            };
+
+            // config 
+            const config = {
+                type: 'bar',
+                data,
+                options: {
+                    scales: {
+                        y: {
+                            ticks: {
+                                stepSize: 1
                             }
-                        ]
+                        }
                     },
-                    {
-                        type: "column",
-                        name: "จำนวนการดาวน์โหลด ",
-                        legendText: "จำนวนการดาวน์โหลด",
-                        // axisYType: "secondary",
-                        showInLegend: true,
-                        dataPoints: [{
-                                label: "1/12/2021",
-                                y: 141
-                            },
-                            {
-                                label: "2/12/2021",
-                                y: 225
-                            },
-                            {
-                                label: "3/12/2021",
-                                y: 341
-                            },
-                            {
-                                label: "4/12/2021",
-                                y: 474
-                            },
-                            {
-                                label: "5/12/2021",
-                                y: 285
-                            },
-                            {
-                                label: "6/12/2021",
-                                y: 312
-                            }
-                        ]
+                    layout: {
+                        padding: 20
                     }
-                ]
-            });
-            chart.render();
-
-            function toggleDataSeries(e) {
-                if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                    e.dataSeries.visible = false;
-                } else {
-                    e.dataSeries.visible = true;
                 }
-                chart.render();
-            }
+            };
 
-        }
+            // render init block
+            const myChart = new Chart(
+                document.getElementById('myChart'),
+                config
+            );
         </script>
-        </head>
