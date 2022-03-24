@@ -369,7 +369,38 @@
     <?php }  ?>
     <?php }  ?>
 </div>
+<div class="modal fade" id="deleteFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; "><b>
+                        ยืนยันการลบเอกสาร</b></h6>
 
+            </div>
+
+            <form id="delete-form" method="POST"
+                action="<?php echo site_url() . '/Member/Member_home/delete_file_folder/' ?>">
+                <div class="modal-body">
+
+                    <input type="hidden" name="doc_id" id="doc_id_delete">
+
+                    <input type="hidden" name="doc_path" id="doc_path_delete">
+
+                    <input type="hidden" name="fol_id" id="fol_id_delete">
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                    <input type="submit" class="btn btn-success" value="ยืนยัน">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!-- /*
     * move file
     * Display modal move file
@@ -408,543 +439,513 @@
                     <input type="submit" class="btn btn-success" value="บันทึก">
                     <input type="hidden" name="doc_name" id="file_name" value="">
                     <input type="hidden" name="qr_name" id="qrcode_name" value="">
-
-                    <div class="modal fade" id="deleteFileModal" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h6 class="modal-title" id="exampleModalLabel"
-                                        style="font-family:TH sarabun new; font-size: 30px; "><b>
-                                            ยืนยันการลบเอกสาร</b></h6>
-
-                                </div>
-
-                                <form id="delete-form" method="POST"
-                                    action="<?php echo site_url() . '/Member/Member_home/delete_file_folder/' ?>">
-                                    <div class="modal-body">
-
-                                        <input type="hidden" name="doc_id" id="doc_id_delete">
-
-                                        <input type="hidden" name="doc_path" id="doc_path_delete">
-
-                                        <input type="hidden" name="fol_id" id="fol_id_delete">
-
-
-
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger"
-                                            data-dismiss="modal">ยกเลิก</button>
-                                        <input type="submit" class="btn btn-success" value="ยืนยัน">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <script>
-                    $(document).on("click", ".EditFileModal", function() {
-                        var id = $(this).attr('data-id');
-                        $("#qr_id").val(id);
-                        console.log(id);
-                        var name = $(this).attr('data-name');
-                        $("#qr_name").val(name);
-                        console.log(name);
-                        var doc_fol = $(this).attr('data-doc_fol');
-                        $("#doc_fol_id").val(doc_fol);
-                    });
-
-                    <?php $this->session->set_userdata('fol_id', ''); ?>
-                    <?php $this->session->set_userdata('path', ''); ?>
-                    $(document).on("keyup", "#fol_name", function() {
-                        var t = <?php echo json_encode($arr_fol) ?>;
-                        var new_name = document.getElementById("fol_name");
-                        var check_name;
-                        var div = document.getElementById('target_div');
-                        var dis_button = document.getElementById('create');
-
-                        for (let x in t) {
-                            if (t[x].fol_name == new_name.value) {
-                                check_name = 1;
-                                break;
-                            } else {
-                                check_name = 0;
-                            }
-                        }
-                        console.log(check_name);
-                        if (check_name == 1) {
-                            $("#fol_name").css("border-color", "red");
-                            div.style.display = "block";
-                            dis_button.disabled = true;
-
-                        } else {
-                            $("#fol_name").css("border-color", "green");
-                            div.style.display = "none";
-                            dis_button.disabled = false;
-
-                        }
-                    });
-
-                    /* check_fol_edit()
-                     * check folder edit
-                     * @input -
-                     * @output -
-                     * @author Onticha
-                     * @Create Date 2564-11-30
-                     */
-                    function check_fol_edit() {
-
-                        var dis_button = document.getElementById('edit');
-                        dis_button.disabled = false;
-
-                        var t = <?php echo json_encode($arr_fol) ?>;
-                        var new_name = document.getElementById("fol_edit");
-                        var check_name;
-                        var div = document.getElementById('edit_mss');
-
-
-                        for (let x in t) {
-                            if (t[x].fol_name == new_name.value || new_name.value == " ") {
-                                check_name = 1;
-                                break;
-                            } else {
-                                check_name = 0;
-                            }
-                        }
-                        console.log(check_name);
-                        if (check_name == 1) {
-                            $("#fol_edit").css("border-color", "red");
-                            div.style.display = "block";
-                            dis_button.disabled = true;
-
-                        } else {
-                            $("#fol_edit").css("border-color", "green");
-                            div.style.display = "none";
-                            dis_button.disabled = false;
-
-                        }
-                    } //end function check_fol_edit()
-                    </script>
-
-
-
-                    <script type="text/javascript">
-                    $(document).on("click", ".editModal", function() {
-                        var id = $(this).attr('data-id');
-                        $("#fol_id").val(id);
-                        console.log(id);
-                        var name = $(this).attr('data-name');
-                        $("#fol_name").val(name);
-                        document.getElementById("folder_id").value = id;
-                        document.getElementById("fol_edit").value = name;
-                    });
-
-
-
-
-
-                    /* deleteModal()
-                     * deleteModal 
-                     * @input -
-                     * @output -
-                     * @author Onticha
-                     * @Create Date 2564-11-30
-                     */
-                    $(document).on("click", ".deleteModal", function() {
-                        var id = $(this).attr('data-id');
-                        $("#fol_id").val(id);
-                    });
-
-
-                    var cm = document.querySelector(".custom-cm");
-
-                    function showContextMenu(show = true) {
-                        cm.style.display = show ? "block" : "none";
-                    }
-
-                    window.addEventListener("contextmenu", e => {
-                        e.preventDefault();
-
-                        showContextMenu();
-                        cm.style.top =
-                            e.y + cm.offsetHeight > window.innerHeight ?
-                            window.innerHeight - cm.offsetHeight :
-                            e.y;
-                        cm.style.left =
-                            e.x + cm.offsetWidth > window.innerWidth ?
-                            window.innerWidth - cm.offsetWidth :
-                            e.x;
-                    });
-
-
-                    /* editModal()
-                     * editModal 
-                     * @input -
-                     * @output -
-                     * @author Onticha
-                     * @Create Date 2564-11-30
-                     */
-                    $(document).on("click", ".editModal", function() {
-                        var id = $(this).attr('data-id');
-                        $("#dep_id").val(id);
-                    });
-
-                    $(document).on("click", ".MoveFileModal", function() {
-                        var id = $(this).attr('data-id');
-                        $("#doc_id").val(id);
-                        var name = $(this).attr('data-name');
-                        $("#doc_name").val(name);
-                        var qr_id = $(this).attr('data-qr-id');
-                        $("#qr_id").val(qr_id);
-                        var qr_name = $(this).attr('data-qr-name');
-                        $("#qr_name").val(qr_name);
-                        document.getElementById("file_id").value = id;
-                        document.getElementById("file_name").value = name;
-                        document.getElementById("qrcode_id").value = qr_id;
-                        document.getElementById("qrcode_name").value = qr_name;
-                        console.log(id);
-                        console.log(name);
-                    });
-
-                    function rightclick() {
-                        var rightclick;
-                        var e = window.event;
-
-                        document.getElementById("myDropdown").classList.toggle("show");
-                        if (!event.target.matches('.dropbtn')) {
-                            var dropdowns = document.getElementsByClassName("dropdown-content");
-                            var i;
-                            for (i = 0; i < script dropdowns.length; i++) {
-                                var openDropdown = dropdowns[i];
-                                if (openDropdown.classList.contains('show')) {
-                                    openDropdown.classList.remove('show');
-                                }
-                            }
-                        }
-                    }
-                    </script>
-                    <script>
-                    $(document).on("keyup", "#fol_name", function() {
-                        var t = <?php echo json_encode($arr_fol) ?>;
-                        var new_name = document.getElementById("fol_name");
-                        var check_name;
-                        var div = document.getElementById('target_div');
-                        var dis_button = document.getElementById('create');
-
-                        for (let x in t) {
-                            if (t[x].fol_name == new_name.value) {
-                                check_name = 1;
-                                break;
-                            } else {
-                                check_name = 0;
-                            }
-                        }
-                        console.log(check_name);
-                        if (check_name == 1) {
-                            $("#fol_name").css("border-color", "red");
-                            div.style.display = "block";
-                            dis_button.disabled = true;
-
-                        } else {
-                            $("#fol_name").css("border-color", "green");
-                            div.style.display = "none";
-                            dis_button.disabled = false;
-
-                        }
-                    });
-                    </script>
-
-                    <script type="text/javascript">
-                    $(document).on("click", ".editModal", function() {
-                        var id = $(this).attr('data-id');
-                        $("#fol_id").val(id);
-                    });
-
-
-                    var cm = document.querySelector(".custom-cm");
-
-                    function showContextMenu(show = true) {
-                        cm.style.display = show ? "block" : "none";
-                    }
-
-                    window.addEventListener("contextmenu", e => {
-                        e.preventDefault();
-
-                        showContextMenu();
-                        cm.style.top =
-                            e.y + cm.offsetHeight > window.innerHeight ?
-                            window.innerHeight - cm.offsetHeight :
-                            e.y;
-                        cm.style.left =
-                            e.x + cm.offsetWidth > window.innerWidth ?
-                            window.innerWidth - cm.offsetWidth :
-                            e.x;
-                    });
-
-
-                    $(document).on("click", ".editModal", function() {
-                        var id = $(this).attr('data-id');
-                        $("#dep_id").val(id);
-                    });
-
-                    function rightclick() {
-                        var rightclick;
-                        var e = window.event;
-
-                        document.getElementById("myDropdown").classList.toggle("show");
-                        if (!event.target.matches('.dropbtn')) {
-                            var dropdowns = document.getElementsByClassName("dropdown-content");
-                            var i;
-                            for (i = 0; i < dropdowns.length; i++) {
-                                var openDropdown = dropdowns[i];
-                                if (openDropdown.classList.contains('show')) {
-                                    openDropdown.classList.remove('show');
-                                }
-                            }
-                        }
-
-
-                    }
-
-
-                    function rightclickfolder(folder) {
-                        var rightclick;
-                        var e = window.event;
-                        var getnamefolder = 'folder' + folder;
-                        var x = document.getElementById("showmenu");
-
-                        if (e.button == 2) {
-                            document.getElementById(getnamefolder).classList.toggle("show");
-                            if (!event.target.matches('.dropbtn')) {
-                                var dropdowns = document.getElementsByClassName("dropdown-content");
-                                var i;
-                                for (i = 0; i < dropdowns.length; i++) {
-                                    var openDropdown = dropdowns[i];
-                                    if (x.style.display === "block") {
-                                        x.style.display = "none";
-                                    } else {
-                                        x.style.display = "block";
-                                    }
-                                    if (openDropdown.classList.contains('show')) {
-                                        openDropdown.classList.remove('show');
-                                    }
-                                }
-                            }
-                        }
-
-                    }
-
-                    /* moveModal()
-                     * moveModal 
-                     * @input -
-                     * @output -
-                     * @author Chanyapat
-                     * @Create Date 2564-11-30
-                     */
-                    $(document).on("click", ".moveModal", function() {
-                        var fol_id = $(this).attr('data-id');
-                        $("#fol_id").val(fol_id);
-                        var name = $(this).attr('data-name');
-                        $("#fol_name").val(name);
-                        var x = document.getElementById("fold_id").value = fol_id;
-                        document.getElementById("folder_name").value = name;
-
-                        $.ajax({
-                            type: 'post',
-                            url: '<?php echo site_url() . 'Folder/Folder_management/get_dropdown_data_ajax'; ?>',
-                            data: {
-                                'fol_id': fol_id
-                            },
-                            dataType: 'json',
-                            success: function(json_data) {
-                                console.log(json_data);
-
-                                //สร้าง select รอไว้ แล้วค่อยใส่ option ทีหลัง
-                                let html_select =
-                                    "<select name='fol_location_id' id='folder_location_id' class='form-select' aria-label='Default select example' placeholder='เลือกโฟลเดอร์' required>'</select>";
-                                $('#select_move').html(html_select);
-                                let html_option =
-                                    '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
-                                $('#folder_location_id').html(html_option);
-
-                                let obj_level = json_data['arr_level'];
-                                let current_path = json_data['current_path'];
-
-
-                                if (obj_level[1].length == 0) {
-
-                                    //กรณีไม่มีข้อมูล
-                                    html_option = ' <option value="none">ไม่พบข้อมูล</option>';
-                                    $('#folder_location_id').html(html_option);
-                                } //if
-                                else {
-                                    // html_option = '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
-                                    // $('#folder_location_id').prepend(html_option);
-                                    //กรณีมีข้อมูล
-
-                                    let max_level = Object.keys(obj_level).length;
-                                    let prefix = '&nbsp'; //สัญลักษณ์ข้างหน้าแต่ละ level
-
-                                    for (level = 1; level <= max_level; level++) {
-
-                                        if (level == 1) {
-                                            html_option =
-                                                '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
-                                            for (i = 0; i < obj_level[level].length; i++) {
-
-                                                //ลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้
-                                                let disable = '';
-                                                if (obj_level[level][i]["fol_location"].includes(
-                                                        current_path + '/') || obj_level[level][i][
-                                                        "fol_location"
-                                                    ] == current_path) {
-                                                    disable = ' disabled ';
-                                                } //if
-
-                                                html_option += '<option ' + disable + ' id="fol_' +
-                                                    obj_level[level][i]["fol_id"] + '" value="' +
-                                                    obj_level[level][i]["fol_id"] + '">';
-                                                html_option += obj_level[level][i]["fol_name"];
-                                                html_option += '</option>';
-
-                                            } //for
-
-                                            $('#folder_location_id').html(html_option);
-                                        } //if
-                                        else {
-                                            if (level == 2) {
-                                                let disable = '';
-                                                if (json_data['is_level_1'] == true) {
-                                                    disable = ' disabled  hidden ';
-                                                } //if
-
-                                                html_option = '<option value="0"' + disable +
-                                                    ' > หน้าหลัก</option>';
-                                                $('#folder_location_id').prepend(html_option);
-                                            } //if
-
-                                            prefix = prefix + '&nbsp' + '&nbsp' + '-';
-
-                                            //แทรกลูกหลังจากตำแหล่งแม่ (ทำจากหลังมาหน้า ลำดับจะไม่เพี้ยน)
-                                            for (i = obj_level[level].length - 1; i >= 0; i--) {
-
-                                                //ลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้
-                                                let disable = '';
-                                                if (obj_level[level][i]["fol_location"].includes(
-                                                        current_path + '/') || obj_level[level][i][
-                                                        "fol_location"
-                                                    ] == current_path) {
-                                                    disable = ' disabled ';
-                                                } //if
-
-                                                html_option = '';
-                                                html_option += '<option ' + disable + ' id="fol_' +
-                                                    obj_level[level][i]["fol_id"] + '" value="' +
-                                                    obj_level[level][i]["fol_id"] + '">';
-                                                html_option += prefix + ' ' + obj_level[level][i][
-                                                    "fol_name"
-                                                ];
-                                                html_option += '</option>';
-
-
-                                                //แทรกโค้ดลูก หลังจากตำแหล่งโค้ดแม่
-                                                var tag_parent = document.getElementById('fol_' +
-                                                    obj_level[level][i]["fol_location_id"]);
-                                                tag_parent.insertAdjacentHTML('afterend',
-                                                    html_option);
-                                            } //for
-                                        } //else
-
-                                    } //for
-
-                                } //else
-                            }
-                        }); //ajax
-                    }); //get_dropdown_data
-
-                    $(document).ready(function() {
-                        $('.dropdown-submenu a.test').on("click", function(e) {
-                            $(this).next('ul').toggle();
-                            e.stopPropagation();
-                            e.preventDefault();
-                        });
-                    });
-
-                    function set_delete(path, id, fol_id) {
-                        $('#doc_path_delete').val(path);
-                        $('#doc_id_delete').val(id);
-                        $('#fol_id_delete').val(fol_id);
-
-                    }
-                    </script>
-                    </script>
-
-                    <!-- EditFile Script -->
-                    <script>
-                    <?php $this->session->set_userdata('qr_id', ''); ?>
-                    <?php $this->session->set_userdata('path', ''); ?>
-                    $(document).on("keyup", "#qr_name", function() {
-                        var t = <?php echo json_encode($arr_doc) ?>;
-                        var new_name = document.getElementById("qr_name");
-                        var check_name;
-                        var div = document.getElementById('target_div');
-                        var dis_button = document.getElementById('create');
-
-                        for (let x in t) {
-                            if (t[x].doc_name == new_name.value) {
-                                check_name = 1;
-                                break;
-                            } else {
-                                check_name = 0;
-                            }
-                        }
-                        console.log(check_name);
-                        if (check_name == 1) {
-                            $("#qr_name").css("border-color", "red");
-                            div.style.display = "block";
-                            dis_button.disabled = true;
-
-                        } else {
-                            $("#qr_name").css("border-color", "green");
-                            div.style.display = "none";
-                            dis_button.disabled = false;
-
-                        }
-                    });
-
-                    function check_file_edit() {
-
-                        var dis_button = document.getElementById('sub_edit');
-                        dis_button.disabled = false;
-
-                        var t = <?php echo json_encode($arr_qr) ?>;
-                        var new_name = document.getElementById("qr_edit");
-                        var check_name;
-                        var div = document.getElementById('edit_mss');
-
-
-                        for (let x in t) {
-                            if (t[x].qr_name == new_name.value || new_name.value == " ") {
-                                check_name = 1;
-                                break;
-                            } else {
-                                check_name = 0;
-                            }
-                        }
-                        console.log(check_name);
-                        if (check_name == 1) {
-                            $("#qr_edit").css("border-color", "red");
-                            div.style.display = "block";
-                            dis_button.disabled = true;
-
-                        } else {
-                            $("#qr_edit").css("border-color", "green");
-                            div.style.display = "none";
-                            dis_button.disabled = false;
-
-                        }
-                        console.log(document.getElementById('edit'));
-                    }
-                    </script>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+$(document).on("click", ".EditFileModal", function() {
+    var id = $(this).attr('data-id');
+    $("#qr_id").val(id);
+    console.log(id);
+    var name = $(this).attr('data-name');
+    $("#qr_name").val(name);
+    console.log(name);
+    var doc_fol = $(this).attr('data-doc_fol');
+    $("#doc_fol_id").val(doc_fol);
+});
+
+<?php $this->session->set_userdata('fol_id', ''); ?>
+<?php $this->session->set_userdata('path', ''); ?>
+$(document).on("keyup", "#fol_name", function() {
+    var t = <?php echo json_encode($arr_fol) ?>;
+    var new_name = document.getElementById("fol_name");
+    var check_name;
+    var div = document.getElementById('target_div');
+    var dis_button = document.getElementById('create');
+
+    for (let x in t) {
+        if (t[x].fol_name == new_name.value) {
+            check_name = 1;
+            break;
+        } else {
+            check_name = 0;
+        }
+    }
+    console.log(check_name);
+    if (check_name == 1) {
+        $("#fol_name").css("border-color", "red");
+        div.style.display = "block";
+        dis_button.disabled = true;
+
+    } else {
+        $("#fol_name").css("border-color", "green");
+        div.style.display = "none";
+        dis_button.disabled = false;
+
+    }
+});
+
+/* check_fol_edit()
+ * check folder edit
+ * @input -
+ * @output -
+ * @author Onticha
+ * @Create Date 2564-11-30
+ */
+function check_fol_edit() {
+
+    var dis_button = document.getElementById('edit');
+    dis_button.disabled = false;
+
+    var t = <?php echo json_encode($arr_fol) ?>;
+    var new_name = document.getElementById("fol_edit");
+    var check_name;
+    var div = document.getElementById('edit_mss');
+
+
+    for (let x in t) {
+        if (t[x].fol_name == new_name.value || new_name.value == " ") {
+            check_name = 1;
+            break;
+        } else {
+            check_name = 0;
+        }
+    }
+    console.log(check_name);
+    if (check_name == 1) {
+        $("#fol_edit").css("border-color", "red");
+        div.style.display = "block";
+        dis_button.disabled = true;
+
+    } else {
+        $("#fol_edit").css("border-color", "green");
+        div.style.display = "none";
+        dis_button.disabled = false;
+
+    }
+} //end function check_fol_edit()
+</script>
+
+
+
+<script type="text/javascript">
+$(document).on("click", ".editModal", function() {
+    var id = $(this).attr('data-id');
+    $("#fol_id").val(id);
+    console.log(id);
+    var name = $(this).attr('data-name');
+    $("#fol_name").val(name);
+    document.getElementById("folder_id").value = id;
+    document.getElementById("fol_edit").value = name;
+});
+
+
+
+
+
+/* deleteModal()
+ * deleteModal 
+ * @input -
+ * @output -
+ * @author Onticha
+ * @Create Date 2564-11-30
+ */
+$(document).on("click", ".deleteModal", function() {
+    var id = $(this).attr('data-id');
+    $("#fol_id").val(id);
+});
+
+
+var cm = document.querySelector(".custom-cm");
+
+function showContextMenu(show = true) {
+    cm.style.display = show ? "block" : "none";
+}
+
+window.addEventListener("contextmenu", e => {
+    e.preventDefault();
+
+    showContextMenu();
+    cm.style.top =
+        e.y + cm.offsetHeight > window.innerHeight ?
+        window.innerHeight - cm.offsetHeight :
+        e.y;
+    cm.style.left =
+        e.x + cm.offsetWidth > window.innerWidth ?
+        window.innerWidth - cm.offsetWidth :
+        e.x;
+});
+
+
+/* editModal()
+ * editModal 
+ * @input -
+ * @output -
+ * @author Onticha
+ * @Create Date 2564-11-30
+ */
+$(document).on("click", ".editModal", function() {
+    var id = $(this).attr('data-id');
+    $("#dep_id").val(id);
+});
+
+$(document).on("click", ".MoveFileModal", function() {
+    var id = $(this).attr('data-id');
+    $("#doc_id").val(id);
+    var name = $(this).attr('data-name');
+    $("#doc_name").val(name);
+    var qr_id = $(this).attr('data-qr-id');
+    $("#qr_id").val(qr_id);
+    var qr_name = $(this).attr('data-qr-name');
+    $("#qr_name").val(qr_name);
+    document.getElementById("file_id").value = id;
+    document.getElementById("file_name").value = name;
+    document.getElementById("qrcode_id").value = qr_id;
+    document.getElementById("qrcode_name").value = qr_name;
+    console.log(id);
+    console.log(name);
+});
+
+function rightclick() {
+    var rightclick;
+    var e = window.event;
+
+    document.getElementById("myDropdown").classList.toggle("show");
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < script dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
+</script>
+<script>
+$(document).on("keyup", "#fol_name", function() {
+    var t = <?php echo json_encode($arr_fol) ?>;
+    var new_name = document.getElementById("fol_name");
+    var check_name;
+    var div = document.getElementById('target_div');
+    var dis_button = document.getElementById('create');
+
+    for (let x in t) {
+        if (t[x].fol_name == new_name.value) {
+            check_name = 1;
+            break;
+        } else {
+            check_name = 0;
+        }
+    }
+    console.log(check_name);
+    if (check_name == 1) {
+        $("#fol_name").css("border-color", "red");
+        div.style.display = "block";
+        dis_button.disabled = true;
+
+    } else {
+        $("#fol_name").css("border-color", "green");
+        div.style.display = "none";
+        dis_button.disabled = false;
+
+    }
+});
+</script>
+
+<script type="text/javascript">
+$(document).on("click", ".editModal", function() {
+    var id = $(this).attr('data-id');
+    $("#fol_id").val(id);
+});
+
+
+var cm = document.querySelector(".custom-cm");
+
+function showContextMenu(show = true) {
+    cm.style.display = show ? "block" : "none";
+}
+
+window.addEventListener("contextmenu", e => {
+    e.preventDefault();
+
+    showContextMenu();
+    cm.style.top =
+        e.y + cm.offsetHeight > window.innerHeight ?
+        window.innerHeight - cm.offsetHeight :
+        e.y;
+    cm.style.left =
+        e.x + cm.offsetWidth > window.innerWidth ?
+        window.innerWidth - cm.offsetWidth :
+        e.x;
+});
+
+
+$(document).on("click", ".editModal", function() {
+    var id = $(this).attr('data-id');
+    $("#dep_id").val(id);
+});
+
+function rightclick() {
+    var rightclick;
+    var e = window.event;
+
+    document.getElementById("myDropdown").classList.toggle("show");
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+
+
+}
+
+
+function rightclickfolder(folder) {
+    var rightclick;
+    var e = window.event;
+    var getnamefolder = 'folder' + folder;
+    var x = document.getElementById("showmenu");
+
+    if (e.button == 2) {
+        document.getElementById(getnamefolder).classList.toggle("show");
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (x.style.display === "block") {
+                    x.style.display = "none";
+                } else {
+                    x.style.display = "block";
+                }
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+
+}
+
+/* moveModal()
+ * moveModal 
+ * @input -
+ * @output -
+ * @author Chanyapat
+ * @Create Date 2564-11-30
+ */
+$(document).on("click", ".moveModal", function() {
+    var fol_id = $(this).attr('data-id');
+    $("#fol_id").val(fol_id);
+    var name = $(this).attr('data-name');
+    $("#fol_name").val(name);
+    var x = document.getElementById("fold_id").value = fol_id;
+    document.getElementById("folder_name").value = name;
+
+    $.ajax({
+        type: 'post',
+        url: '<?php echo site_url() . 'Folder/Folder_management/get_dropdown_data_ajax'; ?>',
+        data: {
+            'fol_id': fol_id
+        },
+        dataType: 'json',
+        success: function(json_data) {
+            console.log(json_data);
+
+            //สร้าง select รอไว้ แล้วค่อยใส่ option ทีหลัง
+            let html_select =
+                "<select name='fol_location_id' id='folder_location_id' class='form-select' aria-label='Default select example' placeholder='เลือกโฟลเดอร์' required>'</select>";
+            $('#select_move').html(html_select);
+            let html_option =
+                '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
+            $('#folder_location_id').html(html_option);
+
+            let obj_level = json_data['arr_level'];
+            let current_path = json_data['current_path'];
+
+
+            if (obj_level[1].length == 0) {
+
+                //กรณีไม่มีข้อมูล
+                html_option = ' <option value="none">ไม่พบข้อมูล</option>';
+                $('#folder_location_id').html(html_option);
+            } //if
+            else {
+                // html_option = '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
+                // $('#folder_location_id').prepend(html_option);
+                //กรณีมีข้อมูล
+
+                let max_level = Object.keys(obj_level).length;
+                let prefix = '&nbsp'; //สัญลักษณ์ข้างหน้าแต่ละ level
+
+                for (level = 1; level <= max_level; level++) {
+
+                    if (level == 1) {
+                        html_option =
+                            '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
+                        for (i = 0; i < obj_level[level].length; i++) {
+
+                            //ลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้
+                            let disable = '';
+                            if (obj_level[level][i]["fol_location"].includes(
+                                    current_path + '/') || obj_level[level][i][
+                                    "fol_location"
+                                ] == current_path) {
+                                disable = ' disabled ';
+                            } //if
+
+                            html_option += '<option ' + disable + ' id="fol_' +
+                                obj_level[level][i]["fol_id"] + '" value="' +
+                                obj_level[level][i]["fol_id"] + '">';
+                            html_option += obj_level[level][i]["fol_name"];
+                            html_option += '</option>';
+
+                        } //for
+
+                        $('#folder_location_id').html(html_option);
+                    } //if
+                    else {
+                        if (level == 2) {
+                            let disable = '';
+                            if (json_data['is_level_1'] == true) {
+                                disable = ' disabled  hidden ';
+                            } //if
+
+                            html_option = '<option value="0"' + disable +
+                                ' > หน้าหลัก</option>';
+                            $('#folder_location_id').prepend(html_option);
+                        } //if
+
+                        prefix = prefix + '&nbsp' + '&nbsp' + '-';
+
+                        //แทรกลูกหลังจากตำแหล่งแม่ (ทำจากหลังมาหน้า ลำดับจะไม่เพี้ยน)
+                        for (i = obj_level[level].length - 1; i >= 0; i--) {
+
+                            //ลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้
+                            let disable = '';
+                            if (obj_level[level][i]["fol_location"].includes(
+                                    current_path + '/') || obj_level[level][i][
+                                    "fol_location"
+                                ] == current_path) {
+                                disable = ' disabled ';
+                            } //if
+
+                            html_option = '';
+                            html_option += '<option ' + disable + ' id="fol_' +
+                                obj_level[level][i]["fol_id"] + '" value="' +
+                                obj_level[level][i]["fol_id"] + '">';
+                            html_option += prefix + ' ' + obj_level[level][i][
+                                "fol_name"
+                            ];
+                            html_option += '</option>';
+
+
+                            //แทรกโค้ดลูก หลังจากตำแหล่งโค้ดแม่
+                            var tag_parent = document.getElementById('fol_' +
+                                obj_level[level][i]["fol_location_id"]);
+                            tag_parent.insertAdjacentHTML('afterend',
+                                html_option);
+                        } //for
+                    } //else
+
+                } //for
+
+            } //else
+        }
+    }); //ajax
+}); //get_dropdown_data
+
+$(document).ready(function() {
+    $('.dropdown-submenu a.test').on("click", function(e) {
+        $(this).next('ul').toggle();
+        e.stopPropagation();
+        e.preventDefault();
+    });
+});
+
+function set_delete(path, id, fol_id) {
+    $('#doc_path_delete').val(path);
+    $('#doc_id_delete').val(id);
+    $('#fol_id_delete').val(fol_id);
+
+}
+</script>
+</script>
+
+<!-- EditFile Script -->
+<script>
+<?php $this->session->set_userdata('qr_id', ''); ?>
+<?php $this->session->set_userdata('path', ''); ?>
+$(document).on("keyup", "#qr_name", function() {
+    var t = <?php echo json_encode($arr_doc) ?>;
+    var new_name = document.getElementById("qr_name");
+    var check_name;
+    var div = document.getElementById('target_div');
+    var dis_button = document.getElementById('create');
+
+    for (let x in t) {
+        if (t[x].doc_name == new_name.value) {
+            check_name = 1;
+            break;
+        } else {
+            check_name = 0;
+        }
+    }
+    console.log(check_name);
+    if (check_name == 1) {
+        $("#qr_name").css("border-color", "red");
+        div.style.display = "block";
+        dis_button.disabled = true;
+
+    } else {
+        $("#qr_name").css("border-color", "green");
+        div.style.display = "none";
+        dis_button.disabled = false;
+
+    }
+});
+
+function check_file_edit() {
+
+    var dis_button = document.getElementById('sub_edit');
+    dis_button.disabled = false;
+
+    var t = <?php echo json_encode($arr_qr) ?>;
+    var new_name = document.getElementById("qr_edit");
+    var check_name;
+    var div = document.getElementById('edit_mss');
+
+
+    for (let x in t) {
+        if (t[x].qr_name == new_name.value || new_name.value == " ") {
+            check_name = 1;
+            break;
+        } else {
+            check_name = 0;
+        }
+    }
+    console.log(check_name);
+    if (check_name == 1) {
+        $("#qr_edit").css("border-color", "red");
+        div.style.display = "block";
+        dis_button.disabled = true;
+
+    } else {
+        $("#qr_edit").css("border-color", "green");
+        div.style.display = "none";
+        dis_button.disabled = false;
+
+    }
+    console.log(document.getElementById('edit'));
+}
+</script>
