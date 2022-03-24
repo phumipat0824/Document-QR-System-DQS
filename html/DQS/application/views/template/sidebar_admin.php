@@ -7,8 +7,10 @@
 
 ?> -->
 <div class="sidebar" data-color="yellow" data-background-color="white" data-image="<?php echo base_url().'/assets/img/sidebar-1.jpg'?>">
+<div>
+    555
+</div>
     <div class="logo simple-text logo-normal" >
-            
         </a>
     </div>
     <div class="sidebar-wrapper ps-container ps-theme-default ps-active-y"
