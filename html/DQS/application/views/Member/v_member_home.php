@@ -37,26 +37,24 @@
                  </div>
              </div>
          </div>
-
+         <div>
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
+                        style=" color:#707070; font-weight: 900; font-family:TH Sarabun New; font-size: 25px;"
+                        href="<?php echo site_url() . '/Member/Member_home/show_member_home'; ?>">หน้าหลัก</a></li>
+                <?php for ($i = 0; $i < count($path_fol); $i++) { ?>
+                <?php if ($path_fol[$i] != '@') { ?>
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
+                        style="color:#707070; font-weight: 900; font-family:TH Sarabun New; font-size: 25px;"
+                        ><?php echo $path_fol[$i] ?></a>
+                </li>
+                <?php } ?>
+                <?php } ?>
+            </ol>
+        </div>
          <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">โฟลเดอร์</h3>
          <br>
-         <div>
-             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-
-                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-                         style="color:#707070; font-weight: 900; font-family:TH Sarabun New; font-size: 25px;"
-                         href="<?php echo site_url() . '/Member/Member_home/show_member_home'; ?>">หน้าหลัก</a></li>
-                 <?php for ($i = 0; $i < count($path_fol); $i++) { ?>
-                 <?php if ($path_fol[$i] != '@') { ?>
-                 <li class="breadcrumb-item text-sm text-dark active" style="font-size: 20px;"><a
-                         class="opacity-5 text-dark"
-                         style="color:#707070;  font-weight: 900; font-family:TH Sarabun New; font-size: 25px;"
-                         href="<?php echo site_url() . '/Member/Member_home/show_in_folder/66'; ?>"><?php echo $path_fol[$i] ?></a>
-                 </li>
-                 <?php } ?>
-                 <?php } ?>
-             </ol>
-         </div>
+        
          <br>
          <br>
          <?php
