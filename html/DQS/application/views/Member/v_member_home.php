@@ -298,8 +298,18 @@
 
                     <a href="#" class="EditFileModal" data-toggle="modal" data-target="#EditFileModal" data-id="<?php echo $arr_qr[$i]->qr_id ?>" data-name="<?php echo $arr_qr[$i]->qr_name ?>">
                          <button id="edit" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">แก้ไข</button></a>
-                         <button id="remove" class="btn btn-"
-                             style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
+                         
+                         
+                         <button type="button" id="move" class="btn btn- MoveFileModal" data-toggle="modal" data-target="#MoveFileModal"
+                            data-id="<?php echo $arr_qr[$i]->doc_id ?>"
+                            data-name="<?php echo $arr_qr[$i]->doc_name ?>"
+                            data-qr-id="<?php echo $arr_qr[$i]->qr_id ?>"
+                            data-qr-name="<?php echo $arr_qr[$i]->qr_name ?>"
+                         
+                            style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; "><?php echo $arr_qr[$i]->doc_id ?> ย้าย</button>
+                            
+
+
                          <a href="#" class="deleteFileModal" data-toggle="modal" data-target="#deleteFileModal">
                              <button id="delete" class="btn btn-"
                                  style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">
