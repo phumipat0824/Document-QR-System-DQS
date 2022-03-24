@@ -372,6 +372,44 @@
             </div>
         </div>
     </div>
+
+    <!-- EditFile Modal -->
+    <div class="modal fade" id="EditFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLabel"
+                        style="font-family:TH sarabun new; font-size: 30px; ">
+                        <b>แก้ไขชื่อไฟล์</b>
+                    </h6>
+                </div>
+
+                <form id="edit-form" method="POST"
+                    action="<?php echo site_url() .'/Member/Member_home/update_qr_file/'.$arr_qr[$i]->doc_id; ?>">
+
+                    <div class="modal-body">
+                        <center>
+                            <input onkeyup="check_file_edit()" type="text" class="col-md-10" id="qr_name" placeholder=""
+                                name="qr_name" required>
+                        </center>
+                        <br>
+                        <a id="edit_mss" style="display: none; color:red;" align='center'>กรุณากรอกข้อมูลใหม่</a>
+                        <input type="hidden" name="qr_id" id="qr_id" value="">
+                        <input type="hidden" name="doc_fol_id" id="doc_fol_id" value="">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                        <input type="submit" class="btn btn-success" id="sub_edit" value="บันทึก">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End UpdateFile Model -->
+
     <?php }  ?>
     <?php }  ?>
 </div>
@@ -380,6 +418,17 @@
 
 
 <script>
+$(document).on("click", ".EditFileModal", function() {
+    var id = $(this).attr('data-id');
+    $("#qr_id").val(id);
+    console.log(id);
+    var name = $(this).attr('data-name');
+    $("#qr_name").val(name);
+    console.log(name);
+    var doc_fol = $(this).attr('data-doc_fol');
+    $("#doc_fol_id").val(doc_fol);
+});
+
 <?php $this->session->set_userdata('fol_id', ''); ?>
 <?php $this->session->set_userdata('path', ''); ?>
 $(document).on("keyup", "#fol_name", function() {
