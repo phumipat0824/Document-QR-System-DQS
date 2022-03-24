@@ -301,7 +301,6 @@ class Member_upload_file extends DQS_controller
 		$this->dqrc->doc_name = $this->input->post('doc_nameimg');
 		$user = $this->session->userdata('mem_username');
 		$this->session->set_userdata('username', $user);
-		$this->dqrc->doc_type = "img";
 
 		$upload = $_FILES['doc_pathimg'];
 		echo $_FILES['doc_pathimg'];
@@ -324,6 +323,7 @@ class Member_upload_file extends DQS_controller
 			move_uploaded_file($_FILES['doc_pathimg']['tmp_name'], $path_copy);
 		} //if
 
+		$this->dqrc->doc_type = substr($type, 1 );
 		$this->dqrc->doc_path = $newpath;
 		$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
 
@@ -348,7 +348,6 @@ class Member_upload_file extends DQS_controller
 		$this->dqrc->doc_name = $this->input->post('doc_nameimg');
 		$user = $this->session->userdata('mem_username');
 		$this->session->set_userdata('username', $user);
-		$this->dqrc->doc_type = "img";
 
 		$upload = $_FILES['doc_pathimg'];
 		echo $_FILES['doc_pathimg'];
@@ -368,6 +367,7 @@ class Member_upload_file extends DQS_controller
 			move_uploaded_file($_FILES['doc_pathimg']['tmp_name'], $path_copy);
 		} //if
 
+		$this->dqrc->doc_type = substr($type, 1 );
 		$this->dqrc->doc_path = $newpath;
 		$this->dqrc->doc_mem_id = $this->session->userdata('mem_id');
 		$this->dqrc->doc_fol_id = $this->session->userdata('fol_id_new');
