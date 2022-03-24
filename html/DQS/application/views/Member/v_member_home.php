@@ -327,7 +327,6 @@
                      <div class="form-group col-md-4">
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชื่อ
                              : </h5>
-                         <input type="hidden" name="doc_id" id="doc_id" value="">
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">
                              <?php echo $arr_qr[$i]->qr_name ?></h5>
 
@@ -351,7 +350,7 @@
                          <button id="remove" class="btn btn-"
                              style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
                          <a href="#" class="deleteFileModal" data-toggle="modal" data-target="#deleteFileModal"
-                             onclick="set_delete(<?php echo $arr_doc[$i]->doc_id ?>)">
+                             onclick="set_delete('<?php echo $arr_doc[$i]->doc_name ?>',<?php echo $arr_doc[$i]->doc_id.',' ?>'<?php echo $arr_doc[$i]->doc_type ?>')">
                              <button id="delete" class="btn btn-"
                                  style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">
                                  ลบ</button></a>
@@ -379,7 +378,13 @@
                      action="<?php echo site_url() . '/Member/Member_home/delete_file/' ?>">
                      <div class="modal-body">
 
-                         <input type="hidden" name="doc_id" id="doc_id_delete">
+                         <input type="text" name="doc_id" id="doc_id_delete">
+
+                         <input type="text" name="doc_name" id="doc_name_delete">
+
+                         <input type="text" name="doc_type" id="doc_type_delete">
+
+
 
                      </div>
                      <div class="modal-footer">
@@ -478,6 +483,10 @@
      <?php }  ?>
      <?php }  ?>
      <?php }  ?>
+
+
+
+
 
      <!-- /*
     * move file
@@ -1096,8 +1105,10 @@ function check_file_edit() {
     console.log(document.getElementById('edit'));
 }
 
-function set_delete(id) {
-    // console.log(id);
+function set_delete(name, id, type) {
+    $('#doc_name_delete').val(name);
     $('#doc_id_delete').val(id);
+    $('#doc_type_delete').val(type);
+
 }
  </script>

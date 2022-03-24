@@ -111,8 +111,14 @@ public function show_member_home()
 
 	public function delete_file(){
         $this->load->model('M_DQS_document','MDD');
+		if($this->input->post('doc_type') == 'img'){
+			if(!unlink(getcwd().'/assets/user/'.$_SESSION['username'].'/Home/'.$this->input->post('doc_name').'.jpg')){
+				unlink(getcwd().'/assets/user/'.$_SESSION['username'].'/Home/'.$this->input->post('doc_name').'.png');
+			}
+		}else if($this->input->post('doc_type') == 'pdf'){
+				unlink(getcwd().'/assets/user/'.$_SESSION['username'].'/Home/'.$this->input->post('doc_name').'.pdf');
+		}
 		$this->MDD->doc_id = $this->input->post('doc_id');
-		// print_r($this->input->post('doc_id'));
 		$data['qr'] = $this->MDD->get_by_qr_id($this->MDD->doc_id)->result();
 		$qr_id = $data['qr'][0]->qr_id;
         $this->MDD->delete_qr_file($qr_id);

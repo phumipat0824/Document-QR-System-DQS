@@ -52,13 +52,7 @@ class Da_DQS_document extends DQS_model {
         $this->db->query($sql,array($this->doc_path,$this->doc_fol_id,$this->doc_id));         
     }//end update location folder into database
 
-    public function update_qr_location(){//update location folder into database    
-        $sql ="UPDATE {$this->db_name}.DQS_Qrcode
-        SET qr_path = ?, qr_fol_id = ?
-        WHERE qr_id = ?";
-        $this->db->query($sql,array($this->qr_path,$this->qr_fol_id,$this->qr_id));         
-    }//end update location folder into database
-
+    
 
     /*
     * update_file()
@@ -74,4 +68,10 @@ class Da_DQS_document extends DQS_model {
                 WHERE doc_id = ? "; // ? = ค่าที่เราจะใส่ไปอยู่แล้ว , อย่าใช้ " ' " เพราะอาจจะเออเร่อได้
         $this-> db->query($sql, array($this->doc_name,$this->doc_path,$this->doc_id)); //ถ้า SQL ที่เราใส่มี ? ต้องใส่ array ด้วย
     }
+    public function update_qr_location(){//update location folder into database    
+        $sql ="UPDATE {$this->db_name}.DQS_Qrcode
+        SET qr_path = ?
+        WHERE qr_id = ?";
+        $this->db->query($sql,array($this->qr_path,$this->qr_id));         
+    }//end update location folder into database
 }

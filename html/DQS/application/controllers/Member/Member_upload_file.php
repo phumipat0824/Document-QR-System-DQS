@@ -442,7 +442,7 @@ class Member_upload_file extends DQS_controller
 			$newname = $this->input->post('doc_name') . $type;
 			$path_copy = $path . $newname;
 			
-			$newpath = '/assets/user/'.$this->session->userdata('username').'/'.'home/Qrcode/' . $newname;
+			$newpath = './assets/user/'.$this->session->userdata('username').'/'.'home/Qrcode/' . $newname;
 		$this->dqrc->qr_path = $newpath;
 		$this->session->set_userdata('newpath', $newpath);
 		$this->dqrc->qr_mem_id = $this->session->userdata('mem_id');
@@ -481,7 +481,7 @@ class Member_upload_file extends DQS_controller
 			$newname = $this->input->post('doc_name') . $type;
 			$path_copy = $path . $newname;
 
-			$newpath = '/assets/user/'.$this->session->userdata('username').'/'.$this->session->userdata('path_new').'Qrcode/' . $newname;
+			$newpath = './assets/user/'.$this->session->userdata('username').'/'.$this->session->userdata('path_new').'Qrcode/' . $newname;
 
 		$this->dqrc->qr_path = $newpath;
 		$this->session->set_userdata('newpath', $newpath);
@@ -517,7 +517,7 @@ class Member_upload_file extends DQS_controller
 			$newname = $this->input->post('doc_nameimg') . $type;
 			$path_copy = $path . $newname;
 
-			$newpath = '/assets/user/'.$this->session->userdata('username').'/'.'home/Qrcode/' . $newname;
+			$newpath = './assets/user/'.$this->session->userdata('username').'/'.'home/Qrcode/' . $newname;
 
 		$this->dqrc->qr_path = $newpath;
 		$this->session->set_userdata('newpath', $newpath);
@@ -558,7 +558,7 @@ class Member_upload_file extends DQS_controller
 			$newname = $this->input->post('doc_nameimg') . $type;
 			$path_copy = $path . $newname;
 
-			$newpath = '/assets/user/'.$this->session->userdata('username').'/'.$this->session->userdata('path_new').'Qrcode/' . $newname;
+			$newpath = './assets/user/'.$this->session->userdata('username').'/'.$this->session->userdata('path_new').'Qrcode/' . $newname;
 
 		$this->dqrc->qr_path = $newpath;
 		$this->session->set_userdata('newpath', $newpath);

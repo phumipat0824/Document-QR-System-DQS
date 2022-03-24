@@ -80,6 +80,7 @@ public function insert_qrcode(){//insert document into database
     $this->db->query($sql,array($this->qr_name,$this->qr_path,$this->qr_mem_id,$this->qr_doc_id));        
 }//end insert document into database
 
+
 public function update_qr_file(){
     $sql = "UPDATE {$this->db_name}.DQS_Qrcode
             SET qr_name = ? ,qr_path = ? 
