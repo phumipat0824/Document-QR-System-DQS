@@ -237,7 +237,7 @@
 
 <!-- QR-code -->
 <div class="row" style="padding: 100px 10px 10px 20%;">
-    <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">คิวอาร์โค้ด <?php echo $_SERVER['REQUEST_URI']?></h3>
+    <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">คิวอาร์โค้ด </h3>
     <?php for ($i = 0; $i < count($arr_qr); $i++) {   ?>
     <?php if ($this->session->userdata('fol_id') == $arr_qr[$i]->doc_fol_id) { ?>
     <div class="col-md-4">
