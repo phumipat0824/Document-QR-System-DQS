@@ -18,11 +18,9 @@
              </h1>
          </div>
          <div class="col-md-4">
-             <div class="dropdown">
-                 <button onmousedown="rightclick()" class="dropbtn btn btn-round"
-                     style=" width: 145px; background-color: #F5F5F5 ; border: none;">
-                     <h1 style="font-weight: 900; color:#003399 ; font-size: 50px; font-family:TH Sarabun New; height: 40; width: 50px;"
-                         id="button-folder">+ สร้าง</h1>
+             <div class="dropdown"id="btt">
+                 <button class="dropbtn btn btn-round"style=" width: 145px; background-color: #F5F5F5 ; border: none;">
+                     <h1 style="font-weight: 900; color:#003399 ; font-size: 50px; font-family:TH Sarabun New; height: 40; width: 50px;"id="button-folder">+ สร้าง</h1>
                  </button>
                  <div id="myDropdown" class="dropdown-content">
                      <div class="custom-cm__item" data-toggle="modal" data-target="#exampleModal"><a>สร้างโฟลเดอร์</a>
@@ -668,22 +666,6 @@ $(document).on("click", ".editModal", function() {
     $("#dep_id").val(id);
 });
 
-function rightclick() {
-    var rightclick;
-    var e = window.event;
-
-    document.getElementById("myDropdown").classList.toggle("show");
-    if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-}
  </script>
  <script>
 $(document).on("keyup", "#fol_name", function() {
@@ -748,7 +730,7 @@ $(document).on("click", ".editModal", function() {
     $("#dep_id").val(id);
 });
 
-function rightclick() {
+$(document).on("click", "#btt", function() {
     var rightclick;
     var e = window.event;
 
@@ -765,7 +747,7 @@ function rightclick() {
     }
 
 
-}
+});
 
 
 function rightclickfolder(folder) {
@@ -863,26 +845,6 @@ $(document).on("click", ".editModal", function() {
     var id = $(this).attr('data-id');
     $("#dep_id").val(id);
 });
-
-function rightclick() {
-    var rightclick;
-    var e = window.event;
-
-    document.getElementById("myDropdown").classList.toggle("show");
-    if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-
-
-}
-
 
 function rightclickfolder(folder) {
     var rightclick;
