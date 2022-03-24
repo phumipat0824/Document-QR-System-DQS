@@ -124,4 +124,37 @@ class Admin_home extends DQS_controller
         $this->output_sidebar_admin('Admin/v_member_list');
         print_r($dept);
     }
+
+
+    public function delete_file(){
+        $this->load->model('M_DQS_document','MDD');
+		$path = substr($this->input->post('doc_path'),1);
+		unlink(getcwd().$path);
+		$this->MDD->doc_id = $this->input->post('doc_id');
+		$data['qr'] = $this->MDD->get_by_qr_id($this->MDD->doc_id)->result();
+		$qr_id = $data['qr'][0]->qr_id;
+		$path_qr = substr($data['qr'][0]->qr_path,1);
+		unlink(getcwd().$path_qr);
+        $this->MDD->delete_qr_file($qr_id);
+        $this->MDD->delete_file();
+
+        redirect('/Admin/Admin_home/show_admin_home');
+        
+    }
+
+    function delete_file_folder()
+    {
+         $this->load->model('M_DQS_document','MDD');
+		$path = substr($this->input->post('doc_path'),1);
+		unlink(getcwd().$path);
+		$this->MDD->doc_id = $this->input->post('doc_id');
+		$data['qr'] = $this->MDD->get_by_qr_id($this->MDD->doc_id)->result();
+		$qr_id = $data['qr'][0]->qr_id;
+		$path_qr = substr($data['qr'][0]->qr_path,1);
+		unlink(getcwd().$path_qr);
+        $this->MDD->delete_qr_file($qr_id);
+        $this->MDD->delete_file();
+
+        redirect('/Admin/Admin_home/show_admin_in_folder/'.$this->input->post('fol_id'));
+    }
 }
