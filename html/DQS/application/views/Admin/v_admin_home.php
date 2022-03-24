@@ -307,7 +307,8 @@
                              รายงานสรุปผล : </h5>
                      </div>
                      <div class="form-group col-md-4">
-                         <button id="edit" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">แก้ไข</button>
+                     <a href="#" class="EditFileModal" data-toggle="modal" data-target="#EditFileModal" data-id="<?php echo $arr_qr[$i]->qr_id ?>" data-name="<?php echo $arr_qr[$i]->qr_name ?>">
+                             <button id="edit" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">แก้ไข</button></a>
                          <button id="remove" class="btn btn-" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
                          <a href="#" class="deleteFileModal" data-toggle="modal" data-target="#deleteFileModal">
                              <button id="delete" class="btn btn-" style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">
@@ -318,7 +319,6 @@
          </div>
      </div>
      <?php }  ?>
-
 
      <!-- deleteFile Modal -->
      <div class="modal fade" id="deleteFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -346,6 +346,38 @@
      </div>
 
      <!-- End DeleteFile Model -->
+
+      <!-- EditFile Modal -->
+      <div class="modal fade" id="EditFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; ">
+                         <b>แก้ไขชื่อไฟล์</b>
+                     </h6>
+                 </div>
+
+                 <form id="edit-form" method="POST" action="<?php echo site_url() .'/Member/Member_home/update_qr_file/'.$arr_qr[$i]->doc_id; ?>">
+
+                     <div class="modal-body">
+                         <center>
+                             <input onkeyup="check_file_edit()" type="text" class="col-md-10" id="qr_edit" placeholder="" name="qr_name" required>
+                         </center>
+                         <br>
+                         <a id="edit_mss" style="display: none; color:red;" align='center'>กรุณากรอกข้อมูลใหม่</a>
+                         <input type="hidden" name="qr_id" id="qr_id" value="">
+                     </div>
+
+                     <div class="modal-footer">
+                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                         <input type="submit" class="btn btn-success" id="sub_edit" value="บันทึก">
+                     </div>
+
+                 </form>
+             </div>
+         </div>
+     </div>
+     <!-- End UpdateFile Model -->
 
      <?php } else{ ?>
      <?php if ($arr_qr[$i]->doc_fol_id == $this->session->userdata('fol_id')) { ?>
@@ -475,7 +507,15 @@ $(document).on("click", ".editModal", function() {
     document.getElementById("fol_edit").value = name;
 });
 
-
+$(document).on("click", ".EditFileModal", function() {
+    var id = $(this).attr('data-id');
+    $("#qr_id").val(id);
+    console.log(id);
+    var name = $(this).attr('data-name');
+    $("#qr_name").val(name);
+    document.getElementById("qr_id").value = id;
+    document.getElementById("qr_edit").value = name;
+});
 
 $(document).on("click", ".deleteModal", function() {
     var id = $(this).attr('data-id');
@@ -663,3 +703,71 @@ $(document).ready(function() {
     });
 });
  </script>
+
+  <!-- EditFile Script -->
+  <script>
+<?php $this->session->set_userdata('qr_id', ''); ?>
+<?php $this->session->set_userdata('path', ''); ?>
+$(document).on("keyup", "#qr_name", function() {
+    var t = <?php echo json_encode($arr_doc) ?>;
+    var new_name = document.getElementById("qr_name");
+    var check_name;
+    var div = document.getElementById('target_div');
+    var dis_button = document.getElementById('create');
+
+    for (let x in t) {
+        if (t[x].doc_name == new_name.value) {
+            check_name = 1;
+            break;
+        } else {
+            check_name = 0;
+        }
+    }
+    console.log(check_name);
+    if (check_name == 1) {
+        $("#qr_name").css("border-color", "red");
+        div.style.display = "block";
+        dis_button.disabled = true;
+
+    } else {
+        $("#qr_name").css("border-color", "green");
+        div.style.display = "none";
+        dis_button.disabled = false;
+
+    }
+});
+
+function check_file_edit() {
+
+    var dis_button = document.getElementById('sub_edit');
+    dis_button.disabled = false;
+
+    var t = <?php echo json_encode($arr_qr) ?>;
+    var new_name = document.getElementById("qr_edit");
+    var check_name;
+    var div = document.getElementById('edit_mss');
+
+
+    for (let x in t) {
+        if (t[x].qr_name == new_name.value || new_name.value == " ") {
+            check_name = 1;
+            break;
+        } else {
+            check_name = 0;
+        }
+    }
+    console.log(check_name);
+    if (check_name == 1) {
+        $("#qr_edit").css("border-color", "red");
+        div.style.display = "block";
+        dis_button.disabled = true;
+
+    } else {
+        $("#qr_edit").css("border-color", "green");
+        div.style.display = "none";
+        dis_button.disabled = false;
+
+    }
+    console.log(document.getElementById('edit'));
+}
+</script>
