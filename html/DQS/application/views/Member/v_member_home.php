@@ -93,12 +93,11 @@
                             if (preg_match('/^[a-z]+/i', $sub_name_folder)) {
                                 if (strlen($sub_name_folder) > 18) {
                                     $sub_name_folder = substr($sub_name_folder, 0, 18) . "...";
-                                }                               
-                            }
-                            else{
+                                }
+                            } else {
                                 if (strlen($sub_name_folder) > 60) {
                                     $sub_name_folder = substr($sub_name_folder, 0, 60) . "...";
-                                }    
+                                }
                             }
                             ?>
 
@@ -235,7 +234,7 @@
                      <div class="modal-header">
                          <h5 class="modal-title" id="exampleModalLabel">ย้ายไปที่</h5>
                      </div>
-                     <form id="move-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/move_folder/';?>">
+                     <form id="move-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/move_folder/'; ?>">
                          <div class="modal-body">
                              <!-- dropdown folder name -->
                              <div id="select_move"></div>
@@ -256,8 +255,7 @@
      </div>
  </div>
 
-
- <!-- QR-code -->
+ <!-- QR-code Home and Folder in home-->
 
  <div class="row" style="padding: 100px 10px 10px 20%;">
      <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">คิวอาร์โค้ด</h3>
@@ -265,7 +263,7 @@
      <?php if ($this->session->userdata('fol_id') == null) { ?>
      <?php if ($arr_qr[$i]->doc_fol_id == null) { ?>
      <div class="col-md-4">
-         <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px; ">
+         <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
              <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
                  <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;">คิวอาร์โค้ด
                  </h>
@@ -294,22 +292,24 @@
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
                              รายงานสรุปผล : </h5>
                      </div>
-                     <div class="form-group col-md-4">
+                     <div class="form-group col-md-2">
 
                          <a href="#" class="EditFileModal" data-toggle="modal" data-target="#EditFileModal" data-id="<?php echo $arr_qr[$i]->qr_id ?>" data-name="<?php echo $arr_qr[$i]->qr_name ?>">
                              <button id="edit" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">แก้ไข</button></a>
-                         <button id="remove" class="btn btn-" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
+
+
+                         <button type="button" id="move" class="btn btn- MoveFileModal" data-toggle="modal" data-target="#MoveFileModal" data-id="<?php echo $arr_qr[$i]->doc_id ?>" data-name="<?php echo $arr_qr[$i]->doc_name ?>" data-qr-id="<?php echo $arr_qr[$i]->qr_id ?>" data-qr-name="<?php echo $arr_qr[$i]->qr_name ?>" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; "><?php echo $arr_qr[$i]->doc_id ?> ย้าย</button>
+
+
+
                          <a href="#" class="deleteFileModal" data-toggle="modal" data-target="#deleteFileModal">
-                             <button id="delete" class="btn btn-" style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">
-                                 ลบ</button></a>
+                             <button id="delete" class="btn btn-" style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ลบ</button></a>
                      </div>
                  </div>
              </div>
          </div>
      </div>
      <?php }  ?>
-
-
      <!-- deleteFile Modal -->
      <div class="modal fade" id="deleteFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
@@ -320,7 +320,7 @@
 
                  </div>
 
-                 <form id="delete-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/delete_file/'.$arr_qr[$i]->doc_id; ?>">
+                 <form id="delete-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/delete_file/' . $arr_qr[$i]->doc_id; ?>">
                      <div class="modal-body">
 
                          <input type="hidden" name="doc_id" id="doc_id" value="">
@@ -347,7 +347,7 @@
                      </h6>
                  </div>
 
-                 <form id="edit-form" method="POST" action="<?php echo site_url() .'/Member/Member_home/update_qr_file/'.$arr_qr[$i]->doc_id; ?>">
+                 <form id="edit-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/update_qr_file/' . $arr_qr[$i]->doc_id; ?>">
 
                      <div class="modal-body">
                          <center>
@@ -367,12 +367,13 @@
              </div>
          </div>
      </div>
-     <!-- End UpdateFile Model -->
+     <!-- End EditFile Model -->
 
-     <?php } else{ ?>
+     <!-- Card in folder -->
+     <?php } else { ?>
      <?php if ($arr_qr[$i]->doc_fol_id == $this->session->userdata('fol_id')) { ?>
      <div class="col-md-4">
-         <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px; ">
+         <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
              <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
                  <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;">คิวอาร์โค้ด
                  </h>
@@ -400,9 +401,9 @@
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
                              รายงานสรุปผล : </h5>
                      </div>
-                     <div class="form-group col-md-4">
+                     <div class="form-group col-md-2">
                          <button id="edit2" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">แก้ไข</button>
-                         <button id="remove2" class="btn btn-" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
+                         <button type="button" id="move" class="btn btn- MoveFileModal" data-toggle="modal" data-target="#MoveFileModal" data-id="<?php echo $arr_qr[$i]->doc_id ?>" data-name="<?php echo $arr_qr[$i]->doc_name ?>" data-qr-id="<?php echo $arr_qr[$i]->qr_id ?>" data-qr-name="<?php echo $arr_qr[$i]->qr_name ?>" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; "><?php echo $arr_qr[$i]->doc_id ?> ย้าย</button>
                          <button id="delete2" class="btn btn-" style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ลบ</button>
                      </div>
                  </div>
@@ -411,7 +412,10 @@
      </div>
      <?php }  ?>
      <?php }  ?>
+     <!-- End Card in folder -->
      <?php }  ?>
+
+
 
      <!-- /*
     * move file
@@ -459,9 +463,7 @@
 
 
  </div>
-
-
-
+ <!-- End QR-code Home and Folder in home-->
 
  <script>
 <?php $this->session->set_userdata('fol_id', ''); ?>
@@ -845,6 +847,7 @@ $(document).ready(function() {
  </script>
 
  <!-- Move Folder Script -->
+
  <script>
 $(document).on("click", ".moveModal", function() {
     var fol_id = $(this).attr('data-id');
