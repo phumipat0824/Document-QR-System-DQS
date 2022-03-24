@@ -444,6 +444,7 @@ class Member_upload_file extends DQS_controller
 			
 			$newpath = './assets/user/'.$this->session->userdata('username').'/'.'home/Qrcode/' . $newname;
 		$this->dqrc->qr_path = $newpath;
+		$newpath = substr($newpath, 1 );
 		$this->session->set_userdata('newpath', $newpath);
 		$this->dqrc->qr_mem_id = $this->session->userdata('mem_id');
 		$obj_doc = $this->get_id_document();
@@ -484,6 +485,7 @@ class Member_upload_file extends DQS_controller
 			$newpath = './assets/user/'.$this->session->userdata('username').'/'.$this->session->userdata('path_new').'Qrcode/' . $newname;
 
 		$this->dqrc->qr_path = $newpath;
+		$newpath = substr($newpath, 1 );
 		$this->session->set_userdata('newpath', $newpath);
 		$this->dqrc->qr_mem_id = $this->session->userdata('mem_id');
 		$obj_doc = $this->get_id_document();
@@ -520,6 +522,7 @@ class Member_upload_file extends DQS_controller
 			$newpath = './assets/user/'.$this->session->userdata('username').'/'.'home/Qrcode/' . $newname;
 
 		$this->dqrc->qr_path = $newpath;
+		$newpath = substr($newpath, 1 );
 		$this->session->set_userdata('newpath', $newpath);
 		$this->dqrc->qr_mem_id = $this->session->userdata('mem_id');
 		$obj_doc = $this->get_id_document();
@@ -561,6 +564,7 @@ class Member_upload_file extends DQS_controller
 			$newpath = './assets/user/'.$this->session->userdata('username').'/'.$this->session->userdata('path_new').'Qrcode/' . $newname;
 
 		$this->dqrc->qr_path = $newpath;
+		$newpath = substr($newpath, 1 );
 		$this->session->set_userdata('newpath', $newpath);
 		$this->dqrc->qr_mem_id = $this->session->userdata('mem_id');
 		$obj_doc = $this->get_id_document();
