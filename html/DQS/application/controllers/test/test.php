@@ -111,6 +111,47 @@ class test extends DQS_controller {
 
         // Coding back-end 01 here!!!!
     }
+    public function test1(){
+        $get_data=file_get_contents('https://covid19.ddc.moph.go.th/api/Cases/today-cases-all');
+        $data['covid19_th']=json_decode($get_data);
+        print_r ($get_data);
+        //$this->load->view('Test/test',$data);
+    }
+    public function show_input()    
+    {
+        $this->load->view('Test/v_show_input');
+    }
+
+    public function show_value()    
+    {
+        $data['name_title'] = $this->request->getPost('name_title');
+        $data['accept1'] = $this->request->getPost('accept1');
+        $data['accept2'] = $this->request->getPost('accept2');
+        $data['accept3'] = $this->request->getPost('accept3');
+        $data['accept4'] = $this->request->getPost('accept4');
+        $data['Fname'] = $this->request->getPost('Fname');
+        $data['Lname'] = $this->request->getPost('Lname');
+        $data['date'] = $this->request->getPost('date');
+        $data['email'] = $this->request->getPost('email');
+        $data['gender'] = $this->request->getPost('gender');
+        $data['phone'] = $this->request->getPost('phone');
+        $data['address'] = $this->request->getPost('address');
+        $data['symptom'] = $this->request->getPost('symptom');
+        $data['age'] = $this->request->getPost('age');
+        $data['province'] = $this->request->getPost('province');
+        $data['district'] = $this->request->getPost('district');
+
+        $file = $this-> request->getFile('image');
+        if($file->isValid())
+        {
+            $image_name = $file->getRandomName();
+            $file->move('./picture',$image_name);
+        }
+        $data['image'] = $image_name;
+
+        $this->load->view('Test/v_show_value',$data);
+    }
+
 
 }
 	
