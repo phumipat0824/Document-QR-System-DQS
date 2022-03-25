@@ -267,7 +267,8 @@
                             รายงานสรุปผล </h5>
                     </div>
                     <div class="form-group col-md-2">
-                        <button id="edit" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">แก้ไข</button>
+                    <a href="#" class="EditFileModal" data-toggle="modal" data-target="#EditFileModal" data-id="<?php echo $arr_qr[$i]->qr_id ?>" data-name="<?php echo $arr_qr[$i]->qr_name ?>"  data-doc_fol="<?php echo $arr_doc[$i]->doc_fol_id ?>">
+                             <button id="edit" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70px; ">แก้ไข</button></a>
                         <button id="remove" class="btn btn-" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
                         <button id="delete" class="btn btn-" style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; " onclick="set_delete('<?php echo $arr_qr[$i]->doc_path ?>',<?php echo $arr_qr[$i]->doc_id.','.$this->session->userdata('fol_id') ?>)" data-toggle="modal" data-target="#deleteFileModal">ลบ</button>
                     </div>
