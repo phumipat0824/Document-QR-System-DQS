@@ -23,20 +23,36 @@ class File_management extends DQS_controller
 	*/
 	function move_file()
 	{
-
+		
 		$this->load->model('M_DQS_folder', 'mfol');
 		$this->load->model('M_DQS_document', 'mdoc');
 		$this->mdoc->doc_id = $this->input->post('doc_id');
 		$this->mdoc->doc_name = $this->input->post('doc_name');
-		$this->mdoc->doc_fol_id = $this->input->post('doc_fol_id');
+		//echo $this->input->post('doc_name');
+		//echo $this->input->post('doc_fol_id');
+		if($this->input->post('doc_fol_id') == '0'){
+			//echo 'hello';
+			$this->mdoc->doc_fol_id = NULL;
+		}else{
+			$this->mdoc->doc_fol_id = $this->input->post('doc_fol_id');
+		}
+
 		$this->mdoc->qr_id = $this->input->post('qr_id');
 		$this->mdoc->qr_name = $this->input->post('qr_name');
+		//echo $this->mdoc->doc_fol_id;
+		
 
 
 		$obj_doc = $this->mdoc->get_by_qr_id($this->input->post('doc_id'))->result();
+		//print_r($obj_doc);
+		//echo '<br>';
 		
-		
-		$get_name_location = $this->mfol->get_by_id_fol($this->input->post('doc_fol_id'))->result();
+		if($this->input->post('doc_fol_id') != '0'){
+			$get_name_location = $this->mfol->get_by_id_fol($this->input->post('doc_fol_id'))->result();
+		}else{
+			$get_name_location = './assets/user/' . $this->session->userdata('mem_username') . '/'.'home'."/";
+		}
+		//print_r($get_name_location);
 		
 
 		$get_sub_doc = $obj_doc[0]->doc_path;
@@ -58,17 +74,35 @@ class File_management extends DQS_controller
 			
 		}while(strpos($get_sub_doc,'/') != null);
 
-		if(strpos($obj_doc[0]->doc_path,'.jpg',0)>1){
-			$path_doc = $get_name_location[0]->fol_location."/".$this->input->post('qr_name').".jpeg";
-		}elseif(strpos($obj_doc[0]->doc_path,'.jpeg',0)>1){
-			$path_doc = $get_name_location[0]->fol_location."/".$this->input->post('qr_name').".jpeg";
-		}else if(strpos($obj_doc[0]->doc_path,'.pdf',0)>1){
-			$path_doc = $get_name_location[0]->fol_location."/".$this->input->post('qr_name').".pdf";
-		}else if(strpos($obj_doc[0]->doc_path,'.png',0)>1){
-			$path_doc = $get_name_location[0]->fol_location."/".$this->input->post('qr_name').".png";
-		}else if(strpos($obj_doc[0]->doc_path,'.PNG',0)>1){
-			$path_doc = $get_name_location[0]->fol_location."/".$this->input->post('qr_name').".png";
+		if($this->input->post('doc_fol_id') == '0'){
+			
+			if(strpos($obj_doc[0]->doc_path,'.jpg',0)>1){
+				$path_doc = './assets/user/' . $this->session->userdata('mem_username') . '/'.'home'."/".$this->input->post('doc_name').".jpeg";
+			}elseif(strpos($obj_doc[0]->doc_path,'.jpeg',0)>1){
+				$path_doc = './assets/user/' . $this->session->userdata('mem_username') . '/'.'home'."/".$this->input->post('doc_name').".jpeg";
+			}else if(strpos($obj_doc[0]->doc_path,'.pdf',0)>1){
+				$path_doc = './assets/user/' . $this->session->userdata('mem_username') . '/'.'home'."/".$this->input->post('doc_name').".pdf";
+			}else if(strpos($obj_doc[0]->doc_path,'.png',0)>1){
+				$path_doc = './assets/user/' . $this->session->userdata('mem_username') . '/'.'home'."/".$this->input->post('doc_name').".png";
+			}else if(strpos($obj_doc[0]->doc_path,'.PNG',0)>1){
+				$path_doc = './assets/user/' . $this->session->userdata('mem_username') . '/'.'home'."/".$this->input->post('doc_name').".png";
+			}	
 		}
+		else{
+			if(strpos($obj_doc[0]->doc_path,'.jpg',0)>1){
+				$path_doc = $get_name_location[0]->fol_location."/".$this->input->post('doc_name').".jpeg";
+			}elseif(strpos($obj_doc[0]->doc_path,'.jpeg',0)>1){
+				$path_doc = $get_name_location[0]->fol_location."/".$this->input->post('doc_name').".jpeg";
+			}else if(strpos($obj_doc[0]->doc_path,'.pdf',0)>1){
+				$path_doc = $get_name_location[0]->fol_location."/".$this->input->post('doc_name').".pdf";
+			}else if(strpos($obj_doc[0]->doc_path,'.png',0)>1){
+				$path_doc = $get_name_location[0]->fol_location."/".$this->input->post('doc_name').".png";
+			}else if(strpos($obj_doc[0]->doc_path,'.PNG',0)>1){
+				$path_doc = $get_name_location[0]->fol_location."/".$this->input->post('doc_name').".png";
+			}	
+		}
+
+		
 		
 		$this->mdoc->doc_path = $path_doc;
 
@@ -95,13 +129,32 @@ class File_management extends DQS_controller
 		$this->load->model('M_DQS_folder', 'mfol');
 		$this->load->model('M_DQS_document', 'mdoc');
 		$obj_qr = $this->mdoc->get_by_qr_id($doc_id)->result();
-		$get_name_location = $this->mfol->get_by_id_fol($doc_fol_id)->result();
-		$newqrpath = $get_name_location[0]->fol_location . '/Qrcode/' . $this->mdoc->qr_name.'.jpeg';
+
+		if($this->input->post('doc_fol_id') != '0'){
+			$get_name_location = $this->mfol->get_by_id_fol($doc_fol_id)->result();
+		}else{
+			$get_name_location = './assets/user/' . $this->session->userdata('mem_username') . '/'.'home'.'/'.'Qrcode'.'/';
+		}
+
+		if($this->input->post('doc_fol_id') != '0'){
+			$newqrpath = $get_name_location[0]->fol_location . '/'.'Qrcode/' . $this->mdoc->qr_name.'.jpeg';
+		}else{
+			$newqrpath = './assets/user/' . $this->session->userdata('mem_username') . '/'.'home'.'/'.'Qrcode'.'/'. $this->mdoc->qr_name.'.jpeg';
+		}
+
+		
 		$this->mdoc->qr_path = $newqrpath;
 		$this->mdoc->update_qr_location();
 		$obj_newqr = $this->mdoc->get_by_qr_id($this->mdoc->doc_id)->result();
 		rename($obj_qr[0]->qr_path, $obj_newqr[0]->qr_path);
-		redirect('Member/Member_home/show_member_home');
+
+		if($this->input->post('doc_fol_id') != 0){
+			redirect('Member/Member_home/show_in_folder/' . $this->input->post('doc_fol_id'));
+		}
+		else{
+			redirect('Member/Member_home/show_member_home/');
+		}
+	
 	}
 
 

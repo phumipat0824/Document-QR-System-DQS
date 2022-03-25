@@ -277,7 +277,21 @@ class Folder_management extends DQS_controller {
 			}
 		// }
 		
-		redirect('Member/Member_home/show_member_home');
+		if($this->session->userdata('mem_role') == 1){
+			if($this->input->post('fol_location_id') != 0){
+				redirect('Admin/Admin_home/show_admin_in_folder/' . $this->input->post('fol_location_id'));
+			}
+			else{
+				redirect('Admin/Admin_home/show_admin_home/');
+			}
+		}else{
+			if($this->input->post('fol_location_id') != 0){
+				redirect('Member/Member_home/show_in_folder/' . $this->input->post('fol_location_id'));
+			}
+			else{
+				redirect('Member/Member_home/show_member_home/');
+			}
+		}
 	}//end funtion move_folder()
 
 	/*
