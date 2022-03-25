@@ -126,7 +126,9 @@ class Member_register extends DQS_controller
                 
                 $data = $this->fmem->get_by_username_folder($this->session->userdata('mem_username'))->result();
                 $newpath = './assets/user/' . $this->session->userdata('mem_username');
-                $path_in_fol_home = $newpath . '/Home'.'/';   
+                $path_in_fol_home = $newpath . '/Home'.'/';  
+                $path_in_fol_service = $newpath . '/เอกสารราชการ'.'/';
+                $path_in_fol_meeting = $newpath . '/เอกสารการประชุม'.'/';
                 $get_address = './assets/user/';
                 $create_folder_user = $this->session->userdata('mem_username');
                 $path_new = $get_address . '/';
@@ -150,10 +152,20 @@ class Member_register extends DQS_controller
                 if (!file_exists($path_new . 'เอกสารราชการ')) {
                     @mkdir($path_new . 'เอกสารราชการ', 0777);
                 }
+                $create_folde_qrcode = 'Qrcode';
+                $path_new = $path_in_fol_service . '/';
+                if (!file_exists($path_new . 'Qrcode')) {
+                    @mkdir($path_new . 'Qrcode', 0777);
+                }
                 $create_folde_meeting = 'เอกสารการประชุม';
                 $path_new = $newpath . '/';
                 if (!file_exists($path_new . 'เอกสารการประชุม')) {
                     @mkdir($path_new . 'เอกสารการประชุม', 0777);
+                }
+                $create_folde_qrcode = 'Qrcode';
+                $path_new = $path_in_fol_meeting . '/';
+                if (!file_exists($path_new . 'Qrcode')) {
+                    @mkdir($path_new . 'Qrcode', 0777);
                 }
                 for($i = 0 ; $i < 2;$i++){
                         if($i == 0){
