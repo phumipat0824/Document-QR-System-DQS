@@ -15,18 +15,18 @@
     
     ?>
 
-<div class="row" style="padding-top: 50px ;margin: 50px;" ;>
+<div class="row" style="padding-top: 60px ;margin: 50px;" ;>
     <div class="col-lg-4 col-md-4">
     </div>
-    <div class="col-lg-4 col-md-4" style="padding-left: 10px ">
-        <div class="card" style="border-radius: 10px;">
+    <div class="col-lg-4 col-md-4">
+        <div class="card" style="border-radius: 20px;">
             <div class="text-center mb-4">
-                <div class="card-header card-header-warning" style="border-radius: 5px;">
-                    <h style="color:#000; font-family:TH Sarabun New; font-size: 50px">เข้าสู่ระบบ</h>
+                <div class="card-header card-header-warning" style="border-radius: 10px;">
+                    <h1 style="color:#fff; font-family:TH Sarabun New;">เข้าสู่ระบบ</h1>
                 </div>
                 <form method="POST" action="<?php echo site_url() . '/Member/Member_login/login'; ?>">
                     <div class="card-body " style="padding-top:30px">
-                        <div class="form-group mb-3">
+                        <div class="form-group">
                             <div class="input-group input-group-merge input-group-alternative">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"></span>
@@ -35,7 +35,7 @@
 
                                 <!-- Insert username -->
 
-                                <input id="mem_username" name="mem_username" placeholder="ชื่อผู้ใช้/อีเมล" type="text"
+                                <input id="mem_username" name="mem_username"style="height: 55px;margin-top:30px;margin-right:30px" class="form-control" placeholder="ชื่อผู้ใช้/อีเมล" type="text"
                                     required oninvalid="this.setCustomValidity('กรุณากรอกชื่อผู้ใช้งานหรืออีเมล')"
                                     oninput="this.setCustomValidity('')">
                             </div>
@@ -46,7 +46,7 @@
                                     <span class="input-group-text"></span>
                                 </div>
                                 <!-- Insert password -->
-                                <input id="mem_password" name="mem_password" placeholder="รหัสผ่าน" type="password"
+                                <input id="mem_password" name="mem_password"style="height: 55px;margin-top:10px;margin-right:30px" class="form-control" placeholder="รหัสผ่าน" type="password"
                                     required oninvalid="this.setCustomValidity('กรุณากรอกรหัสผ่าน')"
                                     oninput="this.setCustomValidity('')">
                             </div>
@@ -59,7 +59,7 @@
 
                         <div class="text-center" style="margin-top: -20px">
                             <!-- Button login -->
-                            <button type="submit" class="btn btn-primary my-10" id="btn_login"
+                            <button type="submit" class="btn btn-primary" id="btn_login"
                                 style="background-color: #100575 ;  font-family:TH Sarabun New; font-size: 30px">
                                 เข้าสู่ระบบ</button>
                         </div><br>
@@ -145,8 +145,7 @@ function login() { //login member
 </script>
 <style>
 input {
-    width: 400px;
-    padding: 0px 15px;
+    width: 300px;
     height: 60px;
 }
 
@@ -156,20 +155,12 @@ input::-webkit-input-placeholder {
     line-height: 3;
 }
 </style>
-
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
 
 /* Full-width input fields */
 input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
+  width: 50%;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -183,7 +174,7 @@ button {
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 30%;
 }
 
 button:hover {
@@ -200,7 +191,6 @@ button:hover {
 /* Center the image and position the close button */
 .imgcontainer {
   text-align: center;
-  margin: 24px 0 12px 0;
   position: relative;
 }
 

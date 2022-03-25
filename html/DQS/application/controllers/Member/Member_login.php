@@ -249,7 +249,7 @@ class Member_login extends DQS_controller
         $mail->Host = "smtp.gmail.com";
         $mail->SMTPAuth = true;
         $mail->Username = "info.dqs.team1@gmail.com"; // enter your email address
-        $mail->Password = "1212312121!"; // enter your password
+        $mail->Password = "Tame1@buu"; // enter your password
         $mail->Port = 465;
         $mail->SMTPSecure = "ssl";
         

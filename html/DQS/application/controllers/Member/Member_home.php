@@ -109,15 +109,35 @@ public function show_member_home()
 		}
 	}
 
-	public function delete_file($file_id){
+	public function delete_file(){
         $this->load->model('M_DQS_document','MDD');
-		$this->MDD->doc_id = $file_id;
-		$data['qr'] = $this->MDD->get_by_qr_id($file_id)->result();
+		$path = substr($this->input->post('doc_path'),1);
+		unlink(getcwd().$path);
+		$this->MDD->doc_id = $this->input->post('doc_id');
+		$data['qr'] = $this->MDD->get_by_qr_id($this->MDD->doc_id)->result();
 		$qr_id = $data['qr'][0]->qr_id;
+		$path_qr = substr($data['qr'][0]->qr_path,1);
+		unlink(getcwd().$path_qr);
         $this->MDD->delete_qr_file($qr_id);
         $this->MDD->delete_file();
 
         redirect('/Member/Member_home/show_member_home');
+        
+    }
+
+	public function delete_file_folder(){
+        $this->load->model('M_DQS_document','MDD');
+		$path = substr($this->input->post('doc_path'),1);
+		unlink(getcwd().$path);
+		$this->MDD->doc_id = $this->input->post('doc_id');
+		$data['qr'] = $this->MDD->get_by_qr_id($this->MDD->doc_id)->result();
+		$qr_id = $data['qr'][0]->qr_id;
+		$path_qr = substr($data['qr'][0]->qr_path,1);
+		unlink(getcwd().$path_qr);
+        $this->MDD->delete_qr_file($qr_id);
+        $this->MDD->delete_file();
+
+        redirect('/Member/Member_home/show_in_folder/'.$this->input->post('fol_id'));
         
     }
 
@@ -139,6 +159,7 @@ public function show_member_home()
         $this->load->model('M_DQS_qrcode','MDQ');
 		$this->load->model('M_DQS_document','MDD');
 		$doc_id = $this->input->post('qr_id');
+		
 		$this->MDQ->qr_name = $this->input->post('qr_name');
 		$this->MDQ->qr_id = $this->input->post('qr_id');
 
@@ -149,9 +170,6 @@ public function show_member_home()
 		$obj_doc = $this->MDD->get_by_doc_id($obj_qr[0]->qr_doc_id)->result();
 		$this->MDD->doc_id = $obj_qr[0]->qr_doc_id;
 
-		// print_r($obj_qr);
-		// print_r($obj_doc);
-		// echo $doc_id;
 		$get_sub_qr = $obj_qr[0]->qr_path;
 		$arr = array();
 		$i = 0;
@@ -213,38 +231,13 @@ public function show_member_home()
 		$arr = array();
 		$i = 0;
 
-		// $path_doc = "";
-		// print_r($arr);
-		// echo "<br>";
-		// echo $path_qr;
-
-
-
-		// $sub_path_qr = strpos($obj_qr[0]->qr_path,$get_sub_qr,0);
-		// $get_qr = substr($obj_qr[0]->qr_path,$sub_path_qr);
-		// echo "<br>";
-		// echo $get_qr;
-		// echo "<br>";
-		// echo $real_path_qr;
-		// echo "<br>";
-		// echo $sub_path_qr;
-		// echo "<br>";
-		// echo $get_sub_qr; 
-
-		//ตั้งชื่อไฟล์ใหม่โดยเอาเวลาไว้หน้าชื่อไฟล์เดิม
-		// $newname = $this->input->post('qr_name');
-		// $newpath = $newpath . $newname;
-		// $this->MDQ->qr_path = $newpath;
-
-		// echo $newpath;
+	
 
 		if ($this->MDQ->check_exist_name($this->MDQ->qr_name) == 0 && trim($this->MDQ->qr_name) != "") {
 			$this->MDQ->update_qr_file();
 
 			rename($obj_qr[0]->qr_path , $path_qr);
-			// echo $obj_qr[0]->qr_path;
-			// echo "<br>";
-			// echo $obj_newqr[0]->qr_path;
+		
 
 		
 		}
@@ -254,36 +247,26 @@ public function show_member_home()
 			$this->MDD->update_doc_file();
 
 			rename($obj_doc[0]->doc_path , $path_doc);
-	// 		// echo $obj_qr[0]->qr_path;
-	// 		// echo "<br>";
-	// 		// echo $obj_newqr[0]->qr_path;
 
-	// echo $obj_doc[0]->doc_path;
-	// echo "<br>";
-	// echo $obj_qr[0]->qr_path;
-	// echo $this->input->post('qr_id');
 
 		
 		}
 		
-
 		if($this->session->userdata('mem_role') == 1){
-			if($this->input->post('qr_doc_id') != 0){
-				redirect('Admin/Admin_home/show_admin_in_folder/' . $this->input->post('qr_doc_id'));
+			if($this->input->post('doc_fol_id') != 0){
+				redirect('Admin/Admin_home/show_admin_in_folder/' . $this->input->post('doc_fol_id'));
 			}
 			else{
 				redirect('Admin/Admin_home/show_admin_home/');
 			}
 		}else{
-			if($this->input->post('qr_doc_id') != 0){
-				redirect('Member/Member_home/show_in_folder/' . $this->input->post('qr_doc_id'));
+			if($this->input->post('doc_fol_id') != 0){
+				redirect('Member/Member_home/show_in_folder/' . $this->input->post('doc_fol_id'));
 			}
 			else{
 				redirect('Member/Member_home/show_member_home/');
 			}
 		}
-		
-        
-     }
+   }
 
 }

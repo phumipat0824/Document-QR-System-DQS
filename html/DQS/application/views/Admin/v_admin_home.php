@@ -34,21 +34,21 @@
                  </div>
              </div>
          </div>
-
-         <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">โฟลเดอร์</h3>
-         <br>
          <div>
              <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 
                  <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" style="color:#707070; font-weight: 900; font-family:TH Sarabun New; font-size: 25px;" href="<?php echo site_url() . '/Admin/Admin_home/show_admin_home'; ?>">หน้าหลัก</a></li>
                  <?php for ($i = 0; $i < count($path_fol); $i++) { ?>
                  <?php if ($path_fol[$i] != '@') { ?>
-                 <li class="breadcrumb-item text-sm text-dark active" style="font-size: 20px;"><a class="opacity-5 text-dark" style="color:#707070;  font-weight: 900; font-family:TH Sarabun New; font-size: 25px;" href="<?php echo site_url() . '/Admin/Admin_home/show_admin_in_folder/66'; ?>"><?php echo $path_fol[$i] ?></a>
+                 <li class="breadcrumb-item text-sm text-dark active" style="font-size: 20px;"><a class="opacity-5 text-dark" style="color:#707070;  font-weight: 900; font-family:TH Sarabun New; font-size: 25px;"><?php echo $path_fol[$i] ?></a>
                  </li>
                  <?php } ?>
                  <?php } ?>
              </ol>
          </div>
+         <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">โฟลเดอร์</h3>
+         <br>
+
          <br>
          <br>
          <?php
@@ -279,34 +279,31 @@
      <div class="col-md-4">
          <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
              <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
-                 <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;">คิวอาร์โค้ด
+                 <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;"><?php echo $arr_qr[$i]->qr_name ?>
                  </h>
              </div>
              <div class="card-body">
                  <div class="form-row">
-                     <div class="form-group col-md-4" id="qrcode">
+                     <div class="form-group col-md-5">
                          <img id="img" src="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" height="128" width="128" style="margin: auto;">
-                         <button id="download" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button>
+                         <a href="#" class="downloadModal" data-toggle="modal" data-target="#downloadModal" data-path="<?php echo base_url() . $arr_qr[$i]->qr_path ?>">
+                             <button id="load" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button></a>
                      </div>
                      <div class="form-group col-md-4">
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชื่อ
-                             : </h5>
+
                          <input type="hidden" name="doc_id" id="doc_id" value="">
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">
-                             <?php echo $arr_qr[$i]->qr_name ?></h5>
+
 
                          <!-- <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">วันที่สร้าง : </h5>
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"><?php echo $arr_qr[$i]->doc_datetime ?></h5> -->
 
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิด
-                             : </h5>
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">
-                             <?php echo $arr_qr[$i]->doc_type ?></h5>
+                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิดไฟล์
+                             : <?php echo $arr_qr[$i]->doc_type ?></h5>
 
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
-                             รายงานสรุปผล : </h5>
+                             รายงานสรุปผล </h5>
                      </div>
-                     <div class="form-group col-md-4">
+                     <div class="form-group col-md-2">
                          <button id="edit" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">แก้ไข</button>
                          <button type="button" id="move" class="btn btn- MoveFileModal" data-toggle="modal" data-target="#MoveFileModal" 
                                      data-id="<?php echo $arr_qr[$i]->doc_id ?>" 
@@ -315,7 +312,9 @@
                                      data-qr-name="<?php echo $arr_qr[$i]->qr_name ?>"
                                      data-doc_fol_id="<?php echo $arr_qr[$i]->doc_fol_id ?>" 
                                      style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
-                         <a href="#" class="deleteFileModal" data-toggle="modal" data-target="#deleteFileModal">
+                        
+                         
+                         <a href="#" class="deleteFileModal" data-toggle="modal" data-target="#deleteFileModal" onclick="set_delete('<?php echo $arr_qr[$i]->doc_path ?>',<?php echo $arr_qr[$i]->doc_id ?>)">
                              <button id="delete" class="btn btn-" style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">
                                  ลบ</button></a>
                      </div>
@@ -324,6 +323,32 @@
          </div>
      </div>
      <?php }  ?>
+
+
+     <div class="modal fade" id="downloadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; "><b>
+                             ดาวน์โหลด</b></h6>
+
+                 </div>
+                 <div class="modal-body">
+                     <div id="capture">
+                         <div id="qrcode">
+                             <center>
+                                 <img src="" id="qr_path" name="qr_path" height="250" width="250" style="margin: auto;">
+                             </center>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                     <button type="submit" id="download" onclick="" class="btn btn-success">ยืนยัน</button>
+                 </div>
+             </div>
+         </div>
+     </div>
 
 
      <!-- deleteFile Modal -->
@@ -336,10 +361,14 @@
 
                  </div>
 
-                 <form id="delete-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/delete_file/'.$arr_qr[$i]->doc_id; ?>">
+                 <form id="delete-form" method="POST" action="<?php echo site_url() . '/Admin/Admin_home/delete_file/' ?>">
                      <div class="modal-body">
 
-                         <input type="hidden" name="doc_id" id="doc_id" value="">
+                         <input type="hidden" name="doc_id" id="doc_id_delete">
+
+                         <input type="hidden" name="doc_path" id="doc_path_delete">
+
+
 
                      </div>
                      <div class="modal-footer">
@@ -353,38 +382,65 @@
 
      <!-- End DeleteFile Model -->
 
+     <!-- EditFile Modal -->
+     <div class="modal fade" id="EditFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; ">
+                         <b>แก้ไขชื่อไฟล์</b>
+                     </h6>
+                 </div>
+
+                 <form id="edit-form" method="POST" action="<?php echo site_url() .'/Member/Member_home/update_qr_file/'.$arr_qr[$i]->doc_id; ?>">
+
+                     <div class="modal-body">
+                         <center>
+                             <input onkeyup="check_file_edit()" type="text" class="col-md-10" id="qr_edit" placeholder="" name="qr_name" required>
+                         </center>
+                         <br>
+                         <a id="edit_mss" style="display: none; color:red;" align='center'>กรุณากรอกข้อมูลใหม่</a>
+                         <input type="hidden" name="qr_id" id="qr_id" value="">
+                     </div>
+
+                     <div class="modal-footer">
+                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                         <input type="submit" class="btn btn-success" id="sub_edit" value="บันทึก">
+                     </div>
+
+                 </form>
+             </div>
+         </div>
+     </div>
+     <!-- End UpdateFile Model -->
+
      <?php } else{ ?>
      <?php if ($arr_qr[$i]->doc_fol_id == $this->session->userdata('fol_id')) { ?>
      <div class="col-md-4">
          <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
              <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
-                 <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;">คิวอาร์โค้ด
+                 <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;"><?php echo $arr_qr[$i]->qr_name ?>
                  </h>
              </div>
              <div class="card-body">
                  <div class="form-row">
-                     <div class="form-group col-md-4" id="qrcode">
+                     <div class="form-group col-md-5">
                          <img id="img" src="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" height="128" width="128" style="margin: auto;">
-                         <button id="download" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button>
+                         <a href="#" class="downloadModal2" data-toggle="modal" data-target="#downloadModal2" data-path="<?php echo base_url() . $arr_qr[$i]->qr_path ?>">
+                             <button id="load" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button></a>
                      </div>
                      <div class="form-group col-md-4">
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชื่อ
-                             : </h5>
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">
-                             <?php echo $arr_qr[$i]->qr_name ?></h5>
 
                          <!-- <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">วันที่สร้าง : </h5>
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"><?php echo $arr_qr[$i]->doc_datetime ?></h5> -->
 
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิด
-                             : </h5>
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">
-                             <?php echo $arr_qr[$i]->doc_type ?></h5>
+                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิดไฟล์
+                             : <?php echo $arr_qr[$i]->doc_type ?></h5>
 
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
-                             รายงานสรุปผล : </h5>
+                             รายงานสรุปผล </h5>
                      </div>
-                     <div class="form-group col-md-4">
+                     <div class="form-group col-md-2">
                          <button id="edit2" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">แก้ไข</button>
                          <button type="button" id="move" class="btn btn- MoveFileModal" data-toggle="modal" data-target="#MoveFileModal" 
                                      data-id="<?php echo $arr_qr[$i]->doc_id ?>" 
@@ -400,6 +456,32 @@
          </div>
      </div>
      <?php }  ?>
+
+     <div class="modal fade" id="downloadModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; "><b>
+                             ดาวน์โหลด</b></h6>
+
+                 </div>
+                 <div class="modal-body">
+                     <div id="capture">
+                         <div id="qrcode">
+                             <center>
+                                 <img src="" id="qr_path" name="qr_path" height="250" width="250" style="margin: auto;">
+                             </center>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                     <button type="submit" id="download" onclick="" class="btn btn-success">ยืนยัน</button>
+                 </div>
+             </div>
+         </div>
+     </div>
+
      <?php }  ?>
      <?php }  ?>
  </div>
@@ -513,6 +595,20 @@ function check_fol_edit() {
 
     }
 }
+
+$(document).on("click", ".downloadModal", function() {
+    var path = $(this).attr('data-path');
+    console.log(path);
+    document.getElementById("qr_path").src = path;
+
+});
+
+$(document).on("click", ".downloadModal2", function() {
+    var path = $(this).attr('data-path');
+    console.log(path);
+    document.getElementById("qr_path").src = path;
+
+});
  </script>
 
 
@@ -529,7 +625,15 @@ $(document).on("click", ".editModal", function() {
     document.getElementById("fol_edit").value = name;
 });
 
-
+$(document).on("click", ".EditFileModal", function() {
+    var id = $(this).attr('data-id');
+    $("#qr_id").val(id);
+    console.log(id);
+    var name = $(this).attr('data-name');
+    $("#qr_name").val(name);
+    document.getElementById("qr_id").value = id;
+    document.getElementById("qr_edit").value = name;
+});
 
 $(document).on("click", ".deleteModal", function() {
     var id = $(this).attr('data-id');
@@ -735,4 +839,122 @@ $(document).on("click", ".MoveFileModal", function() {
 
     });
 
+
+function set_delete(path, id) {
+    $('#doc_path_delete').val(path);
+    $('#doc_id_delete').val(id);
+
+}
+ </script>
+
+
+ <!-- EditFile Script -->
+ <script>
+<?php $this->session->set_userdata('qr_id', ''); ?>
+<?php $this->session->set_userdata('path', ''); ?>
+$(document).on("keyup", "#qr_name", function() {
+    var t = <?php echo json_encode($arr_doc) ?>;
+    var new_name = document.getElementById("qr_name");
+    var check_name;
+    var div = document.getElementById('target_div');
+    var dis_button = document.getElementById('create');
+
+    for (let x in t) {
+        if (t[x].doc_name == new_name.value) {
+            check_name = 1;
+            break;
+        } else {
+            check_name = 0;
+        }
+    }
+    console.log(check_name);
+    if (check_name == 1) {
+        $("#qr_name").css("border-color", "red");
+        div.style.display = "block";
+        dis_button.disabled = true;
+
+    } else {
+        $("#qr_name").css("border-color", "green");
+        div.style.display = "none";
+        dis_button.disabled = false;
+
+    }
+});
+
+function check_file_edit() {
+
+    var dis_button = document.getElementById('sub_edit');
+    dis_button.disabled = false;
+
+    var t = <?php echo json_encode($arr_qr) ?>;
+    var new_name = document.getElementById("qr_edit");
+    var check_name;
+    var div = document.getElementById('edit_mss');
+
+
+    for (let x in t) {
+        if (t[x].qr_name == new_name.value || new_name.value == " ") {
+            check_name = 1;
+            break;
+        } else {
+            check_name = 0;
+        }
+    }
+    console.log(check_name);
+    if (check_name == 1) {
+        $("#qr_edit").css("border-color", "red");
+        div.style.display = "block";
+        dis_button.disabled = true;
+
+    } else {
+        $("#qr_edit").css("border-color", "green");
+        div.style.display = "none";
+        dis_button.disabled = false;
+
+    }
+    console.log(document.getElementById('edit'));
+}
+
+document.getElementById("download").addEventListener("click", function() {
+
+    html2canvas(document.querySelector('#capture')).then(function(canvas) {
+
+        saveAs(canvas.toDataURL(), 'DQS_QR.png');
+    });
+
+});
+
+/*
+ * saveAs
+ * download file qrcode 
+ * @input filename
+ * @output file qrcode 
+ * @author Ashirawat, Jerasak
+ * @Create Date 2565-01-12
+ */
+
+function saveAs(uri, filename) {
+
+    var link = document.createElement('a');
+
+    if (typeof link.download === 'string') {
+
+        link.href = uri;
+        link.download = filename;
+
+        //Firefox requires the link to be in the body
+        document.body.appendChild(link);
+
+        //simulate click
+        link.click();
+
+        //remove the link when done
+        document.body.removeChild(link);
+
+    } else {
+
+        window.open(uri);
+
+    }
+}
  </script>

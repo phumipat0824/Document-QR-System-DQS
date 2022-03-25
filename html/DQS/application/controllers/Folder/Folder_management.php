@@ -170,8 +170,7 @@ class Folder_management extends DQS_controller {
 		$this->folder->delete($fol_id);
 
 
-
-		$newpath = './assets/user/' . $this->session->userdata('mem_username') . '/'. $folder_name ;
+		$newpath = $fol_name[0]->fol_location;
 		$new_path = base_url().$newpath;
 
 		if(file_exists($newpath)){
