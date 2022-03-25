@@ -290,31 +290,21 @@
     <div class="col-md-4">
         <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
             <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
-                <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;">คิวอาร์โค้ด</h>
+                <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;"> <?php echo $arr_qr[$i]->qr_name ?></h>
             </div>
             <div class="card-body">
                 <div class="form-row">
                     <div class="form-group col-md-5">
-                        <div id="capture">
-                            <div id="qrcode">
-                                <img id="img" src="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" height="128" width="128" style="margin: auto;">
-                            </div>
-                        </div>
-                        <button id="download" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button>
+                        <img id="img" src="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" height="128" width="128" style="margin: auto;">
+                        <a href="#" class="downloadModal" data-toggle="modal" data-target="#downloadModal" data-path="<?php echo base_url() . $arr_qr[$i]->qr_path ?>">
+                            <button id="load" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button></a>
                     </div>
                     <div class="form-group col-md-4">
-                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชื่อ :
-                        </h5>
-                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">
-                            <?php echo $arr_qr[$i]->qr_name ?></h5>
 
                         <!-- <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">วันที่สร้าง : </h5>
                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"><?php echo $arr_qr[$i]->doc_datetime ?></h5> -->
 
-                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิด :
-                        </h5>
-                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">
-                            <?php echo $arr_qr[$i]->doc_type ?></h5>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิดไฟล์ : <?php echo $arr_qr[$i]->doc_type ?></h5>
 
                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
                             ราายงานสรุปผล </h5>
@@ -363,6 +353,33 @@
     <!-- End UpdateFile Model -->
 
     <?php }  ?>
+
+    <div class="modal fade" id="downloadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; "><b>
+                            ดาวน์โหลด</b></h6>
+
+                </div>
+                <div class="modal-body">
+                    <div id="capture">
+                        <div id="qrcode">
+                            <center>
+                                <img src="" id="qr_path" name="qr_path" height="250" width="250" style="margin: auto;">
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                    <button type="submit" id="download" onclick="" class="btn btn-success">ยืนยัน</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <?php }  ?>
 </div>
 
@@ -383,6 +400,13 @@ $(document).on("click", ".EditFileModal", function() {
 
 <?php $this->session->set_userdata('fol_id', ''); ?>
 <?php $this->session->set_userdata('path', ''); ?>
+
+$(document).on("click", ".downloadModal", function() {
+    var path = $(this).attr('data-path');
+    console.log(path);
+    document.getElementById("qr_path").src = path;
+
+});
 $(document).on("keyup", "#fol_name", function() {
     var t = <?php echo json_encode($arr_fol) ?>;
     var new_name = document.getElementById("fol_name");
