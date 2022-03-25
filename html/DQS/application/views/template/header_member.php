@@ -54,12 +54,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <!-- Datepicker -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');
 
-    * {
-        font-family: 'Sarabun', sans-serif;
-    }
+        * {
+            font-family: 'Sarabun', sans-serif;
+        }
     </style>
 
     <nav class="navbar navbar-expand-lg bg-dark_blue" style="z-index: 6; position: fixed; width: 100%; top:0;">
@@ -73,17 +76,17 @@
             <img src="<?php echo base_url() . '/assets/image/logo_dqs.PNG' ?>" height="50" width="50">
             <a class="navbar-brand" href="<?php echo base_url() . '/Member/Member_home/show_member_home' ?>"><b>Document QR</b></a>
             <div class="search-container" style="margin-left: 20%;">
-                    <form action="">
-                        <i class="fa fa-search"></i>
-                        <input type="text" style="width: 400px;" placeholder="Search.." name="search">
-                    </form>
-                </div>
+                <form action="">
+                    <i class="fa fa-search"></i>
+                    <input type="text" style="width: 400px;" placeholder="Search.." name="search">
+                </form>
+            </div>
             <form class="form-inline ml-auto">
 
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <span class="material-icons" style="margin-right: -15;">account_circle</span>
+                    <span class="material-icons" style="margin-right: -15;">account_circle</span>
                     <li class="nav-item">
-                        <a class="nav-link" style="font-size:18px"><?php echo $this->session->mem_username?></a>
+                        <a class="nav-link" style="font-size:18px"><?php echo $this->session->mem_username ?></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo site_url() . '/Member/Member_login/logout' ?>" style="font-size:18px">ออกจากระบบ</a>
