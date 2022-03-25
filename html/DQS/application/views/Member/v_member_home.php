@@ -5,8 +5,7 @@
                 * @author Pongthorn
                 * @Create Date 2565-13-01
 */ -->
- <link href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/css/dqs_right_click_menu.css"
-     rel="stylesheet" />
+ <link href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/css/dqs_right_click_menu.css" rel="stylesheet" />
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
  <?php $this->session->set_userdata('fol_id_new', ''); ?>
  <?php $this->session->set_userdata('path_new', ''); ?>
@@ -18,43 +17,37 @@
              </h1>
          </div>
          <div class="col-md-4">
-             <div class="dropdown"id="btt">
-                 <button class="dropbtn btn btn-round"style=" width: 145px; background-color: #F5F5F5 ; border: none;">
-                     <h1 style="font-weight: 900; color:#003399 ; font-size: 50px; font-family:TH Sarabun New; height: 40; width: 50px;"id="button-folder">+ สร้าง</h1>
+             <div class="dropdown" id="btt">
+                 <button class="dropbtn btn btn-round" style=" width: 145px; background-color: #F5F5F5 ; border: none;">
+                     <h1 style="font-weight: 900; color:#003399 ; font-size: 50px; font-family:TH Sarabun New; height: 40; width: 50px;" id="button-folder">+ สร้าง</h1>
                  </button>
                  <div id="myDropdown" class="dropdown-content">
                      <div class="custom-cm__item" data-toggle="modal" data-target="#exampleModal"><a>สร้างโฟลเดอร์</a>
                      </div>
                      <?php if ($this->session->userdata('fol_id') == null) { ?>
-                     <div class="custom-cm__item"><a
-                             href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file/'; ?>">อัปโหลดไฟล์</a>
+                     <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file/'; ?>">อัปโหลดไฟล์</a>
                      </div>
                      <?php } else { ?>
-                     <div class="custom-cm__item"><a
-                             href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file_in_floder/' . $this->session->userdata('fol_id'); ?>">อัปโหลดไฟล์</a>
+                     <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file_in_floder/' . $this->session->userdata('fol_id'); ?>">อัปโหลดไฟล์</a>
                      </div>
                      <?php } ?>
                  </div>
              </div>
          </div>
          <div>
-            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-                        style=" color:#707070; font-weight: 900; font-family:TH Sarabun New; font-size: 25px;"
-                        href="<?php echo site_url() . '/Member/Member_home/show_member_home'; ?>">หน้าหลัก</a></li>
-                <?php for ($i = 0; $i < count($path_fol); $i++) { ?>
-                <?php if ($path_fol[$i] != '@') { ?>
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
-                        style="color:#707070; font-weight: 900; font-family:TH Sarabun New; font-size: 25px;"
-                        ><?php echo $path_fol[$i] ?></a>
-                </li>
-                <?php } ?>
-                <?php } ?>
-            </ol>
-        </div>
+             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" style=" color:#707070; font-weight: 900; font-family:TH Sarabun New; font-size: 25px;" href="<?php echo site_url() . '/Member/Member_home/show_member_home'; ?>">หน้าหลัก</a></li>
+                 <?php for ($i = 0; $i < count($path_fol); $i++) { ?>
+                 <?php if ($path_fol[$i] != '@') { ?>
+                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" style="color:#707070; font-weight: 900; font-family:TH Sarabun New; font-size: 25px;"><?php echo $path_fol[$i] ?></a>
+                 </li>
+                 <?php } ?>
+                 <?php } ?>
+             </ol>
+         </div>
          <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">โฟลเดอร์</h3>
          <br>
-        
+
          <br>
          <br>
          <?php
@@ -66,35 +59,25 @@
              <div class="dropdown">
                  <?php if ($arr_fol[$i]->fol_name == 'เอกสารราชการ') { ?>
                  <!--  โฟลเดอร์พิเศษ -->
-                 <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)"
-                     class="dropbtn btn btn-secondary btn-lg"
-                     style=" background-color:#a19078; border: 2px solid #876a43; height: 60px; width: 300px;">
-                     <img src="<?php echo base_url() . '/assets/image/foldersecurity.png' ?>" height="35" width="35"
-                         style="margin-left: -20px;">
-                     <a style=" font-size: 26px; font-weight:900; font-family:TH Sarabun New; margin-right: 300px;"
-                         class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
+                 <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" style=" background-color:#a19078; border: 2px solid #876a43; height: 60px; width: 300px;">
+                     <img src="<?php echo base_url() . '/assets/image/foldersecurity.png' ?>" height="35" width="35" style="margin-left: -20px;">
+                     <a style=" font-size: 26px; font-weight:900; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
                  </button>
                  <div id="showmenu" style="display:block">
                      <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
-                         <a
-                             href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
+                         <a href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
 
                      </div>
                  </div>
                  <?php } else if ($arr_fol[$i]->fol_name == 'เอกสารการประชุม') { ?>
                  <!--  โฟลเดอร์พิเศษ -->
-                 <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)"
-                     class="dropbtn btn btn-secondary btn-lg"
-                     style=" background-color:#4876d3; border: 2px solid #002b83; height: 60px; width: 300px;">
-                     <img src="<?php echo base_url() . '/assets/image/foldersecurity.png' ?>" height="35" width="35"
-                         style="margin-left: -20px;">
-                     <a style=" font-size: 26px; font-weight:900; font-family:TH Sarabun New; margin-right: 300px;"
-                         class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
+                 <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" style=" background-color:#4876d3; border: 2px solid #002b83; height: 60px; width: 300px;">
+                     <img src="<?php echo base_url() . '/assets/image/foldersecurity.png' ?>" height="35" width="35" style="margin-left: -20px;">
+                     <a style=" font-size: 26px; font-weight:900; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
                  </button>
                  <div id="showmenu" style="display:block">
                      <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
-                         <a
-                             href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
+                         <a href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
 
                      </div>
                  </div>
@@ -117,26 +100,16 @@
                             }
                             ?>
 
-                 <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)"
-                     class="dropbtn btn btn-secondary btn-lg" data-placement="bottom"
-                     title="<?php echo $arr_fol[$i]->fol_name ?>"
-                     style=" background-color:#ffff; border: 2px solid#c7c6c4; height: 60px; width: 300px;">
+                 <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" data-placement="bottom" title="<?php echo $arr_fol[$i]->fol_name ?>" style=" background-color:#ffff; border: 2px solid#c7c6c4; height: 60px; width: 300px;">
                      <i class="material-icons" style="margin-left: -20px; font-size:30px;  color:#f3ff41;">folder</i>
-                     <a style=" font-size: 26px; font-weight:900; font-family:TH Sarabun New; margin-right: 300px;"
-                         class="menu"><?php echo  $sub_name_folder ?></a>
+                     <a style=" font-size: 26px; font-weight:900; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo  $sub_name_folder ?></a>
                  </button>
                  <div id="showmenu" style="display:block">
                      <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
-                         <a
-                             href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
-                         <a href="#" class="editModal" data-toggle="modal" data-target="#editModal"
-                             data-id="<?php echo $arr_fol[$i]->fol_id ?>"
-                             data-name="<?php echo $arr_fol[$i]->fol_name ?>">แก้ไข</a>
-                         <a href="#" class="moveModal" data-toggle="modal" data-target="#moveModal"
-                             data-id="<?php echo $arr_fol[$i]->fol_id ?>"
-                             data-name="<?php echo $arr_fol[$i]->fol_name ?>">ย้าย</a>
-                         <a href="#" class="deleteModal" data-toggle="modal" data-target="#deleteModal"
-                             data-id="<?php echo $arr_fol[$i]->fol_id ?>">ลบ</a>
+                         <a href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
+                         <a href="#" class="editModal" data-toggle="modal" data-target="#editModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">แก้ไข</a>
+                         <a href="#" class="moveModal" data-toggle="modal" data-target="#moveModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">ย้าย</a>
+                         <a href="#" class="deleteModal" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>">ลบ</a>
                      </div>
                  </div>
                  <?php } ?>
@@ -152,31 +125,25 @@
     * @author Pongthorn
     * @Create Date 2565-13-01
 */ -->
-         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
+         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
              <div class="modal-dialog" role="document">
                  <div class="modal-content">
                      <div class="modal-header">
-                         <h1 class="modal-title" id="exampleModalLabel"
-                             style="font-weight: 900;font-size: 36px; font-family:TH Sarabun New;">โฟลเดอร์ใหม่</h1>
+                         <h1 class="modal-title" id="exampleModalLabel" style="font-weight: 900;font-size: 36px; font-family:TH Sarabun New;">โฟลเดอร์ใหม่</h1>
                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                              <span aria-hidden="true">&times;</span>
                          </button>
                      </div>
-                     <form method="POST" name="form"
-                         action="<?php echo site_url() . '/Folder/Folder_management/insert_folder'; ?>">
+                     <form method="POST" name="form" action="<?php echo site_url() . '/Folder/Folder_management/insert_folder'; ?>">
                          <div class="modal-body">
-                             <center><input style="font-size: 25px;font-family:TH Sarabun New; " id="fol_name"
-                                     type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name"
-                                     required></center><br>
+                             <center><input style="font-size: 25px;font-family:TH Sarabun New; " id="fol_name" type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name" required></center><br>
                              <a id="target_div" style="display: none; color:red;" align='center'>ชื่อโฟลเดอร์ซ้ำ
                                  กรุณากรอกใหม่</a>
 
                          </div>
                          <div class="modal-footer">
 
-                             <input type="hidden" value="<?php echo $arr_fol[0]->fol_location_id ?>"
-                                 name="fol_location_id"></input>
+                             <input type="hidden" value="<?php echo $arr_fol[0]->fol_location_id ?>" name="fol_location_id"></input>
 
                              <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                              <input type="submit" class="btn btn-success" id="create" value="สร้าง">
@@ -195,8 +162,7 @@
 */ -->
 
          <!-- delete Modal -->
-         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
+         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
              <div class="modal-dialog" role="document">
                  <div class="modal-content">
                      <div class="modal-header">
@@ -204,13 +170,11 @@
 
                      </div>
 
-                     <form id="delete-form" method="POST"
-                         action="<?php echo site_url() . '/Folder/Folder_management/delete_folder/'; ?>">
+                     <form id="delete-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/delete_folder/'; ?>">
                          <div class="modal-body">
                              <input type="hidden" name="fol_id" id="fol_id" value="">
 
-                             <input type="hidden" name="fol_location_id" id="fol_location_id"
-                                 value="<?php echo $arr_fol[0]->fol_location_id; ?>">
+                             <input type="hidden" name="fol_location_id" id="fol_location_id" value="<?php echo $arr_fol[0]->fol_location_id; ?>">
                          </div>
                          <div class="modal-footer">
                              <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
@@ -230,24 +194,20 @@
     * @Create Date 2565-13-01
 */ -->
          <!-- edit Modal -->
-         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
+         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
              <div class="modal-dialog" role="document">
                  <div class="modal-content">
                      <div class="modal-header">
                          <h5 class="modal-title" id="exampleModalLabel">แก้ไขชื่อโฟลเดอร์</h5>
 
                      </div>
-                     <form id="edit-form" method="POST"
-                         action="<?php echo site_url() . '/Folder/Folder_management/update_folder/'; ?>">
+                     <form id="edit-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/update_folder/'; ?>">
                          <div class="modal-body">
-                             <center><input onkeyup="check_fol_edit()" type="text" class="col-md-10" id="fol_edit"
-                                     placeholder="" name="fol_name" required></center>
+                             <center><input onkeyup="check_fol_edit()" type="text" class="col-md-10" id="fol_edit" placeholder="" name="fol_name" required></center>
                              <br>
                              <a id="edit_mss" style="display: none; color:red;" align='center'>กรุณากรอกข้อมูลใหม่</a>
                              <input type="hidden" name="fol_id" id="folder_id" value="">
-                             <input type="hidden" name="fol_location_id" id="fol_location_id"
-                                 value="<?php echo $arr_fol[0]->fol_location_id; ?>">
+                             <input type="hidden" name="fol_location_id" id="fol_location_id" value="<?php echo $arr_fol[0]->fol_location_id; ?>">
                          </div>
                          <div class="modal-footer">
                              <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
@@ -267,15 +227,13 @@
     * @Create Date 2565-13-01
 */ -->
          <!-- start move Modal -->
-         <div class="modal fade" id="moveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
+         <div class="modal fade" id="moveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
              <div class="modal-dialog" role="document">
                  <div class="modal-content">
                      <div class="modal-header">
                          <h5 class="modal-title" id="exampleModalLabel">ย้ายไปที่</h5>
                      </div>
-                     <form id="move-form" method="POST"
-                         action="<?php echo site_url() . '/Folder/Folder_management/move_folder/'; ?>">
+                     <form id="move-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/move_folder/'; ?>">
                          <div class="modal-body">
                              <!-- dropdown folder name -->
                              <div id="select_move"></div>
@@ -305,49 +263,36 @@
      <?php if ($arr_qr[$i]->doc_fol_id == null) { ?>
      <div class="col-md-4">
          <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
-             <div class="card-header-"
-                 style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
-                 <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;">คิวอาร์โค้ด
+             <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
+                 <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;"> <?php echo $arr_qr[$i]->qr_name ?>
                  </h>
              </div>
              <div class="card-body">
                  <div class="form-row">
-                     <div class="form-group col-md-4" id="qrcode">
-                         <img id="img" src="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" height="128" width="128"
-                             style="margin: auto;">
-                         <button id="download" onclick="" class="btn btn-warning"
-                             style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button>
+                     <div class="form-group col-md-5">
+                         <img id="img" src="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" height="128" width="128" style="margin: auto;">
+                         <a href="#" class="downloadModal" data-toggle="modal" data-target="#downloadModal" data-path="<?php echo base_url() . $arr_qr[$i]->qr_path ?>">
+                             <button id="load" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button></a>
                      </div>
                      <div class="form-group col-md-4">
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชื่อ
-                             : </h5>
                          <input type="hidden" name="doc_id" id="doc_id" value="">
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">
-                             <?php echo $arr_qr[$i]->qr_name ?></h5>
 
                          <!-- <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">วันที่สร้าง : </h5>
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"><?php echo $arr_qr[$i]->doc_datetime ?></h5> -->
 
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิด
-                             : </h5>
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">
-                             <?php echo $arr_qr[$i]->doc_type ?></h5>
+                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิดไฟล์
+                             : <?php echo $arr_qr[$i]->doc_type ?></h5>
 
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
-                             รายงานสรุปผล : </h5>
+                             รายงานสรุปผล </h5>
                      </div>
                      <div class="form-group col-md-2">
 
-                         <a href="#" class="EditFileModal" data-toggle="modal" data-target="#EditFileModal"
-                             data-id="<?php echo $arr_qr[$i]->qr_id ?>" data-name="<?php echo $arr_qr[$i]->qr_name ?>">
-                             <button id="edit" class="btn btn-"
-                                 style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">แก้ไข</button></a>
-                         <button id="remove" class="btn btn-"
-                             style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
-                         <a href="#" class="deleteFileModal" data-toggle="modal" data-target="#deleteFileModal"
-                             onclick="set_delete('<?php echo $arr_doc[$i]->doc_path ?>',<?php echo $arr_doc[$i]->doc_id ?>)">
-                             <button id="delete" class="btn btn-"
-                                 style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">
+                         <a href="#" class="EditFileModal" data-toggle="modal" data-target="#EditFileModal" data-id="<?php echo $arr_qr[$i]->qr_id ?>" data-name="<?php echo $arr_qr[$i]->qr_name ?>">
+                             <button id="edit" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70px; ">แก้ไข</button></a>
+                         <button id="remove" class="btn btn-" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70px; ">ย้าย</button>
+                         <a href="#" class="deleteFileModal" data-toggle="modal" data-target="#deleteFileModal" onclick="set_delete('<?php echo $arr_doc[$i]->doc_path ?>',<?php echo $arr_doc[$i]->doc_id ?>)">
+                             <button id="delete" class="btn btn-" style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70px; ">
                                  ลบ</button></a>
                      </div>
                  </div>
@@ -355,20 +300,43 @@
          </div>
      </div>
      <?php }  ?>
-     <!-- deleteFile Modal -->
-     <div class="modal fade" id="deleteFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+
+     <div class="modal fade" id="downloadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
              <div class="modal-content">
                  <div class="modal-header">
-                     <h6 class="modal-title" id="exampleModalLabel"
-                         style="font-family:TH sarabun new; font-size: 30px; "><b>
+                     <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; "><b>
+                             ดาวน์โหลด</b></h6>
+
+                 </div>
+                 <div class="modal-body">
+                     <div id="capture">
+                         <div id="qrcode">
+                             <center>
+                                 <img src="" id="qr_path" name="qr_path" height="250" width="250" style="margin: auto;">
+                             </center>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                     <button type="submit" id="download" onclick="" class="btn btn-success">ยืนยัน</button>
+                 </div>
+             </div>
+         </div>
+     </div>
+
+     <!-- deleteFile Modal -->
+     <div class="modal fade" id="deleteFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; "><b>
                              ยืนยันการลบเอกสาร</b></h6>
 
                  </div>
 
-                 <form id="delete-form" method="POST"
-                     action="<?php echo site_url() . '/Member/Member_home/delete_file/' ?>">
+                 <form id="delete-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/delete_file/' ?>">
                      <div class="modal-body">
 
                          <input type="hidden" name="doc_id" id="doc_id_delete">
@@ -390,24 +358,20 @@
      <!-- End DeleteFile Model -->
 
      <!-- EditFile Modal -->
-     <div class="modal fade" id="EditFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+     <div class="modal fade" id="EditFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
              <div class="modal-content">
                  <div class="modal-header">
-                     <h6 class="modal-title" id="exampleModalLabel"
-                         style="font-family:TH sarabun new; font-size: 30px; ">
+                     <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; ">
                          <b>แก้ไขชื่อไฟล์</b>
                      </h6>
                  </div>
 
-                 <form id="edit-form" method="POST"
-                     action="<?php echo site_url() . '/Member/Member_home/update_qr_file/' . $arr_qr[$i]->doc_id; ?>">
+                 <form id="edit-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/update_qr_file/' . $arr_qr[$i]->doc_id; ?>">
 
                      <div class="modal-body">
                          <center>
-                             <input onkeyup="check_file_edit()" type="text" class="col-md-10" id="qr_edit"
-                                 placeholder="" name="qr_name" required>
+                             <input onkeyup="check_file_edit()" type="text" class="col-md-10" id="qr_edit" placeholder="" name="qr_name" required>
                          </center>
                          <br>
                          <a id="edit_mss" style="display: none; color:red;" align='center'>กรุณากรอกข้อมูลใหม่</a>
@@ -430,48 +394,33 @@
      <?php if ($arr_qr[$i]->doc_fol_id == $this->session->userdata('fol_id')) { ?>
      <div class="col-md-4">
          <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
-             <div class="card-header-"
-                 style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
-                 <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;">คิวอาร์โค้ด
+             <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
+                 <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;"><?php echo $arr_qr[$i]->qr_name ?>
                  </h>
              </div>
              <div class="card-body">
                  <div class="form-row">
-                     <div class="form-group col-md-4" id="qrcode">
-                         <img id="img" src="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" height="128" width="128"
-                             style="margin: auto;">
-                         <button id="download" onclick="" class="btn btn-warning"
-                             style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button>
+                     <div class="form-group col-md-5">
+                         <img id="img" src="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" height="128" width="128" style="margin: auto;">
+                         <a href="#" class="downloadModal2" data-toggle="modal" data-target="#downloadModal2" data-path="<?php echo base_url() . $arr_qr[$i]->qr_path ?>">
+                             <button id="load" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button></a>
                      </div>
                      <div class="form-group col-md-4">
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชื่อ
-                             : </h5>
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">
-                             <?php echo $arr_qr[$i]->qr_name ?></h5>
 
                          <!-- <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">วันที่สร้าง : </h5>
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"><?php echo $arr_qr[$i]->doc_datetime ?></h5> -->
 
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิด
-                             : </h5>
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">
-                             <?php echo $arr_qr[$i]->doc_type ?></h5>
+                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิดไฟล์
+                             : <?php echo $arr_qr[$i]->doc_type ?></h5>
 
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
-                             รายงานสรุปผล : </h5>
+                             รายงานสรุปผล </h5>
                      </div>
                      <div class="form-group col-md-2">
-                         <button id="edit2" class="btn btn-"
-                             style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">แก้ไข</button>
-                         <button type="button" id="move" class="btn btn- MoveFileModal" data-toggle="modal"
-                             data-target="#MoveFileModal" data-id="<?php echo $arr_qr[$i]->doc_id ?>"
-                             data-name="<?php echo $arr_qr[$i]->doc_name ?>"
-                             data-qr-id="<?php echo $arr_qr[$i]->qr_id ?>"
-                             data-qr-name="<?php echo $arr_qr[$i]->qr_name ?>"
-                             style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; "><?php echo $arr_qr[$i]->doc_id ?>
+                         <button id="edit2" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">แก้ไข</button>
+                         <button type="button" id="move" class="btn btn- MoveFileModal" data-toggle="modal" data-target="#MoveFileModal" data-id="<?php echo $arr_qr[$i]->doc_id ?>" data-name="<?php echo $arr_qr[$i]->doc_name ?>" data-qr-id="<?php echo $arr_qr[$i]->qr_id ?>" data-qr-name="<?php echo $arr_qr[$i]->qr_name ?>" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; "><?php echo $arr_qr[$i]->doc_id ?>
                              ย้าย</button>
-                         <button id="delete2" class="btn btn-"
-                             style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ลบ</button>
+                         <button id="delete2" class="btn btn-" style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ลบ</button>
                      </div>
                  </div>
              </div>
@@ -479,6 +428,32 @@
      </div>
      <?php }  ?>
      <?php }  ?>
+
+     <div class="modal fade" id="downloadModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; "><b>
+                             ดาวน์โหลด</b></h6>
+
+                 </div>
+                 <div class="modal-body">
+                     <div id="capture">
+                         <div id="qrcode">
+                             <center>
+                                 <img src="" id="qr_path" name="qr_path" height="250" width="250" style="margin: auto;">
+                             </center>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                     <button type="submit" id="download" onclick="" class="btn btn-success">ยืนยัน</button>
+                 </div>
+             </div>
+         </div>
+     </div>
+
      <!-- End Card in folder -->
      <?php }  ?>
 
@@ -493,21 +468,18 @@
     * @Create Date 2565-03-21
     */ -->
      <!-- Move File Modal -->
-     <div class="modal fade" id="MoveFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+     <div class="modal fade" id="MoveFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
              <div class="modal-content">
                  <div class="modal-header">
                      <h5 class="modal-title" id="MoveFileModalLabel">ย้ายไฟล์ไปที่</h5>
                  </div>
-                 <form id="move-form" method="POST"
-                     action="<?php echo site_url() . '/File/File_management/move_file/'; ?>">
+                 <form id="move-form" method="POST" action="<?php echo site_url() . '/File/File_management/move_file/'; ?>">
                      <div class="modal-body">
                          <input type="hidden" name="doc_id" id="file_id" value="">
                          <input type="hidden" name="qr_id" id="qrcode_id" value="">
                          <!-- dropdown folder name -->
-                         <select name="doc_fol_id" id="doc_fol_id" class="form-select"
-                             aria-label="Default select example" placeholder="" required>
+                         <select name="doc_fol_id" id="doc_fol_id" class="form-select" aria-label="Default select example" placeholder="" required>
                              <option value="" disabled selected hidden>เลือกโฟลเดอร์</option>
                              <option value='0'>หน้าหลัก</option>
                              <?php for ($i = 0; $i < count($arr_folder); $i++) {   ?>
@@ -631,6 +603,20 @@ $(document).on("click", ".deleteModal", function() {
 
 });
 
+$(document).on("click", ".downloadModal", function() {
+    var path = $(this).attr('data-path');
+    console.log(path);
+    document.getElementById("qr_path").src = path;
+
+});
+
+$(document).on("click", ".downloadModal2", function() {
+    var path = $(this).attr('data-path');
+    console.log(path);
+    document.getElementById("qr_path").src = path;
+
+});
+
 $(document).on("click", ".exampleModal", function() {
     var id = $(this).attr('data-id');
     $("#fol_id").val(id);
@@ -663,7 +649,6 @@ $(document).on("click", ".editModal", function() {
     var id = $(this).attr('data-id');
     $("#dep_id").val(id);
 });
-
  </script>
  <script>
 $(document).on("keyup", "#fol_name", function() {
@@ -1068,5 +1053,49 @@ function set_delete(path, id) {
     $('#doc_path_delete').val(path);
     $('#doc_id_delete').val(id);
 
+}
+
+
+document.getElementById("download").addEventListener("click", function() {
+
+    html2canvas(document.querySelector('#capture')).then(function(canvas) {
+
+        saveAs(canvas.toDataURL(), 'DQS_QR.png');
+    });
+
+});
+
+/*
+ * saveAs
+ * download file qrcode 
+ * @input filename
+ * @output file qrcode 
+ * @author Ashirawat, Jerasak
+ * @Create Date 2565-01-12
+ */
+
+function saveAs(uri, filename) {
+
+    var link = document.createElement('a');
+
+    if (typeof link.download === 'string') {
+
+        link.href = uri;
+        link.download = filename;
+
+        //Firefox requires the link to be in the body
+        document.body.appendChild(link);
+
+        //simulate click
+        link.click();
+
+        //remove the link when done
+        document.body.removeChild(link);
+
+    } else {
+
+        window.open(uri);
+
+    }
 }
  </script>
