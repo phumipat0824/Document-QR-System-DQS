@@ -50,12 +50,12 @@
             <div class="col-md-5">
                 <div class="card" id="onsave" style="border-color:#E4E4E4;border-width: 5px;">
                         <center>
-                            <div id="capture" style="margin-top:40px;">
-                                <div id="qrcode">              
+                            <div id="capture" >
+                                <div id="qrcode"style="margin-top:30px;">              
                                     <img id="img" src="<?php echo base_url(). '/assets/image/QR_home.PNG' ?>" height="250" width="250" style="margin: auto;">                       
                                 </div> 
                             </div> 
-                            <button id="download" class="btn btn-warning" style="margin-top:40px;margin-bottom: 30px;font-family:TH sarabun new; font-size: 35px; width: 240; ">ดาวน์โหลด</button> 
+                            <button id="download" class="btn btn-warning" style="margin-top: 40px;margin-bottom: 30px;font-family:TH sarabun new; font-size: 35px; width: 240; ">ดาวน์โหลด</button> 
                         </center>
                 </div>
             </div>
@@ -117,11 +117,24 @@ function make() {
         });
 
     }
+    
     //qrcode.resize(480, 480);
 }
-
+// #capture {
+//   box-sizing: content-box;  
+//   width: 350px;
+//   height: 350px;
+//   border: 10px solid #fff;
+// }
 document.getElementById("download").addEventListener("click", function() {
-    
+    const note = document.querySelector('#capture');
+// note.style.box-sizing = 'content-box';
+note.style.border = '10px solid #fff';
+note.style.width = '380px';
+note.style.height = '370px';
+const note1 = document.querySelector('#download');
+note1.style.margin = '-10px 0px 30px 0px';
+
     html2canvas(document.querySelector('#capture')).then(function(canvas) {
 
         saveAs(canvas.toDataURL(), 'DQS_QR.png');
@@ -214,8 +227,10 @@ function doCapture() {
 }
 $(document).ready(function(){   
      function validateURL(textval) {
-  var urlregex = new RegExp( "^(http|https|ftp)\://([a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\?\'\\\+&amp;%\$#\=~_\-]+))*$");
-  return urlregex.test(textval);
+  //var urlregex = new RegExp( "^(http|https|ftp)\://([a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|gle|aero|coop|museum|[a-zA-Z]{2}))(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\?\'\\\+&amp;%\$#\=~_\-]+))*$");
+  var re=/^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/;
+  console.log(re.test(textval));
+  return re.test(textval);
 }
     $("#make").on('click', function() {
       var div = document.getElementById('target_div');
@@ -320,5 +335,6 @@ a{
 .nav-tabs .nav-link.active:focus, .nav-tabs .nav-link.active:hover {
     border-color: #fff;
 }
+
 
 </style>
