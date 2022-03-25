@@ -71,7 +71,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <img src="<?php echo base_url() . '/assets/image/logo_dqs.PNG' ?>" height="50" width="50">
-            <a class="navbar-brand" href="<?php echo base_url() . 'Qrcode/Qrcode_generator/show_qrcode' ?>"><b>Document QR</b></a>
+            <a class="navbar-brand"href="<?php echo site_url().'/Admin/Admin_home/show_admin_home'?>"><b>Document QR</b></a>
                 <div class="search-container" style="margin-left: 20%;">
                     <form action="">
                         <i class="fa fa-search"></i>
