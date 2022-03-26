@@ -230,16 +230,6 @@
                         <input type="submit" class="btn btn-success" value="บันทึก">
                         <input type="hidden" name="fol_id" id="fold_id" value="">
                         <input type="hidden" name="fol_name" id="folder_name" value="">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- end move Modal -->
-
-
-</div>
-
 <!-- QR-code -->
 <div class="row" style="padding: 100px 10px 10px 20%;">
     <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">คิวอาร์โค้ด </h3>
