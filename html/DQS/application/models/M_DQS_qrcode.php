@@ -109,6 +109,12 @@ class M_DQS_qrcode extends Da_DQS_qrcode
         return $query;
     }
 
+    public function get_all(){
+        $sql = "SELECT * 
+        FROM {$this->db_name}.DQS_Document";
+        $query = $this->db->query($sql);
+        return $query;
+    }
 
        /*
     * check_exist_name($doc_name)
