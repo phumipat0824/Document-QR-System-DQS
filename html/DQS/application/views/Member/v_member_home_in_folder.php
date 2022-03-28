@@ -200,31 +200,37 @@
             </div>
         </div>
     </div>
-    <!-- /*
+            <!-- /*
     * move folder
-    * move folder
+    * Display show_member_home
     * @input -
     * @output show folder move
     * @author chanyapat
     * @Create Date 2565-13-01
 */ -->
-    <!-- start move Modal -->
-    <div class="modal fade" id="moveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">ย้ายไปที่</h5>
-                </div>
-                <form id="move-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/move_folder/'; ?>">
-                    <div class="modal-body">
-                        <!-- dropdown folder name -->
-                        <div id="select_move"></div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                        <input type="submit" class="btn btn-success" value="บันทึก">
-                        <input type="hidden" name="fol_id" id="fold_id" value="">
-                        <input type="hidden" name="fol_name" id="folder_name" value="">
+         <!-- start move Modal -->
+         <div class="modal fade" id="moveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+             <div class="modal-dialog" role="document">
+                 <div class="modal-content">
+                     <div class="modal-header">
+                         <h5 class="modal-title" id="exampleModalLabel">ย้ายไปที่</h5>
+                     </div>
+                     <form id="move-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/move_folder/'; ?>">
+                         <div class="modal-body">
+                             <!-- dropdown folder name -->
+                             <div id="select_move"></div>
+                         </div>
+                         <div class="modal-footer">
+                             <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                             <input type="submit" class="btn btn-success" value="บันทึก">
+                             <input type="hidden" name="fol_id" id="fold_id" value="">
+                             <input type="hidden" name="fol_name" id="folder_name" value="">
+                         </div>
+                     </form>
+                 </div>
+             </div>
+         </div>
+         <!-- end move Modal -->
 <!-- QR-code -->
 <div class="row" style="padding: 100px 10px 10px 20%;">
     <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">คิวอาร์โค้ด</h3>
