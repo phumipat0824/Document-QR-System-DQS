@@ -271,9 +271,10 @@
                          </div>
                          <div class="card-body">
                              <div class="form-row">
-                                 <div class="form-group col-md-4" id="qrcode">
+                                 <div class="form-group col-md-5">
                                      <img id="img" src="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" height="128" width="128" style="margin: auto;">
-                                     <button id="download" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button>
+                                     <a href="#" class="downloadModal" data-toggle="modal" data-target="#downloadModal" data-path="<?php echo base_url() . $arr_qr[$i]->qr_path ?>">
+                                         <button id="load" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button></a>
                                  </div>
                                  <div class="form-group col-md-4">
                                      <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชื่อ
@@ -297,10 +298,71 @@
 
                                      <a href="#" class="EditFileModal" data-toggle="modal" data-target="#EditFileModal" data-id="<?php echo $arr_qr[$i]->qr_id ?>" data-name="<?php echo $arr_qr[$i]->qr_name ?>">
                                          <button id="edit" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70px; ">แก้ไข</button></a>
-                                     <button type="button" id="move" class="btn btn- MoveFileModal" data-toggle="modal" data-target="#MoveFileModal" data-id="<?php echo $arr_qr[$i]->doc_id ?>" data-name="<?php echo $arr_qr[$i]->doc_name ?>" data-qr-id="<?php echo $arr_qr[$i]->qr_id ?>" data-qr-name="<?php echo $arr_qr[$i]->qr_name ?>" data-doc_fol_id="<?php echo $arr_qr[$i]->doc_fol_id ?>" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; "><?php echo $arr_qr[$i]->doc_fol_id ?>ย้าย</button>
-                                     <a href="#" class="deleteFileModal" data-toggle="modal" data-target="#deleteFileModal" onclick="set_delete('<?php echo $arr_doc[$i]->doc_path ?>',<?php echo $arr_doc[$i]->doc_id ?>)">
+
+                                     <!-- EditFile Modal -->
+                                     <div class="modal fade" id="EditFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                         <div class="modal-dialog" role="document">
+                                             <div class="modal-content">
+                                                 <div class="modal-header">
+                                                     <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; ">
+                                                         <b>แก้ไขชื่อไฟล์</b>
+                                                     </h6>
+                                                 </div>
+
+                                                 <form id="edit-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/update_qr_file/' . $arr_qr[$i]->doc_id; ?>">
+
+                                                     <div class="modal-body">
+                                                         <center>
+                                                             <input onkeyup="check_file_edit()" type="text" class="col-md-10" id="qr_name" placeholder="" name="qr_name" value="" required>
+                                                         </center>
+                                                         <br>
+                                                         <a id="edit_mss" style="display: none; color:red;" align='center'>กรุณากรอกข้อมูลใหม่</a>
+                                                         <input type="hidden" name="qr_id" id="qr_id" value="">
+                                                     </div>
+
+                                                     <div class="modal-footer">
+                                                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                                                         <input type="submit" class="btn btn-success" id="sub_edit" value="บันทึก">
+                                                     </div>
+
+                                                 </form>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <!-- End EditFile Model -->
+                                     <button type="button" id="move" class="btn btn- MoveFileModal" data-toggle="modal" data-target="#MoveFileModal" data-id="<?php echo $arr_qr[$i]->doc_id ?>" data-name="<?php echo $arr_qr[$i]->doc_name ?>" data-qr-id="<?php echo $arr_qr[$i]->qr_id ?>" data-qr-name="<?php echo $arr_qr[$i]->qr_name ?>" data-doc_fol_id="<?php echo $arr_qr[$i]->doc_fol_id ?>" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
+
+                                     <a href="#" class="deleteFileModal" data-toggle="modal" data-target="#deleteFileModal" onclick="set_delete('<?php echo $arr_doc[$i]->doc_path ?>',<?php echo $arr_doc[$i]->doc_id ?>,'<?php echo $arr_qr[$i]->doc_fol_id ?>')">
                                          <button id="delete" class="btn btn-" style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70px; ">
                                              ลบ</button></a>
+                                     <!-- deleteFile Modal -->
+                                     <div class="modal fade" id="deleteFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                         <div class="modal-dialog" role="document">
+                                             <div class="modal-content">
+                                                 <div class="modal-header">
+                                                     <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; "><b>
+                                                             ยืนยันการลบเอกสาร</b></h6>
+
+                                                 </div>
+
+                                                 <form id="delete-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/delete_file/' ?>">
+                                                     <div class="modal-body">
+
+                                                         <input type="hidden" name="doc_id" id="doc_id_delete">
+
+                                                         <input type="hidden" name="doc_path" id="doc_path_delete">
+                                                         <input type="hidden" name="doc_fol_id" id="doc_fol_id_delete">
+
+
+                                                     </div>
+                                                     <div class="modal-footer">
+                                                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                                                         <input type="submit" class="btn btn-success" value="ยืนยัน">
+                                                     </div>
+                                                 </form>
+                                             </div>
+                                         </div>
+                                     </div>
                                  </div>
                              </div>
                          </div>
@@ -333,68 +395,9 @@
                  </div>
              </div>
 
-             <!-- deleteFile Modal -->
-             <div class="modal fade" id="deleteFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                 <div class="modal-dialog" role="document">
-                     <div class="modal-content">
-                         <div class="modal-header">
-                             <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; "><b>
-                                     ยืนยันการลบเอกสาร</b></h6>
-
-                         </div>
-
-                         <form id="delete-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/delete_file/' ?>">
-                             <div class="modal-body">
-
-                                 <input type="hidden" name="doc_id" id="doc_id_delete">
-
-                                 <input type="hidden" name="doc_path" id="doc_path_delete">
 
 
 
-                             </div>
-                             <div class="modal-footer">
-                                 <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                                 <input type="submit" class="btn btn-success" value="ยืนยัน">
-                             </div>
-                         </form>
-                     </div>
-                 </div>
-             </div>
-
-             <!-- End DeleteFile Model -->
-
-             <!-- EditFile Modal -->
-             <div class="modal fade" id="EditFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                 <div class="modal-dialog" role="document">
-                     <div class="modal-content">
-                         <div class="modal-header">
-                             <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; ">
-                                 <b>แก้ไขชื่อไฟล์</b>
-                             </h6>
-                         </div>
-
-                         <form id="edit-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/update_qr_file/' . $arr_qr[$i]->doc_id; ?>">
-
-                             <div class="modal-body">
-                                 <center>
-                                     <input onkeyup="check_file_edit()" type="text" class="col-md-10" id="qr_edit" placeholder="" name="qr_name" required>
-                                 </center>
-                                 <br>
-                                 <a id="edit_mss" style="display: none; color:red;" align='center'>กรุณากรอกข้อมูลใหม่</a>
-                                 <input type="hidden" name="qr_id" id="qr_id" value="">
-                             </div>
-
-                             <div class="modal-footer">
-                                 <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                                 <input type="submit" class="btn btn-success" id="sub_edit" value="บันทึก">
-                             </div>
-
-                         </form>
-                     </div>
-                 </div>
-             </div>
-             <!-- End EditFile Model -->
 
              <!-- Card in folder -->
          <?php } else { ?>
@@ -402,7 +405,7 @@
                  <div class="col-md-4">
                      <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
                          <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
-                             <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;"><?php echo $arr_qr[$i]->qr_name ?>
+                             <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;">คิวอาร์โค้ด
                              </h>
                          </div>
                          <div class="card-body">
@@ -414,19 +417,99 @@
                                  </div>
                                  <div class="form-group col-md-4">
 
-                                     <!-- <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">วันที่สร้าง : </h5>
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"><?php echo $arr_qr[$i]->doc_datetime ?></h5> -->
 
-                                     <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิดไฟล์
-                                         : <?php echo $arr_qr[$i]->doc_type ?></h5>
+                                     <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชื่อ
+                                         : </h5>
+                                     <input type="hidden" name="doc_id" id="doc_id" value="">
+                                     <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">
+                                         <?php echo $arr_qr[$i]->qr_name ?></h5>
+
+                                     <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">วันที่สร้าง : </h5>
+                                     <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"><?php echo $arr_qr[$i]->doc_datetime ?></h5>
+
+                                     <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิด
+                                         : </h5>
+                                     <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;">
+                                         <?php echo $arr_qr[$i]->doc_type ?></h5>
 
                                      <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
-                                         รายงานสรุปผล </h5>
+                                         รายงานสรุปผล : </h5>
+
                                  </div>
                                  <div class="form-group col-md-2">
-                                     <button id="edit2" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">แก้ไข</button>
-                                     <button type="button" id="move" class="btn btn- MoveFileModal" data-toggle="modal" data-target="#MoveFileModal" data-id="<?php echo $arr_qr[$i]->doc_id ?>" data-name="<?php echo $arr_qr[$i]->doc_name ?>" data-qr-id="<?php echo $arr_qr[$i]->qr_id ?>" data-qr-name="<?php echo $arr_qr[$i]->qr_name ?>" data-doc_fol_id="<?php echo $arr_qr[$i]->doc_fol_id ?>" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; "><?php echo $arr_qr[$i]->doc_fol_id ?>ย้าย</button>
-                                     <button id="delete2" class="btn btn-" style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ลบ</button>
+
+                                     <a href="#" class="EditFileModal2" data-toggle="modal" data-target="#EditFileModal2" data-id="<?php echo $arr_qr[$i]->qr_id ?>" data-name="<?php echo $arr_qr[$i]->qr_name ?>" data-doc_fol="<?php echo $arr_qr[$i]->doc_fol_id ?>">
+                                         <button id="edit2" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70px; ">แก้ไข</button></a>
+                                     <!-- EditFile Modal -->
+                                     <div class="modal fade" id="EditFileModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                         <div class="modal-dialog" role="document">
+                                             <div class="modal-content">
+                                                 <div class="modal-header">
+                                                     <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; ">
+                                                         <b>แก้ไขชื่อไฟล์</b>
+                                                     </h6>
+                                                 </div>
+
+                                                 <form id="edit-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/update_qr_file/' . $arr_qr[$i]->doc_id; ?>">
+
+                                                     <div class="modal-body">
+                                                         <center>
+                                                             <input onkeyup="check_file_edit_in_folder()" type="text" class="col-md-10" id="qr_name" placeholder="" name="qr_name" value="" required>
+                                                         </center>
+                                                         <br>
+                                                         <a id="edit_mss" style="display: none; color:red;" align='center'>กรุณากรอกข้อมูลใหม่</a>
+                                                         <input type="hidden" name="qr_id" id="qr_id" value="">
+                                                     </div>
+
+                                                     <div class="modal-footer">
+                                                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                                                         <input type="submit" class="btn btn-success" id="sub_edit" value="บันทึก">
+                                                     </div>
+
+                                                 </form>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <!-- End EditFile Model -->
+                                     <button type="button" id="move" class="btn btn- MoveFileModal" data-toggle="modal" data-target="#MoveFileModal" data-id="<?php echo $arr_qr[$i]->doc_id ?>" data-name="<?php echo $arr_qr[$i]->doc_name ?>" data-qr-id="<?php echo $arr_qr[$i]->qr_id ?>" data-qr-name="<?php echo $arr_qr[$i]->qr_name ?>" data-doc_fol_id="<?php echo $arr_qr[$i]->doc_fol_id ?>" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
+                                     <a href="#" class="delete2FileModal" data-toggle="modal" data-target="#delete2FileModal"
+                             onclick="set_delete('<?php echo $arr_qr[$i]->doc_path ?>',<?php echo $arr_qr[$i]->doc_id ?>,'<?php echo $arr_qr[$i]->doc_fol_id ?>')">
+                             <button id="delete" class="btn btn-"
+                                 style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">
+                                 ลบ</button></a>
+                                 <!-- deleteFile Modal -->
+     <div class="modal fade" id="delete2FileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+         <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h6 class="modal-title" id="exampleModalLabel"
+                         style="font-family:TH sarabun new; font-size: 30px; "><b>
+                             ยืนยันการลบเอกสาร</b></h6>
+
+                 </div>
+
+                 <form id="delete-form" method="POST"
+                     action="<?php echo site_url() . '/Member/Member_home/delete_file/' ?>">
+                     <div class="modal-body">
+
+                         <input type="hidden" name="doc_id" id="doc_id_delete">
+
+                         <input type="hidden" name="doc_path" id="doc_path_delete">
+                         <input type="hidden" name="doc_fol_id" id="doc_fol_id_delete">
+
+
+                     </div>
+                     <div class="modal-footer">
+                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                         <input type="submit" class="btn btn-success" value="ยืนยัน">
+                     </div>
+                 </form>
+             </div>
+         </div>
+     </div>
+
+     <!-- End DeleteFile Model -->
                                  </div>
                              </div>
                          </div>
@@ -461,6 +544,8 @@
          </div>
 
          <!-- End Card in folder -->
+
+
      <?php }  ?>
 
 
@@ -599,9 +684,21 @@
          console.log(id);
          var name = $(this).attr('data-name');
          $("#qr_name").val(name);
-         document.getElementById("qr_id").value = id;
-         document.getElementById("qr_edit").value = name;
+         console.log(name);
+         var doc_fol = $(this).attr('data-doc_fol');
+         $("#doc_fol_id").val(doc_fol);
      });
+     $(document).on("click", ".EditFileModal2", function() {
+         var id = $(this).attr('data-id');
+         $("#qr_id").val(id);
+         console.log(id);
+         var name = $(this).attr('data-name');
+         $("#qr_name").val(name);
+         console.log(name);
+         var doc_fol = $(this).attr('data-doc_fol');
+         $("#doc_fol_id").val(doc_fol);
+     });
+
 
      $(document).on("click", ".deleteModal", function() {
          var id = $(this).attr('data-id');
@@ -1034,7 +1131,7 @@
          dis_button.disabled = false;
 
          var t = <?php echo json_encode($arr_qr) ?>;
-         var new_name = document.getElementById("qr_edit");
+         var new_name = document.getElementById("qr_name");
          var check_name;
          var div = document.getElementById('edit_mss');
 
@@ -1049,12 +1146,12 @@
          }
          console.log(check_name);
          if (check_name == 1) {
-             $("#qr_edit").css("border-color", "red");
+             $("#qr_name").css("border-color", "red");
              div.style.display = "block";
              dis_button.disabled = true;
 
          } else {
-             $("#qr_edit").css("border-color", "green");
+             $("#qr_name").css("border-color", "green");
              div.style.display = "none";
              dis_button.disabled = false;
 
@@ -1062,11 +1159,46 @@
          console.log(document.getElementById('edit'));
      }
 
-     function set_delete(path, id) {
-         $('#doc_path_delete').val(path);
-         $('#doc_id_delete').val(id);
+     function check_file_edit_in_folder() {
 
+         var dis_button = document.getElementById('sub_edit');
+         dis_button.disabled = false;
+
+         var t = <?php echo json_encode($arr_qr) ?>;
+         var new_name = document.getElementById("qr_name");
+         var check_name;
+         var div = document.getElementById('edit_mss');
+
+
+         for (let x in t) {
+             if (t[x].qr_name == new_name.value || new_name.value == " ") {
+                 check_name = 1;
+                 break;
+             } else {
+                 check_name = 0;
+             }
+         }
+         console.log(check_name);
+         if (check_name == 1) {
+             $("#qr_name").css("border-color", "red");
+             div.style.display = "block";
+             dis_button.disabled = true;
+
+         } else {
+             $("#qr_name").css("border-color", "green");
+             div.style.display = "none";
+             dis_button.disabled = false;
+
+         }
+         console.log(document.getElementById('edit2'));
      }
+
+     function set_delete(path, id, doc_fol_id) {
+    $('#doc_path_delete').val(path);
+    $('#doc_id_delete').val(id);
+    $('#doc_fol_id_delete').val(doc_fol_id);
+
+}
 
 
      document.getElementById("download").addEventListener("click", function() {

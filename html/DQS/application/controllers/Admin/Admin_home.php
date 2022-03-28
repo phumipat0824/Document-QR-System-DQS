@@ -128,18 +128,35 @@ class Admin_home extends DQS_controller
 
     public function delete_file(){
         $this->load->model('M_DQS_document','MDD');
-		$path = substr($this->input->post('doc_path'),1);
-		unlink(getcwd().$path);
-		$this->MDD->doc_id = $this->input->post('doc_id');
-		$data['qr'] = $this->MDD->get_by_qr_id($this->MDD->doc_id)->result();
-		$qr_id = $data['qr'][0]->qr_id;
-		$path_qr = substr($data['qr'][0]->qr_path,1);
-		unlink(getcwd().$path_qr);
+        $path = substr($this->input->post('doc_path'),1);
+        unlink(getcwd().$path);
+        $this->MDD->doc_id = $this->input->post('doc_id');
+        $data['qr'] = $this->MDD->get_by_qr_id($this->MDD->doc_id)->result();
+        // $data['doc'] = $this->MDD->get_by_doc($this->MDD->doc_id)->result();
+        $qr_id = $data['qr'][0]->qr_id;
+        $path_qr = substr($data['qr'][0]->qr_path,1);
+        unlink(getcwd().$path_qr);
         $this->MDD->delete_qr_file($qr_id);
         $this->MDD->delete_file();
 
-        redirect('/Admin/Admin_home/show_admin_home');
-        
+        if($this->session->userdata('mem_role') == 1){
+            if($this->input->post('doc_fol_id') != 0){
+                redirect('Admin/Admin_home/show_admin_in_folder/' . $this->input->post('doc_fol_id'));
+            }
+            else{
+                redirect('Admin/Admin_home/show_admin_home/');
+            }
+        }else{
+            if($this->input->post('doc_fol_id') != 0){
+                redirect('Member/Member_home/show_in_folder/' . $this->input->post('doc_fol_id'));
+            }
+            else{
+                redirect('Member/Member_home/show_member_home/');
+            }
+        }
+        // redirect('/Admin/Admin_home/show_admin_home');
+
+
     }
 
     function delete_file_folder()
