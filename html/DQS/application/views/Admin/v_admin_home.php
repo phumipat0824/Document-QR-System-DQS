@@ -5,7 +5,8 @@
                 * @author Pongthorn
                 * @Create Date 2565-13-01
 */ -->
- <link href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/css/dqs_right_click_menu.css" rel="stylesheet" />
+ <link href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/css/dqs_right_click_menu.css"
+     rel="stylesheet" />
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
  <?php $this->session->set_userdata('fol_id_new', ''); ?>
  <?php $this->session->set_userdata('path_new', ''); ?>
@@ -18,18 +19,22 @@
          </div>
          <div class="col-md-4">
              <div class="dropdown">
-                 <button onmousedown="rightclick()" class="dropbtn btn btn-round" style=" width: 145px; background-color: #F5F5F5 ; border: none;">
-                     <h1 style="font-weight: 900; color:#003399 ; font-size: 50px; font-family:TH Sarabun New; height: 40; width: 50px;" id="button-folder">+ สร้าง</h1>
+                 <button onmousedown="rightclick()" class="dropbtn btn btn-round"
+                     style=" width: 145px; background-color: #F5F5F5 ; border: none;">
+                     <h1 style="font-weight: 900; color:#003399 ; font-size: 50px; font-family:TH Sarabun New; height: 40; width: 50px;"
+                         id="button-folder">+ สร้าง</h1>
                  </button>
                  <div id="myDropdown" class="dropdown-content">
                      <div class="custom-cm__item" data-toggle="modal" data-target="#exampleModal"><a>สร้างโฟลเดอร์</a>
                      </div>
                      <?php if ($this->session->userdata('fol_id') == null) { ?>
-                         <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_admin_upload_file/'; ?>">อัปโหลดไฟล์</a>
-                         </div>
+                     <div class="custom-cm__item"><a
+                             href="<?php echo site_url() . '/Member/Member_upload_file/show_admin_upload_file/'; ?>">อัปโหลดไฟล์</a>
+                     </div>
                      <?php } else { ?>
-                         <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_admin_upload_file_in_floder/' . $this->session->userdata('fol_id'); ?>">อัปโหลดไฟล์</a>
-                         </div>
+                     <div class="custom-cm__item"><a
+                             href="<?php echo site_url() . '/Member/Member_upload_file/show_admin_upload_file_in_floder/' . $this->session->userdata('fol_id'); ?>">อัปโหลดไฟล์</a>
+                     </div>
                      <?php } ?>
                  </div>
              </div>
@@ -37,12 +42,16 @@
          <div>
              <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 
-                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" style="color:#707070; font-weight: 900; font-family:TH Sarabun New; font-size: 25px;" href="<?php echo site_url() . '/Admin/Admin_home/show_admin_home'; ?>">หน้าหลัก</a></li>
+                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
+                         style="color:#707070; font-weight: 900; font-family:TH Sarabun New; font-size: 25px;"
+                         href="<?php echo site_url() . '/Admin/Admin_home/show_admin_home'; ?>">หน้าหลัก</a></li>
                  <?php for ($i = 0; $i < count($path_fol); $i++) { ?>
-                     <?php if ($path_fol[$i] != '@') { ?>
-                         <li class="breadcrumb-item text-sm text-dark active" style="font-size: 20px;"><a class="opacity-5 text-dark" style="color:#707070;  font-weight: 900; font-family:TH Sarabun New; font-size: 25px;"><?php echo $path_fol[$i] ?></a>
-                         </li>
-                     <?php } ?>
+                 <?php if ($path_fol[$i] != '@') { ?>
+                 <li class="breadcrumb-item text-sm text-dark active" style="font-size: 20px;"><a
+                         class="opacity-5 text-dark"
+                         style="color:#707070;  font-weight: 900; font-family:TH Sarabun New; font-size: 25px;"><?php echo $path_fol[$i] ?></a>
+                 </li>
+                 <?php } ?>
                  <?php } ?>
              </ol>
          </div>
@@ -57,28 +66,38 @@
 
              <div class="col-3">
 
-                 <div class="dropdown">
-                     <?php if ($arr_fol[$i]->fol_name == 'เอกสารราชการ') { ?>
-                         <!--  โฟลเดอร์พิเศษ -->
-                         <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" style=" background-color:#a19078; border: 2px solid #876a43; height: 60px; width: 300px;">
-                             <img src="<?php echo base_url() . '/assets/image/foldersecurity.png' ?>" height="35" width="35" style="margin-left: -20px;">
-                             <a style=" font-size: 26px; font-weight:900; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
-                         </button>
-                         <div id="showmenu" style="display:block">
-                             <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
-                                 <a href="<?php echo site_url() . '/Admin/Admin_home/show_admin_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
+             <div class="dropdown">
+                 <?php if ($arr_fol[$i]->fol_name == 'เอกสารราชการ') { ?>
+                 <!--  โฟลเดอร์พิเศษ -->
+                 <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)"
+                     class="dropbtn btn btn-secondary btn-lg"
+                     style=" background-color:#a19078; border: 2px solid #876a43; height: 60px; width: 300px;">
+                     <img src="<?php echo base_url() . '/assets/image/foldersecurity.png' ?>" height="35" width="35"
+                         style="margin-left: -20px;">
+                     <a style=" font-size: 26px; font-weight:900; font-family:TH Sarabun New; margin-right: 300px;"
+                         class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
+                 </button>
+                 <div id="showmenu" style="display:block">
+                     <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
+                         <a
+                             href="<?php echo site_url() . '/Admin/Admin_home/show_admin_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
 
-                             </div>
-                         </div>
-                     <?php } else if ($arr_fol[$i]->fol_name == 'เอกสารการประชุม') { ?>
-                         <!--  โฟลเดอร์พิเศษ -->
-                         <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" style=" background-color:#4876d3; border: 2px solid #002b83; height: 60px; width: 300px;">
-                             <img src="<?php echo base_url() . '/assets/image/foldersecurity.png' ?>" height="35" width="35" style="margin-left: -20px;">
-                             <a style=" font-size: 26px; font-weight:900; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
-                         </button>
-                         <div id="showmenu" style="display:block">
-                             <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
-                                 <a href="<?php echo site_url() . '/Admin/Admin_home/show_admin_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
+                     </div>
+                 </div>
+                 <?php } else if ($arr_fol[$i]->fol_name == 'เอกสารการประชุม') { ?>
+                 <!--  โฟลเดอร์พิเศษ -->
+                 <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)"
+                     class="dropbtn btn btn-secondary btn-lg"
+                     style=" background-color:#4876d3; border: 2px solid #002b83; height: 60px; width: 300px;">
+                     <img src="<?php echo base_url() . '/assets/image/foldersecurity.png' ?>" height="35" width="35"
+                         style="margin-left: -20px;">
+                     <a style=" font-size: 26px; font-weight:900; font-family:TH Sarabun New; margin-right: 300px;"
+                         class="menu"><?php echo $arr_fol[$i]->fol_name ?></a>
+                 </button>
+                 <div id="showmenu" style="display:block">
+                     <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
+                         <a
+                             href="<?php echo site_url() . '/Admin/Admin_home/show_admin_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
 
                              </div>
                          </div>
@@ -101,19 +120,29 @@
                             }
                             ?>
 
-                         <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)" class="dropbtn btn btn-secondary btn-lg" data-placement="bottom" title="<?php echo $arr_fol[$i]->fol_name ?>" style=" background-color:#ffff; border: 2px solid#c7c6c4; height: 60px; width: 300px;">
-                             <i class="material-icons" style="margin-left: -20px; font-size:30px;  color:#f3ff41;">folder</i>
-                             <a style=" font-size: 26px; font-weight:900; font-family:TH Sarabun New; margin-right: 300px;" class="menu"><?php echo  $sub_name_folder ?></a>
-                         </button>
-                         <div id="showmenu" style="display:block">
-                             <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
-                                 <a href="<?php echo site_url() . '/Admin/Admin_home/show_admin_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
-                                 <a href="#" class="editModal" data-toggle="modal" data-target="#editModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">แก้ไข</a>
-                                 <a href="#" class="moveModal" data-toggle="modal" data-target="#moveModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">ย้าย</a>
-                                 <a href="#" class="deleteModal" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>">ลบ</a>
-                             </div>
-                         </div>
-                     <?php } ?>
+                 <button onmousedown="rightclickfolder(<?php echo $arr_fol[$i]->fol_id ?>)"
+                     class="dropbtn btn btn-secondary btn-lg" data-placement="bottom"
+                     title="<?php echo $arr_fol[$i]->fol_name ?>"
+                     style=" background-color:#ffff; border: 2px solid#c7c6c4; height: 60px; width: 300px;">
+                     <i class="material-icons" style="margin-left: -20px; font-size:30px;  color:#f3ff41;">folder</i>
+                     <a style=" font-size: 26px; font-weight:900; font-family:TH Sarabun New; margin-right: 300px;"
+                         class="menu"><?php echo  $sub_name_folder ?></a>
+                 </button>
+                 <div id="showmenu" style="display:block">
+                     <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
+                         <a
+                             href="<?php echo site_url() . '/Admin/Admin_home/show_admin_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
+                         <a href="#" class="editModal" data-toggle="modal" data-target="#editModal"
+                             data-id="<?php echo $arr_fol[$i]->fol_id ?>"
+                             data-name="<?php echo $arr_fol[$i]->fol_name ?>">แก้ไข</a>
+                         <a href="#" class="moveModal" data-toggle="modal" data-target="#moveModal"
+                             data-id="<?php echo $arr_fol[$i]->fol_id ?>"
+                             data-name="<?php echo $arr_fol[$i]->fol_name ?>">ย้าย</a>
+                         <a href="#" class="deleteModal" data-toggle="modal" data-target="#deleteModal"
+                             data-id="<?php echo $arr_fol[$i]->fol_id ?>">ลบ</a>
+                     </div>
+                 </div>
+                 <?php } ?>
 
                  </div>
              </div>
@@ -126,25 +155,31 @@
     * @author Pongthorn
     * @Create Date 2565-13-01
 */ -->
-         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
              <div class="modal-dialog" role="document">
                  <div class="modal-content">
                      <div class="modal-header">
-                         <h1 class="modal-title" id="exampleModalLabel" style="font-weight: 900;font-size: 36px; font-family:TH Sarabun New;">โฟลเดอร์ใหม่</h1>
+                         <h1 class="modal-title" id="exampleModalLabel"
+                             style="font-weight: 900;font-size: 36px; font-family:TH Sarabun New;">โฟลเดอร์ใหม่</h1>
                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                              <span aria-hidden="true">&times;</span>
                          </button>
                      </div>
-                     <form method="POST" name="form" action="<?php echo site_url() . '/Folder/Folder_management/insert_folder'; ?>">
+                     <form method="POST" name="form"
+                         action="<?php echo site_url() . '/Folder/Folder_management/insert_folder'; ?>">
                          <div class="modal-body">
-                             <center><input style="font-size: 25px;font-family:TH Sarabun New; " id="fol_name" type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name" required></center><br>
+                             <center><input style="font-size: 25px;font-family:TH Sarabun New; " id="fol_name"
+                                     type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name"
+                                     required></center><br>
                              <a id="target_div" style="display: none; color:red;" align='center'>ชื่อโฟลเดอร์ซ้ำ
                                  กรุณากรอกใหม่</a>
 
                          </div>
                          <div class="modal-footer">
 
-                             <input type="hidden" value="<?php echo $arr_fol[0]->fol_location_id ?>" name="fol_location_id"></input>
+                             <input type="hidden" value="<?php echo $arr_fol[0]->fol_location_id ?>"
+                                 name="fol_location_id"></input>
 
                              <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                              <input type="submit" class="btn btn-success" id="create" value="สร้าง">
@@ -163,7 +198,8 @@
 */ -->
 
          <!-- delete Modal -->
-         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
              <div class="modal-dialog" role="document">
                  <div class="modal-content">
                      <div class="modal-header">
@@ -171,11 +207,13 @@
 
                      </div>
 
-                     <form id="delete-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/delete_folder/'; ?>">
+                     <form id="delete-form" method="POST"
+                         action="<?php echo site_url() . '/Folder/Folder_management/delete_folder/'; ?>">
                          <div class="modal-body">
                              <input type="hidden" name="fol_id" id="fol_id" value="">
 
-                             <input type="hidden" name="fol_location_id" id="fol_location_id" value="<?php echo $arr_fol[0]->fol_location_id; ?>">
+                             <input type="hidden" name="fol_location_id" id="fol_location_id"
+                                 value="<?php echo $arr_fol[0]->fol_location_id; ?>">
                          </div>
                          <div class="modal-footer">
                              <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
@@ -195,20 +233,24 @@
     * @Create Date 2565-13-01
 */ -->
          <!-- edit Modal -->
-         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
              <div class="modal-dialog" role="document">
                  <div class="modal-content">
                      <div class="modal-header">
                          <h5 class="modal-title" id="exampleModalLabel">แก้ไขชื่อโฟลเดอร์</h5>
 
                      </div>
-                     <form id="edit-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/update_folder/'; ?>">
+                     <form id="edit-form" method="POST"
+                         action="<?php echo site_url() . '/Folder/Folder_management/update_folder/'; ?>">
                          <div class="modal-body">
-                             <center><input onkeyup="check_fol_edit()" type="text" class="col-md-10" id="fol_edit" placeholder="" name="fol_name" required></center>
+                             <center><input onkeyup="check_fol_edit()" type="text" class="col-md-10" id="fol_edit"
+                                     placeholder="" name="fol_name" required></center>
                              <br>
                              <a id="edit_mss" style="display: none; color:red;" align='center'>กรุณากรอกข้อมูลใหม่</a>
                              <input type="hidden" name="fol_id" id="folder_id" value="">
-                             <input type="hidden" name="fol_location_id" id="fol_location_id" value="<?php echo $arr_fol[0]->fol_location_id; ?>">
+                             <input type="hidden" name="fol_location_id" id="fol_location_id"
+                                 value="<?php echo $arr_fol[0]->fol_location_id; ?>">
                          </div>
                          <div class="modal-footer">
                              <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
@@ -228,28 +270,18 @@
     * @Create Date 2565-13-01
 */ -->
          <!-- start move Modal -->
-         <div class="modal fade" id="moveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal fade" id="moveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
              <div class="modal-dialog" role="document">
                  <div class="modal-content">
                      <div class="modal-header">
                          <h5 class="modal-title" id="exampleModalLabel">ย้ายไปที่</h5>
                      </div>
-                     <form id="move-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/move_folder/'; ?>">
+                     <form id="move-form" method="POST"
+                         action="<?php echo site_url() . '/Folder/Folder_management/move_folder/'; ?>">
                          <div class="modal-body">
-
                              <!-- dropdown folder name -->
-
-                             <select name="fol_location_id" id="fol_location_id" class="form-select" aria-label="Default select example" placeholder="" required>
-                                 <option value="" disabled selected hidden>เลือกโฟลเดอร์</option>
-                                 <option value='0'>หน้าหลัก</option>
-                                 <?php for ($i = 0; $i < count($arr_folder); $i++) {   ?>
-                                     <?php if ($arr_folder[$i]->fol_mem_id == $this->session->userdata('mem_id')) { ?>
-                                         <option value='<?php echo $arr_folder[$i]->fol_id ?>'>
-                                             <?php echo $arr_folder[$i]->fol_name ?></option>
-                                     <?php } ?>
-                                 <?php } ?>
-                             </select><br>
-
+                             <div id="select_move"></div>
                          </div>
                          <div class="modal-footer">
                              <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
@@ -508,7 +540,6 @@
                      <input type="hidden" name="doc_fol_id" id="doc_fol_id_delete">
 
 
-
                  </div>
                  <div class="modal-footer">
                      <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
@@ -598,6 +629,17 @@
  </div>
  <!-- End move file modal -->
 
+
+                 </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                     <input type="submit" class="btn btn-success" value="ยืนยัน">
+                 </div>
+             </form>
+         </div>
+     </div>
+ </div>
+ <!-- EndDetele -->
 
 
  <script>
@@ -1000,7 +1042,36 @@ $('#doc_fol_id_delete').val(doc_fol_id);
 
  <!-- EditFile Script -->
  <script>
-     <?php $this->session->set_userdata('qr_id', ''); ?>
+    
+function rightclickfolder(folder) {
+    var rightclick;
+    var e = window.event;
+    var getnamefolder = 'folder' + folder;
+    var x = document.getElementById("showmenu");
+
+    if (e.button == 2) {
+        document.getElementById(getnamefolder).classList.toggle("show");
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (x.style.display === "block") {
+                    x.style.display = "none";
+                } else {
+                    x.style.display = "block";
+                }
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+
+}
+
+$(document).ready(function() {
+    <?php $this->session->set_userdata('qr_id', ''); ?>
      <?php $this->session->set_userdata('path', ''); ?>
      $(document).on("keyup", "#qr_name", function() {
          var t = <?php echo json_encode($arr_doc) ?>;
@@ -1008,6 +1079,12 @@ $('#doc_fol_id_delete').val(doc_fol_id);
          var check_name;
          var div = document.getElementById('target_div');
          var dis_button = document.getElementById('create');
+    $('.dropdown-submenu a.test').on("click", function(e) {
+        $(this).next('ul').toggle();
+        e.stopPropagation();
+        e.preventDefault();
+    });
+});
 
          for (let x in t) {
              if (t[x].doc_name == new_name.value) {
@@ -1032,6 +1109,199 @@ $('#doc_fol_id_delete').val(doc_fol_id);
      });
 
      
+function set_delete(path, id, doc_fol_id) {
+
+    $('#doc_path_delete').val(path);
+    $('#doc_id_delete').val(id);
+    $('#doc_fol_id_delete').val(doc_fol_id);
+    // console.log(doc_fol_id);
+
+}
+ </script>
+
+ <!-- Move Folder Script -->
+ <script>
+$(document).on("click", ".moveModal", function() {
+    var fol_id = $(this).attr('data-id');
+    $("#fol_id").val(fol_id);
+    var name = $(this).attr('data-name');
+    $("#fol_name").val(name);
+    var x = document.getElementById("fold_id").value = fol_id;
+    document.getElementById("folder_name").value = name;
+
+    $.ajax({
+        type: 'post',
+        url: '<?php echo site_url() . 'Folder/Folder_management/get_dropdown_data_ajax'; ?>',
+        data: {
+            'fol_id': fol_id
+        },
+        dataType: 'json',
+        success: function(json_data) {
+            console.log(json_data);
+
+            //สร้าง select รอไว้ แล้วค่อยใส่ option ทีหลัง
+            let html_select =
+                "<select name='fol_location_id' id='folder_location_id' class='form-select' aria-label='Default select example' placeholder='เลือกโฟลเดอร์' required>'</select>";
+            $('#select_move').html(html_select);
+            let html_option = '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
+            $('#folder_location_id').html(html_option);
+
+            let obj_level = json_data['arr_level'];
+            let current_path = json_data['current_path'];
+
+
+            if (obj_level[1].length == 0) {
+
+                //กรณีไม่มีข้อมูล
+                html_option = ' <option value="none">ไม่พบข้อมูล</option>';
+                $('#folder_location_id').html(html_option);
+            } //if
+            else {
+                // html_option = '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
+                // $('#folder_location_id').prepend(html_option);
+                //กรณีมีข้อมูล
+
+                let max_level = Object.keys(obj_level).length;
+                let prefix = '&nbsp'; //สัญลักษณ์ข้างหน้าแต่ละ level
+
+                for (level = 1; level <= max_level; level++) {
+
+                    if (level == 1) {
+                        html_option =
+                            '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
+                        for (i = 0; i < obj_level[level].length; i++) {
+
+                            //ลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้
+                            let disable = '';
+                            if (obj_level[level][i]["fol_location"].includes(current_path + '/') ||
+                                obj_level[level][i]["fol_location"] == current_path) {
+                                disable = ' disabled ';
+                            } //if
+
+                            html_option += '<option ' + disable + ' id="fol_' + obj_level[level][i][
+                                "fol_id"
+                            ] + '" value="' + obj_level[level][i]["fol_id"] + '">';
+                            html_option += obj_level[level][i]["fol_name"];
+                            html_option += '</option>';
+
+                        } //for
+
+                        $('#folder_location_id').html(html_option);
+                    } //if
+                    else {
+                        if (level == 2) {
+                            let disable = '';
+                            if (json_data['is_level_1'] == true) {
+                                disable = ' disabled  hidden ';
+                            } //if
+
+                            html_option = '<option value="0"' + disable + ' > หน้าหลัก</option>';
+                            $('#folder_location_id').prepend(html_option);
+                        } //if
+
+                        prefix = prefix + '&nbsp' + '&nbsp' + '-';
+
+                        //แทรกลูกหลังจากตำแหล่งแม่ (ทำจากหลังมาหน้า ลำดับจะไม่เพี้ยน)
+                        for (i = obj_level[level].length - 1; i >= 0; i--) {
+
+                            //ลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้
+                            let disable = '';
+                            if (obj_level[level][i]["fol_location"].includes(current_path + '/') ||
+                                obj_level[level][i]["fol_location"] == current_path) {
+                                disable = ' disabled ';
+                            } //if
+
+                            html_option = '';
+                            html_option += '<option ' + disable + ' id="fol_' + obj_level[level][i][
+                                "fol_id"
+                            ] + '" value="' + obj_level[level][i]["fol_id"] + '">';
+                            html_option += prefix + ' ' + obj_level[level][i]["fol_name"];
+                            html_option += '</option>';
+
+
+                            //แทรกโค้ดลูก หลังจากตำแหล่งโค้ดแม่
+                            var tag_parent = document.getElementById('fol_' + obj_level[level][i][
+                                "fol_location_id"
+                            ]);
+                            tag_parent.insertAdjacentHTML('afterend', html_option);
+                        } //for
+                    } //else
+
+                } //for
+
+            } //else
+        }
+    }); //ajax
+}); //get_dropdown_data
+ </script>
+
+ </script>
+ <!-- EditFile Script -->
+ <script>
+<?php $this->session->set_userdata('qr_id', ''); ?>
+<?php $this->session->set_userdata('path', ''); ?>
+$(document).on("keyup", "#qr_name", function() {
+    var t = <?php echo json_encode($arr_doc) ?>;
+    var new_name = document.getElementById("qr_name");
+    var check_name;
+    var div = document.getElementById('target_div');
+    var dis_button = document.getElementById('create');
+
+    for (let x in t) {
+        if (t[x].doc_name == new_name.value) {
+            check_name = 1;
+            break;
+        } else {
+            check_name = 0;
+        }
+    }
+    console.log(check_name);
+    if (check_name == 1) {
+        $("#qr_name").css("border-color", "red");
+        div.style.display = "block";
+        dis_button.disabled = true;
+
+    } else {
+        $("#qr_name").css("border-color", "green");
+        div.style.display = "none";
+        dis_button.disabled = false;
+
+    }
+});
+
+function check_file_edit() {
+
+    var dis_button = document.getElementById('sub_edit');
+    dis_button.disabled = false;
+
+    var t = <?php echo json_encode($arr_qr) ?>;
+    var new_name = document.getElementById("qr_edit");
+    var check_name;
+    var div = document.getElementById('edit_mss');
+
+
+    for (let x in t) {
+        if (t[x].qr_name == new_name.value || new_name.value == " ") {
+            check_name = 1;
+            break;
+        } else {
+            check_name = 0;
+        }
+    }
+    console.log(check_name);
+    if (check_name == 1) {
+        $("#qr_edit").css("border-color", "red");
+        div.style.display = "block";
+        dis_button.disabled = true;
+
+    } else {
+        $("#qr_edit").css("border-color", "green");
+        div.style.display = "none";
+        dis_button.disabled = false;
+
+    }
+    console.log(document.getElementById('edit'));
+}
 
      document.getElementById("download").addEventListener("click", function() {
 

@@ -161,7 +161,7 @@ class Admin_home extends DQS_controller
 
     function delete_file_folder()
     {
-         $this->load->model('M_DQS_document','MDD');
+        $this->load->model('M_DQS_document','MDD');
 		$path = substr($this->input->post('doc_path'),1);
 		unlink(getcwd().$path);
 		$this->MDD->doc_id = $this->input->post('doc_id');

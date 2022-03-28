@@ -9,7 +9,9 @@ class Member_report extends DQS_controller
 
     public function show_member_report()
     {
-        $this->output_sidebar_member("Member/v_member_report");
+        $this->load->model('M_DQS_qrcode','mqr');
+        $data['arr_qr_code'] = $this->mqr->get_all()->result();
+        $this->output_sidebar_member("Member/v_member_report" ,$data);
     }
 
 }
