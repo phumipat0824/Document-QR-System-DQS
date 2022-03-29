@@ -21,10 +21,10 @@ class Da_DQS_department extends DQS_model
 	// 	* @input -
 	// 	* @output -
 	// 	* @author Kiattisak
-    public function insert()
+    public function insert($dep_name)
 	{
 		$sql = "INSERT INTO {$this->db_name}.DQS_Department(dep_name) 
-                VALUES (?)";
+                VALUES ('$dep_name')";
         $this->db->query($sql, array($this->dep_name));
 	}//insert
 

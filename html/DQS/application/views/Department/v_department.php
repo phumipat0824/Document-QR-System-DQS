@@ -177,8 +177,7 @@ function make_dataTable_byId(id_name) {
       <!-- action="<?php echo site_url() ?>/Department/Department_list/add_department" -->
       <form id="add-form" method="POST" onsubmit="return false">
         <div class="modal-body">
-            <center><input type="text" class="col-md-10" placeholder="กรอกชื่อหน่วยงาน" name="dep_name" required ></center>
-            <!-- <input type="hidden" name="station_status" value="1"> -->
+            <center><input type="text" class="col-md-10" placeholder="กรอกชื่อหน่วยงาน" id="dep_name" name="dep_name" value="" required ></center>
             <br>
             <label style = "color: #FF0000;"><span id ="text_confirm_add"></span></label>
         </div>
@@ -200,7 +199,9 @@ function make_dataTable_byId(id_name) {
     $.ajax({
         type: 'post',
         url: "<?php echo site_url().'/Department/Department_list/add_department'?>",
-        data: $( "#add-form" ).serialize(),
+        data: {
+          dep_name: $('#dep_name').val(),
+            },
         dataType: 'json',
         success: function(data) {
               // console.log("succ");
@@ -209,7 +210,7 @@ function make_dataTable_byId(id_name) {
         },
         error: function (error) {
           // console.log("error");
-          location.reload();
+          // location.reload();
         }
     });
   });
