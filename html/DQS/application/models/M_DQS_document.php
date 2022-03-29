@@ -86,8 +86,8 @@ class M_DQS_document extends Da_DQS_document {
         $sql = "SELECT * 
         FROM {$this->db_name}.DQS_Qrcode AS qr
         LEFT JOIN {$this->db_name}.DQS_Document AS document
-        ON qr.qr_name = document.doc_name
-        WHERE qr_mem_id = $qr_mem_id ";
+        ON qr.qr_name = document.doc_name 
+        WHERE qr_mem_id = $qr_mem_id AND doc_mem_id = $qr_mem_id";
         $query = $this->db->query($sql);
         return $query;
     }
