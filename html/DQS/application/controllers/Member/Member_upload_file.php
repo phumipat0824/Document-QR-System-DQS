@@ -539,6 +539,24 @@ class Member_upload_file extends DQS_controller
 	* @Create Date 2565-02-18
 	*/	
 
+	public function add_count_download(){
+		$this->load->model('M_DQS_qrcode','mqr');
+		$data = $this->mqr->get_qr_download()->result();
+		if($data->qr_download == NULL){
+			$this->mqr->qr_download = 1;
+			$this->mqr->qr_name = $this->input->post('doc_name');
+			$this->mqr->add_count_download();
+			echo json_encode(true);
+		}else if($data->qr_download != NULL){
+			$this->mqr->qr_download = $data->qr_download + 1;
+			$this->mqr->qr_name = $this->input->post('doc_name');
+			$this->mqr->add_count_download();
+			echo json_encode(true);
+		}else{
+			echo json_encode(false);
+		}
+	}
+
 	public function upload_qrcode_image_in_folder()
 	{ //Update department into database
 
