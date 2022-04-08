@@ -109,9 +109,10 @@ class M_DQS_qrcode extends Da_DQS_qrcode
         return $query;
     }
 
-    public function get_all(){
+    public function get_by_user_id($mem_id){
         $sql = "SELECT * 
-        FROM {$this->db_name}.DQS_Document";
+        FROM {$this->db_name}.DQS_Document
+        WHERE DQS_Document.doc_mem_id  = $mem_id";
         $query = $this->db->query($sql);
         return $query;
     }
