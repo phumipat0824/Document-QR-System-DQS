@@ -264,7 +264,7 @@
      <?php if ($this->session->userdata('fol_id') == null) { ?>
      <?php if ($arr_qr[$i]->doc_fol_id == null) { ?>
      <div class="col-md-4">
-         <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px; width:500;">
+         <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
              <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
                  <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;"><?php echo $arr_qr[$i]->qr_name ?>
                  </h>
