@@ -363,17 +363,22 @@ class Folder_management extends DQS_controller {
         //===========================================================================
 
         $data['arr_level'] = $arr_level;
+		if($fol_id != 0){
+			$arr_current_folder = $this->fol->get_folder_by_id($fol_id)->result();
 		
-        $arr_current_folder = $this->fol->get_folder_by_id($fol_id)->result();
-		
-        $data['current_path'] = $arr_current_folder[0]->fol_location;
-
-		// $data['arr_folder'] = $this->fol->get_mem_folder($fol_mem_id)->result();
-		if($arr_current_folder[0]->fol_location_id == 0){
-			$data['is_level_1'] = true;
+			$data['current_path'] = $arr_current_folder[0]->fol_location;
+	
+			// $data['arr_folder'] = $this->fol->get_mem_folder($fol_mem_id)->result();
+			if($arr_current_folder[0]->fol_location_id == 0){
+				$data['is_level_1'] = true;
+			}else{
+					$data['is_level_1'] = false;
+			}
 		}else{
-				$data['is_level_1'] = false;
+			$data['current_path'] = 'home';
+			$data['is_level_1'] = true;
 		}
+        
 
         echo json_encode($data);
 
