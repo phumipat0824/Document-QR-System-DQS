@@ -714,7 +714,10 @@ function set_delete(path, id, fol_id) {
 
 document.getElementById("download").addEventListener("click", function() {
 
-    html2canvas(document.querySelector('#capture')).then(function(canvas) {
+    const note = document.querySelector('#qr_path');
+    note.style.border = '10px solid #fff';
+
+    html2canvas(document.querySelector('#qr_path')).then(function(canvas) {
 
         saveAs(canvas.toDataURL(), 'DQS_QR.png');
     });

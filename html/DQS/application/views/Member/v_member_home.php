@@ -960,7 +960,7 @@ $(document).ready(function() {
  <!-- Move Folder Script -->
 
  <script>
-alert('555');
+// alert('555');
 // $(document).on("click", ".moveModal", function() {
 function createDropdown(type) {
 
@@ -1235,7 +1235,10 @@ function set_delete(path, id, doc_fol_id) {
 
 document.getElementById("download").addEventListener("click", function() {
 
-    html2canvas(document.querySelector('#capture')).then(function(canvas) {
+    const note = document.querySelector('#qr_path');
+    note.style.border = '10px solid #fff';
+
+    html2canvas(document.querySelector('#qr_path')).then(function(canvas) {
 
         saveAs(canvas.toDataURL(), 'DQS_QR.png');
     });
