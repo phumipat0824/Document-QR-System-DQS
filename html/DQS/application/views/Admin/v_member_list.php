@@ -228,8 +228,8 @@
                 showCancelButton: true,
                 confirmButtonColor: '#518FF6',
                 cancelButtonColor: '#fffff',
-                confirmButtonColor: '#198754',
-                cancelButtonColor: '#f44336',
+                confirmButtonColor: 'green',
+                cancelButtonColor: 'red',
                 cancelButtonText: 'ยกเลิก',
                 confirmButtonText: 'บันทึก'
 
