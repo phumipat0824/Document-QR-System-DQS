@@ -129,6 +129,7 @@ public function insert_member()
             $path_in_fol_home = $newpath . '/Home'.'/';  
             $path_in_fol_service = $newpath . '/เอกสารราชการ'.'/';
             $path_in_fol_meeting = $newpath . '/เอกสารการประชุม'.'/';
+
             $get_address = './assets/user/';
             $create_folder_user = $this->session->userdata('mem_username');
             $path_new = $get_address . '/';
@@ -169,15 +170,16 @@ public function insert_member()
             }
             for($i = 0 ; $i < 2;$i++){
                     if($i == 0){
+                        
                         $this->folder->fol_name = 'เอกสารราชการ';
-                        $this->folder->fol_location = $path_new.'เอกสารราชการ';
+                        $this->folder->fol_location = $newpath . '/เอกสารราชการ';
                         $this->folder->fol_mem_id = $data[0]->mem_id;
                         $this->folder->fol_location_id = 0;
                         $this->folder->insert();
                     }
                     else{
                         $this->folder->fol_name = 'เอกสารการประชุม';
-                        $this->folder->fol_location = $path_new.'เอกสารการประชุม';
+                        $this->folder->fol_location = $newpath . '/เอกสารการประชุม';
                         $this->folder->fol_mem_id = $data[0]->mem_id ;
                         $this->folder->fol_location_id = 0;
                         $this->folder->insert();
@@ -197,7 +199,6 @@ public function insert_member()
     */
     public function insert_session()
     {
-        
         $this->load->model('M_DQS_province', 'MDP');
         $this->load->model('M_DQS_department', 'MDD');
         //session
