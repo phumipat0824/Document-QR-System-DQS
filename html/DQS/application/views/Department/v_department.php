@@ -7,10 +7,16 @@
  -->
 <!-- load plugin data table -->
 <style>
-  body {font-family:TH Sarabun New;}
-  table {font-family:TH Sarabun New;}
-  table tr {font-family:TH Sarabun New;}
-  table tr td{font-family:TH Sarabun New;}
+  body {
+    font-family:TH Sarabun New;
+  }
+  /* table {
+    font-family:TH Sarabun New;
+  } */
+  table tr td{
+    font-family:TH Sarabun New;
+    font-size: 30px;
+    }
 </style>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'assets/plugin' ?>/DataTables/datatables.css"/>
 <script type="text/javascript" src="<?php echo base_url() . 'assets/plugin' ?>/DataTables/datatables.js"></script>
