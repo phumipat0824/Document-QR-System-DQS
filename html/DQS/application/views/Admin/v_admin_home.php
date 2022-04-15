@@ -428,6 +428,7 @@
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">รายงานสรุปผล </h5>
                      </div>
                      <div class="form-group col-md-2">
+
                          <a href="#" class="EditFileModal2" data-toggle="modal" data-target="#EditFileModal2" data-id="<?php echo $arr_qr[$i]->qr_id ?>" data-name="<?php echo $arr_qr[$i]->qr_name ?>" data-doc_fol="<?php echo $arr_qr[$i]->doc_fol_id ?>">
                              <button id="edit2" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70px; ">แก้ไข</button></a>
                          <!-- EditFile Modal -->
@@ -443,6 +444,7 @@
                                      <form id="edit-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/update_qr_file/' . $arr_qr[$i]->doc_id; ?>">
 
                                          <div class="modal-body">
+                                         <label style="color: #FF0000;">* <span id="text_namef"> </span> </label><br><br>
                                              <center>
                                                  <input onkeyup="check_file_edit_in_folder()" type="text" class="col-md-10" id="qr_name" placeholder="" name="qr_name" value="" required>
                                              </center>
@@ -454,6 +456,7 @@
                                          <div class="modal-footer">
                                              <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                                              <input type="submit" class="btn btn-success" id="sub_edit" value="บันทึก">
+                                             <input type="hidden" name="doc_fol_id" id="doc_fol_id" value="">
                                          </div>
 
                                      </form>

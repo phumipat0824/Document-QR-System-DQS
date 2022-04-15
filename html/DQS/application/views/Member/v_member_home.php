@@ -294,7 +294,7 @@
                      </div>
                      <div class="form-group col-md-2">
 
-                         <a href="#" class="EditFileModal" data-toggle="modal" data-target="#EditFileModal" data-id="<?php echo $arr_qr[$i]->qr_id ?>" data-name="<?php echo $arr_qr[$i]->qr_name ?>">
+                         <a href="#" class="EditFileModal" data-toggle="modal" data-target="#EditFileModal" data-id="<?php echo $arr_qr[$i]->qr_id ?>" data-name="<?php echo $arr_qr[$i]->qr_name ?>" data-doc_fol_id="<?php echo $arr_qr[$i]->doc_fol_id ?>">
                              <button id="edit" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70px; ">แก้ไข</button></a>
 
                          <!-- EditFile Modal -->
@@ -311,11 +311,13 @@
 
                                          <div class="modal-body">
                                              <center>
-                                                 <input onkeyup="check_file_edit()" type="text" class="col-md-10" id="qr_name" placeholder="" name="qr_name" value="" required>
+                                                 <input onkeyup="check_file_edit()" style="border-color: Grey" type="text" class="col-md-10" id="qr_name" placeholder="" name="qr_name" value="" required>
                                              </center>
                                              <br>
                                              <a id="edit_mss" style="display: none; color:red;" align='center'>กรุณากรอกข้อมูลใหม่</a>
                                              <input type="hidden" name="qr_id" id="qr_id" value="">
+                                             <input type="hidden" name="doc_fol_id" id="doc_fol_id" value="">
+                                             
                                          </div>
 
                                          <div class="modal-footer">
@@ -450,6 +452,7 @@
                                      <form id="edit-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/update_qr_file/' . $arr_qr[$i]->doc_id; ?>">
 
                                          <div class="modal-body">
+                                         <label style="color: #FF0000;">* <span id="text_namef"> </span> </label><br><br>
                                              <center>
                                                  <input onkeyup="check_file_edit_in_folder()" type="text" class="col-md-10" id="qr_name" placeholder="" name="qr_name" value="" required>
                                              </center>
@@ -461,6 +464,7 @@
                                          <div class="modal-footer">
                                              <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                                              <input type="submit" class="btn btn-success" id="sub_edit" value="บันทึก">
+                                             <input type="hidden" name="doc_fol_id" id="doc_fol_id" value="">
                                          </div>
 
                                      </form>
@@ -588,6 +592,26 @@
 <?php $this->session->set_userdata('fol_id', ''); ?>
 <?php $this->session->set_userdata('path', ''); ?>
 $(document).on("keyup", "#fol_name", function() {
+
+     // var text_n = document.getElementById("text_name");
+     var d_name = document.getElementById("fol_name").value;
+    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+    var n_check;
+    console.log("d_name" + d_name);
+
+    if (d_name.match(pattern)) {
+        // text_n.innerHTML = "";
+        n_check = 1;
+
+    } else {
+        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+        // text_n.style.color = "#ff0000";
+        n_check = 0;
+
+    }
+  
+    console.log(n_check + "folder");
+
     var t = <?php echo json_encode($arr_fol) ?>;
     var new_name = document.getElementById("fol_name");
     var check_name;
@@ -595,7 +619,7 @@ $(document).on("keyup", "#fol_name", function() {
     var dis_button = document.getElementById('create');
 
     for (let x in t) {
-        if (t[x].fol_name == new_name.value) {
+        if (t[x].fol_name == new_name.value || n_check == 0) {
             check_name = 1;
             break;
         } else {
@@ -618,6 +642,25 @@ $(document).on("keyup", "#fol_name", function() {
 
 function check_fol_edit() {
 
+     // var text_n = document.getElementById("text_name");
+     var d_name = document.getElementById("fol_name").value;
+    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+    var n_check;
+    console.log("d_name" + d_name);
+
+    if (d_name.match(pattern)) {
+        // text_n.innerHTML = "";
+        n_check = 1;
+
+    } else {
+        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+        // text_n.style.color = "#ff0000";
+        n_check = 0;
+
+    }
+  
+    console.log(n_check + "fol");
+
     var dis_button = document.getElementById('edit');
     dis_button.disabled = false;
 
@@ -628,7 +671,7 @@ function check_fol_edit() {
 
 
     for (let x in t) {
-        if (t[x].fol_name == new_name.value || new_name.value == " ") {
+        if (t[x].fol_name == new_name.value || new_name.value == " " || n_check == 0) {
             check_name = 1;
             break;
         } else {
@@ -673,6 +716,9 @@ $(document).on("click", ".EditFileModal", function() {
     console.log(name);
     var doc_fol = $(this).attr('data-doc_fol');
     $("#doc_fol_id").val(doc_fol);
+    document.getElementById("qr_id").value = id;
+    document.getElementById("qr_name").value = name;
+    document.getElementById("doc_fol_id").value = doc_fol;
 });
 $(document).on("click", ".EditFileModal2", function() {
     var id = $(this).attr('data-id');
@@ -741,6 +787,28 @@ $(document).on("click", ".editModal", function() {
  </script>
  <script>
 $(document).on("keyup", "#fol_name", function() {
+
+    
+    // var text_n = document.getElementById("text_name");
+    var d_name = document.getElementById("fol_name").value;
+    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+    var n_check;
+    console.log("d_name" + d_name);
+
+    if (d_name.match(pattern)) {
+        // text_n.innerHTML = "";
+        n_check = 1;
+
+    } else {
+        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+        // text_n.style.color = "#ff0000";
+        n_check = 0;
+
+    }
+  
+    console.log(n_check + "abc");
+
+
     var t = <?php echo json_encode($arr_fol) ?>;
     var new_name = document.getElementById("fol_name");
     var check_name;
@@ -748,7 +816,7 @@ $(document).on("keyup", "#fol_name", function() {
     var dis_button = document.getElementById('create');
 
     for (let x in t) {
-        if (t[x].fol_name == new_name.value) {
+        if (t[x].fol_name == new_name.value || n_check == 0) {
             check_name = 1;
             break;
         } else {
@@ -1145,6 +1213,26 @@ function createDropdown(type) {
 <?php $this->session->set_userdata('qr_id', ''); ?>
 <?php $this->session->set_userdata('path', ''); ?>
 $(document).on("keyup", "#qr_name", function() {
+
+    // var text_n = document.getElementById("text_name");
+    var d_name = document.getElementById("qr_name").value;
+    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+    var n_check;
+    console.log("d_name" + d_name);
+
+    if (d_name.match(pattern)) {
+        // text_n.innerHTML = "";
+        n_check = 1;
+
+    } else {
+        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+        // text_n.style.color = "#ff0000";
+        n_check = 0;
+
+    }
+  
+    console.log(n_check + "abc");
+
     var t = <?php echo json_encode($arr_doc) ?>;
     var new_name = document.getElementById("qr_name");
     var check_name;
@@ -1152,7 +1240,7 @@ $(document).on("keyup", "#qr_name", function() {
     var dis_button = document.getElementById('create');
 
     for (let x in t) {
-        if (t[x].doc_name == new_name.value) {
+        if (t[x].doc_name == new_name.value || n_check == 0) {
             check_name = 1;
             break;
         } else {
@@ -1175,6 +1263,25 @@ $(document).on("keyup", "#qr_name", function() {
 
 function check_file_edit() {
 
+    // var text_n = document.getElementById("text_name");
+    var d_name = document.getElementById("qr_name").value;
+    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+    var n_check;
+    console.log("d_name" + d_name);
+
+    if (d_name.match(pattern)) {
+        // text_n.innerHTML = "";
+        n_check = 1;
+
+    } else {
+        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+        // text_n.style.color = "#ff0000";
+        n_check = 0;
+
+    }
+  
+    console.log(n_check + "abc");
+    
     var dis_button = document.getElementById('sub_edit');
     dis_button.disabled = false;
 
@@ -1185,7 +1292,7 @@ function check_file_edit() {
 
 
     for (let x in t) {
-        if (t[x].qr_name == new_name.value || new_name.value == " ") {
+        if (t[x].qr_name == new_name.value || new_name.value == " " || n_check == 0) {
             check_name = 1;
             break;
         } else {
@@ -1193,6 +1300,8 @@ function check_file_edit() {
         }
     }
     console.log(check_name);
+
+
     if (check_name == 1) {
         $("#qr_name").css("border-color", "red");
         div.style.display = "block";
@@ -1205,9 +1314,31 @@ function check_file_edit() {
 
     }
     console.log(document.getElementById('edit'));
+
+   
 }
 
+
 function check_file_edit_in_folder() {
+
+    // var text_n = document.getElementById("text_name");
+    var d_name = document.getElementById("qr_name").value;
+    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+    var n_check;
+    console.log("d_name" + d_name);
+
+    if (d_name.match(pattern)) {
+        // text_n.innerHTML = "";
+        n_check = 1;
+
+    } else {
+        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+        // text_n.style.color = "#ff0000";
+        n_check = 0;
+
+    }
+  
+    console.log(n_check + "abc");
 
     var dis_button = document.getElementById('sub_edit');
     dis_button.disabled = false;
@@ -1219,7 +1350,7 @@ function check_file_edit_in_folder() {
 
 
     for (let x in t) {
-        if (t[x].qr_name == new_name.value || new_name.value == " ") {
+        if (t[x].qr_name == new_name.value || new_name.value == " " || n_check ==0) {
             check_name = 1;
             break;
         } else {
