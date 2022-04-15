@@ -1150,7 +1150,7 @@ $(document).on("keyup", "#qr_name", function() {
     var check_name;
     var div = document.getElementById('target_div');
     var dis_button = document.getElementById('create');
-
+    
     for (let x in t) {
         if (t[x].doc_name == new_name.value) {
             check_name = 1;
@@ -1160,11 +1160,11 @@ $(document).on("keyup", "#qr_name", function() {
         }
     }
     console.log(check_name);
-    if (check_name == 1) {
+    if (check_name == 1) { 
         $("#qr_name").css("border-color", "red");
         div.style.display = "block";
         dis_button.disabled = true;
-
+        
     } else {
         $("#qr_name").css("border-color", "green");
         div.style.display = "none";
