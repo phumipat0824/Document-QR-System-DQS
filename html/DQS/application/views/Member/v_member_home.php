@@ -137,8 +137,7 @@
                      <form method="POST" name="form" action="<?php echo site_url() . '/Folder/Folder_management/insert_folder'; ?>">
                          <div class="modal-body">
                              <center><input style="font-size: 25px;font-family:TH Sarabun New; " id="fol_name" type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name" required></center><br>
-                             <a id="target_div" style="display: none; color:red;" align='center'>ชื่อโฟลเดอร์ซ้ำ
-                                 กรุณากรอกใหม่</a>
+                             <a id="target_div" style="display: none; color:red;" align='center'>ชื่อโฟลเดอร์ซ้ำหรือกรอกชื่อโฟลเดอร์ผิด กรุณากรอกใหม่</a>
 
                          </div>
                          <div class="modal-footer">
@@ -615,9 +614,12 @@ $(document).on("keyup", "#fol_name", function() {
     var t = <?php echo json_encode($arr_fol) ?>;
     var new_name = document.getElementById("fol_name");
     var check_name;
+    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+    var n_check;
     var div = document.getElementById('target_div');
     var dis_button = document.getElementById('create');
 
+    
     for (let x in t) {
         if (t[x].fol_name == new_name.value || n_check == 0) {
             check_name = 1;
