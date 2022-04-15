@@ -67,13 +67,29 @@ class Da_DQS_folder extends DQS_model {
 * @author Onticha
 * @Create Date 2564-11-30
 */
-    public function delete($fol_id)//delete folder from database     
+    public function DeleteFolder($fol_id)//delete folder from database     
 	{
         $sql ="DELETE FROM {$this->db_name}.DQS_Folder
         WHERE fol_id = $fol_id";
-        $this->db->query($sql , array($this->fol_id));  
-	}//end delete folder from database     
+        $query = $this->db->query($sql);
+        return $query;
+	}//end delete folder from database    
+    
+    public function DeleteDocument($fol_id)//delete folder from database     
+	{
+        $sql ="DELETE FROM {$this->db_name}.DQS_Document
+        WHERE doc_fol_id = $fol_id";
+        $query = $this->db->query($sql);
+        return $query;
+	}
 
+    public function DeleteQR($qr_id)//delete folder from database     
+	{
+        $sql ="DELETE FROM {$this->db_name}.DQS_Qrcode
+        WHERE qr_id = $qr_id";
+        $query = $this->db->query($sql);
+        return $query;
+	}
 /*
 * update_location()
 * Update folder_location in database 
