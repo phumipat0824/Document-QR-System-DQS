@@ -16,8 +16,19 @@ class M_DQS_station_state_of_province extends Da_DQS_station_state_of_province
         $sql = "SELECT * FROM {$this->db_name}.DQS_Station_State_of_Province 
         LEFT JOIN {$this->db_name}.DQS_Department 
         ON station_dep_id = dep_id 
-        WHERE station_pro_id = $state_dep_id AND station_status = 1";
+        WHERE station_pro_id = $state_dep_id ";
         $query = $this->db->query($sql);
         return $query;
     }
+    public function checkname($mem_pro_id,$mem_dep_id){
+        $sql = "SELECT * 
+        FROM {$this->db_name}.DQS_Member AS member
+        LEFT JOIN {$this->db_name}.DQS_Station_State_of_Province AS station
+        ON member.mem_pro_id = station.station_pro_id AND member.mem_dep_id = station.station_dep_id
+        WHERE mem_pro_id = '$mem_pro_id' AND station_pro_id = '$mem_pro_id' AND mem_dep_id = '$mem_dep_id' AND station_dep_id = '$mem_dep_id'";
+
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
 }

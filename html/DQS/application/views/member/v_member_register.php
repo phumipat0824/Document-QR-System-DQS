@@ -24,7 +24,7 @@
                                 <div class="col-md-10 justify-content-md-center">
                                     <div class="card-header card-header-warning" style = "padding: 10px; border-radius: 10px;">
                                     
-                                        <h2 class= "text-center"  style="color:#000000; font-family:TH sarabun new; font-size: 60px;">สมัครสมาชิก</h2>
+                                        <h2 class= "text-center" id="*" style="color:#000000; font-family:TH sarabun new; font-size: 60px;">สมัครสมาชิก</h2>
                                         
                                     </div>
                                 </div>
@@ -98,17 +98,30 @@
                                     </div> <!-- กำหนดบทบาท-->
                                     <input type="hidden" name="mem_role" id="mem_role" value="0">
 
+                                        
                                     <div class="form-group col-md-4"> <!-- กรอกรหัสผ่านลงใน กล่องบันทึกข้อความ -->
                                         <label for="inputPassword4" style = "color: #000000;">รหัสผ่าน</label>
                                         <label style = "color: #FF0000;">*</label>
                                         <input type="password" class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" onchange="checkpassword()" required oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                                        <div class="media">
+                                        
+                                    </div>
                                           
                                     </div>
-                                    <div class="form-group col-md-4"> <!-- กรอกรหัสยืนยันรหัสผ่านลงใน กล่องบันทึกข้อความ -->
-                                        <label for="inputPassword4" style = "color: #000000;">ยืนยันรหัสผ่าน</label>
+                                    <div class="form-group col-md-4"> <!-- กรอกรหัสผ่านลงใน กล่องบันทึกข้อความ -->
+                                    
+                                    <label for="inputPassword4" style = "color: #000000;">รหัสยืนยัน</label>
                                         <label style = "color: #FF0000;">*</label>
-                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="ยืนยันรหัสผ่าน" onchange="checkpassword()" required oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"><br> 
+                                        <input type="password" class="form-control " id="mem_password" name="mem_password" placeholder="รหัสผ่าน" onchange="checkpassword()" required oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
                                     </div>
+                                    <div class="col-md-12">
+                                        <br>
+                                        <p class="mb-0" style="font-size: 12px;margin-top:0.001em;color:#100575;">หมายเหตุ: โปรดกรอกรหัสผ่านอย่างน้อย 8 ตัวอักษร ประกอบด้วยตัวพิมพ์ใหญ่ พิมพ์เล็ก และอักขระพิเศษ</p>
+                                        <p class="mb-0" style="font-size: 12px;margin-top:0.001em;color:#100575;">หมายเหตุ: หากหน่วยงานถูกสมัครแล้วจะไม่แสดงในรายการเลือก</p>
+
+                                            
+                                        </div>
+                                    
                                 <div class=" row gx-5 ">
                                     <div class=" col-1">
                                     </div>
@@ -139,6 +152,9 @@
 
 
 <script> 
+function disableDepart(mem_pro){
+document.getElementById("mem_pro_list").style.display = 'none';
+}
 
 /*
 	* check_email_input()
@@ -180,6 +196,38 @@ function check_email_input(){
         });
 }
 
+function check_department(){
+
+        let $form = $(this).closest('form');      
+        $.ajax({
+        type: 'POST',
+        dataType: "JSON",
+        url: "<?php echo site_url().'/Member/Member_register/check_status'?>",
+        data:{
+        mem_pro_id: $('#mem_pro_id').val(),
+        mem_dep_id: $('#mem_dep_id').val(),
+        },
+
+
+        success: function(data) {
+        if (data == 0) {
+            console.log('success');
+            document.getElementById('regis').type = 'submit';
+            document.getElementById('form_id').submit();
+        } else if (data == 1) {
+            console.log('error');
+            Swal.fire({
+                icon: 'error',
+                title: 'หน่วยงานนี้ถูกใช้แล้ว',
+                text: 'กรุณากรอกอีเมลใหม่',
+                confirmButtonText: 'ตกลง'
+            })
+        }
+        },
+       
+});
+}
+
 /*
 	* get_dept(value_pro_id)
 	* get dept
@@ -197,10 +245,10 @@ function get_dept(value_pro_id){
             'mem_pro_list': value_pro_id
         },
       success:function(data){
-          console.log(data); 
-        dep_input( data['json_station']);
+          console.log(data);
+        dep_input( data['json_station']);     
       }
-      
+
      });
      
 }// recieve json then send to create data table
@@ -245,7 +293,7 @@ function get_pro(){
     var mem_pro_list = document.getElementById("mem_province_id");
     console.log(mem_pro_list);
     $("#mem_dep_id").empty();
-	get_dept(mem_pro_list.value);
+	get_dept(mem_pro_list.value); 
 }
 
 
