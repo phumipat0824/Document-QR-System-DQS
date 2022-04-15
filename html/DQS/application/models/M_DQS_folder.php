@@ -121,6 +121,24 @@ class M_DQS_folder extends Da_DQS_folder
         return $query;
     } //get_level_2_or_more_by_member_id
 
+    public function get_level_1_by_path($path)
+    {
+        $sql = "SELECT *
+            FROM {$this->db_name}.DQS_Folder
+            WHERE (fol_location = '$path' OR fol_location LIKE '{$path}/%') AND fol_location_id = 0";
+        $query = $this->db->query($sql);
+        return $query;
+    } //get_level_1_by_member_path
+
+    public function get_level_2_or_more_by_path($path)
+    {
+        $sql = "SELECT *
+            FROM {$this->db_name}.DQS_Folder
+            WHERE (fol_location = '$path' OR fol_location LIKE '{$path}/%') AND fol_location_id != 0";
+        $query = $this->db->query($sql);
+        return $query;
+    } //get_level_2_or_more_by_member_path
+
     public function get_folder_by_id($fol_id)
     {
         $sql = "SELECT *
@@ -129,7 +147,7 @@ class M_DQS_folder extends Da_DQS_folder
 
         $query = $this->db->query($sql);
         return $query;
-    } //get_by_id
+    } //get_folder_by_id
 
     public function get_by_doc_fol_id($fol_id)
     {
