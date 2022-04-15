@@ -159,15 +159,33 @@ class Folder_management extends DQS_controller {
 	*/
 	function delete_folder()
 	{
-		$this->load->model('M_DQS_folder', 'folder');
+		$this->load->model('M_DQS_folder', 'MDF');
+		// $this->load->model('M_DQS_document', 'MDD');
+		// $this->load->model('M_DQS_qrcode', 'MQR');
 
 		$fol_id = $this->input->post('fol_id');
 		
 		$fol_location_id = $this->input->post('fol_location_id');
 
-		$fol_name = $this->folder->get_by_id_fol($fol_id)->result();
+		$fol_name = $this->MDF->get_by_id_fol($fol_id)->result();
+		$doc_id = $this->MDF->get_by_doc_fol_id($fol_id)->result();
+		
+		for($i=0; $i<count($doc_id); $i++ ){
+			// echo $doc_id[$i]->doc_name;
+			// echo "<br>";
+			$qr_doc_id = $this->MDF->get_by_doc_id($doc_id[$i]->doc_id)->result();
+			// print_r($qr_doc_id);
+			// echo "<br>";
+
+			$this->MDF->DeleteQR($qr_doc_id[0]->qr_id);
+		}
+
+		$this->MDF->DeleteDocument($fol_id);
+
+		// print_r($doc_id);
+		// $fol_name = $this->MDF->get_by_id_fol($fol_id)->result();
 		$folder_name = $fol_name[0]->fol_name;
-		$this->folder->delete($fol_id);
+		$this->MDF->DeleteFolder($fol_id);
 
 
 		$newpath = $fol_name[0]->fol_location;
@@ -363,17 +381,22 @@ class Folder_management extends DQS_controller {
         //===========================================================================
 
         $data['arr_level'] = $arr_level;
+		if($fol_id != 0){
+			$arr_current_folder = $this->fol->get_folder_by_id($fol_id)->result();
 		
-        $arr_current_folder = $this->fol->get_folder_by_id($fol_id)->result();
-		
-        $data['current_path'] = $arr_current_folder[0]->fol_location;
-
-		// $data['arr_folder'] = $this->fol->get_mem_folder($fol_mem_id)->result();
-		if($arr_current_folder[0]->fol_location_id == 0){
-			$data['is_level_1'] = true;
+			$data['current_path'] = $arr_current_folder[0]->fol_location;
+	
+			// $data['arr_folder'] = $this->fol->get_mem_folder($fol_mem_id)->result();
+			if($arr_current_folder[0]->fol_location_id == 0){
+				$data['is_level_1'] = true;
+			}else{
+					$data['is_level_1'] = false;
+			}
 		}else{
-				$data['is_level_1'] = false;
+			$data['current_path'] = 'home';
+			$data['is_level_1'] = true;
 		}
+        
 
         echo json_encode($data);
 

@@ -32,6 +32,20 @@
 
         <!-- card show number -->
         <div class="row">
+        <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header card-header-icon card-header">
+                        <div class="card-icon" style="background-color: #0000CD;">
+                            <i class="material-icons">preview</i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title" style="font-family:TH Sarabun New;">จำนวนคิวอาร์โค้ดทั้งหมด</h4>
+                        <h5 class="card-title" style="font-family:TH Sarabun New;"><?php echo count($arr_qr_code) ?></h5>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-header card-header-icon card-header">
@@ -41,7 +55,7 @@
                     </div>
                     <div class="card-body">
                         <h4 class="card-title" style="font-family:TH Sarabun New;">จำนวนการเข้าชม</h4>
-
+                        <h5 class="card-title" style="font-family:TH Sarabun New;"><?php echo '0' ?></h5>
                     </div>
                 </div>
             </div>
@@ -56,7 +70,7 @@
                     </div>
                     <div class="card-body">
                         <h4 class="card-title" style="font-family:TH Sarabun New;">จำนวนการดาวน์โหลด</h4>
-
+                        <h5 class="card-title" style="font-family:TH Sarabun New;"><?php echo '0' ?></h5>
                     </div>
                 </div>
             </div>
@@ -74,12 +88,6 @@
     const data = {
         labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
         datasets: [{
-            label: 'จำนวรไฟล์ทั้งหมด',
-            data: [8, 2, 6, 9, 2, 3, 9],
-            backgroundColor: 'rgba(255, 26, 104, 0.2)',
-            borderColor: 'rgba(255, 26, 104, 1)',
-            borderWidth: 1
-        }, {
             label: 'จำนวนการดาวน์โหดล',
             data: [28, 12, 16, 9, 12, 13, 9],
             backgroundColor: 'rgba(54, 162, 235, 0.2)',

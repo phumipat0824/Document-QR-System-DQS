@@ -1,21 +1,10 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- Datepicker -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-<!-- Language script -->
-<script src='../../../assets/calendar/datepick/datepicker-th.js' type='text/javascript'></script>
-<link href="assets/bootstrap-datepicker-thai/css/datepicker.css" rel="stylesheet">
 <script type="text/javascript" src="../../../assets/calendar/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="../../../assets/calendar/js/bootstrap-datepicker-thai.js"></script>
-<script type="text/javascript" src="../../../assets/calendar/js/locales/bootstrap-datepicker.th.js"></script>
-<!-- css style -->
-<style>
-    /* dropdown date */
-    #DropdownDate {
-        margin-left: 450px;
-    }
-</style>
-<!-- css style -->
+
 
 <!-- main -->
 <div class="content">
@@ -28,14 +17,35 @@
         <!-- text -->
 
         <!-- dropdown date -->
-        <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
-            <i class="fa fa-calendar"></i>&nbsp;
-            <span></span> <i class="fa fa-caret-down"></i>
+        <div class="row g-0">
+            <div class="col-sm-6 col-md-8"></div>
+            <div class="col-6 col-md-4">
+                <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                    <i class="fa fa-calendar"></i>&nbsp;
+                    <span></span> <i class="fa fa-caret-down"></i>
+                </div>
+            </div>
+
         </div>
+
         <!-- dropdown date -->
 
         <!-- card show number -->
         <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header card-header-icon card-header">
+                        <div class="card-icon" style="background-color: #0000CD;">
+                            <i class="material-icons">preview</i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title" style="font-family:TH Sarabun New;">จำนวนคิวอาร์โค้ดทั้งหมด</h4>
+                        <h5 class="card-title" style="font-family:TH Sarabun New;"><?php echo count($arr_qr_code) ?></h5>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-header card-header-icon card-header">
@@ -45,7 +55,7 @@
                     </div>
                     <div class="card-body">
                         <h4 class="card-title" style="font-family:TH Sarabun New;">จำนวนการเข้าชม</h4>
-
+                        <h5 class="card-title" style="font-family:TH Sarabun New;"><?php echo '0' ?></h5>
                     </div>
                 </div>
             </div>
@@ -60,154 +70,100 @@
                     </div>
                     <div class="card-body">
                         <h4 class="card-title" style="font-family:TH Sarabun New;">จำนวนการดาวน์โหลด</h4>
-
+                        <h5 class="card-title" style="font-family:TH Sarabun New;"><?php echo '0' ?></h5>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- script graph -->
-        <div class="chart">
-            <!-- Chart wrapper -->
-            <canvas id="chart-bars" class="chart-canvas"></canvas>
+        <!-- Chart -->
+        <div>
+            <canvas id="myChart" width="500" height="250"></canvas>
         </div>
+        <!-- Chart -->
+    </div>
+</div>
 
-        <script>
-            window.onload = function() {
+<script>
+const data = {
+    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    datasets: [{
+        label: 'จำนวนการดาวน์โหดล',
+        data: [28, 12, 16, 9, 12, 13, 9],
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
 
-                var chart = new CanvasJS.Chart("chartContainer", {
-                    animationEnabled: true,
-                    title: {
-                        text: "จำนวนการแสกนและดาวน์โหลด"
-                    },
-                    axisY: {
-                        title: "จำนวนการเข้าชม",
-                        titleFontColor: "#000000",
-                        lineColor: "#000000",
-                        labelFontColor: "#000000",
-                        tickColor: "#000000"
-                    },
-                    toolTip: {
-                        shared: true
-                    },
-                    legend: {
-                        cursor: "pointer",
-                        itemclick: toggleDataSeries
-                    },
-                    data: [{
-                            type: "column",
-                            name: "จำนวนการเข้าชม",
-                            legendText: "จำนวนการเข้าชม",
-                            showInLegend: true,
-                            dataPoints: [{
-                                    label: "1/12/2021",
-                                    y: 266
-                                },
-                                {
-                                    label: "2/12/2021",
-                                    y: 302
-                                },
-                                {
-                                    label: "3/12/2021",
-                                    y: 157
-                                },
-                                {
-                                    label: "4/12/2021",
-                                    y: 148
-                                },
-                                {
-                                    label: "5/12/2021",
-                                    y: 152
-                                },
-                                {
-                                    label: "6/12/2021",
-                                    y: 100
-                                }
-                            ]
-                        },
-                        {
-                            type: "column",
-                            name: "จำนวนการดาวน์โหลด ",
-                            legendText: "จำนวนการดาวน์โหลด",
-                            // axisYType: "secondary",
-                            showInLegend: true,
-                            dataPoints: [{
-                                    label: "1/12/2021",
-                                    y: 141
-                                },
-                                {
-                                    label: "2/12/2021",
-                                    y: 225
-                                },
-                                {
-                                    label: "3/12/2021",
-                                    y: 341
-                                },
-                                {
-                                    label: "4/12/2021",
-                                    y: 474
-                                },
-                                {
-                                    label: "5/12/2021",
-                                    y: 285
-                                },
-                                {
-                                    label: "6/12/2021",
-                                    y: 312
-                                }
-                            ]
-                        }
-                    ]
-                });
-                chart.render();
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
+    }, {
+        label: 'จำนวนการสแกน',
+        data: [15, 15, 16, 19, 22, 13, 19],
+        backgroundColor: 'rgba(255, 206, 86, 0.2)',
 
-                function toggleDataSeries(e) {
-                    if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                        e.dataSeries.visible = false;
-                    } else {
-                        e.dataSeries.visible = true;
-                    }
-                    chart.render();
+        borderColor: 'rgba(255, 206, 86, 1)',
+        borderWidth: 1
+    }]
+};
+
+// config 
+const config = {
+    type: 'bar',
+    data,
+    options: {
+        scales: {
+            y: {
+                ticks: {
+                    stepSize: 5
                 }
-
             }
+        },
+        layout: {
+            padding: 50
+        }
+    }
+};
 
-            $(function() {
-                // Initialize and change language to hindi
-                $('#datepicker').datepicker($.datepicker.regional["th"]);
-                // Reset language
-                //$.datepicker.setDefaults($.datepicker.regional[""]);
-            })
+// render init block
+const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+);
 
-            $(function() {
+$(function() {
+    // Initialize and change language to hindi
+    $('#datepicker').datepicker($.datepicker.regional["th"]);
+    // Reset language
+    //$.datepicker.setDefaults($.datepicker.regional[""]);
+})
 
-
-                $("#datepicker").datepicker({
-                    language: 'th-th',
-                });
-
-                var start = moment();
-                var end = moment();
-
-                function cb(start, end) {
-                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-                }
-
-                $('#reportrange').daterangepicker({
-                    startDate: start,
-                    endDate: end,
-                    ranges: {
-                        'วันนี้': [moment(), moment()],
-                        '30 วันที่ผ่านมา': [moment().subtract(29, 'days'), moment()],
-                        'เดือนนี้': [moment().startOf('month'), moment().endOf('month')],
-                        'เดือนที่แล้ว': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-                        '6 เดือนที่ผ่านมา': [moment().subtract(6, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-                        '1 ปีที่ผ่านมา': [moment().subtract(12, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-                    }
-                }, cb);
-
-                cb(start, end);
+$(function() {
 
 
-            });
-        </script>
+    $("#datepicker").datepicker({
+        language: 'th-th',
+    });
+
+    var start = moment();
+    var end = moment();
+
+    function cb(start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    }
+
+    $('#reportrange').daterangepicker({
+        startDate: start,
+        endDate: end,
+        ranges: {
+            'วันนี้': [moment(), moment()],
+            '30 วันที่ผ่านมา': [moment().subtract(29, 'days'), moment()],
+            'เดือนนี้': [moment().startOf('month'), moment().endOf('month')],
+            'เดือนที่แล้ว': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+            '6 เดือนที่ผ่านมา': [moment().subtract(6, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+            '1 ปีที่ผ่านมา': [moment().subtract(12, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+        }
+    }, cb);
+
+    cb(start, end);
+
+
+});
+</script>

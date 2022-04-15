@@ -302,10 +302,9 @@ function get_pro(){
 <!-- ปรับฟอนต์ให้เป็นไทยสารบัญ   -->
 <style> 
      /*ปรับรูปแบบตัวอักษร */
-    @import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');
-    *{
-        font-family: 'Sarabun', sans-serif;
-    }
-    
+     @import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');
 
-</style>
+     * {
+         font-family: 'Sarabun', sans-serif;
+     }
+     </style>

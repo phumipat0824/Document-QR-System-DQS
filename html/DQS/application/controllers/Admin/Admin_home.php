@@ -174,7 +174,7 @@ class Admin_home extends DQS_controller
 
         redirect('/Admin/Admin_home/show_admin_in_folder/'.$this->input->post('fol_id'));
     }
-    	/*
+    /*
 	* update_document()
 	* update document name
 	* @input doc_name
@@ -185,7 +185,7 @@ class Admin_home extends DQS_controller
 	public function update_qr_file(){
         $this->load->model('M_DQS_qrcode','MDQ');
 		$this->load->model('M_DQS_document','MDD');
-		$doc_id = $this->input->post('qr_id');
+		$qr_id = $this->input->post('qr_id');
 		
 		$this->MDQ->qr_name = $this->input->post('qr_name');
 		$this->MDQ->qr_id = $this->input->post('qr_id');
@@ -193,10 +193,10 @@ class Admin_home extends DQS_controller
 		$this->MDD->doc_name = $this->input->post('qr_name');
 
 
-		$obj_qr = $this->MDQ->get_by_qr_id($doc_id)->result();
+		$obj_qr = $this->MDQ->get_by_qr_id($qr_id)->result();
 		$obj_doc = $this->MDD->get_by_doc_id($obj_qr[0]->qr_doc_id)->result();
 		$this->MDD->doc_id = $obj_qr[0]->qr_doc_id;
-
+		$doc_fol_id = $obj_doc[0]->doc_fol_id;
 		$get_sub_qr = $obj_qr[0]->qr_path;
 		$arr = array();
 		$i = 0;
@@ -279,23 +279,22 @@ class Admin_home extends DQS_controller
 		
 		}
 		
-
 		if($this->session->userdata('mem_role') == 1){
-			if($this->input->post('qr_doc_id') != 0){
-				redirect('Admin/Admin_home/show_admin_in_folder/' . $this->input->post('qr_doc_id'));
+			if($this->input->post('doc_fol_id') != 0){
+				redirect('Admin/Admin_home/show_admin_in_folder/' . $this->input->post('doc_fol_id'));
 			}
 			else{
 				redirect('Admin/Admin_home/show_admin_home/');
 			}
 		}else{
-			if($this->input->post('qr_doc_id') != 0){
-				redirect('Member/Member_home/show_in_folder/' . $this->input->post('qr_doc_id'));
+			if($doc_fol_id != 0){
+				redirect('Member/Member_home/show_in_folder/' . $this->input->post('doc_fol_id'));
+				// echo $doc_fol_id;
 			}
 			else{
 				redirect('Member/Member_home/show_member_home/');
+				// echo $doc_fol_id;
 			}
 		}
-		
-        
    }
 }

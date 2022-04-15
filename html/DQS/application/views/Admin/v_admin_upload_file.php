@@ -689,6 +689,9 @@ function make3() {
 
 document.getElementById("download").addEventListener("click", function() {
 
+    const note = document.querySelector('#capture');
+    note.style.border = '10px solid #fff';
+
     html2canvas(document.querySelector('#capture')).then(function(canvas) {
 
         saveAs(canvas.toDataURL(), 'DQS_QR.png');

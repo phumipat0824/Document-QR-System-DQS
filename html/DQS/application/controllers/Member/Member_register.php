@@ -155,6 +155,7 @@ public function insert_member()
             $path_in_fol_home = $newpath . '/Home'.'/';  
             $path_in_fol_service = $newpath . '/เอกสารราชการ'.'/';
             $path_in_fol_meeting = $newpath . '/เอกสารการประชุม'.'/';
+
             $get_address = './assets/user/';
             $create_folder_user = $this->session->userdata('mem_username');
             $path_new = $get_address . '/';
@@ -195,81 +196,21 @@ public function insert_member()
             }
             for($i = 0 ; $i < 2;$i++){
                     if($i == 0){
+                        
                         $this->folder->fol_name = 'เอกสารราชการ';
-                        $this->folder->fol_location = $path_new.'เอกสารราชการ';
+                        $this->folder->fol_location = $newpath . '/เอกสารราชการ';
                         $this->folder->fol_mem_id = $data[0]->mem_id;
                         $this->folder->fol_location_id = 0;
                         $this->folder->insert();
                     }
                     else{
                         $this->folder->fol_name = 'เอกสารการประชุม';
-                        $this->folder->fol_location = $path_new.'เอกสารการประชุม';
+                        $this->folder->fol_location = $newpath . '/เอกสารการประชุม';
                         $this->folder->fol_mem_id = $data[0]->mem_id ;
                         $this->folder->fol_location_id = 0;
                         $this->folder->insert();
                     }
-            }
-           
-                
-                $data = $this->fmem->get_by_username_folder($this->session->userdata('mem_username'))->result();
-                $newpath = './assets/user/' . $this->session->userdata('mem_username');
-                $path_in_fol_home = $newpath . '/Home'.'/';  
-                $path_in_fol_service = $newpath . '/เอกสารราชการ'.'/';
-                $path_in_fol_meeting = $newpath . '/เอกสารการประชุม'.'/';
-                $get_address = './assets/user/';
-                $create_folder_user = $this->session->userdata('mem_username');
-                $path_new = $get_address . '/';
-                if (!file_exists($path_new . $create_folder_user)) {
-                    @mkdir($path_new . $create_folder_user, 0777);
-                }
-                 //$path_in_user
-                $create_folde_home = 'Home';
-                $path_new = $newpath . '/';
-                if (!file_exists($path_new . 'Home')) {
-                    @mkdir($path_new . 'Home', 0777);
-                }
-                $create_folde_qrcode = 'Qrcode';
-                $path_new = $path_in_fol_home . '/';
-                if (!file_exists($path_new . 'Qrcode')) {
-                    @mkdir($path_new . 'Qrcode', 0777);
-                }
-                $create_folder_service = 'เอกสารราชการ';
-                
-                $path_new = $newpath . '/';
-                if (!file_exists($path_new . 'เอกสารราชการ')) {
-                    @mkdir($path_new . 'เอกสารราชการ', 0777);
-                }
-                $create_folde_qrcode = 'Qrcode';
-                $path_new = $path_in_fol_service . '/';
-                if (!file_exists($path_new . 'Qrcode')) {
-                    @mkdir($path_new . 'Qrcode', 0777);
-                }
-                $create_folde_meeting = 'เอกสารการประชุม';
-                $path_new = $newpath . '/';
-                if (!file_exists($path_new . 'เอกสารการประชุม')) {
-                    @mkdir($path_new . 'เอกสารการประชุม', 0777);
-                }
-                $create_folde_qrcode = 'Qrcode';
-                $path_new = $path_in_fol_meeting . '/';
-                if (!file_exists($path_new . 'Qrcode')) {
-                    @mkdir($path_new . 'Qrcode', 0777);
-                }
-                for($i = 0 ; $i < 2;$i++){
-                        if($i == 0){
-                            $this->folder->fol_name = 'เอกสารราชการ';
-                            $this->folder->fol_location = $path_new.'เอกสารราชการ';
-                            $this->folder->fol_mem_id = $data[0]->mem_id;
-                            $this->folder->fol_location_id = 0;
-                            $this->folder->insert();
-                        }
-                        else{
-                            $this->folder->fol_name = 'เอกสารการประชุม';
-                            $this->folder->fol_location = $path_new.'เอกสารการประชุม';
-                            $this->folder->fol_mem_id = $data[0]->mem_id ;
-                            $this->folder->fol_location_id = 0;
-                            $this->folder->insert();
-                        }
-                }
+            }       
                
                 $this->output_navbar("Member/v_member_login"); //เรียกกลับมาหน้านี้อีกครั้งอยู่หน้าเดียวกันใส่ชื่อได้เลย
     }
@@ -284,7 +225,6 @@ public function insert_member()
     */
     public function insert_session()
     {
-        
         $this->load->model('M_DQS_province', 'MDP');
         $this->load->model('M_DQS_department', 'MDD');
         //session

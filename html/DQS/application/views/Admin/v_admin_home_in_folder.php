@@ -29,7 +29,7 @@
                 <div id="myDropdown" class="dropdown-content">
                     <div class="custom-cm__item" data-toggle="modal" data-target="#exampleModal"><a>สร้างโฟลเดอร์</a>
                     </div>
-                    <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_admin_upload_file_in_floder/' . $this->session->userdata('fol_id'); ?>">อัปโหลดไฟล์</a>
+                    <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_admin_upload_file_in_floder/' . $this->session->userdata('fol_id'); ?>">สร้างคิวอาร์โค้ด</a>
                     </div>
                 </div>
             </div>
@@ -276,7 +276,7 @@
     <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">คิวอาร์โค้ด</h3>
     <?php for ($i = 0; $i < count($arr_qr); $i++) {   ?>
     <?php if ($this->session->userdata('fol_id') == $arr_qr[$i]->doc_fol_id) { ?>
-    <div class="col-md-4">
+    <div class="col-md-4" style="display: flex; flex-wrap: wrap; justify-content: space-around; flex: 0 0 500px;">
         <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
             <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
                 <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;"> <?php echo $arr_qr[$i]->qr_name ?></h>
@@ -714,7 +714,10 @@ function set_delete(path, id, fol_id) {
 
 document.getElementById("download").addEventListener("click", function() {
 
-    html2canvas(document.querySelector('#capture')).then(function(canvas) {
+    const note = document.querySelector('#qr_path');
+    note.style.border = '10px solid #fff';
+
+    html2canvas(document.querySelector('#qr_path')).then(function(canvas) {
 
         saveAs(canvas.toDataURL(), 'DQS_QR.png');
     });

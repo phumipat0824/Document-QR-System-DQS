@@ -93,10 +93,18 @@ class M_DQS_qrcode extends Da_DQS_qrcode
         return $query;
     }
 
-    public function get_by_qr_id($doc_id)
+    public function get_by_qr_id($qr_id)
     {
         $sql = "SELECT * from {$this->db_name}.DQS_Qrcode
-        WHERE DQS_Qrcode.qr_id = $doc_id";
+        WHERE DQS_Qrcode.qr_id = $qr_id";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
+    public function get_by_doc_id($doc_id)
+    {
+        $sql = "SELECT * from {$this->db_name}.DQS_Qrcode
+        WHERE DQS_Qrcode.qr_doc_id = $doc_id";
         $query = $this->db->query($sql);
         return $query;
     }
@@ -109,13 +117,26 @@ class M_DQS_qrcode extends Da_DQS_qrcode
         return $query;
     }
 
-    public function get_all(){
+    public function get_by_user_id($mem_id){
         $sql = "SELECT * 
-        FROM {$this->db_name}.DQS_Document";
+        FROM {$this->db_name}.DQS_Document
+        WHERE DQS_Document.doc_mem_id  = $mem_id";
         $query = $this->db->query($sql);
         return $query;
     }
 
+    public function get_qr_download(){
+        $sql = "SELECT * FROM {$this->db_name}.DQS_Qrcode";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
+    public function add_count_download(){
+        $sql = "UPDATE {$this->db_name}.DQS_Qrcode
+            SET qr_download = ? 
+            WHERE qr_name = ? "; // ? = ค่าที่เราจะใส่ไปอยู่แล้ว , อย่าใช้ " ' " เพราะอาจจะเออเร่อได้
+    $this-> db->query($sql, array($this->qr_download,$this->qr_name)); //ถ้า SQL ที่เราใส่มี ? ต้องใส่ array ด้วย
+    }
        /*
     * check_exist_name($doc_name)
     * check exist name

@@ -25,10 +25,10 @@
                      <div class="custom-cm__item" data-toggle="modal" data-target="#exampleModal"><a>สร้างโฟลเดอร์</a>
                      </div>
                      <?php if ($this->session->userdata('fol_id') == null) { ?>
-                     <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file/'; ?>">อัปโหลดไฟล์</a>
+                     <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file/'; ?>">สร้างคิวอาร์โค้ด</a>
                      </div>
                      <?php } else { ?>
-                     <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file_in_floder/' . $this->session->userdata('fol_id'); ?>">อัปโหลดไฟล์</a>
+                     <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file_in_floder/' . $this->session->userdata('fol_id'); ?>">สร้างคิวอาร์โค้ด</a>
                      </div>
                      <?php } ?>
                  </div>
@@ -108,7 +108,7 @@
                      <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
                          <a href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
                          <a href="#" class="editModal" data-toggle="modal" data-target="#editModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">แก้ไข</a>
-                         <a href="#" class="moveModal" data-toggle="modal" data-target="#moveModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">ย้าย</a>
+                         <a href="#" class="moveModal" data-toggle="modal" data-target="#moveModal" id="optionMoveModal" onclick="createDropdown('folder')" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">ย้าย</a>
                          <a href="#" class="deleteModal" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>">ลบ</a>
                      </div>
                  </div>
@@ -137,8 +137,7 @@
                      <form method="POST" name="form" action="<?php echo site_url() . '/Folder/Folder_management/insert_folder'; ?>">
                          <div class="modal-body">
                              <center><input style="font-size: 25px;font-family:TH Sarabun New; " id="fol_name" type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name" required></center><br>
-                             <a id="target_div" style="display: none; color:red;" align='center'>ชื่อโฟลเดอร์ซ้ำ
-                                 กรุณากรอกใหม่</a>
+                             <a id="target_div" style="display: none; color:red;" align='center'>ชื่อโฟลเดอร์ซ้ำหรือกรอกชื่อโฟลเดอร์ผิด กรุณากรอกใหม่</a>
 
                          </div>
                          <div class="modal-footer">
@@ -264,9 +263,10 @@
      <?php if ($this->session->userdata('fol_id') == null) { ?>
      <?php if ($arr_qr[$i]->doc_fol_id == null) { ?>
      <div class="col-md-4">
-         <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px; width:500;">
+         <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
              <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
-                 <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;"><?php echo $arr_qr[$i]->qr_name ?>
+                 <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;">
+                     <?php echo $arr_qr[$i]->qr_name ?>
                  </h>
              </div>
              <div class="card-body">
@@ -277,18 +277,23 @@
                              <button id="load" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button></a>
                      </div>
                      <div class="form-group col-md-4">
-                         <?php $time = $arr_qr[$i]->doc_datetime ;?>
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">วันที่สร้าง :</h5>
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;"><?php echo substr($time, 0,10 ) ?></h5>
+                         <?php $time = $arr_qr[$i]->doc_datetime; ?>
+                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
+                             วันที่สร้าง :</h5>
+                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
+                             <?php echo substr($time, 0, 10) ?></h5>
 
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิดไฟล์ : </h5>
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;"><?php echo $arr_qr[$i]->doc_type ?></h5>
+                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
+                             ชนิดไฟล์ : </h5>
+                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
+                             <?php echo $arr_qr[$i]->doc_type ?></h5>
 
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">รายงานสรุปผล </h5>
+                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
+                             รายงานสรุปผล </h5>
                      </div>
                      <div class="form-group col-md-2">
 
-                         <a href="#" class="EditFileModal" data-toggle="modal" data-target="#EditFileModal" data-id="<?php echo $arr_qr[$i]->qr_id ?>" data-name="<?php echo $arr_qr[$i]->qr_name ?>">
+                         <a href="#" class="EditFileModal" data-toggle="modal" data-target="#EditFileModal" data-id="<?php echo $arr_qr[$i]->qr_id ?>" data-name="<?php echo $arr_qr[$i]->qr_name ?>" data-doc_fol_id="<?php echo $arr_qr[$i]->doc_fol_id ?>">
                              <button id="edit" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70px; ">แก้ไข</button></a>
 
                          <!-- EditFile Modal -->
@@ -305,11 +310,13 @@
 
                                          <div class="modal-body">
                                              <center>
-                                                 <input onkeyup="check_file_edit()" type="text" class="col-md-10" id="qr_name" placeholder="" name="qr_name" value="" required>
+                                                 <input onkeyup="check_file_edit()" style="border-color: Grey" type="text" class="col-md-10" id="qr_name" placeholder="" name="qr_name" value="" required>
                                              </center>
                                              <br>
                                              <a id="edit_mss" style="display: none; color:red;" align='center'>กรุณากรอกข้อมูลใหม่</a>
                                              <input type="hidden" name="qr_id" id="qr_id" value="">
+                                             <input type="hidden" name="doc_fol_id" id="doc_fol_id" value="">
+                                             
                                          </div>
 
                                          <div class="modal-footer">
@@ -322,11 +329,13 @@
                              </div>
                          </div>
                          <!-- End EditFile Model -->
-                         <button type="button" id="move" class="btn btn- MoveFileModal" data-toggle="modal" data-target="#MoveFileModal" data-id="<?php echo $arr_qr[$i]->doc_id ?>" data-name="<?php echo $arr_qr[$i]->doc_name ?>" data-qr-id="<?php echo $arr_qr[$i]->qr_id ?>" data-qr-name="<?php echo $arr_qr[$i]->qr_name ?>" data-doc_fol_id="<?php echo $arr_qr[$i]->doc_fol_id ?>" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
+                         <button type="button" id="move" class="btn btn- MoveFileModal" onclick="createDropdown('file')" data-toggle="modal" data-target="#MoveFileModal" data-id="<?php echo $arr_qr[$i]->doc_id ?>" data-name="<?php echo $arr_qr[$i]->doc_name ?>" data-qr-id="<?php echo $arr_qr[$i]->qr_id ?>" data-qr-name="<?php echo $arr_qr[$i]->qr_name ?>" data-doc_fol_id="<?php echo $arr_qr[$i]->doc_fol_id ?>" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
 
+                         <!-- Delete File -->
                          <a href="#" class="deleteFileModal" data-toggle="modal" data-target="#deleteFileModal" onclick="set_delete('<?php echo $arr_doc[$i]->doc_path ?>',<?php echo $arr_doc[$i]->doc_id ?>,'<?php echo $arr_qr[$i]->doc_fol_id ?>')">
                              <button id="delete" class="btn btn-" style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70px; ">
                                  ลบ</button></a>
+
                          <!-- deleteFile Modal -->
                          <div class="modal fade" id="deleteFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                              <div class="modal-dialog" role="document">
@@ -398,7 +407,8 @@
      <div class="col-md-4">
          <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
              <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
-                 <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;"><?php echo $arr_qr[$i]->qr_name ?>
+                 <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;">
+                     <?php echo $arr_qr[$i]->qr_name ?>
                  </h>
              </div>
              <div class="card-body">
@@ -409,14 +419,19 @@
                              <button id="load" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button></a>
                      </div>
                      <div class="form-group col-md-4">
-                         <?php $time = $arr_qr[$i]->doc_datetime ;?>
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">วันที่สร้าง :</h5>
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;"><?php echo substr($time, 0,10 ) ?></h5>
+                         <?php $time = $arr_qr[$i]->doc_datetime; ?>
+                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
+                             วันที่สร้าง :</h5>
+                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
+                             <?php echo substr($time, 0, 10) ?></h5>
 
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิดไฟล์ : </h5>
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;"><?php echo $arr_qr[$i]->doc_type ?></h5>
+                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
+                             ชนิดไฟล์ : </h5>
+                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
+                             <?php echo $arr_qr[$i]->doc_type ?></h5>
 
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">รายงานสรุปผล </h5>
+                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
+                             รายงานสรุปผล </h5>
 
                      </div>
                      <div class="form-group col-md-2">
@@ -436,6 +451,7 @@
                                      <form id="edit-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/update_qr_file/' . $arr_qr[$i]->doc_id; ?>">
 
                                          <div class="modal-body">
+                                         <label style="color: #FF0000;">* <span id="text_namef"> </span> </label><br><br>
                                              <center>
                                                  <input onkeyup="check_file_edit_in_folder()" type="text" class="col-md-10" id="qr_name" placeholder="" name="qr_name" value="" required>
                                              </center>
@@ -447,6 +463,7 @@
                                          <div class="modal-footer">
                                              <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                                              <input type="submit" class="btn btn-success" id="sub_edit" value="บันทึก">
+                                             <input type="hidden" name="doc_fol_id" id="doc_fol_id" value="">
                                          </div>
 
                                      </form>
@@ -454,7 +471,7 @@
                              </div>
                          </div>
                          <!-- End EditFile Model -->
-                         <button type="button" id="move" class="btn btn- MoveFileModal" data-toggle="modal" data-target="#MoveFileModal" data-id="<?php echo $arr_qr[$i]->doc_id ?>" data-name="<?php echo $arr_qr[$i]->doc_name ?>" data-qr-id="<?php echo $arr_qr[$i]->qr_id ?>" data-qr-name="<?php echo $arr_qr[$i]->qr_name ?>" data-doc_fol_id="<?php echo $arr_qr[$i]->doc_fol_id ?>" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
+                         <button type="button" id="move" class="btn btn- MoveFileModal" onclick="createDropdown('file')" data-toggle="modal" data-target="#MoveFileModal" data-id="<?php echo $arr_qr[$i]->doc_id ?>" data-name="<?php echo $arr_qr[$i]->doc_name ?>" data-qr-id="<?php echo $arr_qr[$i]->qr_id ?>" data-qr-name="<?php echo $arr_qr[$i]->qr_name ?>" data-doc_fol_id="<?php echo $arr_qr[$i]->doc_fol_id ?>" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
                          <a href="#" class="delete2FileModal" data-toggle="modal" data-target="#delete2FileModal" onclick="set_delete('<?php echo $arr_qr[$i]->doc_path ?>',<?php echo $arr_qr[$i]->doc_id ?>,'<?php echo $arr_qr[$i]->doc_fol_id ?>')">
                              <button id="delete" class="btn btn-" style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">
                                  ลบ</button></a>
@@ -548,16 +565,10 @@
                          <input type="hidden" name="doc_id" id="file_id" value="">
                          <input type="hidden" name="qr_id" id="qrcode_id" value="">
                          <!-- dropdown folder name -->
-                         <select name="doc_fol_id" id="doc_fol_id" class="form-select" aria-label="Default select example" placeholder="" required>
-                             <option value="" disabled selected hidden>เลือกโฟลเดอร์</option>
-                             <option value='0'>หน้าหลัก</option>
-                             <?php for ($i = 0; $i < count($arr_folder); $i++) {   ?>
-                             <?php if ($arr_folder[$i]->fol_mem_id == $this->session->userdata('mem_id')) { ?>
-                             <option value='<?php echo $arr_folder[$i]->fol_id ?>'>
-                                 <?php echo $arr_folder[$i]->fol_name ?></option>
-                             <?php } ?>
-                             <?php } ?>
-                         </select><br>
+
+                         <div id="select_move_file">
+
+                         </div><br>
                      </div>
                      <div class="modal-footer">
                          <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
@@ -580,14 +591,37 @@
 <?php $this->session->set_userdata('fol_id', ''); ?>
 <?php $this->session->set_userdata('path', ''); ?>
 $(document).on("keyup", "#fol_name", function() {
+
+     // var text_n = document.getElementById("text_name");
+     var d_name = document.getElementById("fol_name").value;
+    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+    var n_check;
+    console.log("d_name" + d_name);
+
+    if (d_name.match(pattern)) {
+        // text_n.innerHTML = "";
+        n_check = 1;
+
+    } else {
+        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+        // text_n.style.color = "#ff0000";
+        n_check = 0;
+
+    }
+  
+    console.log(n_check + "folder");
+
     var t = <?php echo json_encode($arr_fol) ?>;
     var new_name = document.getElementById("fol_name");
     var check_name;
+    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+    var n_check;
     var div = document.getElementById('target_div');
     var dis_button = document.getElementById('create');
 
+    
     for (let x in t) {
-        if (t[x].fol_name == new_name.value) {
+        if (t[x].fol_name == new_name.value || n_check == 0) {
             check_name = 1;
             break;
         } else {
@@ -610,6 +644,25 @@ $(document).on("keyup", "#fol_name", function() {
 
 function check_fol_edit() {
 
+     // var text_n = document.getElementById("text_name");
+     var d_name = document.getElementById("fol_name").value;
+    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+    var n_check;
+    console.log("d_name" + d_name);
+
+    if (d_name.match(pattern)) {
+        // text_n.innerHTML = "";
+        n_check = 1;
+
+    } else {
+        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+        // text_n.style.color = "#ff0000";
+        n_check = 0;
+
+    }
+  
+    console.log(n_check + "fol");
+
     var dis_button = document.getElementById('edit');
     dis_button.disabled = false;
 
@@ -620,7 +673,7 @@ function check_fol_edit() {
 
 
     for (let x in t) {
-        if (t[x].fol_name == new_name.value || new_name.value == " ") {
+        if (t[x].fol_name == new_name.value || new_name.value == " " || n_check == 0) {
             check_name = 1;
             break;
         } else {
@@ -665,6 +718,9 @@ $(document).on("click", ".EditFileModal", function() {
     console.log(name);
     var doc_fol = $(this).attr('data-doc_fol');
     $("#doc_fol_id").val(doc_fol);
+    document.getElementById("qr_id").value = id;
+    document.getElementById("qr_name").value = name;
+    document.getElementById("doc_fol_id").value = doc_fol;
 });
 $(document).on("click", ".EditFileModal2", function() {
     var id = $(this).attr('data-id');
@@ -733,6 +789,28 @@ $(document).on("click", ".editModal", function() {
  </script>
  <script>
 $(document).on("keyup", "#fol_name", function() {
+
+    
+    // var text_n = document.getElementById("text_name");
+    var d_name = document.getElementById("fol_name").value;
+    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+    var n_check;
+    console.log("d_name" + d_name);
+
+    if (d_name.match(pattern)) {
+        // text_n.innerHTML = "";
+        n_check = 1;
+
+    } else {
+        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+        // text_n.style.color = "#ff0000";
+        n_check = 0;
+
+    }
+  
+    console.log(n_check + "abc");
+
+
     var t = <?php echo json_encode($arr_fol) ?>;
     var new_name = document.getElementById("fol_name");
     var check_name;
@@ -740,7 +818,7 @@ $(document).on("keyup", "#fol_name", function() {
     var dis_button = document.getElementById('create');
 
     for (let x in t) {
-        if (t[x].fol_name == new_name.value) {
+        if (t[x].fol_name == new_name.value || n_check == 0) {
             check_name = 1;
             break;
         } else {
@@ -863,6 +941,11 @@ $(document).on("click", ".MoveFileModal", function() {
     var qr_name = $(this).attr('data-qr-name');
     $("#qr_name").val(qr_name);
     var doc_fol_id = $(this).attr('data-doc_fol_id');
+    console.log('-------------');
+    console.log(typeof doc_fol_id);
+    if (isNumeric(doc_fol_id) == false || doc_fol_id.trim() == "" || doc_fol_id == null) {
+        doc_fol_id = 0;
+    }
     $("#doc_fol_id").val(doc_fol_id);
     //  var qr_fol_id = $(this).attr('data-qr_fol_id');
     //  $("#qr_fol_id").val(qr_fol_id);
@@ -871,12 +954,17 @@ $(document).on("click", ".MoveFileModal", function() {
     document.getElementById("file_name").value = name;
     document.getElementById("qrcode_id").value = qr_id;
     document.getElementById("qrcode_name").value = qr_name;
-    document.getElementById("doc_fol_id").value = doc_fol_id;
     console.log(id);
-    console.log(name);
+    console.log(isNumeric(doc_fol_id));
+    console.log(isNumeric('1'));
+
+
 
 });
 
+function isNumeric(value) {
+    return /^-?\d+$/.test(value);
+}
 
 $(document).ready(function() {
     $('.dropdown-submenu a.test').on("click", function(e) {
@@ -956,13 +1044,23 @@ $(document).ready(function() {
  <!-- Move Folder Script -->
 
  <script>
-$(document).on("click", ".moveModal", function() {
-    var fol_id = $(this).attr('data-id');
-    $("#fol_id").val(fol_id);
-    var name = $(this).attr('data-name');
-    $("#fol_name").val(name);
-    var x = document.getElementById("fold_id").value = fol_id;
-    document.getElementById("folder_name").value = name;
+alert('555');
+// $(document).on("click", ".moveModal", function() {
+function createDropdown(type) {
+
+    if (type == "file") {
+        var fol_id = $(".MoveFileModal").attr('data-doc_fol_id');
+        //  fol_id = 0;
+    } else if (type == "folder") {
+        var fol_id = $("#optionMoveModal").attr('data-id');
+        $("#fol_id").val(fol_id);
+        var name = $("#optionMoveModal").attr('data-name');
+        $("#fol_name").val(name);
+        var x = document.getElementById("fold_id").value = fol_id;
+        document.getElementById("folder_name").value = name;
+    }
+
+
 
     $.ajax({
         type: 'post',
@@ -975,11 +1073,27 @@ $(document).on("click", ".moveModal", function() {
             console.log(json_data);
 
             //สร้าง select รอไว้ แล้วค่อยใส่ option ทีหลัง
-            let html_select =
-                "<select name='fol_location_id' id='folder_location_id' class='form-select' aria-label='Default select example' placeholder='เลือกโฟลเดอร์' required>'</select>";
-            $('#select_move').html(html_select);
+
+            if (type == "file") {
+                let html_select =
+                    '<select name="doc_fol_id" id="doc_fol_id" class="form-select" aria-label="Default select example" placeholder="" required></select>';
+                $('#select_move_file').html(html_select);
+                $('#select_move').html('');
+            } else if (type == "folder") {
+                let html_select =
+                    "<select name='fol_location_id' id='folder_location_id' class='form-select' aria-label='Default select example' placeholder='เลือกโฟลเดอร์' required>'</select>";
+                $('#select_move').html(html_select);
+                $('#select_move_file').html('');
+            }
+
+            let id_dropdrown = '';
+            if (type == "file") {
+                id_dropdrown = '#doc_fol_id';
+            } else if (type == "folder") {
+                id_dropdrown = '#folder_location_id';
+            }
             let html_option = '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
-            $('#folder_location_id').html(html_option);
+            $(id_dropdrown).html(html_option);
 
             let obj_level = json_data['arr_level'];
             let current_path = json_data['current_path'];
@@ -990,6 +1104,7 @@ $(document).on("click", ".moveModal", function() {
                 //กรณีไม่มีข้อมูล
                 html_option = ' <option value="none">ไม่พบข้อมูล</option>';
                 $('#folder_location_id').html(html_option);
+                $(id_dropdrown).html(html_option);
             } //if
             else {
                 // html_option = '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
@@ -1004,14 +1119,39 @@ $(document).on("click", ".moveModal", function() {
                     if (level == 1) {
                         html_option =
                             '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
+
+                        let disable = '';
+                        if (type == 'folder') {
+                            if (json_data['is_level_1'] == true) {
+                                disable = ' disabled  hidden ';
+                            } //if
+                        } else if (type == 'file') {
+                            if (fol_id == 0) {
+                                disable = ' disabled  hidden ';
+                            }
+                        }
+
+
+                        html_option += '<option value="0"' + disable + ' > หน้าหลัก</option>';
+
                         for (i = 0; i < obj_level[level].length; i++) {
 
-                            //ลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้
+
+
                             let disable = '';
-                            if (obj_level[level][i]["fol_location"].includes(current_path + '/') ||
-                                obj_level[level][i]["fol_location"] == current_path) {
-                                disable = ' disabled ';
-                            } //if
+                            if (type == 'folder') {
+                                //ตัวที่ถูกเลือกและลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้ 
+                                if (obj_level[level][i]["fol_location"].includes(current_path + '/') ||
+                                    obj_level[level][i]["fol_location"] == current_path) {
+                                    disable = ' disabled ';
+                                } //if
+                            } else if (type = 'file') {
+                                //ตัวที่ถูกเลือก จะต้องกดไม่ได้ 
+                                if (obj_level[level][i]["fol_location"] == current_path) {
+                                    disable = ' disabled ';
+                                } //if
+                            }
+
 
                             html_option += '<option ' + disable + ' id="fol_' + obj_level[level][i][
                                 "fol_id"
@@ -1021,30 +1161,29 @@ $(document).on("click", ".moveModal", function() {
 
                         } //for
 
-                        $('#folder_location_id').html(html_option);
+                        $(id_dropdrown).html(html_option);
                     } //if
                     else {
-                        if (level == 2) {
-                            let disable = '';
-                            if (json_data['is_level_1'] == true) {
-                                disable = ' disabled  hidden ';
-                            } //if
 
-                            html_option = '<option value="0"' + disable + ' > หน้าหลัก</option>';
-                            $('#folder_location_id').prepend(html_option);
-                        } //if
 
                         prefix = prefix + '&nbsp' + '&nbsp' + '-';
 
                         //แทรกลูกหลังจากตำแหล่งแม่ (ทำจากหลังมาหน้า ลำดับจะไม่เพี้ยน)
                         for (i = obj_level[level].length - 1; i >= 0; i--) {
 
-                            //ลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้
                             let disable = '';
-                            if (obj_level[level][i]["fol_location"].includes(current_path + '/') ||
-                                obj_level[level][i]["fol_location"] == current_path) {
-                                disable = ' disabled ';
-                            } //if
+                            if (type == 'folder') {
+                                //ตัวที่ถูกเลือกและลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้ 
+                                if (obj_level[level][i]["fol_location"].includes(current_path + '/') ||
+                                    obj_level[level][i]["fol_location"] == current_path) {
+                                    disable = ' disabled ';
+                                } //if
+                            } else if (type = 'file') {
+                                //ตัวที่ถูกเลือก จะต้องกดไม่ได้ 
+                                if (obj_level[level][i]["fol_location"] == current_path) {
+                                    disable = ' disabled ';
+                                } //if
+                            }
 
                             html_option = '';
                             html_option += '<option ' + disable + ' id="fol_' + obj_level[level][i][
@@ -1067,7 +1206,8 @@ $(document).on("click", ".moveModal", function() {
             } //else
         }
     }); //ajax
-}); //get_dropdown_data
+
+} //get_dropdown_data
  </script>
 
  <!-- EditFile Script -->
@@ -1075,14 +1215,34 @@ $(document).on("click", ".moveModal", function() {
 <?php $this->session->set_userdata('qr_id', ''); ?>
 <?php $this->session->set_userdata('path', ''); ?>
 $(document).on("keyup", "#qr_name", function() {
+
+    // var text_n = document.getElementById("text_name");
+    var d_name = document.getElementById("qr_name").value;
+    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+    var n_check;
+    console.log("d_name" + d_name);
+
+    if (d_name.match(pattern)) {
+        // text_n.innerHTML = "";
+        n_check = 1;
+
+    } else {
+        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+        // text_n.style.color = "#ff0000";
+        n_check = 0;
+
+    }
+  
+    console.log(n_check + "abc");
+
     var t = <?php echo json_encode($arr_doc) ?>;
     var new_name = document.getElementById("qr_name");
     var check_name;
     var div = document.getElementById('target_div');
     var dis_button = document.getElementById('create');
-
+    
     for (let x in t) {
-        if (t[x].doc_name == new_name.value) {
+        if (t[x].doc_name == new_name.value || n_check == 0) {
             check_name = 1;
             break;
         } else {
@@ -1090,11 +1250,11 @@ $(document).on("keyup", "#qr_name", function() {
         }
     }
     console.log(check_name);
-    if (check_name == 1) {
+    if (check_name == 1) { 
         $("#qr_name").css("border-color", "red");
         div.style.display = "block";
         dis_button.disabled = true;
-
+        
     } else {
         $("#qr_name").css("border-color", "green");
         div.style.display = "none";
@@ -1105,6 +1265,25 @@ $(document).on("keyup", "#qr_name", function() {
 
 function check_file_edit() {
 
+    // var text_n = document.getElementById("text_name");
+    var d_name = document.getElementById("qr_name").value;
+    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+    var n_check;
+    console.log("d_name" + d_name);
+
+    if (d_name.match(pattern)) {
+        // text_n.innerHTML = "";
+        n_check = 1;
+
+    } else {
+        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+        // text_n.style.color = "#ff0000";
+        n_check = 0;
+
+    }
+  
+    console.log(n_check + "abc");
+    
     var dis_button = document.getElementById('sub_edit');
     dis_button.disabled = false;
 
@@ -1115,7 +1294,7 @@ function check_file_edit() {
 
 
     for (let x in t) {
-        if (t[x].qr_name == new_name.value || new_name.value == " ") {
+        if (t[x].qr_name == new_name.value || new_name.value == " " || n_check == 0) {
             check_name = 1;
             break;
         } else {
@@ -1123,6 +1302,8 @@ function check_file_edit() {
         }
     }
     console.log(check_name);
+
+
     if (check_name == 1) {
         $("#qr_name").css("border-color", "red");
         div.style.display = "block";
@@ -1135,9 +1316,31 @@ function check_file_edit() {
 
     }
     console.log(document.getElementById('edit'));
+
+   
 }
 
+
 function check_file_edit_in_folder() {
+
+    // var text_n = document.getElementById("text_name");
+    var d_name = document.getElementById("qr_name").value;
+    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+    var n_check;
+    console.log("d_name" + d_name);
+
+    if (d_name.match(pattern)) {
+        // text_n.innerHTML = "";
+        n_check = 1;
+
+    } else {
+        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+        // text_n.style.color = "#ff0000";
+        n_check = 0;
+
+    }
+  
+    console.log(n_check + "abc");
 
     var dis_button = document.getElementById('sub_edit');
     dis_button.disabled = false;
@@ -1149,7 +1352,7 @@ function check_file_edit_in_folder() {
 
 
     for (let x in t) {
-        if (t[x].qr_name == new_name.value || new_name.value == " ") {
+        if (t[x].qr_name == new_name.value || new_name.value == " " || n_check ==0) {
             check_name = 1;
             break;
         } else {

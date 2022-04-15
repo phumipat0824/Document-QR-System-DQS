@@ -27,7 +27,7 @@
                 </button>
                 <div id="myDropdown" class="dropdown-content">
                     <div class="custom-cm__item" data-toggle="modal" data-target="#exampleModal"><a>สร้างโฟลเดอร์</a></div>
-                    <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file_in_floder/' . $this->session->userdata('fol_id'); ?>">อัปโหลดไฟล์</a></div>
+                    <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file_in_floder/' . $this->session->userdata('fol_id'); ?>">สร้างคิวอาร์โค้ด</a></div>
                 </div>
             </div>
         </div>
@@ -236,7 +236,7 @@
         <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">คิวอาร์โค้ด</h3>
         <?php for ($i = 0; $i < count($arr_qr); $i++) {   ?>
         <?php if ($this->session->userdata('fol_id') == $arr_qr[$i]->doc_fol_id) { ?>
-        <div class="col-md-4">
+        <div class="col-md-4" style="display: flex; flex-wrap: wrap; justify-content: space-around; flex: 0 0 500px;">
             <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
                 <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
                     <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;"><?php echo $arr_qr[$i]->qr_name ?></h>
@@ -825,6 +825,24 @@
     <?php $this->session->set_userdata('qr_id', ''); ?>
     <?php $this->session->set_userdata('path', ''); ?>
     $(document).on("keyup", "#qr_name", function() {
+
+         // var text_n = document.getElementById("text_name");
+    var d_name = document.getElementById("qr_name").value;
+    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+    var n_check;
+    console.log("d_name" + d_name);
+
+    if (d_name.match(pattern)) {
+        // text_n.innerHTML = "";
+        n_check = 1;
+
+    } else {
+        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+        // text_n.style.color = "#ff0000";
+        n_check = 0;
+
+    }
+
         var t = <?php echo json_encode($arr_doc) ?>;
         var new_name = document.getElementById("qr_name");
         var check_name;
@@ -832,7 +850,7 @@
         var dis_button = document.getElementById('create');
 
         for (let x in t) {
-            if (t[x].doc_name == new_name.value) {
+            if (t[x].doc_name == new_name.value || n_check == 0) {
                 check_name = 1;
                 break;
             } else {
@@ -855,6 +873,23 @@
 
     function check_file_edit() {
 
+         // var text_n = document.getElementById("text_name");
+            var d_name = document.getElementById("qr_name").value;
+            var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+            var n_check;
+            console.log("d_name" + d_name);
+
+            if (d_name.match(pattern)) {
+                // text_n.innerHTML = "";
+                n_check = 1;
+
+            } else {
+        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+        // text_n.style.color = "#ff0000";
+                n_check = 0;
+
+    }
+
         var dis_button = document.getElementById('sub_edit');
         dis_button.disabled = false;
 
@@ -865,7 +900,7 @@
 
 
         for (let x in t) {
-            if (t[x].qr_name == new_name.value || new_name.value == " ") {
+            if (t[x].qr_name == new_name.value || new_name.value == " " || n_check ==0) {
                 check_name = 1;
                 break;
             } else {
@@ -889,7 +924,11 @@
 
     document.getElementById("download").addEventListener("click", function() {
 
-        html2canvas(document.querySelector('#capture')).then(function(canvas) {
+
+        const note = document.querySelector('#qr_path');
+        note.style.border = '10px solid #fff';
+
+        html2canvas(document.querySelector('#qr_path')).then(function(canvas) {
 
             saveAs(canvas.toDataURL(), 'DQS_QR.png');
         });
