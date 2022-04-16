@@ -18,7 +18,7 @@
          </div>
          <div class="col-md-4">
              <div class="dropdown" id="btt">
-                 <button class="dropbtn btn btn-round" style=" width: 160px; background-color: #F5F5F5 ; border: none;">
+                 <button class="dropbtn btn btn-round" style=" width: 145px; background-color: #F5F5F5 ; border: none;">
                      <h1 style="font-weight: 900; color:#003399 ; font-size: 50px; font-family:TH Sarabun New; height: 40; width: 50px;" id="button-folder">+ สร้าง</h1>
                  </button>
                  <div id="myDropdown" class="dropdown-content">
@@ -108,7 +108,7 @@
                      <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
                          <a href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
                          <a href="#" class="editModal" data-toggle="modal" data-target="#editModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">แก้ไข</a>
-                         <a href="#" class="moveModal moveModalAjax" data-toggle="modal" data-target="#moveModal" move-type="folder" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">ย้าย</a>
+                         <a href="#" class="moveModal moveModalAjax" data-toggle="modal" data-target="#moveModal"  move-type ="folder" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">ย้าย</a>
                          <a href="#" class="deleteModal" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>">ลบ</a>
                      </div>
                  </div>
@@ -555,7 +555,7 @@
          <div class="modal-dialog" role="document">
              <div class="modal-content">
                  <div class="modal-header">
-                     <h5 class="modal-title" id="MoveFileModalLabel" style="font-family:TH Sarabun New; font-weight: 900;font-size: 28px;">ย้ายไฟล์ไปที่</h5>
+                     <h5 class="modal-title" id="MoveFileModalLabel" style="font-family:TH Sarabun New; font-weight: 900;font-size: 28px;" >ย้ายไฟล์ไปที่</h5>
                  </div>
                  <form id="move-form" method="POST" action="<?php echo site_url() . '/File/File_management/move_file/'; ?>">
                      <div class="modal-body">
@@ -961,11 +961,13 @@ function rightclickfolder(folder) {
     }
 
 }
+
  </script>
 
  <!-- Move Folder Script -->
 
  <script>
+
 $(document).on("click", ".moveModalAjax", function() {
     var type = $(this).attr('move-type');
 

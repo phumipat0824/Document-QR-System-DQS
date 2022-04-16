@@ -50,14 +50,6 @@ class Member_upload_file extends DQS_controller
 	* @Create Date 2564-02-18
 	*/
 
-	public function save_file($path_file_save){
-		// http://103.129.15.182/DQS/assets/user/mqr.php
-		// http://103.129.15.182/DQS/assets/user/mqr.php?u="CHB005"&f="zysQR99.pdf"
-		mkdir('path/to/directory/kant', 0777, true);
-		return true;
-
-	}
-
 	public function show_member_upload_file_in_floder($fol_location_id){
 		
 		$this->load->model('M_DQS_folder', 'fol');
