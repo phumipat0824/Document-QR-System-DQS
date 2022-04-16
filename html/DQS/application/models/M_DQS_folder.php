@@ -171,5 +171,13 @@ class M_DQS_folder extends Da_DQS_folder
         $query = $this->db->query($sql);
         return $query;
     }
+
+    public function get_by_id_doc($doc_id)
+    {
+        $sql = "SELECT * from {$this->db_name}.DQS_Document
+        WHERE DQS_Document.doc_id = $doc_id";
+        $query = $this->db->query($sql);
+        return $query;
+    }
 }
 ?>
