@@ -555,7 +555,7 @@
          <div class="modal-dialog" role="document">
              <div class="modal-content">
                  <div class="modal-header">
-                     <h5 class="modal-title" id="MoveFileModalLabel">ย้ายไฟล์ไปที่</h5>
+                     <h5 class="modal-title" id="MoveFileModalLabel" style="font-family:TH Sarabun New; font-weight: 900;font-size: 28px;" >ย้ายไฟล์ไปที่</h5>
                  </div>
                  <form id="move-form" method="POST" action="<?php echo site_url() . '/File/File_management/move_file/'; ?>">
                      <div class="modal-body">
@@ -962,13 +962,6 @@ function rightclickfolder(folder) {
 
 }
 
-$(document).ready(function() {
-    $('.dropdown-submenu a.test').on("click", function(e) {
-        $(this).next('ul').toggle();
-        e.stopPropagation();
-        e.preventDefault();
-    });
-});
  </script>
 
  <!-- Move Folder Script -->
