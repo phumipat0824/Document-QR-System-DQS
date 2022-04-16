@@ -11,12 +11,12 @@ class M_DQS_station_state_of_province extends Da_DQS_station_state_of_province
         $query = $this->db->query($sql);
         return $query;
     }
-    public function get_station_by_id($state_dep_id)
+    public function get_station_by_id($station_dep_id)
     {
         $sql = "SELECT * FROM {$this->db_name}.DQS_Station_State_of_Province 
         LEFT JOIN {$this->db_name}.DQS_Department 
         ON station_dep_id = dep_id 
-        WHERE station_pro_id = $state_dep_id AND station_status = 1";
+        WHERE station_pro_id = $station_dep_id AND station_status = 1";
         $query = $this->db->query($sql);
         return $query;
     }
