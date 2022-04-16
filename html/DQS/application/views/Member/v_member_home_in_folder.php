@@ -280,7 +280,7 @@
                                                     <input onkeyup="check_file_edit()" type="text" class="col-md-10" id="qr_name" placeholder="" name="qr_name" required>
                                                 </center>
                                                 <br>
-                                                <a id="edit_mss" style="display: none; color:red;" align='center'>กรุณากรอกข้อมูลใหม่</a>
+                                                <a id="qr_fol_mss" style="display: none; color:red;" align='center'>ชื่อไฟล์ซ้ำหรือกรอกชื่อไฟล์ผิด กรุณากรอกใหม่</a>
                                                 <input type="hidden" name="qr_id" id="qr_id" value="">
                                                 <input type="hidden" name="doc_fol_id" id="doc_fol_id" value="">
                                             </div>
@@ -889,6 +889,26 @@
     <?php $this->session->set_userdata('qr_id', ''); ?>
     <?php $this->session->set_userdata('path', ''); ?>
     $(document).on("keyup", "#qr_name", function() {
+
+        // var text_n = document.getElementById("text_name");
+     var d_name = document.getElementById("qr_name").value;
+    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+    var n_check;
+    console.log("d_name" + d_name);
+
+    if (d_name.match(pattern)) {
+        // text_n.innerHTML = "";
+        n_check = 1;
+
+    } else {
+        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+        // text_n.style.color = "#ff0000";
+        n_check = 0;
+
+    }
+  
+    console.log(n_check + "check file edit in folder");
+
         var t = <?php echo json_encode($arr_doc) ?>;
         var new_name = document.getElementById("qr_name");
         var check_name;
@@ -896,7 +916,7 @@
         var dis_button = document.getElementById('create');
 
         for (let x in t) {
-            if (t[x].doc_name == new_name.value) {
+            if (t[x].doc_name == new_name.value  || n_check == 0) {
                 check_name = 1;
                 break;
             } else {
@@ -919,17 +939,38 @@
 
     function check_file_edit() {
 
+        // var text_n = document.getElementById("text_name");
+     var d_name = document.getElementById("qr_name").value;
+    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+    var n_check;
+    console.log("d_name" + d_name);
+
+    if (d_name.match(pattern)) {
+        // text_n.innerHTML = "";
+        n_check = 1;
+
+    } else {
+        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+        // text_n.style.color = "#ff0000";
+        n_check = 0;
+
+    }
+  
+    console.log(n_check + "check file edit in folder");
+
         var dis_button = document.getElementById('sub_edit');
         dis_button.disabled = false;
 
         var t = <?php echo json_encode($arr_qr) ?>;
-        var new_name = document.getElementById("qr_edit");
+        var new_name = document.getElementById("qr_name");
         var check_name;
-        var div = document.getElementById('edit_mss');
+        var div = document.getElementById('qr_fol_mss');
+
+        console.log(div);
 
 
         for (let x in t) {
-            if (t[x].qr_name == new_name.value || new_name.value == " ") {
+            if (t[x].qr_name == new_name.value || new_name.value == " "  || n_check == 0) {
                 check_name = 1;
                 break;
             } else {
@@ -938,17 +979,17 @@
         }
         console.log(check_name);
         if (check_name == 1) {
-            $("#qr_edit").css("border-color", "red");
+            $("#qr_name").css("border-color", "red");
             div.style.display = "block";
             dis_button.disabled = true;
 
         } else {
-            $("#qr_edit").css("border-color", "green");
+            $("#qr_name").css("border-color", "green");
             div.style.display = "none";
             dis_button.disabled = false;
 
         }
-        console.log(document.getElementById('edit'));
+      
     }
 
     document.getElementById("download").addEventListener("click", function() {
