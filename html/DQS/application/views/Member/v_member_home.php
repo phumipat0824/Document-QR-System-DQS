@@ -108,7 +108,7 @@
                      <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
                          <a href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
                          <a href="#" class="editModal" data-toggle="modal" data-target="#editModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">แก้ไข</a>
-                         <a href="#" class="moveModal" data-toggle="modal" data-target="#moveModal" id="optionMoveModal" onclick="createDropdown('folder')" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">ย้าย</a>
+                         <a href="#" class="moveModal moveModalAjax" data-toggle="modal" data-target="#moveModal"  move-type ="folder" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">ย้าย</a>
                          <a href="#" class="deleteModal" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>">ลบ</a>
                      </div>
                  </div>
@@ -328,7 +328,7 @@
                              </div>
                          </div>
                          <!-- End EditFile Model -->
-                         <button type="button" id="move" class="btn btn- MoveFileModal" onclick="createDropdown('file')" data-toggle="modal" data-target="#MoveFileModal" data-id="<?php echo $arr_qr[$i]->doc_id ?>" data-name="<?php echo $arr_qr[$i]->doc_name ?>" data-qr-id="<?php echo $arr_qr[$i]->qr_id ?>" data-qr-name="<?php echo $arr_qr[$i]->qr_name ?>" data-doc_fol_id="<?php echo $arr_qr[$i]->doc_fol_id ?>" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
+                         <button type="button" id="move" class="btn btn- MoveFileModal moveModalAjax" move-type="file" data-toggle="modal" data-target="#MoveFileModal" data-id="<?php echo $arr_qr[$i]->doc_id ?>" data-name="<?php echo $arr_qr[$i]->doc_name ?>" data-qr-id="<?php echo $arr_qr[$i]->qr_id ?>" data-qr-name="<?php echo $arr_qr[$i]->qr_name ?>" data-doc_fol_id="<?php echo $arr_qr[$i]->doc_fol_id ?>" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
 
                          <!-- Delete File -->
                          <a href="#" class="deleteFileModal" data-toggle="modal" data-target="#deleteFileModal" onclick="set_delete('<?php echo $arr_doc[$i]->doc_path ?>',<?php echo $arr_doc[$i]->doc_id ?>,'<?php echo $arr_qr[$i]->doc_fol_id ?>')">
@@ -468,7 +468,7 @@
                              </div>
                          </div>
                          <!-- End EditFile Model -->
-                         <button type="button" id="move" class="btn btn- MoveFileModal" onclick="createDropdown('file')" data-toggle="modal" data-target="#MoveFileModal" data-id="<?php echo $arr_qr[$i]->doc_id ?>" data-name="<?php echo $arr_qr[$i]->doc_name ?>" data-qr-id="<?php echo $arr_qr[$i]->qr_id ?>" data-qr-name="<?php echo $arr_qr[$i]->qr_name ?>" data-doc_fol_id="<?php echo $arr_qr[$i]->doc_fol_id ?>" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
+                         <button type="button" id="move" class="btn btn- MoveFileModal moveModalAjax" move-type="file" data-toggle="modal" data-target="#MoveFileModal" data-id="<?php echo $arr_qr[$i]->doc_id ?>" data-name="<?php echo $arr_qr[$i]->doc_name ?>" data-qr-id="<?php echo $arr_qr[$i]->qr_id ?>" data-qr-name="<?php echo $arr_qr[$i]->qr_name ?>" data-doc_fol_id="<?php echo $arr_qr[$i]->doc_fol_id ?>" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
                          <a href="#" class="delete2FileModal" data-toggle="modal" data-target="#delete2FileModal" onclick="set_delete('<?php echo $arr_qr[$i]->doc_path ?>',<?php echo $arr_qr[$i]->doc_id ?>,'<?php echo $arr_qr[$i]->doc_fol_id ?>')">
                              <button id="delete" class="btn btn-" style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">
                                  ลบ</button></a>
@@ -974,17 +974,17 @@ $(document).ready(function() {
  <!-- Move Folder Script -->
 
  <script>
-alert('555');
-// $(document).on("click", ".moveModal", function() {
-function createDropdown(type) {
+
+$(document).on("click", ".moveModalAjax", function() {
+    var type = $(this).attr('move-type');
 
     if (type == "file") {
-        var fol_id = $(".MoveFileModal").attr('data-doc_fol_id');
+        var fol_id = $(this).attr('data-doc_fol_id');
         //  fol_id = 0;
     } else if (type == "folder") {
-        var fol_id = $("#optionMoveModal").attr('data-id');
+        var fol_id = $(this).attr('data-id');
         $("#fol_id").val(fol_id);
-        var name = $("#optionMoveModal").attr('data-name');
+        var name = $(this).attr('data-name');
         $("#fol_name").val(name);
         var x = document.getElementById("fold_id").value = fol_id;
         document.getElementById("folder_name").value = name;
@@ -1137,7 +1137,7 @@ function createDropdown(type) {
         }
     }); //ajax
 
-} //get_dropdown_data
+}); //get_dropdown_data
  </script>
 
  <!-- EditFile Script -->
