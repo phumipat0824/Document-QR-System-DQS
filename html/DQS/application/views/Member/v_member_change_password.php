@@ -228,7 +228,7 @@ $old_password = $this->session->mem_password;
                     }else if(form.checkValidity() === true){
                         Swal.fire({
                         icon: 'success',
-                        title: 'เปลี่ยนแปลงรหัสผ่านสำเร็จ',
+                        title: '<font face="THSarabunNew">เปลี่ยนแปลงรหัสผ่านสำเร็จ?</font>',
                         showConfirmButton: false,
                         timer: 1500
                         })

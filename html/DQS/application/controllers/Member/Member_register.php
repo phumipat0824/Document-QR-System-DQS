@@ -65,6 +65,32 @@ class Member_register extends DQS_controller
 
     }
 
+    public function check_status()
+    {
+        $this->load->model('M_DQS_station_state_of_province', 'MSS');
+        $this->load->model('M_DQS_member', 'mmem');
+        $data = $this->MSS->get_all()->result();
+        $data2 = $this->MSS->get_all()->result();
+        // $this->load->model('M_DQS_member','mmem');
+        // $data['arr_member'] = $this->mmem->get_member()->result();
+        $mem_pro_id = $this->input->post('mem_pro_id');
+        $mem_dep_id = $this->input->post('mem_dep_id');
+        
+
+        for ($i=0 ; $i<count($data);$i++){
+            if($data[$i]->mem_pro_id == $mem_pro_id ){
+                if($data2[$i]->mem_dep_id == $mem_dep_id ){
+                    $check = 1;
+                }
+                
+            
+            }
+            $check = 0;
+              
+        }
+        echo json_encode($check);
+
+    }
       /*
 	* 
 	* show_member_confirm()

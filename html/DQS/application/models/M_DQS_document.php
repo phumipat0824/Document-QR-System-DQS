@@ -69,6 +69,50 @@ class M_DQS_document extends Da_DQS_document {
         return $query;
     }
 
+     /*
+	* get_file_by_fol_id
+	* Get document qrcode folder data by userid in database
+	* @input userid
+	* @output document qrcode folder data
+	* @author Chanyapat
+	* @Create Date 2565-03-25
+	*/
+	public function get_file_by_fol_id($qr_mem_id,$fol_id)
+    {
+        // $sql = "SELECT * FROM {$this->db_name}.DQS_QR  WHERE qr_mem_id = $qr_mem_id";
+        // $query = $this->db->query($sql);
+        // return $query;
+        $sql = "SELECT * 
+        FROM {$this->db_name}.DQS_Document AS document
+        LEFT JOIN {$this->db_name}.DQS_Qrcode AS qr
+        ON document.doc_name = qr.qr_name
+        WHERE qr_mem_id = $qr_mem_id AND doc_fol_id = $fol_id";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
+    /*
+	* get_parent_and_child_by_path
+	* Get document qrcode folder data by 
+	* @input 
+	* @output document qrcode folder data
+	* @author Chanyapat
+	* @Create Date 2565-04-15
+	*/
+	public function get_parent_and_child_by_path($path)
+    {
+        // $sql = "SELECT * FROM {$this->db_name}.DQS_QR  WHERE qr_mem_id = $qr_mem_id";
+        // $query = $this->db->query($sql);
+        // return $query;
+        $sql = "SELECT * 
+        FROM {$this->db_name}.DQS_Document AS document
+        LEFT JOIN {$this->db_name}.DQS_Qrcode AS qr
+        ON document.doc_name = qr.qr_name
+        WHERE doc_path = '$path' OR doc_path LIKE '{$path}/%'";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
     /*
 	* get_by_id
 	* Get document qrcode data by userid in database

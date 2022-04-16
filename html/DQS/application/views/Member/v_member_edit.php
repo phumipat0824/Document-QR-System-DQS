@@ -60,7 +60,7 @@
 
                     <div class="col-md-5" style="margin: auto;">
                     <label style = "color: #000000;  font-size: 22px; font-family: TH Sarabun New;" for="">หน่วยงาน</label>
-                        <label style = "color: #FF0000;">*</label>
+                        <label style = "color: #FF0000;">*หากมีบัญชีหน่วยงานแล้วจะไม่พบในรายการเลือก</label>
                         <select name="mem_dep_id" id="mem_dep_id" class="form-select" aria-label="Default select example"    required>
                             <option style = "color: #000000;  " value="<?php echo $obj_mem->dep_id ?>"><?php echo $obj_mem->dep_name ?></option>
                             <?php foreach ($arr_department as $value) { ?>
@@ -109,7 +109,9 @@
     body {
         background-color: #eff3f7;
     }
-   
+    .swal {
+    font-family: 'THSarabunNew', sans-serif;
+}
     
 </style>
 
@@ -280,7 +282,7 @@
         $('form #btn-ok').click(function(e) {
             let $form = $(this).closest('form');
             Swal.fire({
-            title: 'บันทึกการแก้ไขข้อมูลหรือไม่?',
+            title: '<font face="THSarabunNew">บันทึกการแก้ไขข้อมูลหรือไม่?</font>',
             showCancelButton: true,
             confirmButtonColor: '#518FF6',
             cancelButtonColor: '#fffff',
@@ -292,7 +294,7 @@
             if (result.isConfirmed) {
                 Swal.fire({
                 icon: 'success',
-                title: 'บันทึกการแก้ไขเรียบร้อยแล้ว',
+                title: '<font face="THSarabunNew">บันทึกการแก้ไขเรียบร้อยแล้ว</font>',
                 showConfirmButton: false,
                 timer: 2200
             })
