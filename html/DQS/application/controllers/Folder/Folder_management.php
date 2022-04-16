@@ -148,7 +148,42 @@ class Folder_management extends DQS_controller {
 		
 	
 	}//end funtion update_folder()
+
+public	function delete_in_folder($fol_id){
+		$this->load->model('M_DQS_folder', 'MDF');
+		
+		$doc_id = $this->MDF->get_by_doc_fol_id($fol_id)->result();
 	
+
+		for($i=0; $i<count($doc_id); $i++ ){
+			$qr_doc_id = $this->MDF->get_by_doc_id($doc_id[$i]->doc_id)->result();
+			$this->MDF->DeleteQR($qr_doc_id[0]->qr_id);
+		}
+
+		$this->MDF->DeleteDocument($fol_id);
+		
+		$this->MDF->DeleteFolder($fol_id);
+		// $this->delete_fol_in_fol($folder_id[0]->fol_location_id);
+
+	}
+
+	public function delete_fol_in_fol($fol_id){
+		$this->load->model('M_DQS_folder', 'MDF');
+		$fol_local_id = $this->MDF->get_by_fol_location_id($fol_id)->result();
+		$folder_id = $this->MDF->get_folder_by_id($fol_id)->result();
+		if($fol_local_id == null){
+		   $this->delete_in_folder($fol_id);
+		   if($folder_id!=0 && $folder_id != null){
+			if($folder_id[0]->fol_location_id !=0){
+				$this->delete_fol_in_fol($folder_id[0]->fol_location_id);
+			}
+		   }
+		}else{
+			for($i=0; $i<count($fol_local_id); $i++ ){
+				$this->delete_fol_in_fol($fol_local_id[$i]->fol_id);
+			}
+		}
+	}
 	/*
 	* delete_folder()
 	* delete folder 
@@ -157,7 +192,7 @@ class Folder_management extends DQS_controller {
 	* @author Onticha
 	* @Create Date 2564-11-30
 	*/
-	function delete_folder()
+public	function delete_folder()
 	{
 		$this->load->model('M_DQS_folder', 'MDF');
 		// $this->load->model('M_DQS_document', 'MDD');
@@ -169,18 +204,25 @@ class Folder_management extends DQS_controller {
 
 		$fol_name = $this->MDF->get_by_id_fol($fol_id)->result();
 		$doc_id = $this->MDF->get_by_doc_fol_id($fol_id)->result();
-		
-		for($i=0; $i<count($doc_id); $i++ ){
-			// echo $doc_id[$i]->doc_name;
-			// echo "<br>";
-			$qr_doc_id = $this->MDF->get_by_doc_id($doc_id[$i]->doc_id)->result();
-			// print_r($qr_doc_id);
-			// echo "<br>";
+		$fol_local_id = $this->MDF->get_by_fol_location_id($fol_id)->result();
 
-			$this->MDF->DeleteQR($qr_doc_id[0]->qr_id);
+		// print_r($fol_local_id);
+
+
+
+		for($i=0; $i<count($fol_local_id); $i++ ){
+			// $this->delete_in_folder($fol_local_id[$i]->fol_id);
+			$this->delete_fol_in_fol($fol_local_id[$i]->fol_id);
+			// $this->MDF->DeleteQR($qr_doc_id[0]->qr_id);
 		}
 
+		// for($i=0; $i<count($doc_id); $i++ ){
+		// 	$qr_doc_id = $this->MDF->get_by_doc_id($doc_id[$i]->doc_id)->result();
+		// 	$this->MDF->DeleteQR($qr_doc_id[0]->qr_id);
+		// }
+
 		$this->MDF->DeleteDocument($fol_id);
+		// $this->MDF->DeleteDocument($fol_id);
 
 		// print_r($doc_id);
 		// $fol_name = $this->MDF->get_by_id_fol($fol_id)->result();
@@ -218,7 +260,7 @@ class Folder_management extends DQS_controller {
 		}
 		
 	}//end funtion delete_folder()
-    
+  
 	/*
 	* move_folder()
 	* update folder location

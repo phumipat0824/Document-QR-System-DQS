@@ -101,6 +101,13 @@ class M_DQS_folder extends Da_DQS_folder
         return $query;
     } //get_by_path 
 
+    public function get_by_fol_location_id($fol_id)
+    {
+        $sql = "SELECT * from {$this->db_name}.DQS_Folder WHERE fol_location_id= $fol_id";
+        $query = $this->db->query($sql);
+        return $query;
+    } 
+
     public function get_level_1_by_member_id($fol_mem_id)
     {
         $sql = "SELECT *
