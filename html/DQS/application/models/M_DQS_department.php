@@ -88,12 +88,12 @@ class M_DQS_department extends Da_DQS_department
 	// 	* @author Kiattisak
     public function check_exist_name($mem_pro_id,$dep_name)
     {
-        $sql= "SELECT * FROM `DQS_Department` 
-        INNER JOIN DQS_Station_State_of_Province 
+        $sql= "SELECT * FROM {$this->db_name}.DQS_Department 
+        INNER JOIN {$this->db_name}.DQS_Station_State_of_Province 
         ON DQS_Department.dep_id = DQS_Station_State_of_Province.station_dep_id
-        WHERE DQS_Station_State_of_Province.station_pro_id = $mem_pro_id AND DQS_Department.dep_name = $dep_name";
+        WHERE DQS_Station_State_of_Province.station_pro_id = $mem_pro_id AND DQS_Department.dep_name = '$dep_name' ";
         $query = $this->db->query($sql);
-        return $query->num_rows();
+        return $query;
     }
     public function get_department(){
         $sql = "SELECT *

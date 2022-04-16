@@ -111,18 +111,32 @@ public function show_member_home()
 
 	public function delete_file(){
         $this->load->model('M_DQS_document','MDD');
-		$path = substr($this->input->post('doc_path'),1);
-		unlink(getcwd().$path);
-		$this->MDD->doc_id = $this->input->post('doc_id');
-		$data['qr'] = $this->MDD->get_by_qr_id($this->MDD->doc_id)->result();
-		$qr_id = $data['qr'][0]->qr_id;
-		$path_qr = substr($data['qr'][0]->qr_path,1);
-		unlink(getcwd().$path_qr);
+        $path = substr($this->input->post('doc_path'),1);
+        unlink(getcwd().$path);
+        $this->MDD->doc_id = $this->input->post('doc_id');
+        $data['qr'] = $this->MDD->get_by_qr_id($this->MDD->doc_id)->result();
+        $qr_id = $data['qr'][0]->qr_id;
+        $path_qr = substr($data['qr'][0]->qr_path,1);
+        unlink(getcwd().$path_qr);
         $this->MDD->delete_qr_file($qr_id);
         $this->MDD->delete_file();
 
-        redirect('/Member/Member_home/show_member_home');
-        
+            if($this->session->userdata('mem_role') == 1){
+            if($this->input->post('doc_fol_id') != 0){
+                redirect('Admin/Admin_home/show_admin_in_folder/' . $this->input->post('doc_fol_id'));
+            }
+            else{
+                redirect('Admin/Admin_home/show_admin_home/');
+            }
+        }else{
+            if($this->input->post('doc_fol_id') != 0){
+                redirect('Member/Member_home/show_in_folder/' . $this->input->post('doc_fol_id'));
+            }
+            else{
+                redirect('Member/Member_home/show_member_home/');
+            }
+        }
+
     }
 
 	public function delete_file_folder(){
@@ -158,7 +172,7 @@ public function show_member_home()
 	public function update_qr_file(){
         $this->load->model('M_DQS_qrcode','MDQ');
 		$this->load->model('M_DQS_document','MDD');
-		$doc_id = $this->input->post('qr_id');
+		$qr_id = $this->input->post('qr_id');
 		
 		$this->MDQ->qr_name = $this->input->post('qr_name');
 		$this->MDQ->qr_id = $this->input->post('qr_id');
@@ -166,10 +180,10 @@ public function show_member_home()
 		$this->MDD->doc_name = $this->input->post('qr_name');
 
 
-		$obj_qr = $this->MDQ->get_by_qr_id($doc_id)->result();
+		$obj_qr = $this->MDQ->get_by_qr_id($qr_id)->result();
 		$obj_doc = $this->MDD->get_by_doc_id($obj_qr[0]->qr_doc_id)->result();
 		$this->MDD->doc_id = $obj_qr[0]->qr_doc_id;
-
+		$doc_fol_id = $obj_doc[0]->doc_fol_id;
 		$get_sub_qr = $obj_qr[0]->qr_path;
 		$arr = array();
 		$i = 0;
@@ -226,7 +240,7 @@ public function show_member_home()
 
 		
 	
-
+		
 		$get_sub_doc = $obj_doc[0]->doc_path;
 		$arr = array();
 		$i = 0;
@@ -251,20 +265,22 @@ public function show_member_home()
 
 		
 		}
-		
+	
 		if($this->session->userdata('mem_role') == 1){
-			if($this->input->post('doc_fol_id') != 0){
-				redirect('Admin/Admin_home/show_admin_in_folder/' . $this->input->post('doc_fol_id'));
+			if($doc_fol_id != 0){
+				redirect('Admin/Admin_home/show_admin_in_folder/' . $doc_fol_id);
 			}
 			else{
 				redirect('Admin/Admin_home/show_admin_home/');
 			}
 		}else{
-			if($this->input->post('doc_fol_id') != 0){
-				redirect('Member/Member_home/show_in_folder/' . $this->input->post('doc_fol_id'));
+			if($doc_fol_id != 0){
+				redirect('Member/Member_home/show_in_folder/' . $doc_fol_id);
+				// echo $doc_fol_id;
 			}
 			else{
 				redirect('Member/Member_home/show_member_home/');
+				// echo $doc_fol_id;
 			}
 		}
    }

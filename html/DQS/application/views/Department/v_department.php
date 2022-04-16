@@ -6,6 +6,18 @@
   * @Create Date 2564-08-05
  -->
 <!-- load plugin data table -->
+<style>
+  body {
+    font-family:TH Sarabun New;
+  }
+  /* table {
+    font-family:TH Sarabun New;
+  } */
+  table tr td{
+    font-family:TH Sarabun New;
+    font-size: 30px;
+    }
+</style>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'assets/plugin' ?>/DataTables/datatables.css"/>
 <script type="text/javascript" src="<?php echo base_url() . 'assets/plugin' ?>/DataTables/datatables.js"></script>
 <link href="<?php echo base_url() . 'assets/template/material-dashboard-master' ?>/assets/css/CSS_table_list.css" rel="stylesheet" />
@@ -91,21 +103,25 @@ function create_Table(arr_dept){
     } else {
         var check_status ='';
     }
-    if (index_dept <25) {
-        var edit_check ='disabled';
-    } else {
-        var edit_check ='';
-    }
+    // if (index_dept <25) {
+    //     var edit_check ='disabled';
+    // } else {
+    //     var edit_check ='';
+    // }
 // ตรวจสอบสถานะการแสดงผลของหน่วยงาน 
 
     html_code += '<td style="text-align: center;">' ;
     html_code += '<label class="switch">';
-    html_code += '<input type="checkbox"  '+check_status+' '+edit_check+' onchange="update_status('+ row_dept['dep_id'] +',' +  row_dept['station_status'] + ')" >';
+    // html_code += '<input type="checkbox"  '+check_status+' '+edit_check+' onchange="update_status('+ row_dept['dep_id'] +',' +  row_dept['station_status'] + ')" >';
+    html_code += '<input type="checkbox"  '+check_status+'  onchange="update_status('+ row_dept['dep_id'] +',' +  row_dept['station_status'] + ')" >';
+
     html_code += '<span class="slider round"></span>';
     html_code += '</label>';
     html_code += '</td>';
 // สถานะของหน่วยงาน
-    html_code += '<td style="text-align: center;">' +  '<button type="button"'+edit_check+' class="btn btn-orange editModal" data-toggle="modal" data-target="#editModal" data-id= '+row_dept['dep_id']+' data-name= '+row_dept['dep_name']+' >'+'<i class="material-icons">edit</i>'+'&nbsp;</button>' + '</td>';
+    // html_code += '<td style="text-align: center;">' +  '<button type="button"'+edit_check+' class="btn btn-orange editModal" data-toggle="modal" data-target="#editModal" data-id= '+row_dept['dep_id']+' data-name= '+row_dept['dep_name']+' >'+'<i class="material-icons">edit</i>'+'&nbsp;</button>' + '</td>';
+    html_code += '<td style="text-align: center;">' +  '<button type="button" class="btn btn-orange editModal" data-toggle="modal" data-target="#editModal" data-id= '+row_dept['dep_id']+' data-name= '+row_dept['dep_name']+' >'+'<i class="material-icons">edit</i>'+'&nbsp;</button>' + '</td>';
+
     // button edit data
     html_code += '</td>';
 		html_code += '</tr>';
@@ -177,8 +193,7 @@ function make_dataTable_byId(id_name) {
       <!-- action="<?php echo site_url() ?>/Department/Department_list/add_department" -->
       <form id="add-form" method="POST" onsubmit="return false">
         <div class="modal-body">
-            <center><input type="text" class="col-md-10" placeholder="กรอกชื่อหน่วยงาน" name="dep_name" required ></center>
-            <!-- <input type="hidden" name="station_status" value="1"> -->
+            <center><input type="text" class="col-md-10" placeholder="กรอกชื่อหน่วยงาน" id="dep_name" name="dep_name" value="" required ></center>
             <br>
             <label style = "color: #FF0000;"><span id ="text_confirm_add"></span></label>
         </div>
@@ -200,7 +215,9 @@ function make_dataTable_byId(id_name) {
     $.ajax({
         type: 'post',
         url: "<?php echo site_url().'/Department/Department_list/add_department'?>",
-        data: $( "#add-form" ).serialize(),
+        data: {
+          dep_name: $('#dep_name').val(),
+            },
         dataType: 'json',
         success: function(data) {
               // console.log("succ");
@@ -209,7 +226,7 @@ function make_dataTable_byId(id_name) {
         },
         error: function (error) {
           // console.log("error");
-          location.reload();
+          // location.reload();
         }
     });
   });

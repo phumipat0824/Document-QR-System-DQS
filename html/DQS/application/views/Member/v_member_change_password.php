@@ -16,16 +16,16 @@ $old_password = $this->session->mem_password;
 
 <div class="content">
 <div class="container-fluid" style="padding-top: 100px ;margin: auto;">
-    <div class="row">
-        <div class="col-md-6 offset-md-4">
-        <center><h1 style="color:#003399; font-family:TH Sarabun New; font-size:4em; font-weight: bold;">จัดการบัญชีผู้ใช้งาน</h1></center>
-        </div>
-    </div>
+    
     <div class="row">
     <div class="col-md-6 offset-md-4">
+    
         <div class="card"  style="border-radius: 30px;">
-            <center><h2 style="color:black; padding-top:50px; font-family:TH Sarabun New; font-weight: bold;">เปลี่ยนรหัสผ่าน</h2></center>
-            <div class="card-body " style="padding-top: 10px; padding-right:80px; padding-left:80px; padding-bottom:30px">
+            <div class="card-header card-header-warning" style=" height: 60px; width: 300px;">
+                <h5 class="card-title" style="margin-left: 55px; font-family:TH Sarabun New; font-size:1.8em;" ><i class="far fa-edit"></i>เปลี่ยนรหัสผ่านผู้ใช้งาน</h5>
+            </div>
+            <!-- <center><h2 style="color:black; padding-top:50px; font-family:TH Sarabun New; font-weight: bold;">เปลี่ยนรหัสผ่าน</h2></center> -->
+            <div class="card-body " style="padding-top: 30px; padding-right:80px; padding-left:80px; padding-bottom:30px">
             <form id="changepass" action="<?php echo site_url() . '/Member/Member_change_password/change_password' ?>" method="post" >
             <div class="row">
                 <div class="col-md-8 offset-md-2">
@@ -228,7 +228,7 @@ $old_password = $this->session->mem_password;
                     }else if(form.checkValidity() === true){
                         Swal.fire({
                         icon: 'success',
-                        title: 'เปลี่ยนแปลงรหัสผ่านสำเร็จ',
+                        title: '<font face="THSarabunNew">เปลี่ยนแปลงรหัสผ่านสำเร็จ?</font>',
                         showConfirmButton: false,
                         timer: 1500
                         })

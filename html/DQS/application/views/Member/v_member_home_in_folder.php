@@ -18,35 +18,31 @@
 <div class="content">
     <div class="row" style="padding: 100px 10px 10px 20%;">
         <div class="col-md-8">
-            <h1 style="color:#003399; font-family:TH Sarabun New; font-weight: 900; font-size: 80px;">คิวอาร์โค้ดของฉัน
-            </h1>
+            <h1 style="color:#003399; font-family:TH Sarabun New; font-weight: 900; font-size: 80px;">คิวอาร์โค้ดของฉัน</h1>
         </div>
         <div class="col-md-4">
             <div class="dropdown">
-                <button onmousedown="rightclick()" class="dropbtn btn btn-round" style=" width: 145px; background-color: #F5F5F5 ; border: none;">
+                <button onmousedown="rightclick()" class="dropbtn btn btn-round" style=" width: 160px; background-color: #F5F5F5 ; border: none;">
                     <h1 style="font-weight: 900; color:#003399 ; font-size: 50px; font-family:TH Sarabun New; height: 40; width: 50px;" id="button-folder">+ สร้าง</h1>
                 </button>
                 <div id="myDropdown" class="dropdown-content">
-                    <div class="custom-cm__item" data-toggle="modal" data-target="#exampleModal"><a>สร้างโฟลเดอร์</a>
-                    </div>
-                    <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file_in_floder/' . $this->session->userdata('fol_id'); ?>">อัปโหลดไฟล์</a>
-                    </div>
+                    <div class="custom-cm__item" data-toggle="modal" data-target="#exampleModal"><a>สร้างโฟลเดอร์</a></div>
+                    <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file_in_floder/' . $this->session->userdata('fol_id'); ?>">สร้างคิวอาร์โค้ด</a></div>
                 </div>
             </div>
         </div>
+        <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">โฟลเดอร์</h3>
+        <br>
         <div>
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" style=" color:#707070; font-weight: 900; font-family:TH Sarabun New; font-size: 25px;" href="<?php echo site_url() . '/Member/Member_home/show_member_home'; ?>">หน้าหลัก</a></li>
                 <?php for ($i = 0; $i < count($path_fol); $i++) { ?>
                 <?php if ($path_fol[$i] != '@') { ?>
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" style="color:#707070; font-weight: 900; font-family:TH Sarabun New; font-size: 25px;"><?php echo $path_fol[$i] ?></a>
-                </li>
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" style="color:#707070; font-weight: 900; font-family:TH Sarabun New; font-size: 25px;" href="<?php echo site_url() . '/Member/Member_home/show_in_folder/66'; ?>"><?php echo $path_fol[$i] ?></a></li>
                 <?php } ?>
                 <?php } ?>
             </ol>
         </div>
-        <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">โฟลเดอร์</h3>
-        <br>
 
         <br>
 
@@ -63,7 +59,7 @@
         <!--  โฟลเดอร์ปกติ -->
         <?php
             $sub_name_folder = $arr_fol[$i]->fol_name;  //แก้ไขจำนวนชื่อโฟลเดอร์
-            
+
             if (preg_match('/^[a-z]+/i', $sub_name_folder)) {
                 if (strlen($sub_name_folder) > 18) {
                     $sub_name_folder = substr($sub_name_folder, 0, 18) . "...";
@@ -83,7 +79,7 @@
             <div id="folder<?php echo $arr_fol[$i]->fol_id ?>" class="dropdown-content">
                 <a href="<?php echo site_url() . '/Member/Member_home/show_in_folder/'; ?><?php echo $arr_fol[$i]->fol_id ?>">เปิด</a>
                 <a href="#" class="editModal" data-toggle="modal" data-target="#editModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">แก้ไข</a>
-                <a href="#" class="moveModal" data-toggle="modal" data-target="#moveModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">ย้าย</a>
+                <a href="#" class="moveModal moveModalAjax" data-toggle="modal" data-target="#moveModal" move-type="folder" data-id="<?php echo $arr_fol[$i]->fol_id ?>" data-name="<?php echo $arr_fol[$i]->fol_name ?>">ย้าย</a>
                 <a href="#" class="deleteModal" data-toggle="modal" data-target="#deleteModal" data-id="<?php echo $arr_fol[$i]->fol_id ?>">ลบ</a>
             </div>
         </div>
@@ -109,8 +105,7 @@
                     <form method="POST" name="form" action="<?php echo site_url() . '/Folder/Folder_management/insert_folder'; ?>">
                         <div class="modal-body">
                             <center><input style="font-size: 25px;font-family:TH Sarabun New; " id="fol_name" type="text" class="col-md-10" placeholder="โฟลเดอร์ไม่มีชื่อ" name="fol_name" required></center><br>
-                            <a id="target_div" style="display: none; color:red;" align='center'>ชื่อโฟลเดอร์ซ้ำ
-                                กรุณากรอกใหม่</a>
+                            <a id="target_div" style="display: none; color:red;" align='center'>ชื่อโฟลเดอร์ซ้ำ กรุณากรอกใหม่</a>
 
                         </div>
                         <div class="modal-footer">
@@ -207,7 +202,7 @@
     </div>
     <!-- /*
     * move folder
-    * move folder
+    * Display show_member_home
     * @input -
     * @output show folder move
     * @author chanyapat
@@ -220,7 +215,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">ย้ายไปที่</h5>
                 </div>
-                <form id="move-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/move_folder/';?>">
+                <form id="move-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/move_folder/'; ?>">
                     <div class="modal-body">
                         <!-- dropdown folder name -->
                         <div id="select_move"></div>
@@ -230,139 +225,146 @@
                         <input type="submit" class="btn btn-success" value="บันทึก">
                         <input type="hidden" name="fol_id" id="fold_id" value="">
                         <input type="hidden" name="fol_name" id="folder_name" value="">
-<!-- QR-code -->
-<div class="row" style="padding: 100px 10px 10px 20%;">
-    <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">คิวอาร์โค้ด </h3>
-    <?php for ($i = 0; $i < count($arr_qr); $i++) {   ?>
-    <?php if ($this->session->userdata('fol_id') == $arr_qr[$i]->doc_fol_id) { ?>
-    <div class="col-md-4">
-        <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
-            <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
-                <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;"><?php echo $arr_qr[$i]->qr_name ?></h>
-            </div>
-            <div class="card-body">
-                <div class="form-row">
-                    <div class="form-group col-md-5">
-                        <img id="img" src="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" height="128" width="128" style="margin: auto;">
-                        <a href="#" class="downloadModal" data-toggle="modal" data-target="#downloadModal" data-path="<?php echo base_url() . $arr_qr[$i]->qr_path ?>">
-                            <button id="load" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button></a>
                     </div>
-                    <div class="form-group col-md-4">
-                        <!-- <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">วันที่สร้าง : </h5>
-                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"><?php echo $arr_qr[$i]->doc_datetime ?></h5> -->
-
-                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิดไฟล์ : <?php echo $arr_qr[$i]->doc_type ?></h5>
-
-                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
-                            รายงานสรุปผล </h5>
-                    </div>
-                    <div class="form-group col-md-2">
-                    <a href="#" class="EditFileModal" data-toggle="modal" data-target="#EditFileModal" data-id="<?php echo $arr_qr[$i]->qr_id ?>" data-name="<?php echo $arr_qr[$i]->qr_name ?>"  data-doc_fol="<?php echo $arr_doc[$i]->doc_fol_id ?>">
-                             <button id="edit" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70px; ">แก้ไข</button></a>
-                        <button id="remove" class="btn btn-" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
-                        <button id="delete" class="btn btn-" style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; " onclick="set_delete('<?php echo $arr_qr[$i]->doc_path ?>',<?php echo $arr_qr[$i]->doc_id.','.$this->session->userdata('fol_id') ?>)" data-toggle="modal" data-target="#deleteFileModal">ลบ</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- EditFile Modal -->
-    <div class="modal fade" id="EditFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; ">
-                        <b>แก้ไขชื่อไฟล์</b>
-                    </h6>
-                </div>
-
-                <form id="edit-form" method="POST" action="<?php echo site_url() .'/Member/Member_home/update_qr_file/'.$arr_qr[$i]->doc_id; ?>">
-
-                    <div class="modal-body">
-                        <center>
-                            <input onkeyup="check_file_edit()" type="text" class="col-md-10" id="qr_name" placeholder="" name="qr_name" required>
-                        </center>
-                        <br>
-                        <a id="edit_mss" style="display: none; color:red;" align='center'>กรุณากรอกข้อมูลใหม่</a>
-                        <input type="hidden" name="qr_id" id="qr_id" value="">
-                        <input type="hidden" name="doc_fol_id" id="doc_fol_id" value="">
-
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                        <input type="submit" class="btn btn-success" id="sub_edit" value="บันทึก">
-                    </div>
-
                 </form>
             </div>
         </div>
     </div>
-    <!-- End UpdateFile Model -->
-
-    <?php }  ?>
-
-
-    <div class="modal fade" id="downloadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; "><b>
-                            ดาวน์โหลด</b></h6>
-
+    <!-- end move Modal -->
+    <!-- QR-code -->
+    <div class="row" style="padding: 100px 10px 10px 20%;">
+        <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">คิวอาร์โค้ด</h3>
+        <?php for ($i = 0; $i < count($arr_qr); $i++) {   ?>
+        <?php if ($this->session->userdata('fol_id') == $arr_qr[$i]->doc_fol_id) { ?>
+        <div class="col-md-4" style="display: flex; flex-wrap: wrap; justify-content: space-around; flex: 0 0 500px;">
+            <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
+                <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
+                    <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;"><?php echo $arr_qr[$i]->qr_name ?></h>
                 </div>
-                <div class="modal-body">
-                    <div id="capture">
-                        <div id="qrcode">
-                            <center>
-                                <img src="" id="qr_path" name="qr_path" height="250" width="250" style="margin: auto;">
-                            </center>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-5">
+                            <img id="img" src="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" height="128" width="128" style="margin: auto;">
+                            <a href="#" class="downloadModal" data-toggle="modal" data-target="#downloadModal" data-path="<?php echo base_url() . $arr_qr[$i]->qr_path ?>">
+                                <button id="load" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button></a>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <?php $time = $arr_qr[$i]->doc_datetime ;?>
+                            <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">วันที่สร้าง :</h5>
+                            <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;"><?php echo substr($time, 0,10 ) ?></h5>
+
+                            <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิดไฟล์ : </h5>
+                            <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;"><?php echo $arr_qr[$i]->doc_type ?></h5>
+
+                            <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">รายงานสรุปผล </h5>
+                        </div>
+                        <div class="form-group col-md-2">
+
+                            <a href="#" class="EditFileModal" data-toggle="modal" data-target="#EditFileModal" data-id="<?php echo $arr_qr[$i]->qr_id ?>" data-name="<?php echo $arr_qr[$i]->qr_name ?>" data-doc_fol="<?php echo $arr_qr[$i]->doc_fol_id ?>">
+                                <button id="edit" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70px; ">แก้ไข</button></a>
+
+                            <!-- EditFile Modal -->
+                            <div class="modal fade" id="EditFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; ">
+                                                <b>แก้ไขชื่อไฟล์</b>
+                                            </h6>
+                                        </div>
+
+                                        <form id="edit-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/update_qr_file/' . $arr_qr[$i]->doc_id; ?>">
+
+                                            <div class="modal-body">
+                                                <center>
+                                                    <input onkeyup="check_file_edit()" type="text" class="col-md-10" id="qr_name" placeholder="" name="qr_name" required>
+                                                </center>
+                                                <br>
+                                                <a id="qr_fol_mss" style="display: none; color:red;" align='center'>ชื่อไฟล์ซ้ำหรือกรอกชื่อไฟล์ผิด กรุณากรอกใหม่</a>
+                                                <input type="hidden" name="qr_id" id="qr_id" value="">
+                                                <input type="hidden" name="doc_fol_id" id="doc_fol_id" value="">
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                                                <input type="submit" class="btn btn-success" id="sub_edit" value="บันทึก">
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End UpdateFile Model -->
+
+                            <button type="button" id="move" class="btn btn- MoveFileModal moveModalAjax" move-type="file" data-toggle="modal" data-target="#MoveFileModal" data-id="<?php echo $arr_qr[$i]->doc_id ?>" data-name="<?php echo $arr_qr[$i]->doc_name ?>" data-qr-id="<?php echo $arr_qr[$i]->qr_id ?>" data-qr-name="<?php echo $arr_qr[$i]->qr_name ?>" data-doc_fol_id="<?php echo $arr_qr[$i]->doc_fol_id ?>" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
+
+
+
+                            <button type="button" id="delete" class="btn btn- deleteFileModal" data-toggle="modal" data-target="#deleteFileModal" style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; " onclick="set_delete('<?php echo $arr_qr[$i]->doc_path ?>',<?php echo $arr_qr[$i]->doc_id.','.$this->session->userdata('fol_id') ?>)">ลบ</button>
+
+                            <!-- delete file modal-->
+                            <div class="modal fade" id="deleteFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; "><b>
+                                                    ยืนยันการลบเอกสาร</b></h6>
+
+                                        </div>
+
+                                        <form id="delete-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/delete_file_folder/' ?>">
+                                            <div class="modal-body">
+
+                                                <input type="hidden" name="doc_id" id="doc_id_delete">
+
+                                                <input type="hidden" name="doc_path" id="doc_path_delete">
+
+                                                <input type="hidden" name="fol_id" id="fol_id_delete">
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                                                <input type="submit" class="btn btn-success" value="ยืนยัน">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- delete file modal-->
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                    <button type="submit" id="download" onclick="" class="btn btn-success">ยืนยัน</button>
+            </div>
+        </div>
+        <div class="modal fade" id="downloadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; "><b>
+                                ดาวน์โหลด</b></h6>
+
+                    </div>
+                    <div class="modal-body">
+                        <div id="capture">
+                            <div id="qrcode">
+                                <center>
+                                    <img src="" id="qr_path" name="qr_path" height="250" width="250" style="margin: auto;">
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                        <button type="submit" id="download" onclick="" class="btn btn-success">ยืนยัน</button>
+                    </div>
                 </div>
             </div>
         </div>
+        <?php }  ?>
+        <?php }  ?>
     </div>
 
-
-    <?php }  ?>
-</div>
-<div class="modal fade" id="deleteFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; "><b>
-                        ยืนยันการลบเอกสาร</b></h6>
-
-            </div>
-
-            <form id="delete-form" method="POST" action="<?php echo site_url() . '/Member/Member_home/delete_file_folder/' ?>">
-                <div class="modal-body">
-
-                    <input type="hidden" name="doc_id" id="doc_id_delete">
-
-                    <input type="hidden" name="doc_path" id="doc_path_delete">
-
-                    <input type="hidden" name="fol_id" id="fol_id_delete">
-
-
-
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                    <input type="submit" class="btn btn-success" value="ยืนยัน">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<!-- /*
+    <!-- /*
     * move file
     * Display modal move file
     * @input -
@@ -370,588 +372,661 @@
     * @author natruja
     * @Create Date 2565-03-21
     */ -->
-<!-- Move File Modal -->
-<div class="modal fade" id="MoveFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="MoveFileModalLabel">ย้ายไฟล์ไปที่</h5>
+    <!-- Move File Modal -->
+    <div class="modal fade" id="MoveFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="MoveFileModalLabel" style="font-family:TH Sarabun New; font-weight: 900;font-size: 28px;">ย้ายไฟล์ไปที่</h5>
+                </div>
+                <form id="move-form" method="POST" action="<?php echo site_url() . '/File/File_management/move_file/'; ?>">
+                    <div class="modal-body">
+                        <input type="hidden" name="doc_id" id="file_id" value="">
+                        <input type="hidden" name="qr_id" id="qrcode_id" value="">
+                        <!-- dropdown folder name -->
+
+                        <div id="select_move_file">
+
+                        </div><br>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                        <input type="submit" class="btn btn-success" value="บันทึก">
+                        <input type="hidden" name="doc_name" id="file_name" value="">
+                        <input type="hidden" name="qr_name" id="qrcode_name" value="">
+
+                    </div>
+                </form>
             </div>
-            <form id="move-form" method="POST" action="<?php echo site_url() . '/File/File_management/move_file/'; ?>">
-                <div class="modal-body">
-                    <input type="hidden" name="doc_id" id="file_id" value="">
-                    <input type="hidden" name="qr_id" id="qrcode_id" value="">
-                    <!-- dropdown folder name -->
-                    <select name="doc_fol_id" id="doc_fol_id" class="form-select" aria-label="Default select example" placeholder="" required>
-                        <option value="" disabled selected hidden>เลือกโฟลเดอร์</option>
-                        <option value='0'>หน้าหลัก</option>
-                        <?php for ($i = 0; $i < count($arr_folder); $i++) {   ?>
-                        <?php if ($arr_folder[$i]->fol_mem_id == $this->session->userdata('mem_id')) { ?>
-                        <option value='<?php echo $arr_folder[$i]->fol_id ?>'>
-                            <?php echo $arr_folder[$i]->fol_name ?></option>
-                        <?php } ?>
-                        <?php } ?>
-                    </select><br>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                    <input type="submit" class="btn btn-success" value="บันทึก">
-                    <input type="hidden" name="doc_name" id="file_name" value="">
-                    <input type="hidden" name="qr_name" id="qrcode_name" value="">
-                </div>
         </div>
     </div>
-</div>
+    <!-- End move file modal -->
 
 
-<script>
-$(document).on("click", ".EditFileModal", function() {
-    var id = $(this).attr('data-id');
-    $("#qr_id").val(id);
-    console.log(id);
-    var name = $(this).attr('data-name');
-    $("#qr_name").val(name);
-    console.log(name);
-    var doc_fol = $(this).attr('data-doc_fol');
-    $("#doc_fol_id").val(doc_fol);
-});
 
-$(document).on("click", ".downloadModal", function() {
-    var path = $(this).attr('data-path');
-    console.log(path);
-    document.getElementById("qr_path").src = path;
+    <script type="text/javascript">
+    $(document).on("click", ".EditFileModal", function() {
+        var id = $(this).attr('data-id');
+        $("#qr_id").val(id);
+        console.log(id);
+        var name = $(this).attr('data-name');
+        $("#qr_name").val(name);
+        console.log(name);
+        var doc_fol = $(this).attr('data-doc_fol');
+        $("#doc_fol_id").val(doc_fol);
+    });
+    </script>
 
-});
+    <script>
+    $(document).on("click", ".downloadModal", function() {
+        var path = $(this).attr('data-path');
+        // console.log(path);
+        document.getElementById("qr_path").src = path;
 
-<?php $this->session->set_userdata('fol_id', ''); ?>
-<?php $this->session->set_userdata('path', ''); ?>
-$(document).on("keyup", "#fol_name", function() {
-    var t = <?php echo json_encode($arr_fol) ?>;
-    var new_name = document.getElementById("fol_name");
-    var check_name;
-    var div = document.getElementById('target_div');
-    var dis_button = document.getElementById('create');
+    });
 
-    for (let x in t) {
-        if (t[x].fol_name == new_name.value) {
-            check_name = 1;
-            break;
-        } else {
-            check_name = 0;
-        }
+    function set_delete(path, id, fol_id) {
+        $('#doc_path_delete').val(path);
+        $('#doc_id_delete').val(id);
+        $('#fol_id_delete').val(fol_id);
     }
-    console.log(check_name);
-    if (check_name == 1) {
-        $("#fol_name").css("border-color", "red");
-        div.style.display = "block";
-        dis_button.disabled = true;
+    <?php $this->session->set_userdata('fol_id', ''); ?>
+    <?php $this->session->set_userdata('path', ''); ?>
+    $(document).on("keyup", "#fol_name", function() {
+        var t = <?php echo json_encode($arr_fol) ?>;
+        var new_name = document.getElementById("fol_name");
+        var check_name;
+        var div = document.getElementById('target_div');
+        var dis_button = document.getElementById('create');
 
-    } else {
-        $("#fol_name").css("border-color", "green");
-        div.style.display = "none";
-        dis_button.disabled = false;
-
-    }
-});
-
-/* check_fol_edit()
- * check folder edit
- * @input -
- * @output -
- * @author Onticha
- * @Create Date 2564-11-30
- */
-function check_fol_edit() {
-
-    var dis_button = document.getElementById('edit');
-    dis_button.disabled = false;
-
-    var t = <?php echo json_encode($arr_fol) ?>;
-    var new_name = document.getElementById("fol_edit");
-    var check_name;
-    var div = document.getElementById('edit_mss');
-
-
-    for (let x in t) {
-        if (t[x].fol_name == new_name.value || new_name.value == " ") {
-            check_name = 1;
-            break;
-        } else {
-            check_name = 0;
-        }
-    }
-    console.log(check_name);
-    if (check_name == 1) {
-        $("#fol_edit").css("border-color", "red");
-        div.style.display = "block";
-        dis_button.disabled = true;
-
-    } else {
-        $("#fol_edit").css("border-color", "green");
-        div.style.display = "none";
-        dis_button.disabled = false;
-
-    }
-} //end function check_fol_edit()
-</script>
-
-
-
-<script type="text/javascript">
-$(document).on("click", ".editModal", function() {
-    var id = $(this).attr('data-id');
-    $("#fol_id").val(id);
-    console.log(id);
-    var name = $(this).attr('data-name');
-    $("#fol_name").val(name);
-    document.getElementById("folder_id").value = id;
-    document.getElementById("fol_edit").value = name;
-});
-
-
-/* deleteModal()
- * deleteModal 
- * @input -
- * @output -
- * @author Onticha
- * @Create Date 2564-11-30
- */
-$(document).on("click", ".deleteModal", function() {
-    var id = $(this).attr('data-id');
-    $("#fol_id").val(id);
-});
-
-
-var cm = document.querySelector(".custom-cm");
-
-function showContextMenu(show = true) {
-    cm.style.display = show ? "block" : "none";
-}
-
-window.addEventListener("contextmenu", e => {
-    e.preventDefault();
-
-    showContextMenu();
-    cm.style.top =
-        e.y + cm.offsetHeight > window.innerHeight ?
-        window.innerHeight - cm.offsetHeight :
-        e.y;
-    cm.style.left =
-        e.x + cm.offsetWidth > window.innerWidth ?
-        window.innerWidth - cm.offsetWidth :
-        e.x;
-});
-
-
-/* editModal()
- * editModal 
- * @input -
- * @output -
- * @author Onticha
- * @Create Date 2564-11-30
- */
-$(document).on("click", ".editModal", function() {
-    var id = $(this).attr('data-id');
-    $("#dep_id").val(id);
-});
-
-$(document).on("click", ".MoveFileModal", function() {
-    var id = $(this).attr('data-id');
-    $("#doc_id").val(id);
-    var name = $(this).attr('data-name');
-    $("#doc_name").val(name);
-    var qr_id = $(this).attr('data-qr-id');
-    $("#qr_id").val(qr_id);
-    var qr_name = $(this).attr('data-qr-name');
-    $("#qr_name").val(qr_name);
-    document.getElementById("file_id").value = id;
-    document.getElementById("file_name").value = name;
-    document.getElementById("qrcode_id").value = qr_id;
-    document.getElementById("qrcode_name").value = qr_name;
-    console.log(id);
-    console.log(name);
-});
-
-function rightclick() {
-    var rightclick;
-    var e = window.event;
-
-    document.getElementById("myDropdown").classList.toggle("show");
-    if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < script dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
+        for (let x in t) {
+            if (t[x].fol_name == new_name.value) {
+                check_name = 1;
+                break;
+            } else {
+                check_name = 0;
             }
         }
-    }
-}
-</script>
-<script>
-$(document).on("keyup", "#fol_name", function() {
-    var t = <?php echo json_encode($arr_fol) ?>;
-    var new_name = document.getElementById("fol_name");
-    var check_name;
-    var div = document.getElementById('target_div');
-    var dis_button = document.getElementById('create');
+        console.log(check_name);
+        if (check_name == 1) {
+            $("#fol_name").css("border-color", "red");
+            div.style.display = "block";
+            dis_button.disabled = true;
 
-    for (let x in t) {
-        if (t[x].fol_name == new_name.value) {
-            check_name = 1;
-            break;
         } else {
-            check_name = 0;
-        }
-    }
-    console.log(check_name);
-    if (check_name == 1) {
-        $("#fol_name").css("border-color", "red");
-        div.style.display = "block";
-        dis_button.disabled = true;
+            $("#fol_name").css("border-color", "green");
+            div.style.display = "none";
+            dis_button.disabled = false;
 
-    } else {
-        $("#fol_name").css("border-color", "green");
-        div.style.display = "none";
+        }
+    });
+
+    /* check_fol_edit()
+     * check folder edit
+     * @input -
+     * @output -
+     * @author Onticha
+     * @Create Date 2564-11-30
+     */
+    function check_fol_edit() {
+
+        var dis_button = document.getElementById('edit');
         dis_button.disabled = false;
 
-    }
-});
-</script>
-
-<script type="text/javascript">
-$(document).on("click", ".editModal", function() {
-    var id = $(this).attr('data-id');
-    $("#fol_id").val(id);
-});
+        var t = <?php echo json_encode($arr_fol) ?>;
+        var new_name = document.getElementById("fol_edit");
+        var check_name;
+        var div = document.getElementById('edit_mss');
 
 
-var cm = document.querySelector(".custom-cm");
-
-function showContextMenu(show = true) {
-    cm.style.display = show ? "block" : "none";
-}
-
-window.addEventListener("contextmenu", e => {
-    e.preventDefault();
-
-    showContextMenu();
-    cm.style.top =
-        e.y + cm.offsetHeight > window.innerHeight ?
-        window.innerHeight - cm.offsetHeight :
-        e.y;
-    cm.style.left =
-        e.x + cm.offsetWidth > window.innerWidth ?
-        window.innerWidth - cm.offsetWidth :
-        e.x;
-});
-
-
-$(document).on("click", ".editModal", function() {
-    var id = $(this).attr('data-id');
-    $("#dep_id").val(id);
-});
-
-function rightclick() {
-    var rightclick;
-    var e = window.event;
-
-    document.getElementById("myDropdown").classList.toggle("show");
-    if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
+        for (let x in t) {
+            if (t[x].fol_name == new_name.value || new_name.value == " ") {
+                check_name = 1;
+                break;
+            } else {
+                check_name = 0;
             }
         }
+        console.log(check_name);
+        if (check_name == 1) {
+            $("#fol_edit").css("border-color", "red");
+            div.style.display = "block";
+            dis_button.disabled = true;
+
+        } else {
+            $("#fol_edit").css("border-color", "green");
+            div.style.display = "none";
+            dis_button.disabled = false;
+
+        }
+    } //end function check_fol_edit()
+    </script>
+
+
+
+    <script>
+    /* deleteModal()
+     * deleteModal 
+     * @input -
+     * @output -
+     * @author Onticha
+     * @Create Date 2564-11-30
+     */
+    $(document).on("click", ".deleteModal", function() {
+        var id = $(this).attr('data-id');
+        $("#fol_id").val(id);
+    });
+
+
+    var cm = document.querySelector(".custom-cm");
+
+    function showContextMenu(show = true) {
+        cm.style.display = show ? "block" : "none";
     }
 
+    window.addEventListener("contextmenu", e => {
+        e.preventDefault();
 
-}
+        showContextMenu();
+        cm.style.top =
+            e.y + cm.offsetHeight > window.innerHeight ?
+            window.innerHeight - cm.offsetHeight :
+            e.y;
+        cm.style.left =
+            e.x + cm.offsetWidth > window.innerWidth ?
+            window.innerWidth - cm.offsetWidth :
+            e.x;
+    });
 
 
-function rightclickfolder(folder) {
-    var rightclick;
-    var e = window.event;
-    var getnamefolder = 'folder' + folder;
-    var x = document.getElementById("showmenu");
+    /* editModal()
+     * editModal 
+     * @input -
+     * @output -
+     * @author Onticha
+     * @Create Date 2564-11-30
+     */
+    $(document).on("click", ".editModal", function() {
+        var id = $(this).attr('data-id');
+        $("#dep_id").val(id);
+    });
 
-    if (e.button == 2) {
-        document.getElementById(getnamefolder).classList.toggle("show");
+    function rightclick() {
+        var rightclick;
+        var e = window.event;
+
+        document.getElementById("myDropdown").classList.toggle("show");
         if (!event.target.matches('.dropbtn')) {
             var dropdowns = document.getElementsByClassName("dropdown-content");
             var i;
-            for (i = 0; i < dropdowns.length; i++) {
+            for (i = 0; i <  dropdowns.length; i++) {
                 var openDropdown = dropdowns[i];
-                if (x.style.display === "block") {
-                    x.style.display = "none";
-                } else {
-                    x.style.display = "block";
-                }
                 if (openDropdown.classList.contains('show')) {
                     openDropdown.classList.remove('show');
                 }
             }
         }
     }
+    </script>
+    <script>
+    $(document).on("keyup", "#fol_name", function() {
+        var t = <?php echo json_encode($arr_fol) ?>;
+        var new_name = document.getElementById("fol_name");
+        var check_name;
+        var div = document.getElementById('target_div');
+        var dis_button = document.getElementById('create');
 
-}
-
-/* moveModal()
- * moveModal 
- * @input -
- * @output -
- * @author Chanyapat
- * @Create Date 2564-11-30
- */
-$(document).on("click", ".moveModal", function() {
-    var fol_id = $(this).attr('data-id');
-    $("#fol_id").val(fol_id);
-    var name = $(this).attr('data-name');
-    $("#fol_name").val(name);
-    var x = document.getElementById("fold_id").value = fol_id;
-    document.getElementById("folder_name").value = name;
-
-    $.ajax({
-        type: 'post',
-        url: '<?php echo site_url() . 'Folder/Folder_management/get_dropdown_data_ajax'; ?>',
-        data: {
-            'fol_id': fol_id
-        },
-        dataType: 'json',
-        success: function(json_data) {
-            console.log(json_data);
-
-            //สร้าง select รอไว้ แล้วค่อยใส่ option ทีหลัง
-            let html_select =
-                "<select name='fol_location_id' id='folder_location_id' class='form-select' aria-label='Default select example' placeholder='เลือกโฟลเดอร์' required>'</select>";
-            $('#select_move').html(html_select);
-            let html_option =
-                '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
-            $('#folder_location_id').html(html_option);
-
-            let obj_level = json_data['arr_level'];
-            let current_path = json_data['current_path'];
-
-
-            if (obj_level[1].length == 0) {
-
-                //กรณีไม่มีข้อมูล
-                html_option = ' <option value="none">ไม่พบข้อมูล</option>';
-                $('#folder_location_id').html(html_option);
-            } //if
-            else {
-                // html_option = '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
-                // $('#folder_location_id').prepend(html_option);
-                //กรณีมีข้อมูล
-
-                let max_level = Object.keys(obj_level).length;
-                let prefix = '&nbsp'; //สัญลักษณ์ข้างหน้าแต่ละ level
-
-                for (level = 1; level <= max_level; level++) {
-
-                    if (level == 1) {
-                        html_option =
-                            '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
-                        for (i = 0; i < obj_level[level].length; i++) {
-
-                            //ลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้
-                            let disable = '';
-                            if (obj_level[level][i]["fol_location"].includes(
-                                    current_path + '/') || obj_level[level][i][
-                                    "fol_location"
-                                ] == current_path) {
-                                disable = ' disabled ';
-                            } //if
-
-                            html_option += '<option ' + disable + ' id="fol_' +
-                                obj_level[level][i]["fol_id"] + '" value="' +
-                                obj_level[level][i]["fol_id"] + '">';
-                            html_option += obj_level[level][i]["fol_name"];
-                            html_option += '</option>';
-
-                        } //for
-
-                        $('#folder_location_id').html(html_option);
-                    } //if
-                    else {
-                        if (level == 2) {
-                            let disable = '';
-                            if (json_data['is_level_1'] == true) {
-                                disable = ' disabled  hidden ';
-                            } //if
-
-                            html_option = '<option value="0"' + disable +
-                                ' > หน้าหลัก</option>';
-                            $('#folder_location_id').prepend(html_option);
-                        } //if
-
-                        prefix = prefix + '&nbsp' + '&nbsp' + '-';
-
-                        //แทรกลูกหลังจากตำแหล่งแม่ (ทำจากหลังมาหน้า ลำดับจะไม่เพี้ยน)
-                        for (i = obj_level[level].length - 1; i >= 0; i--) {
-
-                            //ลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้
-                            let disable = '';
-                            if (obj_level[level][i]["fol_location"].includes(
-                                    current_path + '/') || obj_level[level][i][
-                                    "fol_location"
-                                ] == current_path) {
-                                disable = ' disabled ';
-                            } //if
-
-                            html_option = '';
-                            html_option += '<option ' + disable + ' id="fol_' +
-                                obj_level[level][i]["fol_id"] + '" value="' +
-                                obj_level[level][i]["fol_id"] + '">';
-                            html_option += prefix + ' ' + obj_level[level][i][
-                                "fol_name"
-                            ];
-                            html_option += '</option>';
-
-
-                            //แทรกโค้ดลูก หลังจากตำแหล่งโค้ดแม่
-                            var tag_parent = document.getElementById('fol_' +
-                                obj_level[level][i]["fol_location_id"]);
-                            tag_parent.insertAdjacentHTML('afterend',
-                                html_option);
-                        } //for
-                    } //else
-
-                } //for
-
-            } //else
+        for (let x in t) {
+            if (t[x].fol_name == new_name.value) {
+                check_name = 1;
+                break;
+            } else {
+                check_name = 0;
+            }
         }
-    }); //ajax
-}); //get_dropdown_data
+        console.log(check_name);
+        if (check_name == 1) {
+            $("#fol_name").css("border-color", "red");
+            div.style.display = "block";
+            dis_button.disabled = true;
 
-$(document).ready(function() {
-    $('.dropdown-submenu a.test').on("click", function(e) {
-        $(this).next('ul').toggle();
-        e.stopPropagation();
+        } else {
+            $("#fol_name").css("border-color", "green");
+            div.style.display = "none";
+            dis_button.disabled = false;
+
+        }
+    });
+    </script>
+    <script type="text/javascript">
+    $(document).on("click", ".editModal", function() {
+        var id = $(this).attr('data-id');
+        $("#fol_id").val(id);
+    });
+
+
+    var cm = document.querySelector(".custom-cm");
+
+    function showContextMenu(show = true) {
+        cm.style.display = show ? "block" : "none";
+    }
+
+    window.addEventListener("contextmenu", e => {
         e.preventDefault();
-    });
-});
 
-function set_delete(path, id, fol_id) {
-    $('#doc_path_delete').val(path);
-    $('#doc_id_delete').val(id);
-    $('#fol_id_delete').val(fol_id);
-
-}
-</script>
-</script>
-
-<!-- EditFile Script -->
-<script>
-<?php $this->session->set_userdata('qr_id', ''); ?>
-<?php $this->session->set_userdata('path', ''); ?>
-$(document).on("keyup", "#qr_name", function() {
-    var t = <?php echo json_encode($arr_doc) ?>;
-    var new_name = document.getElementById("qr_name");
-    var check_name;
-    var div = document.getElementById('target_div');
-    var dis_button = document.getElementById('create');
-
-    for (let x in t) {
-        if (t[x].doc_name == new_name.value) {
-            check_name = 1;
-            break;
-        } else {
-            check_name = 0;
-        }
-    }
-    console.log(check_name);
-    if (check_name == 1) {
-        $("#qr_name").css("border-color", "red");
-        div.style.display = "block";
-        dis_button.disabled = true;
-
-    } else {
-        $("#qr_name").css("border-color", "green");
-        div.style.display = "none";
-        dis_button.disabled = false;
-
-    }
-});
-
-function check_file_edit() {
-
-    var dis_button = document.getElementById('sub_edit');
-    dis_button.disabled = false;
-
-    var t = <?php echo json_encode($arr_qr) ?>;
-    var new_name = document.getElementById("qr_edit");
-    var check_name;
-    var div = document.getElementById('edit_mss');
-
-
-    for (let x in t) {
-        if (t[x].qr_name == new_name.value || new_name.value == " ") {
-            check_name = 1;
-            break;
-        } else {
-            check_name = 0;
-        }
-    }
-    console.log(check_name);
-    if (check_name == 1) {
-        $("#qr_edit").css("border-color", "red");
-        div.style.display = "block";
-        dis_button.disabled = true;
-
-    } else {
-        $("#qr_edit").css("border-color", "green");
-        div.style.display = "none";
-        dis_button.disabled = false;
-
-    }
-    console.log(document.getElementById('edit'));
-}
-
-document.getElementById("download").addEventListener("click", function() {
-
-    html2canvas(document.querySelector('#capture')).then(function(canvas) {
-
-        saveAs(canvas.toDataURL(), 'DQS_QR.png');
+        showContextMenu();
+        cm.style.top =
+            e.y + cm.offsetHeight > window.innerHeight ?
+            window.innerHeight - cm.offsetHeight :
+            e.y;
+        cm.style.left =
+            e.x + cm.offsetWidth > window.innerWidth ?
+            window.innerWidth - cm.offsetWidth :
+            e.x;
     });
 
-});
 
-/*
- * saveAs
- * download file qrcode 
- * @input filename
- * @output file qrcode 
- * @author Ashirawat, Jerasak
- * @Create Date 2565-01-12
- */
+    $(document).on("click", ".editModal", function() {
+        var id = $(this).attr('data-id');
+        $("#dep_id").val(id);
+    });
 
-function saveAs(uri, filename) {
+    function rightclick() {
+        var rightclick;
+        var e = window.event;
 
-    var link = document.createElement('a');
+        document.getElementById("myDropdown").classList.toggle("show");
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
 
-    if (typeof link.download === 'string') {
-
-        link.href = uri;
-        link.download = filename;
-
-        //Firefox requires the link to be in the body
-        document.body.appendChild(link);
-
-        //simulate click
-        link.click();
-
-        //remove the link when done
-        document.body.removeChild(link);
-
-    } else {
-
-        window.open(uri);
 
     }
-}
-</script>
+
+
+    function rightclickfolder(folder) {
+        var rightclick;
+        var e = window.event;
+        var getnamefolder = 'folder' + folder;
+        var x = document.getElementById("showmenu");
+
+        if (e.button == 2) {
+            document.getElementById(getnamefolder).classList.toggle("show");
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (x.style.display === "block") {
+                        x.style.display = "none";
+                    } else {
+                        x.style.display = "block";
+                    }
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+
+    }
+
+    $(document).on("click", ".MoveFileModal", function() {
+        console.log('test');
+        var id = $(this).attr('data-id');
+        $("#doc_id").val(id);
+        var name = $(this).attr('data-name');
+        $("#doc_name").val(name);
+        var qr_id = $(this).attr('data-qr-id');
+        $("#qr_id").val(qr_id);
+        var qr_name = $(this).attr('data-qr-name');
+        $("#qr_name").val(qr_name);
+        var doc_fol_id = $(this).attr('data-doc_fol_id');
+        console.log('-------------');
+        console.log(typeof doc_fol_id);
+        if (isNumeric(doc_fol_id) == false || doc_fol_id.trim() == "" || doc_fol_id == null) {
+            doc_fol_id = 0;
+        }
+        $("#doc_fol_id").val(doc_fol_id);
+        //  var qr_fol_id = $(this).attr('data-qr_fol_id');
+        //  $("#qr_fol_id").val(qr_fol_id);
+        console.log('sawass');
+        document.getElementById("file_id").value = id;
+        document.getElementById("file_name").value = name;
+        document.getElementById("qrcode_id").value = qr_id;
+        document.getElementById("qrcode_name").value = qr_name;
+        console.log(id);
+        console.log(isNumeric(doc_fol_id));
+        console.log(isNumeric('1'));
+    });
+
+
+    function isNumeric(value) {
+        return /^-?\d+$/.test(value);
+    }
+    $(document).ready(function() {
+        $('.dropdown-submenu a.test').on("click", function(e) {
+            $(this).next('ul').toggle();
+            e.stopPropagation();
+            e.preventDefault();
+        });
+    });
+
+
+    $(document).on("click", ".moveModalAjax", function() {
+        var type = $(this).attr('move-type');
+
+        if (type == "file") {
+            var fol_id = $(this).attr('data-doc_fol_id');
+            //  fol_id = 0;
+        } else if (type == "folder") {
+            var fol_id = $(this).attr('data-id');
+            $("#fol_id").val(fol_id);
+            var name = $(this).attr('data-name');
+            $("#fol_name").val(name);
+            var x = document.getElementById("fold_id").value = fol_id;
+            document.getElementById("folder_name").value = name;
+        }
+
+
+
+        $.ajax({
+            type: 'post',
+            url: '<?php echo site_url() . 'Folder/Folder_management/get_dropdown_data_ajax'; ?>',
+            data: {
+                'fol_id': fol_id
+            },
+            dataType: 'json',
+            success: function(json_data) {
+                console.log(json_data);
+
+                //สร้าง select รอไว้ แล้วค่อยใส่ option ทีหลัง
+
+                if (type == "file") {
+                    let html_select =
+                        '<select name="doc_fol_id" id="dropdown_doc_fol_id" class="form-select" aria-label="Default select example" placeholder="" required></select>';
+                    $('#select_move_file').html(html_select);
+                    $('#select_move').html('');
+                } else if (type == "folder") {
+                    let html_select =
+                        "<select name='fol_location_id' id='folder_location_id' class='form-select' aria-label='Default select example' placeholder='เลือกโฟลเดอร์' required>'</select>";
+                    $('#select_move').html(html_select);
+                    $('#select_move_file').html('');
+                }
+
+                let id_dropdrown = '';
+                if (type == "file") {
+                    id_dropdrown = '#dropdown_doc_fol_id';
+                } else if (type == "folder") {
+                    id_dropdrown = '#folder_location_id';
+                }
+                let html_option = '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
+                $(id_dropdrown).html(html_option);
+
+                let obj_level = json_data['arr_level'];
+                let current_path = json_data['current_path'];
+
+
+                if (obj_level[1].length == 0) {
+
+                    //กรณีไม่มีข้อมูล
+                    html_option = ' <option value="none">ไม่พบข้อมูล</option>';
+                    $('#folder_location_id').html(html_option);
+                    $(id_dropdrown).html(html_option);
+                } //if
+                else {
+                    // html_option = '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
+                    // $('#folder_location_id').prepend(html_option);
+                    //กรณีมีข้อมูล
+
+                    let max_level = Object.keys(obj_level).length;
+                    let prefix = '&nbsp'; //สัญลักษณ์ข้างหน้าแต่ละ level
+
+                    for (level = 1; level <= max_level; level++) {
+
+                        if (level == 1) {
+                            html_option =
+                                '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
+
+                            let disable = '';
+                            if (type == 'folder') {
+                                if (json_data['is_level_1'] == true) {
+                                    disable = ' disabled  hidden ';
+                                } //if
+                            } else if (type == 'file') {
+                                if (fol_id == 0) {
+                                    disable = ' disabled  hidden ';
+                                }
+                            }
+
+
+                            html_option += '<option value="0"' + disable + ' > หน้าหลัก</option>';
+
+                            for (i = 0; i < obj_level[level].length; i++) {
+
+
+
+                                let disable = '';
+                                if (type == 'folder') {
+                                    //ตัวที่ถูกเลือกและลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้ 
+                                    if (obj_level[level][i]["fol_location"].includes(current_path + '/') ||
+                                        obj_level[level][i]["fol_location"] == current_path) {
+                                        disable = ' disabled ';
+                                    } //if
+                                } else if (type = 'file') {
+                                    //ตัวที่ถูกเลือก จะต้องกดไม่ได้ 
+                                    if (obj_level[level][i]["fol_location"] == current_path) {
+                                        disable = ' disabled ';
+                                    } //if
+                                }
+
+
+                                html_option += '<option ' + disable + ' id="fol_' + obj_level[level][i][
+                                    "fol_id"
+                                ] + '" value="' + obj_level[level][i]["fol_id"] + '">';
+                                html_option += obj_level[level][i]["fol_name"];
+                                html_option += '</option>';
+
+                            } //for
+
+                            $(id_dropdrown).html(html_option);
+                        } //if
+                        else {
+
+
+                            prefix = prefix + '&nbsp' + '&nbsp' + '-';
+
+                            //แทรกลูกหลังจากตำแหล่งแม่ (ทำจากหลังมาหน้า ลำดับจะไม่เพี้ยน)
+                            for (i = obj_level[level].length - 1; i >= 0; i--) {
+
+                                let disable = '';
+                                if (type == 'folder') {
+                                    //ตัวที่ถูกเลือกและลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้ 
+                                    if (obj_level[level][i]["fol_location"].includes(current_path + '/') ||
+                                        obj_level[level][i]["fol_location"] == current_path) {
+                                        disable = ' disabled ';
+                                    } //if
+                                } else if (type = 'file') {
+                                    //ตัวที่ถูกเลือก จะต้องกดไม่ได้ 
+                                    if (obj_level[level][i]["fol_location"] == current_path) {
+                                        disable = ' disabled ';
+                                    } //if
+                                }
+
+                                html_option = '';
+                                html_option += '<option ' + disable + ' id="fol_' + obj_level[level][i][
+                                    "fol_id"
+                                ] + '" value="' + obj_level[level][i]["fol_id"] + '">';
+                                html_option += prefix + ' ' + obj_level[level][i]["fol_name"];
+                                html_option += '</option>';
+
+
+                                //แทรกโค้ดลูก หลังจากตำแหล่งโค้ดแม่
+                                var tag_parent = document.getElementById('fol_' + obj_level[level][i][
+                                    "fol_location_id"
+                                ]);
+                                tag_parent.insertAdjacentHTML('afterend', html_option);
+                            } //for
+                        } //else
+
+                    } //for
+
+                } //else
+            }
+        }); //ajax
+
+    }); //get_dropdown_data
+    </script>
+    <!-- EditFile Script -->
+    <script>
+    <?php $this->session->set_userdata('qr_id', ''); ?>
+    <?php $this->session->set_userdata('path', ''); ?>
+    $(document).on("keyup", "#qr_name", function() {
+
+        // var text_n = document.getElementById("text_name");
+     var d_name = document.getElementById("qr_name").value;
+    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+    var n_check;
+    console.log("d_name" + d_name);
+
+    if (d_name.match(pattern)) {
+        // text_n.innerHTML = "";
+        n_check = 1;
+
+    } else {
+        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+        // text_n.style.color = "#ff0000";
+        n_check = 0;
+
+    }
+  
+    console.log(n_check + "check file edit in folder");
+
+        var t = <?php echo json_encode($arr_doc) ?>;
+        var new_name = document.getElementById("qr_name");
+        var check_name;
+        var div = document.getElementById('target_div');
+        var dis_button = document.getElementById('create');
+
+        for (let x in t) {
+            if (t[x].doc_name == new_name.value  || n_check == 0) {
+                check_name = 1;
+                break;
+            } else {
+                check_name = 0;
+            }
+        }
+        console.log(check_name);
+        if (check_name == 1) {
+            $("#qr_name").css("border-color", "red");
+            div.style.display = "block";
+            dis_button.disabled = true;
+
+        } else {
+            $("#qr_name").css("border-color", "green");
+            div.style.display = "none";
+            dis_button.disabled = false;
+
+        }
+    });
+
+    function check_file_edit() {
+
+        // var text_n = document.getElementById("text_name");
+     var d_name = document.getElementById("qr_name").value;
+    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+    var n_check;
+    console.log("d_name" + d_name);
+
+    if (d_name.match(pattern)) {
+        // text_n.innerHTML = "";
+        n_check = 1;
+
+    } else {
+        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+        // text_n.style.color = "#ff0000";
+        n_check = 0;
+
+    }
+  
+    console.log(n_check + "check file edit in folder");
+
+        var dis_button = document.getElementById('sub_edit');
+        dis_button.disabled = false;
+
+        var t = <?php echo json_encode($arr_qr) ?>;
+        var new_name = document.getElementById("qr_name");
+        var check_name;
+        var div = document.getElementById('qr_fol_mss');
+
+        console.log(div);
+
+
+        for (let x in t) {
+            if (t[x].qr_name == new_name.value || new_name.value == " "  || n_check == 0) {
+                check_name = 1;
+                break;
+            } else {
+                check_name = 0;
+            }
+        }
+        console.log(check_name);
+        if (check_name == 1) {
+            $("#qr_name").css("border-color", "red");
+            div.style.display = "block";
+            dis_button.disabled = true;
+
+        } else {
+            $("#qr_name").css("border-color", "green");
+            div.style.display = "none";
+            dis_button.disabled = false;
+
+        }
+      
+    }
+
+    document.getElementById("download").addEventListener("click", function() {
+
+
+        const note = document.querySelector('#qr_path');
+        note.style.border = '10px solid #fff';
+
+        html2canvas(document.querySelector('#qr_path')).then(function(canvas) {
+
+            saveAs(canvas.toDataURL(), 'DQS_QR.png');
+        });
+
+    });
+
+    function saveAs(uri, filename) {
+
+        var link = document.createElement('a');
+
+        if (typeof link.download === 'string') {
+
+            link.href = uri;
+            link.download = filename;
+
+            //Firefox requires the link to be in the body
+            document.body.appendChild(link);
+
+            //simulate click
+            link.click();
+
+            //remove the link when done
+            document.body.removeChild(link);
+
+        } else {
+
+            window.open(uri);
+
+        }
+    }
+    </script>

@@ -59,6 +59,30 @@ class Da_DQS_folder extends DQS_model {
                  
     }//end update folder into database
 
+    public function update_in_folder(){//update folder into database    
+        $sql ="UPDATE {$this->db_name}.DQS_Folder
+        SET fol_location = ?
+        WHERE fol_id = ? ";
+        // $this->db->query($sql,array($this->fol_name,$this->fol_id));
+        $this->db->query($sql,array($this->fol_location,$this->fol_id));     
+                 
+    }//end update folder into database
+
+    public function update_document(){//update folder into database    
+        $sql ="UPDATE {$this->db_name}.DQS_Document
+        SET doc_path = ?
+        WHERE doc_id = ? ";
+        // $this->db->query($sql,array($this->fol_name,$this->fol_id));
+        $this->db->query($sql,array($this->doc_path,$this->doc_id));     
+                 
+    }
+
+    public function update_qrcode(){//update folder into database    
+        $sql ="UPDATE {$this->db_name}.DQS_Qrcode
+        SET qr_path = ?
+        WHERE qr_id = ? ";
+        $this->db->query($sql,array($this->qr_path,$this->qr_id));      
+    }
 /*
 * delete()
 * Delete folder from database 
@@ -67,13 +91,29 @@ class Da_DQS_folder extends DQS_model {
 * @author Onticha
 * @Create Date 2564-11-30
 */
-    public function delete($fol_id)//delete folder from database     
+    public function DeleteFolder($fol_id)//delete folder from database     
 	{
         $sql ="DELETE FROM {$this->db_name}.DQS_Folder
         WHERE fol_id = $fol_id";
-        $this->db->query($sql , array($this->fol_id));  
-	}//end delete folder from database     
+        $query = $this->db->query($sql);
+        return $query;
+	}//end delete folder from database    
+    
+    public function DeleteDocument($fol_id)//delete folder from database     
+	{
+        $sql ="DELETE FROM {$this->db_name}.DQS_Document
+        WHERE doc_fol_id = $fol_id";
+        $query = $this->db->query($sql);
+        return $query;
+	}
 
+    public function DeleteQR($qr_id)//delete folder from database     
+	{
+        $sql ="DELETE FROM {$this->db_name}.DQS_Qrcode
+        WHERE qr_id = $qr_id";
+        $query = $this->db->query($sql);
+        return $query;
+	}
 /*
 * update_location()
 * Update folder_location in database 

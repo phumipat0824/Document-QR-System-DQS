@@ -23,13 +23,13 @@
         </div>
         <div class="col-md-4">
             <div class="dropdown">
-                <button onmousedown="rightclick()" class="dropbtn btn btn-round" style=" width: 145px; background-color: #F5F5F5 ; border: none;">
+                <button onmousedown="rightclick()" class="dropbtn btn btn-round" style=" width: 160px; background-color: #F5F5F5 ; border: none;">
                     <h1 style="font-weight: 900; color:#003399 ; font-size: 50px; font-family:TH Sarabun New; height: 40; width: 50px;" id="button-folder">+ สร้าง</h1>
                 </button>
                 <div id="myDropdown" class="dropdown-content">
                     <div class="custom-cm__item" data-toggle="modal" data-target="#exampleModal"><a>สร้างโฟลเดอร์</a>
                     </div>
-                    <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_admin_upload_file_in_floder/' . $this->session->userdata('fol_id'); ?>">อัปโหลดไฟล์</a>
+                    <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_admin_upload_file_in_floder/' . $this->session->userdata('fol_id'); ?>">สร้างคิวอาร์โค้ด</a>
                     </div>
                 </div>
             </div>
@@ -216,27 +216,27 @@
 */ -->
     <!-- start move Modal -->
     <div class="modal fade" id="moveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-             <div class="modal-dialog" role="document">
-                 <div class="modal-content">
-                     <div class="modal-header">
-                         <h5 class="modal-title" id="exampleModalLabel">ย้ายไปที่</h5>
-                     </div>
-                     <form id="move-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/move_folder/'; ?>">
-                         <div class="modal-body">
-                             <!-- dropdown folder name -->
-                             <div id="select_move"></div>
-                         </div>
-                         <div class="modal-footer">
-                             <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                             <input type="submit" class="btn btn-success" value="บันทึก">
-                             <input type="hidden" name="fol_id" id="fold_id" value="">
-                             <input type="hidden" name="fol_name" id="folder_name" value="">
-                         </div>
-                     </form>
-                 </div>
-             </div>
-         </div>
-         <!-- end move Modal -->
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">ย้ายไปที่</h5>
+                </div>
+                <form id="move-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/move_folder/'; ?>">
+                    <div class="modal-body">
+                        <!-- dropdown folder name -->
+                        <div id="select_move"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                        <input type="submit" class="btn btn-success" value="บันทึก">
+                        <input type="hidden" name="fol_id" id="fold_id" value="">
+                        <input type="hidden" name="fol_name" id="folder_name" value="">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- end move Modal -->
     <!-- deleteFile Modal -->
     <div class="modal fade" id="deleteFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -276,7 +276,7 @@
     <h3 style="color:#707070; font-family:TH Sarabun New; font-weight: 900;">คิวอาร์โค้ด</h3>
     <?php for ($i = 0; $i < count($arr_qr); $i++) {   ?>
     <?php if ($this->session->userdata('fol_id') == $arr_qr[$i]->doc_fol_id) { ?>
-    <div class="col-md-4">
+    <div class="col-md-4" style="display: flex; flex-wrap: wrap; justify-content: space-around; flex: 0 0 500px;">
         <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
             <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
                 <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;"> <?php echo $arr_qr[$i]->qr_name ?></h>
@@ -290,18 +290,18 @@
                     </div>
                     <div class="form-group col-md-4">
 
-                        <!-- <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">วันที่สร้าง : </h5>
-                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px;"><?php echo $arr_qr[$i]->doc_datetime ?></h5> -->
+                        <?php $time = $arr_qr[$i]->doc_datetime ;?>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">วันที่สร้าง :</h5>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;"><?php echo substr($time, 0,10 ) ?></h5>
 
-                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิดไฟล์ : <?php echo $arr_qr[$i]->doc_type ?></h5>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิดไฟล์ : </h5>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;"><?php echo $arr_qr[$i]->doc_type ?></h5>
 
-                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
-                            ราายงานสรุปผล </h5>
+                        <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">รายงานสรุปผล </h5>
                     </div>
                     <div class="form-group col-md-2">
-                    <a href="#" class="EditFileModal" data-toggle="modal" data-target="#EditFileModal" data-id="<?php echo $arr_qr[$i]->qr_id ?>" data-name="<?php echo $arr_qr[$i]->qr_name ?>"  data-doc_fol="<?php echo $arr_doc[$i]->doc_fol_id ?>">
-                             <button id="edit" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70px; ">แก้ไข</button></a>
-                        <button id="remove" class="btn btn-" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
+                        <button id="edit" class="btn btn-" style="background-color: #100575; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">แก้ไข</button>
+                        <button type="button" id="move" class="btn btn- MoveFileModal moveModalAjax" move-type="file" data-toggle="modal" data-target="#MoveFileModal" data-id="<?php echo $arr_qr[$i]->doc_id ?>" data-name="<?php echo $arr_qr[$i]->doc_name ?>" data-qr-id="<?php echo $arr_qr[$i]->qr_id ?>" data-qr-name="<?php echo $arr_qr[$i]->qr_name ?>" data-doc_fol_id="<?php echo $arr_qr[$i]->doc_fol_id ?>" style="background-color:#0093EA; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; ">ย้าย</button>
                         <button id="delete" class="btn btn-" style="background-color:#E02D2D; font-family:TH sarabun new; color:#FFFFFF; font-size: 20px; width: 70; " onclick="set_delete('<?php echo $arr_qr[$i]->doc_path ?>',<?php echo $arr_qr[$i]->doc_id.','.$this->session->userdata('fol_id') ?>)" data-toggle="modal" data-target="#deleteFileModal">ลบ</button>
                     </div>
                 </div>
@@ -373,6 +373,43 @@
     <?php }  ?>
 </div>
 
+<!-- /*
+    * move file
+    * Display modal move file
+    * @input -
+    * @output show file move
+    * @author natruja
+    * @Create Date 2565-03-21
+    */ -->
+<!-- Move File Modal -->
+<div class="modal fade" id="MoveFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="MoveFileModalLabel" style="font-family:TH Sarabun New; font-weight: 900;font-size: 28px;">ย้ายไฟล์ไปที่</h5>
+            </div>
+            <form id="move-form" method="POST" action="<?php echo site_url() . '/File/File_management/move_file/'; ?>">
+                <div class="modal-body">
+                    <input type="hidden" name="doc_id" id="file_id" value="">
+                    <input type="hidden" name="qr_id" id="qrcode_id" value="">
+                    <!-- dropdown folder name -->
+
+                    <div id="select_move_file">
+
+                    </div><br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                    <input type="submit" class="btn btn-success" value="บันทึก">
+                    <input type="hidden" name="doc_name" id="file_name" value="">
+                    <input type="hidden" name="qr_name" id="qrcode_name" value="">
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End move file modal -->
 
 
 
@@ -393,7 +430,7 @@ $(document).on("click", ".EditFileModal", function() {
 
 $(document).on("click", ".downloadModal", function() {
     var path = $(this).attr('data-path');
-    console.log(path);
+    // console.log(path);
     document.getElementById("qr_path").src = path;
 
 });
@@ -671,7 +708,10 @@ function set_delete(path, id, fol_id) {
 
 document.getElementById("download").addEventListener("click", function() {
 
-    html2canvas(document.querySelector('#capture')).then(function(canvas) {
+    const note = document.querySelector('#qr_path');
+    note.style.border = '10px solid #fff';
+
+    html2canvas(document.querySelector('#qr_path')).then(function(canvas) {
 
         saveAs(canvas.toDataURL(), 'DQS_QR.png');
     });
@@ -711,24 +751,67 @@ function saveAs(uri, filename) {
 
     }
 }
+$(document).on("click", ".MoveFileModal", function() {
+    console.log('test');
+    var id = $(this).attr('data-id');
+    $("#doc_id").val(id);
+    var name = $(this).attr('data-name');
+    $("#doc_name").val(name);
+    var qr_id = $(this).attr('data-qr-id');
+    $("#qr_id").val(qr_id);
+    var qr_name = $(this).attr('data-qr-name');
+    $("#qr_name").val(qr_name);
+    var doc_fol_id = $(this).attr('data-doc_fol_id');
+    console.log('-------------');
+    console.log(typeof doc_fol_id);
+    if (isNumeric(doc_fol_id) == false || doc_fol_id.trim() == "" || doc_fol_id == null) {
+        doc_fol_id = 0;
+    }
+    $("#doc_fol_id").val(doc_fol_id);
+    //  var qr_fol_id = $(this).attr('data-qr_fol_id');
+    //  $("#qr_fol_id").val(qr_fol_id);
+    console.log('sawass');
+    document.getElementById("file_id").value = id;
+    document.getElementById("file_name").value = name;
+    document.getElementById("qrcode_id").value = qr_id;
+    document.getElementById("qrcode_name").value = qr_name;
+    console.log(id);
+    console.log(isNumeric(doc_fol_id));
+    console.log(isNumeric('1'));
+});
+
+
+function isNumeric(value) {
+    return /^-?\d+$/.test(value);
+}
+</script>
 </script>
 
- <!-- Move Folder Script -->
+<!-- Move Folder Script -->
 <script>
- /* moveModal()
+/* moveModal()
  * moveModal 
  * @input -
  * @output -
  * @author Chanyapat
  * @Create Date 2564-11-30
  */
-$(document).on("click", ".moveModal", function() {
-    var fol_id = $(this).attr('data-id');
-    $("#fol_id").val(fol_id);
-    var name = $(this).attr('data-name');
-    $("#fol_name").val(name);
-    var x = document.getElementById("fold_id").value = fol_id;
-    document.getElementById("folder_name").value = name;
+$(document).on("click", ".moveModalAjax", function() {
+    var type = $(this).attr('move-type');
+
+    if (type == "file") {
+        var fol_id = $(this).attr('data-doc_fol_id');
+        //  fol_id = 0;
+    } else if (type == "folder") {
+        var fol_id = $(this).attr('data-id');
+        $("#fol_id").val(fol_id);
+        var name = $(this).attr('data-name');
+        $("#fol_name").val(name);
+        var x = document.getElementById("fold_id").value = fol_id;
+        document.getElementById("folder_name").value = name;
+    }
+
+
 
     $.ajax({
         type: 'post',
@@ -741,11 +824,27 @@ $(document).on("click", ".moveModal", function() {
             console.log(json_data);
 
             //สร้าง select รอไว้ แล้วค่อยใส่ option ทีหลัง
-            let html_select =
-                "<select name='fol_location_id' id='folder_location_id' class='form-select' aria-label='Default select example' placeholder='เลือกโฟลเดอร์' required>'</select>";
-            $('#select_move').html(html_select);
+
+            if (type == "file") {
+                let html_select =
+                    '<select name="doc_fol_id" id="dropdown_doc_fol_id" class="form-select" aria-label="Default select example" placeholder="" required></select>';
+                $('#select_move_file').html(html_select);
+                $('#select_move').html('');
+            } else if (type == "folder") {
+                let html_select =
+                    "<select name='fol_location_id' id='folder_location_id' class='form-select' aria-label='Default select example' placeholder='เลือกโฟลเดอร์' required>'</select>";
+                $('#select_move').html(html_select);
+                $('#select_move_file').html('');
+            }
+
+            let id_dropdrown = '';
+            if (type == "file") {
+                id_dropdrown = '#dropdown_doc_fol_id';
+            } else if (type == "folder") {
+                id_dropdrown = '#folder_location_id';
+            }
             let html_option = '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
-            $('#folder_location_id').html(html_option);
+            $(id_dropdrown).html(html_option);
 
             let obj_level = json_data['arr_level'];
             let current_path = json_data['current_path'];
@@ -756,6 +855,7 @@ $(document).on("click", ".moveModal", function() {
                 //กรณีไม่มีข้อมูล
                 html_option = ' <option value="none">ไม่พบข้อมูล</option>';
                 $('#folder_location_id').html(html_option);
+                $(id_dropdrown).html(html_option);
             } //if
             else {
                 // html_option = '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
@@ -770,14 +870,39 @@ $(document).on("click", ".moveModal", function() {
                     if (level == 1) {
                         html_option =
                             '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
+
+                        let disable = '';
+                        if (type == 'folder') {
+                            if (json_data['is_level_1'] == true) {
+                                disable = ' disabled  hidden ';
+                            } //if
+                        } else if (type == 'file') {
+                            if (fol_id == 0) {
+                                disable = ' disabled  hidden ';
+                            }
+                        }
+
+
+                        html_option += '<option value="0"' + disable + ' > หน้าหลัก</option>';
+
                         for (i = 0; i < obj_level[level].length; i++) {
 
-                            //ลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้
+
+
                             let disable = '';
-                            if (obj_level[level][i]["fol_location"].includes(current_path + '/') ||
-                                obj_level[level][i]["fol_location"] == current_path) {
-                                disable = ' disabled ';
-                            } //if
+                            if (type == 'folder') {
+                                //ตัวที่ถูกเลือกและลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้ 
+                                if (obj_level[level][i]["fol_location"].includes(current_path + '/') ||
+                                    obj_level[level][i]["fol_location"] == current_path) {
+                                    disable = ' disabled ';
+                                } //if
+                            } else if (type = 'file') {
+                                //ตัวที่ถูกเลือก จะต้องกดไม่ได้ 
+                                if (obj_level[level][i]["fol_location"] == current_path) {
+                                    disable = ' disabled ';
+                                } //if
+                            }
+
 
                             html_option += '<option ' + disable + ' id="fol_' + obj_level[level][i][
                                 "fol_id"
@@ -787,30 +912,29 @@ $(document).on("click", ".moveModal", function() {
 
                         } //for
 
-                        $('#folder_location_id').html(html_option);
+                        $(id_dropdrown).html(html_option);
                     } //if
                     else {
-                        if (level == 2) {
-                            let disable = '';
-                            if (json_data['is_level_1'] == true) {
-                                disable = ' disabled  hidden ';
-                            } //if
 
-                            html_option = '<option value="0"' + disable + ' > หน้าหลัก</option>';
-                            $('#folder_location_id').prepend(html_option);
-                        } //if
 
                         prefix = prefix + '&nbsp' + '&nbsp' + '-';
 
                         //แทรกลูกหลังจากตำแหล่งแม่ (ทำจากหลังมาหน้า ลำดับจะไม่เพี้ยน)
                         for (i = obj_level[level].length - 1; i >= 0; i--) {
 
-                            //ลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้
                             let disable = '';
-                            if (obj_level[level][i]["fol_location"].includes(current_path + '/') ||
-                                obj_level[level][i]["fol_location"] == current_path) {
-                                disable = ' disabled ';
-                            } //if
+                            if (type == 'folder') {
+                                //ตัวที่ถูกเลือกและลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้ 
+                                if (obj_level[level][i]["fol_location"].includes(current_path + '/') ||
+                                    obj_level[level][i]["fol_location"] == current_path) {
+                                    disable = ' disabled ';
+                                } //if
+                            } else if (type = 'file') {
+                                //ตัวที่ถูกเลือก จะต้องกดไม่ได้ 
+                                if (obj_level[level][i]["fol_location"] == current_path) {
+                                    disable = ' disabled ';
+                                } //if
+                            }
 
                             html_option = '';
                             html_option += '<option ' + disable + ' id="fol_' + obj_level[level][i][
@@ -833,5 +957,6 @@ $(document).on("click", ".moveModal", function() {
             } //else
         }
     }); //ajax
+
 }); //get_dropdown_data
- </script>
+</script>

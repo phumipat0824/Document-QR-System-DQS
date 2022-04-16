@@ -14,8 +14,8 @@
 
 <div class="content">
     <div class="row" style="padding: 100px 10px 10px 20%;">
-        <a style="color:#100575;font-family:TH sarabun new; font-size: 80px;">สร้างคิวอาร์โค้ด</a>
-        <a style="font-family:TH sarabun new;font-size: 35px;">เริ่มสร้าง QR Code กันเลย </a>
+        <a style="color:#100575; font-size: 80px;">สร้างคิวอาร์โค้ด</a>
+        <a style="font-size: 35px;">เริ่มสร้าง QR Code กันเลย </a>
 
 
         <div class="col-md-5">
@@ -688,6 +688,9 @@ function make3() {
 }
 
 document.getElementById("download").addEventListener("click", function() {
+
+    const note = document.querySelector('#capture');
+    note.style.border = '10px solid #fff';
 
     html2canvas(document.querySelector('#capture')).then(function(canvas) {
 
