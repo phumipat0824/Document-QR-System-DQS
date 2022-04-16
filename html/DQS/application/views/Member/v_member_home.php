@@ -1006,7 +1006,7 @@ $(document).on("click", ".moveModalAjax", function() {
 
             if (type == "file") {
                 let html_select =
-                    '<select name="doc_fol_id" id="doc_fol_id" class="form-select" aria-label="Default select example" placeholder="" required></select>';
+                    '<select name="doc_fol_id" id="dropdown_doc_fol_id" class="form-select" aria-label="Default select example" placeholder="" required></select>';
                 $('#select_move_file').html(html_select);
                 $('#select_move').html('');
             } else if (type == "folder") {
@@ -1018,7 +1018,7 @@ $(document).on("click", ".moveModalAjax", function() {
 
             let id_dropdrown = '';
             if (type == "file") {
-                id_dropdrown = '#doc_fol_id';
+                id_dropdrown = '#dropdown_doc_fol_id';
             } else if (type == "folder") {
                 id_dropdrown = '#folder_location_id';
             }
