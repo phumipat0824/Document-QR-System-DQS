@@ -24,7 +24,7 @@
                                 <div class="col-md-10 justify-content-md-center">
                                     <div class="card-header card-header-warning" style = "padding: 10px; border-radius: 10px;">
                                     
-                                        <h2 class= "text-center" id="*" style="color:#000000; font-family:TH sarabun new; font-size: 60px;">สมัครสมาชิก</h2>
+                                        <h2 class= "text-center" id="*" style="color:aliceblue; font-family:TH sarabun new; font-size: 60px;">สมัครสมาชิก</h2>
                                         
                                     </div>
                                 </div>
@@ -54,6 +54,7 @@
                                 <div class="col"><br><br>
                                         <label style = "color: #000000;">หน่วยงาน</label>
                                         <label style = "color: #FF0000;">*</label>
+                                        <a class="mb-0" style="font-size: 11px;margin-top:0.001em;color:red;">หากหน่วยงานถูกสมัครแล้วจะไม่แสดงในรายการเลือก</a>
                                         <select name="mem_dep_id" id="mem_dep_id" class="form-select" aria-label="Default select example" required>
                                         <option value="" selected>--------- เลือกหน่วยงาน ---------</option>
                                         </select><br>
@@ -102,10 +103,15 @@
                                     <div class="form-group col-md-4"> <!-- กรอกรหัสผ่านลงใน กล่องบันทึกข้อความ -->
                                         <label for="inputPassword4" style = "color: #000000;">รหัสผ่าน</label>
                                         <label style = "color: #FF0000;">*</label>
+                                        <!-- <div class="col-md-3"> -->
+                                          
+                                        <!-- </div> -->
                                         <input type="password" class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" onchange="checkpassword()" required oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-                                        <div class="media">
+                                        <a style="font-size: 10px;margin-top:0.01em;color:red;">กรอกรหัสผ่านอย่างน้อย 8 ตัวอักษร </a>
+                                        <a style="font-size: 10px;margin-top:0.01em;color:red;">ประกอบด้วยตัวพิมพ์ใหญ่ พิมพ์เล็ก และอักขระพิเศษ</a>
                                         
-                                    </div>
+                                        
+                                   
                                           
                                     </div>
                                     <div class="form-group col-md-4"> <!-- กรอกรหัสผ่านลงใน กล่องบันทึกข้อความ -->
@@ -113,14 +119,7 @@
                                     <label for="inputPassword4" style = "color: #000000;">รหัสยืนยัน</label>
                                         <label style = "color: #FF0000;">*</label>
                                         <input type="password" class="form-control " id="mem_password" name="mem_password" placeholder="รหัสผ่าน" onchange="checkpassword()" required oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-                                    </div>
-                                    <div class="col-md-12">
-                                        <br>
-                                        <p class="mb-0" style="font-size: 12px;margin-top:0.001em;color:#100575;">หมายเหตุ: โปรดกรอกรหัสผ่านอย่างน้อย 8 ตัวอักษร ประกอบด้วยตัวพิมพ์ใหญ่ พิมพ์เล็ก และอักขระพิเศษ</p>
-                                        <p class="mb-0" style="font-size: 12px;margin-top:0.001em;color:#100575;">หมายเหตุ: หากหน่วยงานถูกสมัครแล้วจะไม่แสดงในรายการเลือก</p>
-
-                                            
-                                        </div>
+                                    </div> 
                                     
                                 <div class=" row gx-5 ">
                                     <div class=" col-1">
@@ -152,9 +151,6 @@
 
 
 <script> 
-function disableDepart(mem_pro){
-document.getElementById("mem_pro_list").style.display = 'none';
-}
 
 /*
 	* check_email_input()
@@ -188,6 +184,7 @@ function check_email_input(){
                         icon: 'error',
                         title: 'อีเมลถูกใช้แล้ว',
                         text: 'กรุณากรอกอีเมลใหม่',
+                        confirmButtonColor: '#009933',
                         confirmButtonText: 'ตกลง'
                     })
                 }
