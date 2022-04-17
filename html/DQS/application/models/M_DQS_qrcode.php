@@ -152,4 +152,35 @@ class M_DQS_qrcode extends Da_DQS_qrcode
     //     return $query->num_rows();
     // }
 
+    public function get_by_id_user($mem_id){
+        $sql = "SELECT * 
+        FROM {$this->db_name}.DQS_Document
+        WHERE DQS_Document.doc_mem_id  = $mem_id";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
+    public function get_by_pro_id($mem_pro_id )
+    {
+        $sql = "SELECT * from {$this->db_name}.DQS_Member
+        WHERE DQS_Member.mem_pro_id = $mem_pro_id ";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
+    public function get_qr_download_by_date($doc_id)
+    {
+        $sql = "SELECT * FROM {$this->db_name}.DQS_Qrcode
+         WHERE DQS_Member.dow_qr_id = $doc_id ";
+        $query = $this->db->query($sql);
+        return $query;
+
+    }
+
+    public function count_date_download(){
+        $sql = " SELECT dow_datetime, SUM(dow_download) AS dow_download FROM {$this->db_name}.DQS_Download
+        GROUP BY dow_datetime";
+        $query = $this->db->query($sql);
+        return $query;
+    }
 }
