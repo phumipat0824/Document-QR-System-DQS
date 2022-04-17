@@ -56,7 +56,7 @@ class Member_register extends DQS_controller
 
         for ($i=0 ; $i<count($data);$i++){
             if($data[$i]->mem_email == $mem_email ){
-                $check = 1; 
+                $check = 1;
             
             }
               
