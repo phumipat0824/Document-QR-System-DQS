@@ -207,7 +207,7 @@
                              <br>
                              <a id="edit_mss" style="display: none; color:red;" align='center'>ชื่อโฟลเดอร์ซ้ำหรือกรอกชื่อโฟลเดอร์ผิด กรุณากรอกใหม่</a>
                              <!-- <a id="text_name" style="display: none; color:red;" align='center'>ชื่อโฟลเดอร์ซ้ำหรือกรอกชื่อโฟลเดอร์ผิด กรุณากรอกใหม่</a> -->
-                             
+
                              <input type="hidden" name="fol_id" id="folder_id" value="">
                              <input type="hidden" name="fol_location_id" id="fol_location_id" value="<?php echo $arr_fol[0]->fol_location_id; ?>">
                          </div>
@@ -265,7 +265,7 @@
      <?php for ($i = 0; $i < count($arr_qr); $i++) {   ?>
      <?php if ($this->session->userdata('fol_id') == null) { ?>
      <?php if ($arr_qr[$i]->doc_fol_id == null) { ?>
-     <div class="col-md-4">
+     <div class="col-md-4" style="display: flex; flex-wrap: wrap; justify-content: space-around; flex: 0 0 500px;">
          <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
              <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
                  <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;">
@@ -317,7 +317,7 @@
                                              </center>
                                              <br>
                                              <a id="qr_mss" style="display: none; color:red;" align='center'>ชื่อไฟล์ซ้ำหรือกรอกชื่อไฟล์ผิด กรุณากรอกใหม่</a>
-                    
+
                                              <input type="hidden" name="qr_id" id="qr_id" value="">
                                          </div>
 
@@ -406,7 +406,7 @@
      <!-- Card in folder -->
      <?php } else { ?>
      <?php if ($arr_qr[$i]->doc_fol_id == $this->session->userdata('fol_id')) { ?>
-     <div class="col-md-4">
+     <div class="col-md-4" style="display: flex; flex-wrap: wrap; justify-content: space-around; flex: 0 0 500px;">
          <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
              <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
                  <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;">
@@ -609,7 +609,7 @@ $(document).on("keyup", "#fol_name", function() {
         n_check = 0;
 
     }
-  
+
     console.log(n_check + "check onkeyup");
 
 
@@ -643,8 +643,8 @@ $(document).on("keyup", "#fol_name", function() {
 
 function check_fol_edit() {
 
-        // var text_n = document.getElementById("text_name");
-        var d_name = document.getElementById("fol_edit").value;
+    // var text_n = document.getElementById("text_name");
+    var d_name = document.getElementById("fol_edit").value;
     var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
     var n_check;
     console.log("d_name" + d_name);
@@ -659,7 +659,7 @@ function check_fol_edit() {
         n_check = 0;
 
     }
-  
+
     console.log("check onkeyup" + n_check);
 
     var dis_button = document.getElementById('edit');
@@ -672,7 +672,7 @@ function check_fol_edit() {
 
 
     for (let x in t) {
-        if (t[x].fol_name == new_name.value || new_name.value == " " || n_check ==0) {
+        if (t[x].fol_name == new_name.value || new_name.value == " " || n_check == 0) {
             check_name = 1;
             break;
         } else {
@@ -1197,7 +1197,7 @@ $(document).on("keyup", "#qr_name", function() {
         n_check = 0;
 
     }
-  
+
     console.log(n_check + "check onkeyup");
 
     var t = <?php echo json_encode($arr_doc) ?>;
@@ -1207,7 +1207,7 @@ $(document).on("keyup", "#qr_name", function() {
     var dis_button = document.getElementById('create');
 
     for (let x in t) {
-        if (t[x].doc_name == new_name.value  || n_check == 0) {
+        if (t[x].doc_name == new_name.value || n_check == 0) {
             check_name = 1;
             break;
         } else {
@@ -1230,8 +1230,8 @@ $(document).on("keyup", "#qr_name", function() {
 
 function check_file_edit() {
 
-     // var text_n = document.getElementById("text_name");
-     var d_name = document.getElementById("qr_name").value;
+    // var text_n = document.getElementById("text_name");
+    var d_name = document.getElementById("qr_name").value;
     var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
     var n_check;
     console.log("d_name" + d_name);
@@ -1246,7 +1246,7 @@ function check_file_edit() {
         n_check = 0;
 
     }
-  
+
     console.log(n_check + "check file edit");
 
     var dis_button = document.getElementById('sub_edit');
@@ -1259,7 +1259,7 @@ function check_file_edit() {
 
 
     for (let x in t) {
-        if (t[x].qr_name == new_name.value || new_name.value == " "  || n_check == 0) {
+        if (t[x].qr_name == new_name.value || new_name.value == " " || n_check == 0) {
             check_name = 1;
             break;
         } else {
@@ -1279,13 +1279,13 @@ function check_file_edit() {
 
     }
     console.log(document.getElementById('edit'));
-   
+
 }
 
 function check_file_edit_in_folder() {
 
-     var text_n = document.getElementById("text_name");
-     var d_name = document.getElementById("qr_name").value;
+    var text_n = document.getElementById("text_name");
+    var d_name = document.getElementById("qr_name").value;
     var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
     var n_check;
     console.log("d_name" + d_name);
@@ -1300,7 +1300,7 @@ function check_file_edit_in_folder() {
         n_check = 0;
 
     }
-  
+
     console.log(n_check + "check file edit in folder");
 
     var dis_button = document.getElementById('sub_edit');
@@ -1313,7 +1313,7 @@ function check_file_edit_in_folder() {
 
 
     for (let x in t) {
-        if (t[x].qr_name == new_name.value || new_name.value == " "  || n_check == 0) {
+        if (t[x].qr_name == new_name.value || new_name.value == " " || n_check == 0) {
             check_name = 1;
             break;
         } else {
