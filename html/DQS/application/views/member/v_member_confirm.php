@@ -14,7 +14,7 @@
                                 </div>
                                 <div class="col-md-10 justify-content-md-center">
                                     <div class="card-header card-header-warning">
-                                        <h2 class="text-center" style = "padding: 10px; border-radius: 20px;">ยืนยันข้อมูลการสมัคร</h2>
+                                        <h2 class="text-center" style = "padding: 10px; border-radius: 20px;font-family: 'Sarabun', sans-serif;">ยืนยันข้อมูลการสมัคร</h2>
                                     </div>
                                 </div>
                                 <div class="col col-lg-1">
@@ -103,7 +103,7 @@
                                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 
                                             <input type="button" class="btn btn-light" onclick="goBack()" value="ยกเลิก">
-                                            <input type="button" id="btn-ok" style="background-color: #100575" value="ยืนยัน" name="register" class="btn btn-primary accept">
+                                            <input type="button" id="btn-ok"  value="ยืนยัน" name="register" class="btn btn-success">
                                         </div>
                                     </div>
                                     <div class="col-2"></div>
@@ -150,3 +150,11 @@
 
         
     </script>
+    <style> 
+     /*ปรับรูปแบบตัวอักษร */
+     @import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');
+
+     * {
+         font-family: 'Sarabun', sans-serif;
+     }
+     </style>
