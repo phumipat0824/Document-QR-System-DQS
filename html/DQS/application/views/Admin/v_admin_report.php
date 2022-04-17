@@ -72,6 +72,8 @@
                     <div class="card-body">
                         <h4 class="card-title" style="font-family:TH Sarabun New;">จำนวนคิวอาร์โค้ดทั้งหมด</h4>
                         <h5 class="card-title" style="font-family:TH Sarabun New;"><?php echo count($arr_qr_code) ?></h5>
+                    </h5>
+                            
                     </div>
                 </div>
             </div>
@@ -182,12 +184,11 @@
         // console.log(select);
     }
     const data = {
-        labels: [1,2,3,4,5,6],
+        labels: [<?php foreach($total_download as $value){ echo "'". $value->dow_datetime ."'". ','; }?>],
         datasets: [{
             label: 'จำนวนการดาวน์โหดล',
-            data: [1 , 2 , 3 , 4 ,5 ,6 ],
+            data: [<?php foreach($total_download as $value){ echo $value->dow_download . ','; }?>],
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
-
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1
         }]
