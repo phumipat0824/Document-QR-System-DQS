@@ -17,14 +17,15 @@ class Member_report extends DQS_controller
         $pdf = 0;
         $img = 0;
         $all_doc = count($data['arr_doc']);
-        for ($i = 0; $i < count($data['arr_doc']); $i++) {
-            if($data['arr_doc'][$i]->doc_type == "pdf"){
-                $all_pdf += 1;
-            }
-            else{
-                $all_img += 1;
-            }
-        }       
+        if($all_doc != 0){
+            for ($i = 0; $i < count($data['arr_doc']); $i++) {
+                if($data['arr_doc'][$i]->doc_type == "pdf"){
+                    $all_pdf += 1;
+                }
+                else{
+                    $all_img += 1;
+                }
+            }       
         $pdf = $all_pdf;
         $img = $all_img;
         $all_pdf = ($all_pdf*100)/$all_doc;
@@ -36,6 +37,14 @@ class Member_report extends DQS_controller
         $data['pdf'] = $pdf;
         $data['img'] = $img;
         $this->output_sidebar_member("Member/v_member_report" ,$data);
+        }
+        else{
+            $data['all_pdf'] = $all_pdf;
+            $data['all_img'] = $all_img;
+            $data['pdf'] = $pdf;
+            $data['img'] = $img;
+            $this->output_sidebar_member("Member/v_member_report" ,$data);
+        }
     }
 }
 ?>
