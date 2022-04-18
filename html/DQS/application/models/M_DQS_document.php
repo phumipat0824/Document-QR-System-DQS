@@ -173,4 +173,19 @@ class M_DQS_document extends Da_DQS_document {
         $query = $this->db->get('DQS_Document');
         return $query->num_rows();
     }
+
+    public function get_all_doc()
+    {
+        $sql = "SELECT * FROM {$this->db_name}.DQS_Document ";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
+    public function get_by_doc_mem_id($mem_id)
+    {
+        $sql = "SELECT * FROM {$this->db_name}.DQS_Document 
+        WHERE DQS_Document.doc_mem_id  = $mem_id";
+        $query = $this->db->query($sql);
+        return $query;
+    }
 }
