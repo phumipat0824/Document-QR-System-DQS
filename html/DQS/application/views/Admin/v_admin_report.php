@@ -15,20 +15,8 @@
             <h1 style="color:#003399; font-family:TH Sarabun New; font-weight: 900; font-size: 80px;">รายงานสรุปผล</h1>
         </div>
         <!-- text -->
-
         <!-- dropdown date -->
-        <div class="col-3 " style="margin-top:100px;">
-            <form method="POST" action=<?php echo site_url() .'/Admin/Admin_report/get_file/'?>>
-                <select onchange="get_id()" name="user_id" id="user_id" class="form-select" aria-label="Default select example">
-                    <option value="total" selected style="text-align: center;"> สมาชิกทั้งหมด </option>
-                    <?php foreach ($arr_member as $value) { ?>
-                    <option value='<?php echo $value->mem_id  ?>'><?php echo $value->mem_username ?></option>
-                    <?php } ?>
-                </select>
-                <center>
-                    <button type="submit" class="btn btn-primary" id="btn_login" style="background-color: #100575 ;  font-family:TH Sarabun New; font-size: 25px; margin-top:30px;">ยืนยัน</button>
-                </center>
-                <!-- </div>
+        <!-- </div>
             <div class="col-5 ">
                 <label style="color: #000000;">เอกสาร</label>
                 <label style="color: #FF0000;">*</label>
@@ -51,14 +39,13 @@
                 <div class="input-group input-group-static my-3">
                     <input type="date" class="form-select" name="doc_timeend" id="doc_timeend" required>
                 </div>-->
-        </div>
 
-        </form>
+
 
         <!-- dropdown date -->
 
         <!-- card show number -->
-        <div class="row">
+        <div class="row justify-content-evenly">
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-header card-header-icon card-header">
@@ -73,12 +60,26 @@
                     </div>
                 </div>
             </div>
+            <div class="col-3">
+            <form method="POST" action=<?php echo site_url() . '/Admin/Admin_report/get_file/' ?>>
+                <select onchange="get_id()" name="user_id" id="user_id" class="form-select" aria-label="Default select example">
+                    <option value="total" selected style="text-align: center;"> สมาชิกทั้งหมด </option>
+                    <?php foreach ($arr_member as $value) { ?>
+                        <option value='<?php echo $value->mem_id  ?>'><?php echo $value->mem_username ?></option>
+                    <?php } ?>
+                </select>
+                <center>
+                    <button type="submit" class="btn btn-primary" id="btn_login" style="background-color: #100575 ;  font-family:TH Sarabun New; font-size: 25px; margin-top:30px;">ยืนยัน</button>
+                </center>
+            </form>
+        </div>
             <div class="row justify-content-start">
                 <div class="col-6">
                     <div id="chartContainer" style="height: 370px;">
                     </div>
-                    <div class="col-4">
-                    </div>
+                </div>
+                <div class="col-6">
+                    <div id="chartContainer2" style="height: 370px;"></div>
                 </div>
 
                 <!-- Chart -->
@@ -88,8 +89,8 @@
                 <!-- Chart -->
             </div>
         </div>
-
-        <script>
+    </div>
+    <script>
         // function get_id() {
         //     var mem_list = document.getElementById("user_id");
         //     // console.log(mem_list);
@@ -150,7 +151,36 @@
                 }
             }
 
+            var chart = new CanvasJS.Chart("chartContainer2", {
+                animationEnabled: true,
+                theme: "light2", // "light1", "light2", "dark1", "dark2"
+                title: {
+                    text: "ชนิดของไฟล์"
+                },
+                axisY: {
+                    title: "จำนวนไฟล์"
+                },
+                data: [{
+                    type: "column",
+                    showInLegend: true,
+                    legendMarkerColor: "grey",
+                    legendText: "ชนิดไฟล์",
+                    dataPoints: [{
+                            y: <?php echo $pdf ?>,
+                            label: "PDF"
+                        },
+                        {
+                            y: <?php echo $img ?>,
+                            label: "IMG"
+                        }
+
+                    ]
+                }]
+            });
+            chart.render();
+
         }
+
 
         // function doc_input(arr_doc) { //
 
@@ -192,4 +222,4 @@
 
         //     // console.log(select);
         // }
-        </script>
+    </script>
