@@ -256,7 +256,6 @@
                             <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิดไฟล์ : </h5>
                             <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;"><?php echo $arr_qr[$i]->doc_type ?></h5>
 
-                            <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">รายงานสรุปผล </h5>
                         </div>
                         <div class="form-group col-md-2">
 
@@ -433,52 +432,52 @@
     <?php $this->session->set_userdata('fol_id', ''); ?>
     <?php $this->session->set_userdata('path', ''); ?>
     $(document).on("keyup", "#fol_name", function() {
-         // var text_n = document.getElementById("text_name");
-    var d_name = document.getElementById("fol_edit").value;
-    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
-    var n_check;
-    console.log("d_name" + d_name);
+        // var text_n = document.getElementById("text_name");
+        var d_name = document.getElementById("fol_edit").value;
+        var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+        var n_check;
+        console.log("d_name" + d_name);
 
-    if (d_name.match(pattern)) {
-        // text_n.innerHTML = "";
-        n_check = 1;
+        if (d_name.match(pattern)) {
+            // text_n.innerHTML = "";
+            n_check = 1;
 
-    } else {
-        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
-        // text_n.style.color = "#ff0000";
-        n_check = 0;
-
-    }
-
-    console.log(n_check + "check onkeyup");
-
-
-    var t = <?php echo json_encode($arr_fol) ?>;
-    var new_name = document.getElementById("fol_name");
-    var check_name;
-    var div = document.getElementById('target_div');
-    var dis_button = document.getElementById('create');
-
-    for (let x in t) {
-        if (t[x].fol_name == new_name.value || n_check == 0) {
-            check_name = 1;
-            break;
         } else {
-            check_name = 0;
+            // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+            // text_n.style.color = "#ff0000";
+            n_check = 0;
+
         }
-    }
-    console.log(check_name);
-    if (check_name == 1) {
-        $("#fol_name").css("border-color", "red");
-        div.style.display = "block";
-        dis_button.disabled = true;
 
-    } else {
-        $("#fol_name").css("border-color", "green");
-        div.style.display = "none";
-        dis_button.disabled = false;
+        console.log(n_check + "check onkeyup");
 
-    }
+
+        var t = <?php echo json_encode($arr_fol) ?>;
+        var new_name = document.getElementById("fol_name");
+        var check_name;
+        var div = document.getElementById('target_div');
+        var dis_button = document.getElementById('create');
+
+        for (let x in t) {
+            if (t[x].fol_name == new_name.value || n_check == 0) {
+                check_name = 1;
+                break;
+            } else {
+                check_name = 0;
+            }
+        }
+        console.log(check_name);
+        if (check_name == 1) {
+            $("#fol_name").css("border-color", "red");
+            div.style.display = "block";
+            dis_button.disabled = true;
+
+        } else {
+            $("#fol_name").css("border-color", "green");
+            div.style.display = "none";
+            dis_button.disabled = false;
+
+        }
     });
 
     /* check_fol_edit()
@@ -490,54 +489,54 @@
      */
     function check_fol_edit() {
 
-    // var text_n = document.getElementById("text_name");
-    var d_name = document.getElementById("fol_edit").value;
-    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
-    var n_check;
-    console.log("d_name" + d_name);
+        // var text_n = document.getElementById("text_name");
+        var d_name = document.getElementById("fol_edit").value;
+        var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+        var n_check;
+        console.log("d_name" + d_name);
 
-    if (d_name.match(pattern)) {
-        // text_n.innerHTML = "";
-        n_check = 1;
+        if (d_name.match(pattern)) {
+            // text_n.innerHTML = "";
+            n_check = 1;
 
-    } else {
-        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
-        // text_n.style.color = "#ff0000";
-        n_check = 0;
-
-    }
-
-    console.log("check onkeyup" + n_check);
-
-    var dis_button = document.getElementById('edit');
-    dis_button.disabled = false;
-
-    var t = <?php echo json_encode($arr_fol) ?>;
-    var new_name = document.getElementById("fol_edit");
-    var check_name;
-    var div = document.getElementById('edit_mss');
-
-
-    for (let x in t) {
-        if (t[x].fol_name == new_name.value || new_name.value == " " || n_check == 0) {
-            check_name = 1;
-            break;
         } else {
-            check_name = 0;
-        }
-    }
-    console.log(check_name);
-    if (check_name == 1) {
-        $("#fol_edit").css("border-color", "red");
-        div.style.display = "block";
-        dis_button.disabled = true;
+            // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+            // text_n.style.color = "#ff0000";
+            n_check = 0;
 
-    } else {
-        $("#fol_edit").css("border-color", "green");
-        div.style.display = "none";
+        }
+
+        console.log("check onkeyup" + n_check);
+
+        var dis_button = document.getElementById('edit');
         dis_button.disabled = false;
 
-    }
+        var t = <?php echo json_encode($arr_fol) ?>;
+        var new_name = document.getElementById("fol_edit");
+        var check_name;
+        var div = document.getElementById('edit_mss');
+
+
+        for (let x in t) {
+            if (t[x].fol_name == new_name.value || new_name.value == " " || n_check == 0) {
+                check_name = 1;
+                break;
+            } else {
+                check_name = 0;
+            }
+        }
+        console.log(check_name);
+        if (check_name == 1) {
+            $("#fol_edit").css("border-color", "red");
+            div.style.display = "block";
+            dis_button.disabled = true;
+
+        } else {
+            $("#fol_edit").css("border-color", "green");
+            div.style.display = "none";
+            dis_button.disabled = false;
+
+        }
     } //end function check_fol_edit()
     </script>
 
@@ -598,7 +597,7 @@
         if (!event.target.matches('.dropbtn')) {
             var dropdowns = document.getElementsByClassName("dropdown-content");
             var i;
-            for (i = 0; i <  dropdowns.length; i++) {
+            for (i = 0; i < dropdowns.length; i++) {
                 var openDropdown = dropdowns[i];
                 if (openDropdown.classList.contains('show')) {
                     openDropdown.classList.remove('show');
@@ -930,23 +929,23 @@
     $(document).on("keyup", "#qr_name", function() {
 
         // var text_n = document.getElementById("text_name");
-     var d_name = document.getElementById("qr_name").value;
-    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
-    var n_check;
-    console.log("d_name" + d_name);
+        var d_name = document.getElementById("qr_name").value;
+        var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+        var n_check;
+        console.log("d_name" + d_name);
 
-    if (d_name.match(pattern)) {
-        // text_n.innerHTML = "";
-        n_check = 1;
+        if (d_name.match(pattern)) {
+            // text_n.innerHTML = "";
+            n_check = 1;
 
-    } else {
-        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
-        // text_n.style.color = "#ff0000";
-        n_check = 0;
+        } else {
+            // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+            // text_n.style.color = "#ff0000";
+            n_check = 0;
 
-    }
-  
-    console.log(n_check + "check file edit in folder");
+        }
+
+        console.log(n_check + "check file edit in folder");
 
         var t = <?php echo json_encode($arr_doc) ?>;
         var new_name = document.getElementById("qr_name");
@@ -955,7 +954,7 @@
         var dis_button = document.getElementById('create');
 
         for (let x in t) {
-            if (t[x].doc_name == new_name.value  || n_check == 0) {
+            if (t[x].doc_name == new_name.value || n_check == 0) {
                 check_name = 1;
                 break;
             } else {
@@ -979,23 +978,23 @@
     function check_file_edit() {
 
         // var text_n = document.getElementById("text_name");
-     var d_name = document.getElementById("qr_name").value;
-    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
-    var n_check;
-    console.log("d_name" + d_name);
+        var d_name = document.getElementById("qr_name").value;
+        var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+        var n_check;
+        console.log("d_name" + d_name);
 
-    if (d_name.match(pattern)) {
-        // text_n.innerHTML = "";
-        n_check = 1;
+        if (d_name.match(pattern)) {
+            // text_n.innerHTML = "";
+            n_check = 1;
 
-    } else {
-        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
-        // text_n.style.color = "#ff0000";
-        n_check = 0;
+        } else {
+            // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+            // text_n.style.color = "#ff0000";
+            n_check = 0;
 
-    }
-  
-    console.log(n_check + "check file edit in folder");
+        }
+
+        console.log(n_check + "check file edit in folder");
 
         var dis_button = document.getElementById('sub_edit');
         dis_button.disabled = false;
@@ -1009,7 +1008,7 @@
 
 
         for (let x in t) {
-            if (t[x].qr_name == new_name.value || new_name.value == " "  || n_check == 0) {
+            if (t[x].qr_name == new_name.value || new_name.value == " " || n_check == 0) {
                 check_name = 1;
                 break;
             } else {
@@ -1028,7 +1027,7 @@
             dis_button.disabled = false;
 
         }
-      
+
     }
 
     document.getElementById("download").addEventListener("click", function() {

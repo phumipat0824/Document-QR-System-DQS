@@ -291,8 +291,6 @@
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
                              <?php echo $arr_qr[$i]->doc_type ?></h5>
 
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
-                             รายงานสรุปผล </h5>
                      </div>
                      <div class="form-group col-md-2">
 
@@ -431,9 +429,6 @@
                              ชนิดไฟล์ : </h5>
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
                              <?php echo $arr_qr[$i]->doc_type ?></h5>
-
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
-                             รายงานสรุปผล </h5>
 
                      </div>
                      <div class="form-group col-md-2">

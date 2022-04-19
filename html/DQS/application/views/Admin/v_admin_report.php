@@ -45,7 +45,7 @@
         <!-- dropdown date -->
 
         <!-- card show number -->
-        <div class="row justify-content-evenly">
+        <div class="row">
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-header card-header-icon card-header">
@@ -60,19 +60,35 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3">
-            <form method="POST" action=<?php echo site_url() . '/Admin/Admin_report/get_file/' ?>>
-                <select onchange="get_id()" name="user_id" id="user_id" class="form-select" aria-label="Default select example">
-                    <option value="total" selected style="text-align: center;"> สมาชิกทั้งหมด </option>
-                    <?php foreach ($arr_member as $value) { ?>
+
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header card-header-icon card-header">
+                        <div class="card-icon" style="background-color: #BE4734;">
+                            <i class="material-icons">file_download</i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title" style="font-family:TH Sarabun New;">จำนวนการดาวน์โหลด</h4>
+                        <h5 class="card-title" style="font-family:TH Sarabun New;"><?php echo count($arr_download) ?></h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4" style="margin-top : 31px">
+                <form method="POST" action=<?php echo site_url() . '/Admin/Admin_report/get_file/' ?>>
+                    <select onchange="get_id()" name="user_id" id="user_id" class="form-select" aria-label="Default select example">
+                        <option value="total" selected style="text-align: center;"> สมาชิกทั้งหมด </option>
+                        <?php foreach ($arr_member as $value) { ?>
                         <option value='<?php echo $value->mem_id  ?>'><?php echo $value->mem_username ?></option>
-                    <?php } ?>
-                </select>
-                <center>
-                    <button type="submit" class="btn btn-primary" id="btn_login" style="background-color: #100575 ;  font-family:TH Sarabun New; font-size: 25px; margin-top:30px;">ยืนยัน</button>
-                </center>
-            </form>
-        </div>
+                        <?php } ?>
+                    </select>
+                    <center>
+                        <button type="submit" class="btn btn-primary" id="btn_login" style="background-color: #100575 ;  font-family:TH Sarabun New; font-size: 25px; margin-top:30px;">ยืนยัน</button>
+                    </center>
+                </form>
+            </div>
+
             <div class="row justify-content-start">
                 <div class="col-6">
                     <div id="chartContainer" style="height: 370px;">
@@ -89,137 +105,138 @@
                 <!-- Chart -->
             </div>
         </div>
+
     </div>
     <script>
-        // function get_id() {
-        //     var mem_list = document.getElementById("user_id");
-        //     // console.log(mem_list);
-        //     get_doc(mem_list.value);
-        // }
+    // function get_id() {
+    //     var mem_list = document.getElementById("user_id");
+    //     // console.log(mem_list);
+    //     get_doc(mem_list.value);
+    // }
 
-        // function get_doc(value_mem_list) {
-        //     // console.log(value_mem_list);
-        //     $.ajax({
-        //         type: "POST",
-        //         url: "<?php echo site_url() ?>/Admin/Admin_report/get_file_ajax/",
-        //         dataType: 'JSON',
-        //         data: {
-        //             'mem_id_list': value_mem_list
-        //         },
-        //         success: function(data) {
-        //             console.log(data);
-        //             Pie(data);
-        //         }
+    // function get_doc(value_mem_list) {
+    //     // console.log(value_mem_list);
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "<?php echo site_url() ?>/Admin/Admin_report/get_file_ajax/",
+    //         dataType: 'JSON',
+    //         data: {
+    //             'mem_id_list': value_mem_list
+    //         },
+    //         success: function(data) {
+    //             console.log(data);
+    //             Pie(data);
+    //         }
 
-        //     });
+    //     });
 
 
-        // }
+    // }
 
-        window.onload = function() {
+    window.onload = function() {
 
-            var chart = new CanvasJS.Chart("chartContainer", {
-                theme: "light2",
-                animationEnabled: true,
-                title: {
-                    text: "ชนิดของไฟล์"
-                },
-                data: [{
-                    type: "pie",
-                    indexLabelFontSize: 18,
-                    radius: 80,
-                    indexLabel: "{label} - {y}",
-                    yValueFormatString: "###0.0\"%\"",
-                    click: explodePie,
-                    dataPoints: [{
-                            y: <?php echo $all_pdf ?>,
-                            label: "PDF"
-                        },
-                        {
-                            y: <?php echo $all_img ?>,
-                            label: "IMG"
-                        }
-                    ]
-                }]
-            });
-            chart.render();
+        var chart = new CanvasJS.Chart("chartContainer", {
+            theme: "light2",
+            animationEnabled: true,
+            title: {
+                text: "ชนิดของไฟล์"
+            },
+            data: [{
+                type: "pie",
+                indexLabelFontSize: 18,
+                radius: 80,
+                indexLabel: "{label} - {y}",
+                yValueFormatString: "###0.0\"%\"",
+                click: explodePie,
+                dataPoints: [{
+                        y: <?php echo $all_pdf ?>,
+                        label: "PDF"
+                    },
+                    {
+                        y: <?php echo $all_img ?>,
+                        label: "IMG"
+                    }
+                ]
+            }]
+        });
+        chart.render();
 
-            function explodePie(e) {
-                for (var i = 0; i < e.dataSeries.dataPoints.length; i++) {
-                    if (i !== e.dataPointIndex)
-                        e.dataSeries.dataPoints[i].exploded = false;
-                }
+        function explodePie(e) {
+            for (var i = 0; i < e.dataSeries.dataPoints.length; i++) {
+                if (i !== e.dataPointIndex)
+                    e.dataSeries.dataPoints[i].exploded = false;
             }
-
-            var chart = new CanvasJS.Chart("chartContainer2", {
-                animationEnabled: true,
-                theme: "light2", // "light1", "light2", "dark1", "dark2"
-                title: {
-                    text: "ชนิดของไฟล์"
-                },
-                axisY: {
-                    title: "จำนวนไฟล์"
-                },
-                data: [{
-                    type: "column",
-                    showInLegend: true,
-                    legendMarkerColor: "grey",
-                    legendText: "ชนิดไฟล์",
-                    dataPoints: [{
-                            y: <?php echo $pdf ?>,
-                            label: "PDF"
-                        },
-                        {
-                            y: <?php echo $img ?>,
-                            label: "IMG"
-                        }
-
-                    ]
-                }]
-            });
-            chart.render();
-
         }
 
+        var chart = new CanvasJS.Chart("chartContainer2", {
+            animationEnabled: true,
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            title: {
+                text: "ชนิดของไฟล์"
+            },
+            axisY: {
+                title: "จำนวนไฟล์"
+            },
+            data: [{
+                type: "column",
+                showInLegend: true,
+                legendMarkerColor: "grey",
+                legendText: "ชนิดไฟล์",
+                dataPoints: [{
+                        y: <?php echo $pdf ?>,
+                        label: "PDF"
+                    },
+                    {
+                        y: <?php echo $img ?>,
+                        label: "IMG"
+                    }
 
-        // function doc_input(arr_doc) { //
+                ]
+            }]
+        });
+        chart.render();
 
-        //     var select = document.getElementById("mem_doc_id");
+    }
 
-        //     const elmts = arr_doc;
 
-        //     // console.log(arr_doc);
-        //     const doc_optn = JSON.parse(JSON.stringify(elmts));
+    // function doc_input(arr_doc) { //
 
-        //     if (elmts == "") {
+    //     var select = document.getElementById("mem_doc_id");
 
-        //         var optn = "ไม่มีเอกสาร";
-        //         var el = document.createElement("option");
-        //         el.textContent = optn;
-        //         el.value = "";
-        //         // console.log(el.value);
-        //         select.appendChild(el);
+    //     const elmts = arr_doc;
 
-        //     } else {
-        //         var optn = "เอกสารทั้งหมด";
-        //         var el = document.createElement("option");
-        //         el.textContent = optn;
-        //         el.value = "total";
-        //         // console.log(el.value);
-        //         select.appendChild(el);
-        //         for (var i of elmts) {
+    //     // console.log(arr_doc);
+    //     const doc_optn = JSON.parse(JSON.stringify(elmts));
 
-        //             // console.log(i.doc_name);
-        //             var optn = i.doc_name;
-        //             var el = document.createElement("option");
-        //             el.textContent = optn;
-        //             el.value = i.doc_id;
-        //             // console.log(el.value);
-        //             select.appendChild(el);
+    //     if (elmts == "") {
 
-        //         }
-        //     }
+    //         var optn = "ไม่มีเอกสาร";
+    //         var el = document.createElement("option");
+    //         el.textContent = optn;
+    //         el.value = "";
+    //         // console.log(el.value);
+    //         select.appendChild(el);
 
-        //     // console.log(select);
-        // }
+    //     } else {
+    //         var optn = "เอกสารทั้งหมด";
+    //         var el = document.createElement("option");
+    //         el.textContent = optn;
+    //         el.value = "total";
+    //         // console.log(el.value);
+    //         select.appendChild(el);
+    //         for (var i of elmts) {
+
+    //             // console.log(i.doc_name);
+    //             var optn = i.doc_name;
+    //             var el = document.createElement("option");
+    //             el.textContent = optn;
+    //             el.value = i.doc_id;
+    //             // console.log(el.value);
+    //             select.appendChild(el);
+
+    //         }
+    //     }
+
+    //     // console.log(select);
+    // }
     </script>

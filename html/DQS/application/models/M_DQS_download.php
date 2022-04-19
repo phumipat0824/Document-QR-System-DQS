@@ -22,4 +22,21 @@ class M_DQS_download extends Da_DQS_download {
         $query = $this->db->query($sql);
         return $query;
     }
+
+    public function get_by_pro_id($mem_pro_id )
+    {
+        $sql = "SELECT * from {$this->db_name}.DQS_Download
+        WHERE DQS_Download.dow_pro_id = $mem_pro_id ";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
+    public function get_by_mem_id($mem_id )
+    {
+        $sql = "SELECT * from {$this->db_name}.DQS_Download
+        WHERE DQS_Download.dow_mem_id = $mem_id ";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
 }
