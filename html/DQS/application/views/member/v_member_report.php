@@ -55,143 +55,221 @@
                 </div>
                 <!-- Chart -->
 
-                <canvas id="myChart" width="400" height="400"></canvas>
+                <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
 
                 <!-- Chart -->
             </div>
+            <div class="row">
+                <div id="chartContainer3" style="height: 500px; width: 100%;margin-top : 50px;"></div>
+            </div>
         </div>
+    </div>
+</div>
+<script>
+// function get_id() {
+//     var mem_list = document.getElementById("user_id");
+//     // console.log(mem_list);
+//     get_doc(mem_list.value);
+// }
 
-        <script>
-        // function get_id() {
-        //     var mem_list = document.getElementById("user_id");
-        //     // console.log(mem_list);
-        //     get_doc(mem_list.value);
-        // }
+// function get_doc(value_mem_list) {
+//     // console.log(value_mem_list);
+//     $.ajax({
+//         type: "POST",
+//         url: "<?php echo site_url() ?>/Admin/Admin_report/get_file_ajax/",
+//         dataType: 'JSON',
+//         data: {
+//             'mem_id_list': value_mem_list
+//         },
+//         success: function(data) {
+//             console.log(data);
+//             Pie(data);
+//         }
 
-        // function get_doc(value_mem_list) {
-        //     // console.log(value_mem_list);
-        //     $.ajax({
-        //         type: "POST",
-        //         url: "<?php echo site_url() ?>/Admin/Admin_report/get_file_ajax/",
-        //         dataType: 'JSON',
-        //         data: {
-        //             'mem_id_list': value_mem_list
-        //         },
-        //         success: function(data) {
-        //             console.log(data);
-        //             Pie(data);
-        //         }
-
-        //     });
+//     });
 
 
-        // }
+// }
 
-        window.onload = function() {
+window.onload = function() {
 
-            var chart = new CanvasJS.Chart("chartContainer", {
-                theme: "light2",
-                animationEnabled: true,
-                title: {
-                    text: "ชนิดของไฟล์"
+    var chart = new CanvasJS.Chart("chartContainer", {
+        theme: "light2",
+        animationEnabled: true,
+        title: {
+            text: "ชนิดของไฟล์"
+        },
+        data: [{
+            type: "pie",
+            indexLabelFontSize: 18,
+            radius: 80,
+            indexLabel: "{label} - {y}",
+            yValueFormatString: "###0.0\"%\"",
+            click: explodePie,
+            dataPoints: [{
+                    y: <?php echo $all_pdf ?>,
+                    label: "PDF"
                 },
-                data: [{
-                    type: "pie",
-                    indexLabelFontSize: 18,
-                    radius: 80,
-                    indexLabel: "{label} - {y}",
-                    yValueFormatString: "###0.0\"%\"",
-                    click: explodePie,
-                    dataPoints: [{
-                            y: <?php echo $all_pdf ?>,
-                            label: "PDF"
-                        },
-                        {
-                            y: <?php echo $all_img ?>,
-                            label: "IMG"
-                        }
-                    ]
-                }]
-            });
-            chart.render();
-
-            function explodePie(e) {
-                for (var i = 0; i < e.dataSeries.dataPoints.length; i++) {
-                    if (i !== e.dataPointIndex)
-                        e.dataSeries.dataPoints[i].exploded = false;
+                {
+                    y: <?php echo $all_img ?>,
+                    label: "IMG"
                 }
-            }
+            ]
+        }]
+    });
+    chart.render();
 
-            var chart = new CanvasJS.Chart("chartContainer2", {
-                animationEnabled: true,
-                theme: "light2", // "light1", "light2", "dark1", "dark2"
-                title: {
-                    text: "ชนิดของไฟล์"
-                },
-                axisY: {
-                    title: "จำนวนไฟล์"
-                },
-                data: [{
-                    type: "column",
-                    showInLegend: true,
-                    legendMarkerColor: "grey",
-                    legendText: "ชนิดไฟล์",
-                    dataPoints: [{
-                            y: <?php echo $pdf ?>,
-                            label: "PDF"
-                        },
-                        {
-                            y: <?php echo $img ?>,
-                            label: "IMG"
-                        }
-
-                    ]
-                }]
-            });
-            chart.render();
-
+    function explodePie(e) {
+        for (var i = 0; i < e.dataSeries.dataPoints.length; i++) {
+            if (i !== e.dataPointIndex)
+                e.dataSeries.dataPoints[i].exploded = false;
         }
+    }
+
+    var chart = new CanvasJS.Chart("chartContainer2", {
+        animationEnabled: true,
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        title: {
+            text: "ชนิดของไฟล์"
+        },
+        axisY: {
+            title: "จำนวนไฟล์"
+        },
+        data: [{
+            type: "column",
+            showInLegend: true,
+            legendMarkerColor: "grey",
+            legendText: "ชนิดไฟล์",
+            dataPoints: [{
+                    y: <?php echo $pdf ?>,
+                    label: "PDF"
+                },
+                {
+                    y: <?php echo $img ?>,
+                    label: "IMG"
+                }
+
+            ]
+        }]
+    });
+    chart.render();
+
+    var chart = new CanvasJS.Chart("chartContainer3", {
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        animationEnabled: true,
+        title: {
+            text: "จำนวนการดาวน์โหลด - 2022"
+        },
+        axisX: {
+            interval: 1,
+            intervalType: "month",
+            valueFormatString: "MMM"
+        },
+        axisY: {
+            title: "จำนวนการดาวน์โหลด",
+            includeZero: true,
+            valueFormatString: 0.00
+        },
+        data: [{
+            type: "line",
+            markerSize: 12,
+            xValueFormatString: "MMM, YYYY",
+            yValueFormatString: "ดาวน์โหลดทั้งหมด : ###.#",
+            dataPoints: [{
+                    x: new Date(2022, 00, 1),
+                    y: <?php echo $Jan ?>,
+                },
+                {
+                    x: new Date(2022, 01, 1),
+                    y: <?php echo $Feb ?>,
+                },
+                {
+                    x: new Date(2022, 02, 1),
+                    y: <?php echo $Mar ?>,
+                },
+                {
+                    x: new Date(2022, 03, 1),
+                    y: <?php echo $Apr ?>,
+                },
+                {
+                    x: new Date(2022, 04, 1),
+                    y: <?php echo $May ?>,
+                },
+                {
+                    x: new Date(2022, 05, 1),
+                    y: <?php echo $Jun ?>,
+                },
+                {
+                    x: new Date(2022, 06, 1),
+                    y: <?php echo $Jul ?>,
+                },
+                {
+                    x: new Date(2022, 07, 1),
+                    y: <?php echo $Aug ?>,
+                },
+                {
+                    x: new Date(2022, 08, 1),
+                    y: <?php echo $Sep ?>,
+                },
+                {
+                    x: new Date(2022, 09, 1),
+                    y: <?php echo $Oct ?>,
+                },
+                {
+                    x: new Date(2022, 10, 1),
+                    y: <?php echo $Nov ?>,
+                },
+                {
+                    x: new Date(2022, 11, 1),
+                    y: <?php echo $Dec ?>,
+                }
+            ]
+        }]
+    });
+    chart.render();
+
+}
 
 
 
-        // function doc_input(arr_doc) { //
+// function doc_input(arr_doc) { //
 
-        //     var select = document.getElementById("mem_doc_id");
+//     var select = document.getElementById("mem_doc_id");
 
-        //     const elmts = arr_doc;
+//     const elmts = arr_doc;
 
-        //     // console.log(arr_doc);
-        //     const doc_optn = JSON.parse(JSON.stringify(elmts));
+//     // console.log(arr_doc);
+//     const doc_optn = JSON.parse(JSON.stringify(elmts));
 
-        //     if (elmts == "") {
+//     if (elmts == "") {
 
-        //         var optn = "ไม่มีเอกสาร";
-        //         var el = document.createElement("option");
-        //         el.textContent = optn;
-        //         el.value = "";
-        //         // console.log(el.value);
-        //         select.appendChild(el);
+//         var optn = "ไม่มีเอกสาร";
+//         var el = document.createElement("option");
+//         el.textContent = optn;
+//         el.value = "";
+//         // console.log(el.value);
+//         select.appendChild(el);
 
-        //     } else {
-        //         var optn = "เอกสารทั้งหมด";
-        //         var el = document.createElement("option");
-        //         el.textContent = optn;
-        //         el.value = "total";
-        //         // console.log(el.value);
-        //         select.appendChild(el);
-        //         for (var i of elmts) {
+//     } else {
+//         var optn = "เอกสารทั้งหมด";
+//         var el = document.createElement("option");
+//         el.textContent = optn;
+//         el.value = "total";
+//         // console.log(el.value);
+//         select.appendChild(el);
+//         for (var i of elmts) {
 
-        //             // console.log(i.doc_name);
-        //             var optn = i.doc_name;
-        //             var el = document.createElement("option");
-        //             el.textContent = optn;
-        //             el.value = i.doc_id;
-        //             // console.log(el.value);
-        //             select.appendChild(el);
+//             // console.log(i.doc_name);
+//             var optn = i.doc_name;
+//             var el = document.createElement("option");
+//             el.textContent = optn;
+//             el.value = i.doc_id;
+//             // console.log(el.value);
+//             select.appendChild(el);
 
-        //         }
-        //     }
+//         }
+//     }
 
-        //     // console.log(select);
-        // }
-        </script>
+//     // console.log(select);
+// }
+</script>

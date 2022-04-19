@@ -155,6 +155,7 @@ class Admin_report extends DQS_controller
             else{
                 $all_img += 1;
             }
+        }
         
         $pdf = $all_pdf;
         $img = $all_img;
@@ -162,7 +163,6 @@ class Admin_report extends DQS_controller
         $all_pdf = round($all_pdf);
         $all_img = ($all_img*100)/$all_doc;
         $all_img = round($all_img);
-        }
         $data['all_pdf'] = $all_pdf;
         $data['all_img'] = $all_img;
         $data['pdf'] = $pdf;
@@ -179,28 +179,26 @@ class Admin_report extends DQS_controller
         $data['Oct'] = $Oct;
         $data['Nov'] = $Nov;
         $data['Dec'] = $Dec;
-        
-
         $this->output_sidebar_admin("Admin/v_admin_report", $data);
         }
         else{
-            $data['all_pdf'] = $all_pdf;
-            $data['all_img'] = $all_img;
-            $data['pdf'] = $pdf;
-            $data['img'] = $img;
-            $data['Jan'] = $Jan;
-            $data['Feb'] = $Feb;
-            $data['Mar'] = $Mar;
-            $data['Apr'] = $Apr;
-            $data['May'] = $May;
-            $data['Jun'] = $Jun;
-            $data['Jul'] = $Jul;
-            $data['Aug'] = $Aug;
-            $data['Sep'] = $Sep;
-            $data['Oct'] = $Oct;
-            $data['Nov'] = $Nov;
-            $data['Dec'] = $Dec;
-            $this->output_sidebar_admin("Admin/v_admin_report", $data);
+        $data['all_pdf'] = $all_pdf;
+        $data['all_img'] = $all_img;
+        $data['pdf'] = $pdf;
+        $data['img'] = $img;
+        $data['Jan'] = $Jan;
+        $data['Feb'] = $Feb;
+        $data['Mar'] = $Mar;
+        $data['Apr'] = $Apr;
+        $data['May'] = $May;
+        $data['Jun'] = $Jun;
+        $data['Jul'] = $Jul;
+        $data['Aug'] = $Aug;
+        $data['Sep'] = $Sep;
+        $data['Oct'] = $Oct;
+        $data['Nov'] = $Nov;
+        $data['Dec'] = $Dec;
+        $this->output_sidebar_admin("Admin/v_admin_report", $data);
         }
     }
 
