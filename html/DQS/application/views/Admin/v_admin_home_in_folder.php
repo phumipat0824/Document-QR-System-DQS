@@ -27,7 +27,7 @@
                 </button>
                 <div id="myDropdown" class="dropdown-content">
                     <div class="custom-cm__item" data-toggle="modal" data-target="#exampleModal"><a>สร้างโฟลเดอร์</a></div>
-                    <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_member_upload_file_in_floder/' . $this->session->userdata('fol_id'); ?>">สร้างคิวอาร์โค้ด</a></div>
+                    <div class="custom-cm__item"><a href="<?php echo site_url() . '/Member/Member_upload_file/show_admin_upload_file_in_floder/' . $this->session->userdata('fol_id'); ?>">สร้างคิวอาร์โค้ด</a></div>
                 </div>
             </div>
         </div>
