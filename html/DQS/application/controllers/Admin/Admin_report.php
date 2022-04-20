@@ -33,52 +33,18 @@ class Admin_report extends DQS_controller
     //     echo json_encode($data);
     // }
 
-    // public function count_download()
-    // {
-    //     $this->load->model('M_DQS_download', 'mdd');
-    //     $qr_id = $this->input->post('qr_id');
-    //     $download['arr_download'] = $this->mdd->get_by_qr_id($qr_id)->result();
-    //     if ($download['arr_download'] == null) {
-    //         $this->mdd->dow_download = 1;
-    //         $this->mdd->dow_datetime = date("Y-m-d");
-    //         $this->mdd->dow_qr_id = (int)$qr_id;
-    //         $this->mdd->insert_download_history();
-    //     }
-    //     $count_date_insert = 0;
-    //     for ($i = 0; $i < count($download['arr_download']); $i++) {
-
-    //         $date_download = substr($download['arr_download'][$i]->dow_datetime, 0, 11);
-    //         $discount_start_date = date("Y-m-d");
-    //         $date_format = date('Y-m-d', strtotime($discount_start_date));
-    //         $date_download_format = date('Y-m-d', strtotime($date_download));
-    //         echo 'DATE CURRENT : ' . $date_format . '<br>';
-    //         echo 'DATE QRCODE : ' . $date_download_format . '<br>';
-    //         if ($i == count($download['arr_download']) - 1) {
-    //             if ($count_date_insert == 0) {
-    //                 if ($date_download_format != $date_format) {
-    //                     $this->mdd->dow_download = 1;
-    //                     $this->mdd->dow_datetime = date("Y-m-d");
-    //                     $this->mdd->dow_qr_id = (int)$qr_id;
-    //                     $this->mdd->insert_download_history();
-    //                     echo 'today insert';
-    //                 }
-    //             }
-    //         } else if ($date_download_format == $date_format) {
-    //             $count_date_insert += 1;
-    //             $count_download = $download['arr_download'][$i]->dow_download;
-    //             $dow_id = $download['arr_download'][$i]->dow_id;
-    //             $count_download += 1;
-    //             echo $dow_id . '<br>';
-    //             echo $count_download . '<br>';
-    //             $this->mdd->dow_download = $count_download;
-    //             $this->mdd->dow_id = $dow_id;
-    //             $this->mdd->update_download_history();
-    //             echo 'today update';
-    //         }
-    //     }
-
-    //     echo json_encode($qr_id);
-    // }
+    public function count_download()
+    {
+        $this->load->model('M_DQS_download', 'mdd');
+        $qr_id = $this->input->post('qr_id');
+        $this->mdd->dow_download = 1;
+        $this->mdd->dow_datetime = date("Y-m-d");
+        $this->mdd->dow_qr_id = (int)$qr_id;
+        $this->mdd->dow_mem_id = $this->session->userdata('mem_id');
+        $this->mdd->dow_pro_id = $this->session->userdata('mem_pro_id');
+        $this->mdd->insert_download_history();
+        echo json_encode($qr_id);
+    }
     public function show_admin_report()
     {
         $this->load->model('M_DQS_qrcode', 'mqr');
@@ -96,7 +62,7 @@ class Admin_report extends DQS_controller
         $Feb = 0;
         $Mar = 0;
         $Apr = 0;
-        $May = 0; 
+        $May = 0;
         $Jun = 0;
         $Jul = 0;
         $Aug = 0;
@@ -108,303 +74,47 @@ class Admin_report extends DQS_controller
             $date = $data['arr_download'][$i]->dow_datetime;
 
 
-            if(substr($date, 5,2) == 1){
+            if (substr($date, 5, 2) == 1) {
                 $Jan += 1;
-            }
-            else if(substr($date, 5,2) == 2){
+            } else if (substr($date, 5, 2) == 2) {
                 $Feb += 1;
-            }
-            else if(substr($date, 5,2) == 3){
+            } else if (substr($date, 5, 2) == 3) {
                 $Mar += 1;
-            }
-            else if(substr($date, 5,2) == 4){
+            } else if (substr($date, 5, 2) == 4) {
                 $Apr += 1;
-            }
-            else if(substr($date, 5,2) == 5){
+            } else if (substr($date, 5, 2) == 5) {
                 $May += 1;
-            }
-            else if(substr($date, 5,2) == 6){
+            } else if (substr($date, 5, 2) == 6) {
                 $Jun += 1;
-            }
-            else if(substr($date, 5,2) == 7){
+            } else if (substr($date, 5, 2) == 7) {
                 $Jul += 1;
-            }
-            else if(substr($date, 5,2) == 8){
+            } else if (substr($date, 5, 2) == 8) {
                 $Aug += 1;
-            }
-            else if(substr($date, 5,2) == 9){
+            } else if (substr($date, 5, 2) == 9) {
                 $Sep += 1;
-            }
-            else if(substr($date, 5,2) == 10){
+            } else if (substr($date, 5, 2) == 10) {
                 $Oct += 1;
-            }
-            else if(substr($date, 5,2) == 11){
+            } else if (substr($date, 5, 2) == 11) {
                 $Nov += 1;
-            }
-            else if(substr($date, 5,2) == 12){
+            } else if (substr($date, 5, 2) == 12) {
                 $Dec += 1;
             }
-
         }
         $all_doc = count($data['arr_doc']);
-        if($all_doc != 0){
-        for ($i = 0; $i < count($data['arr_doc']); $i++) {
-            if($data['arr_doc'][$i]->doc_type == "pdf"){
-                $all_pdf += 1;
-            }
-            else{
-                $all_img += 1;
-            }
-        }
-        
-        $pdf = $all_pdf;
-        $img = $all_img;
-        $all_pdf = ($all_pdf*100)/$all_doc;
-        $all_pdf = round($all_pdf);
-        $all_img = ($all_img*100)/$all_doc;
-        $all_img = round($all_img);
-        $data['all_pdf'] = $all_pdf;
-        $data['all_img'] = $all_img;
-        $data['pdf'] = $pdf;
-        $data['img'] = $img;
-        $data['Jan'] = $Jan;
-        $data['Feb'] = $Feb;
-        $data['Mar'] = $Mar;
-        $data['Apr'] = $Apr;
-        $data['May'] = $May;
-        $data['Jun'] = $Jun;
-        $data['Jul'] = $Jul;
-        $data['Aug'] = $Aug;
-        $data['Sep'] = $Sep;
-        $data['Oct'] = $Oct;
-        $data['Nov'] = $Nov;
-        $data['Dec'] = $Dec;
-        $this->output_sidebar_admin("Admin/v_admin_report", $data);
-        }
-        else{
-        $data['all_pdf'] = $all_pdf;
-        $data['all_img'] = $all_img;
-        $data['pdf'] = $pdf;
-        $data['img'] = $img;
-        $data['Jan'] = $Jan;
-        $data['Feb'] = $Feb;
-        $data['Mar'] = $Mar;
-        $data['Apr'] = $Apr;
-        $data['May'] = $May;
-        $data['Jun'] = $Jun;
-        $data['Jul'] = $Jul;
-        $data['Aug'] = $Aug;
-        $data['Sep'] = $Sep;
-        $data['Oct'] = $Oct;
-        $data['Nov'] = $Nov;
-        $data['Dec'] = $Dec;
-        $this->output_sidebar_admin("Admin/v_admin_report", $data);
-        }
-    }
-
-    public function get_file(){
-
-        $this->load->model('M_DQS_qrcode', 'mqr');
-        $this->load->model('M_DQS_document', 'doc');
-        $this->load->model('M_DQS_download', 'dow');
-        $mem_id = $this->input->post('user_id');
-        if($mem_id == "total"){
-        $mem_pro_id = $this->session->userdata('mem_pro_id');
-        $data['arr_member'] = $this->mqr->get_by_pro_id($mem_pro_id)->result();
-        $data['arr_download'] = $this->dow->get_by_pro_id($mem_pro_id)->result();
-        $data['arr_doc'] = $this->doc->get_all_doc()->result();
-        $all_pdf = 0;
-        $all_img = 0;
-        $pdf = 0;
-        $img = 0;
-        $Jan = 0;
-        $Feb = 0;
-        $Mar = 0;
-        $Apr = 0;
-        $May = 0; 
-        $Jun = 0;
-        $Jul = 0;
-        $Aug = 0;
-        $Sep = 0;
-        $Oct = 0;
-        $Nov = 0;
-        $Dec = 0;
-        for ($i = 0; $i < count($data['arr_download']); $i++) {
-            $date = $data['arr_download'][$i]->dow_datetime;
-
-
-            if(substr($date, 5,2) == 1){
-                $Jan += 1;
-            }
-            else if(substr($date, 5,2) == 2){
-                $Feb += 1;
-            }
-            else if(substr($date, 5,2) == 3){
-                $Mar += 1;
-            }
-            else if(substr($date, 5,2) == 4){
-                $Apr += 1;
-            }
-            else if(substr($date, 5,2) == 5){
-                $May += 1;
-            }
-            else if(substr($date, 5,2) == 6){
-                $Jun += 1;
-            }
-            else if(substr($date, 5,2) == 7){
-                $Jul += 1;
-            }
-            else if(substr($date, 5,2) == 8){
-                $Aug += 1;
-            }
-            else if(substr($date, 5,2) == 9){
-                $Sep += 1;
-            }
-            else if(substr($date, 5,2) == 10){
-                $Oct += 1;
-            }
-            else if(substr($date, 5,2) == 11){
-                $Nov += 1;
-            }
-            else if(substr($date, 5,2) == 12){
-                $Dec += 1;
-            }
-
-        }
-        $all_doc = count($data['arr_doc']);
-        if($all_doc != 0){
-        for ($i = 0; $i < count($data['arr_doc']); $i++) {
-            if($data['arr_doc'][$i]->doc_type == "pdf"){
-                $all_pdf += 1;
-            }
-            else{
-                $all_img += 1;
-            }
-        }
-        
-        $pdf = $all_pdf;
-        $img = $all_img;
-        $all_pdf = ($all_pdf*100)/$all_doc;
-        $all_pdf = round($all_pdf);
-        $all_img = ($all_img*100)/$all_doc;
-        $all_img = round($all_img);
-        $data['all_pdf'] = $all_pdf;
-        $data['all_img'] = $all_img;
-        $data['pdf'] = $pdf;
-        $data['img'] = $img;
-        $data['Jan'] = $Jan;
-        $data['Feb'] = $Feb;
-        $data['Mar'] = $Mar;
-        $data['Apr'] = $Apr;
-        $data['May'] = $May;
-        $data['Jun'] = $Jun;
-        $data['Jul'] = $Jul;
-        $data['Aug'] = $Aug;
-        $data['Sep'] = $Sep;
-        $data['Oct'] = $Oct;
-        $data['Nov'] = $Nov;
-        $data['Dec'] = $Dec;
-        $this->output_sidebar_admin("Admin/v_admin_report", $data);
-        }
-        else{
-        $data['all_pdf'] = $all_pdf;
-        $data['all_img'] = $all_img;
-        $data['pdf'] = $pdf;
-        $data['img'] = $img;
-        $data['Jan'] = $Jan;
-        $data['Feb'] = $Feb;
-        $data['Mar'] = $Mar;
-        $data['Apr'] = $Apr;
-        $data['May'] = $May;
-        $data['Jun'] = $Jun;
-        $data['Jul'] = $Jul;
-        $data['Aug'] = $Aug;
-        $data['Sep'] = $Sep;
-        $data['Oct'] = $Oct;
-        $data['Nov'] = $Nov;
-        $data['Dec'] = $Dec;
-        $this->output_sidebar_admin("Admin/v_admin_report", $data);
-        }
-        }
-        else{
-            $mem_pro_id = $this->session->userdata('mem_pro_id');
-            $data['arr_member'] = $this->mqr->get_by_pro_id($mem_pro_id)->result();
-            $data['arr_doc'] = $this->doc->get_by_doc_mem_id($mem_id)->result();
-            $data['arr_download'] = $this->dow->get_by_mem_id($mem_id)->result();
-            $all_pdf = 0;
-            $all_img = 0;
-            $pdf = 0;
-            $img = 0;
-            $Jan = 0;
-            $Feb = 0;
-            $Mar = 0;
-            $Apr = 0;
-            $May = 0; 
-            $Jun = 0;
-            $Jul = 0;
-            $Aug = 0;
-            $Sep = 0;
-            $Oct = 0;
-            $Nov = 0;
-            $Dec = 0;
-            for ($i = 0; $i < count($data['arr_download']); $i++) {
-                $date = $data['arr_download'][$i]->dow_datetime;
-    
-    
-                if(substr($date, 5,2) == 1){
-                    $Jan += 1;
-                }
-                else if(substr($date, 5,2) == 2){
-                    $Feb += 1;
-                }
-                else if(substr($date, 5,2) == 3){
-                    $Mar += 1;
-                }
-                else if(substr($date, 5,2) == 4){
-                    $Apr += 1;
-                }
-                else if(substr($date, 5,2) == 5){
-                    $May += 1;
-                }
-                else if(substr($date, 5,2) == 6){
-                    $Jun += 1;
-                }
-                else if(substr($date, 5,2) == 7){
-                    $Jul += 1;
-                }
-                else if(substr($date, 5,2) == 8){
-                    $Aug += 1;
-                }
-                else if(substr($date, 5,2) == 9){
-                    $Sep += 1;
-                }
-                else if(substr($date, 5,2) == 10){
-                    $Oct += 1;
-                }
-                else if(substr($date, 5,2) == 11){
-                    $Nov += 1;
-                }
-                else if(substr($date, 5,2) == 12){
-                    $Dec += 1;
-                }
-    
-            }
-            $all_doc = count($data['arr_doc']);
-            if($all_doc != 0){
+        if ($all_doc != 0) {
             for ($i = 0; $i < count($data['arr_doc']); $i++) {
-                if($data['arr_doc'][$i]->doc_type == "pdf"){
+                if ($data['arr_doc'][$i]->doc_type == "pdf") {
                     $all_pdf += 1;
-                }
-                else{
+                } else {
                     $all_img += 1;
                 }
             }
-            
+
             $pdf = $all_pdf;
             $img = $all_img;
-            $all_pdf = ($all_pdf*100)/$all_doc;
+            $all_pdf = ($all_pdf * 100) / $all_doc;
             $all_pdf = round($all_pdf);
-            $all_img = ($all_img*100)/$all_doc;
+            $all_img = ($all_img * 100) / $all_doc;
             $all_img = round($all_img);
             $data['all_pdf'] = $all_pdf;
             $data['all_img'] = $all_img;
@@ -423,8 +133,101 @@ class Admin_report extends DQS_controller
             $data['Nov'] = $Nov;
             $data['Dec'] = $Dec;
             $this->output_sidebar_admin("Admin/v_admin_report", $data);
+        } else {
+            $data['all_pdf'] = $all_pdf;
+            $data['all_img'] = $all_img;
+            $data['pdf'] = $pdf;
+            $data['img'] = $img;
+            $data['Jan'] = $Jan;
+            $data['Feb'] = $Feb;
+            $data['Mar'] = $Mar;
+            $data['Apr'] = $Apr;
+            $data['May'] = $May;
+            $data['Jun'] = $Jun;
+            $data['Jul'] = $Jul;
+            $data['Aug'] = $Aug;
+            $data['Sep'] = $Sep;
+            $data['Oct'] = $Oct;
+            $data['Nov'] = $Nov;
+            $data['Dec'] = $Dec;
+            $this->output_sidebar_admin("Admin/v_admin_report", $data);
+        }
+    }
+
+    public function get_file()
+    {
+
+        $this->load->model('M_DQS_qrcode', 'mqr');
+        $this->load->model('M_DQS_document', 'doc');
+        $this->load->model('M_DQS_download', 'dow');
+        $mem_id = $this->input->post('user_id');
+        if ($mem_id == "total") {
+            $mem_pro_id = $this->session->userdata('mem_pro_id');
+            $data['arr_member'] = $this->mqr->get_by_pro_id($mem_pro_id)->result();
+            $data['arr_download'] = $this->dow->get_by_pro_id($mem_pro_id)->result();
+            $data['arr_doc'] = $this->doc->get_all_doc()->result();
+            $all_pdf = 0;
+            $all_img = 0;
+            $pdf = 0;
+            $img = 0;
+            $Jan = 0;
+            $Feb = 0;
+            $Mar = 0;
+            $Apr = 0;
+            $May = 0;
+            $Jun = 0;
+            $Jul = 0;
+            $Aug = 0;
+            $Sep = 0;
+            $Oct = 0;
+            $Nov = 0;
+            $Dec = 0;
+            for ($i = 0; $i < count($data['arr_download']); $i++) {
+                $date = $data['arr_download'][$i]->dow_datetime;
+
+
+                if (substr($date, 5, 2) == 1) {
+                    $Jan += 1;
+                } else if (substr($date, 5, 2) == 2) {
+                    $Feb += 1;
+                } else if (substr($date, 5, 2) == 3) {
+                    $Mar += 1;
+                } else if (substr($date, 5, 2) == 4) {
+                    $Apr += 1;
+                } else if (substr($date, 5, 2) == 5) {
+                    $May += 1;
+                } else if (substr($date, 5, 2) == 6) {
+                    $Jun += 1;
+                } else if (substr($date, 5, 2) == 7) {
+                    $Jul += 1;
+                } else if (substr($date, 5, 2) == 8) {
+                    $Aug += 1;
+                } else if (substr($date, 5, 2) == 9) {
+                    $Sep += 1;
+                } else if (substr($date, 5, 2) == 10) {
+                    $Oct += 1;
+                } else if (substr($date, 5, 2) == 11) {
+                    $Nov += 1;
+                } else if (substr($date, 5, 2) == 12) {
+                    $Dec += 1;
+                }
             }
-            else{
+            $all_doc = count($data['arr_doc']);
+            if ($all_doc != 0) {
+                for ($i = 0; $i < count($data['arr_doc']); $i++) {
+                    if ($data['arr_doc'][$i]->doc_type == "pdf") {
+                        $all_pdf += 1;
+                    } else {
+                        $all_img += 1;
+                    }
+                }
+
+                $pdf = $all_pdf;
+                $img = $all_img;
+                $all_pdf = ($all_pdf * 100) / $all_doc;
+                $all_pdf = round($all_pdf);
+                $all_img = ($all_img * 100) / $all_doc;
+                $all_img = round($all_img);
                 $data['all_pdf'] = $all_pdf;
                 $data['all_img'] = $all_img;
                 $data['pdf'] = $pdf;
@@ -441,7 +244,128 @@ class Admin_report extends DQS_controller
                 $data['Oct'] = $Oct;
                 $data['Nov'] = $Nov;
                 $data['Dec'] = $Dec;
-            $this->output_sidebar_admin("Admin/v_admin_report", $data);
+                $this->output_sidebar_admin("Admin/v_admin_report", $data);
+            } else {
+                $data['all_pdf'] = $all_pdf;
+                $data['all_img'] = $all_img;
+                $data['pdf'] = $pdf;
+                $data['img'] = $img;
+                $data['Jan'] = $Jan;
+                $data['Feb'] = $Feb;
+                $data['Mar'] = $Mar;
+                $data['Apr'] = $Apr;
+                $data['May'] = $May;
+                $data['Jun'] = $Jun;
+                $data['Jul'] = $Jul;
+                $data['Aug'] = $Aug;
+                $data['Sep'] = $Sep;
+                $data['Oct'] = $Oct;
+                $data['Nov'] = $Nov;
+                $data['Dec'] = $Dec;
+                $this->output_sidebar_admin("Admin/v_admin_report", $data);
+            }
+        } else {
+            $mem_pro_id = $this->session->userdata('mem_pro_id');
+            $data['arr_member'] = $this->mqr->get_by_pro_id($mem_pro_id)->result();
+            $data['arr_doc'] = $this->doc->get_by_doc_mem_id($mem_id)->result();
+            $data['arr_download'] = $this->dow->get_by_mem_id($mem_id)->result();
+            $all_pdf = 0;
+            $all_img = 0;
+            $pdf = 0;
+            $img = 0;
+            $Jan = 0;
+            $Feb = 0;
+            $Mar = 0;
+            $Apr = 0;
+            $May = 0;
+            $Jun = 0;
+            $Jul = 0;
+            $Aug = 0;
+            $Sep = 0;
+            $Oct = 0;
+            $Nov = 0;
+            $Dec = 0;
+            for ($i = 0; $i < count($data['arr_download']); $i++) {
+                $date = $data['arr_download'][$i]->dow_datetime;
+
+
+                if (substr($date, 5, 2) == 1) {
+                    $Jan += 1;
+                } else if (substr($date, 5, 2) == 2) {
+                    $Feb += 1;
+                } else if (substr($date, 5, 2) == 3) {
+                    $Mar += 1;
+                } else if (substr($date, 5, 2) == 4) {
+                    $Apr += 1;
+                } else if (substr($date, 5, 2) == 5) {
+                    $May += 1;
+                } else if (substr($date, 5, 2) == 6) {
+                    $Jun += 1;
+                } else if (substr($date, 5, 2) == 7) {
+                    $Jul += 1;
+                } else if (substr($date, 5, 2) == 8) {
+                    $Aug += 1;
+                } else if (substr($date, 5, 2) == 9) {
+                    $Sep += 1;
+                } else if (substr($date, 5, 2) == 10) {
+                    $Oct += 1;
+                } else if (substr($date, 5, 2) == 11) {
+                    $Nov += 1;
+                } else if (substr($date, 5, 2) == 12) {
+                    $Dec += 1;
+                }
+            }
+            $all_doc = count($data['arr_doc']);
+            if ($all_doc != 0) {
+                for ($i = 0; $i < count($data['arr_doc']); $i++) {
+                    if ($data['arr_doc'][$i]->doc_type == "pdf") {
+                        $all_pdf += 1;
+                    } else {
+                        $all_img += 1;
+                    }
+                }
+
+                $pdf = $all_pdf;
+                $img = $all_img;
+                $all_pdf = ($all_pdf * 100) / $all_doc;
+                $all_pdf = round($all_pdf);
+                $all_img = ($all_img * 100) / $all_doc;
+                $all_img = round($all_img);
+                $data['all_pdf'] = $all_pdf;
+                $data['all_img'] = $all_img;
+                $data['pdf'] = $pdf;
+                $data['img'] = $img;
+                $data['Jan'] = $Jan;
+                $data['Feb'] = $Feb;
+                $data['Mar'] = $Mar;
+                $data['Apr'] = $Apr;
+                $data['May'] = $May;
+                $data['Jun'] = $Jun;
+                $data['Jul'] = $Jul;
+                $data['Aug'] = $Aug;
+                $data['Sep'] = $Sep;
+                $data['Oct'] = $Oct;
+                $data['Nov'] = $Nov;
+                $data['Dec'] = $Dec;
+                $this->output_sidebar_admin("Admin/v_admin_report", $data);
+            } else {
+                $data['all_pdf'] = $all_pdf;
+                $data['all_img'] = $all_img;
+                $data['pdf'] = $pdf;
+                $data['img'] = $img;
+                $data['Jan'] = $Jan;
+                $data['Feb'] = $Feb;
+                $data['Mar'] = $Mar;
+                $data['Apr'] = $Apr;
+                $data['May'] = $May;
+                $data['Jun'] = $Jun;
+                $data['Jul'] = $Jul;
+                $data['Aug'] = $Aug;
+                $data['Sep'] = $Sep;
+                $data['Oct'] = $Oct;
+                $data['Nov'] = $Nov;
+                $data['Dec'] = $Dec;
+                $this->output_sidebar_admin("Admin/v_admin_report", $data);
             }
         }
     }
