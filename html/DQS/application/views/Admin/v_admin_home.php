@@ -524,7 +524,7 @@
                  </div>
                  <div class="modal-footer">
                      <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                     <button type="submit" id="download" onclick="get_count_download()" class="btn btn-success" data-id="<?php echo $arr_qr[$i]->qr_id ?>">ยืนยัน</button>
+                     <button type="submit" id="download" onclick="get_count_download2()" class="btn btn-success" data-id="<?php echo $arr_qr[$i]->qr_id ?>">ยืนยัน</button>
                  </div>
              </div>
          </div>
@@ -622,11 +622,31 @@
 
      function get_count_download() {
          var qr_id = document.getElementById("qr_path_url").value
-         var qr_id2 = document.getElementById("qr_path_url2").value
          console.log(qr_id)
          $.ajax({
              type: 'post',
-             url: '<?php echo site_url() . 'Admin/Admin_report/count_download'; ?>',
+             url: '<?php echo site_url() . '/Admin/Admin_report/count_download'; ?>',
+             data: {
+                 'qr_id': qr_id
+             },
+             dataType: 'json',
+             success: function(res) {
+                 console.log(res)
+                 console.log('success')
+             },
+             error: function(res) {
+                 console.log(res)
+                 console.log('unsuccess')
+             }
+         })
+     }
+
+     function get_count_download2() {
+         var qr_id = document.getElementById("qr_path_url2").value
+         console.log(qr_id)
+         $.ajax({
+             type: 'post',
+             url: '<?php echo site_url() . '/Admin/Admin_report/count_download'; ?>',
              data: {
                  'qr_id': qr_id
              },
@@ -707,7 +727,7 @@
          var id = $(this).attr('data-id');
          // console.log(path);
          document.getElementById("qr_path").src = path;
-         document.getElementById("qr_path_url").value = id;
+         document.getElementById("qr_path_url2").value = id;
      });
 
      document.getElementById("download").addEventListener("click", function() {

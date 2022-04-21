@@ -7,6 +7,18 @@ require dirname(__FILE__) . '/../DQS_controller.php';
 class Member_report extends DQS_controller
 {
 
+    public function count_download()
+    {
+        $this->load->model('M_DQS_download', 'mdd');
+        $qr_id = $this->input->post('qr_id');
+        $this->mdd->dow_download = 1;
+        $this->mdd->dow_datetime = date("Y-m-d");
+        $this->mdd->dow_qr_id = (int)$qr_id;
+        $this->mdd->dow_mem_id = $this->session->userdata('mem_id');
+        $this->mdd->dow_pro_id = $this->session->userdata('mem_pro_id');
+        $this->mdd->insert_download_history();
+        echo json_encode($qr_id);
+    }
     public function show_member_report()
     {
         $this->load->model('M_DQS_document', 'doc');

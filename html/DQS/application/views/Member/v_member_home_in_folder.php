@@ -245,7 +245,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-5">
                             <img id="img" src="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" height="128" width="128" style="margin: auto;">
-                            <a href="#" class="downloadModal" data-toggle="modal" data-target="#downloadModal" data-path="<?php echo base_url() . $arr_qr[$i]->qr_path ?>">
+                            <a href="#" class="downloadModal" data-toggle="modal" data-target="#downloadModal" data-path="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" data-id="<?php echo $arr_qr[$i]->qr_id ?>">
                                 <button id="load" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button></a>
                         </div>
                         <div class="form-group col-md-4">
@@ -347,6 +347,7 @@
                         <div id="capture">
                             <div id="qrcode">
                                 <center>
+                                    <input type="hidden" id='qr_path_url' name='qr_path_url' value="">
                                     <img src="" id="qr_path" name="qr_path" height="250" width="250" style="margin: auto;">
                                 </center>
                             </div>
@@ -354,7 +355,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                        <button type="submit" id="download" onclick="" class="btn btn-success">ยืนยัน</button>
+                        <button type="submit" id="download" onclick="get_count_download()" class="btn btn-success">ยืนยัน</button>
                     </div>
                 </div>
             </div>
@@ -419,10 +420,33 @@
     <script>
     $(document).on("click", ".downloadModal", function() {
         var path = $(this).attr('data-path');
+        var id = $(this).attr('data-id');
         // console.log(path);
         document.getElementById("qr_path").src = path;
+        document.getElementById("qr_path_url").value = id;
 
     });
+
+    function get_count_download() {
+         var qr_id = document.getElementById("qr_path_url").value
+         console.log(qr_id)
+         $.ajax({
+             type: 'post',
+             url: '<?php echo site_url() . '/Member/Member_report/count_download'; ?>',
+             data: {
+                 'qr_id': qr_id
+             },
+             dataType: 'json',
+             success: function(res) {
+                 console.log(res)
+                 console.log('success')
+             },
+             error: function(res) {
+                 console.log(res)
+                 console.log('unsuccess')
+             }
+         })
+     }
 
     function set_delete(path, id, fol_id) {
         $('#doc_path_delete').val(path);
