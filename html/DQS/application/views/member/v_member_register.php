@@ -76,15 +76,15 @@
                                 <!-- กรอกชื่อลงในกล่องบันทึกข้อความ -->
                                 <div class="col"> 
                                     <label style = "color: #000000;">ชื่อ</label>
-                                    <label style = "color: #FF0000;">*</label>
-                                    <input onchange="fname_validation()" type="text" class="form-control" id="mem_firstname" name="mem_firstname" placeholder="ชื่อ"><br>
+                                    <label style = "color: #FF0000;">* <span id ="text_fname"></span></label>
+                                    <input type="text" class="form-control" id="mem_firstname" name="mem_firstname" placeholder="ชื่อ" onchange ="fname_validation();" ><br>
                                 </div>
 
                                     <!-- กรอกชื่อลงในกล่องบันทึกข้อความ -->
                                     <div class="col">
                                         <label style = "color: #000000;">นามสกุล</label>
-                                        <label style = "color: #FF0000;">*</label>
-                                        <input type="text" class="form-control" id="mem_lastname" name="mem_lastname" placeholder="นามสกุล"><br>
+                                        <label style = "color: #FF0000;">*<span id ="text_lname"></span></label>
+                                        <input type="text" class="form-control" id="mem_lastname" name="mem_lastname" placeholder="นามสกุล" onchange ="lname_validation();" ><br>
                                     </div>
 
                                 </div>
@@ -93,8 +93,8 @@
                                     <div class="col-4">
 
                                         <label style = "color: #000000;">อีเมล</label>
-                                        <label style = "color: #FF0000;">*</label>
-                                        <input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="อีเมล" required oninvalid="this.setCustomValidity('กรุณากรอกอีเมลที่ถูกต้อง')" oninput="setCustomValidity('')"></input>
+                                        <label style = "color: #FF0000;">*<span id ="text_email"></span></label>
+                                        <input type="email" class="form-control" id="mem_email" name="mem_email" placeholder="อีเมล" required oninvalid="this.setCustomValidity('กรุณากรอกอีเมลที่ถูกต้อง')" oninput="setCustomValidity('')" onchange ="email_validation();" ></input>
 
                                     </div> <!-- กำหนดบทบาท-->
                                     <input type="hidden" name="mem_role" id="mem_role" value="0">
@@ -215,8 +215,59 @@ function fname_validation(){
         }
         return fname_check;
     }
+    function lname_validation(){
+        var text_lname = document.getElementById("text_lname");
+        var l_name = document.getElementById("mem_lastname").value;
+        var pattern = /^[ก-๏]+$/;
+        var lname_check;
+        if(l_name.match(pattern)){
+            text_lname.innerHTML = "";
+            lname_check =1;
+        }else{
+            text_lname.innerHTML = "กรอกข้อมูลไม่ถูกต้องกรุณากรอกใหม่อีกครั้ง";
+            text_lname.style.color = "#ff0000";
+            lname_check =0;
+        }if(l_name == ""){
+            text_lname.innerHTML = "กรุณากรอกนามสกุล";
+            text_lname.style.color = "#ff0000";
+            lname_check =0;
+        }
+        return lname_check;
+    }
 
-
+    $(document).on('change', '.form-control', function() {
+        var submit = document.getElementById("btn-ok");
+        if(fname_validation() == 0 || lname_validation() == 0 || email_validation() == 0 || check_email_input() == 0){
+            submit.disabled = true ;
+           
+            
+        }else{
+            submit.disabled = false;
+            
+        }
+       
+    });
+    function email_validation(){
+        var form = document.getElementById("form");
+        var text = document.getElementById("text");
+        var email = document.getElementById("mem_email").value;
+        var pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+        var email_check;
+        if(email.match(pattern)){
+            text.innerHTML = "";
+            email_check =1;
+        }else{
+            text.innerHTML = "อีเมลไม่ถูกต้อง กรุณากรอกใหม่อีกครั้ง";
+            text.style.color = "#ff0000";
+            email_check =0;
+        }if(email == ""){
+            text.innerHTML = "กรุณากรอกอีเมล";
+            text.style.color = "#ff0000";
+            email_check =0;
+        }
+        return email_check;
+    }
+    
 /*
 	* get_dept(value_pro_id)
 	* get dept
