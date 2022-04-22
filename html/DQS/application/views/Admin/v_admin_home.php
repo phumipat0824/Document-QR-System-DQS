@@ -130,7 +130,7 @@
              <div class="modal-dialog" role="document">
                  <div class="modal-content">
                      <div class="modal-header">
-                         <h1 class="modal-title" id="exampleModalLabel" style="font-weight: 900;font-size: 36px; font-family:TH Sarabun New;">โฟลเดอร์ใหม่</h1>
+                         <h1 class="modal-title" id="exampleModalLabel" style="font-family:TH Sarabun New; font-weight: 900;font-size: 28px;"">โฟลเดอร์ใหม่</h1>
                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                              <span aria-hidden="true">&times;</span>
                          </button>
@@ -167,7 +167,7 @@
              <div class="modal-dialog" role="document">
                  <div class="modal-content">
                      <div class="modal-header">
-                         <h5 class="modal-title" id="exampleModalLabel">ยืนยันการลบโฟลเดอร์</h5>
+                         <h5 class="modal-title" id="exampleModalLabel" style="font-family:TH Sarabun New; font-weight: 900;font-size: 28px;">ยืนยันการลบโฟลเดอร์</h5>
 
                      </div>
 
@@ -199,7 +199,7 @@
              <div class="modal-dialog" role="document">
                  <div class="modal-content">
                      <div class="modal-header">
-                         <h5 class="modal-title" id="exampleModalLabel">แก้ไขชื่อโฟลเดอร์</h5>
+                         <h5 class="modal-title" id="exampleModalLabel" style="font-family:TH Sarabun New; font-weight: 900;font-size: 28px;">แก้ไขชื่อโฟลเดอร์</h5>
 
                      </div>
                      <form id="edit-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/update_folder/'; ?>">
@@ -232,7 +232,7 @@
              <div class="modal-dialog" role="document">
                  <div class="modal-content">
                      <div class="modal-header">
-                         <h5 class="modal-title" id="exampleModalLabel">ย้ายไปที่</h5>
+                         <h5 class="modal-title" id="exampleModalLabel" style="font-family:TH Sarabun New; font-weight: 900;font-size: 28px;">ย้ายไปที่</h5>
                      </div>
                      <form id="move-form" method="POST" action="<?php echo site_url() . '/Folder/Folder_management/move_folder/'; ?>">
                          <div class="modal-body">
