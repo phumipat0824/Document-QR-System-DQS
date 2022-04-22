@@ -236,7 +236,7 @@ function fname_validation(){
     }
 
     $(document).on('change', '.form-control', function() {
-        var submit = document.getElementById("btn-ok");
+        var submit = document.getElementById("regis");
         if(fname_validation() == 0 || lname_validation() == 0 || email_validation() == 0 || check_email_input() == 0){
             submit.disabled = true ;
            

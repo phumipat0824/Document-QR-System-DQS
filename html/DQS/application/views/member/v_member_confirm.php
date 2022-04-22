@@ -22,7 +22,7 @@
                                 </div>
                             </div>
 
-                            <form action="<?php echo site_url() . 'Member/Member_register/insert_member' ?>" method="post">
+                            <form action="<?php echo site_url() . '/Member/Member_register/insert_member' ?>" method="post">
                                 <div class="row gx-5">
                                     <div class="col">
                                         <div class="p-3 ">จังหวัด</div>
