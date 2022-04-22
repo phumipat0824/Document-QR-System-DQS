@@ -25,4 +25,6 @@ class M_DQS_province extends Da_DQS_province
         $query = $this->db->query($sql);
         return $query;
     }
+
+   
 }

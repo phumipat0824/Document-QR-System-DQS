@@ -240,7 +240,7 @@ public function show_member_home()
 
 		
 	
-
+		
 		$get_sub_doc = $obj_doc[0]->doc_path;
 		$arr = array();
 		$i = 0;
@@ -265,17 +265,17 @@ public function show_member_home()
 
 		
 		}
-		
+	
 		if($this->session->userdata('mem_role') == 1){
-			if($this->input->post('doc_fol_id') != 0){
-				redirect('Admin/Admin_home/show_admin_in_folder/' . $this->input->post('doc_fol_id'));
+			if($doc_fol_id != 0){
+				redirect('Admin/Admin_home/show_admin_in_folder/' . $doc_fol_id);
 			}
 			else{
 				redirect('Admin/Admin_home/show_admin_home/');
 			}
 		}else{
 			if($doc_fol_id != 0){
-				redirect('Member/Member_home/show_in_folder/' . $this->input->post('doc_fol_id'));
+				redirect('Member/Member_home/show_in_folder/' . $doc_fol_id);
 				// echo $doc_fol_id;
 			}
 			else{

@@ -18,7 +18,7 @@
          </div>
          <div class="col-md-4">
              <div class="dropdown">
-                 <button onmousedown="rightclick()" class="dropbtn btn btn-round" style=" width: 145px; background-color: #F5F5F5 ; border: none;">
+                 <button onmousedown="rightclick()" class="dropbtn btn btn-round" style=" width: 160px; background-color: #F5F5F5 ; border: none;">
                      <h1 style="font-weight: 900; color:#003399 ; font-size: 50px; font-family:TH Sarabun New; height: 40; width: 50px;" id="button-folder">+ สร้าง</h1>
                  </button>
                  <div id="myDropdown" class="dropdown-content">
@@ -206,7 +206,7 @@
                          <div class="modal-body">
                              <center><input onkeyup="check_fol_edit()" type="text" class="col-md-10" id="fol_edit" placeholder="" name="fol_name" required></center>
                              <br>
-                             <a id="edit_mss" style="display: none; color:red;" align='center'>กรุณากรอกข้อมูลใหม่</a>
+                             <a id="edit_mss" style="display: none; color:red;" align='center'>ชื่อโฟลเดอร์ซ้ำหรือกรอกชื่อโฟลเดอร์ผิด กรุณากรอกใหม่</a>
                              <input type="hidden" name="fol_id" id="folder_id" value="">
                              <input type="hidden" name="fol_location_id" id="fol_location_id" value="<?php echo $arr_fol[0]->fol_location_id; ?>">
                          </div>
@@ -273,7 +273,7 @@
                  <div class="form-row">
                      <div class="form-group col-md-5">
                          <img id="img" src="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" height="128" width="128" style="margin: auto;">
-                         <a href="#" class="downloadModal" data-toggle="modal" data-target="#downloadModal" data-path="<?php echo base_url() . $arr_qr[$i]->qr_path ?>">
+                         <a href="#" class="downloadModal" data-toggle="modal" data-target="#downloadModal" data-path="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" data-id="<?php echo $arr_qr[$i]->qr_id ?>">
                              <button id="load" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button></a>
                      </div>
                      <div class="form-group col-md-4">
@@ -286,7 +286,6 @@
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิดไฟล์ : </h5>
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;"><?php echo $arr_qr[$i]->doc_type ?></h5>
 
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">รายงานสรุปผล </h5>
                      </div>
                      <div class="form-group col-md-2">
                          <a href="#" class="EditFileModal" data-toggle="modal" data-target="#EditFileModal" data-id="<?php echo $arr_qr[$i]->qr_id ?>" data-name="<?php echo $arr_qr[$i]->qr_name ?>">
@@ -309,7 +308,7 @@
                                                  <input onkeyup="check_file_edit()" type="text" class="col-md-10" id="qr_name" placeholder="" name="qr_name" value="<?php echo $arr_qr[$i]->qr_name ?>" required>
                                              </center>
                                              <br>
-                                             <a id="edit_mss" style="display: none; color:red;" align='center'>กรุณากรอกข้อมูลใหม่</a>
+                                             <a id="qr_mss" style="display: none; color:red;" align='center'>ชื่อไฟล์ซ้ำหรือกรอกชื่อไฟล์ผิด กรุณากรอกใหม่</a>
                                              <input type="hidden" name="qr_id" id="qr_id" value="">
                                          </div>
 
@@ -375,6 +374,7 @@
          <div class="modal-dialog" role="document">
              <div class="modal-content">
                  <div class="modal-header">
+
                      <h6 class="modal-title" id="exampleModalLabel" style="font-family:TH sarabun new; font-size: 30px; "><b>
                              ดาวน์โหลด</b></h6>
 
@@ -383,6 +383,7 @@
                      <div id="capture">
                          <div id="qrcode">
                              <center>
+                                 <input type="hidden" id='qr_path_url' name='qr_path_url' value="">
                                  <img src="" id="qr_path" name="qr_path" height="250" width="250" style="margin: auto;">
                              </center>
                          </div>
@@ -390,7 +391,7 @@
                  </div>
                  <div class="modal-footer">
                      <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                     <button type="submit" id="download" onclick="" class="btn btn-success">ยืนยัน</button>
+                     <button type="submit" id="download" onclick="get_count_download()" class="btn btn-success">ยืนยัน</button>
                  </div>
              </div>
          </div>
@@ -410,7 +411,7 @@
                  <div class="form-row">
                      <div class="form-group col-md-5">
                          <img id="img" src="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" height="128" width="128" style="margin: auto;">
-                         <a href="#" class="downloadModal2" data-toggle="modal" data-target="#downloadModal2" data-path="<?php echo base_url() . $arr_qr[$i]->qr_path ?>">
+                         <a href="#" class="downloadModal2" data-toggle="modal" data-target="#downloadModal2" data-path="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" data-id="<?php echo $arr_qr[$i]->qr_id ?>">
                              <button id="load" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button></a>
                      </div>
                      <div class="form-group col-md-4">
@@ -425,7 +426,6 @@
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิดไฟล์ : </h5>
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;"><?php echo $arr_qr[$i]->doc_type ?></h5>
 
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">รายงานสรุปผล </h5>
                      </div>
                      <div class="form-group col-md-2">
 
@@ -448,8 +448,7 @@
                                                  <input onkeyup="check_file_edit_in_folder()" type="text" class="col-md-10" id="qr_name" placeholder="" name="qr_name" value="" required>
                                              </center>
                                              <br>
-                                             <a id="edit_mss" style="display: none; color:red;" align='center'>กรุณากรอกข้อมูลใหม่</a>
-                                             <input type="hidden" name="qr_id" id="qr_id" value="">
+                                             <a id="qr_mss" style="display: none; color:red;" align='center'>ชื่อไฟล์ซ้ำหรือกรอกชื่อไฟล์ผิด กรุณากรอกใหม่</a> <input type="hidden" name="qr_id" id="qr_id" value="">
                                          </div>
 
                                          <div class="modal-footer">
@@ -517,6 +516,7 @@
                      <div id="capture">
                          <div id="qrcode">
                              <center>
+                                 <input type="hidden" id='qr_path_url2' name='qr_path_url2' value="">
                                  <img src="" id="qr_path" name="qr_path" height="250" width="250" style="margin: auto;">
                              </center>
                          </div>
@@ -524,7 +524,7 @@
                  </div>
                  <div class="modal-footer">
                      <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                     <button type="submit" id="download" onclick="" class="btn btn-success">ยืนยัน</button>
+                     <button type="submit" id="download" onclick="get_count_download2()" class="btn btn-success" data-id="<?php echo $arr_qr[$i]->qr_id ?>">ยืนยัน</button>
                  </div>
              </div>
          </div>
@@ -543,7 +543,7 @@
          <div class="modal-dialog" role="document">
              <div class="modal-content">
                  <div class="modal-header">
-                     <h5 class="modal-title" id="MoveFileModalLabel" style="font-family:TH Sarabun New; font-weight: 900;font-size: 28px;" >ย้ายไฟล์ไปที่</h5>
+                     <h5 class="modal-title" id="MoveFileModalLabel" style="font-family:TH Sarabun New; font-weight: 900;font-size: 28px;">ย้ายไฟล์ไปที่</h5>
                  </div>
                  <form id="move-form" method="POST" action="<?php echo site_url() . '/File/File_management/move_file/'; ?>">
                      <div class="modal-body">
@@ -566,885 +566,869 @@
              </div>
          </div>
      </div>
- <!-- End move file modal -->
-
- <script>
-<?php $this->session->set_userdata('fol_id', ''); ?>
-<?php $this->session->set_userdata('path', ''); ?>
-$(document).on("keyup", "#fol_name", function() {
-
-      // var text_n = document.getElementById("text_name");
-      var d_name = document.getElementById("qr_name").value;
-    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
-    var n_check;
-    console.log("d_name" + d_name);
-
-    if (d_name.match(pattern)) {
-        // text_n.innerHTML = "";
-        n_check = 1;
-
-    } else {
-        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
-        // text_n.style.color = "#ff0000";
-        n_check = 0;
-
-    }
-  
-    console.log(n_check + "abc");
-
-    var t = <?php echo json_encode($arr_fol) ?>;
-    var new_name = document.getElementById("fol_name");
-    var check_name;
-    var div = document.getElementById('target_div');
-    var dis_button = document.getElementById('create');
-
-    for (let x in t) {
-        if (t[x].fol_name == new_name.value || n_check==0) {
-            check_name = 1;
-            break;
-        } else {
-            check_name = 0;
-        }
-    }
-    console.log(check_name);
-    if (check_name == 1) {
-        $("#fol_name").css("border-color", "red");
-        div.style.display = "block";
-        dis_button.disabled = true;
-
-    } else {
-        $("#fol_name").css("border-color", "green");
-        div.style.display = "none";
-        dis_button.disabled = false;
-
-    }
-});
-
-function check_fol_edit() {
+     <!-- End move file modal -->
+
+     <script>
+     <?php $this->session->set_userdata('fol_id', ''); ?>
+     <?php $this->session->set_userdata('path', ''); ?>
+     $(document).on("keyup", "#fol_name", function() {
+
+         // var text_n = document.getElementById("text_name");
+         var d_name = document.getElementById("fol_edit").value;
+         var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+         var n_check;
+         console.log("d_name" + d_name);
+
+         if (d_name.match(pattern)) {
+             // text_n.innerHTML = "";
+             n_check = 1;
+
+         } else {
+             // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+             // text_n.style.color = "#ff0000";
+             n_check = 0;
+
+         }
+
+         console.log(n_check + "check onkeyup");
+
+         var t = <?php echo json_encode($arr_fol) ?>;
+         var new_name = document.getElementById("fol_name");
+         var check_name;
+         var div = document.getElementById('target_div');
+         var dis_button = document.getElementById('create');
+
+         for (let x in t) {
+             if (t[x].fol_name == new_name.value || n_check == 0) {
+                 check_name = 1;
+                 break;
+             } else {
+                 check_name = 0;
+             }
+         }
+         console.log(check_name);
+         if (check_name == 1) {
+             $("#fol_name").css("border-color", "red");
+             div.style.display = "block";
+             dis_button.disabled = true;
+
+         } else {
+             $("#fol_name").css("border-color", "green");
+             div.style.display = "none";
+             dis_button.disabled = false;
+
+         }
+     });
+
+     function get_count_download() {
+         var qr_id = document.getElementById("qr_path_url").value
+         console.log(qr_id)
+         $.ajax({
+             type: 'post',
+             url: '<?php echo site_url() . '/Admin/Admin_report/count_download'; ?>',
+             data: {
+                 'qr_id': qr_id
+             },
+             dataType: 'json',
+             success: function(res) {
+                 console.log(res)
+                 console.log('success')
+             },
+             error: function(res) {
+                 console.log(res)
+                 console.log('unsuccess')
+             }
+         })
+     }
+
+     function get_count_download2() {
+         var qr_id = document.getElementById("qr_path_url2").value
+         console.log(qr_id)
+         $.ajax({
+             type: 'post',
+             url: '<?php echo site_url() . '/Admin/Admin_report/count_download'; ?>',
+             data: {
+                 'qr_id': qr_id
+             },
+             dataType: 'json',
+             success: function(res) {
+                 console.log(res)
+                 console.log('success')
+             },
+             error: function(res) {
+                 console.log(res)
+                 console.log('unsuccess')
+             }
+         })
+     }
+
+     function check_fol_edit() {
+
+         // var text_n = document.getElementById("text_name");
+         var d_name = document.getElementById("fol_edit").value;
+         var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+         var n_check;
+         console.log("d_name" + d_name);
 
-      // var text_n = document.getElementById("text_name");
-      var d_name = document.getElementById("fol_name").value;
-    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
-    var n_check;
-    console.log("d_name" + d_name);
+         if (d_name.match(pattern)) {
+             // text_n.innerHTML = "";
+             n_check = 1;
 
-    if (d_name.match(pattern)) {
-        // text_n.innerHTML = "";
-        n_check = 1;
+         } else {
+             // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+             // text_n.style.color = "#ff0000";
+             n_check = 0;
 
-    } else {
-        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
-        // text_n.style.color = "#ff0000";
-        n_check = 0;
+         }
 
-    }
-  
-    console.log(n_check + "abc");
+         console.log("check onkeyup" + n_check);
 
-    var dis_button = document.getElementById('edit');
-    dis_button.disabled = false;
-
-    var t = <?php echo json_encode($arr_fol) ?>;
-    var new_name = document.getElementById("fol_edit");
-    var check_name;
-    var div = document.getElementById('edit_mss');
-
-
-    for (let x in t) {
-        if (t[x].fol_name == new_name.value || new_name.value == " " || n_check == 0) {
-            check_name = 1;
-            break;
-        } else {
-            check_name = 0;
-        }
-    }
-    console.log(check_name);
-    if (check_name == 1) {
-        $("#fol_edit").css("border-color", "red");
-        div.style.display = "block";
-        dis_button.disabled = true;
-
-    } else {
-        $("#fol_edit").css("border-color", "green");
-        div.style.display = "none";
-        dis_button.disabled = false;
+         var dis_button = document.getElementById('edit');
+         dis_button.disabled = false;
 
-    }
-}
+         var t = <?php echo json_encode($arr_fol) ?>;
+         var new_name = document.getElementById("fol_edit");
+         var check_name;
+         var div = document.getElementById('edit_mss');
 
-$(document).on("click", ".downloadModal", function() {
-    var path = $(this).attr('data-path');
-    // console.log(path);
-    document.getElementById("qr_path").src = path;
 
-});
+         for (let x in t) {
+             if (t[x].fol_name == new_name.value || new_name.value == " " || n_check == 0) {
+                 check_name = 1;
+                 break;
+             } else {
+                 check_name = 0;
+             }
+         }
+         console.log(check_name);
+         if (check_name == 1) {
+             $("#fol_edit").css("border-color", "red");
+             div.style.display = "block";
+             dis_button.disabled = true;
 
-$(document).on("click", ".downloadModal2", function() {
-    var path = $(this).attr('data-path');
-    // console.log(path);
-    document.getElementById("qr_path").src = path;
+         } else {
+             $("#fol_edit").css("border-color", "green");
+             div.style.display = "none";
+             dis_button.disabled = false;
 
-});
+         }
+     }
 
-document.getElementById("download").addEventListener("click", function() {
+     $(document).on("click", ".downloadModal", function() {
+         var path = $(this).attr('data-path');
+         var id = $(this).attr('data-id');
+         // console.log(path);
+         document.getElementById("qr_path").src = path;
+         document.getElementById("qr_path_url").value = id;
+     });
 
-    const note = document.querySelector('#qr_path');
-    note.style.border = '10px solid #fff';
+     $(document).on("click", ".downloadModal2", function() {
+         var path = $(this).attr('data-path');
+         var id = $(this).attr('data-id');
+         // console.log(path);
+         document.getElementById("qr_path").src = path;
+         document.getElementById("qr_path_url2").value = id;
+     });
 
-    html2canvas(document.querySelector('#qr_path')).then(function(canvas) {
+     document.getElementById("download").addEventListener("click", function() {
 
-        saveAs(canvas.toDataURL(), 'DQS_QR.png');
-    });
+         const note = document.querySelector('#qr_path');
+         note.style.border = '10px solid #fff';
 
-});
+         html2canvas(document.querySelector('#qr_path')).then(function(canvas) {
 
-function saveAs(uri, filename) {
+             saveAs(canvas.toDataURL(), 'DQS_QR.png');
+         });
 
-    var link = document.createElement('a');
+     });
 
-    if (typeof link.download === 'string') {
+     function saveAs(uri, filename) {
 
-        link.href = uri;
-        link.download = filename;
+         var link = document.createElement('a');
 
-        //Firefox requires the link to be in the body
-        document.body.appendChild(link);
+         if (typeof link.download === 'string') {
 
-        //simulate click
-        link.click();
+             link.href = uri;
+             link.download = filename;
 
-        //remove the link when done
-        document.body.removeChild(link);
+             //Firefox requires the link to be in the body
+             document.body.appendChild(link);
 
-    } else {
+             //simulate click
+             link.click();
 
-        window.open(uri);
-
-    }
-}
- </script>
-
+             //remove the link when done
+             document.body.removeChild(link);
 
+         } else {
 
+             window.open(uri);
 
- <script type="text/javascript">
-$(document).on("click", ".editModal", function() {
-    var id = $(this).attr('data-id');
-    $("#fol_id").val(id);
-    console.log(id);
-    var name = $(this).attr('data-name');
-    $("#fol_name").val(name);
-    document.getElementById("folder_id").value = id;
-    document.getElementById("fol_edit").value = name;
-});
+         }
+     }
+     </script>
 
-$(document).on("click", ".EditFileModal", function() {
-    var id = $(this).attr('data-id');
-    $("#qr_id").val(id);
-    console.log(id);
-    var name = $(this).attr('data-name');
-    $("#qr_name").val(name);
-    console.log(name);
-    var doc_fol = $(this).attr('data-doc_fol');
-    $("#doc_fol_id").val(doc_fol);
-});
-$(document).on("click", ".EditFileModal2", function() {
-    var id = $(this).attr('data-id');
-    $("#qr_id").val(id);
-    console.log(id);
-    var name = $(this).attr('data-name');
-    $("#qr_name").val(name);
-    console.log(name);
-    var doc_fol = $(this).attr('data-doc_fol');
-    $("#doc_fol_id").val(doc_fol);
-});
-
-function check_file_edit() {
-
-     // var text_n = document.getElementById("text_name");
-     var d_name = document.getElementById("qr_name").value;
-    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
-    var n_check;
-    console.log("d_name" + d_name);
-
-    if (d_name.match(pattern)) {
-        // text_n.innerHTML = "";
-        n_check = 1;
-
-    } else {
-        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
-        // text_n.style.color = "#ff0000";
-        n_check = 0;
-
-    }
-  
-    console.log(n_check + "abc");
-
-    var dis_button = document.getElementById('sub_edit');
-    dis_button.disabled = false;
 
-    var t = <?php echo json_encode($arr_qr) ?>;
-    var new_name = document.getElementById("qr_name");
-    var check_name;
-    var div = document.getElementById('edit_mss');
 
 
-    for (let x in t) {
-        if (t[x].qr_name == new_name.value || new_name.value == " " || n_check == 0) {
-            check_name = 1;
-            break;
-        } else {
-            check_name = 0;
-        }
-    }
-    console.log(check_name);
-    if (check_name == 1) {
-        $("#qr_name").css("border-color", "red");
-        div.style.display = "block";
-        dis_button.disabled = true;
-
-    } else {
-        $("#qr_name").css("border-color", "green");
-        div.style.display = "none";
-        dis_button.disabled = false;
-
-    }
-    console.log(document.getElementById('edit'));
-}
-
-function check_file_edit_in_folder() {
-
-      // var text_n = document.getElementById("text_name");
-      var d_name = document.getElementById("qr_name").value;
-    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
-    var n_check;
-    console.log("d_name" + d_name);
-
-    if (d_name.match(pattern)) {
-        // text_n.innerHTML = "";
-        n_check = 1;
-
-    } else {
-        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
-        // text_n.style.color = "#ff0000";
-        n_check = 0;
-
-    }
-  
-    console.log(n_check + "abc");
-
-    var dis_button = document.getElementById('sub_edit');
-    dis_button.disabled = false;
-
-    var t = <?php echo json_encode($arr_qr) ?>;
-    var new_name = document.getElementById("qr_name");
-    var check_name;
-    var div = document.getElementById('edit_mss');
-
-
-    for (let x in t) {
-        if (t[x].qr_name == new_name.value || new_name.value == " " || n_check == 0) {
-            check_name = 1;
-            break;
-        } else {
-            check_name = 0;
-        }
-    }
-    console.log(check_name);
-    if (check_name == 1) {
-        $("#qr_name").css("border-color", "red");
-        div.style.display = "block";
-        dis_button.disabled = true;
-
-    } else {
-        $("#qr_name").css("border-color", "green");
-        div.style.display = "none";
-        dis_button.disabled = false;
-
-    }
-    console.log(document.getElementById('edit2'));
-}
-
-$(document).on("click", ".deleteModal", function() {
-    var id = $(this).attr('data-id');
-    $("#fol_id").val(id);
-
-});
-
-$(document).on("click", ".exampleModal", function() {
-    var id = $(this).attr('data-id');
-    $("#fol_id").val(id);
-
-});
-
-
-var cm = document.querySelector(".custom-cm");
-
-function showContextMenu(show = true) {
-    cm.style.display = show ? "block" : "none";
-}
-
-window.addEventListener("contextmenu", e => {
-    e.preventDefault();
-
-    showContextMenu();
-    cm.style.top =
-        e.y + cm.offsetHeight > window.innerHeight ?
-        window.innerHeight - cm.offsetHeight :
-        e.y;
-    cm.style.left =
-        e.x + cm.offsetWidth > window.innerWidth ?
-        window.innerWidth - cm.offsetWidth :
-        e.x;
-});
-
-
-$(document).on("click", ".editModal", function() {
-    var id = $(this).attr('data-id');
-    $("#dep_id").val(id);
-});
-
-function rightclick() {
-    var rightclick;
-    var e = window.event;
-
-    document.getElementById("myDropdown").classList.toggle("show");
-    if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-}
- </script>
- <script>
-$(document).on("keyup", "#fol_name", function() {
-    var t = <?php echo json_encode($arr_fol) ?>;
-    var new_name = document.getElementById("fol_name");
-    var check_name;
-    var div = document.getElementById('target_div');
-    var dis_button = document.getElementById('create');
-
-    for (let x in t) {
-        if (t[x].fol_name == new_name.value) {
-            check_name = 1;
-            break;
-        } else {
-            check_name = 0;
-        }
-    }
-    console.log(check_name);
-    if (check_name == 1) {
-        $("#fol_name").css("border-color", "red");
-        div.style.display = "block";
-        dis_button.disabled = true;
-
-    } else {
-        $("#fol_name").css("border-color", "green");
-        div.style.display = "none";
-        dis_button.disabled = false;
-
-    }
-});
- </script>
- <script type="text/javascript">
-$(document).on("click", ".editModal", function() {
-    var id = $(this).attr('data-id');
-    $("#fol_id").val(id);
-});
-
-
-var cm = document.querySelector(".custom-cm");
-
-function showContextMenu(show = true) {
-    cm.style.display = show ? "block" : "none";
-}
-
-window.addEventListener("contextmenu", e => {
-    e.preventDefault();
-
-    showContextMenu();
-    cm.style.top =
-        e.y + cm.offsetHeight > window.innerHeight ?
-        window.innerHeight - cm.offsetHeight :
-        e.y;
-    cm.style.left =
-        e.x + cm.offsetWidth > window.innerWidth ?
-        window.innerWidth - cm.offsetWidth :
-        e.x;
-});
-
-
-$(document).on("click", ".editModal", function() {
-    var id = $(this).attr('data-id');
-    $("#dep_id").val(id);
-});
-
-function rightclick() {
-    var rightclick;
-    var e = window.event;
-
-    document.getElementById("myDropdown").classList.toggle("show");
-    if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-
-
-}
-
-
-function rightclickfolder(folder) {
-    var rightclick;
-    var e = window.event;
-    var getnamefolder = 'folder' + folder;
-    var x = document.getElementById("showmenu");
-
-    if (e.button == 2) {
-        document.getElementById(getnamefolder).classList.toggle("show");
-        if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (x.style.display === "block") {
-                    x.style.display = "none";
-                } else {
-                    x.style.display = "block";
-                }
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-            }
-        }
-    }
-
-}
-
-$(document).on("click", ".moveModal", function() {
-    var id = $(this).attr('data-id');
-    $("#fol_id").val(id);
-    var name = $(this).attr('data-name');
-    $("#fol_name").val(name);
-    var x = document.getElementById("fold_id").value = id;
-    document.getElementById("folder_name").value = name;
-    console.log(x);
-    console.log(name);
-});
-
-
-$(document).ready(function() {
-    $('.dropdown-submenu a.test').on("click", function(e) {
-        $(this).next('ul').toggle();
-        e.stopPropagation();
-        e.preventDefault();
-    });
-});
-
-/*
- * MoveFileModal
- * get data on click movefileModal button
- * @input data-id,data-name,data-qr-id,data-qr-name,data-doc_fol_id
- * @output -
- * @author Natruja
- * @Create Date 2565-04-11
- */
-$(document).on("click", ".MoveFileModal", function() {
-    console.log('test');
-    var id = $(this).attr('data-id');
-    $("#doc_id").val(id);
-    var name = $(this).attr('data-name');
-    $("#doc_name").val(name);
-    var qr_id = $(this).attr('data-qr-id');
-    $("#qr_id").val(qr_id);
-    var qr_name = $(this).attr('data-qr-name');
-    $("#qr_name").val(qr_name);
-    var doc_fol_id = $(this).attr('data-doc_fol_id');
-    console.log('-------------');
-    console.log(typeof doc_fol_id);
-    if (isNumeric(doc_fol_id) == false || doc_fol_id.trim() == "" || doc_fol_id == null) {
-        doc_fol_id = 0;
-    }
-    $("#doc_fol_id").val(doc_fol_id);
-    //  var qr_fol_id = $(this).attr('data-qr_fol_id');
-    //  $("#qr_fol_id").val(qr_fol_id);
-    console.log('sawass');
-    document.getElementById("file_id").value = id;
-    document.getElementById("file_name").value = name;
-    document.getElementById("qrcode_id").value = qr_id;
-    document.getElementById("qrcode_name").value = qr_name;
-    console.log(id);
-    console.log(isNumeric(doc_fol_id));
-    console.log(isNumeric('1'));
-
-
-
-});
-
-/*
- * isNumeric
- * check nemuric value
- * @input value
- * @output returns a Boolean value
- * @author Natruja
- * @Create Date 2565-04-11
- */
-function isNumeric(value) {
-    return /^-?\d+$/.test(value);
-}
-
-
-function set_delete(path, id, doc_fol_id) {
-
-    $('#doc_path_delete').val(path);
-    $('#doc_id_delete').val(id);
-    $('#doc_fol_id_delete').val(doc_fol_id);
-    // console.log(doc_fol_id);
-
-}
- </script>
-
-
- <!-- EditFile Script -->
- <script>
-function rightclickfolder(folder) {
-    var rightclick;
-    var e = window.event;
-    var getnamefolder = 'folder' + folder;
-    var x = document.getElementById("showmenu");
-
-    if (e.button == 2) {
-        document.getElementById(getnamefolder).classList.toggle("show");
-        if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (x.style.display === "block") {
-                    x.style.display = "none";
-                } else {
-                    x.style.display = "block";
-                }
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-            }
-        }
-    }
-
-}
-
-$(document).ready(function() {
-    <?php $this->session->set_userdata('qr_id', ''); ?>
-    <?php $this->session->set_userdata('path', ''); ?>
-    $(document).on("keyup", "#qr_name", function() {
-
-            // var text_n = document.getElementById("text_name");
-            var d_name = document.getElementById("qr_name").value;
-            var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
-            var n_check;
-            console.log("d_name" + d_name);
-
-            if (d_name.match(pattern)) {
-                // text_n.innerHTML = "";
-                n_check = 1;
-
-            } else {
-                // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
-                // text_n.style.color = "#ff0000";
-                n_check = 0;
-
-            }
-  
-    console.log(n_check + "abc");
-
-        var t = <?php echo json_encode($arr_doc) ?>;
-        var new_name = document.getElementById("qr_name");
-        var check_name;
-        var div = document.getElementById('target_div');
-        var dis_button = document.getElementById('create');
-        $('.dropdown-submenu a.test').on("click", function(e) {
-            $(this).next('ul').toggle();
-            e.stopPropagation();
-            e.preventDefault();
-        });
-    });
-
-    for (let x in t) {
-        if (t[x].doc_name == new_name.value || n_check==0) {
-            check_name = 1;
-            break;
-        } else {
-            check_name = 0;
-        }
-    }
-    console.log(check_name);
-    if (check_name == 1) {
-        $("#qr_name").css("border-color", "red");
-        div.style.display = "block";
-        dis_button.disabled = true;
-
-    } else {
-        $("#qr_name").css("border-color", "green");
-        div.style.display = "none";
-        dis_button.disabled = false;
-
-    }
-});
-
-
-function set_delete(path, id, doc_fol_id) {
-
-    $('#doc_path_delete').val(path);
-    $('#doc_id_delete').val(id);
-    $('#doc_fol_id_delete').val(doc_fol_id);
-    // console.log(doc_fol_id);
-
-}
- </script>
-
- <!-- Move Folder Script -->
- <script>
-$(document).on("click", ".moveModalAjax", function() {
-    var type = $(this).attr('move-type');
-
-    if (type == "file") {
-        var fol_id = $(this).attr('data-doc_fol_id');
-        //  fol_id = 0;
-    } else if (type == "folder") {
-        var fol_id = $(this).attr('data-id');
-        $("#fol_id").val(fol_id);
-        var name = $(this).attr('data-name');
-        $("#fol_name").val(name);
-        var x = document.getElementById("fold_id").value = fol_id;
-        document.getElementById("folder_name").value = name;
-    }
-
-
-
-    $.ajax({
-        type: 'post',
-        url: '<?php echo site_url() . 'Folder/Folder_management/get_dropdown_data_ajax'; ?>',
-        data: {
-            'fol_id': fol_id
-        },
-        dataType: 'json',
-        success: function(json_data) {
-            console.log(json_data);
-
-            //สร้าง select รอไว้ แล้วค่อยใส่ option ทีหลัง
-
-            if (type == "file") {
-                let html_select =
-                    '<select name="doc_fol_id" id="dropdown_doc_fol_id" class="form-select" aria-label="Default select example" placeholder="" required></select>';
-                $('#select_move_file').html(html_select);
-                $('#select_move').html('');
-            } else if (type == "folder") {
-                let html_select =
-                    "<select name='fol_location_id' id='folder_location_id' class='form-select' aria-label='Default select example' placeholder='เลือกโฟลเดอร์' required>'</select>";
-                $('#select_move').html(html_select);
-                $('#select_move_file').html('');
-            }
-
-            let id_dropdrown = '';
-            if (type == "file") {
-                id_dropdrown = '#dropdown_doc_fol_id';
-            } else if (type == "folder") {
-                id_dropdrown = '#folder_location_id';
-            }
-            let html_option = '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
-            $(id_dropdrown).html(html_option);
-
-            let obj_level = json_data['arr_level'];
-            let current_path = json_data['current_path'];
-
-
-            if (obj_level[1].length == 0) {
-
-                //กรณีไม่มีข้อมูล
-                html_option = ' <option value="none">ไม่พบข้อมูล</option>';
-                $('#folder_location_id').html(html_option);
-                $(id_dropdrown).html(html_option);
-            } //if
-            else {
-                // html_option = '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
-                // $('#folder_location_id').prepend(html_option);
-                //กรณีมีข้อมูล
-
-                let max_level = Object.keys(obj_level).length;
-                let prefix = '&nbsp'; //สัญลักษณ์ข้างหน้าแต่ละ level
-
-                for (level = 1; level <= max_level; level++) {
-
-                    if (level == 1) {
-                        html_option =
-                            '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
-
-                        let disable = '';
-                        if (type == 'folder') {
-                            if (json_data['is_level_1'] == true) {
-                                disable = ' disabled  hidden ';
-                            } //if
-                        } else if (type == 'file') {
-                            if (fol_id == 0) {
-                                disable = ' disabled  hidden ';
-                            }
-                        }
-
-
-                        html_option += '<option value="0"' + disable + ' > หน้าหลัก</option>';
-
-                        for (i = 0; i < obj_level[level].length; i++) {
-
-
-
-                            let disable = '';
-                            if (type == 'folder') {
-                                //ตัวที่ถูกเลือกและลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้ 
-                                if (obj_level[level][i]["fol_location"].includes(current_path + '/') ||
-                                    obj_level[level][i]["fol_location"] == current_path) {
-                                    disable = ' disabled ';
-                                } //if
-                            } else if (type = 'file') {
-                                //ตัวที่ถูกเลือก จะต้องกดไม่ได้ 
-                                if (obj_level[level][i]["fol_location"] == current_path) {
-                                    disable = ' disabled ';
-                                } //if
-                            }
-
-
-                            html_option += '<option ' + disable + ' id="fol_' + obj_level[level][i][
-                                "fol_id"
-                            ] + '" value="' + obj_level[level][i]["fol_id"] + '">';
-                            html_option += obj_level[level][i]["fol_name"];
-                            html_option += '</option>';
-
-                        } //for
-
-                        $(id_dropdrown).html(html_option);
-                    } //if
-                    else {
-
-
-                        prefix = prefix + '&nbsp' + '&nbsp' + '-';
-
-                        //แทรกลูกหลังจากตำแหล่งแม่ (ทำจากหลังมาหน้า ลำดับจะไม่เพี้ยน)
-                        for (i = obj_level[level].length - 1; i >= 0; i--) {
-
-                            let disable = '';
-                            if (type == 'folder') {
-                                //ตัวที่ถูกเลือกและลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้ 
-                                if (obj_level[level][i]["fol_location"].includes(current_path + '/') ||
-                                    obj_level[level][i]["fol_location"] == current_path) {
-                                    disable = ' disabled ';
-                                } //if
-                            } else if (type = 'file') {
-                                //ตัวที่ถูกเลือก จะต้องกดไม่ได้ 
-                                if (obj_level[level][i]["fol_location"] == current_path) {
-                                    disable = ' disabled ';
-                                } //if
-                            }
-
-                            html_option = '';
-                            html_option += '<option ' + disable + ' id="fol_' + obj_level[level][i][
-                                "fol_id"
-                            ] + '" value="' + obj_level[level][i]["fol_id"] + '">';
-                            html_option += prefix + ' ' + obj_level[level][i]["fol_name"];
-                            html_option += '</option>';
-
-
-                            //แทรกโค้ดลูก หลังจากตำแหล่งโค้ดแม่
-                            var tag_parent = document.getElementById('fol_' + obj_level[level][i][
-                                "fol_location_id"
-                            ]);
-                            tag_parent.insertAdjacentHTML('afterend', html_option);
-                        } //for
-                    } //else
-
-                } //for
-
-            } //else
-        }
-    }); //ajax
-
-}); //get_dropdown_data
- </script>
-
- </script>
- <!-- EditFile Script -->
- <script>
-<?php $this->session->set_userdata('qr_id', ''); ?>
-<?php $this->session->set_userdata('path', ''); ?>
-$(document).on("keyup", "#qr_name", function() {
-    var t = <?php echo json_encode($arr_doc) ?>;
-    var new_name = document.getElementById("qr_name");
-    var check_name;
-    var div = document.getElementById('target_div');
-    var dis_button = document.getElementById('create');
-
-    for (let x in t) {
-        if (t[x].doc_name == new_name.value) {
-            check_name = 1;
-            break;
-        } else {
-            check_name = 0;
-        }
-    }
-    console.log(check_name);
-    if (check_name == 1) {
-        $("#qr_name").css("border-color", "red");
-        div.style.display = "block";
-        dis_button.disabled = true;
-
-    } else {
-        $("#qr_name").css("border-color", "green");
-        div.style.display = "none";
-        dis_button.disabled = false;
-
-    }
-});
-
-function check_file_edit() {
-
-    var dis_button = document.getElementById('sub_edit');
-    dis_button.disabled = false;
-
-    var t = <?php echo json_encode($arr_qr) ?>;
-    var new_name = document.getElementById("qr_edit");
-    var check_name;
-    var div = document.getElementById('edit_mss');
-
-
-    for (let x in t) {
-        if (t[x].qr_name == new_name.value || new_name.value == " ") {
-            check_name = 1;
-            break;
-        } else {
-            check_name = 0;
-        }
-    }
-    console.log(check_name);
-    if (check_name == 1) {
-        $("#qr_edit").css("border-color", "red");
-        div.style.display = "block";
-        dis_button.disabled = true;
-
-    } else {
-        $("#qr_edit").css("border-color", "green");
-        div.style.display = "none";
-        dis_button.disabled = false;
-
-    }
-    console.log(document.getElementById('edit'));
-}
- </script>
+     <script type="text/javascript">
+    
+
+     function check_file_edit() {
+
+         // var text_n = document.getElementById("text_name");
+         var d_name = document.getElementById("qr_name").value;
+         var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+         var n_check;
+         console.log("d_name" + d_name);
+
+         if (d_name.match(pattern)) {
+             // text_n.innerHTML = "";
+             n_check = 1;
+
+         } else {
+             // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+             // text_n.style.color = "#ff0000";
+             n_check = 0;
+
+         }
+
+         console.log(n_check + "abc");
+
+         var dis_button = document.getElementById('sub_edit');
+         dis_button.disabled = false;
+
+         var t = <?php echo json_encode($arr_qr) ?>;
+         var new_name = document.getElementById("qr_name");
+         var check_name;
+         var div = document.getElementById('qr_mss');
+
+
+         for (let x in t) {
+             if (t[x].qr_name == new_name.value || new_name.value == " " || n_check == 0) {
+                 check_name = 1;
+                 break;
+             } else {
+                 check_name = 0;
+             }
+         }
+         console.log(check_name);
+         if (check_name == 1) {
+             $("#qr_name").css("border-color", "red");
+             div.style.display = "block";
+             dis_button.disabled = true;
+
+         } else {
+             $("#qr_name").css("border-color", "green");
+             div.style.display = "none";
+             dis_button.disabled = false;
+
+         }
+         console.log(document.getElementById('edit'));
+     }
+
+     function check_file_edit_in_folder() {
+
+         var text_n = document.getElementById("text_name");
+         var d_name = document.getElementById("qr_name").value;
+         var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+         var n_check;
+         console.log("d_name" + d_name);
+
+         if (d_name.match(pattern)) {
+             // text_n.innerHTML = "";
+             n_check = 1;
+
+         } else {
+             // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+             // text_n.style.color = "#ff0000";
+             n_check = 0;
+
+         }
+
+         console.log(n_check + "check file edit in folder");
+
+         var dis_button = document.getElementById('sub_edit');
+         dis_button.disabled = false;
+
+         var t = <?php echo json_encode($arr_qr) ?>;
+         var new_name = document.getElementById("qr_name");
+         var check_name;
+         var div = document.getElementById('qr_mss');
+
+
+         for (let x in t) {
+             if (t[x].qr_name == new_name.value || new_name.value == " " || n_check == 0) {
+                 check_name = 1;
+                 break;
+             } else {
+                 check_name = 0;
+             }
+         }
+         console.log(check_name);
+         if (check_name == 1) {
+             $("#qr_name").css("border-color", "red");
+             div.style.display = "block";
+             dis_button.disabled = true;
+
+         } else {
+             $("#qr_name").css("border-color", "green");
+             div.style.display = "none";
+             dis_button.disabled = false;
+
+         }
+         console.log(document.getElementById('edit2'));
+     }
+
+     $(document).on("click", ".deleteModal", function() {
+         var id = $(this).attr('data-id');
+         $("#fol_id").val(id);
+
+     });
+
+     $(document).on("click", ".exampleModal", function() {
+         var id = $(this).attr('data-id');
+         $("#fol_id").val(id);
+
+     });
+
+
+     var cm = document.querySelector(".custom-cm");
+
+     function showContextMenu(show = true) {
+         cm.style.display = show ? "block" : "none";
+     }
+
+     window.addEventListener("contextmenu", e => {
+         e.preventDefault();
+
+         showContextMenu();
+         cm.style.top =
+             e.y + cm.offsetHeight > window.innerHeight ?
+             window.innerHeight - cm.offsetHeight :
+             e.y;
+         cm.style.left =
+             e.x + cm.offsetWidth > window.innerWidth ?
+             window.innerWidth - cm.offsetWidth :
+             e.x;
+     });
+
+
+     $(document).on("click", ".editModal", function() {
+         var id = $(this).attr('data-id');
+         $("#dep_id").val(id);
+     });
+
+     function rightclick() {
+         var rightclick;
+         var e = window.event;
+
+         document.getElementById("myDropdown").classList.toggle("show");
+         if (!event.target.matches('.dropbtn')) {
+             var dropdowns = document.getElementsByClassName("dropdown-content");
+             var i;
+             for (i = 0; i < dropdowns.length; i++) {
+                 var openDropdown = dropdowns[i];
+                 if (openDropdown.classList.contains('show')) {
+                     openDropdown.classList.remove('show');
+                 }
+             }
+         }
+     }
+     </script>
+     <script>
+     $(document).on("keyup", "#fol_name", function() {
+         var t = <?php echo json_encode($arr_fol) ?>;
+         var new_name = document.getElementById("fol_name");
+         var check_name;
+         var div = document.getElementById('target_div');
+         var dis_button = document.getElementById('create');
+
+         for (let x in t) {
+             if (t[x].fol_name == new_name.value) {
+                 check_name = 1;
+                 break;
+             } else {
+                 check_name = 0;
+             }
+         }
+         console.log(check_name);
+         if (check_name == 1) {
+             $("#fol_name").css("border-color", "red");
+             div.style.display = "block";
+             dis_button.disabled = true;
+
+         } else {
+             $("#fol_name").css("border-color", "green");
+             div.style.display = "none";
+             dis_button.disabled = false;
+
+         }
+     });
+     </script>
+     <script type="text/javascript">
+     $(document).on("click", ".editModal", function() {
+         var id = $(this).attr('data-id');
+         $("#fol_id").val(id);
+     });
+
+
+     var cm = document.querySelector(".custom-cm");
+
+     function showContextMenu(show = true) {
+         cm.style.display = show ? "block" : "none";
+     }
+
+     window.addEventListener("contextmenu", e => {
+         e.preventDefault();
+
+         showContextMenu();
+         cm.style.top =
+             e.y + cm.offsetHeight > window.innerHeight ?
+             window.innerHeight - cm.offsetHeight :
+             e.y;
+         cm.style.left =
+             e.x + cm.offsetWidth > window.innerWidth ?
+             window.innerWidth - cm.offsetWidth :
+             e.x;
+     });
+
+
+     $(document).on("click", ".editModal", function() {
+         var id = $(this).attr('data-id');
+         $("#dep_id").val(id);
+     });
+
+     function rightclick() {
+         var rightclick;
+         var e = window.event;
+
+         document.getElementById("myDropdown").classList.toggle("show");
+         if (!event.target.matches('.dropbtn')) {
+             var dropdowns = document.getElementsByClassName("dropdown-content");
+             var i;
+             for (i = 0; i < dropdowns.length; i++) {
+                 var openDropdown = dropdowns[i];
+                 if (openDropdown.classList.contains('show')) {
+                     openDropdown.classList.remove('show');
+                 }
+             }
+         }
+
+
+     }
+
+
+     function rightclickfolder(folder) {
+         var rightclick;
+         var e = window.event;
+         var getnamefolder = 'folder' + folder;
+         var x = document.getElementById("showmenu");
+
+         if (e.button == 2) {
+             document.getElementById(getnamefolder).classList.toggle("show");
+             if (!event.target.matches('.dropbtn')) {
+                 var dropdowns = document.getElementsByClassName("dropdown-content");
+                 var i;
+                 for (i = 0; i < dropdowns.length; i++) {
+                     var openDropdown = dropdowns[i];
+                     if (x.style.display === "block") {
+                         x.style.display = "none";
+                     } else {
+                         x.style.display = "block";
+                     }
+                     if (openDropdown.classList.contains('show')) {
+                         openDropdown.classList.remove('show');
+                     }
+                 }
+             }
+         }
+
+     }
+
+     $(document).on("click", ".moveModal", function() {
+         var id = $(this).attr('data-id');
+         $("#fol_id").val(id);
+         var name = $(this).attr('data-name');
+         $("#fol_name").val(name);
+         var x = document.getElementById("fold_id").value = id;
+         document.getElementById("folder_name").value = name;
+         console.log(x);
+         console.log(name);
+     });
+
+
+     $(document).ready(function() {
+         $('.dropdown-submenu a.test').on("click", function(e) {
+             $(this).next('ul').toggle();
+             e.stopPropagation();
+             e.preventDefault();
+         });
+     });
+
+     $(document).on("click", ".MoveFileModal", function() {
+         console.log('test');
+         var id = $(this).attr('data-id');
+         $("#doc_id").val(id);
+         var name = $(this).attr('data-name');
+         $("#doc_name").val(name);
+         var qr_id = $(this).attr('data-qr-id');
+         $("#qr_id").val(qr_id);
+         var qr_name = $(this).attr('data-qr-name');
+         $("#qr_name").val(qr_name);
+         var doc_fol_id = $(this).attr('data-doc_fol_id');
+         console.log('-------------');
+         console.log(typeof doc_fol_id);
+         if (isNumeric(doc_fol_id) == false || doc_fol_id.trim() == "" || doc_fol_id == null) {
+             doc_fol_id = 0;
+         }
+         $("#doc_fol_id").val(doc_fol_id);
+         //  var qr_fol_id = $(this).attr('data-qr_fol_id');
+         //  $("#qr_fol_id").val(qr_fol_id);
+         console.log('sawass');
+         document.getElementById("file_id").value = id;
+         document.getElementById("file_name").value = name;
+         document.getElementById("qrcode_id").value = qr_id;
+         document.getElementById("qrcode_name").value = qr_name;
+         console.log(id);
+         console.log(isNumeric(doc_fol_id));
+         console.log(isNumeric('1'));
+
+
+
+     });
+
+     function isNumeric(value) {
+         return /^-?\d+$/.test(value);
+     }
+
+
+     function set_delete(path, id, doc_fol_id) {
+
+         $('#doc_path_delete').val(path);
+         $('#doc_id_delete').val(id);
+         $('#doc_fol_id_delete').val(doc_fol_id);
+         // console.log(doc_fol_id);
+
+     }
+     </script>
+
+
+     <!-- EditFile Script -->
+     <script>
+     function rightclickfolder(folder) {
+         var rightclick;
+         var e = window.event;
+         var getnamefolder = 'folder' + folder;
+         var x = document.getElementById("showmenu");
+
+         if (e.button == 2) {
+             document.getElementById(getnamefolder).classList.toggle("show");
+             if (!event.target.matches('.dropbtn')) {
+                 var dropdowns = document.getElementsByClassName("dropdown-content");
+                 var i;
+                 for (i = 0; i < dropdowns.length; i++) {
+                     var openDropdown = dropdowns[i];
+                     if (x.style.display === "block") {
+                         x.style.display = "none";
+                     } else {
+                         x.style.display = "block";
+                     }
+                     if (openDropdown.classList.contains('show')) {
+                         openDropdown.classList.remove('show');
+                     }
+                 }
+             }
+         }
+
+     }
+
+     $(document).ready(function() {
+         <?php $this->session->set_userdata('qr_id', ''); ?>
+         <?php $this->session->set_userdata('path', ''); ?>
+         $(document).on("keyup", "#qr_name", function() {
+
+             // var text_n = document.getElementById("text_name");
+             var d_name = document.getElementById("qr_name").value;
+             var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+             var n_check;
+             console.log("d_name" + d_name);
+
+             if (d_name.match(pattern)) {
+                 // text_n.innerHTML = "";
+                 n_check = 1;
+
+             } else {
+                 // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+                 // text_n.style.color = "#ff0000";
+                 n_check = 0;
+
+             }
+
+             console.log(n_check + "abc");
+
+             var t = <?php echo json_encode($arr_doc) ?>;
+             var new_name = document.getElementById("qr_name");
+             var check_name;
+             var div = document.getElementById('target_div');
+             var dis_button = document.getElementById('create');
+             $('.dropdown-submenu a.test').on("click", function(e) {
+                 $(this).next('ul').toggle();
+                 e.stopPropagation();
+                 e.preventDefault();
+             });
+         });
+
+         for (let x in t) {
+             if (t[x].doc_name == new_name.value || n_check == 0) {
+                 check_name = 1;
+                 break;
+             } else {
+                 check_name = 0;
+             }
+         }
+         console.log(check_name);
+         if (check_name == 1) {
+             $("#qr_name").css("border-color", "red");
+             div.style.display = "block";
+             dis_button.disabled = true;
+
+         } else {
+             $("#qr_name").css("border-color", "green");
+             div.style.display = "none";
+             dis_button.disabled = false;
+
+         }
+     });
+
+
+     function set_delete(path, id, doc_fol_id) {
+
+         $('#doc_path_delete').val(path);
+         $('#doc_id_delete').val(id);
+         $('#doc_fol_id_delete').val(doc_fol_id);
+         // console.log(doc_fol_id);
+
+     }
+     </script>
+
+     <!-- Move Folder Script -->
+     <script>
+     $(document).on("click", ".moveModalAjax", function() {
+         var type = $(this).attr('move-type');
+
+         if (type == "file") {
+             var fol_id = $(this).attr('data-doc_fol_id');
+             //  fol_id = 0;
+         } else if (type == "folder") {
+             var fol_id = $(this).attr('data-id');
+             $("#fol_id").val(fol_id);
+             var name = $(this).attr('data-name');
+             $("#fol_name").val(name);
+             var x = document.getElementById("fold_id").value = fol_id;
+             document.getElementById("folder_name").value = name;
+         }
+
+
+
+         $.ajax({
+             type: 'post',
+             url: '<?php echo site_url() . 'Folder/Folder_management/get_dropdown_data_ajax'; ?>',
+             data: {
+                 'fol_id': fol_id
+             },
+             dataType: 'json',
+             success: function(json_data) {
+                 console.log(json_data);
+
+                 //สร้าง select รอไว้ แล้วค่อยใส่ option ทีหลัง
+
+                 if (type == "file") {
+                     let html_select =
+                         '<select name="doc_fol_id" id="dropdown_doc_fol_id" class="form-select" aria-label="Default select example" placeholder="" required></select>';
+                     $('#select_move_file').html(html_select);
+                     $('#select_move').html('');
+                 } else if (type == "folder") {
+                     let html_select =
+                         "<select name='fol_location_id' id='folder_location_id' class='form-select' aria-label='Default select example' placeholder='เลือกโฟลเดอร์' required>'</select>";
+                     $('#select_move').html(html_select);
+                     $('#select_move_file').html('');
+                 }
+
+                 let id_dropdrown = '';
+                 if (type == "file") {
+                     id_dropdrown = '#dropdown_doc_fol_id';
+                 } else if (type == "folder") {
+                     id_dropdrown = '#folder_location_id';
+                 }
+                 let html_option = '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
+                 $(id_dropdrown).html(html_option);
+
+                 let obj_level = json_data['arr_level'];
+                 let current_path = json_data['current_path'];
+
+
+                 if (obj_level[1].length == 0) {
+
+                     //กรณีไม่มีข้อมูล
+                     html_option = ' <option value="none">ไม่พบข้อมูล</option>';
+                     $('#folder_location_id').html(html_option);
+                     $(id_dropdrown).html(html_option);
+                 } //if
+                 else {
+                     // html_option = '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
+                     // $('#folder_location_id').prepend(html_option);
+                     //กรณีมีข้อมูล
+
+                     let max_level = Object.keys(obj_level).length;
+                     let prefix = '&nbsp'; //สัญลักษณ์ข้างหน้าแต่ละ level
+
+                     for (level = 1; level <= max_level; level++) {
+
+                         if (level == 1) {
+                             html_option =
+                                 '<option value="" disabled selected hidden>เลือกโฟลเดอร์</option>';
+
+                             let disable = '';
+                             if (type == 'folder') {
+                                 if (json_data['is_level_1'] == true) {
+                                     disable = ' disabled  hidden ';
+                                 } //if
+                             } else if (type == 'file') {
+                                 if (fol_id == 0) {
+                                     disable = ' disabled  hidden ';
+                                 }
+                             }
+
+
+                             html_option += '<option value="0"' + disable + ' > หน้าหลัก</option>';
+
+                             for (i = 0; i < obj_level[level].length; i++) {
+
+
+
+                                 let disable = '';
+                                 if (type == 'folder') {
+                                     //ตัวที่ถูกเลือกและลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้ 
+                                     if (obj_level[level][i]["fol_location"].includes(current_path + '/') ||
+                                         obj_level[level][i]["fol_location"] == current_path) {
+                                         disable = ' disabled ';
+                                     } //if
+                                 } else if (type = 'file') {
+                                     //ตัวที่ถูกเลือก จะต้องกดไม่ได้ 
+                                     if (obj_level[level][i]["fol_location"] == current_path) {
+                                         disable = ' disabled ';
+                                     } //if
+                                 }
+
+
+                                 html_option += '<option ' + disable + ' id="fol_' + obj_level[level][i][
+                                     "fol_id"
+                                 ] + '" value="' + obj_level[level][i]["fol_id"] + '">';
+                                 html_option += obj_level[level][i]["fol_name"];
+                                 html_option += '</option>';
+
+                             } //for
+
+                             $(id_dropdrown).html(html_option);
+                         } //if
+                         else {
+
+
+                             prefix = prefix + '&nbsp' + '&nbsp' + '-';
+
+                             //แทรกลูกหลังจากตำแหล่งแม่ (ทำจากหลังมาหน้า ลำดับจะไม่เพี้ยน)
+                             for (i = obj_level[level].length - 1; i >= 0; i--) {
+
+                                 let disable = '';
+                                 if (type == 'folder') {
+                                     //ตัวที่ถูกเลือกและลูกของตัวที่ถูกเลือก จะต้องกดไม่ได้ 
+                                     if (obj_level[level][i]["fol_location"].includes(current_path + '/') ||
+                                         obj_level[level][i]["fol_location"] == current_path) {
+                                         disable = ' disabled ';
+                                     } //if
+                                 } else if (type = 'file') {
+                                     //ตัวที่ถูกเลือก จะต้องกดไม่ได้ 
+                                     if (obj_level[level][i]["fol_location"] == current_path) {
+                                         disable = ' disabled ';
+                                     } //if
+                                 }
+
+                                 html_option = '';
+                                 html_option += '<option ' + disable + ' id="fol_' + obj_level[level][i][
+                                     "fol_id"
+                                 ] + '" value="' + obj_level[level][i]["fol_id"] + '">';
+                                 html_option += prefix + ' ' + obj_level[level][i]["fol_name"];
+                                 html_option += '</option>';
+
+
+                                 //แทรกโค้ดลูก หลังจากตำแหล่งโค้ดแม่
+                                 var tag_parent = document.getElementById('fol_' + obj_level[level][i][
+                                     "fol_location_id"
+                                 ]);
+                                 tag_parent.insertAdjacentHTML('afterend', html_option);
+                             } //for
+                         } //else
+
+                     } //for
+
+                 } //else
+             }
+         }); //ajax
+
+     }); //get_dropdown_data
+     </script>
+
+     <script>
+     <?php $this->session->set_userdata('qr_id', ''); ?>
+     <?php $this->session->set_userdata('path', ''); ?>
+     $(document).on("keyup", "#qr_name", function() {
+         // var text_n = document.getElementById("text_name");
+         var d_name = document.getElementById("qr_name").value;
+         var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+         var n_check;
+         console.log("d_name" + d_name);
+
+         if (d_name.match(pattern)) {
+             // text_n.innerHTML = "";
+             n_check = 1;
+
+         } else {
+             // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+             // text_n.style.color = "#ff0000";
+             n_check = 0;
+
+         }
+
+         console.log(n_check + "check onkeyup");
+
+         var t = <?php echo json_encode($arr_doc) ?>;
+         var new_name = document.getElementById("qr_name");
+         var check_name;
+         var div = document.getElementById('target_div');
+         var dis_button = document.getElementById('create');
+
+         for (let x in t) {
+             if (t[x].doc_name == new_name.value || n_check == 0) {
+                 check_name = 1;
+                 break;
+             } else {
+                 check_name = 0;
+             }
+         }
+         console.log(check_name);
+         if (check_name == 1) {
+             $("#qr_name").css("border-color", "red");
+             div.style.display = "block";
+             dis_button.disabled = true;
+
+         } else {
+             $("#qr_name").css("border-color", "green");
+             div.style.display = "none";
+             dis_button.disabled = false;
+
+         }
+     });
+
+     
+     </script>

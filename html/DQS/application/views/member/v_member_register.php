@@ -24,7 +24,7 @@
                                 <div class="col-md-10 justify-content-md-center">
                                     <div class="card-header card-header-warning" style = "padding: 10px; border-radius: 10px;">
                                     
-                                        <h2 class= "text-center" id="*" style="color:#000000; font-family:TH sarabun new; font-size: 60px;">สมัครสมาชิก</h2>
+                                        <h2 class= "text-center" id="*" style="color:aliceblue ; font-family:TH sarabun new; font-size: 60px;">สมัครสมาชิก</h2>
                                         
                                     </div>
                                 </div>
@@ -54,6 +54,7 @@
                                 <div class="col"><br><br>
                                         <label style = "color: #000000;">หน่วยงาน</label>
                                         <label style = "color: #FF0000;">*</label>
+                                        <a class="mb-0" style="font-size: 11px;margin-top:0.001em;color:red;">หากหน่วยงานถูกสมัครแล้วจะไม่แสดงในรายการเลือก</a>
                                         <select name="mem_dep_id" id="mem_dep_id" class="form-select" aria-label="Default select example" required>
                                         <option value="" selected>--------- เลือกหน่วยงาน ---------</option>
                                         </select><br>
@@ -76,7 +77,7 @@
                                 <div class="col"> 
                                     <label style = "color: #000000;">ชื่อ</label>
                                     <label style = "color: #FF0000;">*</label>
-                                    <input type="text" class="form-control" id="mem_firstname" name="mem_firstname" placeholder="ชื่อ"><br>
+                                    <input onchange="fname_validation()" type="text" class="form-control" id="mem_firstname" name="mem_firstname" placeholder="ชื่อ"><br>
                                 </div>
 
                                     <!-- กรอกชื่อลงในกล่องบันทึกข้อความ -->
@@ -101,26 +102,21 @@
                                         
                                     <div class="form-group col-md-4"> <!-- กรอกรหัสผ่านลงใน กล่องบันทึกข้อความ -->
                                         <label for="inputPassword4" style = "color: #000000;">รหัสผ่าน</label>
-                                        <label style = "color: #FF0000;">*</label>
+                                        <label style = "color: #FF0000;">*<span id ="text_fname"></span></label>
                                         <input type="password" class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" onchange="checkpassword()" required oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-                                        <div class="media">
+                                        <!-- <div class="col-md-4"> -->
+                                        <a style="font-size: 11px;margin-top:0.01em;color:red;">กรอกรหัสผ่านอย่างน้อย 8 ตัวอักษรประกอบด้วย </a>
+                                        <p style="font-size: 11px;margin-top:0.01em;color:red;"> ตัวพิมพ์ใหญ่ พิมพ์เล็ก และอักขระพิเศษ</p>
                                         
-                                    </div>
+                                    <!-- </div> -->
                                           
                                     </div>
                                     <div class="form-group col-md-4"> <!-- กรอกรหัสผ่านลงใน กล่องบันทึกข้อความ -->
                                     
                                     <label for="inputPassword4" style = "color: #000000;">รหัสยืนยัน</label>
                                         <label style = "color: #FF0000;">*</label>
-                                        <input type="password" class="form-control " id="mem_password" name="mem_password" placeholder="รหัสผ่าน" onchange="checkpassword()" required oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                                        <input type="password" class="form-control " id="mem_password" name="mem_password" placeholder="รหัสยืนยัน" onchange="checkpassword()" required oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
                                     </div>
-                                    <div class="col-md-12">
-                                        <br>
-                                        <p class="mb-0" style="font-size: 12px;margin-top:0.001em;color:#100575;">หมายเหตุ: โปรดกรอกรหัสผ่านอย่างน้อย 8 ตัวอักษร ประกอบด้วยตัวพิมพ์ใหญ่ พิมพ์เล็ก และอักขระพิเศษ</p>
-                                        <p class="mb-0" style="font-size: 12px;margin-top:0.001em;color:#100575;">หมายเหตุ: หากหน่วยงานถูกสมัครแล้วจะไม่แสดงในรายการเลือก</p>
-
-                                            
-                                        </div>
                                     
                                 <div class=" row gx-5 ">
                                     <div class=" col-1">
@@ -188,6 +184,8 @@ function check_email_input(){
                         icon: 'error',
                         title: 'อีเมลถูกใช้แล้ว',
                         text: 'กรุณากรอกอีเมลใหม่',
+                        confirmButtonColor: '#5cb85c',
+                        confirmButtonShadow: '#5cb85c',
                         confirmButtonText: 'ตกลง'
                     })
                 }
@@ -195,38 +193,29 @@ function check_email_input(){
                     
         });
 }
-
-function check_department(){
-
-        let $form = $(this).closest('form');      
-        $.ajax({
-        type: 'POST',
-        dataType: "JSON",
-        url: "<?php echo site_url().'/Member/Member_register/check_status'?>",
-        data:{
-        mem_pro_id: $('#mem_pro_id').val(),
-        mem_dep_id: $('#mem_dep_id').val(),
-        },
-
-
-        success: function(data) {
-        if (data == 0) {
-            console.log('success');
-            document.getElementById('regis').type = 'submit';
-            document.getElementById('form_id').submit();
-        } else if (data == 1) {
-            console.log('error');
-            Swal.fire({
-                icon: 'error',
-                title: 'หน่วยงานนี้ถูกใช้แล้ว',
-                text: 'กรุณากรอกอีเมลใหม่',
-                confirmButtonText: 'ตกลง'
-            })
+function fname_validation(){
+        var text_fname = document.getElementById("text_fname");
+        var f_name = document.getElementById("mem_firstname").value;
+        var pattern = /^[ก-๏]+$/;
+        var fname_check;
+        if(f_name.match(pattern)){
+            text_fname.innerHTML = "";
+            fname_check = 1;
+            
+        }else{
+            text_fname.innerHTML = "กรอกข้อมูลไม่ถูกต้องกรุณากรอกใหม่อีกครั้ง";
+            text_fname.style.color = "#ff0000";
+           fname_check = 0;
+            
+        }if(f_name == ""){
+            text_fname.innerHTML = "กรุณากรอกชื่อ";
+            text_fname.style.color = "#ff0000";
+            fname_check = 0;
+            
         }
-        },
-       
-});
-}
+        return fname_check;
+    }
+
 
 /*
 	* get_dept(value_pro_id)
