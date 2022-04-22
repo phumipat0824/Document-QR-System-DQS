@@ -4,7 +4,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script type="text/javascript" src="../../../assets/calendar/js/bootstrap-datepicker.js"></script>
-
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 <!-- main -->
 <div class="content">
@@ -15,24 +15,9 @@
             <h1 style="color:#003399; font-family:TH Sarabun New; font-weight: 900; font-size: 80px;">รายงานสรุปผล</h1>
         </div>
         <!-- text -->
-
-        <!-- dropdown date -->
-        <div class="row g-0">
-            <div class="col-sm-6 col-md-8"></div>
-            <div class="col-6 col-md-4">
-                <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
-                    <i class="fa fa-calendar"></i>&nbsp;
-                    <span></span> <i class="fa fa-caret-down"></i>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- dropdown date -->
-
         <!-- card show number -->
         <div class="row">
-        <div class="col-md-3">
+            <div class="col-md-3">
                 <div class="card">
                     <div class="card-header card-header-icon card-header">
                         <div class="card-icon" style="background-color: #0000CD;">
@@ -40,27 +25,12 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <h4 class="card-title" style="font-family:TH Sarabun New;">จำนวนคิวอาร์โค้ดทั้งหมด</h4>
-                        <h5 class="card-title" style="font-family:TH Sarabun New;"><?php echo count($arr_qr_code) ?></h5>
+                        <h4 class="card-title" style="font-family:TH Sarabun New;">จำนวนเอกสารทั้งหมด</h4>
+                        <h5 class="card-title" style="font-family:TH Sarabun New;"><?php echo count($arr_doc) ?></h5>
+                        </h5>
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-3">
-                <div class="card">
-                    <div class="card-header card-header-icon card-header">
-                        <div class="card-icon" style="background-color: #139447;">
-                            <i class="material-icons">preview</i>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title" style="font-family:TH Sarabun New;">จำนวนการเข้าชม</h4>
-                        <h5 class="card-title" style="font-family:TH Sarabun New;"><?php echo '0' ?></h5>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ----------------------------------------------------------------------------------------------------------------------------- -->
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-header card-header-icon card-header">
@@ -70,100 +40,236 @@
                     </div>
                     <div class="card-body">
                         <h4 class="card-title" style="font-family:TH Sarabun New;">จำนวนการดาวน์โหลด</h4>
-                        <h5 class="card-title" style="font-family:TH Sarabun New;"><?php echo '0' ?></h5>
+                        <h5 class="card-title" style="font-family:TH Sarabun New;"><?php echo count($arr_download) ?></h5>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="row justify-content-start">
+                <div class="col-6">
+                    <div id="chartContainer" style="height: 370px;">
+                    </div>
 
-        <!-- Chart -->
-        <div>
-            <canvas id="myChart" width="500" height="250"></canvas>
+                </div>
+                <div class="col-6">
+                    <div id="chartContainer2" style="height: 370px;"></div>
+                </div>
+                <!-- Chart -->
+
+                <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
+
+                <!-- Chart -->
+            </div>
+            <div class="row">
+                <div id="chartContainer3" style="height: 500px; width: 100%;margin-top : 50px;"></div>
+            </div>
         </div>
-        <!-- Chart -->
     </div>
 </div>
-
 <script>
-    const data = {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-        datasets: [{
-            label: 'จำนวนการดาวน์โหดล',
-            data: [28, 12, 16, 9, 12, 13, 9],
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+// function get_id() {
+//     var mem_list = document.getElementById("user_id");
+//     // console.log(mem_list);
+//     get_doc(mem_list.value);
+// }
 
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1
-        }, {
-            label: 'จำนวนการสแกน',
-            data: [15, 15, 16, 19, 22, 13, 19],
-            backgroundColor: 'rgba(255, 206, 86, 0.2)',
+// function get_doc(value_mem_list) {
+//     // console.log(value_mem_list);
+//     $.ajax({
+//         type: "POST",
+//         url: "<?php echo site_url() ?>/Admin/Admin_report/get_file_ajax/",
+//         dataType: 'JSON',
+//         data: {
+//             'mem_id_list': value_mem_list
+//         },
+//         success: function(data) {
+//             console.log(data);
+//             Pie(data);
+//         }
 
-            borderColor: 'rgba(255, 206, 86, 1)',
-            borderWidth: 1
-        }]
-    };
+//     });
 
-    // config 
-    const config = {
-        type: 'bar',
-        data,
-        options: {
-            scales: {
-                y: {
-                    ticks: {
-                        stepSize: 5
-                    }
+
+// }
+
+window.onload = function() {
+
+    var chart = new CanvasJS.Chart("chartContainer", {
+        theme: "light2",
+        animationEnabled: true,
+        title: {
+            text: "ชนิดของไฟล์"
+        },
+        data: [{
+            type: "pie",
+            indexLabelFontSize: 18,
+            radius: 80,
+            indexLabel: "{label} - {y}",
+            yValueFormatString: "###0.0\"%\"",
+            click: explodePie,
+            dataPoints: [{
+                    y: <?php echo $all_pdf ?>,
+                    label: "PDF"
+                },
+                {
+                    y: <?php echo $all_img ?>,
+                    label: "IMG"
                 }
-            },
-            layout: {
-                padding: 50
-            }
-        }
-    };
-
-    // render init block
-    const myChart = new Chart(
-        document.getElementById('myChart'),
-        config
-    );
-
-    $(function() {
-        // Initialize and change language to hindi
-        $('#datepicker').datepicker($.datepicker.regional["th"]);
-        // Reset language
-        //$.datepicker.setDefaults($.datepicker.regional[""]);
-    })
-
-    $(function() {
-
-
-        $("#datepicker").datepicker({
-            language: 'th-th',
-        });
-
-        var start = moment();
-        var end = moment();
-
-        function cb(start, end) {
-            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-        }
-
-        $('#reportrange').daterangepicker({
-            startDate: start,
-            endDate: end,
-            ranges: {
-                'วันนี้': [moment(), moment()],
-                '30 วันที่ผ่านมา': [moment().subtract(29, 'days'), moment()],
-                'เดือนนี้': [moment().startOf('month'), moment().endOf('month')],
-                'เดือนที่แล้ว': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-                '6 เดือนที่ผ่านมา': [moment().subtract(6, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-                '1 ปีที่ผ่านมา': [moment().subtract(12, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-            }
-        }, cb);
-
-        cb(start, end);
-
-
+            ]
+        }]
     });
+    chart.render();
+
+    function explodePie(e) {
+        for (var i = 0; i < e.dataSeries.dataPoints.length; i++) {
+            if (i !== e.dataPointIndex)
+                e.dataSeries.dataPoints[i].exploded = false;
+        }
+    }
+
+    var chart = new CanvasJS.Chart("chartContainer2", {
+        animationEnabled: true,
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        title: {
+            text: "ชนิดของไฟล์"
+        },
+        axisY: {
+            title: "จำนวนไฟล์"
+        },
+        data: [{
+            type: "column",
+            showInLegend: true,
+            legendMarkerColor: "grey",
+            legendText: "ชนิดไฟล์",
+            dataPoints: [{
+                    y: <?php echo $pdf ?>,
+                    label: "PDF"
+                },
+                {
+                    y: <?php echo $img ?>,
+                    label: "IMG"
+                }
+
+            ]
+        }]
+    });
+    chart.render();
+
+    var chart = new CanvasJS.Chart("chartContainer3", {
+        theme: "light2", // "light1", "light2", "dark1", "dark2"
+        animationEnabled: true,
+        title: {
+            text: "จำนวนการดาวน์โหลด - 2022"
+        },
+        axisX: {
+            interval: 1,
+            intervalType: "month",
+            valueFormatString: "MMM"
+        },
+        axisY: {
+            title: "จำนวนการดาวน์โหลด",
+            includeZero: true,
+            valueFormatString: 0.00
+        },
+        data: [{
+            type: "line",
+            markerSize: 12,
+            xValueFormatString: "MMM, YYYY",
+            yValueFormatString: "ดาวน์โหลดทั้งหมด : ###.#",
+            dataPoints: [{
+                    x: new Date(2022, 00, 1),
+                    y: <?php echo $Jan ?>,
+                },
+                {
+                    x: new Date(2022, 01, 1),
+                    y: <?php echo $Feb ?>,
+                },
+                {
+                    x: new Date(2022, 02, 1),
+                    y: <?php echo $Mar ?>,
+                },
+                {
+                    x: new Date(2022, 03, 1),
+                    y: <?php echo $Apr ?>,
+                },
+                {
+                    x: new Date(2022, 04, 1),
+                    y: <?php echo $May ?>,
+                },
+                {
+                    x: new Date(2022, 05, 1),
+                    y: <?php echo $Jun ?>,
+                },
+                {
+                    x: new Date(2022, 06, 1),
+                    y: <?php echo $Jul ?>,
+                },
+                {
+                    x: new Date(2022, 07, 1),
+                    y: <?php echo $Aug ?>,
+                },
+                {
+                    x: new Date(2022, 08, 1),
+                    y: <?php echo $Sep ?>,
+                },
+                {
+                    x: new Date(2022, 09, 1),
+                    y: <?php echo $Oct ?>,
+                },
+                {
+                    x: new Date(2022, 10, 1),
+                    y: <?php echo $Nov ?>,
+                },
+                {
+                    x: new Date(2022, 11, 1),
+                    y: <?php echo $Dec ?>,
+                }
+            ]
+        }]
+    });
+    chart.render();
+
+}
+
+
+
+// function doc_input(arr_doc) { //
+
+//     var select = document.getElementById("mem_doc_id");
+
+//     const elmts = arr_doc;
+
+//     // console.log(arr_doc);
+//     const doc_optn = JSON.parse(JSON.stringify(elmts));
+
+//     if (elmts == "") {
+
+//         var optn = "ไม่มีเอกสาร";
+//         var el = document.createElement("option");
+//         el.textContent = optn;
+//         el.value = "";
+//         // console.log(el.value);
+//         select.appendChild(el);
+
+//     } else {
+//         var optn = "เอกสารทั้งหมด";
+//         var el = document.createElement("option");
+//         el.textContent = optn;
+//         el.value = "total";
+//         // console.log(el.value);
+//         select.appendChild(el);
+//         for (var i of elmts) {
+
+//             // console.log(i.doc_name);
+//             var optn = i.doc_name;
+//             var el = document.createElement("option");
+//             el.textContent = optn;
+//             el.value = i.doc_id;
+//             // console.log(el.value);
+//             select.appendChild(el);
+
+//         }
+//     }
+
+//     // console.log(select);
+// }
 </script>

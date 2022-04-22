@@ -23,7 +23,7 @@
         </div>
         <div class="col-md-4">
             <div class="dropdown">
-                <button onmousedown="rightclick()" class="dropbtn btn btn-round" style=" width: 160px; background-color: #F5F5F5 ; border: none;">
+                <button onmousedown="rightclick()" class="dropbtn btn btn-round" style=" width: 145px; background-color: #F5F5F5 ; border: none;">
                     <h1 style="font-weight: 900; color:#003399 ; font-size: 50px; font-family:TH Sarabun New; height: 40; width: 50px;" id="button-folder">+ สร้าง</h1>
                 </button>
                 <div id="myDropdown" class="dropdown-content">
@@ -383,32 +383,32 @@
     */ -->
 <!-- Move File Modal -->
 <div class="modal fade" id="MoveFileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="MoveFileModalLabel" style="font-family:TH Sarabun New; font-weight: 900;font-size: 28px;">ย้ายไฟล์ไปที่</h5>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="MoveFileModalLabel" style="font-family:TH Sarabun New; font-weight: 900;font-size: 28px;" >ย้ายไฟล์ไปที่</h5>
+                </div>
+                <form id="move-form" method="POST" action="<?php echo site_url() . '/File/File_management/move_file/'; ?>">
+                    <div class="modal-body">
+                        <input type="hidden" name="doc_id" id="file_id" value="">
+                        <input type="hidden" name="qr_id" id="qrcode_id" value="">
+                        <!-- dropdown folder name -->
+
+                         <div id="select_move_file">
+
+                         </div><br>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                        <input type="submit" class="btn btn-success" value="บันทึก">
+                        <input type="hidden" name="doc_name" id="file_name" value="">
+                        <input type="hidden" name="qr_name" id="qrcode_name" value="">
+
+                    </div>
+                </form>
             </div>
-            <form id="move-form" method="POST" action="<?php echo site_url() . '/File/File_management/move_file/'; ?>">
-                <div class="modal-body">
-                    <input type="hidden" name="doc_id" id="file_id" value="">
-                    <input type="hidden" name="qr_id" id="qrcode_id" value="">
-                    <!-- dropdown folder name -->
-
-                    <div id="select_move_file">
-
-                    </div><br>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                    <input type="submit" class="btn btn-success" value="บันทึก">
-                    <input type="hidden" name="doc_name" id="file_name" value="">
-                    <input type="hidden" name="qr_name" id="qrcode_name" value="">
-
-                </div>
-            </form>
         </div>
     </div>
-</div>
 <!-- End move file modal -->
 
 
@@ -572,7 +572,7 @@ function rightclick() {
     if (!event.target.matches('.dropbtn')) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
         var i;
-        for (i = 0; i < script dropdowns.length; i++) {
+        for (i = 0; i < dropdowns.length; i++) {
             var openDropdown = dropdowns[i];
             if (openDropdown.classList.contains('show')) {
                 openDropdown.classList.remove('show');
@@ -751,6 +751,15 @@ function saveAs(uri, filename) {
 
     }
 }
+
+/*
+ * MoveFileModal
+ * get data on click movefileModal button
+ * @input data-id,data-name,data-qr-id,data-qr-name,data-doc_fol_id
+ * @output -
+ * @author Natruja
+ * @Create Date 2565-04-11
+ */
 $(document).on("click", ".MoveFileModal", function() {
     console.log('test');
     var id = $(this).attr('data-id');
@@ -780,10 +789,18 @@ $(document).on("click", ".MoveFileModal", function() {
     console.log(isNumeric('1'));
 });
 
-
+/*
+ * isNumeric
+ * check nemuric value
+ * @input value
+ * @output returns a Boolean value
+ * @author Natruja
+ * @Create Date 2565-04-11
+ */
 function isNumeric(value) {
     return /^-?\d+$/.test(value);
 }
+
 </script>
 </script>
 

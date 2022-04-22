@@ -15,7 +15,7 @@ class Da_DQS_station_state_of_province extends DQS_model
     {
         $sql = "UPDATE {$this->db_name}.DQS_Station_State_of_Province
         SET station_status = 0
-        WHERE station_pro_id = $mem_pro_id && station_dep_id = $mem_dep_id";
+        WHERE station_pro_id = $mem_pro_id && station_dep_id = 1";
         $this->db->query($sql, array($this-> station_status));
     }
 
@@ -26,5 +26,6 @@ class Da_DQS_station_state_of_province extends DQS_model
                 ";
         $this->db->query($sql, array($this->station_pro_id,$this->station_status,$this->station_dep_id));
 	}//insert
+    
 }
 

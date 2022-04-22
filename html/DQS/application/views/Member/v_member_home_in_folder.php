@@ -174,7 +174,7 @@
                         <div class="modal-body">
                             <center><input onkeyup="check_fol_edit()" type="text" class="col-md-10" id="fol_edit" placeholder="" name="fol_name" required></center>
                             <br>
-                            <a id="edit_mss" style="display: none; color:red;" align='center'>กรุณากรอกข้อมูลใหม่</a>
+                            <a id="edit_mss" style="display: none; color:red;" align='center'>ชื่อโฟลเดอร์ซ้ำหรือกรอกชื่อโฟลเดอร์ผิด กรุณากรอกใหม่</a>
                             <input type="hidden" name="fol_id" id="folder_id" value="">
                             <input type="hidden" name="fol_location_id" id="fol_location_id" value="<?php echo $arr_fol[0]->fol_location_id; ?>">
                         </div>
@@ -187,7 +187,7 @@
                             <div class="modal-body">
                                 <center><input onkeyup="check_fol_edit()" type="text" class="col-md-10" id="fol_edit" placeholder="" name="fol_name" required></center>
                                 <br>
-                                <a id="edit_mss" style="display: none; color:red;" align='center'>กรุณากรอกข้อมูลใหม่</a>
+                                <a id="edit_mss" style="display: none; color:red;" align='center'>ชื่อโฟลเดอร์ซ้ำหรือกรอกชื่อโฟลเดอร์ผิด กรุณากรอกใหม่</a>
                                 <input type="hidden" name="fol_id" id="folder_id" value="">
                                 <input type="hidden" name="fol_location_id" id="fol_location_id" value="<?php echo $arr_fol[0]->fol_location_id; ?>">
                             </div>
@@ -245,7 +245,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-5">
                             <img id="img" src="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" height="128" width="128" style="margin: auto;">
-                            <a href="#" class="downloadModal" data-toggle="modal" data-target="#downloadModal" data-path="<?php echo base_url() . $arr_qr[$i]->qr_path ?>">
+                            <a href="#" class="downloadModal" data-toggle="modal" data-target="#downloadModal" data-path="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" data-id="<?php echo $arr_qr[$i]->qr_id ?>">
                                 <button id="load" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button></a>
                         </div>
                         <div class="form-group col-md-4">
@@ -256,7 +256,6 @@
                             <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">ชนิดไฟล์ : </h5>
                             <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;"><?php echo $arr_qr[$i]->doc_type ?></h5>
 
-                            <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">รายงานสรุปผล </h5>
                         </div>
                         <div class="form-group col-md-2">
 
@@ -348,6 +347,7 @@
                         <div id="capture">
                             <div id="qrcode">
                                 <center>
+                                    <input type="hidden" id='qr_path_url' name='qr_path_url' value="">
                                     <img src="" id="qr_path" name="qr_path" height="250" width="250" style="margin: auto;">
                                 </center>
                             </div>
@@ -355,7 +355,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                        <button type="submit" id="download" onclick="" class="btn btn-success">ยืนยัน</button>
+                        <button type="submit" id="download" onclick="get_count_download()" class="btn btn-success">ยืนยัน</button>
                     </div>
                 </div>
             </div>
@@ -420,10 +420,33 @@
     <script>
     $(document).on("click", ".downloadModal", function() {
         var path = $(this).attr('data-path');
+        var id = $(this).attr('data-id');
         // console.log(path);
         document.getElementById("qr_path").src = path;
+        document.getElementById("qr_path_url").value = id;
 
     });
+
+    function get_count_download() {
+         var qr_id = document.getElementById("qr_path_url").value
+         console.log(qr_id)
+         $.ajax({
+             type: 'post',
+             url: '<?php echo site_url() . '/Member/Member_report/count_download'; ?>',
+             data: {
+                 'qr_id': qr_id
+             },
+             dataType: 'json',
+             success: function(res) {
+                 console.log(res)
+                 console.log('success')
+             },
+             error: function(res) {
+                 console.log(res)
+                 console.log('unsuccess')
+             }
+         })
+     }
 
     function set_delete(path, id, fol_id) {
         $('#doc_path_delete').val(path);
@@ -433,6 +456,26 @@
     <?php $this->session->set_userdata('fol_id', ''); ?>
     <?php $this->session->set_userdata('path', ''); ?>
     $(document).on("keyup", "#fol_name", function() {
+        // var text_n = document.getElementById("text_name");
+        var d_name = document.getElementById("fol_edit").value;
+        var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+        var n_check;
+        console.log("d_name" + d_name);
+
+        if (d_name.match(pattern)) {
+            // text_n.innerHTML = "";
+            n_check = 1;
+
+        } else {
+            // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+            // text_n.style.color = "#ff0000";
+            n_check = 0;
+
+        }
+
+        console.log(n_check + "check onkeyup");
+
+
         var t = <?php echo json_encode($arr_fol) ?>;
         var new_name = document.getElementById("fol_name");
         var check_name;
@@ -440,7 +483,7 @@
         var dis_button = document.getElementById('create');
 
         for (let x in t) {
-            if (t[x].fol_name == new_name.value) {
+            if (t[x].fol_name == new_name.value || n_check == 0) {
                 check_name = 1;
                 break;
             } else {
@@ -470,6 +513,25 @@
      */
     function check_fol_edit() {
 
+        // var text_n = document.getElementById("text_name");
+        var d_name = document.getElementById("fol_edit").value;
+        var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+        var n_check;
+        console.log("d_name" + d_name);
+
+        if (d_name.match(pattern)) {
+            // text_n.innerHTML = "";
+            n_check = 1;
+
+        } else {
+            // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+            // text_n.style.color = "#ff0000";
+            n_check = 0;
+
+        }
+
+        console.log("check onkeyup" + n_check);
+
         var dis_button = document.getElementById('edit');
         dis_button.disabled = false;
 
@@ -480,7 +542,7 @@
 
 
         for (let x in t) {
-            if (t[x].fol_name == new_name.value || new_name.value == " ") {
+            if (t[x].fol_name == new_name.value || new_name.value == " " || n_check == 0) {
                 check_name = 1;
                 break;
             } else {
@@ -559,7 +621,7 @@
         if (!event.target.matches('.dropbtn')) {
             var dropdowns = document.getElementsByClassName("dropdown-content");
             var i;
-            for (i = 0; i <  dropdowns.length; i++) {
+            for (i = 0; i < dropdowns.length; i++) {
                 var openDropdown = dropdowns[i];
                 if (openDropdown.classList.contains('show')) {
                     openDropdown.classList.remove('show');
@@ -678,6 +740,14 @@
 
     }
 
+    /*
+ * MoveFileModal
+ * get data on click movefileModal button
+ * @input data-id,data-name,data-qr-id,data-qr-name,data-doc_fol_id
+ * @output -
+ * @author Natruja
+ * @Create Date 2565-04-11
+ */
     $(document).on("click", ".MoveFileModal", function() {
         console.log('test');
         var id = $(this).attr('data-id');
@@ -711,6 +781,18 @@
     function isNumeric(value) {
         return /^-?\d+$/.test(value);
     }
+    
+/*
+ * isNumeric
+ * check nemuric value
+ * @input value
+ * @output returns a Boolean value
+ * @author Natruja
+ * @Create Date 2565-04-11
+ */
+function isNumeric(value) {
+    return /^-?\d+$/.test(value);
+}
     $(document).ready(function() {
         $('.dropdown-submenu a.test').on("click", function(e) {
             $(this).next('ul').toggle();
@@ -891,23 +973,23 @@
     $(document).on("keyup", "#qr_name", function() {
 
         // var text_n = document.getElementById("text_name");
-     var d_name = document.getElementById("qr_name").value;
-    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
-    var n_check;
-    console.log("d_name" + d_name);
+        var d_name = document.getElementById("qr_name").value;
+        var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+        var n_check;
+        console.log("d_name" + d_name);
 
-    if (d_name.match(pattern)) {
-        // text_n.innerHTML = "";
-        n_check = 1;
+        if (d_name.match(pattern)) {
+            // text_n.innerHTML = "";
+            n_check = 1;
 
-    } else {
-        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
-        // text_n.style.color = "#ff0000";
-        n_check = 0;
+        } else {
+            // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+            // text_n.style.color = "#ff0000";
+            n_check = 0;
 
-    }
-  
-    console.log(n_check + "check file edit in folder");
+        }
+
+        console.log(n_check + "check file edit in folder");
 
         var t = <?php echo json_encode($arr_doc) ?>;
         var new_name = document.getElementById("qr_name");
@@ -916,7 +998,7 @@
         var dis_button = document.getElementById('create');
 
         for (let x in t) {
-            if (t[x].doc_name == new_name.value  || n_check == 0) {
+            if (t[x].doc_name == new_name.value || n_check == 0) {
                 check_name = 1;
                 break;
             } else {
@@ -940,23 +1022,23 @@
     function check_file_edit() {
 
         // var text_n = document.getElementById("text_name");
-     var d_name = document.getElementById("qr_name").value;
-    var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
-    var n_check;
-    console.log("d_name" + d_name);
+        var d_name = document.getElementById("qr_name").value;
+        var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
+        var n_check;
+        console.log("d_name" + d_name);
 
-    if (d_name.match(pattern)) {
-        // text_n.innerHTML = "";
-        n_check = 1;
+        if (d_name.match(pattern)) {
+            // text_n.innerHTML = "";
+            n_check = 1;
 
-    } else {
-        // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
-        // text_n.style.color = "#ff0000";
-        n_check = 0;
+        } else {
+            // text_n.innerHTML = "กรอกชื่อเอกสารไม่ถูกต้องห้ามมีตัวอักษรพิเศษ กรุณากรอกใหม่อีกครั้ง";
+            // text_n.style.color = "#ff0000";
+            n_check = 0;
 
-    }
-  
-    console.log(n_check + "check file edit in folder");
+        }
+
+        console.log(n_check + "check file edit in folder");
 
         var dis_button = document.getElementById('sub_edit');
         dis_button.disabled = false;
@@ -970,7 +1052,7 @@
 
 
         for (let x in t) {
-            if (t[x].qr_name == new_name.value || new_name.value == " "  || n_check == 0) {
+            if (t[x].qr_name == new_name.value || new_name.value == " " || n_check == 0) {
                 check_name = 1;
                 break;
             } else {
@@ -989,7 +1071,7 @@
             dis_button.disabled = false;
 
         }
-      
+
     }
 
     document.getElementById("download").addEventListener("click", function() {

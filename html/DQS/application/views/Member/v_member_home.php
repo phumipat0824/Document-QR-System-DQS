@@ -207,7 +207,7 @@
                              <br>
                              <a id="edit_mss" style="display: none; color:red;" align='center'>ชื่อโฟลเดอร์ซ้ำหรือกรอกชื่อโฟลเดอร์ผิด กรุณากรอกใหม่</a>
                              <!-- <a id="text_name" style="display: none; color:red;" align='center'>ชื่อโฟลเดอร์ซ้ำหรือกรอกชื่อโฟลเดอร์ผิด กรุณากรอกใหม่</a> -->
-                             
+
                              <input type="hidden" name="fol_id" id="folder_id" value="">
                              <input type="hidden" name="fol_location_id" id="fol_location_id" value="<?php echo $arr_fol[0]->fol_location_id; ?>">
                          </div>
@@ -265,7 +265,7 @@
      <?php for ($i = 0; $i < count($arr_qr); $i++) {   ?>
      <?php if ($this->session->userdata('fol_id') == null) { ?>
      <?php if ($arr_qr[$i]->doc_fol_id == null) { ?>
-     <div class="col-md-4">
+     <div class="col-md-4" style="display: flex; flex-wrap: wrap; justify-content: space-around; flex: 0 0 500px;">
          <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
              <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
                  <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;">
@@ -276,7 +276,7 @@
                  <div class="form-row">
                      <div class="form-group col-md-5">
                          <img id="img" src="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" height="128" width="128" style="margin: auto;">
-                         <a href="#" class="downloadModal" data-toggle="modal" data-target="#downloadModal" data-path="<?php echo base_url() . $arr_qr[$i]->qr_path ?>">
+                         <a href="#" class="downloadModal" data-toggle="modal" data-target="#downloadModal" data-path="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" data-id="<?php echo $arr_qr[$i]->qr_id ?>">
                              <button id="load" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button></a>
                      </div>
                      <div class="form-group col-md-4">
@@ -291,8 +291,6 @@
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
                              <?php echo $arr_qr[$i]->doc_type ?></h5>
 
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
-                             รายงานสรุปผล </h5>
                      </div>
                      <div class="form-group col-md-2">
 
@@ -317,7 +315,7 @@
                                              </center>
                                              <br>
                                              <a id="qr_mss" style="display: none; color:red;" align='center'>ชื่อไฟล์ซ้ำหรือกรอกชื่อไฟล์ผิด กรุณากรอกใหม่</a>
-                    
+
                                              <input type="hidden" name="qr_id" id="qr_id" value="">
                                          </div>
 
@@ -386,6 +384,7 @@
                      <div id="capture">
                          <div id="qrcode">
                              <center>
+                                <input type="hidden" id='qr_path_url' name='qr_path_url' value="">
                                  <img src="" id="qr_path" name="qr_path" height="250" width="250" style="margin: auto;">
                              </center>
                          </div>
@@ -393,7 +392,7 @@
                  </div>
                  <div class="modal-footer">
                      <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                     <button type="submit" id="download" onclick="" class="btn btn-success">ยืนยัน</button>
+                     <button type="submit" id="download" onclick="get_count_download()" class="btn btn-success">ยืนยัน</button>
                  </div>
              </div>
          </div>
@@ -406,7 +405,7 @@
      <!-- Card in folder -->
      <?php } else { ?>
      <?php if ($arr_qr[$i]->doc_fol_id == $this->session->userdata('fol_id')) { ?>
-     <div class="col-md-4">
+     <div class="col-md-4" style="display: flex; flex-wrap: wrap; justify-content: space-around; flex: 0 0 500px;">
          <div class="card" id="card-qrcode" style="padding-top: 10px; border-radius: 10px;">
              <div class="card-header-" style="padding:10px; border-radius: 10px; background-color: #100575; text-align:center;">
                  <h style="color:#FFFFFF; font-family:TH Sarabun New; font-size: 25px; font-weight:bold;">
@@ -417,7 +416,7 @@
                  <div class="form-row">
                      <div class="form-group col-md-5">
                          <img id="img" src="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" height="128" width="128" style="margin: auto;">
-                         <a href="#" class="downloadModal2" data-toggle="modal" data-target="#downloadModal2" data-path="<?php echo base_url() . $arr_qr[$i]->qr_path ?>">
+                         <a href="#" class="downloadModal2" data-toggle="modal" data-target="#downloadModal2" data-path="<?php echo base_url() . $arr_qr[$i]->qr_path ?>" data-id="<?php echo $arr_qr[$i]->qr_id ?>">
                              <button id="load" onclick="" class="btn btn-warning" style="margin-left:5px;margin-top:15px;font-family:TH sarabun new; font-size: 20px; width: 120; ">ดาวน์โหลด</button></a>
                      </div>
                      <div class="form-group col-md-4">
@@ -431,9 +430,6 @@
                              ชนิดไฟล์ : </h5>
                          <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
                              <?php echo $arr_qr[$i]->doc_type ?></h5>
-
-                         <h5 style="color:#000000; font-family:TH Sarabun New; font-size: 20px; font-weight:bold;">
-                             รายงานสรุปผล </h5>
 
                      </div>
                      <div class="form-group col-md-2">
@@ -526,6 +522,7 @@
                      <div id="capture">
                          <div id="qrcode">
                              <center>
+                             <input type="hidden" id='qr_path_url2' name='qr_path_url2' value="">
                                  <img src="" id="qr_path" name="qr_path" height="250" width="250" style="margin: auto;">
                              </center>
                          </div>
@@ -533,7 +530,7 @@
                  </div>
                  <div class="modal-footer">
                      <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                     <button type="submit" id="download" onclick="" class="btn btn-success">ยืนยัน</button>
+                     <button type="submit" id="download" onclick="get_count_download2()" class="btn btn-success">ยืนยัน</button>
                  </div>
              </div>
          </div>
@@ -609,7 +606,7 @@ $(document).on("keyup", "#fol_name", function() {
         n_check = 0;
 
     }
-  
+
     console.log(n_check + "check onkeyup");
 
 
@@ -641,10 +638,53 @@ $(document).on("keyup", "#fol_name", function() {
     }
 });
 
+function get_count_download() {
+         var qr_id = document.getElementById("qr_path_url").value
+         var qr_id2 = document.getElementById("qr_path_url2").value
+         console.log(qr_id)
+         $.ajax({
+             type: 'post',
+             url: '<?php echo site_url() . '/Member/Member_report/count_download'; ?>',
+             data: {
+                 'qr_id': qr_id
+             },
+             dataType: 'json',
+             success: function(res) {
+                 console.log(res)
+                 console.log('success')
+             },
+             error: function(res) {
+                 console.log(res)
+                 console.log('unsuccess')
+             }
+         })
+     }
+
+     function get_count_download2() {
+         var qr_id = document.getElementById("qr_path_url2").value
+         console.log(qr_id)
+         $.ajax({
+             type: 'post',
+             url: '<?php echo site_url() . '/Member/Member_report/count_download'; ?>',
+             data: {
+                 'qr_id': qr_id
+             },
+             dataType: 'json',
+             success: function(res) {
+                 console.log(res)
+                 console.log('success')
+             },
+             error: function(res) {
+                 console.log(res)
+                 console.log('unsuccess')
+             }
+         })
+     }
+
 function check_fol_edit() {
 
-        // var text_n = document.getElementById("text_name");
-        var d_name = document.getElementById("fol_edit").value;
+    // var text_n = document.getElementById("text_name");
+    var d_name = document.getElementById("fol_edit").value;
     var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
     var n_check;
     console.log("d_name" + d_name);
@@ -659,7 +699,7 @@ function check_fol_edit() {
         n_check = 0;
 
     }
-  
+
     console.log("check onkeyup" + n_check);
 
     var dis_button = document.getElementById('edit');
@@ -672,7 +712,7 @@ function check_fol_edit() {
 
 
     for (let x in t) {
-        if (t[x].fol_name == new_name.value || new_name.value == " " || n_check ==0) {
+        if (t[x].fol_name == new_name.value || new_name.value == " " || n_check == 0) {
             check_name = 1;
             break;
         } else {
@@ -738,15 +778,19 @@ $(document).on("click", ".deleteModal", function() {
 
 $(document).on("click", ".downloadModal", function() {
     var path = $(this).attr('data-path');
+    var id = $(this).attr('data-id');
     // console.log(path);
     document.getElementById("qr_path").src = path;
+    document.getElementById("qr_path_url").value = id;
 
 });
 
 $(document).on("click", ".downloadModal2", function() {
     var path = $(this).attr('data-path');
+    var id = $(this).attr('data-id');
     // console.log(path);
     document.getElementById("qr_path").src = path;
+    document.getElementById("qr_path_url2").value = id;
 
 });
 
@@ -904,6 +948,15 @@ $(document).on("click", ".moveModal", function() {
     console.log(name);
 });
 
+
+    /*
+ * MoveFileModal
+ * get data on click movefileModal button
+ * @input data-id,data-name,data-qr-id,data-qr-name,data-doc_fol_id
+ * @output -
+ * @author Natruja
+ * @Create Date 2565-04-11
+ */
 $(document).on("click", ".MoveFileModal", function() {
     console.log('test');
     var id = $(this).attr('data-id');
@@ -936,6 +989,14 @@ $(document).on("click", ".MoveFileModal", function() {
 
 });
 
+/*
+ * isNumeric
+ * check nemuric value
+ * @input value
+ * @output returns a Boolean value
+ * @author Natruja
+ * @Create Date 2565-04-11
+ */
 function isNumeric(value) {
     return /^-?\d+$/.test(value);
 }
@@ -1197,7 +1258,7 @@ $(document).on("keyup", "#qr_name", function() {
         n_check = 0;
 
     }
-  
+
     console.log(n_check + "check onkeyup");
 
     var t = <?php echo json_encode($arr_doc) ?>;
@@ -1207,7 +1268,7 @@ $(document).on("keyup", "#qr_name", function() {
     var dis_button = document.getElementById('create');
 
     for (let x in t) {
-        if (t[x].doc_name == new_name.value  || n_check == 0) {
+        if (t[x].doc_name == new_name.value || n_check == 0) {
             check_name = 1;
             break;
         } else {
@@ -1230,8 +1291,8 @@ $(document).on("keyup", "#qr_name", function() {
 
 function check_file_edit() {
 
-     // var text_n = document.getElementById("text_name");
-     var d_name = document.getElementById("qr_name").value;
+    // var text_n = document.getElementById("text_name");
+    var d_name = document.getElementById("qr_name").value;
     var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
     var n_check;
     console.log("d_name" + d_name);
@@ -1246,7 +1307,7 @@ function check_file_edit() {
         n_check = 0;
 
     }
-  
+
     console.log(n_check + "check file edit");
 
     var dis_button = document.getElementById('sub_edit');
@@ -1259,7 +1320,7 @@ function check_file_edit() {
 
 
     for (let x in t) {
-        if (t[x].qr_name == new_name.value || new_name.value == " "  || n_check == 0) {
+        if (t[x].qr_name == new_name.value || new_name.value == " " || n_check == 0) {
             check_name = 1;
             break;
         } else {
@@ -1279,13 +1340,13 @@ function check_file_edit() {
 
     }
     console.log(document.getElementById('edit'));
-   
+
 }
 
 function check_file_edit_in_folder() {
 
-     var text_n = document.getElementById("text_name");
-     var d_name = document.getElementById("qr_name").value;
+    var text_n = document.getElementById("text_name");
+    var d_name = document.getElementById("qr_name").value;
     var pattern = /^[ก-๏,0-9,a-z,A-Z]+$/;
     var n_check;
     console.log("d_name" + d_name);
@@ -1300,7 +1361,7 @@ function check_file_edit_in_folder() {
         n_check = 0;
 
     }
-  
+
     console.log(n_check + "check file edit in folder");
 
     var dis_button = document.getElementById('sub_edit');
@@ -1313,7 +1374,7 @@ function check_file_edit_in_folder() {
 
 
     for (let x in t) {
-        if (t[x].qr_name == new_name.value || new_name.value == " "  || n_check == 0) {
+        if (t[x].qr_name == new_name.value || new_name.value == " " || n_check == 0) {
             check_name = 1;
             break;
         } else {
