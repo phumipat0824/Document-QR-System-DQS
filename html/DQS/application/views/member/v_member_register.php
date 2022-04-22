@@ -54,7 +54,7 @@
                                 <div class="col"><br><br>
                                         <label style = "color: #000000;">หน่วยงาน</label>
                                         <label style = "color: #FF0000;">*</label>
-                                        <a class="mb-0" style="font-size: 11px;margin-top:0.001em;color:red;">หากหน่วยงานถูกสมัครแล้วจะไม่แสดงในรายการเลือก</a>
+                                        <a class="mb-0" style="font-size: 13px;margin-top:0.001em;color:red;">หากหน่วยงานถูกสมัครแล้วจะไม่แสดงในรายการเลือก</a>
                                         <select name="mem_dep_id" id="mem_dep_id" class="form-select" aria-label="Default select example" required>
                                         <option value="" selected>--------- เลือกหน่วยงาน ---------</option>
                                         </select><br>
@@ -105,8 +105,8 @@
                                         <label style = "color: #FF0000;">*<span id ="text_password"></span></label>
                                         <input type="password" class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" onchange="password_validation()" required oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
                                         <!-- <div class="col-md-4"> -->
-                                        <a style="font-size: 11px;margin-top:0.01em;color:red;">กรอกรหัสผ่านอย่างน้อย 8 ตัวอักษรประกอบด้วย </a>
-                                        <p style="font-size: 11px;margin-top:0.01em;color:red;"> ตัวพิมพ์ใหญ่ พิมพ์เล็ก และอักขระพิเศษ</p>
+                                        <a style="font-size: 13px;margin-top:0.5em;color:red;">กรอกรหัสผ่านอย่างน้อย 8 ตัวอักษรประกอบด้วย </a>
+                                        <a style="font-size: 13px;margin-top:0.5em;color:red;"> ตัวพิมพ์ใหญ่ พิมพ์เล็ก และอักขระพิเศษ</a>
                                         
                                     <!-- </div> -->
                                           
