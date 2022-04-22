@@ -97,7 +97,8 @@ window.onload = function() {
         theme: "light2",
         animationEnabled: true,
         title: {
-            text: "ชนิดของไฟล์"
+            text: "ชนิดของไฟล์",
+            fontFamily: 'TH Sarabun New',
         },
         data: [{
             type: "pie",
@@ -130,7 +131,8 @@ window.onload = function() {
         animationEnabled: true,
         theme: "light2", // "light1", "light2", "dark1", "dark2"
         title: {
-            text: "ชนิดของไฟล์"
+            text: "ชนิดของไฟล์",
+            fontFamily: 'TH Sarabun New',
         },
         axisY: {
             title: "จำนวนไฟล์"
@@ -158,7 +160,8 @@ window.onload = function() {
         theme: "light2", // "light1", "light2", "dark1", "dark2"
         animationEnabled: true,
         title: {
-            text: "จำนวนการดาวน์โหลด - 2022"
+            text: "จำนวนการดาวน์โหลด ปี 2022",
+            fontFamily: 'TH Sarabun New',
         },
         axisX: {
             interval: 1,
