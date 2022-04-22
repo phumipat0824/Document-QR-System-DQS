@@ -32,7 +32,7 @@
 
                                 </div>
                             </div>
-                            <form action='<?php echo site_url() . 'Member/Member_register/insert_session' ?>'id="form_id" method="post" name='form'>
+                            <form action='<?php echo site_url() . '/Member/Member_register/insert_session' ?>'id="form_id" method="post" name='form'>
                             
                             <!-- เลือกจังหวัดแบบ dropdown list -->
                                 <div class="row gx-5">
@@ -279,7 +279,7 @@ function fname_validation(){
 function get_dept(value_pro_id){
     $.ajax({
         type: "POST",
-      url: "<?php echo site_url() ."Member/Member_register/get_dept_list_ajax" ?>",
+      url: "<?php echo site_url() ."/Member/Member_register/get_dept_list_ajax" ?>",
       dataType: 'JSON',
       data: {
             'mem_pro_list': value_pro_id
