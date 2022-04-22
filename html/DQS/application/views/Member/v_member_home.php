@@ -860,6 +860,15 @@ $(document).on("click", ".moveModal", function() {
     console.log(name);
 });
 
+
+    /*
+ * MoveFileModal
+ * get data on click movefileModal button
+ * @input data-id,data-name,data-qr-id,data-qr-name,data-doc_fol_id
+ * @output -
+ * @author Natruja
+ * @Create Date 2565-04-11
+ */
 $(document).on("click", ".MoveFileModal", function() {
     console.log('test');
     var id = $(this).attr('data-id');
@@ -892,6 +901,14 @@ $(document).on("click", ".MoveFileModal", function() {
 
 });
 
+/*
+ * isNumeric
+ * check nemuric value
+ * @input value
+ * @output returns a Boolean value
+ * @author Natruja
+ * @Create Date 2565-04-11
+ */
 function isNumeric(value) {
     return /^-?\d+$/.test(value);
 }

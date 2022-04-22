@@ -572,7 +572,7 @@ function rightclick() {
     if (!event.target.matches('.dropbtn')) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
         var i;
-        for (i = 0; i < script dropdowns.length; i++) {
+        for (i = 0; i < dropdowns.length; i++) {
             var openDropdown = dropdowns[i];
             if (openDropdown.classList.contains('show')) {
                 openDropdown.classList.remove('show');
@@ -751,6 +751,15 @@ function saveAs(uri, filename) {
 
     }
 }
+
+/*
+ * MoveFileModal
+ * get data on click movefileModal button
+ * @input data-id,data-name,data-qr-id,data-qr-name,data-doc_fol_id
+ * @output -
+ * @author Natruja
+ * @Create Date 2565-04-11
+ */
 $(document).on("click", ".MoveFileModal", function() {
     console.log('test');
     var id = $(this).attr('data-id');
@@ -780,7 +789,14 @@ $(document).on("click", ".MoveFileModal", function() {
     console.log(isNumeric('1'));
 });
 
-
+/*
+ * isNumeric
+ * check nemuric value
+ * @input value
+ * @output returns a Boolean value
+ * @author Natruja
+ * @Create Date 2565-04-11
+ */
 function isNumeric(value) {
     return /^-?\d+$/.test(value);
 }

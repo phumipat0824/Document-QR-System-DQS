@@ -125,6 +125,15 @@ class File_management extends DQS_controller
 		//เรียกฟังก์ชั่นย้าย path qrcode
 		$this->move_qr($this->input->post('doc_id'),$this->input->post('doc_fol_id'));
 	}
+
+	/*
+	* move_qr()
+	* update qrcode location
+	* @input -
+	* @output -
+	* @author Natruja
+	* @Create Date 2565-03-21
+	*/
 	function move_qr($doc_id,$doc_fol_id){
 		
 		$this->load->model('M_DQS_folder', 'mfol');
