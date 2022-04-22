@@ -102,8 +102,8 @@
                                         
                                     <div class="form-group col-md-4"> <!-- กรอกรหัสผ่านลงใน กล่องบันทึกข้อความ -->
                                         <label for="inputPassword4" style = "color: #000000;">รหัสผ่าน</label>
-                                        <label style = "color: #FF0000;">*<span id ="text_fname"></span></label>
-                                        <input type="password" class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" onchange="checkpassword()" required oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                                        <label style = "color: #FF0000;">*<span id ="text_password"></span></label>
+                                        <input type="password" class="form-control" id="mem_password" name="mem_password" placeholder="รหัสผ่าน" onchange="password_validation()" required oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
                                         <!-- <div class="col-md-4"> -->
                                         <a style="font-size: 11px;margin-top:0.01em;color:red;">กรอกรหัสผ่านอย่างน้อย 8 ตัวอักษรประกอบด้วย </a>
                                         <p style="font-size: 11px;margin-top:0.01em;color:red;"> ตัวพิมพ์ใหญ่ พิมพ์เล็ก และอักขระพิเศษ</p>
@@ -114,8 +114,8 @@
                                     <div class="form-group col-md-4"> <!-- กรอกรหัสผ่านลงใน กล่องบันทึกข้อความ -->
                                     
                                     <label for="inputPassword4" style = "color: #000000;">รหัสยืนยัน</label>
-                                        <label style = "color: #FF0000;">*</label>
-                                        <input type="password" class="form-control " id="mem_password" name="mem_password" placeholder="รหัสยืนยัน" onchange="checkpassword()" required oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                                        <label style = "color: #FF0000;">*<span id ="text_confirmpass"></span></label>
+                                        <input type="password" class="form-control " id="mem_confirmpassword" name="mem_confirmpassword" placeholder="รหัสยืนยัน" onchange="confirmpassword_validation()" required oninvalid="this.setCustomValidity('โปรดเลือกรหัสผ่านที่ปลอดภัยยิ่งขึ้น ใช้อักขระ 8 ตัวขึ้นไปสำหรับรหัสผ่าน ใช้ตัวอักษร ตัวเลขผสมกัน')" oninput="this.setCustomValidity('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
                                     </div>
                                     
                                 <div class=" row gx-5 ">
@@ -237,7 +237,7 @@ function fname_validation(){
 
     $(document).on('change', '.form-control', function() {
         var submit = document.getElementById("regis");
-        if(fname_validation() == 0 || lname_validation() == 0 || email_validation() == 0 || check_email_input() == 0){
+        if(fname_validation() == 0 || lname_validation() == 0 || email_validation() == 0 || password_validation() == 0 || confirmpass_validation() == 0){
             submit.disabled = true ;
            
             
@@ -248,10 +248,10 @@ function fname_validation(){
        
     });
     function email_validation(){
-        var form = document.getElementById("form");
-        var text = document.getElementById("text");
+        // var form = document.getElementById("form");
+        var text = document.getElementById("text_email");
         var email = document.getElementById("mem_email").value;
-        var pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+        var pattern = /^[^]+@[^ ]+\.[a-z]{2,3}$/;
         var email_check;
         if(email.match(pattern)){
             text.innerHTML = "";
@@ -267,6 +267,48 @@ function fname_validation(){
         }
         return email_check;
     }
+    function password_validation(){
+        // var form = document.getElementById("form");
+        var text = document.getElementById("text_password");
+        var password = document.getElementById("mem_password").value;
+        var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        var password_check;
+        if(password.match(pattern)){
+            text.innerHTML = "";
+            password_check =1;
+        }else{
+            text.innerHTML = "รหัสผ่านไม่ถูกต้อง กรุณากรอกใหม่อีกครั้ง";
+            text.style.color = "#ff0000";
+            password_check =0;
+        }if(password == ""){
+            text.innerHTML = "กรุณากรอกรหัสผ่าน";
+            text.style.color = "#ff0000";
+            password_check =0;
+        }
+        return password_check;
+    }
+
+    function confirmpass_validation(){
+        // var form = document.getElementById("form");
+        var text = document.getElementById("text_confirmpass");
+        var password = document.getElementById("mem_confirmpassword").value;
+        var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        var password_check;
+        if(password.match(pattern)){
+            text.innerHTML = "";
+            password_check =1;
+        }else{
+            text.innerHTML = "รหัสผ่านไม่ถูกต้อง กรุณากรอกใหม่อีกครั้ง";
+            text.style.color = "#ff0000";
+            password_check =0;
+        }if(password == ""){
+            text.innerHTML = "กรุณากรอกรหัสผ่าน";
+            text.style.color = "#ff0000";
+            password_check =0;
+        }
+        return password_check;
+    }
+   
     
 /*
 	* get_dept(value_pro_id)
