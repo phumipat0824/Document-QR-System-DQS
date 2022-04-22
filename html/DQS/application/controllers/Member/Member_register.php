@@ -32,7 +32,7 @@ class Member_register extends DQS_controller
         $data['arr_department'] = $this->MDD->get_all()->result();
         $data['arr_province'] = $this->MDP->get_all()->result();
         
-        $this->output_navbar('Member/v_member_register', $data);
+        $this->output_navbar('/Member/v_member_register', $data);
         
     }
 
@@ -103,7 +103,7 @@ class Member_register extends DQS_controller
     public function show_member_confirm()
     {
         
-        $this->output_navbar('Member/v_member_confirm');
+        $this->output_navbar('/Member/v_member_confirm');
     }
       /*
 	* get_dept_list_ajax()
@@ -212,7 +212,7 @@ public function insert_member()
                     }
             }       
                
-                $this->output_navbar("Member/v_member_login"); //เรียกกลับมาหน้านี้อีกครั้งอยู่หน้าเดียวกันใส่ชื่อได้เลย
+                $this->output_navbar("/Member/v_member_login"); //เรียกกลับมาหน้านี้อีกครั้งอยู่หน้าเดียวกันใส่ชื่อได้เลย
     }
     
     /*
@@ -258,7 +258,7 @@ public function insert_member()
         
         $this->session->set_userdata('mem_username', $username);
 
-        $this->output_navbar('Member/v_member_confirm');
+        $this->output_navbar('/Member/v_member_confirm');
         // redirect('Member/Member_register/show_member_confirm');
         //ที่อยู่
     }
