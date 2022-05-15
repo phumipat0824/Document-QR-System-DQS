@@ -134,6 +134,20 @@ public function update_in_fol($fol_id,$new_path){
 
 }
 
+public function check_fol_id($fol_id){
+	$this->load->model('M_DQS_folder', 'Mfol');
+	$obj_fol = $this->Mfol->get_by_id_fol($fol_id)->result();
+	$arr_fol_id = $this->Mfol->get_by_fol_location_id($fol_id)->result();
+	$newpath = $obj_fol[0]->fol_location;
+
+	if($arr_fol_id != NULL){
+		for($i=0; $i<count($arr_fol_id); $i++ ){
+			$this->update_in_fol($arr_fol_id[$i]->fol_id,$newpath);
+			$this->check_fol_id($arr_fol_id[$i]->fol_id);
+		}
+	}
+}
+
 public function update_folder()
 	{
 		$this->load->model('M_DQS_folder', 'Mfol');
@@ -171,10 +185,8 @@ public function update_folder()
 			$this->update_doc($doc_id[$i]->doc_id,$newpath);
 		}
 
-		for($i=0; $i<count($arr_fol_id); $i++ ){
-			$this->update_in_fol($arr_fol_id[$i]->fol_id,$newpath);
-			
-		}
+		$fol_check_id = $this->input->post('fol_id');
+		$this->check_fol_id($fol_check_id);
 
 		if($this->session->userdata('mem_role') == 1){
 			if($this->input->post('fol_location_id') != 0){
